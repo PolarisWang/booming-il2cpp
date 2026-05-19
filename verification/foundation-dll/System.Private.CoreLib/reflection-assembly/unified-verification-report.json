@@ -2,8 +2,8 @@
   "family": "reflection-assembly",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:34:17",
-  "duration_ms": 25565,
+  "timestamp": "2026-05-19T19:16:35",
+  "duration_ms": 22768,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-assembly\\managed\\subjects\\build-output\\ReflectionAssemblySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21041
+      "duration_ms": 18228
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 326
+      "duration_ms": 356
     },
     "audit": {
       "stage": "audit",
@@ -51,12 +51,12 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 3,
+        "skipsFound": 0,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 763
+      "duration_ms": 921
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,13 +72,13 @@
         "benchmarkQuality": "matchedCount=0/22 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 3432
+      "duration_ms": 3260
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 86.36,
-    "overall": 93.18
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

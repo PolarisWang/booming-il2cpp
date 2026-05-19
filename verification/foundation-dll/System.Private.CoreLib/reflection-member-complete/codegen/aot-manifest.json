@@ -148,6 +148,24 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
       "reason": "external-call"
@@ -162,6 +180,24 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {
@@ -203,6 +239,18 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()",
       "reason": "external-call"
     },
@@ -216,6 +264,18 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsLiteral:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()",
       "reason": "external-call"
     },
     {

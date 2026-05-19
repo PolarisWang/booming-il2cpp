@@ -337,6 +337,16 @@ extern "C" void* CodegenNewArr(int32_t length) noexcept {
     return arr;
 }
 
+extern "C" void* CodegenNewArrTlab(void* mem, int32_t length) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewArrTlab");
+    using namespace chaos::il2cpp::interpreter;
+    auto* arr = static_cast<ArrayStorage*>(mem);
+    if (arr == nullptr) return nullptr;
+    ::new (arr) ArrayStorage();
+    arr->elements.resize(static_cast<size_t>(length > 0 ? length : 0));
+    return arr;
+}
+
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdElem");
     using namespace chaos::il2cpp::interpreter;

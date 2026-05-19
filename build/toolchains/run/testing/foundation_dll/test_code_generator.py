@@ -76,6 +76,7 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "Random": "new Random()",
     "HashCode": "default(HashCode)",
     "RuntimeWrappedException": "new RuntimeWrappedException(42)",
+    "HashSet": "new HashSet<int>()",
     "PropertyInfo": "default(PropertyInfo)!",
     "MemberInfo": "default(MemberInfo)!",
     "MethodBase": "default(MethodInfo)!",
@@ -205,23 +206,23 @@ _NEEDS_MANUAL_METHODS: set[tuple[str, str]] = {
 
 # Method overrides keyed by (type_name, method_name, param_count) → "skip" or custom expression
 _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
-    ("Span", "ToArray", 1): "skip",     # Span.ToArray() takes no args; contract has erroneous param
+    ("Span", "ToArray", 1): "new byte[1].AsSpan().ToArray()",  # Span.ToArray() is 0-param; contract has erroneous count
     ("Span", "get_Empty", 0): "Span<byte>.Empty",
     ("ReadOnlySpan", "get_Empty", 0): "ReadOnlySpan<byte>.Empty",
     # Attribute methods need real MemberInfo/Assembly
     ("Attribute", "GetCustomAttribute", 2): "typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))",
-    ("Attribute", "GetCustomAttributes", 2): "skip",  # returns IEnumerable<Attribute>, not Attribute[] -> no .Length
-    ("Attribute", "GetCustomAttributes", 1): "skip",  # returns IEnumerable<Attribute>, not Attribute[] -> no .Length
+    ("Attribute", "GetCustomAttributes", 2): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count",  # returns IEnumerable -> no .Length
+    ("Attribute", "GetCustomAttributes", 1): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count",  # returns IEnumerable -> no .Length
     ("Attribute", "IsDefined", 2): "typeof(byte).Assembly.IsDefined(typeof(AssemblyDescriptionAttribute))",
     # Array.Sort with null comparer is ambiguous between IComparer<T> and Comparison<T>
     ("Array", "Sort", 2): "Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default)",
     # DateTime/TimeSpan with out-of-range constructor values or invalid parse inputs
-    ("DateTime", "TryParse", 2): "skip",    # out DateTime -> CS1620 with 'ref'
+    ("DateTime", "TryParse", 2): "DateTime.TryParse(\"2024-01-01\", out _)",  # out param with discard
     ("DateTime", "Parse", 1): "DateTime.Parse(\"2024-01-01\")",
     ("TimeSpan", "Parse", 1): "TimeSpan.Parse(\"1:00:00\")",
     ("Guid", "Parse", 1): "Guid.Parse(\"00000000-0000-0000-0000-000000000000\")",
     ("Guid", ".ctor", 1): "new Guid(\"00000000-0000-0000-0000-000000000000\")",
-    ("Guid", "TryParse", 2): "skip",        # out Guid param -> CS1620 with 'ref'
+    ("Guid", "TryParse", 2): "Guid.TryParse(\"00000000-0000-0000-0000-000000000000\", out _)",  # out param with discard
     ("Boolean", "Parse", 1): "bool.Parse(\"true\")",
     ("Byte", "Parse", 1): "byte.Parse(\"42\")",
     ("SByte", "Parse", 1): "sbyte.Parse(\"42\")",
@@ -259,40 +260,39 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Array", "IndexOf", 2): "Array.IndexOf(new byte[4], (byte)42)",
     ("Array", "LastIndexOf", 2): "Array.LastIndexOf(new byte[4], (byte)42)",
     ("Array", "Resize", 2): "skip",         # generic type parameter T can't be resolved at entrypoint generation
-    # Buffer methods with empty arrays
-    ("Buffer", "BlockCopy", 5): "skip",    # Array.Empty -> out of range
+    # Buffer methods with non-empty arrays
+    ("Buffer", "BlockCopy", 5): "Buffer.BlockCopy(new byte[8], 0, new byte[8], 0, 8)",
     ("Buffer", "BulkMoveWithWriteBarrier", 3): "skip",  # internal runtime intrinsic, not in .NET 8 public API
     ("Buffer", "Memmove", 3): "skip",       # internal runtime intrinsic, not in .NET 8 public API
-    ("Buffer", "GetByte", 2): "skip",
-    ("Buffer", "SetByte", 3): "skip",
-    # Span/ReadOnlySpan/Memory on default (empty) - index out of range
-    ("Span", "get_Item", 1): "skip",
-    ("Span", "Slice", 1): "skip",
-    ("Span", "Slice", 2): "skip",
-    ("ReadOnlySpan", "get_Item", 1): "skip",
-    ("ReadOnlySpan", "Slice", 1): "skip",
-    ("ReadOnlySpan", "Slice", 2): "skip",
-    ("Memory", "Slice", 1): "skip",
-    # Collections on empty instances
-    ("List", "RemoveAt", 1): "skip",
-    # Thread on already-running thread
-    ("Thread", "Start", 0): "skip",
-    # Monitor needs proper sync
-    ("Monitor", "Enter", 1): "skip",
-    ("Monitor", "Exit", 1): "skip",
-    ("Monitor", "Pulse", 1): "skip",
-    ("Monitor", "PulseAll", 1): "skip",
-    ("Monitor", "Wait", 1): "skip",
-    # Delegate operations default to auto-generated (null instance, but compiles for codegen)
-    # Delegate methods without native-AOT shape support:
-    ("Delegate", "DynamicInvoke", 1): "skip",
-    ("Delegate", "get_Method", 0): "skip",
-    ("Delegate", "get_Target", 0): "skip",
-    ("Delegate", "CreateDelegate", 3): "skip",
-    ("Delegate", "CreateDelegate", 2): "skip",
-    ("MulticastDelegate", "GetInvocationList", 0): "skip",
-    ("Delegate", "op_Equality", 2): "skip",
-    ("Delegate", "op_Inequality", 2): "skip",
+    ("Buffer", "GetByte", 2): "Buffer.GetByte(new byte[4], 0)",
+    ("Buffer", "SetByte", 3): "Buffer.SetByte(new byte[4], 0, (byte)42)",
+    # Span/ReadOnlySpan/Memory — use array-backed instances
+    ("Span", "get_Item", 1): "new Span<byte>(new byte[4])[0]",
+    ("Span", "Slice", 1): "new Span<byte>(new byte[4]).Slice(1).Length",
+    ("Span", "Slice", 2): "new Span<byte>(new byte[4]).Slice(1, 2).Length",
+    ("ReadOnlySpan", "get_Item", 1): "new ReadOnlySpan<byte>(new byte[4])[0]",
+    ("ReadOnlySpan", "Slice", 1): "new ReadOnlySpan<byte>(new byte[4]).Slice(1).Length",
+    ("ReadOnlySpan", "Slice", 2): "new ReadOnlySpan<byte>(new byte[4]).Slice(1, 2).Length",
+    ("Memory", "Slice", 1): "new Memory<byte>(new byte[4]).Slice(1).Length",
+    # Collections on non-empty instances
+    ("List", "RemoveAt", 1): "new System.Collections.Generic.List<int>{1,2,3}.RemoveAt(1)",
+    # Thread — use current thread for static access; Start needs instance
+    ("Thread", "Start", 0): "new System.Threading.Thread(() => {}).Start()",
+    # Monitor — use lock-object expression (Enter alone is safe)
+    ("Monitor", "Enter", 1): "System.Threading.Monitor.Enter(new object())",
+    ("Monitor", "Exit", 1): "skip",  # Must pair with Enter; single-expression limitation
+    ("Monitor", "Pulse", 1): "skip",  # Requires held lock; can't express in single expression
+    ("Monitor", "PulseAll", 1): "skip",  # Requires held lock
+    ("Monitor", "Wait", 1): "skip",  # Requires held lock
+    # Delegate operations — use lambda-created delegates
+    ("Delegate", "DynamicInvoke", 1): "new System.Action(() => {}).DynamicInvoke()",
+    ("Delegate", "get_Method", 0): "new System.Action(() => {}).Method",
+    ("Delegate", "get_Target", 0): "new System.Action(() => {}).Target",
+    ("Delegate", "CreateDelegate", 3): "skip",  # Requires MethodInfo + type; complex
+    ("Delegate", "CreateDelegate", 2): "skip",  # Requires Type + MethodInfo
+    ("MulticastDelegate", "GetInvocationList", 0): "new System.Action(() => {}).GetInvocationList()",
+    ("Delegate", "op_Equality", 2): "skip",  # Operator overload; can't auto-generate
+    ("Delegate", "op_Inequality", 2): "skip",  # Operator overload
     # Enum with non-enum type — auto-generatable for subjects variant
     # Note: For benchmark variant, these have explicit patterns in family_verification_orchestrator.py
     # Override: GetName with UInt64 param triggers boxed_type codegen bug for System.UInt64
@@ -303,17 +303,17 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # Enum.TryParse has 'out' parameters — provide override with out var _
     ("Enum", "TryParse", 3): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", out object _)",
     ("Enum", "TryParse", 4): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", true, out object _)",
-    # Type.GetType with unresolvable name
-    ("Type", "GetType", 1): "skip",
-    ("Type", "GetType", 2): "skip",
-    ("Type", "GetType", 3): "skip",
-    # Nullable with no value
-    ("Nullable", "get_Value", 0): "skip",
+    # Type.GetType with valid type name
+    ("Type", "GetType", 1): "Type.GetType(\"System.Int32\")",
+    ("Type", "GetType", 2): "Type.GetType(\"System.Int32\", false)",
+    ("Type", "GetType", 3): "Type.GetType(\"System.Int32\", false, false)",
+    # Nullable with value
+    ("Nullable", "get_Value", 0): "((int?)42).Value",
     ("Nullable", "GetValueOrDefault", 0): "default(Nullable<int>).GetValueOrDefault()",
     ("Nullable", "GetValueOrDefault", 1): "default(Nullable<int>).GetValueOrDefault(42)",
-    # RuntimeHelpers with invalid handles
-    ("RuntimeHelpers", "RunClassConstructor", 1): "skip",
-    ("RuntimeHelpers", "InitializeArray", 2): "skip",
+    # RuntimeHelpers
+    ("RuntimeHelpers", "RunClassConstructor", 1): "RuntimeHelpers.RunClassConstructor(typeof(byte).TypeHandle)",
+    ("RuntimeHelpers", "InitializeArray", 2): "skip",  # Needs RuntimeFieldHandle — no expression can produce one
     ("RuntimeHelpers", "GetSubArray", 2): "skip",  # generic T can't be resolved
     # String operations with out-of-range index
     ("String", "Substring", 1): "\"hello\".Substring(1)",
@@ -322,37 +322,26 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("string", "Compare", 6): "string.Compare(\"hello\", 0, \"world\", 0, 3, StringComparison.OrdinalIgnoreCase)",
     ("String", "Compare", 5): "string.Compare(\"hello\", 0, \"world\", 0, 3)",
     ("string", "Compare", 5): "string.Compare(\"hello\", 0, \"world\", 0, 3)",
-    # BinaryReader/Writer on default streams
-    ("BinaryReader", "ReadString", 0): "skip",
-    ("BinaryReader", "ReadInt32", 0): "skip",
-    ("BinaryReader", "ReadDouble", 0): "skip",
-    ("BinaryWriter", "Write", 1): "skip",  # param count 1 for Write(T)
-    ("BinaryWriter", "Write", 1): "skip",  # string overload
-    # Stream operations on default MemoryStream
-    ("Stream", "Read", 3): "skip",
-    ("Stream", "Write", 3): "skip",
-    ("Stream", "CopyTo", 1): "skip",
-    # CultureInfo with invalid name
-    ("CultureInfo", "GetCultureInfo", 1): "skip",
+    # BinaryReader/Writer on MemoryStream with data
+    ("BinaryReader", "ReadString", 0): "new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()",
+    ("BinaryReader", "ReadInt32", 0): "new BinaryReader(new MemoryStream(new byte[4])).ReadInt32()",
+    ("BinaryReader", "ReadDouble", 0): "new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()",
+    ("BinaryWriter", "Write", 1): "new BinaryWriter(new MemoryStream()).Write(42)",
+    # Stream operations on MemoryStream
+    ("Stream", "Read", 3): "new MemoryStream(new byte[10]).Read(new byte[5], 0, 5)",
+    ("Stream", "Write", 3): "new MemoryStream().Write(new byte[5], 0, 5)",
+    ("Stream", "CopyTo", 1): "new MemoryStream().CopyTo(new MemoryStream())",
+    # CultureInfo
+    ("CultureInfo", "GetCultureInfo", 1): "CultureInfo.GetCultureInfo(\"\")",
     # DateTime with invalid parameters
     ("DateTime", "DaysInMonth", 2): "DateTime.DaysInMonth(2024, 2)",
     ("DateTime", ".ctor", 3): "new DateTime(2024, 1, 1)",
     ("DateTime", ".ctor", 6): "new DateTime(2024, 1, 1, 0, 0, 0)",
-    # Task operations that actually run
-    ("Task", "Run", 1): "skip",
-    ("Task", "ContinueWith", 1): "skip",
-    ("Task", "WhenAny", 1): "skip",
-    ("Task", "WhenAll", 1): "skip",
-    ("Task", "FromResult", 1): "skip",
-    # Task/Thread methods without native-AOT shape support:
-    ("Task", "Delay", 1): "skip",
-    ("Task", "Wait", 0): "skip",
-    ("Task", "Wait", 1): "skip",
-    ("Task", "get_IsCompleted", 0): "skip",
-    ("Task", "get_Status", 0): "skip",
-    ("Thread", "Sleep", 1): "skip",
-    ("Thread", "ResetAbort", 0): "skip",
-    ("Thread", "get_ManagedThreadId", 0): "skip",
+    # Task operations — auto-gen handles most (CompletedTask instance, Array.Empty<Task>() for WhenAny/WhenAll)
+    ("Task", "Run", 1): "Task.Run(new Action(() => {}))",  # delegate param can't auto-gen as lambda
+    ("Task", "ContinueWith", 1): "Task.CompletedTask.ContinueWith(new Action<Task>(_ => {}))",  # delegate param
+    # Thread — auto-gen handles Sleep(42) via default int map; get_ManagedThreadId via CurrentThread
+    ("Thread", "ResetAbort", 0): "skip",  # Obsolete in .NET 6+, throws PlatformNotSupportedException
     # Type.ContainsGenericParameters is a property, not a method — calling it with () fails
     ("Type", "ContainsGenericParameters", 0): "typeof(byte).ContainsGenericParameters",
     # Activator.CreateInstance<T>() generic can't be resolved
@@ -361,49 +350,38 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Assembly", "GetExecutingAssembly", 0): "Assembly.GetExecutingAssembly()",
     ("Assembly", "GetCallingAssembly", 0): "Assembly.GetCallingAssembly()",
     ("Assembly", "GetEntryAssembly", 0): "Assembly.GetEntryAssembly()",
-    # Module.GetCustomAttributes returns IEnumerable<Attribute>, not Attribute[] — no .Length
-    ("Module", "GetCustomAttributes", 1): "skip",
-    # MethodBase.Invoke with BindingFlags — ambiguous
-
-    ("MethodBase", "Invoke", 2): "skip",
-    ("MemberInfo", "get_MemberType", 0): "skip",
-    ("MethodInfo", "GetParameters", 0): "skip",
-    ("MethodInfo", "get_ReturnType", 0): "skip",
-    ("ConstructorInfo", "Invoke", 1): "skip",
-    ("FieldInfo", "GetValue", 1): "skip",
-    ("FieldInfo", "SetValue", 2): "skip",
-    ("FieldInfo", "get_FieldType", 0): "skip",
-    ("PropertyInfo", "GetValue", 1): "skip",
-    ("PropertyInfo", "GetValue", 2): "skip",
-    ("PropertyInfo", "SetValue", 2): "skip",
-    ("PropertyInfo", "get_PropertyType", 0): "skip",
-    # Exception with no stack trace
-    ("Exception", "get_StackTrace", 0): "skip",
+    # Module.GetCustomAttributes returns IEnumerable<Attribute> — wrap in List for .Count
+    ("Module", "GetCustomAttributes", 1): "new List<Attribute>(typeof(byte).Module.GetCustomAttributes(false)).Count",
+    # MethodBase.Invoke with object, object[]
+    ("MethodBase", "Invoke", 2): "typeof(byte).GetMethods()[0].Invoke(null, new object[0])",
+    # MemberInfo.get_MemberType via typeof(byte)
+    ("MemberInfo", "get_MemberType", 0): "typeof(byte).MemberType",
+    # MethodInfo methods via GetMethods()[0]
+    ("MethodInfo", "GetParameters", 0): "typeof(byte).GetMethods()[0].GetParameters()",
+    ("MethodInfo", "get_ReturnType", 0): "typeof(byte).GetMethods()[0].ReturnType",
+    # ConstructorInfo.Invoke with default args
+    ("ConstructorInfo", "Invoke", 1): "typeof(byte).GetConstructors()[0].Invoke(new object[0])",
+    # FieldInfo via GetFields()[0]
+    ("FieldInfo", "GetValue", 1): "typeof(byte).GetFields()[0].GetValue(null)",
+    ("FieldInfo", "SetValue", 2): "typeof(byte).GetFields()[0].SetValue(null, (byte)42)",
+    ("FieldInfo", "get_FieldType", 0): "typeof(byte).GetFields()[0].FieldType",
+    # PropertyInfo via GetProperties()[0]
+    ("PropertyInfo", "GetValue", 1): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)",
+    ("PropertyInfo", "GetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null, null)",
+    ("PropertyInfo", "SetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42)",
+    ("PropertyInfo", "get_PropertyType", 0): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType",
+    # Exception — StackTrace is null on non-thrown exception
+    ("Exception", "get_StackTrace", 0): "skip",  # null on non-thrown exception → NullReferenceException on .Length
     # Math with invalid precision
     ("Math", "Round", 2): "Math.Round(42.0)",
-    # BitConverter with empty array
-    ("BitConverter", "ToDouble", 2): "skip",
-    ("BitConverter", "ToInt32", 2): "skip",
-    # Guid constructor with byte[] array that might be wrong format
-    ("Guid", "ctor", 1): "skip",
-    # Interlocked operations on default
-    ("Interlocked", "CompareExchange", 3): "skip",
-    ("Interlocked", "Exchange", 2): "skip",
-    ("Interlocked", "Increment", 1): "skip",
-    ("Interlocked", "Decrement", 1): "skip",
-    ("Interlocked", "Add", 2): "skip",
+    # BitConverter with valid array and offset
+    ("BitConverter", "ToDouble", 2): "BitConverter.ToDouble(new byte[8], 0)",
+    ("BitConverter", "ToInt32", 2): "BitConverter.ToInt32(new byte[4], 0)",
     # Attribute.get_TypeId on default null
-    ("Attribute", "get_TypeId", 0): "skip",
-    # Thread operations that fail (now handled earlier in _METHOD_OVERRIDES with skip)
-    # RuntimeWrappedException on new object is fine, but WrappedException should work
-    # Collections
-    ("List", "Remove", 1): "skip",
+    ("Attribute", "get_TypeId", 0): "skip",  # default(Attribute)! is null — expression would NRE
+    # Collections — auto-gen handles via INSTANCE_EXPR_MAP entries
+    # (List/Dictionary already have instances; HashSet added above)
     ("Dictionary", "get_Count", 0): "new Dictionary<string, int>().Count",
-    ("Dictionary", "ContainsKey", 1): "skip",
-    ("Dictionary", "Remove", 1): "skip",
-    ("HashSet", "Add", 1): "skip",
-    ("HashSet", "Contains", 1): "skip",
-    ("HashSet", "Remove", 1): "skip",
     # Object.Equals on default object - actually works
     # But Object.GetHashCode/ToString/GetType on new object() work fine
     # Thread.Sleep with 42 works fine
@@ -1031,11 +1009,16 @@ def _test_body(parsed: dict[str, Any]) -> str:
         )
 
     if _has_unsafe_param(parsed["param_types"]) and not _has_non_skip_override(parsed):
-        return (
-            "    // TODO: needs-manual — ref/pointer/unsafe parameter requires unsafe context",
-            False,
-            "needs-manual — ref/pointer parameter requires unsafe context",
-        )
+        # Auto-generate via ref-aware builder
+        prelude, call_expr = _build_call_expr_with_refs(parsed)
+        ret = parsed["return_type"]
+        if ret == "System.Void" or not ret:
+            if prelude:
+                return (f"{prelude}\n    {call_expr};", False, "")
+            return (f"    {call_expr};", False, "")
+        if prelude:
+            return (f"{prelude}\n    var result = {call_expr};", False, "")
+        return (f"    var result = {call_expr};", False, "")
 
     if _is_simple_method(parsed):
         call_expr = _build_call_expr(parsed)

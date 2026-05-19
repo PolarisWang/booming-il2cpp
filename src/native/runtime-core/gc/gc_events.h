@@ -115,6 +115,9 @@ void GcProcessDependentHandlesAfterYoungGC() noexcept;
 /// Process dependent handles after a full GC (fixed-point iteration up to 3 rounds).
 int GcProcessDependentHandlesAfterFullGC() noexcept;
 
+/// Check if any GCHandles are registered (fast empty check, no lock).
+bool GcHasAnyHandles() noexcept;
+
 /// Collect weak handle entries whose objects died during BGC marking.
 /// Must be called during/after BgcSweep while the mark bitmap is still
 /// valid (before StwCompact clears it).  Returns handle IDs that need

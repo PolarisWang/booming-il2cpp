@@ -460,7 +460,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 | R12 | POH 完整实现 (Phase 2) | ✅ 已实现 | REGION_POH kind, bump-pointer, young GC 跳过 |
 | R13 | ThinLock 卸载语义 | ✅ 已实现 | LockDrain Phase 0 in domain_unloader |
 | R14 | GCNotification 回调 | ✅ 已实现 | 8 槽回调表 + 9 种事件 |
-| R15 | GcStressTest 覆盖增强 | ✅ 已实现 | A→N 14 场景 |
+| R15 | GcStressTest 覆盖增强 | ✅ 已实现 | A→Q 17 场景 |
 | R16 | MemoryDomain HEAP 线程安全 | ✅ 已实现 | ArenaHeap std::mutex 保护 bump pointer |
 
 **剩余演进方向**（非阻塞）：
@@ -471,7 +471,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 
 ## 文档更新
 
-- `2026-05-23`：BGC 专用 Finalizer 线程 + Per-thread handshake 安全点系统（5 phases）+ Event-based wait + SATB freeze 协议 + APC 回退 + BGC 线程一等公民；更新对比表 safepoint 行、"并发标记" 状态、完成度矩阵、风险分类、R15→14 场景
+- `2026-05-19`：新增 GC 测试覆盖附录（27 个测试 target，含 Phase A/B/C 全部实现 + 运行状态）；更新完成度矩阵 R15 场景数 14→17；新增压力测试场景 O/P/Q
 - `2026-05-18`：POH Phase 2 完成（region bump-pointer + GC mark-sweep integration + standalone tests）；GCHandle SetTargetFromNative API + 测试完成；完成度矩阵更新
 - `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向
 
@@ -637,6 +637,81 @@ BGC 的根集扫描从 `GcIterateHandleTable` 迁移到 `GcIterateTenuredHandles
 - `gc_helpers.h` / `gc_api.cpp`：添加 `extern "C" void chaos_gc_dirty_card(const void* obj)`，委托给 `DirtyCard()`
 - `NativeAotLoweringPlanner.ExceptionEmission.cs`：5 个 DirtyCard 发射点（值类型 stfld、引用类型 stfld、stelem.ref、cpobj/stobj 值类型复制）
 - 快照基线同步更新（4 个测试文件 + 1 个验证文件）
+
+---
+
+## 附录：GC 测试覆盖
+
+> 评估日期：2026-05-19 | 测试位于 `tests/contracts/native/runtime-core/`
+
+### 单元测试 — 单子系统、确定性
+
+| Target | 文件 | 测试内容 | 场景数 | 状态 |
+|--------|------|---------|--------|------|
+| `chaos_gc_region_test` | `gc_region_test.cpp` | RegionManager + NurseryAllocate + CardTable | — | ✅ 全部 PASS |
+| `chaos_gc_young_collector_test` | `gc_young_collector_test.cpp` | Cheney copying young GC | — | ✅ 全部 PASS |
+| `chaos_gc_root_scanner_test` | `gc_root_scanner_test.cpp` | GcSlotMap registry + scan modes | — | ✅ 全部 PASS |
+| `chaos_gc_finalizer_test` | `gc_finalizer_test.cpp` | Finalizer lifecycle (含 LargeFinalizerQueue + SuppressSuppressed 边缘) | 8 | ✅ 0 failures |
+| `chaos_gc_handle_test` | `gc_handle_test.cpp` | GCHandle types (strong/weak/pinned/dependent) | — | ⚠️ pinned content check 已知问题 |
+| `chaos_gc_loh_test` | `gc_loh_test.cpp` | LOH alloc/sweep/compact (含 VeryLarge/ConcurrentSweep/SegmentCount 边缘) | 8 | ✅ 0 failures |
+| `chaos_gc_poh_test` | `gc_poh_test.cpp` | POH alloc + GC (含 FullGc/MultiRegionConcurrent/OversizedBoundary 边缘) | 10 | ✅ 0 failures |
+| `chaos_gc_bump_cache_test` | `gc_bump_cache_test.cpp` | GcBumpCache size classes | — | ✅ |
+| `chaos_gc_scheduler_test` | `gc_scheduler_test.cpp` | GcScheduler: RecordAllocation triggers, LatencyMode, CollectionMode, RequestFullGc, TryClaimGcSlot, PageCountGrowth, SurvivalRate, RecommendedNurserySize, Cooldown | 9 | ✅ 0 failures |
+| `chaos_gc_parallel_mark_test` | `gc_parallel_mark_test.cpp` | ParallelMark work-stealing: PushPopLocal, StealFromIdle, StealFromBusy, StealAll, ProcessChunkBasic, MultiRoundWorkStealing, InitDestroy, FlushPending | 8 | ✅ 0 failures |
+| `chaos_gc_safepoint_test` | `gc_safepoint_test.cpp` | Safepoint protocol: RegisterUnregisterThread, CooperativePreemptiveTransition, SafepointRequested, ReleaseSafepoint, MultipleThreadSafepoint, GcScanAllThreadRoots, NestedSafepoint | 7 | ✅ 0 failures |
+| `chaos_gc_old_gen_unit_test` | `gc_old_gen_unit_test.cpp` | OldGen core ops: AllocateAndFree, Reallocate, IsInOldGen, MarkObject, AddToMarkStack, FindPage, BgcTryMark, CollectFull | 8 | ✅ 0 failures |
+| `chaos_gc_mark_bitmap_test` | `gc_mark_bitmap_test.cpp` | Mark bitmap: MarkSingleSlot, MarkRange, TestBeforeMark, ClearAfterMark, AnySet, Boundary, WordCount/ByteCount, AtomicMarkConcurrent | 8 | ✅ 0 failures |
+| `chaos_gc_bit_utils_test` | `gc_bit_utils_test.cpp` | Bit utilities: Ctz64_Zero/Powers/All, PopCount64_Zero/All/Mixed, ForEachSetBit, ForEachZeroBit | 8 | ✅ 0 failures |
+| `chaos_gc_layout_test` | `gc_layout_test.cpp` | GcLayoutRegistry: RegisterLookup, RegisterTypeInfoRange, RawAllocType, SentinelInit, ScanObjectPointers, InvalidLookup, IsValidManagedObject | 7 | ✅ 0 failures |
+| `chaos_gc_events_test` | `gc_events_test.cpp` | GC events: RegisterFireCallback, MultipleCallbacks, FireMultipleEvents, UnregisterCallback, GcAddRemovePinnedObject, GcSetHandleTarget | 6 | ✅ 0 failures |
+| `chaos_gc_stats_test` | `gc_stats_test.cpp` | GC stats: RecordAndGetSnapshot, RecordPauseHistogram, RingBufferWraparound, DumpStatsOutput, RecordAlloc, MultiThreadRecord | 6 | ✅ 0 failures |
+| `chaos_gc_card_table_ext_test` | `gc_card_table_ext_test.cpp` | Card table edge cases: OverlappingRange, L1AutoGrowth, DirtyAtBoundary, ClearAllCards, ScanDirtyEmpty, ScanDirtyPartial | 6 | ✅ 0 failures |
+| `chaos_gc_tlab_test` | `gc_tlab_test.cpp` | TLAB: TlabClaimFromYoungGen, TlabFlushCounter, InitDestroyYoungGen, TlabMultipleClaim, TlabExhaustion | 5 | ✅ 0 failures |
+
+### 压力测试 — 多线程、长时间
+
+| Target | 文件 | 场景 | 状态 |
+|--------|------|------|------|
+| `chaos_gc_stress_test` | `gc_stress_test.cpp` | A→Q 共 17 场景 — alloc/mark/sweep/compact/domain/pressure/modes | ✅ A-N 已通过, O-Q 新增构建验证通过 |
+| `chaos_gc_bgc_stress_test` | `gc_bgc_stress_test.cpp` | BGC 并发压力 | ✅ |
+| `chaos_gc_finalizer_stress_test` | `gc_finalizer_stress_test.cpp` | Finalizer 线程压力 F1-F5 | ✅ |
+| `chaos_gc_loh_stress_test` | `loh_stress_test.cpp` | LOH 多线程压力 L1-L5 | ✅ |
+| `chaos_gc_oversized_stress_test` | `oversized_stress_test.cpp` | Oversized 分配压力 | ✅ 构建验证通过 |
+
+### 冒烟测试 — 轻量级生命周期
+
+| Target | 文件 | 测试内容 | 状态 |
+|--------|------|---------|------|
+| `chaos_gc_bgc_smoke` | `gc_bgc_smoke.cpp` | BGC 生命周期: BasicBgcCycle, BgcWithAllocation, ForceComplete, IsBusy/IsMarking, MultipleCycles, BgcWithYoungGc | ✅ Tests 1,2,4,5 PASS; Test 6 运行缓慢; ⚠️ Test 3 预存 segfault (YoungGc 交互) |
+| `chaos_gc_worker_pool_smoke` | `gc_worker_pool_smoke.cpp` | WorkerPool 生命周期 | ✅ |
+| `chaos_gc_sanity_test` | `gc_sanity_test.cpp` | POH + Domain sanity | ✅ |
+
+### 已知问题
+
+| 问题 | 涉及测试 | 说明 |
+|------|---------|------|
+| POH 区域不在 old-gen page array 中 | `gc_poh_test.cpp:TestPohFullGc` | 直接 `g_old_gen.Collect()` 会挂起，改用 nursery GC pressure 替代 |
+| BGC YoungGc 交互 segfault | `gc_bgc_smoke.cpp:TestBgcWithYoungGc` | 预存问题，被隔离到测试末尾运行（不影响其他测试）|
+| pinned 标记后继校验 | `gc_handle_test.cpp` | 某些 pinned 对象标记后内容验证不一致 |
+| gc_region_test tls_nursery_ctx | `gc_region_test.cpp` | 涉及 TLS nursery 上下文初始化的已知假设 |
+
+### 运行方式
+
+```bash
+# 全部单元测试
+cmake --build --preset debug
+ctest --test-dir build/debug -R chaos_gc
+
+# 单独运行
+artifacts/native-runtime-core-test/Debug/chaos_gc_scheduler_test.exe
+artifacts/native-runtime-core-test/Debug/chaos_gc_parallel_mark_test.exe
+
+# 压力测试（通过 stress CLI）
+run stress gc-stress
+run stress bgc-stress
+run stress loh-stress
+run stress finalizer-stress
+```
 
 ---
 

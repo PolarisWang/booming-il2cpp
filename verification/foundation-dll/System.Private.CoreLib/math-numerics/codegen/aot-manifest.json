@@ -205,6 +205,24 @@
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)",
+      "reason": "external-call"
     }
   ]
 }

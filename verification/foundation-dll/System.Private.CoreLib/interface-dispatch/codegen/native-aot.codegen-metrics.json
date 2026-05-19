@@ -8,15 +8,15 @@
     "generated/native-aot.generated.cpp"
   ],
   "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 133523,
-  "largestGeneratedCppBytes": 78842,
-  "generatedSymbolCount": 16,
-  "peakWorkingSetBytes": 494473216,
-  "structuredMethodCount": 9,
-  "structuredExceptionBodyCount": 1,
+  "generatedCppTotalBytes": 228677,
+  "largestGeneratedCppBytes": 149835,
+  "generatedSymbolCount": 41,
+  "peakWorkingSetBytes": 501116928,
+  "structuredMethodCount": 26,
+  "structuredExceptionBodyCount": 9,
   "flatFallbackCount": 0,
-  "totalMethodCount": 10,
+  "totalMethodCount": 35,
   "structuredRecoveryRate": 1,
-  "aotReachableMethodCount": 10,
+  "aotReachableMethodCount": 36,
   "aotUnreachableMethodCount": 0
 }

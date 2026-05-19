@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "RcwBasicPatchEntry",
-  "entrySubjectId": "RcwBasicPatchEntry/RcwBasicPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "RcwBasicSubjects",
+  "entrySubjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "RcwBasicPatchEntry_RcwBasicPatchEntry_Run_System_Int32",
+  "entrySymbol": "RcwBasicSubjects_ConstantFortyTwo__ctor",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

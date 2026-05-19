@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "GlobalizationCultureSubjects",
+  "assemblyName": "GlobalizationCulturePatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/patch/build-output/GlobalizationCulturePatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "GlobalizationCultureSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/subjects/build-output/GlobalizationCultureSubjects.dll"
+      "assemblyName": "GlobalizationCulturePatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/globalization-culture/managed/patch/build-output/GlobalizationCulturePatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d234db22-70e8-449e-a204-ca5019b58c1d",
+  "inputModuleVersionId": "2b35652d-c791-4243-b1d8-9996d31c8f39",
   "artifacts": [
     {
       "kind": "typedIlIr",

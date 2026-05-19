@@ -13,7 +13,7 @@ public static partial class BufferMemorySubjects
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32) could not be auto-generated
+        Buffer.BlockCopy(new byte[8], 0, new byte[8], 0, 8);
     }
 
     // [1] System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
@@ -31,7 +31,7 @@ public static partial class BufferMemorySubjects
     // [3] System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32) could not be auto-generated
+        if ((int)(Buffer.GetByte(new byte[4], 0)) != 0) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)
@@ -67,7 +67,7 @@ public static partial class BufferMemorySubjects
     // [9] System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)
     public static void Subject_9()
     {
-        // TODO: System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte) could not be auto-generated
+        Buffer.SetByte(new byte[4], 0, (byte)42);
     }
 
 }

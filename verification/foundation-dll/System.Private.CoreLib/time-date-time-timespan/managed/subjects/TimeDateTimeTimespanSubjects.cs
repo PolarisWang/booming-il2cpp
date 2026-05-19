@@ -31,37 +31,37 @@ public static partial class TimeDateTimeTimespanSubjects
     // [3] System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&) could not be auto-generated
+        if (((DateTime.TryParse("2024-01-01", out _)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.DateTime::ToString:System.String()
     public static void Subject_4()
     {
-        if (((DateTime.UtcNow.ToString()).Length) != 20) _exitCode = 1;
+        if (((DateTime.UtcNow.ToString()).Length) != 21) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
     public static void Subject_5()
     {
-        if (((DateTime.UtcNow.ToString("hello")).Length) != 5) _exitCode = 1;
+        if (((DateTime.UtcNow.ToString("hello")).Length) != 6) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
     public static void Subject_6()
     {
-        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 762828818) _exitCode = 1;
+        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 590074005) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
     public static void Subject_7()
     {
-        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != 844502591) _exitCode = 1;
+        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != 1208623105) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
     public static void Subject_8()
     {
-        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != 109558782) _exitCode = 1;
+        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != 477869609) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)

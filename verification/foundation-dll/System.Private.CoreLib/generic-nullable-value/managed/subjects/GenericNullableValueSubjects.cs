@@ -19,7 +19,7 @@ public static partial class GenericNullableValueSubjects
     // [1] System.Private.CoreLib/System.Nullable`1::get_Value:T()
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Nullable`1::get_Value:T() could not be auto-generated
+        if ((int)(((int?)42).Value) != 42) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()

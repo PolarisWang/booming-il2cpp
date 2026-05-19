@@ -131,6 +131,12 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
@@ -295,5 +301,11 @@
       "requiresBoxing": false
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_13:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

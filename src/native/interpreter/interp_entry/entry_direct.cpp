@@ -392,7 +392,7 @@ void InterpreterEntryDirect(
         }
     }
 
-    
+
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);

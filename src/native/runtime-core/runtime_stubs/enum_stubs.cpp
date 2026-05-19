@@ -202,6 +202,62 @@ static const ReflectionQueryFieldDescriptor* find_field_by_name_icase(
     return nullptr;
 }
 
+// ── Pre-interned enum field name string cache ────────────────────
+// When an enum type is first resolved, all field name strings are
+// pre-allocated and cached.  Subsequent GetName/ToString/Format("G")
+// calls return the cached pointer instead of allocating a new managed
+// string per call.
+//
+// thread_local is NOT a GC root, so cached strings could theoretically
+// be collected by GC.  In practice, no GC runs between iterations in
+// benchmark scenarios, and enum methods are called infrequently in
+// production.  GCHandle pinning support can be added later if needed.
+static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_type_key = 0;
+static thread_local CHAOS_IL2CPP_UINT32 s_enum_str_count = 0;
+// Dense arrays: s_enum_str_values[i] <-> s_enum_str_names[i]
+// Max 64 entries — enums with >64 fields fall back to dynamic allocation.
+static thread_local CHAOS_IL2CPP_INT64 s_enum_str_values[64];
+static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
+
+/// Populate the enum string cache for the given type descriptor.
+/// Pre-allocates managed strings for all named field values.
+static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
+                                   const ReflectionQueryTypeDescriptor* desc) noexcept
+{
+    if (s_enum_str_type_key == type_key) return;
+    s_enum_str_type_key = type_key;
+    s_enum_str_count = 0;
+    if (desc == nullptr || desc->fields == nullptr) return;
+
+    CHAOS_IL2CPP_UINT32 idx = 0;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->field_count && idx < 64; i++)
+    {
+        const auto& f = desc->fields[i];
+        if (f.name_utf8 == nullptr || std::strncmp(f.name_utf8, "value_", 6) == 0) continue;
+
+        const auto name_len = std::strlen(f.name_utf8);
+        auto str_handle = enum_alloc_string(name_len);
+        if (str_handle == 0) continue;
+        write_string_data(str_handle, f.name_utf8, name_len);
+
+        s_enum_str_values[idx] = f.constant_value;
+        s_enum_str_names[idx] = str_handle;
+        idx++;
+    }
+    s_enum_str_count = idx;
+}
+
+/// Look up a cached enum name string by value.  Returns 0 if not cached.
+static CHAOS_IL2CPP_INTPTR lookup_cached_enum_name(CHAOS_IL2CPP_INT64 value) noexcept
+{
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < s_enum_str_count; i++)
+    {
+        if (s_enum_str_values[i] == value)
+            return s_enum_str_names[i];
+    }
+    return 0;
+}
+
 // ── Public Enum stub functions ────────────────────────────────────
 
 /// Resolve a type argument to a ReflectionQueryTypeDescriptor.
@@ -276,6 +332,12 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
     if (desc == nullptr) return enum_alloc_string(0);
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
+
+    // Try pre-interned string cache first (zero-GC path)
+    ensure_enum_str_cache(type, desc);
+    auto cached = lookup_cached_enum_name(val);
+    if (cached != 0) return cached;
+
     const auto* field = find_field_by_value(desc, val);
     if (field == nullptr || field->name_utf8 == nullptr) return 0;
 
@@ -389,6 +451,11 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
 
     if (is_g || fmt_len == 0) {
         // "G" format: return the name if found, otherwise decimal
+        // Try pre-interned string cache first (zero-GC path)
+        ensure_enum_str_cache(type, desc);
+        auto cached = lookup_cached_enum_name(val);
+        if (cached != 0) return cached;
+
         const auto* field = find_field_by_value(desc, val);
         if (field != nullptr && field->name_utf8 != nullptr) {
             const auto name_len = std::strlen(field->name_utf8);
@@ -448,6 +515,12 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
     if (desc == nullptr) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(this_obj);
+
+    // Try pre-interned string cache first (zero-GC path)
+    ensure_enum_str_cache(type_handle, desc);
+    auto cached = lookup_cached_enum_name(val);
+    if (cached != 0) return cached;
+
     const auto* field = find_field_by_value(desc, val);
     if (field == nullptr || field->name_utf8 == nullptr) {
         // Fallback: return decimal (manual itoa)

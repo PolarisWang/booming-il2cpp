@@ -3,68 +3,60 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "GarbageCollectionPatchEntry",
-      "subjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "GarbageCollectionPatchEntry/GarbageCollectionPatchEntry",
-      "metadataToken": 100663303,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

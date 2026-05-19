@@ -88,7 +88,32 @@
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::RemoveAt:System.Void(System.Int32)",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",

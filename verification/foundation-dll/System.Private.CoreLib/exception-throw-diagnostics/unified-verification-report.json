@@ -2,8 +2,8 @@
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:30:18",
-  "duration_ms": 28224,
+  "timestamp": "2026-05-19T19:09:45",
+  "duration_ms": 21330,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 23810
+      "duration_ms": 18052
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 440
+      "duration_ms": 37
     },
     "audit": {
       "stage": "audit",
@@ -72,7 +72,7 @@
         "benchmarkQuality": "matchedCount=0/14 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 3194
+      "duration_ms": 2459
     }
   },
   "coverage": {

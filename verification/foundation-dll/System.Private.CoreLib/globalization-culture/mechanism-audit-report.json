@@ -5,7 +5,7 @@
   "audited": 41,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 1,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 41,
   "passed": true,
@@ -380,13 +380,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "CultureInfo",
-      "method_name": "GetCultureInfo",
-      "param_count": 1,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

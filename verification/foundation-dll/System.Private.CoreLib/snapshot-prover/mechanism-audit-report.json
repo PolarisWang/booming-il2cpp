@@ -1,13 +1,13 @@
 {
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 182,
-  "audited": 182,
+  "total_methods": 184,
+  "audited": 184,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 182,
+  "methods_without_assert": 184,
   "passed": true,
   "method_details": [
     {
@@ -156,6 +156,15 @@
     },
     {
       "method_name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -1641,6 +1650,15 @@
     },
     {
       "method_name": "chaos_stub_definition_SnapshotTestFixtures_Wrapper_1__GetValue__0___type__System_Int32__method",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

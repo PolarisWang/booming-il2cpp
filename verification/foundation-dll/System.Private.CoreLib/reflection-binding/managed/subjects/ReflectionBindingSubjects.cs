@@ -85,7 +85,8 @@ public static partial class ReflectionBindingSubjects
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     public static void Subject_10()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[]) could not be auto-generated
+        try { typeof(byte).GetMethods()[0].Invoke(null, new object[0]); _exitCode = 1; }
+        catch (TargetException) { }
     }
 
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)

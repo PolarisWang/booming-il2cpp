@@ -2,8 +2,8 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:31:34",
-  "duration_ms": 23595,
+  "timestamp": "2026-05-19T19:12:17",
+  "duration_ms": 28405,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 19591
+      "duration_ms": 23153
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 40
+      "duration_ms": 382
     },
     "audit": {
       "stage": "audit",
@@ -51,19 +51,19 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 2,
+        "skipsFound": 0,
         "principleStatus": "VIOLATION",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 952
+      "duration_ms": 917
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=-215.32%, native_faster=1/10, managed_faster=9/10",
+      "summary": "avg_speedup=-162.93%, native_faster=1/10, managed_faster=9/10",
       "details": {
-        "averageSpeedupPercent": -215.32,
+        "averageSpeedupPercent": -162.93,
         "nativeFasterCount": 1,
         "managedFasterCount": 9,
         "matchedCount": 10,
@@ -72,19 +72,32 @@
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 3010
+      "duration_ms": 3951
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 85.71,
-    "overall": 92.85
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},
-    "irTranslation": {},
+    "irTranslation": {
+      "totalMethods": 14,
+      "okCount": 0,
+      "failedCount": 14,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
     "performance": {
-      "averageSpeedupPercent": -215.32,
+      "averageSpeedupPercent": -162.93,
       "nativeFasterCount": 1,
       "managedFasterCount": 9,
       "matchedCount": 10,
@@ -114,7 +127,7 @@
         "matchedCount": 10,
         "nativeFasterCount": 1,
         "managedFasterCount": 9,
-        "averageSpeedupPercent": -215.32
+        "averageSpeedupPercent": -162.93
       }
     },
     "hasRegression": true,

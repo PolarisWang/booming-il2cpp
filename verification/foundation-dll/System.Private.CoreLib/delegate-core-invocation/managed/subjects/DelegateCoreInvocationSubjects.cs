@@ -28,19 +28,20 @@ public static partial class DelegateCoreInvocationSubjects
     // [2] System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[]) could not be auto-generated
+        try { new System.Action(() => {}).DynamicInvoke(); _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [3] System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo() could not be auto-generated
+        if (((new System.Action(() => {}).Method).GetHashCode()) != -1597880513) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Delegate::get_Target:System.Object()
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Delegate::get_Target:System.Object() could not be auto-generated
+        if (((new System.Action(() => {}).Target).GetHashCode()) != 35342034) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)
@@ -58,7 +59,7 @@ public static partial class DelegateCoreInvocationSubjects
     // [7] System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]() could not be auto-generated
+        if (((new System.Action(() => {}).GetInvocationList()).Length) != 1) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)

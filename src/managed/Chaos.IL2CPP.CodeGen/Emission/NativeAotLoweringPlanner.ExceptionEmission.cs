@@ -1937,7 +1937,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}
-			EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
+		EmitHotpatchResolvedInvocation(builder, slotIndex, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, invocationTarget.DirectNativeSymbol);
 		}
 		else if (TryResolveModuleLocalCall(instruction, invocationTarget, out string localSymbol))
 		{
@@ -1982,7 +1982,8 @@ public sealed partial class NativeAotLoweringPlanner
 					GetMethodAbiParameterSlots(devirtMethod),
 					devirtMethod.ReturnAbi,
 					EmptyRawArgumentIndices,
-					indentation);
+					indentation,
+					directNativeSymbol: null);
 				return;
 			}
 
@@ -2613,7 +2614,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 	}
 
-	private void EmitHotpatchResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation)
+	private void EmitHotpatchResolvedInvocation(StringBuilder builder, int dispatchSlotIndex, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, string? directNativeSymbol = null)
 	{
 		string returnType = MapAbiSlotReturnType(returnAbi);
 		bool hasReturn = !string.Equals(returnType, "void", StringComparison.Ordinal);
@@ -2670,7 +2671,8 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
-		string callExpr = $"{targetSymbol}({FormatAbiInvocationArgumentList(parameterAbis)})";
+		string nativeTarget = directNativeSymbol ?? targetSymbol;
+		string callExpr = $"{nativeTarget}({FormatAbiInvocationArgumentList(parameterAbis)})";
 		if (hasReturn)
 		{
 			builder.AppendLine($"{indentation}        _d_hpresult = {callExpr};");

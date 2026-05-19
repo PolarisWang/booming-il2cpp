@@ -441,8 +441,15 @@ public:
     // Written under mutex_, read with atomic load + deferred free.
     std::atomic<PageArray*> page_array_{nullptr};
 
-    // Retired page array freed on next RebuildPageArray call.
-    PageArray* page_array_retired_ = nullptr;
+    // Ring buffer of retired page arrays.  Each RebuildPageArray call
+    // retires the previous array into buf[i++ % 3] and frees buf[(i-2)%3].
+    // This provides a 2-call grace period: any reader that loaded the
+    // current array before an exchange has at least 2 more rebuilds before
+    // the array is freed — sufficient for the short-lived lock-free reads
+    // performed by FindPage/IsInOldGen (microsecond-range critical sections).
+    static constexpr int kRetiredRingSize = 3;
+    int retired_ring_idx_ = 0;
+    PageArray* retired_ring_[kRetiredRingSize]{};
 
     // Oversized pages freed by Free() but deferred to safepoint for
     // VirtualFree.  BgcSweep snapshots page_list_ under mutex_ and may

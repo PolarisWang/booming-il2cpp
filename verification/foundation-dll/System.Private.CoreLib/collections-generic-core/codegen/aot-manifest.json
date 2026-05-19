@@ -119,6 +119,18 @@
     {
       "assemblyName": "System.Collections",
       "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Add:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::RemoveAt:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Int32\u003E::Sort:System.Void()",
       "reason": "external-call"
     },

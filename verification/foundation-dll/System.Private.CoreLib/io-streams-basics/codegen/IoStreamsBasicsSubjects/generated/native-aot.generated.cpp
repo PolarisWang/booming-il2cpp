@@ -33,7 +33,10 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects = {{nullptr, nullptr, 13364025341430610304ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13364025341430610304ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_MemoryStream = {{nullptr, nullptr, 7740506271772842812ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13364025341430610304ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_BinaryReader = {{nullptr, nullptr, 8142529082164247609ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IO_BinaryReader = static_cast<CHAOS_IL2CPP_INTPTR>(8142529082164247609ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter = {{nullptr, nullptr, 15406090504116211001ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IO_BinaryWriter = static_cast<CHAOS_IL2CPP_INTPTR>(15406090504116211001ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_MemoryStream = {{nullptr, nullptr, 7740506271772842812ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IO_MemoryStream = static_cast<CHAOS_IL2CPP_INTPTR>(7740506271772842812ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_StringReader = {{nullptr, nullptr, 12492575098174306897ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IO_StringReader = static_cast<CHAOS_IL2CPP_INTPTR>(12492575098174306897ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IO_StringWriter = {{nullptr, nullptr, 7116827954295356577ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IO_StringWriter = static_cast<CHAOS_IL2CPP_INTPTR>(7116827954295356577ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -78,6 +81,21 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 }
 
 struct chaos_type_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects
+{
+	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_Byte
+{
+	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_IO_BinaryReader
+{
+	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_IO_BinaryWriter
 {
 	ThinLockableHeader header{};
 };
@@ -505,24 +523,24 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[18] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[18] = {
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_0
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_1
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_2
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_3
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_4
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_5
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_6
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_7
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_8
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_9
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_10
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_11
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // IoStreamsBasicsSubjects::Subject_12
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_13
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_14
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_15
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_16
-	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IoStreamsBasicsSubjects::Subject_17
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_0
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_1
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_2
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_3
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_4
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_5
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_6
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_7
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_8
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_9
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_10
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_11
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_12
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_13
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_14
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_15
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_16
+	{ reinterpret_cast<void*>(&IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IoStreamsBasicsSubjects::Subject_17
 };
 
 // Module hotpatch bundle
@@ -544,14 +562,19 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[26] = {
+	"System.Private.CoreLib/System.Byte",
+	"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])",
+	"System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+	"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
 	"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+	"System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
 	"System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
 	"System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
-	"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
 	"System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
 	"System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
 	"System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+	"System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)",
 	"System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
 	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
@@ -560,16 +583,27 @@ extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
 	"System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
 	"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
 	"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+	"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)",
+	"System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
+	"System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
+	"System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
+	"System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)",
+	"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[15] = {
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__),
+extern "C" void* kChaosExternalRuntimeFnTable[26] = {
 	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__),
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__get_Length_System_Int64__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__get_Position_System_Int64__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_StringReader___ctor_System_Void_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__ReadLine_System_String__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
@@ -578,9 +612,15 @@ extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__Write_System_Void_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void__),
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 15;
+extern "C" int32_t kChaosExternalRuntimeCount = 26;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -852,9 +892,81 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
 
 
-	return;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_arg_2 = _s4;
+		const auto chaos_arg_1 = _s3;
+		const auto chaos_arg_0 = _s2;
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	{
+		if (_s2 != 0)
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s2;
+				chaos_static_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 // Managed method: IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1()
@@ -862,8 +974,42 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_arg_2 = _s3;
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+	}
 	return;
 }
 
@@ -925,7 +1071,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void)
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0, chaos_arg_1);
 		_s1 = ChaosStoreInt64(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
@@ -1074,8 +1220,26 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 
 
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_arg_0 = _s1;
+		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0);
+	}
 	return;
 }
 
@@ -1293,9 +1457,59 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	return;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[21])();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s3) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s4) ? 1 : 0);
+	{
+		if (_s3 != 0)
+		{
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 // Managed method: IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14()
@@ -1303,9 +1517,69 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
 
 
-	return;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[22])();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_0 = _s3;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s3) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s4) ? 1 : 0);
+	{
+		if (_s3 != 0)
+		{
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 // Managed method: IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15()
@@ -1313,9 +1587,62 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	return;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<double(*)(void)>(kChaosExternalRuntimeFnTable[23])();
+		_s3 = ChaosStoreFloat64(chaos_result);
+	}
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s3)));
+	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s3) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s4) ? 1 : 0);
+	{
+		if (_s3 != 0)
+		{
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 // Managed method: IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16()
@@ -1323,8 +1650,27 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryWriter, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_arg_0 = _s2;
+		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
+	}
 	return;
 }
 
@@ -1333,8 +1679,27 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryWriter, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter.hot;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_arg_0 = _s2;
+		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
+	}
 	return;
 }
 
@@ -1346,4 +1711,54 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void)
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 18;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-0\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-0\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_0()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":3,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":8,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":14,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":30,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":32,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":42,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":37,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":42,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-1\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-1\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_1()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":7,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-2\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-2\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_2()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::Flush:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Flush:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Flush:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-3\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-3\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_3()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":8,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Int64\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":33,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":28,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":33,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-4\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-4\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_4()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":8,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-5\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-5\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_5()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Int64\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":25,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":20,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-6\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-6\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_6()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Int64\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":25,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":20,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-7\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-7\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_7()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":6,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-8\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-8\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_8()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":6,\"resultType\":\"System.Private.CoreLib/System.IO.StringReader\",\"callee\":\"System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringReader\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":11,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":37,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-9\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-9\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_9()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":6,\"resultType\":\"System.Private.CoreLib/System.IO.StringReader\",\"callee\":\"System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringReader\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":11,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":37,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-10\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_10()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-10\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_10()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.StringWriter\",\"callee\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":6,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":11,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-11\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_11()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-11\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_11()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.StringWriter\",\"callee\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":6,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":11,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-12\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_12()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-12\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_12()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.StringWriter\",\"callee\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.StringWriter\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":6,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_13[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-13\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_13()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-13\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_13()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":4,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":12,\"resultType\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":35,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":30,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":35,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_14[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-14\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_14()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-14\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_14()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":12,\"resultType\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":31,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":40,\"ilOffset\":32,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":40,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_15[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-15\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_15()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-15\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_15()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":8,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":12,\"resultType\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Double\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":36,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":30,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"ilOffset\":31,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"IoStreamsBasicsSubjects\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":36,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_16[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-16\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_16()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-16\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_16()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":6,\"resultType\":\"System.Private.CoreLib/System.IO.BinaryWriter\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":13,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":19,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+static const char kMethodJson_17[] = "{\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-17\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_17()\",\"identity\":{\"assemblyName\":\"IoStreamsBasicsSubjects\",\"declaringTypeSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects\",\"definitionSubjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()\",\"subjectId\":\"IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()\",\"methodId\":\"io-streams-basics-subjects.io-streams-basics-subjects.subject-17\",\"signature\":\"System.Void IoStreamsBasicsSubjects::Subject_17()\"},\"nativeSymbol\":\"IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"callee\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.MemoryStream\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":6,\"resultType\":\"System.Private.CoreLib/System.IO.BinaryWriter\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":13,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":19,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"IoStreamsBasicsSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[18] =
+{
+    { kMethodJson_0, 5624u, 0x00000003u, 0u },
+    { kMethodJson_1, 3482u, 0x00000004u, 0u },
+    { kMethodJson_2, 2527u, 0x00000005u, 0u },
+    { kMethodJson_3, 4500u, 0x00000006u, 0u },
+    { kMethodJson_4, 2770u, 0x00000007u, 0u },
+    { kMethodJson_5, 3931u, 0x00000008u, 0u },
+    { kMethodJson_6, 3937u, 0x00000009u, 0u },
+    { kMethodJson_7, 3212u, 0x0000000Au, 0u },
+    { kMethodJson_8, 4789u, 0x0000000Bu, 0u },
+    { kMethodJson_9, 4792u, 0x0000000Cu, 0u },
+    { kMethodJson_10, 2695u, 0x0000000Du, 0u },
+    { kMethodJson_11, 2707u, 0x0000000Eu, 0u },
+    { kMethodJson_12, 2559u, 0x0000000Fu, 0u },
+    { kMethodJson_13, 5189u, 0x00000010u, 0u },
+    { kMethodJson_14, 5813u, 0x00000011u, 0u },
+    { kMethodJson_15, 5289u, 0x00000012u, 0u },
+    { kMethodJson_16, 3363u, 0x00000013u, 0u },
+    { kMethodJson_17, 3363u, 0x00000014u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 18u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

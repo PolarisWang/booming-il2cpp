@@ -109,13 +109,13 @@ public static partial class MathNumericsSubjects
     // [16] System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)
     public static void Subject_16()
     {
-        // TODO: System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32) could not be auto-generated
+        if (BitConverter.ToInt32(new byte[4], 0) != 0) _exitCode = 1;
     }
 
     // [17] System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)
     public static void Subject_17()
     {
-        // TODO: System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32) could not be auto-generated
+        if ((int)(BitConverter.ToDouble(new byte[8], 0)) != 0) _exitCode = 1;
     }
 
 }

@@ -4,140 +4,89 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_11:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
+      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+      "methodSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
-    },
-    {
-      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

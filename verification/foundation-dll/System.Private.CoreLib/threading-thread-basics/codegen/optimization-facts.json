@@ -4,84 +4,133 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Subject_10:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Abort:System.Void()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::_exitCode",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Threading.Thread/System.Threading.ThreadInterruptedException"
     }
   ]
 }

@@ -100,6 +100,18 @@
   ],
   "dispatchFacts": [
     {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
@@ -169,6 +181,42 @@
       "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
       "devirtualized": false
     }
   ],

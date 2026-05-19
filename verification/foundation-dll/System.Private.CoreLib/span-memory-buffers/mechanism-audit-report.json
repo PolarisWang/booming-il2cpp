@@ -5,7 +5,7 @@
   "audited": 43,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 8,
+  "skips_found": 0,
   "methods_without_lowering": 0,
   "methods_without_assert": 43,
   "passed": true,
@@ -398,55 +398,6 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [
-    {
-      "type_name": "Span",
-      "method_name": "ToArray",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "get_Item",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Span",
-      "method_name": "Slice",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "get_Item",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "ReadOnlySpan",
-      "method_name": "Slice",
-      "param_count": 2,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Memory",
-      "method_name": "Slice",
-      "param_count": 1,
-      "override_value": "skip"
-    }
-  ],
+  "skip_details": [],
   "errors": []
 }

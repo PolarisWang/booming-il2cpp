@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "DispatchBasicPatchEntry",
-  "entrySubjectId": "DispatchBasicPatchEntry/DispatchBasicPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "DispatchBasicSubjects",
+  "entrySubjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/dispatch-basic/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

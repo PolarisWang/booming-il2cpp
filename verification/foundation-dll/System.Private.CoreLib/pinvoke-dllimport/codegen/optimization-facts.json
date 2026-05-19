@@ -4,32 +4,72 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentProcess:System.IntPtr()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentThread:System.IntPtr()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetProcessId:System.UInt32(System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetModuleHandle:System.IntPtr(System.String)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()",
       "reason": "closed-world-method"
     }
   ],
@@ -37,14 +77,29 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::_exitCode",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }

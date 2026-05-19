@@ -1,13 +1,13 @@
 {
   "family": "interface-dispatch",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 103,
-  "audited": 103,
+  "total_methods": 105,
+  "audited": 105,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 103,
+  "methods_without_assert": 105,
   "passed": true,
   "method_details": [
     {
@@ -147,6 +147,15 @@
     },
     {
       "method_name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -516,6 +525,15 @@
     },
     {
       "method_name": "InterfaceDispatchSubjects_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

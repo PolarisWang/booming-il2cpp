@@ -5,7 +5,7 @@
   "audited": 35,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 3,
+  "skips_found": 2,
   "methods_without_lowering": 0,
   "methods_without_assert": 35,
   "passed": true,
@@ -327,12 +327,6 @@
     }
   ],
   "skip_details": [
-    {
-      "type_name": "RuntimeHelpers",
-      "method_name": "RunClassConstructor",
-      "param_count": 1,
-      "override_value": "skip"
-    },
     {
       "type_name": "RuntimeHelpers",
       "method_name": "InitializeArray",

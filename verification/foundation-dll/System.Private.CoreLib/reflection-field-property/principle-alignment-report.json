@@ -1,12 +1,12 @@
 {
   "family": "reflection-field-property",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T17:43:29.456174",
+  "generated_at": "2026-05-19T19:17:19.710432",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks may not have been run [overridden — benchmark stage was skipped]",
+      "summary": "No benchmark data available — benchmarks may not have been run [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
       "details": [],
       "evidence": {}
     },
@@ -19,280 +19,696 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 68,
-        "methods_total": 68
+        "methods_with_lowering": 172,
+        "methods_total": 172
       },
       "per_method": [
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_8",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_9",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_10",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_11",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_12",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_13",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_14",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_15",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_16",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_17",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_18",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_19",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_20",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_21",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_22",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_23",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_24",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_25",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_26",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_27",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_28",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_29",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_30",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_31",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_32",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_33",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Run_System_Int32",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_8",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_9",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_10",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_11",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_12",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_13",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_14",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_15",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_16",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_17",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_18",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_19",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_20",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_21",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_22",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_23",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_24",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_25",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_26",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_27",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_28",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_29",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_30",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_31",
           "has_lowering": true
         },
         {
-          "name": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33",
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_33",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Run_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_24",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_25",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_27",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_29",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_30",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_31",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_33",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_24",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_25",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_27",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_29",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_30",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_31",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_33",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_24",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_25",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_27",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_29",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_30",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_31",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Subject_33",
           "has_lowering": true
         }
       ]
@@ -328,79 +744,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "7 of 39 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "build/check_foundation_dll_pipeline.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "build/toolchains/run/commands/foundation_dll.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "details": [],
       "evidence": {
-        "changed_source_count": 39,
-        "layer_distribution": {
-          "TestInfra": 5,
-          "Emitter": 3,
-          "RuntimeSupport": 1,
-          "Driver": 2,
-          "Codegen": 1,
-          "RuntimeCore": 3,
-          "Tests": 17
-        },
-        "violations": [
-          {
-            "file": "build/check_foundation_dll_pipeline.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "build/toolchains/run/commands/foundation_dll.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -434,11 +782,11 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 34 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 35 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 34,
-        "entries_with_interrupt_ptr": 34,
+        "table_size": 35,
+        "entries_with_interrupt_ptr": 35,
         "has_hotpatch_module": true
       }
     },
@@ -460,9 +808,9 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 2,
-    "violation": 0,
+    "concern": 1,
+    "violation": 1,
     "not_applicable": 2,
-    "overall": "CONCERN"
+    "overall": "VIOLATION"
   }
 }

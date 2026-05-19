@@ -14,19 +14,19 @@ public static partial class ReflectionTypeSubjects
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String) could not be auto-generated
+        if (((Type.GetType("System.Int32")).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean) could not be auto-generated
+        if (((Type.GetType("System.Int32", false)).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean) could not be auto-generated
+        if (((Type.GetType("System.Int32", false, false)).GetHashCode()) != 7880838) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
@@ -63,7 +63,7 @@ public static partial class ReflectionTypeSubjects
     // [8] System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()
     public static void Subject_8()
     {
-        if (((typeof(byte).TypeHandle).GetHashCode()) != 35342034) _exitCode = 1;
+        if (((typeof(byte).TypeHandle).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()
@@ -159,7 +159,7 @@ public static partial class ReflectionTypeSubjects
     // [24] System.Private.CoreLib/System.Type::get_BaseType:System.Type()
     public static void Subject_24()
     {
-        if (((typeof(byte).BaseType).GetHashCode()) != 56793269) _exitCode = 1;
+        if (((typeof(byte).BaseType).GetHashCode()) != 115000) _exitCode = 1;
     }
 
     // [25] System.Private.CoreLib/System.Type::get_DeclaringType:System.Type()
@@ -179,7 +179,7 @@ public static partial class ReflectionTypeSubjects
     // [27] System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()
     public static void Subject_27()
     {
-        if (((typeof(byte).UnderlyingSystemType).GetHashCode()) != 35342034) _exitCode = 1;
+        if (((typeof(byte).UnderlyingSystemType).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [28] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
@@ -271,7 +271,7 @@ public static partial class ReflectionTypeSubjects
     // [42] System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()
     public static void Subject_42()
     {
-        if (((typeof(byte).Assembly).GetHashCode()) != 115000) _exitCode = 1;
+        if (((typeof(byte).Assembly).GetHashCode()) != 1495009) _exitCode = 1;
     }
 
 }

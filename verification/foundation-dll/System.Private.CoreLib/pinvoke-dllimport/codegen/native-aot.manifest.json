@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "PinvokeDllimportPatchEntry",
-  "entrySubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "PinvokeDllimportSubjects",
+  "entrySubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentProcess:System.IntPtr()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

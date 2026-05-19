@@ -4,109 +4,115 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_8:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_10:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_11:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_12:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_13:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_14:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Subject_15:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

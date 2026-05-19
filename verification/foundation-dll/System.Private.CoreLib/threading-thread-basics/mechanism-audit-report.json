@@ -1,13 +1,13 @@
 {
   "family": "threading-thread-basics",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 35,
-  "audited": 35,
+  "total_methods": 37,
+  "audited": 37,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 4,
+  "skips_found": 1,
   "methods_without_lowering": 0,
-  "methods_without_assert": 35,
+  "methods_without_assert": 37,
   "passed": true,
   "method_details": [
     {
@@ -173,6 +173,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -324,30 +333,21 @@
       "has_lowering": true,
       "assert_fired": false,
       "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
     }
   ],
   "skip_details": [
     {
       "type_name": "Thread",
-      "method_name": "Start",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "Sleep",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
       "method_name": "ResetAbort",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "get_ManagedThreadId",
       "param_count": 0,
       "override_value": "skip"
     }

@@ -1,22 +1,26 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "RcwBasicPatchEntry",
+  "assemblyName": "RcwBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/patch/build-output/RcwBasicPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "RcwBasicPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/patch/build-output/RcwBasicPatchEntry.dll"
+      "assemblyName": "RcwBasicSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Runtime.InteropServices.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "45c4fc86-f403-42e5-8ec2-846719432ff9",
+  "inputModuleVersionId": "af129483-481f-44bb-bf67-71edeb227c3d",
   "artifacts": [
     {
       "kind": "typedIlIr",

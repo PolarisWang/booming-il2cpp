@@ -14,25 +14,25 @@ public static partial class SpanMemoryBuffersSubjects
     // [0] System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32) could not be auto-generated
+        if ((int)(new Span<byte>(new byte[4])[0]) != 0) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32) could not be auto-generated
+        if (((new Span<byte>(new byte[4]).Slice(1).Length).GetHashCode()) != 3) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32)
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Span`1::Slice:System.Span`1(System.Int32,System.Int32) could not be auto-generated
+        if (((new Span<byte>(new byte[4]).Slice(1, 2).Length).GetHashCode()) != 2) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Span`1::ToArray:T[](System.Int32) could not be auto-generated
+        if (((new byte[1].AsSpan().ToArray()).Length) != 1) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)
@@ -51,13 +51,13 @@ public static partial class SpanMemoryBuffersSubjects
     // [6] System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)
     public static void Subject_6()
     {
-        // TODO: System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32) could not be auto-generated
+        if ((int)(new ReadOnlySpan<byte>(new byte[4])[0]) != 0) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32)
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.ReadOnlySpan`1::Slice:System.ReadOnlySpan`1(System.Int32) could not be auto-generated
+        if (((new ReadOnlySpan<byte>(new byte[4]).Slice(1).Length).GetHashCode()) != 3) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
@@ -69,7 +69,7 @@ public static partial class SpanMemoryBuffersSubjects
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
     public static void Subject_9()
     {
-        // TODO: System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32) could not be auto-generated
+        if ((int)(new Memory<byte>(new byte[4]).Slice(1).Length) != 3) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Memory`1::get_Span:System.Span`1()

@@ -1,15 +1,15 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T17:28:54.644737",
+  "generated_at": "2026-05-19T19:08:09.043770",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "ALIGNED",
-      "summary": "avg_speedup=42.54%",
+      "summary": "avg_speedup=37.29%",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 42.54,
+        "average_speedup_percent": 37.29,
         "managed_faster_count": 1,
         "native_faster_count": 10,
         "matched_count": 11,
@@ -430,79 +430,11 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "7 of 39 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "build/check_foundation_dll_pipeline.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "build/toolchains/run/commands/foundation_dll.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "VIOLATION",
+      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "details": [],
       "evidence": {
-        "changed_source_count": 39,
-        "layer_distribution": {
-          "TestInfra": 5,
-          "Emitter": 3,
-          "RuntimeSupport": 1,
-          "Driver": 2,
-          "Codegen": 1,
-          "RuntimeCore": 3,
-          "Tests": 17
-        },
-        "violations": [
-          {
-            "file": "build/check_foundation_dll_pipeline.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "build/toolchains/run/commands/foundation_dll.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+        "error": "'NoneType' object has no attribute 'strip'"
       }
     },
     "p2_no_bare_new": {
@@ -563,8 +495,8 @@
   "summary": {
     "total": 12,
     "aligned": 9,
-    "concern": 1,
-    "violation": 0,
+    "concern": 0,
+    "violation": 1,
     "not_applicable": 2,
     "overall": "ALIGNED"
   }

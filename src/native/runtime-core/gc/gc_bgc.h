@@ -208,6 +208,9 @@ public:
     /// Drains mark stack + SATB + sweeps immediately.
     void ForceComplete();
 
+    /// Collect dead weak handles into bgc_dead_weak_handles_ (post-BgcSweep).
+    void CollectDeadWeakHandlesForBgc();
+
 private:
     BgcController() = default;
     ~BgcController() = default;

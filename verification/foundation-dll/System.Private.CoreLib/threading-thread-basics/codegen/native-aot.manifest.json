@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ThreadingThreadBasicsPatchEntry",
-  "entrySubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ThreadingThreadBasicsSubjects",
+  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

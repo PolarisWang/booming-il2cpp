@@ -2,9 +2,9 @@
   "family": "reflection-type",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T17:37:22",
-  "duration_ms": 32431,
-  "overall_status": "passed",
+  "timestamp": "2026-05-19T18:46:53",
+  "duration_ms": 27843,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,21 +28,21 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-type\\managed\\subjects\\build-output\\ReflectionTypeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 23993
+      "duration_ms": 26306
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (43/43)",
+      "status": "failed",
+      "summary": "Fact verify=failed (42/43)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 43,
+          "status": "failed",
+          "passed": 42,
           "total": 43
         }
       },
       "errors": [],
-      "duration_ms": 537
+      "duration_ms": 48
     },
     "audit": {
       "stage": "audit",
@@ -51,46 +51,23 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 3,
+        "skipsFound": 0,
         "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1962
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/43 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 43,
-        "invalidCount": 43,
-        "benchmarkQuality": "matchedCount=0/43 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 5935
+      "duration_ms": 1486
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 93.02,
-    "overall": 96.51
+    "methodCoverage": 97.67,
+    "testedRate": 100.0,
+    "overall": 98.84
   },
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0.0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 43,
-      "invalidCount": 43
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

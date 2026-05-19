@@ -4,6 +4,26 @@
       "requestingAssemblyName": "SpanMemoryBuffersSubjects",
       "owningAssemblyName": "System.Memory",
       "subjectKind": "method",
+      "subjectId": "System.Memory/System.MemoryExtensions::AsSpan\u003CSystem.Byte\u003E:System.Span\u003CSystem.Byte\u003E(System.Byte[])",
+      "definitionSubjectId": "System.Memory/System.MemoryExtensions::AsSpan:System.Span\u003C!!0\u003E(!!0[])",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Memory/System.MemoryExtensions::AsSpan:System.Span\u003C!!0\u003E(!!0[])",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Memory",
+      "subjectKind": "method",
       "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
       "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
@@ -44,12 +64,72 @@
       "requestingAssemblyName": "SpanMemoryBuffersSubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
+      "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::.ctor:System.Void(!0[])",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::.ctor:System.Void(!0[])",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::Slice:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::Slice:System.Memory\u003C!0\u003E(System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::Slice:System.Memory\u003C!0\u003E(System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
       "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
       "demandSourceKind": "memberReference",
       "instantiationKey": {
         "contextKind": 1,
         "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Length:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Length:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Memory\u00601::get_Length:System.Int32()",
         "typeArguments": [
           "System.Byte"
         ],
@@ -84,12 +164,112 @@
       "requestingAssemblyName": "SpanMemoryBuffersSubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
+      "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::.ctor:System.Void(!0[])",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::.ctor:System.Void(!0[])",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::Slice:System.ReadOnlySpan\u003CSystem.Byte\u003E(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::Slice:System.ReadOnlySpan\u003C!0\u003E(System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::Slice:System.ReadOnlySpan\u003C!0\u003E(System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
       "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
       "demandSourceKind": "memberReference",
       "instantiationKey": {
         "contextKind": 1,
         "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::get_Item:System.Byte\u0026(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Item:!0\u0026(System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Item:!0\u0026(System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::get_Length:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Length:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Length:System.Int32()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::.ctor:System.Void(!0[])",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::.ctor:System.Void(!0[])",
         "typeArguments": [
           "System.Byte"
         ],
@@ -124,12 +304,112 @@
       "requestingAssemblyName": "SpanMemoryBuffersSubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::Slice:System.Span\u003CSystem.Byte\u003E(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::Slice:System.Span\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32,System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32,System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::ToArray:System.Byte[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::ToArray:!0[]()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::ToArray:!0[]()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Empty:System.Span\u003CSystem.Byte\u003E()",
       "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
       "demandSourceKind": "memberReference",
       "instantiationKey": {
         "contextKind": 1,
         "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Item:System.Byte\u0026(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Item:!0\u0026(System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Item:!0\u0026(System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Length:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Length:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Span\u00601::get_Length:System.Int32()",
         "typeArguments": [
           "System.Byte"
         ],

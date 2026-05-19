@@ -21,7 +21,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes() could not be auto-generated
+        if ((int)(typeof(byte).MemberType) != 32) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
@@ -48,7 +48,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     public static void Subject_5()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type() could not be auto-generated
+        if (((typeof(byte).GetMethods()[0].ReturnType).GetHashCode()) != 35342034) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
@@ -96,7 +96,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_12()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type() could not be auto-generated
+        if (((typeof(byte).GetFields()[0].FieldType).GetHashCode()) != 56793269) _exitCode = 1;
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
@@ -123,7 +123,8 @@ public static partial class ReflectionMemberCompleteSubjects
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     public static void Subject_16()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type() could not be auto-generated
+        try { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()

@@ -1665,36 +1665,108 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
 
 
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
 	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
+	catch (const chaos_managed_exception& chaos_exception)
 	{
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
 		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				throw;
+			}
 		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s0 = chaos_exception.object_value;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___exitCode = chaos_value;
+			}
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
 	{
-		if (_s0 != 0)
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
 		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___exitCode = chaos_value;
+			}
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects___exitCode = chaos_value;
 			}
 		}
-		return;
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 	}
+#endif
+	return;
 }
 
 // Managed method: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14()

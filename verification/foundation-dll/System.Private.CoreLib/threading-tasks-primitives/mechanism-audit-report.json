@@ -5,7 +5,7 @@
   "audited": 52,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 14,
+  "skips_found": 1,
   "methods_without_lowering": 0,
   "methods_without_assert": 52,
   "passed": true,
@@ -482,85 +482,7 @@
   "skip_details": [
     {
       "type_name": "Thread",
-      "method_name": "Start",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Run",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "ContinueWith",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "WhenAny",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "WhenAll",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "FromResult",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Delay",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Wait",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "Wait",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "get_IsCompleted",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Task",
-      "method_name": "get_Status",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "Sleep",
-      "param_count": 1,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
       "method_name": "ResetAbort",
-      "param_count": 0,
-      "override_value": "skip"
-    },
-    {
-      "type_name": "Thread",
-      "method_name": "get_ManagedThreadId",
       "param_count": 0,
       "override_value": "skip"
     }

@@ -701,6 +701,28 @@ static bool Test_NewArr() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: NewArrTlab — NewArr(42) via TLAB inline → LdLen → expect 42
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_NewArrTlab() {
+    std::printf("  Test_NewArrTlab...\n");
+    PrimeTlab();
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrNewArr(1, 0),                  // r1 = NewArr(r0) — via TLAB inline
+        InstrLdLen(2, 1),                   // r2 = LdLen(r1)
+        InstrRet(2),                        // return length
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // Test: LdElem_StElem — NewArr(3), StElem[0]=42, LdElem[0], expect 42
 // ═══════════════════════════════════════════════════════════════════════
 static bool Test_LdElem_StElem() {
@@ -711,6 +733,34 @@ static bool Test_LdElem_StElem() {
         InstrNewArr(1, 0),                  // r1 = NewArr(r0)
         InstrI4(IROpCode::LdcI4, 0, 2),   // r2 = 0 (index)
         InstrI4(IROpCode::LdcI4, 42, 3),  // r3 = 42 (value)
+        InstrStElem(1, 2, 3),              // StElem(r1, r2, r3) — arr, index, value
+        InstrI4(IROpCode::LdcI4, 0, 2),   // r2 = 0 (index again)
+        InstrLdElem(4, 1, 2),              // r4 = LdElem(r1, r2)
+        InstrRet(4),
+    };
+    rm.max_regs = 5;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: StElemFix — Verify StElem src3 DCE fix round-trips 42
+// ═══════════════════════════════════════════════════════════════════════
+// Regression test for the src3 use-count bug: DCE in OptimizeInstructions
+// was not counting src3_reg() uses, so the LdcI4 defining StElem's value
+// was incorrectly removed. Same sequence as LdElem_StElem, explicit 42.
+static bool Test_StElemFix() {
+    std::printf("  Test_StElemFix...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 3, 0),   // r0 = 3 (array length)
+        InstrNewArr(1, 0),                  // r1 = NewArr(r0)
+        InstrI4(IROpCode::LdcI4, 0, 2),   // r2 = 0 (index)
+        InstrI4(IROpCode::LdcI4, 42, 3),  // r3 = 42 (value) — was being DCE'd
         InstrStElem(1, 2, 3),              // StElem(r1, r2, r3) — arr, index, value
         InstrI4(IROpCode::LdcI4, 0, 2),   // r2 = 0 (index again)
         InstrLdElem(4, 1, 2),              // r4 = LdElem(r1, r2)
@@ -1510,6 +1560,93 @@ static bool Test_BenchmarkExtended() {
                     static_cast<double>(re_cycles) / avg);
     }
 
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: BrToSwitch — Beq chain converted to Switch by optimizer
+// ═══════════════════════════════════════════════════════════════════════
+// Verifies correct branch-to-switch conversion: a chain of 3 Beq + Br
+// should be optimized into a Switch instruction. Tests each case and
+// default via RegisterExecute, then one case via T4 native.
+static bool Test_BrToSwitch() {
+    std::printf("  Test_BrToSwitch...\n");
+    // r0 = switch value (set externally)
+    // r1 = constant for comparison
+    // r2 = result register
+    //
+    //  0: LdcI4(r0, <test_val>) — set by check lambda
+    //  1: LdcI4(0, r1)          — case 0
+    //  2: Beq(r0, r1) → 8       — if r0==0 goto case0 (LdcI4 100)
+    //  3: LdcI4(1, r1)          — case 1
+    //  4: Beq(r0, r1) → 10      — if r0==1 goto case1 (LdcI4 200)
+    //  5: LdcI4(2, r1)          — case 2
+    //  6: Beq(r0, r1) → 12      — if r0==2 goto case2 (LdcI4 300)
+    //  7: Br → 14               — goto default (LdcI4 0)
+    //  8: LdcI4(100, r2)        — case 0 result
+    //  9: Ret(r2)               — return 100
+    // 10: LdcI4(200, r2)        — case 1 result
+    // 11: Ret(r2)               — return 200
+    // 12: LdcI4(300, r2)        — case 2 result
+    // 13: Ret(r2)               — return 300
+    // 14: LdcI4(0, r2)          — default result
+    // 15: Ret(r2)               — return 0
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0, 0),   // 0: r0 = <test_val> (overwritten)
+        InstrI4(IROpCode::LdcI4, 0, 1),   // 1: r1 = 0
+        InstrCondBranch(IROpCode::Beq, 8, 0, 1),  // 2: if r0==0 goto 8
+        InstrI4(IROpCode::LdcI4, 1, 1),   // 3: r1 = 1
+        InstrCondBranch(IROpCode::Beq, 10, 0, 1), // 4: if r0==1 goto 10
+        InstrI4(IROpCode::LdcI4, 2, 1),   // 5: r1 = 2
+        InstrCondBranch(IROpCode::Beq, 12, 0, 1), // 6: if r0==2 goto 12
+        InstrBranch(IROpCode::Br, 14),     // 7: goto 14 (default)
+        InstrI4(IROpCode::LdcI4, 100, 2), // 8: r2 = 100
+        InstrRet(2),                       // 9: return 100
+        InstrI4(IROpCode::LdcI4, 200, 2), // 10: r2 = 200
+        InstrRet(2),                       // 11: return 200
+        InstrI4(IROpCode::LdcI4, 300, 2), // 12: r2 = 300
+        InstrRet(2),                       // 13: return 300
+        InstrI4(IROpCode::LdcI4, 0, 2),   // 14: r2 = 0
+        InstrRet(2),                       // 15: return 0
+    };
+    rm.max_regs = 3;
+
+    // Verify via RegisterExecute (all cases)
+    auto check = [&](int32_t val, uint64_t expected) -> bool {
+        RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
+        rm.instructions[0].imm.i4 = val;
+        bool ok = RegisterExecute(rf, rm.instructions.data(),
+                                   static_cast<uint32_t>(rm.instructions.size()));
+        rm.instructions[0].imm.i4 = 0;  // restore
+        if (!ok || !rf.has_ret || rf.ret_val != expected) {
+            std::printf("    FAIL: val=%d expected %llu got %llu (ok=%d has_ret=%d)\n",
+                        val, (unsigned long long)expected, (unsigned long long)rf.ret_val, ok, rf.has_ret);
+            return false;
+        }
+        return true;
+    };
+    if (!check(0, 100)) return false;
+    if (!check(1, 200)) return false;
+    if (!check(2, 300)) return false;
+    if (!check(99, 0)) return false;  // default
+
+    // Verify T4 codegen produces correct result for case 1 (r0=1 → 200)
+    rm.instructions[0].imm.i4 = 1;  // set switch value to 1
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(entry, nm->code_size, nm);
+
+    uint64_t result = ExecuteNative(entry);
+    rm.instructions[0].imm.i4 = 0;  // restore
+
+    if (result != 200) {
+        std::printf("    FAIL: T4 returned %llu (expected 200)\n", (unsigned long long)result);
+        return false;
+    }
+    std::printf("    T4 r0=1 → 200 ✓\n");
     return true;
 }
 
@@ -2677,13 +2814,20 @@ int main() {
 
     // TLAB inline allocation tests
     TEST(TlabNewObj); TEST(TlabBox); TEST(TlabNewObjBox);
-    TEST(LdLen); TEST(NewArr); TEST(LdElem_StElem); TEST(Dup);
+    TEST(LdLen); TEST(NewArr); TEST(NewArrTlab); TEST(LdElem_StElem); TEST(StElemFix); TEST(Dup);
 
     // WS3: Precise GC Slot Mapping
     TEST(GcSlotMap); TEST(GcSlotMapRegistration);
 
     // WS4: T4 SEH Support
     TEST(SehTable); TEST(SehCanGenerate);
+
+    // Phase 3d: Branch-to-switch conversion (before OSR tests due to OsrPromote hang)
+    TEST(BrToSwitch);
+
+    // Performance benchmarks (before OSR tests due to OsrPromote hang)
+    TEST(Benchmark);
+    TEST(BenchmarkExtended);
 
     // WS6: OSR — hot loop promotes to T4
     TEST(OsrPromote);
@@ -2716,10 +2860,6 @@ int main() {
 
     // WS12: Fuzz test — random instruction sequences
     TEST(Fuzz);
-
-    // Performance benchmarks
-    TEST(Benchmark);
-    TEST(BenchmarkExtended);
 
     std::printf("\nResults: %d passed, %d failed out of %d\n",
                 g_tests_passed, g_tests_failed, g_tests_passed + g_tests_failed);

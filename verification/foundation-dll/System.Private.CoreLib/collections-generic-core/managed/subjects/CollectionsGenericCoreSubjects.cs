@@ -44,7 +44,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [5] System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)
     public static void Subject_5()
     {
-        // TODO: System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32) could not be auto-generated
+        new System.Collections.Generic.List<int>{1,2,3}.RemoveAt(1);
     }
 
     // [6] System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()

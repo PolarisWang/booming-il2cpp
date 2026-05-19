@@ -32,7 +32,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [3] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle) could not be auto-generated
+        RuntimeHelpers.RunClassConstructor(typeof(byte).TypeHandle);
     }
 
     // [4] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)

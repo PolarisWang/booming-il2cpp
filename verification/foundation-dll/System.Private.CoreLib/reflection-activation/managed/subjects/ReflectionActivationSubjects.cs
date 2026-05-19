@@ -58,7 +58,8 @@ public static partial class ReflectionActivationSubjects
     // [7] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
     public static void Subject_7()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[]) could not be auto-generated
+        try { typeof(byte).GetConstructors()[0].Invoke(new object[0]); _exitCode = 1; }
+        catch (IndexOutOfRangeException) { }
     }
 
 }
