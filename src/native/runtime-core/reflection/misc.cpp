@@ -76,10 +76,17 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetModuleNameOnly(CHAOS_IL2CPP_INTPTR module_
 }
 
 // ── GetAssemblyFullName ───────────────────────────────────────────
+// Returns a string_id (tagged pointer) so the generated code's
+// String::get_Length etc. can resolve it.  Raw C string pointers
+// would be misread as managed string objects.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyFullName(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept {
     auto* decoded = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly_handle));
-    if (decoded == nullptr || decoded->image_name_utf8 == nullptr) return 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(decoded->image_name_utf8));
+    if (decoded == nullptr || decoded->image_name_utf8 == nullptr) {
+        decoded = &aot_metadata::kImageCoreLib;
+    }
+    auto id = string_table::Intern(decoded->image_name_utf8,
+        static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(decoded->image_name_utf8)));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
 }
 
 // ── GetCallingAssembly ─────────────────────────────────────────────
@@ -111,8 +118,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR /*
 }
 
 // ── GetAssemblyLocation ────────────────────────────────────────────
+// Return an Intern'd path string instead of 0 so the generated code's
+// null check doesn't crash.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR /*assembly*/) noexcept {
-    return 0;
+    auto id = string_table::Intern("unknown", 7);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
 }
 
 // ── GetCallingConvention ───────────────────────────────────────────

@@ -3,6 +3,10 @@
 
 #include <chaos/log.h>
 
+// Register demotion callbacks with runtime_core so method_replacement
+// can demote T4 entries without creating a circular dependency.
+#include <t4_demotion.h>
+
 #if defined(_WIN32) || defined(_WIN64)
   #define NOMINMAX
   #include <windows.h>
@@ -21,6 +25,7 @@ struct T4CodeEntry {
     const void*       code_start = nullptr;   // RX code entry point
     uint32_t          code_size  = 0;          // bytes
     const NativeMethod* nm       = nullptr;
+    uint32_t          patch_method_token = 0;  // PatchMethod token for hotpatch demotion
 };
 
 static T4CodeEntry    g_t4_code_entries[kMaxT4CodeEntries];
@@ -38,7 +43,8 @@ static void UnlockT4Registry() noexcept {
 }
 
 void RegisterT4Code(void* code_start, uint32_t code_size,
-                    const NativeMethod* nm) noexcept {
+                    const NativeMethod* nm,
+                    uint32_t patch_method_token) noexcept {
     if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
 
     LockT4Registry();
@@ -50,12 +56,13 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
     g_t4_code_entries[g_t4_code_count].code_start = code_start;
     g_t4_code_entries[g_t4_code_count].code_size  = code_size;
     g_t4_code_entries[g_t4_code_count].nm         = nm;
+    g_t4_code_entries[g_t4_code_count].patch_method_token = patch_method_token;
     g_t4_code_count++;
     UnlockT4Registry();
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "RegisterT4Code: code={} size={} seh_offset={}",
-        code_start, code_size, nm->seh_table_offset);
+        "RegisterT4Code: code={} size={} seh_offset={} token={}",
+        code_start, code_size, nm->seh_table_offset, patch_method_token);
 }
 
 void UnregisterT4Code(void* code_start) noexcept {
@@ -68,6 +75,48 @@ void UnregisterT4Code(void* code_start) noexcept {
         }
     }
     UnlockT4Registry();
+}
+
+uint32_t DemoteT4ByToken(uint32_t method_token) noexcept {
+    if (method_token == 0) return 0;
+    uint32_t count = 0;
+    LockT4Registry();
+    for (uint32_t i = 0; i < g_t4_code_count; i++) {
+        if (g_t4_code_entries[i].patch_method_token == method_token) {
+            g_t4_code_entries[i].nm = nullptr;
+            count++;
+        }
+    }
+    UnlockT4Registry();
+    if (count > 0) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+            "DemoteT4ByToken: token={} demoted {} entries", method_token, count);
+    }
+    return count;
+}
+
+uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
+    if (method_token == 0) return 0;
+    uint32_t count = 0;
+    LockT4Registry();
+    for (uint32_t i = 0; i < g_t4_code_count; i++) {
+        const auto* nm = g_t4_code_entries[i].nm;
+        if (nm == nullptr) continue;
+        // Scan call sites for matching method_token
+        for (uint32_t j = 0; j < nm->call_site_count; j++) {
+            if (nm->call_sites[j].method_token == method_token) {
+                g_t4_code_entries[i].nm = nullptr;
+                count++;
+                break;
+            }
+        }
+    }
+    UnlockT4Registry();
+    if (count > 0) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+            "DemoteT4ByCallSiteToken: token={} demoted {} caller entries", method_token, count);
+    }
+    return count;
 }
 
 /// Find the NativeMethod covering a given code address.
@@ -213,6 +262,11 @@ void RegisterT4SehHandler() noexcept {
     } else {
         CHAOS_IL2CPP_LOG_ERROR_M("codegen", "T4 VEH handler registration FAILED");
     }
+
+    // Register T4 demotion callbacks so method_replacement can demote T4
+    // entries through runtime_core without a circular build dependency.
+    chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(
+        DemoteT4ByToken, DemoteT4ByCallSiteToken);
 }
 
 #else  // not Windows
@@ -220,6 +274,10 @@ void RegisterT4SehHandler() noexcept {
 void RegisterT4SehHandler() noexcept {
     // VEH is Windows-specific. On POSIX, signal handlers would be used instead.
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4 SEH handler: not implemented for this platform");
+
+    // Register T4 demotion callbacks (platform-independent).
+    chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(
+        DemoteT4ByToken, DemoteT4ByCallSiteToken);
 }
 
 #endif  // _WIN32 || _WIN64

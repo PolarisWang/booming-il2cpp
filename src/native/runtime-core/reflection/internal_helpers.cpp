@@ -1,6 +1,19 @@
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
+// ── FNV-1a 24-bit hash ──────────────────────────────────────────────
+// Matches the codegen's pseudo-metadata handle convention in
+// ObjectModelUtilities.cs:CreatePseudoMetadataHandle().
+static inline uint32_t ComputeFNV1a24(const char* str) noexcept {
+    if (str == nullptr) return 0;
+    uint32_t hash = 2166136261u;
+    while (*str) {
+        hash ^= static_cast<uint8_t>(*str++);
+        hash *= 16777619u;
+    }
+    return hash & 0xFFFFFFu;
+}
+
 // ── Internal helpers ──
 
 // Extract metadata token from a type handle.
@@ -48,6 +61,37 @@ static inline const ReflectionQueryTypeDescriptor* GetTypeDescriptorFromHandle(C
         }
     }
 
+    // Try pseudo-metadata handle (codegen FNV-1a convention: 0x02XXXXXX)
+    {
+        uint32_t val = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+        if ((val & 0xFF000000u) == 0x02000000u && (val & 0xFFFFFFu) != 0u) {
+            uint32_t target_hash = val & 0xFFFFFFu;
+            // Scan ModuleRegistry images for matching SubjectId
+            {
+                uint32_t mod_count = GetModuleCount();
+                for (uint32_t mi = 0u; mi < mod_count; mi++) {
+                    const auto* mod = GetModuleByIndex(mi);
+                    if (mod == nullptr || mod->image == nullptr || mod->image->types == nullptr) continue;
+                    for (uint32_t ti = 0u; ti < mod->image->type_count; ti++) {
+                        auto* type = mod->image->types[ti];
+                        if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+                        if (ComputeFNV1a24(type->subject_id_utf8) == target_hash) {
+                            return type;
+                        }
+                    }
+                }
+            }
+            // Fallback: scan aot_metadata::kAllTypes (static descriptors)
+            for (uint32_t i = 0u; i < aot_metadata::kAllTypeCount; i++) {
+                auto* type = aot_metadata::kAllTypes[i];
+                if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+                if (ComputeFNV1a24(type->subject_id_utf8) == target_hash) {
+                    return type;
+                }
+            }
+        }
+    }
+
     // Fall back to raw metadata token lookup
     {
         uint32_t token = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
@@ -82,6 +126,96 @@ static inline const ReflectionQueryImageDescriptor* GetImageFromTypeHandle(CHAOS
 static inline const char* DecodeStringValue(CHAOS_IL2CPP_INTPTR value) {
     if (value == 0) return nullptr;
     return reinterpret_cast<const char*>(value);
+}
+
+// ── GC Type object resolution ──────────────────────────────────────────
+// Managed Type objects (created by generated code's
+// ChaosReflectionGetTypeFromHandle) store runtime_type_handle at offset 16.
+// This helper tries standard resolution first, then falls back to reading
+// runtime_type_handle from a GC Type object pointer.
+//
+// Managed Type layout:
+//   [ThinLockableHeader(16B)][runtime_type_handle(8B)][runtime_name_value(8B)][...]
+static inline const ReflectionQueryTypeDescriptor* ResolveTypeFromReflectionOrGcHandle(
+    CHAOS_IL2CPP_INTPTR handle) noexcept {
+    auto* desc = GetTypeDescriptorFromHandle(handle);
+    if (desc != nullptr) return desc;
+
+    // Fallback: could be a GC Type object (no tag bit, GC heap pointer).
+    // Read runtime_type_handle at offset 16.
+    if (handle != 0) {
+        CHAOS_IL2CPP_INTPTR inner = 0;
+        std::memcpy(&inner, reinterpret_cast<const void*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(handle) + 16), sizeof(inner));
+        if (inner != 0) {
+            return GetTypeDescriptorFromHandle(inner);
+        }
+    }
+
+    return nullptr;
+}
+
+// ── GC Type object -> Image resolution ─────────────────────────────────
+// Tries GetImageFromTypeHandle first, then reads runtime_type_handle from
+// a GC Type object at offset 16. As a last resort, scans modules for the
+// type descriptor to find its containing image.
+static inline const ReflectionQueryImageDescriptor* GetImageFromReflectionOrGcHandle(
+    CHAOS_IL2CPP_INTPTR handle) noexcept {
+    auto* image = GetImageFromTypeHandle(handle);
+    if (image != nullptr) return image;
+
+    if (handle != 0) {
+        CHAOS_IL2CPP_INTPTR inner = 0;
+        std::memcpy(&inner, reinterpret_cast<const void*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(handle) + 16), sizeof(inner));
+        if (inner != 0) {
+            auto* desc = GetTypeDescriptorFromHandle(inner);
+            if (desc != nullptr) {
+                // Scan modules for the descriptor
+                uint32_t mod_count = GetModuleCount();
+                for (uint32_t mi = 0; mi < mod_count; mi++) {
+                    const auto* mod = GetModuleByIndex(mi);
+                    if (mod == nullptr || mod->image == nullptr) continue;
+                    for (uint32_t ti = 0; ti < mod->image->type_count && ti < mod->type_count; ti++) {
+                        if (mod->image->types[ti] == desc) {
+                            return mod->image;
+                        }
+                    }
+                }
+                // Not found in any module's types[] array — could be a static
+                // constexpr descriptor from aot_metadata::kAllTypes.
+                // Check if kAllTypes contains this descriptor → return CoreLib.
+                if (desc != nullptr) {
+                    for (uint32_t i = 0; i < aot_metadata::kAllTypeCount; i++) {
+                        if (aot_metadata::kAllTypes[i] == desc) {
+                            return &aot_metadata::kImageCoreLib;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+// ── GetImageFromDescriptor ─────────────────────────────────────────────
+// Scans all registered modules to find the image containing a specific
+// type descriptor. Returns nullptr if not found.
+static inline const ReflectionQueryImageDescriptor* GetImageFromTypeDescriptor(
+    const ReflectionQueryTypeDescriptor* desc) noexcept {
+    if (desc == nullptr) return nullptr;
+    uint32_t mod_count = GetModuleCount();
+    for (uint32_t mi = 0; mi < mod_count; mi++) {
+        const auto* mod = GetModuleByIndex(mi);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t ti = 0; ti < mod->image->type_count && ti < mod->type_count; ti++) {
+            if (mod->image->types[ti] == desc) {
+                return mod->image;
+            }
+        }
+    }
+    return nullptr;
 }
 
 // ── String input decoding ──────────────────────────────────────────
@@ -237,6 +371,42 @@ static uint64_t ComputeStableIdFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
         return chaos_compute_type_stable_id(desc->subject_id_utf8);
     }
     return 0;
+}
+
+// ── TypeInfoHot resolution with GC object fallback ───────────────────
+// Extends GetTypeInfoFromHandle to also handle GC Type objects (no tag
+// bit, GC heap pointer) by reading runtime_type_handle at offset 16,
+// then scanning modules for a type whose stable_id matches.
+static inline const TypeInfoHot* GetTypeInfoFromReflectionOrGcHandle(
+    CHAOS_IL2CPP_INTPTR handle) noexcept {
+    // First try direct Module Registry path
+    auto* ti = GetTypeInfoFromHandle(handle);
+    if (ti != nullptr) return ti;
+
+    // Fallback: GC Type object → read inner handle at offset 16
+    if (handle == 0) return nullptr;
+    CHAOS_IL2CPP_INTPTR inner = 0;
+    std::memcpy(&inner, reinterpret_cast<const void*>(
+        static_cast<CHAOS_IL2CPP_INTPTR>(handle) + 16), sizeof(inner));
+    if (inner == 0) return nullptr;
+
+    // Resolve the inner handle to a type descriptor, then scan modules
+    // for the TypeInfoHot matching this descriptor.
+    auto* desc = GetTypeDescriptorFromHandle(inner);
+    if (desc == nullptr) return nullptr;
+
+    uint32_t count = GetModuleCount();
+    for (uint32_t i = 0; i < count; i++) {
+        const auto* mod = GetModuleByIndex(i);
+        if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+        for (uint32_t j = 0; j < mod->type_count && j < mod->image->type_count; j++) {
+            if (mod->image->types[j] == desc) {
+                return mod->type_info_ptrs[j];
+            }
+        }
+    }
+
+    return nullptr;
 }
 
 }  // anonymous namespace

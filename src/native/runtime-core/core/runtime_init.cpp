@@ -4,6 +4,8 @@
 // T4 VEH handler for SEH dispatch in native-generated code.
 #include "../codegen/t4_seh_handler.h"
 
+#include <chaos/thread.h> // for common::current_thread_object
+
 namespace chaos::il2cpp::runtime_core {
 
 // Forward declarations from task_runner.cpp (threading sub-namespace)
@@ -109,6 +111,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
     SetCurrentThreadState(thread_state);
 
     threading::RegisterThread(threading::kMainThreadId, nullptr);
+
+    // Set TLS current_thread_object so chaos_thread_get_current() returns non-null
+    // in codegen mode where managed_object is null for the main thread.
+    static CHAOS_IL2CPP_UINT8 s_main_thread_sentinel = 0;
+    chaos::il2cpp::common::current_thread_object =
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_main_thread_sentinel);
 
     return CHAOS_RUNTIME_STATUS_OK;
 }

@@ -3,7 +3,13 @@
 Each check maps to one item in the Principle Evaluation Matrix (SKILL.md).
 All checks are objective — no subjective judgment required.
 
-Usage:
+⚠️  DEPRECATED: This module is a backward-compatibility shim.
+    New code should import from `principle` package directly.
+    ```
+    from principle import run_family_checks, discover_checks
+    ```
+
+Usage (legacy):
     python principle_auto_checks.py --family convert-char
     python principle_auto_checks.py --family convert-char --verbose
     python principle_auto_checks.py --family convert-char --output report.json
@@ -61,9 +67,40 @@ def _generated_cpp(assembly: str, family_slug: str) -> Path | None:
     return path if path.exists() else None
 
 
-def _method_count_in_cpp(cpp: str) -> int:
+def _class_name_from_slug(family_slug: str) -> str:
+    """Derive the C++ class name from a family slug.
+
+    'convert-char' -> 'ConvertChar'
+    'boxing-unboxing-casts' -> 'BoxingUnboxingCasts'
+    'threading-thread-basics' -> 'ThreadingThreadBasics'
+    """
+    return ''.join(word.capitalize() for word in family_slug.replace('_', '-').split('-'))
+
+
+def _native_entry_re(family_slug: str) -> str:
+    """Build a regex matching any native entry function in generated C++.
+
+    Matches all known naming conventions: ClassName_NativeEntry_*, RunNativeAot_*,
+    NativeReferenceStub_*, BenchmarkEntry_*, NativeEntry_*.
+    """
+    cls = _class_name_from_slug(family_slug)
+    patterns = [
+        f'{cls}_NativeEntry_',     # e.g. ConvertChar_NativeEntry_ToChar
+        f'{cls}_',                  # legacy: ConvertCharNativeEntry_ToChar
+        'RunNativeAot_',
+        'NativeReferenceStub_',
+        'BenchmarkEntry_',
+        'NativeEntry_',
+    ]
+    return '(?:' + '|'.join(patterns) + r')\w+\s*\('
+
+
+def _method_count_in_cpp(cpp: str, family_slug: str = "") -> int:
     """Count the number of native entry methods in generated C++."""
-    return len(re.findall(r'(?:NativeReferenceStub_|ConvertCharNativeEntry_|NativeEntry_|BenchmarkEntry_)\w+\s*\(', cpp))
+    if family_slug:
+        return len(re.findall(_native_entry_re(family_slug), cpp))
+    # Fallback: match any known pattern
+    return len(re.findall(r'(?:NativeReferenceStub_|\w+NativeEntry_|\w+_NativeEntry_|RunNativeAot_|BenchmarkEntry_)\w+\s*\(', cpp))
 
 
 def _has_real_lowering(cpp: str) -> bool:
@@ -71,10 +108,12 @@ def _has_real_lowering(cpp: str) -> bool:
     return "chaos_eval_stack" in cpp or "CHAOS_IL2CPP_ARRAY" in cpp
 
 
-def _parse_method_names(cpp: str) -> list[str]:
+def _parse_method_names(cpp: str, family_slug: str = "") -> list[str]:
     """Extract method names from the generated C++."""
+    if family_slug:
+        return [m.group(0).rstrip('(') for m in re.finditer(_native_entry_re(family_slug), cpp)]
     methods = []
-    for m in re.finditer(r'(?:NativeReferenceStub_|ConvertCharNativeEntry_|NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp):
+    for m in re.finditer(r'(?:NativeReferenceStub_|\w+NativeEntry_|\w+_NativeEntry_|RunNativeAot_)(\w+)\s*\(', cpp):
         methods.append(m.group(0).rstrip('('))
     return methods
 
@@ -524,6 +563,9 @@ def check_p3_patchdata(assembly: str, family_slug: str) -> PrincipleCheckResult:
 def run_all_checks(assembly: str, family_slug: str) -> dict[str, Any]:
     """Run all 7 automated principle checks for a family.
 
+    ⚠️  Deprecated: delegates to principle.run_family_checks().
+        Kept for backward compatibility.
+
     Returns:
         {
             "family": "convert-char",
@@ -539,7 +581,14 @@ def run_all_checks(assembly: str, family_slug: str) -> dict[str, Any]:
             }
         }
     """
-    trace("principle_auto_checks.run_all", stage="audit", family=family_slug)
+    try:
+        from testing.foundation_dll.principle import run_family_checks as new_run
+        return new_run(assembly, family_slug)
+    except ImportError:
+        pass
+
+    # Fallback: use the old hardcoded implementation
+    trace("principle_auto_checks.run_all (legacy)", stage="audit", family=family_slug)
 
     checks: dict[str, PrincipleCheckResult] = {}
 

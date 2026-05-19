@@ -15,6 +15,30 @@ public sealed partial class NativeAotLoweringPlanner
         string parameterSignature,
         IReadOnlyList<string> bodyLines)
     {
+        // Sentinel fix: for pointer-returning stubs where the body is just
+        // a bare "return 0;", replace with sentinel address so that generated
+        // code null-checks do not immediately CHAOS_IL2CPP_FAIL.
+        if (returnType == "CHAOS_IL2CPP_INTPTR" &&
+            bodyLines.Count > 0 &&
+            bodyLines[bodyLines.Count - 1].Contains("return 0"))
+        {
+            var lines = bodyLines.ToList();
+            bool isStub = true;
+            foreach (var line in lines)
+            {
+                if (line.Contains("return ") && line != bodyLines[bodyLines.Count - 1])
+                {
+                    isStub = false;
+                    break;
+                }
+            }
+            if (isStub)
+            {
+                lines.Insert(lines.Count - 1, "    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;");
+                lines[^1] = "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);";
+                bodyLines = lines;
+            }
+        }
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetSimpleExternalRuntimeHelperTemplate(),
             new ScriptObject

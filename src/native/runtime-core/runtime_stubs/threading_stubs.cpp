@@ -20,7 +20,10 @@ CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept
 {
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
+    if (thread->managed_object != nullptr)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
+    // Fallback to TLS current_thread_object (set for codegen main thread)
+    return chaos::il2cpp::common::current_thread_object;
 }
 
 void chaos_thread_ctor(

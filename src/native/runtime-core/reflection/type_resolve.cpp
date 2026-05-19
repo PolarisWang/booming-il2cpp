@@ -8,11 +8,33 @@ namespace chaos::il2cpp::runtime_core {
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle) {
     if (runtime_type_handle == 0) return 0;
 
+    // Try raw metadata token lookup first.
     uint32_t token = DecodeMetadataToken(runtime_type_handle);
     auto* typeDesc = aot_metadata::FindTypeByMetadataToken(token);
-    if (typeDesc == nullptr) return 0;
+    if (typeDesc != nullptr) {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
+    }
 
-    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
+    // Try pseudo-metadata handle (codegen FNV-1a convention: 0x02XXXXXX).
+    uint32_t val = static_cast<uint32_t>(runtime_type_handle & 0xFFFFFFFFu);
+    if ((val & 0xFF000000u) == 0x02000000u && (val & 0xFFFFFFu) != 0u) {
+        uint32_t target_hash = val & 0xFFFFFFu;
+        // Scan aot_metadata::kAllTypes (static descriptors).
+        for (uint32_t i = 0u; i < aot_metadata::kAllTypeCount; i++) {
+            auto* type = aot_metadata::kAllTypes[i];
+            if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+            uint32_t h = 2166136261u;
+            for (const char* s = type->subject_id_utf8; *s; s++) {
+                h ^= static_cast<uint8_t>(*s);
+                h *= 16777619u;
+            }
+            if ((h & 0xFFFFFFu) == target_hash) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
+            }
+        }
+    }
+
+    return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(

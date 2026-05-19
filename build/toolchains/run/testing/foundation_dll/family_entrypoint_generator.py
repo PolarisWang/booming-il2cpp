@@ -168,6 +168,46 @@ def _build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
         return ("", "")
 
 
+# System type → C# keyword mapping for parameter declarations in subject wrappers
+_SYSTEM_TYPE_TO_CSHARP: dict[str, str] = {
+    "System.Boolean": "bool",
+    "System.Byte": "byte",
+    "System.SByte": "sbyte",
+    "System.Int16": "short",
+    "System.UInt16": "ushort",
+    "System.Int32": "int",
+    "System.UInt32": "uint",
+    "System.Int64": "long",
+    "System.UInt64": "ulong",
+    "System.Single": "float",
+    "System.Double": "double",
+    "System.Char": "char",
+    "System.String": "string",
+    "System.IntPtr": "IntPtr",
+    "System.UIntPtr": "UIntPtr",
+    "System.Object": "object",
+    "System.Type": "Type",
+    "System.Array": "Array",
+    "System.Delegate": "Delegate",
+}
+
+
+def _csharp_param_decls(param_types: list[str]) -> str:
+    """Convert System type names to C# parameter declarations.
+
+    >>> _csharp_param_decls(["System.Int32"])
+    'int p0'
+    >>> _csharp_param_decls(["System.Int32", "System.String"])
+    'int p0, string p1'
+    """
+    parts: list[str] = []
+    for i, pt in enumerate(param_types):
+        bare = pt.rstrip("&*?").strip()
+        cs_type = _SYSTEM_TYPE_TO_CSHARP.get(bare, bare)
+        parts.append(f"{cs_type} p{i}")
+    return ", ".join(parts)
+
+
 def _generate_entrypoint_source(
     assembly_name: str,
     family_id: str,
@@ -301,6 +341,22 @@ def _generate_entrypoint_source(
             lines.append("")
             continue
 
+        # Self-referential detection: when the subject's declaring type IS the
+        # entry class itself (CodegenEdgeCasesSubjects::Subject_1), the auto-
+        # generated wrapper must match the method's parameter signature and use
+        # an empty try/catch body — no self-call (which would recurse infinitely).
+        parsed = _parse_method_subject_id(subject_id)
+        is_self_ref = (variant == "subjects" and parsed["type_name"] == class_name)
+        if is_self_ref:
+            param_decls = _csharp_param_decls(parsed["param_types"]) if parsed["param_types"] else ""
+            lines.append(f"{ns_indent}    public static void {method_prefix}{idx}({param_decls})")
+            lines.append(f"{ns_indent}    {{")
+            lines.append(f"{ns_indent}        try {{ }}")
+            lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
+            lines.append(f"{ns_indent}    }}")
+            lines.append("")
+            continue
+
         # Normal mode: void entry with proper Assert.Equal(expected, actual)
         # Must be public so Program.cs (different class) can call it
         lines.append(f"{ns_indent}    public static void {method_prefix}{idx}()")
@@ -338,11 +394,11 @@ def _generate_entrypoint_source(
                 # even though managed returns a value (translation divergence).
                 if ret == "System.Void" or not ret:
                     lines.append(f"{ns_indent}        try {{ {call_expr}; }}")
-                    lines.append(f"{ns_indent}        catch (Exception) {{ _exitCode = 1; }}")
+                    lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
                 else:
                     cast_expr = _cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        try {{ if ({cast_expr} != {cast_expr}) _exitCode = 1; }}")
-                    lines.append(f"{ns_indent}        catch (Exception) {{ _exitCode = 1; }}")
+                    lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
         else:
             lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
         lines.append(f"{ns_indent}    }}")
@@ -369,7 +425,7 @@ def _generate_entrypoint_source(
             lines.append(f"{ns_indent}                case {idx}: {mn}(); break;")
         lines.append(f"{ns_indent}            }}")
         lines.append(f"{ns_indent}        }}")
-        lines.append(f"{ns_indent}        catch (System.Exception)")
+        lines.append(f"{ns_indent}        catch")
         lines.append(f"{ns_indent}        {{")
         lines.append(f"{ns_indent}            _exitCode = 1;")
         lines.append(f"{ns_indent}        }}")

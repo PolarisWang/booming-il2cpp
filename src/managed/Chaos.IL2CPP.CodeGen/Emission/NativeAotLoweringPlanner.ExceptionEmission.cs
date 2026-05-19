@@ -1957,7 +1957,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 				builder.AppendLine($"{indentation}    {{");
-				builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
+				builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 				builder.AppendLine($"{indentation}    }}");
 			}
 			if (devirtHint.GuardTypeSubjectId != null)
@@ -2045,7 +2045,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 					builder.AppendLine($"{indentation}    {{");
-					builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
+					builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 					builder.AppendLine($"{indentation}    }}");
 					// RCW-aware COM object pointer extraction.
 					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
@@ -2134,7 +2134,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    const auto chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
 		builder.AppendLine($"{indentation}    if (chaos_delegate_value == 0)");
 		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
+		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > 0)");
@@ -2373,7 +2373,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 			builder.AppendLine(indentation + "    {");
-			builder.AppendLine(indentation + "        CHAOS_IL2CPP_FAIL();");
+			builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 			builder.AppendLine(indentation + "    }");
 		}
 		string value = targetSymbol + "(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
@@ -2503,7 +2503,7 @@ public sealed partial class NativeAotLoweringPlanner
 		// Null check
 		builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL();");
+		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		builder.AppendLine($"{indentation}    }}");
 		// VTable resolve — always through type_info->vtable_array (unified ThinLockableHeader)
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";

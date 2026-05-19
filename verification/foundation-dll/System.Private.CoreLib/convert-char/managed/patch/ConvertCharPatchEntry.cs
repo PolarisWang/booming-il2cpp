@@ -142,7 +142,7 @@ public static partial class ConvertCharPatchEntry
                 case 17: Subject_17(); break;
             }
         }
-        catch (System.Exception)
+        catch
         {
             _exitCode = 1;
         }

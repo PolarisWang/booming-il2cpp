@@ -29,6 +29,7 @@ target_include_directories(
     PRIVATE
         "${REPO_ROOT}/src/native"
         "${REPO_ROOT}/src/native/codegen"
+        "${REPO_ROOT}/src/native/hot-update"
         "${REPO_ROOT}/third_party/fmt/include")
 target_link_libraries(
     chaos_interpreter
@@ -37,4 +38,5 @@ target_link_libraries(
 target_link_libraries(
     chaos_interpreter
     PRIVATE
-        chaos_bootstrap)
+        chaos_bootstrap
+        chaos_hot_update)

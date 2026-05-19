@@ -120,6 +120,12 @@ uint32_t GetModuleCount();
 /// is unallocated or tombstoned.
 const ModuleDescriptor* GetModuleByIndex(uint32_t index);
 
+/// Reverse-lookup a type's name from its TypeInfoHot* pointer.
+/// Scans all registered modules for a matching type_info_ptrs entry.
+/// @return The type name string (e.g., "Exception") or nullptr if not found.
+/// @param[out] out_namespace Optional: receives the namespace string (e.g., "System").
+const char* LookupTypeNameByInfoPtr(const TypeInfoHot* type_info, const char** out_namespace = nullptr);
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_MODULE_REGISTRY_H_

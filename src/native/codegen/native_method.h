@@ -24,6 +24,8 @@ namespace chaos::il2cpp::codegen {
 struct CallSiteInfo {
     uint32_t    instr_pc;           // RegisterInstruction index
     uint32_t    native_offset;      // byte offset from code entry
+    uint32_t    method_token = 0;   // AOT metadata token of the called method
+    uint32_t    module_id    = 0;   // module owning the called method
 };
 
 /// GC slot descriptor for a single stack/register location at a safepoint.

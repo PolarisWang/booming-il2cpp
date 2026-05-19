@@ -74,6 +74,7 @@ CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
                     if (lookup != 0) {
                         info.module_id = runtime_core::ExtractModuleId(lookup);
                         uint32_t token = runtime_core::ExtractToken(lookup);
+                        info.method_token = token;
                         info.slot = registry.TokenToSlot(info.module_id, token);
                         if (info.slot != ~0u) {
                             auto* entry = registry.GetDispatchEntryBySlot(

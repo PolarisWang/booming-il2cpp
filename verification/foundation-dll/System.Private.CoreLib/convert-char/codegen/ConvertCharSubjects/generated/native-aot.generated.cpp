@@ -843,16 +843,16 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubject
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[1] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ConvertCharSubjects/ConvertCharSubjects", "ConvertCharSubjects/ConvertCharSubjects", "", "ConvertCharSubjects", "ConvertCharSubjects", nullptr, kReflFields_ConvertCharSubjects_ConvertCharSubjects, 1u, nullptr, 0u,
 	kReflMethods_ConvertCharSubjects_ConvertCharSubjects, 18u },
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "ConvertCharSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ConvertCharSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

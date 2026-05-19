@@ -28,27 +28,24 @@ bool chaos_try_get_static_field_data(
 void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR chaos_array_value, CHAOS_IL2CPP_INTPTR chaos_field_handle)
 {
     auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);
-    if (chaos_array == nullptr || chaos_array->element_type_shape != chaos_type_shape_value)
+    if (chaos_array == nullptr || chaos_array->element_type_shape == 0)
     {
         CHAOS_IL2CPP_FAIL();
     }
     const CHAOS_IL2CPP_UINT8* chaos_bytes = nullptr;
     CHAOS_IL2CPP_SIZE chaos_size = 0;
-    if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size) ||
-        (chaos_size % sizeof(CHAOS_IL2CPP_INT32)) != 0)
+    if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size))
     {
         CHAOS_IL2CPP_FAIL();
     }
-    const auto chaos_element_count = static_cast<CHAOS_IL2CPP_INT32>(chaos_size / sizeof(CHAOS_IL2CPP_INT32));
-    if (chaos_element_count > static_cast<CHAOS_IL2CPP_INT32>(chaos_array->length))
+    const auto copy_count = static_cast<CHAOS_IL2CPP_INT32>(
+        chaos_size < static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length)
+            ? chaos_size
+            : static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length));
+    for (CHAOS_IL2CPP_INT32 chaos_index = 0; chaos_index < copy_count; chaos_index++)
     {
-        CHAOS_IL2CPP_FAIL();
-    }
-    for (CHAOS_IL2CPP_INT32 chaos_index = 0; chaos_index < chaos_element_count; chaos_index++)
-    {
-        CHAOS_IL2CPP_INT32 chaos_value = 0;
-        CHAOS_IL2CPP_MEMCPY(&chaos_value, chaos_bytes + (static_cast<CHAOS_IL2CPP_SIZE>(chaos_index) * sizeof(CHAOS_IL2CPP_INT32)), sizeof(chaos_value));
-        chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value);
+        chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] =
+            static_cast<CHAOS_IL2CPP_INTPTR>(chaos_bytes[chaos_index]);
     }
 }
 

@@ -7,7 +7,7 @@ namespace chaos::il2cpp::runtime_core {
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR type_handle) {
     // Resolve the image from the type handle via Module Registry
-    auto* image = GetImageFromTypeHandle(type_handle);
+    auto* image = GetImageFromReflectionOrGcHandle(type_handle);
     if (image == nullptr) {
         // Fallback: CoreLib shared metadata
         image = &aot_metadata::kImageCoreLib;
@@ -30,7 +30,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPTR assembly_
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr) return 0;
 
     return static_cast<CHAOS_IL2CPP_INTPTR>(
@@ -43,23 +43,38 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMemberName(CHAOS_IL2CPP_INTPTR member_hand
     using namespace chaos::il2cpp::runtime_core;
     if (member_handle == 0) return 0;
 
+    const char* name = nullptr;
+
     // Try decoding as each descriptor type
     auto* typeDesc = TryDecodeReflectionQueryHandle<ReflectionQueryTypeDescriptor>(static_cast<TypeInfoHandle>(member_handle));
     if (typeDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(typeDesc->name_utf8));
+        name = typeDesc->name_utf8;
     }
 
     auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(static_cast<MethodInfoHandle>(member_handle));
     if (methodDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(methodDesc->name_utf8));
+        name = methodDesc->name_utf8;
     }
 
     auto* fieldDesc = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(static_cast<FieldInfoHandle>(member_handle));
     if (fieldDesc != nullptr) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(fieldDesc->name_utf8));
+        name = fieldDesc->name_utf8;
     }
 
-    return 0;
+    // Fallback: could be a GC Type object (no tag bit). Read runtime_type_handle
+    // at offset 16 and resolve the type descriptor.
+    if (name == nullptr) {
+        auto* desc = ResolveTypeFromReflectionOrGcHandle(member_handle);
+        if (desc != nullptr) {
+            name = desc->name_utf8;
+        }
+    }
+
+    if (name == nullptr) return 0;
+
+    auto str_id = static_cast<intptr_t>(
+        string_table::Intern(name, static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(name))));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(str_id | CHAOS_STRING_ID_TAG);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR method_handle) {
@@ -107,7 +122,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMetadataToken(CHAOS_IL2CPP_INTPTR member_h
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr) return 0;
 
     return static_cast<CHAOS_IL2CPP_INTPTR>(desc->metadata_token);
@@ -115,34 +130,77 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeHandle(CHAOS_IL2CPP_INTPTR type_handle
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
+    // Count only .ctor methods (method_count includes all methods)
+    uint32_t ctor_count = 0;
+    for (uint32_t i = 0; i < desc->method_count; i++) {
+        if (desc->methods[i].name_utf8 != nullptr &&
+            std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0) {
+            ctor_count++;
+        }
+    }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ctor_count);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
     using namespace chaos::il2cpp::runtime_core;
     (void)binding_flags;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
+    // Count only .ctor methods
+    uint32_t ctor_count = 0;
+    for (uint32_t i = 0; i < desc->method_count; i++) {
+        if (desc->methods[i].name_utf8 != nullptr &&
+            std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0) {
+            ctor_count++;
+        }
+    }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(ctor_count);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
-    if (desc == nullptr || desc->methods == nullptr) return 0;
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+    if (desc == nullptr) return 0;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryMethodDescriptor*>(desc->methods));
+    // codegen reads .Length via (int32)result — return total count directly
+    uint32_t total = desc->method_count;
+
+    // Walk the parent TypeInfo chain to include inherited methods
+    auto* type_info = GetTypeInfoFromReflectionOrGcHandle(type_handle);
+    if (type_info != nullptr) {
+        const TypeInfoHot* parent = type_info->parent;
+        uint32_t max_depth = 20;
+        while (parent != nullptr && max_depth > 0) {
+            uint32_t count = GetModuleCount();
+            bool found = false;
+            for (uint32_t i = 0; i < count && !found; i++) {
+                const auto* mod = GetModuleByIndex(i);
+                if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+                for (uint32_t j = 0; j < mod->type_count && j < mod->image->type_count && !found; j++) {
+                    if (mod->type_info_ptrs[j] == parent) {
+                        total += mod->image->types[j]->method_count;
+                        found = true;
+                    }
+                }
+            }
+            if (!found) break;
+            parent = parent->parent;
+            max_depth--;
+        }
+    }
+
+    return static_cast<CHAOS_IL2CPP_INTPTR>(total);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
-    if (desc == nullptr || desc->fields == nullptr) return 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<ReflectionQueryFieldDescriptor*>(desc->fields));
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+    if (desc == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(desc->field_count);
 }
 
 // =====================================================================
@@ -176,90 +234,138 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) 
         uint32_t parent_token = tr.module->type_parent_tokens[tr.type_index];
         if (parent_token == 0) return 0;
         // Same-module parent: encode as (module_id << 32) | parent_token
-        return static_cast<CHAOS_IL2CPP_INTPTR>(MakeTypeHandle(tr.module_id, parent_token));
+        auto result = static_cast<CHAOS_IL2CPP_INTPTR>(MakeTypeHandle(tr.module_id, parent_token));
+        return result;
     }
+
+    // Fallback for ReflectionQuery encoded handles (bit 63) or GC Type objects
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+    if (desc == nullptr || desc->metadata_token == 0) {
+        return 0;
+    }
+
+    // For aot_metadata::kAllTypes descriptors (hand-written), the
+    // generic_type_definition field doubles as the parent type pointer.
+    // Scriban-generated descriptors always set it to nullptr and rely on
+    // module-registry type_parent_tokens instead.
+    if (desc->generic_type_definition != nullptr) {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryTypeHandle(desc->generic_type_definition));
+    }
+
     return 0;
 }
 
 // ── GetNamespace ──────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNamespace(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    const char* ns = nullptr;
+
     TypeRef tr;
     if (ResolveTypeRef(type_handle, tr)) {
-        const char* ns = tr.module->type_namespaces[tr.type_index];
-        if (ns == nullptr) return 0;
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(ns));
+        ns = tr.module->type_namespaces[tr.type_index];
+    } else {
+        // Fallback: decode descriptor
+        auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+        if (desc != nullptr) {
+            ns = desc->namespace_name_utf8;
+        }
     }
-    // Fallback: decode descriptor
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
-    if (desc == nullptr || desc->namespace_name_utf8 == nullptr) return 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(desc->namespace_name_utf8));
+
+    if (ns == nullptr || ns[0] == '\0') return 0;
+
+    auto str_id = static_cast<intptr_t>(
+        string_table::Intern(ns, static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(ns))));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(str_id | CHAOS_STRING_ID_TAG);
 }
 
 // ── GetTypeFullName ──────────────────────────────────────────────
 // Returns "Namespace.Name" for types with a namespace, or just "Name" for
-// global types. Uses a static buffer for concatenation (caller marshals
-// immediately via shape-dispatch wrapper).
+// global types. Uses string_table::Intern to return a StringId that the
+// codegen's String.get_Length can resolve via string_table::Resolve.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    const char* ns = nullptr;
+    const char* name = nullptr;
+
     // Try Tier 0 first
     TypeRef tr;
     if (ResolveTypeRef(type_handle, tr)) {
-        const char* ns = tr.module->type_namespaces[tr.type_index];
-        const char* name = tr.module->type_names[tr.type_index];
-        if (name == nullptr) return 0;
-        if (ns == nullptr || ns[0] == '\0') {
-            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(name));
+        ns = tr.module->type_namespaces[tr.type_index];
+        name = tr.module->type_names[tr.type_index];
+    } else {
+        // Fallback: decode descriptor
+        auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+        if (desc != nullptr && desc->name_utf8 != nullptr) {
+            ns = desc->namespace_name_utf8;
+            name = desc->name_utf8;
         }
-        static char s_buf[1024];
-        fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}", ns, name);
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
     }
 
-    // Fallback: decode descriptor
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
-    if (desc == nullptr || desc->name_utf8 == nullptr) return 0;
-    if (desc->namespace_name_utf8 == nullptr || desc->namespace_name_utf8[0] == '\0') {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(desc->name_utf8));
+    if (name == nullptr) {
+        return 0;
     }
-    static char s_buf2[1024];
-    fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}.{}", desc->namespace_name_utf8, desc->name_utf8);
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf2);
+
+    // Build full name and intern as StringId
+    static char s_buf[1024];
+    if (ns != nullptr && ns[0] != '\0') {
+        auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}", ns, name);
+        auto str_id = static_cast<intptr_t>(
+            string_table::Intern(s_buf, static_cast<CHAOS_IL2CPP_UINT32>(result.size)));
+        return static_cast<CHAOS_IL2CPP_INTPTR>(str_id | CHAOS_STRING_ID_TAG);
+    }
+
+    {
+        auto str_id = static_cast<intptr_t>(
+            string_table::Intern(name, static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(name))));
+        return static_cast<CHAOS_IL2CPP_INTPTR>(str_id | CHAOS_STRING_ID_TAG);
+    }
 }
 
 // ── GetAssemblyQualifiedName ─────────────────────────────────────
-// Returns "Namespace.Name, AssemblyName" using ModuleRegistry Tier 0
-// or descriptor fallback. Static buffer for concatenation.
+// Returns "Namespace.Name, AssemblyName, Version=..., Culture=..., PublicKeyToken=..."
+// using ModuleRegistry Tier 0 or descriptor fallback.
+// Uses string_table::Intern for StringId return.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    const char* ns = nullptr;
+    const char* name = nullptr;
+    const char* assembly = nullptr;
+
     TypeRef tr;
     if (ResolveTypeRef(type_handle, tr)) {
-        const char* ns = tr.module->type_namespaces[tr.type_index];
-        const char* name = tr.module->type_names[tr.type_index];
-        const char* assembly = tr.module->name_utf8;
-        if (name == nullptr || assembly == nullptr) return 0;
-
-        static char s_buf[2048];
-        if (ns != nullptr && ns[0] != '\0') {
-            fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}.{}, {}", ns, name, assembly);
-        } else {
-            fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}, {}", name, assembly);
-        }
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
-    }
-
-    // Fallback: decode descriptor + image
-    auto* desc = GetTypeDescriptorFromHandle(type_handle);
-    if (desc == nullptr || desc->name_utf8 == nullptr) return 0;
-    auto* image = GetImageFromTypeHandle(type_handle);
-    if (image == nullptr || image->image_name_utf8 == nullptr) return 0;
-
-    static char s_buf2[2048];
-    if (desc->namespace_name_utf8 != nullptr && desc->namespace_name_utf8[0] != '\0') {
-        fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}.{}, {}",
-            desc->namespace_name_utf8, desc->name_utf8, image->image_name_utf8);
+        ns = tr.module->type_namespaces[tr.type_index];
+        name = tr.module->type_names[tr.type_index];
+        assembly = tr.module->name_utf8;
     } else {
-        fmt::format_to_n(s_buf2, sizeof(s_buf2) - 1, "{}, {}",
-            desc->name_utf8, image->image_name_utf8);
+        // Fallback: decode descriptor + image
+        auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+        if (desc == nullptr || desc->name_utf8 == nullptr) return 0;
+        auto* image = GetImageFromReflectionOrGcHandle(type_handle);
+        if (image == nullptr || image->image_name_utf8 == nullptr) return 0;
+        ns = desc->namespace_name_utf8;
+        name = desc->name_utf8;
+        assembly = image->image_name_utf8;
     }
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf2);
+
+    if (name == nullptr || assembly == nullptr) return 0;
+
+    // Build the full assembly qualified name including version/culture/token.
+    // .NET format: "Namespace.Type, Assembly, Version=X.Y.Z.W, Culture=neutral, PublicKeyToken=..."
+    static char s_buf[2048];
+    size_t len = 0;
+    if (ns != nullptr && ns[0] != '\0') {
+        auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1,
+            "{}.{}, {}, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+            ns, name, assembly);
+        len = result.size;
+    } else {
+        auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1,
+            "{}, {}, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+            name, assembly);
+        len = result.size;
+    }
+
+    auto str_id = static_cast<intptr_t>(
+        string_table::Intern(s_buf, static_cast<CHAOS_IL2CPP_UINT32>(len)));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(str_id | CHAOS_STRING_ID_TAG);
 }
 
 // ── GetAssemblyNameValue ─────────────────────────────────────────
@@ -301,6 +407,19 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_h
                 EncodeReflectionQueryTypeHandle(typeDesc->generic_type_definition));
         }
         return 0;
+    }
+
+    // Fallback for GC Type objects: resolve descriptor and return it
+    {
+        auto* desc = ResolveTypeFromReflectionOrGcHandle(member_handle);
+        if (desc != nullptr) {
+            if (desc->generic_type_definition != nullptr) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    EncodeReflectionQueryTypeHandle(desc->generic_type_definition));
+            }
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryTypeHandle(desc));
+        }
     }
 
     auto* methodDesc = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(

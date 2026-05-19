@@ -416,9 +416,12 @@ static void FillExternalRuntimeStubs() {{
         }} else if (std::strstr(sub, "":System.Boolean("")) {{
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {{ return 0; }});
         }} else if (std::strstr(sub, ""Array::Empty<"")) {{
-            // Array.Empty<T>() — return null (empty array reference). Generated code
-            // uses this in subsequent calls (Buffer.ByteLength, etc.) which handle null.
-            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {{ return 0; }});
+            // Array.Empty<T>() — return a valid empty codegen-format array so that
+            // String.Join (et al.) see length=0 instead of crashing on null.
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {{
+                static CHAOS_IL2CPP_UINT8 s_buf[48] = {{}};
+                return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
+            }});
         }} else {{
             // Unknown return type — return a non-null sentinel address so generated code
             // null-checks (which call CHAOS_IL2CPP_FAIL when the result is 0) pass during
@@ -509,7 +512,11 @@ int main(int argc, char** argv) {{
         int result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {{
             bool caught = false;
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() {{ chaos::il2cpp::runtime_core::chaos_raise_exception(0); }};
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() {{ throw chaos_managed_exception{{}}; }};
+#endif
             try {{
                 RunNativeAot(i);
             }} catch (const chaos_managed_exception&) {{

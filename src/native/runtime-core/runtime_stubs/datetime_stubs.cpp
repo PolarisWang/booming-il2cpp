@@ -14,6 +14,8 @@
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
+#include "string_table.h"
+#include "codegen_bridge.h"
 
 // .NET DateTime ticks: 100-nanosecond intervals since 0001-01-01
 static constexpr CHAOS_IL2CPP_INT64 kTicksPerMillisecond = 10000LL;
@@ -29,6 +31,30 @@ static constexpr CHAOS_IL2CPP_INT64 kDotNetToUnixEpochOffset = 62135596800000000
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
+
+// ── StringId resolution helper ──
+// If `value` is a StringId (tagged hash), resolve through the AOT string table
+// and allocate a real StubStringHeader. If already a pointer, return unchanged.
+static CHAOS_IL2CPP_INTPTR resolve_string_arg(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    if (value == 0) return 0;
+    if (!chaos_is_string_id(value)) return value;
+
+    auto view = string_table::Resolve(chaos_extract_string_id(value));
+    if (view.utf8_data == nullptr) return 0;
+
+    auto* result = static_cast<StubStringHeader*>(
+        GcAllocateAtomic(sizeof(StubStringHeader) + view.byte_count + 1));
+    if (result == nullptr) return 0;
+    result->type = 0;
+    result->byte_count = view.byte_count;
+    if (view.byte_count > 0)
+    {
+        std::memcpy(result + 1, view.utf8_data, view.byte_count);
+    }
+    reinterpret_cast<char*>(result + 1)[view.byte_count] = '\0';
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+}
 
 CHAOS_IL2CPP_INT64 ChaosDatetimeGetUtcNow(void) noexcept
 {
@@ -159,6 +185,8 @@ void ChaosTimeSpanCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INT32 hours, C
 CHAOS_IL2CPP_INT64 ChaosTimeSpanParse(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (value == 0) return 0;
+    value = resolve_string_arg(value);
+    if (value == 0) return 0;
     const char* s = stub_string_data(reinterpret_cast<const void*>(value));
     if (s == nullptr) return 0;
 
@@ -211,6 +239,8 @@ CHAOS_IL2CPP_INT64 ChaosTimeSpanParse(CHAOS_IL2CPP_INTPTR value) noexcept
 // Returns ticks as Int64 (DateTime ABI carrier is Int64).
 CHAOS_IL2CPP_INT64 ChaosDateTimeParse(CHAOS_IL2CPP_INTPTR value) noexcept
 {
+    if (value == 0) return 0;
+    value = resolve_string_arg(value);
     if (value == 0) return 0;
     const char* s = stub_string_data(reinterpret_cast<const void*>(value));
     if (s == nullptr) return 0;
@@ -329,61 +359,113 @@ CHAOS_IL2CPP_INTPTR ChaosDateTimeToString(CHAOS_IL2CPP_INT64 dt) noexcept
 
 CHAOS_IL2CPP_INTPTR ChaosDateTimeToStringFormat(CHAOS_IL2CPP_INT64 dt, CHAOS_IL2CPP_INTPTR format) noexcept
 {
-    CHAOS_IL2CPP_INT32 y, M, d, h, m, s;
-    ticks_to_date(dt, &y, &M, &d, &h, &m, &s);
+    CHAOS_IL2CPP_INT32 y, M, d, h, m, sec;
+    ticks_to_date(dt, &y, &M, &d, &h, &m, &sec);
+
+    // Resolve StringId for the format parameter
+    format = resolve_string_arg(format);
 
     // Parse format string (ASCII-only)
     const char* fmt = nullptr;
     CHAOS_IL2CPP_UINTPTR fmt_len = 0;
-    char fmt_buf[2] = {0};
     if (format != 0) {
         auto* fhdr = reinterpret_cast<const StubStringHeader*>(format);
         fmt = stub_string_data(reinterpret_cast<const void*>(format));
         fmt_len = fhdr->byte_count;
     }
 
-    // Determine format pattern
-    char pattern = 'G'; // default general
-    if (fmt != nullptr && fmt_len > 0) {
-        // Single-char format specifier
-        char c = fmt[0];
-        if (c == 'd' || c == 'D' || c == 't' || c == 'T' || c == 's' || c == 'o' || c == 'O' || c == 'g' || c == 'G')
-            pattern = c;
-    }
-
-    char buf[64];
+    char buf[128];
     int len = -1;
 
-    switch (pattern) {
-    case 'd': // short date: yyyy-MM-dd
-        len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d",
-                            static_cast<int>(y), static_cast<int>(M), static_cast<int>(d));
-        break;
-    case 't': // short time: HH:mm:ss
-    case 'T': // long time
-        len = std::snprintf(buf, sizeof(buf), "%02d:%02d:%02d",
-                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
-        break;
-    case 's': // sortable: yyyy-MM-ddTHH:mm:ss
-        len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:%02d",
-                            static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
-                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
-        break;
-    case 'o': case 'O': // round-trip
-        len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:%02d.0000000",
-                            static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
-                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
-        break;
-    case 'g': // general short
+    if (fmt != nullptr && fmt_len > 0) {
+        // Single-char format specifier
+        if (fmt_len == 1) {
+            char c = fmt[0];
+            switch (c) {
+            case 'd': // short date: yyyy-MM-dd
+                len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d",
+                                    static_cast<int>(y), static_cast<int>(M), static_cast<int>(d));
+                break;
+            case 't': case 'T': // short/long time: HH:mm:ss
+                len = std::snprintf(buf, sizeof(buf), "%02d:%02d:%02d",
+                                    static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
+                break;
+            case 's': // sortable: yyyy-MM-ddTHH:mm:ss
+                len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:%02d",
+                                    static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
+                                    static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
+                break;
+            case 'o': case 'O': // round-trip
+                len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:%02d.0000000",
+                                    static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
+                                    static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
+                break;
+            case 'g': // general short
+                len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:%02d:%02d",
+                                    static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
+                                    static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
+                break;
+            default: // 'G' or unknown — general long
+                len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:%02d:%02d",
+                                    static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
+                                    static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
+                break;
+            }
+        } else {
+            // Multi-character format — treat as custom format string.
+            // Iterate through each char: recognized specifiers emit their value,
+            // unrecognized chars are emitted as literals.
+            int pos = 0;
+            for (CHAOS_IL2CPP_UINTPTR i = 0; i < fmt_len && pos < static_cast<int>(sizeof(buf) - 8); ++i) {
+                char c = fmt[i];
+                switch (c) {
+                case 'h': // hours 1-12 (no leading zero)
+                    {
+                        int h12 = h % 12;
+                        if (h12 == 0) h12 = 12;
+                        pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                             "%d", h12);
+                    }
+                    break;
+                case 'H': // hours 0-23 (no leading zero for single H)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", h);
+                    break;
+                case 'm': // minutes (no leading zero)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", m);
+                    break;
+                case 's': // seconds (no leading zero)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", sec);
+                    break;
+                case 'd': // day (no leading zero)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", d);
+                    break;
+                case 'M': // month (no leading zero)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", M);
+                    break;
+                case 'y': // year (full)
+                    pos += std::snprintf(buf + pos, sizeof(buf) - static_cast<CHAOS_IL2CPP_UINTPTR>(pos),
+                                         "%d", y);
+                    break;
+                default:
+                    // Unrecognized character → emit as literal
+                    if (pos < static_cast<int>(sizeof(buf) - 1)) {
+                        buf[pos++] = c;
+                    }
+                    break;
+                }
+            }
+            len = pos;
+        }
+    } else {
+        // No format: default general long
         len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:%02d:%02d",
                             static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
-                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
-        break;
-    default: // 'G' or unknown — general long
-        len = std::snprintf(buf, sizeof(buf), "%04d-%02d-%02d %02d:%02d:%02d",
-                            static_cast<int>(y), static_cast<int>(M), static_cast<int>(d),
-                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(s));
-        break;
+                            static_cast<int>(h), static_cast<int>(m), static_cast<int>(sec));
     }
 
     if (len < 0) return 0;

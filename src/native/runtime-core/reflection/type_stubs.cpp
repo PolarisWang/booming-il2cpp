@@ -231,15 +231,18 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetElementType(CHAOS_IL2CPP_INTPTR type) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeArrayType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    return ChaosReflectionMakeGenericType(type, 0);  // Phase 2: SzArrayHelper
+    (void)type;
+    return 0;  // Phase 2: instantiate SzArray type wrapper
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeByRefType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    return type;  // Phase 2: instantiate ByRef-like wrapper
+    (void)type;
+    return 0;  // Phase 2: instantiate ByRef-like wrapper
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakePointerType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    return type;  // Phase 2: instantiate pointer-like wrapper
+    (void)type;
+    return 0;  // Phase 2: instantiate pointer-like wrapper
 }
 
 }  // namespace chaos::il2cpp::runtime_core

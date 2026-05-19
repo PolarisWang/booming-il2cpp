@@ -677,6 +677,74 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
     print(f"    [build_entry] auto-generated CMakeLists.txt at {cmakelists}")
 
 
+def _fix_runtime_entry(path: Path) -> None:
+    """Fix known bugs in the stock runtime-entry.cpp template.
+
+    1. `\\n` → `\n` in printf format strings (double-escaped backslash).
+    2. `int result` bitmask with `while(tmp)` arithmetic-right-shift loop
+       that never terminates for negative values (i >= 31 sets sign bit).
+    """
+    text = path.read_text(encoding="utf-8")
+    changed = False
+
+    # Fix 1: double-escaped backslash in printf
+    if '\\\\n"' in text:
+        text = text.replace('\\\\n"', '\\n"')
+        changed = True
+
+    # Fix 2: bitmask infinite loop — replace with simple counter
+    old_bitmask = (
+        "        int result = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                result |= (1 << i);\n"
+        "            } catch (...) {\n"
+        "                result |= (1 << i);\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int failed_count = 0;\n"
+        "        int tmp = result;\n"
+        "        while (tmp) { failed_count += tmp & 1; tmp >>= 1; }\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
+        "        std::fflush(stdout);\n"
+        "        _exit(result);\n"
+        "        return result;\n"
+    )
+    new_counter = (
+        "        int failed_count = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                caught = true;\n"
+        "            } catch (...) {\n"
+        "                caught = true;\n"
+        "            }\n"
+        "            if (caught) { ++failed_count; }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
+        "        std::fflush(stdout);\n"
+        "        _exit(failed_count);\n"
+        "        return failed_count;\n"
+    )
+    if old_bitmask in text:
+        text = text.replace(old_bitmask, new_counter)
+        changed = True
+
+    if changed:
+        path.write_text(text, encoding="utf-8")
+        print(f"    [build_entry] fixed runtime-entry.cpp bugs")
+
+
 def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK") -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
@@ -702,6 +770,11 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     if codegen_runtime_entry.exists():
         native_runtime_entry.write_text(codegen_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
         print(f"    [build_entry] copied runtime-entry.cpp from codegen/ to native/")
+        # Fix known bugs in the stock runtime-entry.cpp template:
+        # 1. `\\n` -> `\n` in printf (double-escaped backslash)
+        # 2. `int result` bitmask with `while (tmp)` loop hangs for >31 methods
+        #    (MSVC arithmetic right shift of negative int never reaches 0)
+        _fix_runtime_entry(native_runtime_entry)
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)

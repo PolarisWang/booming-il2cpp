@@ -17,7 +17,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe
 };
 
 {{~ end ~}}
-static constexpr ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
 {{~ for type_group in type_groups ~}}
     {{~ if type_group.fields && type_group.fields.size > 0 ~}}
     { 0u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, kReflFields_{{ type_group.safe_name }}, {{ type_group.fields.size }}u, nullptr, 0u,
@@ -28,13 +28,13 @@ static constexpr ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}
 {{~ end ~}}
 };
 
-static constexpr const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}] = {
 {{~ for i in type_group_indices ~}}
     &kReflTypes[{{ i }}],
 {{~ end ~}}
 };
 
-static constexpr ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u };
+static const ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

@@ -1,21 +1,21 @@
 {
   "array-indexing-copy": {
-    "status": "failed",
-    "passed": 12,
+    "status": "passed",
+    "passed": 13,
     "total": 13,
-    "exit_code": 4096
+    "exit_code": 0
   },
   "attributes-custom-metadata": {
-    "status": "failed",
-    "passed": 7,
+    "status": "passed",
+    "passed": 9,
     "total": 9,
-    "exit_code": 3
+    "exit_code": 0
   },
   "boxing-unboxing-casts": {
-    "status": "failed",
-    "passed": 9,
+    "status": "passed",
+    "passed": 11,
     "total": 11,
-    "exit_code": 3
+    "exit_code": 0
   },
   "buffer-memory": {
     "status": "passed",
@@ -23,12 +23,7 @@
     "total": 13,
     "exit_code": 0
   },
-  "ccw-basic": {
-    "status": "passed",
-    "passed": 20,
-    "total": 20,
-    "exit_code": 0
-  },
+  "ccw-basic": "build-fail: -basic\\native\\runtime-entry.cpp(166,13): error C2065: 'result': undeclared identifier [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\ccw-basic\\native\\build\\entry.vcxproj]\n",
   "collections-generic-core": {
     "status": "passed",
     "passed": 16,
@@ -51,7 +46,7 @@
     "status": "failed",
     "passed": 18,
     "total": 22,
-    "exit_code": 491520
+    "exit_code": 4
   },
   "enum-parsing": {
     "status": "passed",
@@ -60,10 +55,10 @@
     "exit_code": 0
   },
   "exception-throw-diagnostics": {
-    "status": "failed",
-    "passed": 13,
+    "status": "passed",
+    "passed": 14,
     "total": 14,
-    "exit_code": 4
+    "exit_code": 0
   },
   "garbage-collection": {
     "status": "passed",
@@ -72,34 +67,34 @@
     "exit_code": 0
   },
   "generic-nullable-value": {
-    "status": "failed",
-    "passed": 9,
+    "status": "passed",
+    "passed": 10,
     "total": 10,
-    "exit_code": 8
+    "exit_code": 0
   },
   "globalization-culture": {
-    "status": "failed",
-    "passed": 11,
+    "status": "passed",
+    "passed": 13,
     "total": 13,
-    "exit_code": 640
+    "exit_code": 0
   },
   "guid-random-hashcode": {
-    "status": "failed",
-    "passed": 13,
+    "status": "passed",
+    "passed": 14,
     "total": 14,
-    "exit_code": 1024
+    "exit_code": 0
   },
   "interface-dispatch": {
     "status": "failed",
-    "passed": 31,
+    "passed": 32,
     "total": 39,
-    "exit_code": 805797928
+    "exit_code": 7
   },
   "io-streams-basics": {
-    "status": "failed",
-    "passed": 16,
+    "status": "passed",
+    "passed": 18,
     "total": 18,
-    "exit_code": 768
+    "exit_code": 0
   },
   "math-numerics": {
     "status": "passed",
@@ -123,61 +118,61 @@
     "status": "failed",
     "passed": 21,
     "total": 32,
-    "exit_code": 1048064
-  },
-  "reflection-activation": {
-    "status": "failed",
-    "passed": 5,
-    "total": 8,
     "exit_code": 11
   },
+  "reflection-activation": {
+    "status": "passed",
+    "passed": 8,
+    "total": 8,
+    "exit_code": 0
+  },
   "reflection-assembly": {
-    "status": "failed",
-    "passed": 4,
+    "status": "passed",
+    "passed": 22,
     "total": 22,
-    "exit_code": 2097144
+    "exit_code": 0
   },
   "reflection-binding": {
-    "status": "failed",
-    "passed": 11,
+    "status": "passed",
+    "passed": 12,
     "total": 12,
-    "exit_code": 2048
+    "exit_code": 0
   },
   "reflection-generics": {
-    "status": "failed",
-    "passed": 11,
+    "status": "passed",
+    "passed": 12,
     "total": 12,
-    "exit_code": 512
+    "exit_code": 0
   },
   "reflection-member-basics": {
-    "status": "failed",
-    "passed": 12,
+    "status": "passed",
+    "passed": 14,
     "total": 14,
-    "exit_code": 5
+    "exit_code": 0
   },
   "reflection-member-complete": {
-    "status": "failed",
-    "passed": 4,
+    "status": "passed",
+    "passed": 22,
     "total": 22,
-    "exit_code": 4124637
+    "exit_code": 0
   },
   "reflection-module": {
-    "status": "failed",
-    "passed": 1,
+    "status": "passed",
+    "passed": 6,
     "total": 6,
-    "exit_code": 31
+    "exit_code": 0
   },
   "reflection-parameters": {
-    "status": "failed",
-    "passed": 0,
+    "status": "passed",
+    "passed": 10,
     "total": 10,
-    "exit_code": 1023
+    "exit_code": 0
   },
   "reflection-type": {
-    "status": "failed",
-    "passed": 37,
+    "status": "passed",
+    "passed": 43,
     "total": 43,
-    "exit_code": 16778480
+    "exit_code": 0
   },
   "runtime-compiler-services": {
     "status": "passed",
@@ -187,21 +182,16 @@
   },
   "snapshot-prover": {
     "status": "failed",
-    "passed": 145,
+    "passed": 137,
     "total": 158,
-    "exit_code": 1065436960
+    "exit_code": 21
   },
-  "span-memory-buffers": {
-    "status": "passed",
-    "passed": 14,
-    "total": 14,
-    "exit_code": 0
-  },
+  "span-memory-buffers": "build-fail: ld\\entry.vcxproj]\n      D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\native\\runtime-entry.cpp(253,13):\n      see declaration of 'hotupdate_failed'\n  \n",
   "string-char-text-core": {
-    "status": "failed",
-    "passed": 8,
+    "status": "passed",
+    "passed": 20,
     "total": 20,
-    "exit_code": 126749
+    "exit_code": 0
   },
   "threading-monitor-interlocked": {
     "status": "passed",
@@ -210,10 +200,10 @@
     "exit_code": 0
   },
   "threading-tasks-primitives": {
-    "status": "failed",
-    "passed": 20,
-    "total": 23,
-    "exit_code": 598016
+    "status": "passed",
+    "passed": 22,
+    "total": 22,
+    "exit_code": 0
   },
   "threading-thread-basics": {
     "status": "passed",
@@ -222,15 +212,15 @@
     "exit_code": 0
   },
   "time-date-time-timespan": {
-    "status": "failed",
-    "passed": 13,
+    "status": "passed",
+    "passed": 16,
     "total": 16,
-    "exit_code": 32804
+    "exit_code": 0
   },
   "type-runtime-handles": {
-    "status": "failed",
-    "passed": 10,
+    "status": "passed",
+    "passed": 13,
     "total": 13,
-    "exit_code": 1792
+    "exit_code": 0
   }
 }

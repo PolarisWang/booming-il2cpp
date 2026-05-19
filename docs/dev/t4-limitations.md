@@ -22,7 +22,8 @@ Current status: **V3 Complete** — All 5 stages of T4 V3 implemented (Safepoint
 | Field access | LdFld, StFld | Helper call (CodegenLdFld/CodegenStFld) |
 | Static fields | LdSFld, StSFld | Helper call (CodegenLdSFld/CodegenStSFld) |
 | Object access | LdObj, StObj, InitObj | Helper call (CodegenLdObj/CodegenStObj/CodegenInitObj) |
-| Heap allocation | NewObj, NewArr, Box, LocAlloc | Helper call (CodegenNewObj/CodegenNewArr/CodegenBox/CodegenLocAlloc) |
+| Heap allocation | NewObj, NewArr, Box | Helper call (CodegenNewObj/CodegenNewArr/CodegenBox) |
+| LocAlloc | LocAlloc | Stack bump from frame reserve (4KB), heap fallback on overflow — **no leak** |
 | Returns | Ret | Inlined (store RAX→ret_buf) |
 | Stack | Pop | Inlined (no-op, reg-based IR) |
 | Dup | Dup | Inlined (copy src1→dst) |

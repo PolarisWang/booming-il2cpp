@@ -48,6 +48,15 @@ extern "C" void SetExceptionFallback(void (*fn)());
         "Value cannot be null.");
 }
 
+/// Throws a managed NullReferenceException.
+/// Uses RaiseManagedException to resolve the type by name and dispatch through
+/// the runtime ABI.  This is the correct exception for callvirt on null `this`,
+/// replacing the old codegen pattern that called CHAOS_IL2CPP_FAIL().
+[[noreturn]] inline void RaiseNullReferenceException() {
+    RaiseManagedException("System.NullReferenceException",
+        "Object reference not set to an instance of an object.");
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_EXCEPTION_HELPERS_H_

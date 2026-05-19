@@ -171,6 +171,15 @@ inline void EmitLeaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) 
     EmitMR(buf, dst, base, disp);
 }
 
+/// lea r64, [rip + disp32]  ──── load RIP-relative effective address
+/// ModRM.mod=00 with ModRM.rm=101 encodes RIP-relative addressing in x64.
+inline void EmitLeaRipRel(CodeBuffer& buf, uint8_t dst, int32_t disp) noexcept {
+    EmitREX(buf, true, dst, 0);
+    buf.EmitByte(0x8D);
+    buf.EmitByte(ModRM(0, dst, 5));  // rm=5 with mod=00 = RIP-relative
+    buf.Emit32(static_cast<uint32_t>(disp));
+}
+
 /// mov r64, r64       (register-to-register)
 inline void EmitMovRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     if (dst == src) return;  // nop

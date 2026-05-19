@@ -1,0 +1,30 @@
+{
+  "kind": "project",
+  "domain": "testing",
+  "name": "dev-foundation-dll-verify-aggregate",
+  "summary": "Define cross-family aggregation strategy and regression detection logic using unified-verification-report.json. Provide guidelines for dashboard refresh.",
+  "trigger_signals": [
+    "需要聚合多个 family 的验证结果时",
+    "需要检测跨 family 回归时",
+    "需要刷新验证 dashboard 时"
+  ],
+  "owner": "00-skills-maintainers",
+  "status": "active",
+  "version": "1.0.0",
+  "startup_visible": false,
+  "token_budget": "medium",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-05-19",
+      "type": "initial"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": null,
+    "derived_from": "dev-foundation-dll-verification-pipeline",
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": "session-20260519-aggregate"
+  }
+}
