@@ -2,33 +2,32 @@
   "formatVersion": "v0",
   "artifactKind": "nativeReferenceLoweringPlan",
   "planKind": "assembly-full-closure-runtime-skeleton",
-  "assemblyName": "ObjectEqualityIdentityPatchEntry",
+  "assemblyName": "ObjectEqualityIdentitySubjects",
   "entrySubjectId": "",
   "includeHeader": "codegen_bridge.h",
   "nativeEntryFunctionName": "RunNativeReferenceAssembly",
-  "entrySymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_0",
+  "entrySymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-    "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()"
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()"
   ],
-  "translationUnitMethodCount": 8,
+  "translationUnitMethodCount": 7,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 8,
+      "methodCount": 7,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
-      "lastMethodSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()"
+      "firstMethodSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()"
     }
   ],
   "auditStatus": "runtime-skeleton",

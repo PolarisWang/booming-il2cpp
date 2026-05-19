@@ -3,79 +3,73 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "BoxingUnboxingCastsPatchEntry.dll",
+      "moduleName": "BoxingUnboxingCastsSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_0",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_0:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_1",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_1:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_2",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_2:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_3",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_3:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_4",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_4:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_5",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_5:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_6",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_6:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_6",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_7",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_7:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_8",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_8:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_9",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_9:System.Int32()"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Subject_10",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Subject_10:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 11,
-          "symbol": "BoxingUnboxingCastsPatchEntry_BoxingUnboxingCastsPatchEntry_Run_System_Int32",
-          "subjectId": "BoxingUnboxingCastsPatchEntry/BoxingUnboxingCastsPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
+          "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()"
         }
       ]
     }

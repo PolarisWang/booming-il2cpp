@@ -4,99 +4,159 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=3",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_0:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_1:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_2:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_3:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_4:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_5:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_6:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_7:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_8:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_9:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_10:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_11:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_12:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_13:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::_exitCode",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
+      "dataKind": "reference",
+      "requiresBoxing": false
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)",
+      "methodSubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentException"
     }
   ]
 }

@@ -2012,6 +2012,152 @@ static void OptimizeInstructions(
                 }
             }
         }
+
+        // (g) Redundant LdLoc elimination
+        if (opc == interpreter::IROpCode::LdLoc && ri.has_dst() && ri.has_src1()) {
+            uint8_t ldst = ri.dst_reg();
+            // (g1) Dead LdLoc: dst never read
+            if (ldst < 64 && use_count[ldst] == 0) {
+                removed_mask[i] = 1;
+                did_opt = true;
+                continue;
+            }
+            // (g2) Single-use StLoc→LdLoc forwarding (adjacent)
+            if (ldst < 64 && use_count[ldst] == 1 && i > 0 && i + 1 < n) {
+                auto& prev = instrs[i - 1];
+                uint8_t local_vreg = ri.src1_reg();
+                if (prev.op_code() == interpreter::IROpCode::StLoc &&
+                    !removed_mask[i - 1] &&
+                    prev.has_dst() && prev.dst_reg() == local_vreg &&
+                    prev.has_src1())
+                {
+                    uint8_t store_src = prev.src1_reg();
+                    auto& next = instrs[i + 1];
+                    uint64_t nh = next.header;
+                    bool changed = false;
+                    if (next.has_src1() && next.src1_reg() == ldst) {
+                        nh = (nh & ~(0xFFULL << 24)) | (static_cast<uint64_t>(store_src) << 24);
+                        changed = true;
+                    }
+                    if (next.has_src2() && next.src2_reg() == ldst) {
+                        nh = (nh & ~(0xFFULL << 32)) | (static_cast<uint64_t>(store_src) << 32);
+                        changed = true;
+                    }
+                    if (changed) {
+                        next.header = nh;
+                        removed_mask[i] = 1;
+                        did_opt = true;
+                    }
+                }
+            }
+        }
+
+        // (h) Branch-to-branch forwarding + dead Br elimination
+        if ((opc == interpreter::IROpCode::Br ||
+             opc == interpreter::IROpCode::BrFalse ||
+             opc == interpreter::IROpCode::BrTrue) && ri.has_imm())
+        {
+            uint32_t target = ri.imm.branch_target;
+
+            // (h1) Dead unconditional Br: branch to next instruction → fall-through
+            if (opc == interpreter::IROpCode::Br && target == i + 1) {
+                removed_mask[i] = 1;
+                did_opt = true;
+                continue;
+            }
+
+            // (h2) Br/BrFalse/BrTrue forwarding: resolve Br → Br chains
+            uint32_t resolved = target;
+            uint32_t max_hop = 16;
+            while (resolved < n && max_hop > 0) {
+                auto& target_instr = instrs[resolved];
+                if (target_instr.op_code() == interpreter::IROpCode::Br &&
+                    target_instr.has_imm() && !removed_mask[resolved])
+                {
+                    uint32_t next_target = target_instr.imm.branch_target;
+                    if (next_target == resolved) break;  // self-loop guard
+                    resolved = next_target;
+                    --max_hop;
+                } else {
+                    break;
+                }
+            }
+
+            if (resolved != target) {
+                ri.imm.branch_target = resolved;
+                did_opt = true;
+                // If unconditional Br now points to next instruction, remove it
+                if (opc == interpreter::IROpCode::Br && resolved == i + 1) {
+                    removed_mask[i] = 1;
+                }
+            }
+        }
+
+        // (i) Arithmetic identity intrinsics: eliminate redundant operations
+        if (ri.has_dst() && ri.has_src1()) {
+            bool identity_opt = false;
+
+            if (opc == interpreter::IROpCode::Add || opc == interpreter::IROpCode::Sub ||
+                opc == interpreter::IROpCode::Or  || opc == interpreter::IROpCode::Xor ||
+                opc == interpreter::IROpCode::Shl || opc == interpreter::IROpCode::Shr ||
+                opc == interpreter::IROpCode::ShrUn)
+            {
+                // x op 0 → x (src2 is constant 0)
+                if (ri.has_src2()) {
+                    const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
+                    if (v2 && *v2 == 0) {
+                        ri.header = MakeHdr(interpreter::IROpCode::Dup, ri.dst_reg(), ri.src1_reg(), 0,
+                                            interpreter::kRegHasDst | interpreter::kRegHasSrc1);
+                        ri.imm.i4 = 0;
+                        identity_opt = true;
+                    }
+                }
+            }
+
+            if (!identity_opt && opc == interpreter::IROpCode::Mul && ri.has_src2()) {
+                const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
+                if (v2) {
+                    if (*v2 == 1) {
+                        // x * 1 → x
+                        ri.header = MakeHdr(interpreter::IROpCode::Dup, ri.dst_reg(), ri.src1_reg(), 0,
+                                            interpreter::kRegHasDst | interpreter::kRegHasSrc1);
+                        ri.imm.i4 = 0;
+                        identity_opt = true;
+                    } else if (*v2 == 0) {
+                        // x * 0 → 0
+                        ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                            interpreter::kRegHasDst | interpreter::kRegHasImm);
+                        ri.imm.i4 = 0;
+                        identity_opt = true;
+                    }
+                }
+            }
+
+            if (!identity_opt && opc == interpreter::IROpCode::And && ri.has_src2()) {
+                if (ri.src1_reg() == ri.src2_reg()) {
+                    // x & x → x
+                    ri.header = MakeHdr(interpreter::IROpCode::Dup, ri.dst_reg(), ri.src1_reg(), 0,
+                                        interpreter::kRegHasDst | interpreter::kRegHasSrc1);
+                    ri.imm.i4 = 0;
+                    identity_opt = true;
+                }
+            }
+
+            if (!identity_opt && opc == interpreter::IROpCode::Sub) {
+                if (ri.has_src2() && ri.src1_reg() == ri.src2_reg()) {
+                    // x - x → 0
+                    ri.header = MakeHdr(interpreter::IROpCode::LdcI4, ri.dst_reg(), 0, 0,
+                                        interpreter::kRegHasDst | interpreter::kRegHasImm);
+                    ri.imm.i4 = 0;
+                    identity_opt = true;
+                }
+            }
+
+            if (identity_opt) {
+                did_opt = true;
+                continue;
+            }
+        }
     }
 
     if (!did_opt) removed_mask.clear();

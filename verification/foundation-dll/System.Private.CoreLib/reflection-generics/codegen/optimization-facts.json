@@ -4,89 +4,190 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Subject_11:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_GenericParameterPosition:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_ContainsGenericParameters:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericTypeDefinition:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::MakeArrayType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::MakeByRefType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::MakePointerType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::_exitCode",
+      "subjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ReflectionGenericsPatchEntry/ReflectionGenericsPatchEntry::Run:System.Void(System.Int32)",
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidOperationException"
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidOperationException"
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidOperationException"
+    },
+    {
+      "methodSubjectId": "ReflectionGenericsSubjects/ReflectionGenericsSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.InvalidOperationException"
     }
   ]
 }

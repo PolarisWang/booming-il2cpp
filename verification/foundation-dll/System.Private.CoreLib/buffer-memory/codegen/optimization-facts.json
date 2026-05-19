@@ -4,62 +4,77 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
       "reason": "closed-world-method"
     }
   ],
@@ -67,16 +82,10 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::_exitCode",
+      "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": [
-    {
-      "methodSubjectId": "BufferMemoryPatchEntry/BufferMemoryPatchEntry::Run:System.Void(System.Int32)",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    }
-  ]
+  "exceptionFacts": []
 }

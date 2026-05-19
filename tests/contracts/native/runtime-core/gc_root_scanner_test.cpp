@@ -16,29 +16,11 @@
 #include <cstdlib>
 #include <cstring>
 
-// ════════════════════════════════════════════════════════════════════════════
-// Test helpers
-// ════════════════════════════════════════════════════════════════════════════
+#include "gc_test_macros.h"
 
 static int g_failures = 0;
 static int g_tests    = 0;
 static int g_sub      = 0;
-
-#define TEST(name)                                                      \
-    do {                                                                \
-        ++g_tests;                                                      \
-        g_sub = 0;                                                      \
-        printf("  TEST: %s ... ", name);                                \
-    } while (0)
-
-#define SUBTEST(name)                                                   \
-    do {                                                                \
-        ++g_sub;                                                        \
-        printf("\n    SUB %d: %s ... ", g_sub, name);                   \
-    } while (0)
-
-#define PASS()          puts("PASS")
-#define FAIL(msg)       do { ++g_failures; printf("FAIL: %s\n", msg); } while (0)
 
 using namespace chaos::il2cpp::runtime_core;
 

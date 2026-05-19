@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "GuidRandomHashcodePatchEntry",
-  "entrySubjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "GuidRandomHashcodeSubjects",
+  "entrySubjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/guid-random-hashcode/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

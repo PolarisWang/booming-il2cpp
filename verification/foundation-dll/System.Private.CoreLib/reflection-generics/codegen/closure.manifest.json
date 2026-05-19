@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionGenericsPatchEntry",
+  "assemblyName": "ReflectionGenericsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/patch/build-output/ReflectionGenericsPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionGenericsPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/patch/build-output/ReflectionGenericsPatchEntry.dll"
+      "assemblyName": "ReflectionGenericsSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "35102b8c-783e-4eec-a185-d3add8d35f63",
+  "inputModuleVersionId": "157dbc91-c926-4cb7-b368-7f0c143ff2e0",
   "artifacts": [
     {
       "kind": "typedIlIr",

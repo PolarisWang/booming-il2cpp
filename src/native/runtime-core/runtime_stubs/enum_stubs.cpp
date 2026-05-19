@@ -67,6 +67,30 @@ static const char* get_string_data(CHAOS_IL2CPP_INTPTR str_handle, CHAOS_IL2CPP_
     return *reinterpret_cast<const char* const*>(str_handle + 24);
 }
 
+// ── Fast integer-to-string helpers (no snprintf format parsing) ─────
+
+/// Write decimal representation of int64 into buf (right-to-left).
+/// Returns pointer to the first digit within buf (may not be buf[0]).
+static char* format_i64_dec(char* buf_end, CHAOS_IL2CPP_INT64 val) noexcept
+{
+    char* p = buf_end;
+    bool neg = (val < 0);
+    uint64_t uv = neg ? static_cast<uint64_t>(-(val + 1)) + 1 : static_cast<uint64_t>(val);
+    do { *--p = static_cast<char>('0' + (uv % 10)); uv /= 10; } while (uv);
+    if (neg) *--p = '-';
+    return p;
+}
+
+/// Write hexadecimal representation of uint64 into buf (right-to-left).
+/// Pads to at least `min_width` digits with leading zeros.
+/// Returns pointer to the first hex digit within buf.
+static char* format_u64_hex(char* buf_end, uint64_t val, unsigned int min_width) noexcept
+{
+    char* p = buf_end;
+    do { *--p = "0123456789abcdef"[val & 0xF]; val >>= 4; } while (val > 0 || (static_cast<size_t>(buf_end - p) < min_width));
+    return p;
+}
+
 /// Read a boxed int32 value from a managed object (ThinLockableHeader + payload).
 static CHAOS_IL2CPP_INT64 read_boxed_value(CHAOS_IL2CPP_INTPTR obj) noexcept
 {
@@ -116,10 +140,6 @@ static CHAOS_IL2CPP_UINT32 count_enum_fields(const ReflectionQueryTypeDescriptor
     if (type == nullptr || type->fields == nullptr) return 0;
     CHAOS_IL2CPP_UINT32 count = 0;
     for (CHAOS_IL2CPP_UINT32 i = 0; i < type->field_count; i++) {
-        // Enum value fields have a constant_value (literal fields in the IL metadata).
-        // Fields with constant_value == 0 AND name matching something like "value__" are the
-        // underlying value field, not an enum literal. We include all fields with a name
-        // that does NOT start with "value_" (the backing field names are typically "value__").
         const auto& f = type->fields[i];
         if (f.subject_id_utf8 != nullptr && f.name_utf8 != nullptr &&
             std::strncmp(f.name_utf8, "value_", 6) != 0) {
@@ -208,7 +228,6 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
     // Check cache
     for (auto& entry : s_type_cache) {
         if (entry.key == type_arg) {
-            CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: cache hit key={0} desc={1}", (void*)type_arg, (void*)entry.desc);
             return entry.desc;
         }
     }
@@ -218,8 +237,6 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
     // Case 1: direct TypeInfoHandle (high bit set)
     desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_arg));
     if (desc != nullptr) {
-        CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: direct handle, desc={0} fields={1}", (void*)desc, desc->field_count);
-        // Insert into cache (direct-mapped: replace first entry)
         s_type_cache[0].key = type_arg;
         s_type_cache[0].desc = desc;
         return desc;
@@ -228,17 +245,13 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
     // Case 2: managed Type object - read runtime_type_handle at offset 16
     CHAOS_IL2CPP_INTPTR raw_handle = 0;
     std::memcpy(&raw_handle, reinterpret_cast<const void*>(type_arg + 16), sizeof(raw_handle));
-    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: managed obj, type_arg={0} raw_handle={1}", (void*)type_arg, (unsigned long long)raw_handle);
     if (raw_handle == 0) return nullptr;
 
     auto type_info_handle = ChaosReflectionGetTypeFromHandle(raw_handle);
-    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: type_info_handle={0}", (void*)type_info_handle);
     if (type_info_handle == 0) return nullptr;
 
     desc = TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_info_handle));
-    CHAOS_IL2CPP_LOG_DEBUG_M("enum_stubs", "resolve_type_arg: decoded desc={0} fields={1}", (void*)desc, desc ? desc->field_count : 0);
 
-    // Insert into cache (direct-mapped: replace first entry)
     s_type_cache[0].key = type_arg;
     s_type_cache[0].desc = desc;
     return desc;
@@ -387,12 +400,13 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
     }
 
     if (is_g || is_d) {
-        // "D" format or "G" fallback: decimal representation
+        // "D" format or "G" fallback: decimal representation (manual itoa)
         char buf[32];
-        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(
-            std::snprintf(buf, sizeof(buf), "%lld", static_cast<long long>(val)));
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_i64_dec(buf_end, val);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
-        write_string_data(result, buf, len);
+        write_string_data(result, start, len);
         return result;
     }
 
@@ -407,17 +421,13 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
                 } else break;
             }
         }
-        char fmt_buf[8];
-        char out_buf[32];
-        if (width > 0 && width <= 16) {
-            std::snprintf(fmt_buf, sizeof(fmt_buf), "%%0%ullx", static_cast<unsigned long>(width));
-        } else {
-            std::snprintf(fmt_buf, sizeof(fmt_buf), "%%llx");
-        }
-        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(
-            std::snprintf(out_buf, sizeof(out_buf), fmt_buf, static_cast<unsigned long long>(val)));
+        // Manual hex conversion — no snprintf format strings
+        char buf[32];
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_u64_hex(buf_end, static_cast<uint64_t>(val), width);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
-        write_string_data(result, out_buf, len);
+        write_string_data(result, start, len);
         return result;
     }
 
@@ -440,12 +450,13 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(this_obj);
     const auto* field = find_field_by_value(desc, val);
     if (field == nullptr || field->name_utf8 == nullptr) {
-        // Fallback: return decimal
+        // Fallback: return decimal (manual itoa)
         char buf[32];
-        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(
-            std::snprintf(buf, sizeof(buf), "%lld", static_cast<long long>(val)));
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_i64_dec(buf_end, val);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
-        write_string_data(result, buf, len);
+        write_string_data(result, start, len);
         return result;
     }
 

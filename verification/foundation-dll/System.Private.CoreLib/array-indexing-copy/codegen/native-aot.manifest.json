@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ArrayIndexingCopyPatchEntry",
-  "entrySubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ArrayIndexingCopySubjects",
+  "entrySubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

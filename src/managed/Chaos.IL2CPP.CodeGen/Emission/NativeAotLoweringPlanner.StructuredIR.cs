@@ -506,6 +506,55 @@ public sealed partial class NativeAotLoweringPlanner
 
     // 鈹€鈹€ If-then-else 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
+
+    /// <summary>
+    /// Recursively collects all local slots referenced by ldloc instructions
+    /// in a structured IR node tree. Used by EmitIRIfThenElse to prevent
+    /// FilterRedundantStoreReloadPairs from eliminating stloc pairs whose
+    /// values are needed by then/else bodies.
+    /// </summary>
+    private static HashSet<int> CollectLdlocSlots(StructuredIRNode node)
+    {
+        var slots = new HashSet<int>();
+        CollectLdlocSlotsRecursive(node, slots);
+        return slots;
+    }
+
+    private static void CollectLdlocSlotsRecursive(StructuredIRNode node, HashSet<int> slots)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                foreach (var instr in block.BodyInstructions)
+                {
+                    if (instr.Op is "ldloc")
+                        slots.Add(GetRequiredIntOperand(instr));
+                }
+                break;
+            case IRIfThenElse ite:
+                CollectLdlocSlotsRecursive(ite.ThenBody, slots);
+                if (ite.ElseBody != null)
+                    CollectLdlocSlotsRecursive(ite.ElseBody, slots);
+                break;
+            case IRWhileLoop w:
+                CollectLdlocSlotsRecursive(w.Body, slots);
+                break;
+            case IRDoWhileLoop dw:
+                CollectLdlocSlotsRecursive(dw.Body, slots);
+                break;
+            case IRSwitch sw:
+                foreach (var caseBody in sw.CaseBodies.Values)
+                    CollectLdlocSlotsRecursive(caseBody, slots);
+                if (sw.DefaultBody != null)
+                    CollectLdlocSlotsRecursive(sw.DefaultBody, slots);
+                break;
+            case IRSequence seq:
+                foreach (var sub in seq.Nodes)
+                    CollectLdlocSlotsRecursive(sub, slots);
+                break;
+        }
+    }
+
     private void EmitIRIfThenElse(
         StringBuilder builder,
         IRIfThenElse ite,
@@ -545,8 +594,20 @@ public sealed partial class NativeAotLoweringPlanner
         // from this depth so they converge on the same slot names.
         int preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
 
+        // Scan then/else bodies for ldloc slots referenced externally. When a stloc+ldloc
+        // pair in the condition writes to a slot later read by the body, the filter must
+        // preserve the stloc so chaos_locals[N] is populated for the body's ldloc.
+        var externallyReferencedLocals = CollectLdlocSlots(ite.ThenBody);
+        if (ite.ElseBody != null)
+        {
+            foreach (int s in CollectLdlocSlots(ite.ElseBody))
+                externallyReferencedLocals.Add(s);
+        }
+
         // Emit condition instructions (push operands onto eval stack)
-        var filteredConditions = FilterRedundantStoreReloadPairs(ite.ConditionInstructions);
+        var filteredConditions = FilterRedundantStoreReloadPairs(
+            ite.ConditionInstructions,
+            externallyReferencedLocals: externallyReferencedLocals);
         foreach (var instr in filteredConditions)
             EmitInstruction(builder, instr, indentation);
 

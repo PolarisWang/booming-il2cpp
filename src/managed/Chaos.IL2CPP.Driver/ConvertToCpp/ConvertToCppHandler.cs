@@ -92,7 +92,7 @@ internal static class ConvertToCppHandler
             Console.WriteLine(" done");
 
             Console.Write("  [3/3] Emitting C++ (NativeAot)...");
-            var emitResult = EmitNativeAot(outputRoot);
+            var emitResult = EmitNativeAot(outputRoot, config.Mode);
             // EmitNativeAot writes .cpp to outputRoot/generated/ but CmakeGenerator
             // expects outputRoot/{AssemblyName}/generated/. Move files to match.
             var asmName = emitResult.Manifest.AssemblyName;
@@ -122,7 +122,7 @@ internal static class ConvertToCppHandler
                 targetName: "entry");
             File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), singleCmakeContent);
 
-            var runtimeEntryCpp = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null);
+            var runtimeEntryCpp = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
             File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryCpp);
 
             Console.WriteLine($"Convert completed: {outputRoot}");
@@ -154,7 +154,7 @@ internal static class ConvertToCppHandler
             int totalFiles = 0;
             foreach (var result in results)
             {
-                var emitResult = EmitNativeAot(result.OutputRootPath);
+                var emitResult = EmitNativeAot(result.OutputRootPath, config.Mode);
                 totalFiles += emitResult.GeneratedSources.Count;
             }
 
@@ -211,7 +211,7 @@ internal static class ConvertToCppHandler
             File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), cmakeContent);
 
             // Generate runtime entry point (simple text, no Scriban dependency)
-            var runtimeEntryContent = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null);
+            var runtimeEntryContent = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
             File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryContent);
 
             Console.WriteLine($" {totalFiles} files across {results.Count} assemblies");
@@ -238,9 +238,9 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
     }
 
-    private static NativeAotResult EmitNativeAot(string outputRoot)
+    private static NativeAotResult EmitNativeAot(string outputRoot, CodegenMode mode = CodegenMode.Aot)
     {
-        var request = new NativeAotRequest(outputRoot, outputRoot);
+        var request = new NativeAotRequest(outputRoot, outputRoot, mode);
         var emitter = new NativeAotEmitter();
         var emitResult = emitter.Generate(request);
 
@@ -300,7 +300,7 @@ internal static class ConvertToCppHandler
         return Directory.GetCurrentDirectory();
     }
 
-    private static string GenerateRuntimeEntryCpp(string? entryFunction)
+    private static string GenerateRuntimeEntryCpp(string? entryFunction, CodegenMode mode = CodegenMode.Aot)
     {
         bool hasEntry = !string.IsNullOrEmpty(entryFunction);
         string header = hasEntry
@@ -332,11 +332,15 @@ internal static class ConvertToCppHandler
 #include ""chaos/profile.h""
 #include ""runtime_stubs/misc_stubs.h""
 #include ""gc/gc_bgc_inline.h""
+#include ""jit_registration.h""
 
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
 extern ""C"" void* kChaosExternalRuntimeFnTable[];
 extern ""C"" const char* kChaosExternalRuntimeSubjects[];
 extern ""C"" int32_t kChaosExternalRuntimeCount;
+
+// ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
+extern ""C"" void ChaosJitRegisterAll();
 
 extern ""C"" std::int32_t RunNativeAot(std::int32_t);
 extern ""C"" std::int32_t RunNativeAotAll();
@@ -487,6 +491,9 @@ int main(int argc, char** argv) {{
 
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
+
+    // Register JIT methods for interpreter dispatch (no-op in AOT mode).
+    ChaosJitRegisterAll();
 
     RunMode mode = RunMode::Fact;
     int entry_index = 0;

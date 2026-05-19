@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-  "entrySubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ThreadingMonitorInterlockedSubjects",
+  "entrySubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

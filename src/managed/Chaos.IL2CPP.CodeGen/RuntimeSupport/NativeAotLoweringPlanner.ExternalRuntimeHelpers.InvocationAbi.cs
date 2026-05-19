@@ -742,7 +742,8 @@ public sealed partial class NativeAotLoweringPlanner
 	private static string FormatInboundAbiArgumentExpression(AotCoreIrAbiSlotArtifact abiSlot, string sourceName)
 	{
 		if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt
-		    && abiSlot.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
+		    && abiSlot.TypeShape == AotCoreIrTypeShapeKind.ReferenceType
+		    && !IsStringParameterSlot(abiSlot))
 		{
 			return "chaos_normalize_native_int_argument(" + sourceName + ")";
 		}

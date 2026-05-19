@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "DelegateCoreInvocationPatchEntry",
+  "assemblyName": "DelegateCoreInvocationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/patch/build-output/DelegateCoreInvocationPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/patch/build-output/DelegateCoreInvocationPatchEntry.dll"
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8c360575-1855-4b1e-a348-ca914f33292f",
+  "inputModuleVersionId": "a1820a75-83ff-45b6-9115-a1b59d2d0c58",
   "artifacts": [
     {
       "kind": "typedIlIr",

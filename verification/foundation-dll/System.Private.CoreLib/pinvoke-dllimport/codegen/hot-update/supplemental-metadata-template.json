@@ -1,0 +1,59 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeDllimportPatchEntry",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "definitionSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

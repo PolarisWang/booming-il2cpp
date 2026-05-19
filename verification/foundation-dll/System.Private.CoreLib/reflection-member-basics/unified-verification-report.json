@@ -2,8 +2,8 @@
   "family": "reflection-member-basics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T15:10:41",
-  "duration_ms": 18771,
+  "timestamp": "2026-05-19T17:35:28",
+  "duration_ms": 25693,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-basics\\managed\\subjects\\build-output\\ReflectionMemberBasicsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 17872
+      "duration_ms": 21653
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 331
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,23 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 862
+      "duration_ms": 697
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/14 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 14,
+        "invalidCount": 14,
+        "benchmarkQuality": "matchedCount=0/14 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 3009
     }
   },
   "coverage": {
@@ -80,7 +96,14 @@
       "totalBoxingOps": 0,
       "topInstructionCategories": {}
     },
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 14,
+      "invalidCount": 14
+    },
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

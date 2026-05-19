@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ReflectionModulePatchEntry",
-  "entrySubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ReflectionModuleSubjects",
+  "entrySubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/reflection-module/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

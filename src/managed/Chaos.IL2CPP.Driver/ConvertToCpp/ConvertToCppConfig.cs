@@ -1,3 +1,5 @@
+using Chaos.IL2CPP.Contracts;
+
 namespace Chaos.IL2CPP.Driver;
 
 /// <summary>
@@ -25,6 +27,9 @@ internal sealed class ConvertToCppConfig
     /// <summary>When true, compile full assembly closure instead of entry-point reachable</summary>
     public bool FullClosure { get; init; } = false;
 
+    /// <summary>Code generation mode: AOT (default) or JIT</summary>
+    public CodegenMode Mode { get; init; } = CodegenMode.Aot;
+
     /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; [--assembly &lt;path&gt; ...] --output &lt;dir&gt; [options]
@@ -37,6 +42,7 @@ internal sealed class ConvertToCppConfig
         bool verbose = false;
         bool fullClosure = false;
         string? entryPoint = null;
+        var mode = CodegenMode.Aot;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -60,6 +66,15 @@ internal sealed class ConvertToCppConfig
                 case "--full-closure":
                     fullClosure = true;
                     break;
+                case "--mode" when i + 1 < args.Length:
+                    var modeValue = args[++i];
+                    mode = modeValue.ToLowerInvariant() switch
+                    {
+                        "aot" => CodegenMode.Aot,
+                        "jit" => CodegenMode.Jit,
+                        _ => CodegenMode.Aot,
+                    };
+                    break;
                 case "--help" or "-h":
                     PrintHelp();
                     return new ConvertToCppConfig { AssemblyPaths = [], OutputDir = "" };
@@ -81,6 +96,7 @@ internal sealed class ConvertToCppConfig
             Verbose = verbose,
             FullClosure = fullClosure,
             EntryPoint = entryPoint,
+            Mode = mode,
         };
     }
 
@@ -97,6 +113,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --assembly-dir <dir>          Additional dependency search path (repeatable)");
         Console.WriteLine("  --entry-point <subject-id>    Explicit entry point (default: auto-detect Main)");
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
+        Console.WriteLine("  --mode aot|jit                Codegen mode: aot (native C++, default) or jit (interpreter)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

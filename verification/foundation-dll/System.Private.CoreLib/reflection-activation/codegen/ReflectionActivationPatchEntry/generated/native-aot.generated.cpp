@@ -1250,3 +1250,5 @@ extern "C" void ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Ru
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 9;
+
+extern "C" void ChaosJitRegisterAll() {}

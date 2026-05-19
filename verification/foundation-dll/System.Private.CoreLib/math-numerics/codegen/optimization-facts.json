@@ -4,102 +4,97 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_11:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_12:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_13:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_14:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_15:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_16:System.Int32()",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Subject_17:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()",
       "reason": "closed-world-method"
     }
   ],
@@ -107,16 +102,10 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::_exitCode",
+      "subjectId": "MathNumericsSubjects/MathNumericsSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": [
-    {
-      "methodSubjectId": "MathNumericsPatchEntry/MathNumericsPatchEntry::Run:System.Void(System.Int32)",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    }
-  ]
+  "exceptionFacts": []
 }

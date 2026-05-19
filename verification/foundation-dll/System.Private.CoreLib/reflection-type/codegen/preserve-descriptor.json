@@ -4,277 +4,271 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::_exitCode",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_11:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_12:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_12:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_13:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_13:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_14:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_14:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_15:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_15:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_16:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_16:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_17:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_17:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_18:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_18:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_19:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_19:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_20:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_20:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_21:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_21:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_22:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_22:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_23:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_23:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_24:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_24:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_25:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_25:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_26:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_26:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_27:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_27:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_28:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_28:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_29:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_29:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_30:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_30:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_31:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_31:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_32:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_32:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_33:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_33:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_34:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_34:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_35:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_35:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_36:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_36:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_37:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_37:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_38:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_38:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_39:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_39:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_40:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_40:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_41:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_41:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_42:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_42:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

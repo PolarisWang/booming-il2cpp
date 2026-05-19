@@ -1,14 +1,18 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ArrayIndexingCopyPatchEntry",
+  "assemblyName": "ArrayIndexingCopySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/patch/build-output/ArrayIndexingCopyPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/patch/build-output/ArrayIndexingCopyPatchEntry.dll"
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b2f81a0d-5107-4163-a745-2e516464c05b",
+  "inputModuleVersionId": "fe9613a9-99ba-4a82-aaf2-f7218d7062ff",
   "artifacts": [
     {
       "kind": "typedIlIr",

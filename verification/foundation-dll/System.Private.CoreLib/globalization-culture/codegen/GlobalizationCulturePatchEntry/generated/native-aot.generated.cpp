@@ -1620,3 +1620,5 @@ extern "C" void GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Ru
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 14;
+
+extern "C" void ChaosJitRegisterAll() {}

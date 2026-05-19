@@ -3,124 +3,116 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_10:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_10:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663307,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_11:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_11:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663308,
       "parameterCount": 0
     },
     {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_12:System.Int32()",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_12:System.Int32()",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "assemblyName": "ArrayIndexingCopySubjects",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "metadataToken": 100663309,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "ArrayIndexingCopyPatchEntry",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
-      "metadataToken": 100663310,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

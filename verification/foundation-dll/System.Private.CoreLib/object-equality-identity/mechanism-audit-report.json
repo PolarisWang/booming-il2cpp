@@ -1,13 +1,13 @@
 {
   "family": "object-equality-identity",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 27,
-  "audited": 27,
+  "total_methods": 29,
+  "audited": 29,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 27,
+  "methods_without_assert": 29,
   "passed": true,
   "method_details": [
     {
@@ -137,6 +137,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -246,6 +255,15 @@
     },
     {
       "method_name": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

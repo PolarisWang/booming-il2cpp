@@ -3,100 +3,92 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
+      "assemblyName": "DelegateCoreInvocationSubjects",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "DelegateCoreInvocationPatchEntry",
-      "subjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "DelegateCoreInvocationPatchEntry/DelegateCoreInvocationPatchEntry",
-      "metadataToken": 100663307,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

@@ -1287,6 +1287,195 @@ static bool bench_reg_execute_t4() {
 }
 
 
+
+// ── Scenario 11: T4 mixed-IL benchmark ─────────────────────────────
+// Tests StLoc→LdLoc round-trip + LdArg + Add through T4 native codegen.
+// IL: LdArg(0) → StLoc(loc=0) → LdLoc(loc=0) → Add(arg, loaded) → Ret
+// Expected: 200 (= 100 + 100)
+static bool bench_mixed_il_t4() {
+    std::printf("\n--- bench_mixed_il_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 4;
+    // r0 = LdArg(0)
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::LdArg, 0, 0, 0,
+                                   kRegHasDst | kRegHasImm);
+        ri.imm.i4 = 0;
+        rm.instructions.push_back(ri);
+    }
+    // StLoc(loc=0, src=r0, dst=r1) — store to local, copy to r1
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::StLoc, 1, 0, 0,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasImm);
+        ri.imm.i4 = 0;
+        rm.instructions.push_back(ri);
+    }
+    // r2 = LdLoc(loc=0) — reload from local
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::LdLoc, 2, 0, 0,
+                                   kRegHasDst | kRegHasImm);
+        ri.imm.i4 = 0;
+        rm.instructions.push_back(ri);
+    }
+    // r3 = Add(r0, r2) — add original arg + reloaded value
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::Add, 3, 0, 2,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+        rm.instructions.push_back(ri);
+    }
+    // Ret(r3)
+    rm.instructions.push_back(BM_Ret(3));
+
+    PatchMethod pm;
+    SetupT4DirectBenchmark(&pm, std::move(rm));
+
+    uint64_t args_buf[1] = { 100 };
+    int64_t warmup = -1;
+    InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &warmup);
+
+    constexpr int kTotalCalls = 1000;
+    constexpr int32_t kExpectedResult = 200;  // 100 + 100
+    uint64_t sum_ns = 0;
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (mixed_il): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+    return has_native;
+}
+
+// ── Scenario 12: T4 multiply benchmark ────────────────────────────
+// Tests Mul through T4 native codegen.
+// IL: LdcI4(6) → LdcI4(7) → Mul → Ret
+// Expected: 42
+static bool bench_mul_t4() {
+    std::printf("\n--- bench_mul_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 4;
+    rm.instructions.push_back(BM_I4(6, 0));
+    rm.instructions.push_back(BM_I4(7, 1));
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::Mul, 2, 0, 1,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+        rm.instructions.push_back(ri);
+    }
+    rm.instructions.push_back(BM_Ret(2));
+
+    PatchMethod pm;
+    SetupT4DirectBenchmark(&pm, std::move(rm));
+
+    int64_t warmup = -1;
+    InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &warmup);
+
+    constexpr int kTotalCalls = 1000;
+    constexpr int32_t kExpectedResult = 42;
+    uint64_t sum_ns = 0;
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (mul): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+    return has_native;
+}
+
+// ── Scenario 13: T4 div+rem benchmark ────────────────────────────
+// Tests Div + Rem through T4 native codegen.
+// IL: LdcI4(42) → LdcI4(5) → Div → Rem → Add(div, rem) → Ret
+// Expected: 10 (= 42/5 + 42%5 = 8 + 2)
+static bool bench_div_rem_t4() {
+    std::printf("\n--- bench_div_rem_t4 ---\n");
+    std::fflush(stdout);
+
+    RegisterMethod rm;
+    rm.max_regs = 6;
+    rm.instructions.push_back(BM_I4(42, 0));
+    rm.instructions.push_back(BM_I4(5, 1));
+    // r2 = Div(r0, r1) = 8
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::Div, 2, 0, 1,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+        rm.instructions.push_back(ri);
+    }
+    // r3 = Rem(r0, r1) = 2
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::Rem, 3, 0, 1,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+        rm.instructions.push_back(ri);
+    }
+    // r4 = Add(r2, r3) = 10
+    {
+        auto ri = RegisterInstruction{};
+        ri.header = BM_MakeHeader(IROpCode::Add, 4, 2, 3,
+                                   kRegHasDst | kRegHasSrc1 | kRegHasSrc2);
+        rm.instructions.push_back(ri);
+    }
+    rm.instructions.push_back(BM_Ret(4));
+
+    PatchMethod pm;
+    SetupT4DirectBenchmark(&pm, std::move(rm));
+
+    int64_t warmup = -1;
+    InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &warmup);
+
+    constexpr int kTotalCalls = 1000;
+    constexpr int32_t kExpectedResult = 10;
+    uint64_t sum_ns = 0;
+    for (int i = 0; i < kTotalCalls; ++i) {
+        int64_t ret_val = -1;
+        auto start = Clock::now();
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &ret_val);
+        auto end = Clock::now();
+        sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+            std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
+                        (long long)ret_val, kExpectedResult, i);
+            return false;
+        }
+    }
+
+    bool has_native = (pm.cached_native_method != nullptr);
+    double avg_ns = static_cast<double>(sum_ns) / kTotalCalls;
+    std::printf("  T4 (div_rem): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
+    std::fflush(stdout);
+    return has_native;
+}
+
+
 // ── Main ──────────────────────────────────────────────────────────────────
 
 int main() {
@@ -1307,6 +1496,9 @@ int main() {
     run_test("bench_direct_arithmetic_t4", bench_direct_arithmetic_t4());
     run_test("bench_direct_args_t4",      bench_direct_args_t4());
     run_test("bench_stloc_ldloc_t4",      bench_reg_execute_t4());
+    run_test("bench_mixed_il_t4",         bench_mixed_il_t4());
+    run_test("bench_mul_t4",              bench_mul_t4());
+    run_test("bench_div_rem_t4",          bench_div_rem_t4());
 
     UnregisterThread();
 

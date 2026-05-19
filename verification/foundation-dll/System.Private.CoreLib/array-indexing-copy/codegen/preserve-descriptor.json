@@ -4,97 +4,91 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::_exitCode",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_11:System.Int32()",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Subject_12:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ArrayIndexingCopyPatchEntry/ArrayIndexingCopyPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

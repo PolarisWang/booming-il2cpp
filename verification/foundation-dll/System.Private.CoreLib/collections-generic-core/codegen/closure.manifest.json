@@ -1,14 +1,18 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "CollectionsGenericCorePatchEntry",
+  "assemblyName": "CollectionsGenericCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/patch/build-output/CollectionsGenericCorePatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "CollectionsGenericCorePatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/patch/build-output/CollectionsGenericCorePatchEntry.dll"
+      "assemblyName": "CollectionsGenericCoreSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "bc83c5eb-b741-49ea-85a9-683703af0d22",
+  "inputModuleVersionId": "2d508de3-639c-44dc-b2ce-45ae12060f1d",
   "artifacts": [
     {
       "kind": "typedIlIr",

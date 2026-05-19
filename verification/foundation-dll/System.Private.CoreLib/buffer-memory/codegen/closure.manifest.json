@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "BufferMemoryPatchEntry",
+  "assemblyName": "BufferMemorySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/subjects/build-output/BufferMemorySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "BufferMemoryPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/patch/build-output/BufferMemoryPatchEntry.dll"
+      "assemblyName": "BufferMemorySubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/managed/subjects/build-output/BufferMemorySubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0e0ce764-2bb2-45c4-953c-19dfb1f2d192",
+  "inputModuleVersionId": "d3c3b522-ee49-4760-8285-980c2d28c331",
   "artifacts": [
     {
       "kind": "typedIlIr",

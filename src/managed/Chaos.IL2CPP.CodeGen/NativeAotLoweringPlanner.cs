@@ -64,6 +64,8 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, DevirtualizationHint> _devirtualizationHints =
         new Dictionary<string, DevirtualizationHint>(StringComparer.Ordinal);
 
+    private CodegenMode _codegenMode = CodegenMode.Aot;
+
 
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
@@ -267,7 +269,8 @@ public sealed partial class NativeAotLoweringPlanner
         ManagedClosureManifestArtifact closureManifest,
         MetadataRegistrationArtifact metadataRegistration,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
-        bool fullAssemblyMode = false)
+        bool fullAssemblyMode = false,
+        CodegenMode mode = CodegenMode.Aot)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
         ArgumentNullException.ThrowIfNull(aotCoreIr);
@@ -277,6 +280,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (!fullAssemblyMode)
             ArgumentNullException.ThrowIfNull(entryMethod);
+
+        _codegenMode = mode;
 
         // Skip entry ABI validation for full-closure assembly translation
         if (!closureManifest.FullAssemblyClosure)
@@ -586,6 +591,25 @@ public sealed partial class NativeAotLoweringPlanner
         var globalDeclarations = methodCount > 0
             ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"
             : string.Empty;
+
+        // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
+        // In AOT mode it's a no-op; in JIT mode it registers all methods for interpreter dispatch.
+        // This avoids linker errors in AOT builds where JIT symbols don't exist.
+        if (_codegenMode == CodegenMode.Jit && methodCount > 0)
+        {
+            globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
+            globalDeclarations += @"
+extern ""C"" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}
+";
+        }
+        else
+        {
+            globalDeclarations += @"
+extern ""C"" void ChaosJitRegisterAll() {}
+";
+        }
 
         // Add kReflImage forward declaration BEFORE the ModuleDescriptor that references it.
         // The actual definition is emitted in Step 3 (EmitReflectionQueryImage) later in

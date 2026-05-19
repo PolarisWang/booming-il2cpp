@@ -1694,3 +1694,5 @@ extern "C" void ExceptionThrowDiagnosticsPatchEntry_ExceptionThrowDiagnosticsPat
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 15;
+
+extern "C" void ChaosJitRegisterAll() {}

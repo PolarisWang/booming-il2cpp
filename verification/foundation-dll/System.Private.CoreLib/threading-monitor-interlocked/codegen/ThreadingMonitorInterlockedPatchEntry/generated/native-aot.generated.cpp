@@ -1694,3 +1694,5 @@ extern "C" void ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlocke
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 15;
+
+extern "C" void ChaosJitRegisterAll() {}

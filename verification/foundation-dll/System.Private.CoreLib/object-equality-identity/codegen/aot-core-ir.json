@@ -3,632 +3,103 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-0",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_0()",
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-0",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_0()",
       "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-0",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_0()"
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-0",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_0()"
       },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-1",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-1",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-2",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-2",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-3",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-3",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-4",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-4",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-5",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-5",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-6",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.subject-6",
-        "signature": "System.Int32 ObjectEqualityIdentityPatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
-    },
-    {
-      "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.run",
-      "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void ObjectEqualityIdentityPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ObjectEqualityIdentityPatchEntry",
-        "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
-        "definitionSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "object-equality-identity-patch-entry.object-equality-identity-patch-entry.run",
-        "signature": "System.Void ObjectEqualityIdentityPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Run_System_Int32",
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 100,
-          "handlerOffset": 101,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
           "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            42,
-            50,
-            58,
-            66,
-            74,
-            82,
-            90
-          ],
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 40,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 42,
           "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 8,
+          "resultType": "System.Object",
           "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_0:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -636,321 +107,108 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 47,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 48,
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 23,
+          "ilOffset": 18,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 50,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 20,
           "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_1:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 55,
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 98,
-          "ilOffset": 56,
+          "operand": 24,
+          "ilOffset": 21,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 58,
-          "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 63,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 64,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 66,
-          "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 74,
-          "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 79,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 80,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 82,
-          "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 87,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 88,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 90,
-          "resultType": "System.Int32",
-          "callee": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ObjectEqualityIdentityPatchEntry_ObjectEqualityIdentityPatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 95,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 98,
-          "ilOffset": 96,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 112,
-          "ilOffset": 99,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 101,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 103,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 37,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::_exitCode",
-          "ilOffset": 104,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
+            "assemblyName": "ObjectEqualityIdentitySubjects",
             "subjectKind": "field",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::_exitCode"
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ObjectEqualityIdentityPatchEntry",
-            "subjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry::_exitCode",
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ObjectEqualityIdentityPatchEntry/ObjectEqualityIdentityPatchEntry",
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -958,17 +216,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 112,
-          "ilOffset": 110,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 112,
+          "ilOffset": 37,
           "isPreserveSig": false
         }
       ],
@@ -980,7 +230,1105 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ObjectEqualityIdentityPatchEntry"
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-1",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-1",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_1()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 10,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 15,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 25,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 26,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 42,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-2",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-2",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_2()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 10,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "beq",
+          "opCode": 20,
+          "operand": 20,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 21,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 34,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 34,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-3",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-3",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_3()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 35342034,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-4",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-4",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_4()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Object::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 13,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 33,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-5",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-5",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_5()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 56793269,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectEqualityIdentitySubjects",
+            "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
+    },
+    {
+      "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-6",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+      "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ObjectEqualityIdentitySubjects",
+        "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+        "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+        "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+        "methodId": "object-equality-identity-subjects.object-equality-identity-subjects.subject-6",
+        "signature": "System.Void ObjectEqualityIdentitySubjects::Subject_6()"
+      },
+      "nativeSymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ObjectEqualityIdentitySubjects"
     }
   ]
 }

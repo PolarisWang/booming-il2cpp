@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+  "assemblyName": "ThreadingMonitorInterlockedSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/patch/build-output/ThreadingMonitorInterlockedPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,12 +11,16 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/patch/build-output/ThreadingMonitorInterlockedPatchEntry.dll"
+      "assemblyName": "System.Threading",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Threading.dll"
+    },
+    {
+      "assemblyName": "ThreadingMonitorInterlockedSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8cecd23a-a0c5-4a5a-99ba-ab81152c57f0",
+  "inputModuleVersionId": "cd1d7b92-8a95-49fe-b08f-88fd375bf169",
   "artifacts": [
     {
       "kind": "typedIlIr",

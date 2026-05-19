@@ -260,6 +260,7 @@ def _handle_verify_family(
     mode = str(_get_option(options, "mode") or "standard")
     skip_raw = _get_option(options, "skip")
     skip_stages = [s.strip() for s in skip_raw.split(",") if s.strip()] if skip_raw else None
+    codegen_mode = str(_get_option(options, "codegen_mode") or "").strip() or None
 
     if not family_slug:
         return _failure(command_text, host_platform, "--family is required (e.g. --family convert-char)")
@@ -273,7 +274,7 @@ def _handle_verify_family(
         sys.path.insert(0, str(root))
         from testing.foundation_dll.family_verification_orchestrator import verify_family
 
-    payload = verify_family(family_slug, assembly=assembly, mode=mode, skip_stages=skip_stages)
+    payload = verify_family(family_slug, assembly=assembly, mode=mode, skip_stages=skip_stages, codegen_mode=codegen_mode)
     report = payload.get("unifiedReport", payload)
     overall = report.get("overall_status", "failed")
 

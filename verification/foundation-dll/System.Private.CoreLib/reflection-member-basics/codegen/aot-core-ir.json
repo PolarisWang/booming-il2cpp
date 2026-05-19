@@ -3,1150 +3,61 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-0",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_0()",
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-0",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_0()",
       "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-0",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_0()"
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-0",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_0()"
       },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-1",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-1",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-2",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-2",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-3",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-3",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-4",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-4",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-5",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-5",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-6",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-6",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-7",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_7()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-7",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_7()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177273,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-8",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_8()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-8",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_8()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177272,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-9",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_9()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-9",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_9()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177271,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-10",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_10()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-10",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_10()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177270,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-11",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_11()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-11",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_11()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177269,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-12",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_12()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-12",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_12()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177268,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-13",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()",
-      "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_13()",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.subject-13",
-        "signature": "System.Int32 ReflectionMemberBasicsPatchEntry::Subject_13()"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177267,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
-    },
-    {
-      "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.run",
-      "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void ReflectionMemberBasicsPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ReflectionMemberBasicsPatchEntry",
-        "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
-        "definitionSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "reflection-member-basics-patch-entry.reflection-member-basics-patch-entry.run",
-        "signature": "System.Void ReflectionMemberBasicsPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Run_System_Int32",
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 184,
-          "handlerOffset": 185,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
         }
       ],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 2,
-          "resultType": "System.Int32",
+          "resultType": "System.Object",
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            70,
-            78,
-            86,
-            94,
-            102,
-            110,
-            118,
-            126,
-            134,
-            142,
-            150,
-            158,
-            166,
-            174
-          ],
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 70,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()",
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
           "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1154,615 +65,44 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 75,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 76,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 78,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 83,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 84,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 86,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 94,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 99,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 100,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 102,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 107,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 108,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 115,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 116,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 118,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 123,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 124,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 126,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 131,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 132,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 134,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 139,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 140,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 142,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 147,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 148,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 150,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 155,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 156,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 158,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 163,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 164,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 166,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 171,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 172,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 174,
-          "resultType": "System.Int32",
-          "callee": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()",
-          "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 179,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 180,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 196,
-          "ilOffset": 183,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 185,
+          "ilOffset": 8,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 187,
+          "ilOffset": 9,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::_exitCode",
-          "ilOffset": 188,
+          "operand": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode",
+          "ilOffset": 10,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
+            "assemblyName": "ReflectionMemberBasicsSubjects",
             "subjectKind": "field",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::_exitCode"
+            "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ReflectionMemberBasicsPatchEntry",
-            "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::_exitCode",
+            "assemblyName": "ReflectionMemberBasicsSubjects",
+            "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry",
+            "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1772,15 +112,29 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 196,
-          "ilOffset": 194,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 196,
+          "ilOffset": 23,
           "isPreserveSig": false
         }
       ],
@@ -1792,7 +146,657 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ReflectionMemberBasicsPatchEntry"
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-1",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-1",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_1()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-2",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-2",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ReflectionMemberBasicsSubjects",
+            "subjectKind": "field",
+            "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ReflectionMemberBasicsSubjects",
+            "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-3",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-3",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-4",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-4",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-5",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-5",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-6",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-6",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-7",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-7",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-8",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-8",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_8()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-9",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-9",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_9()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-10",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-10",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_10()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-11",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-11",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_11()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-12",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-12",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_12()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
+    },
+    {
+      "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-13",
+      "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()",
+      "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "ReflectionMemberBasicsSubjects",
+        "declaringTypeSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
+        "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()",
+        "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()",
+        "methodId": "reflection-member-basics-subjects.reflection-member-basics-subjects.subject-13",
+        "signature": "System.Void ReflectionMemberBasicsSubjects::Subject_13()"
+      },
+      "nativeSymbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReflectionMemberBasicsSubjects"
     }
   ]
 }

@@ -7,6 +7,8 @@
 
 #if defined(_WIN32)
 #include <Windows.h>
+#include <bcrypt.h>
+#pragma comment(lib, "bcrypt.lib")
 #else
 #include <cstdio>
 #endif
@@ -18,6 +20,54 @@
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
+
+// ── Shared GUID string parser ────────────────────────────────────────
+static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
+{
+    if (c >= '0' && c <= '9') return static_cast<CHAOS_IL2CPP_UINT8>(c - '0');
+    if (c >= 'a' && c <= 'f') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'a' + 10);
+    if (c >= 'A' && c <= 'F') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'A' + 10);
+    return 0xFF;
+}
+
+// ── Shared GUID string parser ────────────────────────────────────────
+// Decodes a "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" format string from
+// `value` (StringId or CHAOS_IL2CPP_STRING_TYPE*) into 16 raw bytes.
+// Returns true on success, false on invalid input.
+static bool parse_guid_string(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_UINT8 out_guid[16]) noexcept
+{
+    if (value == 0) return false;
+
+    const char* data = nullptr;
+    CHAOS_IL2CPP_INT32 len = 0;
+
+    if (chaos_is_string_id(value))
+    {
+        auto view = string_table::Resolve(chaos_extract_string_id(value));
+        data = view.utf8_data;
+        len = static_cast<CHAOS_IL2CPP_INT32>(view.byte_count);
+    }
+    else
+    {
+        auto ms = reinterpret_cast<const CHAOS_IL2CPP_STRING_TYPE*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(value));
+        len = ms->length;
+        if (len > 0) data = ms->utf8_data;
+    }
+    if (data == nullptr || len < 36) return false;
+    if (data[8] != '-' || data[13] != '-' || data[18] != '-' || data[23] != '-') return false;
+
+    static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
+    for (int i = 0; i < 16; i++)
+    {
+        int p = kPos[i];
+        auto hi = HexNibble(data[p]);
+        auto lo = HexNibble(data[p + 1]);
+        if (hi == 0xFF || lo == 0xFF) return false;
+        out_guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
+    }
+    return true;
+}
 
 // ── Managed string allocator ──────────────────────────────────────────
 // Allocates a chaos_managed_string (40B header + inline data) so the
@@ -45,82 +95,58 @@ static CHAOS_IL2CPP_INTPTR alloc_guid_string(const char* utf8, CHAOS_IL2CPP_UINT
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
-static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
+void ChaosGuidCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (c >= '0' && c <= '9') return static_cast<CHAOS_IL2CPP_UINT8>(c - '0');
-    if (c >= 'a' && c <= 'f') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'a' + 10);
-    if (c >= 'A' && c <= 'F') return static_cast<CHAOS_IL2CPP_UINT8>(c - 'A' + 10);
-    return 0xFF;
+    if (instance == 0) return;
+    // Decode the GUID string into the Guid struct at instance+16
+    // (after ThinLockableHeader = 16 bytes)
+    CHAOS_IL2CPP_UINT8 raw_guid[16];
+    if (parse_guid_string(value, raw_guid)) {
+        std::memcpy(reinterpret_cast<void*>(instance + 16), raw_guid, 16);
+    } else {
+        std::memset(reinterpret_cast<void*>(instance + 16), 0, 16);
+    }
 }
-
-void ChaosGuidCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INTPTR value) noexcept { (void)instance; (void)value; }
 
 CHAOS_IL2CPP_INTPTR ChaosGuidNewGuid(void) noexcept
 {
-    auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(16));
-    if (guid == nullptr) return 0;
+    // Thread-local buffer avoids GcAllocateAtomic(16) per call.
+    // Valid until the next ChaosGuidNewGuid call on the same thread.
+    thread_local CHAOS_IL2CPP_UINT8 s_guid_buf[16];
 
 #if defined(_WIN32)
-    GUID win_guid;
-    if (CoCreateGuid(&win_guid) == S_OK) {
-        std::memcpy(guid, &win_guid, 16);
-    } else {
-        std::memset(guid, 0, 16);
+    // BCryptGenRandom is a lightweight syscall, much faster than CoCreateGuid (COM).
+    if (BCryptGenRandom(nullptr, s_guid_buf, 16, BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) {
+        std::memset(s_guid_buf, 0, 16);
     }
 #else
     std::FILE* fp = std::fopen("/dev/urandom", "rb");
     if (fp) {
-        size_t nread = std::fread(guid, 1, 16, fp);
+        size_t nread = std::fread(s_guid_buf, 1, 16, fp);
         std::fclose(fp);
-        if (nread != 16) std::memset(guid, 0, 16);
+        if (nread != 16) std::memset(s_guid_buf, 0, 16);
     } else {
         for (int i = 0; i < 4; ++i) {
             uint32_t v = stub_xorshift32();
-            std::memcpy(guid + i * 4, &v, 4);
+            std::memcpy(s_guid_buf + i * 4, &v, 4);
         }
     }
-    guid[6] = (guid[6] & 0x0F) | 0x40;
-    guid[8] = (guid[8] & 0x3F) | 0x80;
 #endif
+    // Set UUID version 4 (random) and variant bits per RFC 4122
+    s_guid_buf[6] = (s_guid_buf[6] & 0x0F) | 0x40;
+    s_guid_buf[8] = (s_guid_buf[8] & 0x3F) | 0x80;
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(guid);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_guid_buf);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosGuidParse(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    if (value == 0) return 0;
-
-    const char* data = nullptr;
-    CHAOS_IL2CPP_INT32 len = 0;
-
-    if (chaos_is_string_id(value))
-    {
-        auto view = string_table::Resolve(chaos_extract_string_id(value));
-        data = view.utf8_data;
-        len = static_cast<CHAOS_IL2CPP_INT32>(view.byte_count);
-    }
-    else
-    {
-        auto ms = reinterpret_cast<const CHAOS_IL2CPP_STRING_TYPE*>(
-            static_cast<CHAOS_IL2CPP_INTPTR>(value));
-        len = ms->length;
-        if (len > 0) data = ms->utf8_data;
-    }
-    if (data == nullptr || len < 36) return 0;
-    if (data[8] != '-' || data[13] != '-' || data[18] != '-' || data[23] != '-') return 0;
+    CHAOS_IL2CPP_UINT8 raw_guid[16];
+    if (!parse_guid_string(value, raw_guid)) return 0;
 
     auto* guid = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(16));
     if (guid == nullptr) return 0;
-
-    static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
-    for (int i = 0; i < 16; i++)
-    {
-        int p = kPos[i];
-        auto hi = HexNibble(data[p]);
-        auto lo = HexNibble(data[p + 1]);
-        if (hi == 0xFF || lo == 0xFF) { return 0; }
-        guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
-    }
+    std::memcpy(guid, raw_guid, 16);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(guid);
 }
 

@@ -631,6 +631,8 @@ static void (*kAotMethods[14])() = {
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
 // Each wrapper supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
 static void (*kBenchmarkWrappers[14])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
@@ -1400,3 +1402,5 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 14;
+
+extern "C" void ChaosJitRegisterAll() {}

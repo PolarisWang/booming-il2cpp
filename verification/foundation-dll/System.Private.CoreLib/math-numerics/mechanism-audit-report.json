@@ -1,13 +1,13 @@
 {
   "family": "math-numerics",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 49,
-  "audited": 49,
+  "total_methods": 51,
+  "audited": 51,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 2,
   "methods_without_lowering": 0,
-  "methods_without_assert": 49,
+  "methods_without_assert": 51,
   "passed": true,
   "method_details": [
     {
@@ -236,6 +236,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -444,6 +453,15 @@
     },
     {
       "method_name": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

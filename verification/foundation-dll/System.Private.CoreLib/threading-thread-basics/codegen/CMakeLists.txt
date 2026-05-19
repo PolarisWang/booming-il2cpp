@@ -18,6 +18,7 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib"
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
+    "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_codegen.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"
 )
 
@@ -28,6 +29,7 @@ set(COMMON_INCLUDE_DIRS
     "${REPO_ROOT}/src/native/runtime-core/gc"
     "${REPO_ROOT}/src/native/interpreter"
     "${REPO_ROOT}/third_party/fmt/include"
+    "${REPO_ROOT}/third_party/unordered_dense/include"
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")

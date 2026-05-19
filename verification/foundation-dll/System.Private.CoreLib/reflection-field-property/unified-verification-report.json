@@ -1,0 +1,87 @@
+{
+  "family": "reflection-field-property",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-19T17:43:29",
+  "duration_ms": 25315,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "34 methods, 0 custom entries",
+      "details": {
+        "methodCount": 34,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 34,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-field-property\\managed\\subjects\\build-output\\ReflectionFieldPropertySubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 23835
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (34/34)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 34,
+          "total": 34
+        }
+      },
+      "errors": [],
+      "duration_ms": 384
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 7,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1092
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 79.41,
+    "overall": 89.7
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {},
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

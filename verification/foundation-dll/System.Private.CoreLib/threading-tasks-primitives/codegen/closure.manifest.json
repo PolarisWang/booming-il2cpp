@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
+  "assemblyName": "ThreadingTasksPrimitivesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/patch/build-output/ThreadingTasksPrimitivesPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,12 +11,16 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/patch/build-output/ThreadingTasksPrimitivesPatchEntry.dll"
+      "assemblyName": "System.Threading.Thread",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Threading.Thread.dll"
+    },
+    {
+      "assemblyName": "ThreadingTasksPrimitivesSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "72bf7a35-d558-4d17-a588-b40016992498",
+  "inputModuleVersionId": "b9d2e605-beb7-4d09-8e7a-1d7b0bc4f43e",
   "artifacts": [
     {
       "kind": "typedIlIr",

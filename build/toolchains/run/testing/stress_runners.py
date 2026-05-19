@@ -631,14 +631,14 @@ def run_loh_stress(
     **kw: Any,
 ) -> list[StressRunResult]:
     """Run the LOH (Large Object Heap) stress test."""
-    binary = repo_root / "artifacts" / "native-runtime-core-test" / "Debug" / "chaos_loh_stress_test.exe"
+    binary = repo_root / "artifacts" / "native-runtime-core-test" / "Debug" / "chaos_gc_loh_stress_test.exe"
     if not binary.exists():
         return [StressRunResult(status="error", test_name="loh-stress",
                                 errors=["Binary not found; build first"])]
 
     if build:
         b = _run(["cmake", "--build", str(repo_root / "artifacts" / "presets" / "debug"),
-                   "--target", "chaos_loh_stress_test", "--config", "Debug"])
+                   "--target", "chaos_gc_loh_stress_test", "--config", "Debug"])
         if b.returncode != 0:
             return [StressRunResult(status="error", test_name="loh-stress",
                                     errors=[f"Build failed: {b.stderr[:500]}"])]

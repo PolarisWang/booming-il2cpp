@@ -1,7 +1,7 @@
 {
   "family": "reflection-module",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T14:28:33.962836",
+  "generated_at": "2026-05-19T17:36:21.184194",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -191,26 +191,75 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 24 changed source files are outside expected architecture layers",
+      "summary": "7 of 39 changed source files are outside expected architecture layers",
       "details": [
         {
+          "file": "build/check_foundation_dll_pipeline.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/toolchains/run/commands/foundation_dll.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 24,
+        "changed_source_count": 39,
         "layer_distribution": {
           "TestInfra": 5,
-          "Planner": 1,
-          "Driver": 1,
-          "Codegen": 3,
-          "RuntimeCore": 9,
-          "Tests": 4
+          "Emitter": 3,
+          "RuntimeSupport": 1,
+          "Driver": 2,
+          "Codegen": 1,
+          "RuntimeCore": 3,
+          "Tests": 17
         },
         "violations": [
           {
+            "file": "build/check_foundation_dll_pipeline.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/toolchains/run/commands/foundation_dll.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/BuildSystem/CmakeGenerator.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
             "reason": "outside expected architecture layers"
           }
         ]

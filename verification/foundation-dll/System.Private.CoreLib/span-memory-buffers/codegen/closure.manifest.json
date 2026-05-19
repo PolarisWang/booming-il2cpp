@@ -1,14 +1,18 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "SpanMemoryBuffersPatchEntry",
+  "assemblyName": "SpanMemoryBuffersSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/patch/build-output/SpanMemoryBuffersPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "SpanMemoryBuffersPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/patch/build-output/SpanMemoryBuffersPatchEntry.dll"
+      "assemblyName": "SpanMemoryBuffersSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Memory",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Memory.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0d97ee6f-e057-4acf-b823-22c7a279a462",
+  "inputModuleVersionId": "5beca413-b504-4440-b46f-f447b69d2411",
   "artifacts": [
     {
       "kind": "typedIlIr",

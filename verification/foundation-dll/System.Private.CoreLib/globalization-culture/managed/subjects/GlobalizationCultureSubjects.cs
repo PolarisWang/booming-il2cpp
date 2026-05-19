@@ -14,13 +14,13 @@ public static partial class GlobalizationCultureSubjects
     // [0] System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()
     public static void Subject_0()
     {
-        if (((CultureInfo.CurrentCulture).GetHashCode()) != -136333890) _exitCode = 1;
+        if (((CultureInfo.CurrentCulture).GetHashCode()) != -6744848) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()
     public static void Subject_1()
     {
-        if (((CultureInfo.InvariantCulture).GetHashCode()) != 466991800) _exitCode = 1;
+        if (((CultureInfo.InvariantCulture).GetHashCode()) != 1940576540) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)

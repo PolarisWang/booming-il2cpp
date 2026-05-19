@@ -3,1446 +3,154 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-0",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_0()",
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-0",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_0()",
       "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-0",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_0()"
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-0",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_0()"
       },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_0",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177280,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-1",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_1()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-1",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_1()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177279,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-2",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_2()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-2",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_2()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-3",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-3",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-4",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_4()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-4",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_4()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_4",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177276,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-5",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_5()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-5",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_5()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_5",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177275,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-6",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_6()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-6",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_6()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_6",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177274,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-7",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_7()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-7",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_7()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_7",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177273,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-8",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_8()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-8",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_8()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_8",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177272,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-9",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_9()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-9",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_9()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_9",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177271,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-10",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_10()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-10",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_10()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_10",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177270,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-11",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_11()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-11",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_11()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_11",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177269,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-12",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_12()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-12",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_12()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177268,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-13",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_13()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-13",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_13()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177267,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-14",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_14()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-14",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_14()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_14",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177266,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-15",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_15()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-15",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_15()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_15",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177265,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-16",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_16()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-16",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_16()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_16",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177264,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-17",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
-      "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_17()",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.subject-17",
-        "signature": "System.Int32 IoStreamsBasicsPatchEntry::Subject_17()"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_17",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177263,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
-    },
-    {
-      "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.run",
-      "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void IoStreamsBasicsPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "IoStreamsBasicsPatchEntry",
-        "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
-        "definitionSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "io-streams-basics-patch-entry.io-streams-basics-patch-entry.run",
-        "signature": "System.Void IoStreamsBasicsPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Run_System_Int32",
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 241,
-          "handlerOffset": 242,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-1",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-1",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_1()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-2",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-2",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_2()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 3,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            89,
-            100,
-            111,
-            119,
-            127,
-            135,
-            143,
-            151,
-            159,
-            167,
-            175,
-            183,
-            191,
-            199,
-            207,
-            215,
-            223,
-            231
-          ],
-          "ilOffset": 7,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 84,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 89,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
+          "callee": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
           "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_0:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1450,41 +158,114 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 94,
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 12,
           "isPreserveSig": false
-        },
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-3",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-3",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_3()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
         {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 95,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 100,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
           "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i8",
+          "opCode": 40,
+          "ilOffset": 8,
+          "resultType": "System.Int64",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 10,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_1:System.Int32()",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1492,741 +273,98 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 106,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 111,
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 15,
           "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 116,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 117,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 119,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 16,
           "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 124,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 125,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 127,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 18,
           "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_4:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 132,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 133,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 135,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 20,
           "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_5:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 140,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 141,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 143,
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
           "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_6:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 148,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 149,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 151,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_7:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 24,
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 156,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 157,
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 33,
+          "ilOffset": 25,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 159,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_8:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 164,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 165,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 167,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_9:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 172,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 173,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 175,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_10:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 180,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 181,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 183,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_11:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 188,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 189,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 191,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_12:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 196,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 197,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 199,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_13:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 204,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 205,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 207,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_14:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_14",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 212,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 213,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 215,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_15:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_15",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 220,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 221,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 223,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_16:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_16",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 228,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 229,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 231,
-          "resultType": "System.Int32",
-          "callee": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
-          "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::Subject_17:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Subject_17",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 236,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 239,
-          "ilOffset": 237,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 253,
-          "ilOffset": 240,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 242,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 244,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::_exitCode",
-          "ilOffset": 245,
+          "operand": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+          "ilOffset": 28,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "IoStreamsBasicsPatchEntry",
+            "assemblyName": "IoStreamsBasicsSubjects",
             "subjectKind": "field",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::_exitCode"
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "IoStreamsBasicsPatchEntry",
-            "subjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry::_exitCode",
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "IoStreamsBasicsPatchEntry/IoStreamsBasicsPatchEntry",
+            "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2234,17 +372,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 253,
-          "ilOffset": 251,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 253,
+          "ilOffset": 33,
           "isPreserveSig": false
         }
       ],
@@ -2256,7 +386,1428 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "IoStreamsBasicsPatchEntry"
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-4",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-4",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_4()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i8",
+          "opCode": 40,
+          "ilOffset": 8,
+          "resultType": "System.Int64",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 15,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-5",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-5",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_5()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 25,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectKind": "field",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-6",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-6",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_6()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 25,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectKind": "field",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-7",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-7",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_7()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-8",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-8",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_8()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 6,
+          "resultType": "System.Private.CoreLib/System.IO.StringReader",
+          "callee": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.StringReader",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 37,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectKind": "field",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 37,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-9",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-9",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_9()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 6,
+          "resultType": "System.Private.CoreLib/System.IO.StringReader",
+          "callee": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.StringReader::.ctor:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.StringReader",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 37,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectKind": "field",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "IoStreamsBasicsSubjects",
+            "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 37,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-10",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-10",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_10()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+          "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-11",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-11",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_11()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+          "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-12",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-12",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_12()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.StringWriter",
+          "callee": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.StringWriter",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-13",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-13",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_13()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-14",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_14()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-14",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_14()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-15",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_15()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-15",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_15()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-16",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_16()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-16",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_16()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
+    },
+    {
+      "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-17",
+      "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+      "signature": "System.Void IoStreamsBasicsSubjects::Subject_17()",
+      "identity": {
+        "assemblyName": "IoStreamsBasicsSubjects",
+        "declaringTypeSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects",
+        "definitionSubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+        "subjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()",
+        "methodId": "io-streams-basics-subjects.io-streams-basics-subjects.subject-17",
+        "signature": "System.Void IoStreamsBasicsSubjects::Subject_17()"
+      },
+      "nativeSymbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "IoStreamsBasicsSubjects"
     }
   ]
 }

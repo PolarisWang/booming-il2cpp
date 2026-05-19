@@ -18,6 +18,7 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib"
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
+    "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_codegen.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"
 )
 
@@ -28,18 +29,19 @@ set(COMMON_INCLUDE_DIRS
     "${REPO_ROOT}/src/native/runtime-core/gc"
     "${REPO_ROOT}/src/native/interpreter"
     "${REPO_ROOT}/third_party/fmt/include"
+    "${REPO_ROOT}/third_party/unordered_dense/include"
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ConvertCharPatchEntry
-add_library(chaos_gen_ConvertCharPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/ConvertCharPatchEntry/generated/native-aot.generated.cpp
+# Assembly: ConvertCharSubjects
+add_library(chaos_gen_ConvertCharSubjects STATIC
+    ${CHAOS_GEN_DIR}/ConvertCharSubjects/generated/native-aot.generated.cpp
 )
 
-target_include_directories(chaos_gen_ConvertCharPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ConvertCharPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ConvertCharPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ConvertCharSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ConvertCharSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ConvertCharSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -48,7 +50,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ConvertCharPatchEntry
+    chaos_gen_ConvertCharSubjects
     ${NATIVE_LIBS}
 )
 

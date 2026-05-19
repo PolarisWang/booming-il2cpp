@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "SnapshotProverPatchEntry",
-  "entrySubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "SnapshotProverSubjects",
+  "entrySubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

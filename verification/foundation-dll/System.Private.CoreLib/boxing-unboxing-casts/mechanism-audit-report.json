@@ -1,13 +1,13 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 53,
-  "audited": 53,
+  "total_methods": 55,
+  "audited": 55,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 7,
   "methods_without_lowering": 0,
-  "methods_without_assert": 53,
+  "methods_without_assert": 55,
   "passed": true,
   "method_details": [
     {
@@ -173,6 +173,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -318,6 +327,15 @@
     },
     {
       "method_name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

@@ -44,6 +44,7 @@ using chaos::il2cpp::interpreter::kRegHasImm;
 using chaos::il2cpp::interpreter::kRegHasSrc3;
 using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::interpreter::kRegIsCall;
+using chaos::il2cpp::interpreter::kRegIsStore;
 using chaos::il2cpp::interpreter::SEHClause;
 using chaos::il2cpp::interpreter::SEHFlags;
 using chaos::il2cpp::codegen::GenerateNativeCode;
@@ -273,6 +274,22 @@ static RegisterInstruction InstrRet(uint8_t src) noexcept {
     RegisterInstruction ri;
     ri.header = MakeHeader(IROpCode::Ret, 0, src, 0, kRegHasSrc1);
     ri.imm.i4 = 0;
+    return ri;
+}
+
+static RegisterInstruction InstrStLoc(uint32_t local_idx, uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::StLoc, static_cast<uint8_t>(8 + local_idx), src, 0,
+                           kRegHasSrc1 | kRegHasDst | kRegHasImm | kRegIsStore);
+    ri.imm.operand_index = local_idx;
+    return ri;
+}
+
+static RegisterInstruction InstrLdLoc(uint8_t dst, uint32_t local_idx) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::LdLoc, dst, static_cast<uint8_t>(8 + local_idx), 0,
+                           kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.operand_index = local_idx;
     return ri;
 }
 
@@ -2321,6 +2338,321 @@ static bool Test_UnboxElim() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Optimizer: Dead store elimination (consecutive StLoc to same local)
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_DeadStLoc() {
+    std::printf("  Test_DeadStLoc...\n");
+    // LdcI4(42, r0), LdcI4(99, r1), StLoc(0, r0)[dead], StLoc(0, r1), LdLoc(r2, 0), Ret(r2)
+    // After optimization: first StLoc removed → returns 99
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),   // r0 = 42
+        InstrI4(IROpCode::LdcI4, 99, 1),   // r1 = 99
+        InstrStLoc(0, 0),                   // StLoc local[0] = r0 (dead — overwritten next)
+        InstrStLoc(0, 1),                   // StLoc local[0] = r1
+        InstrLdLoc(2, 0),                   // r2 = local[0]
+        InstrRet(2),                        // ret r2
+    };
+    rm.max_regs = 10;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 99)\n", (unsigned long long)result);
+    return result == 99;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Optimizer: Dead Dup elimination (Dup with use_count[dst] == 0)
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_DeadDup() {
+    std::printf("  Test_DeadDup...\n");
+    // LdcI4(42, r0), Dup(r1, r0)[dead], Ret(r0)
+    // After optimization: Dup removed → returns 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrDup(1, 0),                    // r1 = r0 (dead — use_count[r1] == 0)
+        InstrRet(0),                       // ret r0
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Optimizer: Copy propagation (single-use Dup forwarded to next instruction)
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_CopyProp() {
+    std::printf("  Test_CopyProp...\n");
+    // LdcI4(42, r0), Dup(r1, r0)[propagated], Ret(r1) → becomes Ret(r0)
+    // After optimization: Dup removed, Ret src1 changed from r1 to r0 → returns 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrDup(1, 0),                    // r1 = r0 (single use by next instruction)
+        InstrRet(1),                       // ret r1 → becomes ret r0
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_DeadLdLoc() {
+    std::printf("  Test_DeadLdLoc...\n");
+    // LdcI4(42, r0), StLoc(0, r0), LdLoc(r1, 0)[dead], LdcI4(99, r2), Ret(r2)
+    // After optimization: LdLoc removed (r1 never read) → returns 99
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrStLoc(0, 0),                  // local[0] = r0
+        InstrLdLoc(1, 0),                  // r1 = local[0] (dead)
+        InstrI4(IROpCode::LdcI4, 99, 2),  // r2 = 99
+        InstrRet(2),                       // ret r2
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 99)\n", (unsigned long long)result);
+    return result == 99;
+}
+
+static bool Test_RedundantLdLoc() {
+    std::printf("  Test_RedundantLdLoc...\n");
+    // LdcI4(42, r0), StLoc(0, r0), LdLoc(r1, 0), Ret(r1)
+    // After optimization: StLoc→LdLoc forwarded, LdLoc removed → Ret(r0) → returns 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrStLoc(0, 0),                  // local[0] = r0
+        InstrLdLoc(1, 0),                  // r1 = local[0] (single use by next)
+        InstrRet(1),                       // ret r1 → becomes ret r0
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_DeadBr() {
+    std::printf("  Test_DeadBr...\n");
+    // Br to next instruction → fall-through, removed
+    // LdcI4(42, r0), Br(2)[dead], Ret(r0) → returns 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // r0 = 42
+        InstrBranch(IROpCode::Br, 2),      // Br to index 2 = fall-through → removed
+        InstrRet(0),                       // ret r0
+    };
+    rm.max_regs = 1;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_BrChain() {
+    std::printf("  Test_BrChain...\n");
+    // Br → Br chain forwarding
+    // LdcI4(42, r0), Br(2), Br(5), LdcI4(0, r0), LdcI4(0, r0), Ret(r0)
+    // Br(2) targets [2]=Br(5) → forwards to 5, execution: [0]→[1]→[5]→ret 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),  // [0] r0 = 42
+        InstrBranch(IROpCode::Br, 2),      // [1] Br(2) → forwards to 5
+        InstrBranch(IROpCode::Br, 5),      // [2] Br(5) → targets Ret, stays
+        InstrI4(IROpCode::LdcI4, 0, 0),   // [3] r0 = 0 (skipped)
+        InstrI4(IROpCode::LdcI4, 0, 0),   // [4] r0 = 0 (skipped)
+        InstrRet(0),                       // [5] ret r0
+    };
+    rm.max_regs = 1;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_BrChainConditional() {
+    std::printf("  Test_BrChainConditional...\n");
+    // BrFalse → Br chain forwarding
+    // LdcI4(1, r0), BrFalse(3, r0), Br(5), LdcI4(0, r1), LdcI4(0, r1), Br(6), Br(7), LdcI4(99, r1), Ret(r1)
+    // After forwarding: BrFalse target → 5 (skip over dead LdcI4 at [3])
+    // r0=1 → BrFalse NOT taken → falls to [2] → Br(5) → ...
+    // Actually this is getting confusing, let me simplify.
+    // Just test that BrFalse target forwarding works correctly.
+    // LdcI4(1, r0), BrFalse(3, r0), LdcI4(0, r1), LdcI4(99, r1), Br(5), Ret(r1)
+    // Wait, I need a cleaner test. Let me think...
+    // Test: BrFalse target points to a Br → should forward
+    // LdcI4(0, r0), BrFalse(3, r0), LdcI4(42, r1), Br(5), LdcI4(0, r1), Ret(r1)
+    // r0=0 → BrFalse TAKEN → jump to [3]=Br(5) → forwards to [4]
+    // After forward: BrFalse(4, r0) → jump to [4] → LdcI4(0, r1) → Ret(r1) → returns 0
+    // If NOT forwarded: BrFalse(3, r0) → jump to [3]=Br(5) → jump to [4]=LdcI4(0, r1) → returns 0
+    // Same result either way! The forwarding just skips a hop.
+    //
+    // Better test: ensure forwarding doesn't change behavior
+    // LdcI4(0, r0), BrFalse(3, r0), LdcI4(42, r1), Br(5), LdcI4(0, r1), Ret(r1) → returns 0
+    // LdcI4(1, r0), BrFalse(3, r0), LdcI4(42, r1), Br(5), LdcI4(0, r1), Ret(r1) → returns 42 (fall-through)
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 0, 0),   // [0] r0 = 0
+        InstrBranch(IROpCode::BrFalse, 3, 0), // [1] BrFalse(3, r0) → forwards to 5
+        InstrI4(IROpCode::LdcI4, 42, 1),  // [2] r1 = 42 (fall-through when r0 != 0)
+        InstrBranch(IROpCode::Br, 5),      // [3] Br(5) → target of BrFalse, stays
+        InstrI4(IROpCode::LdcI4, 0, 1),   // [4] r1 = 0 (skipped)
+        InstrRet(1),                       // [5] ret r1
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
+    return result == 0;
+}
+
+static bool Test_ArithIdentity() {
+    std::printf("  Test_ArithIdentity...\n");
+    // Test key intrinsic patterns in sequence (no branches, linear flow).
+    // The first Ret terminates, so different registers test each pattern.
+    // Only the FIRST Ret actually executes — the rest would be dead code
+    // from the optimizer's perspective but harmless.
+    //
+    // Since multiple Ret instructions exist, only first one matters.
+    // Test 1: AddZero → Dup(r2, r0) → should return 42
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrI4(IROpCode::LdcI4, 0, 1),
+        InstrBinary(IROpCode::Add, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_MulOneIntrinsic() {
+    std::printf("  Test_MulOneIntrinsic...\n");
+    // Mul by 1 → Dup
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrI4(IROpCode::LdcI4, 1, 1),
+        InstrBinary(IROpCode::Mul, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_MulZeroIntrinsic() {
+    std::printf("  Test_MulZeroIntrinsic...\n");
+    // Mul by 0 → LdcI4(0)
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrI4(IROpCode::LdcI4, 0, 1),
+        InstrBinary(IROpCode::Mul, 2, 0, 1),
+        InstrRet(2),
+    };
+    rm.max_regs = 3;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
+    return result == 0;
+}
+
+static bool Test_AndSelfIntrinsic() {
+    std::printf("  Test_AndSelfIntrinsic...\n");
+    // And(self, self) → Dup
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrBinary(IROpCode::And, 1, 0, 0),
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
+    return result == 42;
+}
+
+static bool Test_SubSelfIntrinsic() {
+    std::printf("  Test_SubSelfIntrinsic...\n");
+    // Sub(self, self) → LdcI4(0)
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrBinary(IROpCode::Sub, 1, 0, 0),
+        InstrRet(1),
+    };
+    rm.max_regs = 2;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) return false;
+    void* entry = SealAndGetEntry(nm);
+    if (entry == nullptr) return false;
+    uint64_t result = ExecuteNative(entry);
+    std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
+    return result == 0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 int main() {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
     std::printf("Starting codegen test...\n");
@@ -2331,7 +2663,12 @@ int main() {
     TEST(FoldAdd); TEST(FoldMul); TEST(FoldChain);
     TEST(FoldBrFalse); TEST(FoldBrFalseNonZero);
     TEST(UnboxElim);
+    TEST(DeadStLoc); TEST(DeadDup); TEST(CopyProp);
+    TEST(DeadLdLoc); TEST(RedundantLdLoc);
     TEST(BranchUncond); TEST(BranchTaken); TEST(BranchNotTaken);
+    TEST(DeadBr); TEST(BrChain); TEST(BrChainConditional);
+    TEST(ArithIdentity); TEST(MulOneIntrinsic); TEST(MulZeroIntrinsic);
+    TEST(AndSelfIntrinsic); TEST(SubSelfIntrinsic);
     TEST(CanGenerate_Unsupported);
     TEST(DeoptMetadata_Call); TEST(DeoptSequence_Generated); TEST(DeoptEntry_Registration);
 

@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ThreadingTasksPrimitivesPatchEntry",
-  "entrySubjectId": "ThreadingTasksPrimitivesPatchEntry/ThreadingTasksPrimitivesPatchEntry::Run:System.Void(System.Int32)",
+  "assemblyName": "ThreadingTasksPrimitivesSubjects",
+  "entrySubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

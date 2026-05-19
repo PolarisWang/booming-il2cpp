@@ -2,9 +2,9 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T15:07:54",
-  "duration_ms": 19363,
-  "overall_status": "passed",
+  "timestamp": "2026-05-19T17:29:49",
+  "duration_ms": 27617,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 18479
+      "duration_ms": 23735
     },
     "fact": {
       "stage": "fact",
@@ -42,21 +42,37 @@
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 35
     },
     "audit": {
       "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "VIOLATION",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 846
+      "duration_ms": 742
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "avg_speedup=-397.01%, native_faster=2/12, managed_faster=10/12",
+      "details": {
+        "averageSpeedupPercent": -397.01,
+        "nativeFasterCount": 2,
+        "managedFasterCount": 10,
+        "matchedCount": 12,
+        "totalMethods": 12,
+        "invalidCount": 0,
+        "benchmarkQuality": "ok"
+      },
+      "errors": [],
+      "duration_ms": 3103
     }
   },
   "coverage": {
@@ -67,10 +83,17 @@
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": -397.01,
+      "nativeFasterCount": 2,
+      "managedFasterCount": 10,
+      "matchedCount": 12,
+      "totalMethods": 12,
+      "invalidCount": 0
+    },
     "hotupdate": {},
     "keyRatios": {
-      "nativeFasterRatio": 0,
+      "nativeFasterRatio": 0.17,
       "irExpansionRatio": 0,
       "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0
@@ -91,7 +114,7 @@
         "matchedCount": 12,
         "nativeFasterCount": 2,
         "managedFasterCount": 10,
-        "averageSpeedupPercent": -232.46
+        "averageSpeedupPercent": -397.01
       }
     },
     "hasRegression": true,

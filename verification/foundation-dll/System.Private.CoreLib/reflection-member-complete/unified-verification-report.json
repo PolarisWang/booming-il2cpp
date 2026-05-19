@@ -2,8 +2,8 @@
   "family": "reflection-member-complete",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T14:27:10",
-  "duration_ms": 24562,
+  "timestamp": "2026-05-19T17:35:56",
+  "duration_ms": 28539,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-member-complete\\managed\\subjects\\build-output\\ReflectionMemberCompleteSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 18969
+      "duration_ms": 21989
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 46
+      "duration_ms": 348
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1065
+      "duration_ms": 821
     },
     "benchmark": {
       "stage": "benchmark",
@@ -72,7 +72,7 @@
         "benchmarkQuality": "matchedCount=0/22 below threshold 50%"
       },
       "errors": [],
-      "duration_ms": 4478
+      "duration_ms": 5378
     }
   },
   "coverage": {

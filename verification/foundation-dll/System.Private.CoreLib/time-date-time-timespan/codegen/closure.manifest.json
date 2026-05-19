@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "TimeDateTimeTimespanPatchEntry",
+  "assemblyName": "TimeDateTimeTimespanSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/patch/build-output/TimeDateTimeTimespanPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,12 +11,12 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "TimeDateTimeTimespanPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/patch/build-output/TimeDateTimeTimespanPatchEntry.dll"
+      "assemblyName": "TimeDateTimeTimespanSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "152b9ea3-2526-4ff1-8f81-a56698c431c9",
+  "inputModuleVersionId": "59586c59-2176-4ef5-b49c-250e72fd0d8d",
   "artifacts": [
     {
       "kind": "typedIlIr",

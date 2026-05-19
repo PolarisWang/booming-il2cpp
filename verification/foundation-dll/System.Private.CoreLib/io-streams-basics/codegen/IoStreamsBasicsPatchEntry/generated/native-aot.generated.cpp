@@ -1990,3 +1990,5 @@ extern "C" void IoStreamsBasicsPatchEntry_IoStreamsBasicsPatchEntry_Run_System_I
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 19;
+
+extern "C" void ChaosJitRegisterAll() {}

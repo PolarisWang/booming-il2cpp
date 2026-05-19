@@ -4,103 +4,115 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=3",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::_exitCode",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GuidRandomHashcodeSubjects/\u003CPrivateImplementationDetails\u003E::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_0:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_1:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_2:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_3:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_4:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_5:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_6:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_7:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_8:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_9:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_10:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_11:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_12:System.Int32()",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Subject_13:System.Int32()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GuidRandomHashcodePatchEntry/GuidRandomHashcodePatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

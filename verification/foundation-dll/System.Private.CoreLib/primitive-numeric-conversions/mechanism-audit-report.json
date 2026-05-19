@@ -1,13 +1,13 @@
 {
   "family": "primitive-numeric-conversions",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 65,
-  "audited": 65,
+  "total_methods": 67,
+  "audited": 67,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 65,
+  "methods_without_assert": 67,
   "passed": true,
   "method_details": [
     {
@@ -209,6 +209,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -390,6 +399,15 @@
     },
     {
       "method_name": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

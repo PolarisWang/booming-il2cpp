@@ -229,6 +229,7 @@ def _run_convert_to_cpp(
     *,
     verification: Path | None = None,
     entry_point_subject_id: str | None = None,
+    codegen_mode: str | None = None,
 ) -> bool:
     """Run chaos-il2cpp convert-to-cpp on the subjects DLL.
 
@@ -248,6 +249,8 @@ def _run_convert_to_cpp(
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
+    if codegen_mode:
+        cmd.extend(["--mode", codegen_mode])
 
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
 
@@ -1025,7 +1028,7 @@ def _has_synthetic_method_ids(method_subject_ids: list[str]) -> bool:
     return False
 
 
-def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib", variant: str | None = None, config_tier: str = "CHECK") -> dict:
+def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib", variant: str | None = None, config_tier: str = "CHECK", codegen_mode: str | None = None) -> dict:
     """Run the full pipeline for one family. Returns result dict."""
     verification = _VERIFICATION_BASE / assembly_name
     result = {
@@ -1066,7 +1069,7 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     # Step 1b: Convert-to-CPP → codegen/
     print(f"  [1b/3] Running convert-to-cpp...")
     entry_pt = build_result.get("entry_point_subject_id")
-    if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt):
+    if not _run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt, codegen_mode=codegen_mode):
         result["steps"]["convert_to_cpp"] = "FAILED"
         result["error"] = "convert-to-cpp failed"
         trace("family_c2c_failed", family=family_slug)

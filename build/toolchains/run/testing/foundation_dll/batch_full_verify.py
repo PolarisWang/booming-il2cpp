@@ -7,7 +7,7 @@ from pathlib import Path
 REPO = Path(r"D:\agent\booming-il2cpp")
 VERIFICATION = REPO / "verification" / "foundation-dll" / "System.Private.CoreLib"
 DRIVER = REPO / "src" / "managed" / "Chaos.IL2CPP.Driver"
-SKIP_FAMILIES = {"reports", "System.Private.CoreLib", "codegen-edge-cases", "pinvoke-dllimport", "primitive-numeric-conversions-core"}
+SKIP_FAMILIES = {"reports", "System.Private.CoreLib"}
 
 def get_families():
     return sorted(d.name for d in VERIFICATION.iterdir() if d.is_dir() and d.name not in SKIP_FAMILIES)
@@ -60,7 +60,7 @@ def inject_seh(cmakelists):
     cmakelists.write_text(text, encoding="utf-8")
     return True
 
-def build_entry(family_slug):
+def build_entry(family_slug, retries=3):
     native_dir = VERIFICATION / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
     if not cmakelists.exists():
@@ -71,28 +71,48 @@ def build_entry(family_slug):
     build_dir = native_dir / "build"
     build_dir.mkdir(parents=True, exist_ok=True)
 
-    try:
-        cfg = subprocess.run(
-            ["cmake", "-S", str(native_dir), "-B", str(build_dir),
-             "-G", "Visual Studio 17 2022", "-A", "x64",
-             "-DCHAOS_NATIVE_BUILD=" + str(REPO / "build" / "native")],
-            capture_output=True, text=True, errors='replace', timeout=120)
-        if cfg.returncode != 0:
-            err = cfg.stderr[-200:] if cfg.stderr else "unknown"
-            return f"cmake-fail: {err}"
-    except Exception as e:
-        return f"cmake-exception: {e}"
+    for attempt in range(1, retries + 1):
+        try:
+            cfg = subprocess.run(
+                ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+                 "-G", "Visual Studio 17 2022", "-A", "x64",
+                 "-DCHAOS_NATIVE_BUILD=" + str(REPO / "build" / "native")],
+                capture_output=True, text=True, errors='replace', timeout=120)
+            if cfg.returncode != 0:
+                err = cfg.stderr[-200:] if cfg.stderr else "unknown"
+                if attempt < retries and "locked" in err.lower():
+                    print(f"      cmake configure locked, retry {attempt}/{retries}")
+                    time.sleep(5)
+                    continue
+                return f"cmake-fail: {err}"
+        except Exception as e:
+            if attempt < retries:
+                print(f"      cmake configure exception, retry {attempt}/{retries}: {e}")
+                time.sleep(5)
+                continue
+            return f"cmake-exception: {e}"
 
-    try:
-        bld = subprocess.run(
-            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
-             "--target", "entry"],
-            capture_output=True, text=True, errors='replace', timeout=300)
-        if bld.returncode != 0:
-            err = bld.stderr[-200:] if bld.stderr else bld.stdout[-200:]
-            return f"build-fail: {err}"
-    except Exception as e:
-        return f"build-exception: {e}"
+        try:
+            bld = subprocess.run(
+                ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
+                 "--target", "entry"],
+                capture_output=True, text=True, errors='replace', timeout=300)
+            if bld.returncode != 0:
+                err = bld.stderr[-200:] if bld.stderr else bld.stdout[-200:]
+                if attempt < retries and ("locked" in err.lower() or "LNK" in err):
+                    print(f"      cmake build locked/contention, retry {attempt}/{retries}")
+                    time.sleep(5)
+                    continue
+                return f"build-fail: {err}"
+        except Exception as e:
+            if attempt < retries:
+                print(f"      cmake build exception, retry {attempt}/{retries}: {e}")
+                time.sleep(5)
+                continue
+            return f"build-exception: {e}"
+
+        # Success — break out of retry loop
+        break
 
     src_exe = build_dir / "RelWithDebInfo" / "entry.exe"
     if not src_exe.exists():

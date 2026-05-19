@@ -1102,3 +1102,5 @@ extern "C" void GarbageCollectionPatchEntry_GarbageCollectionPatchEntry_Run_Syst
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 7;
+
+extern "C" void ChaosJitRegisterAll() {}

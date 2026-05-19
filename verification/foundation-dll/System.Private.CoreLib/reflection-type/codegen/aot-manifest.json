@@ -3,274 +3,538 @@
   "artifactKind": "aotManifest",
   "entries": [
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_0:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_0:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_1:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_1:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_2:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_2:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_3:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_3:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_4:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_4:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_5:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_5:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_6:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_6:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_7:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_7:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_8:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_8:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_9:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_9:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_10:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_10:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_11:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_11:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_12:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_12:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_13:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_13:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_14:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_14:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_15:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_15:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_16:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_16:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_17:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_17:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_18:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_18:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_19:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_19:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_20:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_20:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_21:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_21:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_22:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_22:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_23:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_23:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_24:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_24:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_25:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_25:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_26:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_26:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_27:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_27:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_28:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_28:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_29:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_29:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_30:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_30:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_31:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_31:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_32:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_32:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_33:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_33:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_34:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_34:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_35:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_35:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_36:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_36:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_37:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_37:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_38:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_38:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_39:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_39:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_40:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_40:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_41:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_41:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Subject_42:System.Int32()",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::Subject_42:System.Void()",
       "reason": "generated-direct-call"
     },
     {
-      "assemblyName": "ReflectionTypePatchEntry",
-      "subjectKind": "method",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::Run:System.Void(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ReflectionTypePatchEntry",
+      "assemblyName": "ReflectionTypeSubjects",
       "subjectKind": "field",
-      "subjectId": "ReflectionTypePatchEntry/ReflectionTypePatchEntry::_exitCode",
+      "subjectId": "ReflectionTypeSubjects/ReflectionTypeSubjects::_exitCode",
       "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "reason": "external-call"
     }
   ]
 }

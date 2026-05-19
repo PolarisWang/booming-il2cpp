@@ -1,0 +1,52 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_0:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_1:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_2:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Subject_3:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "PinvokeDllimportPatchEntry/PinvokeDllimportPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}
