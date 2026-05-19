@@ -290,15 +290,17 @@ void BgcController::PopulateRootSet() {
     // scanning path below, which will mark any old-gen object found.
 
         // Phase 1b: Scan the shared young generation for old-gen pointers.
-    // The young region is scanned [begin, current) for any reference
+    // The young region is scanned [begin, bump) for any reference
     // to old-gen objects; those objects are marked and enqueued for
-    // concurrent marking.
+    // concurrent marking.  Uses g_young_gen.bump (the true allocation
+    // frontier advanced by TLAB claims) rather than region->current
+    // (which is frozen at begin after each young GC reset).
     {
         Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
         if (young_region != nullptr) {
             auto& ctrl = BgcController::Instance();
             void* begin = young_region->begin;
-            void* cur   = young_region->current;
+            void* cur   = g_young_gen.bump.load(std::memory_order_acquire);
             if (cur > begin) {
                 for (auto* slot = static_cast<void**>(begin);
                      slot < static_cast<void**>(cur);

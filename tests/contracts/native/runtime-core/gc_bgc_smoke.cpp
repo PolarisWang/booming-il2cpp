@@ -201,8 +201,8 @@ void TestBgcWithYoungGc() {
     BgcController::Instance().StartBgcCycle();
     threading::ReleaseGlobalSafepoint(gen);
 
-    // While BGC is marking, run a young GC.
-    for (int i = 0; i < 1; i++) {
+    // While BGC is marking, run young GCs.
+    for (int i = 0; i < 10; i++) {
         // Allocate nursery objects.
         for (int j = 0; j < 200; j++) {
             void* p = NurseryAllocate(32);
