@@ -39,6 +39,15 @@ struct Functions {
         void (*Subject_0)(
                 void
         );
+        void (*Subject_10)(
+                void
+        );
+        void (*Subject_11)(
+                void
+        );
+        void (*Subject_12)(
+                void
+        );
         void (*Subject_1)(
                 void
         );
@@ -66,20 +75,15 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-        void (*Subject_10)(
-                void
-        );
-        void (*Subject_11)(
-                void
-        );
-        void (*Subject_12)(
-                void
-        );
     } typeRuntimeHandlesSubjects;
     int32_t method_count;
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -94,6 +98,21 @@ struct TypeRuntimeHandlesSubjects {
     static inline void Subject_0(
     ) {
         return kFunctions.typeRuntimeHandlesSubjects.Subject_0(
+        );
+    }
+    static inline void Subject_10(
+    ) {
+        return kFunctions.typeRuntimeHandlesSubjects.Subject_10(
+        );
+    }
+    static inline void Subject_11(
+    ) {
+        return kFunctions.typeRuntimeHandlesSubjects.Subject_11(
+        );
+    }
+    static inline void Subject_12(
+    ) {
+        return kFunctions.typeRuntimeHandlesSubjects.Subject_12(
         );
     }
     static inline void Subject_1(
@@ -139,21 +158,6 @@ struct TypeRuntimeHandlesSubjects {
     static inline void Subject_9(
     ) {
         return kFunctions.typeRuntimeHandlesSubjects.Subject_9(
-        );
-    }
-    static inline void Subject_10(
-    ) {
-        return kFunctions.typeRuntimeHandlesSubjects.Subject_10(
-        );
-    }
-    static inline void Subject_11(
-    ) {
-        return kFunctions.typeRuntimeHandlesSubjects.Subject_11(
-        );
-    }
-    static inline void Subject_12(
-    ) {
-        return kFunctions.typeRuntimeHandlesSubjects.Subject_12(
         );
     }
     /// Total number of AOT-compiled methods in this type.

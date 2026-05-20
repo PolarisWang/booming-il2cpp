@@ -146,6 +146,8 @@ CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*
 }
 
 // ── GC stubs ──
+}  // extern "C"
+
 void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
 {
     // Synchronous blocking collection:
@@ -160,22 +162,23 @@ void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
     // Step 1: Young collection on the shared young generation (if any).
     Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
     if (young_region != nullptr && young_region->current > young_region->begin) {
-        uint32_t gen = threading::RequestGlobalSafepoint();
+        uint32_t gen = chaos::il2cpp::runtime_core::threading::RequestGlobalSafepoint();
         GcYoungCollection();
-        threading::ReleaseGlobalSafepoint(gen);
+        chaos::il2cpp::runtime_core::threading::ReleaseGlobalSafepoint(gen);
     }
 
     // Step 2: Full collection when gen >= 1 or default (-1).
     if (generation < 0 || generation >= 1) {
-        uint32_t gen = threading::RequestGlobalSafepoint();
+        uint32_t gen = chaos::il2cpp::runtime_core::threading::RequestGlobalSafepoint();
         g_old_gen.Collect(nullptr, nullptr);
-        threading::ReleaseGlobalSafepoint(gen);
+        chaos::il2cpp::runtime_core::threading::ReleaseGlobalSafepoint(gen);
     }
 
     // Step 3: Run pending finalizers.
     g_old_gen.RunFinalizers();
 }
 
+extern "C" {
 CHAOS_IL2CPP_INT32 ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     if (obj == 0) return 0;

@@ -2,8 +2,8 @@
   "family": "reflection-field-property",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:39:52",
-  "duration_ms": 22635,
+  "timestamp": "2026-05-20T17:47:50",
+  "duration_ms": 24750,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\reflection-field-property\\managed\\subjects\\build-output\\ReflectionFieldPropertySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20704
+      "duration_ms": 22682
     },
     "fact": {
       "stage": "fact",
@@ -42,21 +42,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 390
+      "duration_ms": 397
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1539
+      "duration_ms": 1666
     }
   },
   "coverage": {

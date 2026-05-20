@@ -2,9 +2,9 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T16:11:35",
-  "duration_ms": 6574,
-  "overall_status": "passed",
+  "timestamp": "2026-05-20T19:08:09",
+  "duration_ms": 39214,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,6 +21,17 @@
       "errors": [],
       "duration_ms": 1
     },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 13,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 31935
+    },
     "fact": {
       "stage": "fact",
       "status": "passed",
@@ -33,21 +44,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 45
+      "duration_ms": 30
     },
     "audit": {
       "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "VIOLATION",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1223
+      "duration_ms": 1192
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -78,7 +89,7 @@
         "averageExpansionRatio": 0
       },
       "errors": [],
-      "duration_ms": 4670
+      "duration_ms": 2931
     },
     "microbench": {
       "stage": "microbench",
@@ -88,7 +99,23 @@
         "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 45
+      "duration_ms": 28
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "avg_speedup=-204.15%, native_faster=2/12, managed_faster=10/12",
+      "details": {
+        "averageSpeedupPercent": -204.15,
+        "nativeFasterCount": 2,
+        "managedFasterCount": 10,
+        "matchedCount": 12,
+        "totalMethods": 13,
+        "invalidCount": 1,
+        "benchmarkQuality": "ok"
+      },
+      "errors": [],
+      "duration_ms": 2665
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -102,20 +129,20 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 44
+      "duration_ms": 30
     },
     "post_hotupdate_benchmark": {
       "stage": "post_hotupdate_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "summary": "avg_slowdown=2.85% (1.0x) over 10 methods (interpreter path — expected)",
       "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
+        "averageSlowdownPercent": 2.85,
+        "slowdownFactor": 1.0285,
         "threshold": 50.0,
-        "nonStubMethods": 0
+        "nonStubMethods": 10
       },
       "errors": [],
-      "duration_ms": 543
+      "duration_ms": 396
     }
   },
   "coverage": {
@@ -146,7 +173,14 @@
       "totalBoxingOps": 0,
       "topInstructionCategories": {}
     },
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": -204.15,
+      "nativeFasterCount": 2,
+      "managedFasterCount": 10,
+      "matchedCount": 12,
+      "totalMethods": 13,
+      "invalidCount": 1
+    },
     "hotupdate": {
       "functional": {
         "passedMethods": 13,
@@ -154,21 +188,21 @@
         "totalMethods": 13
       },
       "interpreterOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
+        "averageSlowdownPercent": 2.85,
+        "slowdownFactor": 1.0285,
+        "nonStubMethods": 10
       }
     },
     "keyRatios": {
-      "nativeFasterRatio": 0,
+      "nativeFasterRatio": 0.17,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.0,
+      "interpreterSlowdownFactor": 1.0285,
       "asmPassRate": 0.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "matched",
+      "status": "regressed",
       "baselineMetrics": {
         "totalMethods": 12,
         "matchedCount": 0,
@@ -177,14 +211,16 @@
         "averageSpeedupPercent": 0.0
       },
       "currentMetrics": {
-        "totalMethods": 12,
+        "totalMethods": 13,
         "matchedCount": 12,
-        "nativeFasterCount": 8,
-        "managedFasterCount": 4,
-        "averageSpeedupPercent": -38.69
+        "nativeFasterCount": 2,
+        "managedFasterCount": 10,
+        "averageSpeedupPercent": -204.15
       }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 83% exceeds native-faster ratio 17% (10/12 methods)"
+    ]
   }
 }

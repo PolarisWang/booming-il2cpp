@@ -2,23 +2,68 @@
   "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T21:39:19",
-  "duration_ms": 8,
+  "timestamp": "2026-05-20T19:54:05",
+  "duration_ms": 2173,
   "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
-      "status": "failed",
-      "summary": "Contract not found: D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core\\capability-family-contract.json",
-      "details": {},
+      "status": "passed",
+      "summary": "23 methods, 0 custom entries",
+      "details": {
+        "methodCount": 23,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "MSBUILD : error MSB1006: Property is not valid.\nSwitch: pinvoke-dllimport\n\nFor switch syntax, type \"MSBuild -help\"\n",
+      "details": {
+        "steps": {
+          "build_subjects": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 910
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=skip (0/0)",
+      "details": {
+        "fact": {
+          "status": "skip",
+          "passed": 0,
+          "total": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1257
     }
   },
   "coverage": {
     "methodCoverage": 0.0,
-    "testedRate": 0.0,
-    "overall": 0.0
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

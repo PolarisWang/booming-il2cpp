@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -14,6 +14,110 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
 
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8(
+        void
+);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9(
+        void
+);
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -21,15 +125,6 @@ extern "C" const int kAotMethodCount;
 static const Functions s_functions = {
     {
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8,
-        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12,
@@ -40,6 +135,7 @@ static const Functions s_functions = {
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22,
@@ -50,15 +146,64 @@ static const Functions s_functions = {
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32,
         &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8,
+        &ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9,
     },
     34,
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[34];
+void* kFunctionsFlat[34] = {
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8),
+    reinterpret_cast<void*>(&ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

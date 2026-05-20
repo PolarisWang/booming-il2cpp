@@ -143,9 +143,9 @@ GcSnapshot GcGetSnapshot() noexcept;
 // ── GCMemoryInfo snapshot (managed GC.GetGCMemoryInfo() data) ──
 
 /// Mirrors the framework pack System.GCMemoryInfoData field layout.
-/// Populated by chaos_gc_get_memory_info().  The codegen layer computes
-/// an interior pointer (past the MethodTable*) so the native write goes
-/// directly to the first field at offset 0.
+/// Populated by chaos_gc_get_memory_info().  The native function receives
+/// the managed object reference and computes the interior pointer
+/// (past the MethodTable*) so the write goes directly to offset 0.
 struct GcMemoryInfoNative {
     int64_t high_memory_load_threshold_bytes;  // 0
     int64_t total_available_memory_bytes;       // 8

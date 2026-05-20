@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ThreadingMonitorInterlockedPatchEntry.cs" />
+    <Compile Include="ThreadingMonitorInterlockedPatchEntry.Custom.cs" />
   </ItemGroup>
 </Project>

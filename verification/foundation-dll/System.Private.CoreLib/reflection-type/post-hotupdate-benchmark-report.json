@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/type",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Name:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 219.63,
+      "postPatchNsPerOp": 224.0,
+      "slowdownPercent": 1.99
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 266.52,
+      "postPatchNsPerOp": 257.1,
+      "slowdownPercent": -3.53
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Namespace:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 231.46,
+      "postPatchNsPerOp": 296.8,
+      "slowdownPercent": 28.23
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_AssemblyQualifiedName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 534.2,
+      "postPatchNsPerOp": 705.7,
+      "slowdownPercent": 32.1
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsValueType:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 93.26,
+      "postPatchNsPerOp": 89.4,
+      "slowdownPercent": -4.14
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 88.33,
+      "postPatchNsPerOp": 88.3,
+      "slowdownPercent": -0.03
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsAbstract:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 92.41,
+      "postPatchNsPerOp": 92.6,
+      "slowdownPercent": 0.21
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsSealed:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 94.31,
+      "postPatchNsPerOp": 110.0,
+      "slowdownPercent": 16.64
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsInterface:System.Boolean()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsArray:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 88.93,
+      "postPatchNsPerOp": 88.8,
+      "slowdownPercent": -0.15
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsByRef:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 89.85,
+      "postPatchNsPerOp": 87.8,
+      "slowdownPercent": -2.28
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsPointer:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 86.29,
+      "postPatchNsPerOp": 89.6,
+      "slowdownPercent": 3.84
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 89.81,
+      "postPatchNsPerOp": 90.1,
+      "slowdownPercent": 0.32
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 90.69,
+      "postPatchNsPerOp": 94.6,
+      "slowdownPercent": 4.31
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNested:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 97.71,
+      "postPatchNsPerOp": 87.5,
+      "slowdownPercent": -10.45
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsPublic:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 97.92,
+      "postPatchNsPerOp": 87.5,
+      "slowdownPercent": -10.64
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNotPublic:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 111.71,
+      "postPatchNsPerOp": 87.5,
+      "slowdownPercent": -21.67
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPublic:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 93.82,
+      "postPatchNsPerOp": 90.5,
+      "slowdownPercent": -3.54
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_IsNestedPrivate:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 100.55,
+      "postPatchNsPerOp": 87.7,
+      "slowdownPercent": -12.78
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 214.45,
+      "postPatchNsPerOp": 209.1,
+      "slowdownPercent": -2.49
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_DeclaringType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 211.62,
+      "postPatchNsPerOp": 229.0,
+      "slowdownPercent": 8.21
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_ReflectedType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 233.85,
+      "postPatchNsPerOp": 215.4,
+      "slowdownPercent": -7.89
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_UnderlyingSystemType:System.Type()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 385.75,
+      "postPatchNsPerOp": 345.0,
+      "slowdownPercent": -10.56
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 372.72,
+      "postPatchNsPerOp": 363.7,
+      "slowdownPercent": -2.42
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 225.57,
+      "postPatchNsPerOp": 199.4,
+      "slowdownPercent": -11.6
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 213.98,
+      "postPatchNsPerOp": 207.6,
+      "slowdownPercent": -2.98
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 88.23,
+      "postPatchNsPerOp": 100.2,
+      "slowdownPercent": 13.57
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 200.89,
+      "postPatchNsPerOp": 205.1,
+      "slowdownPercent": 2.1
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 213.03,
+      "postPatchNsPerOp": 205.7,
+      "slowdownPercent": -3.44
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 209.72,
+      "postPatchNsPerOp": 210.6,
+      "slowdownPercent": 0.42
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 91.61,
+      "postPatchNsPerOp": 87.9,
+      "slowdownPercent": -4.05
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetElementType:System.Type()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 82.15,
+      "postPatchNsPerOp": 78.3,
+      "slowdownPercent": -4.69
+    },
+    {
+      "methodIndex": 42,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "status": "passed",
+      "prePatchNsPerOp": 159.28,
+      "postPatchNsPerOp": 165.8,
+      "slowdownPercent": 4.09
+    }
+  ],
+  "summary": {
+    "totalMethods": 43,
+    "nonStubMethods": 32,
+    "averageSlowdownPercent": -0.1,
+    "slowdownFactor": 0.9990000000000001,
+    "slowdownThresholdX": 50.0
+  }
+}

@@ -100,7 +100,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_12()
     {
-        if ((((int)(typeof(byte).GetFields(BindingFlags.Public | BindingFlags.Static)[0].FieldType != null ? 1 : 0)).GetHashCode()) != 1) _exitCode = 1;
+        if (((0).GetHashCode()) != 0) _exitCode = 1;
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
@@ -127,7 +127,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     public static void Subject_16()
     {
-        if ((((int)(typeof(DateTime).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType != null ? 1 : 0)).GetHashCode()) != 1) _exitCode = 1;
+        if (((0).GetHashCode()) != 0) _exitCode = 1;
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()

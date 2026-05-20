@@ -83,10 +83,16 @@ def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",
 
 def verify_benchmark(family_slug: str, *, assembly: str = "System.Private.CoreLib",
                      entry_index: int = 0, iterations: int = 1000,
-                     verbose: bool = False) -> dict[str, Any]:
-    """Run benchmark via il2cpp-translated entry EXE."""
+                     verbose: bool = False,
+                     exe_path: Path | None = None) -> dict[str, Any]:
+    """Run benchmark via il2cpp-translated entry EXE.
+
+    Args:
+        exe_path: Optional explicit path to entry.exe. If None, uses _locate_entry_exe().
+    """
     print(f"=== Fact Benchmark: {family_slug} ===")
-    exe_path = _locate_entry_exe(family_slug, assembly=assembly)
+    if exe_path is None:
+        exe_path = _locate_entry_exe(family_slug, assembly=assembly)
     if exe_path is None:
         return {"status": "skip", "reason": "entry EXE not found"}
 

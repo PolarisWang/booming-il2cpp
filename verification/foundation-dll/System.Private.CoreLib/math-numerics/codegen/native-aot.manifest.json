@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "MathNumericsSubjects",
   "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/math-numerics/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/math-numerics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
@@ -17,6 +17,14 @@
     {
       "kind": "generatedTranslationUnit",
       "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "generatedModuleHeader",
+      "path": "generated/chaos_generated_module.h"
+    },
+    {
+      "kind": "generatedModuleSource",
+      "path": "generated/chaos_generated_module.cpp"
     },
     {
       "kind": "codegenMetrics",

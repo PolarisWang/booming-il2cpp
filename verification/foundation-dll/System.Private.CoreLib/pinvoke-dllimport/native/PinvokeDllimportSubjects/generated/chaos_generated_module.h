@@ -80,6 +80,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -101,17 +105,17 @@ struct PinvokeDllimportNativeEntry {
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetModuleHandle(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.pinvokeDllimportNativeEntry.GetModuleHandle(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetProcessId(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.pinvokeDllimportNativeEntry.GetProcessId(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetCurrentProcess(

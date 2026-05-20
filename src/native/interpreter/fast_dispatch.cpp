@@ -1255,7 +1255,10 @@ static void Handle_StInd(FastFrame& frame, const interpreter::IRInstruction&) no
     uint64_t val = frame.stack[--frame.sp];
     void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
     if (ptr != nullptr) {
+        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(ptr));
         *static_cast<uint64_t*>(ptr) = val;
+        chaos_gc_dirty_card(ptr);
     }
     ++frame.pc;
 }

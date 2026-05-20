@@ -82,6 +82,26 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[13];
+void* kFunctionsFlat[13] = {
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_0),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_1),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_2),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_3),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_4),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_5),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_6),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_7),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_8),
+    reinterpret_cast<void*>(&BufferMemorySubjects_BufferMemorySubjects_Subject_9),
+};
+
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;

@@ -59,4 +59,13 @@ CHAOS_IL2CPP_INTPTR AsyncLocalGetValue(uint64_t key) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core::threading
 
+// extern "C" bridges for threading_stubs — declared outside the namespace
+// so they are visible from chaos::il2cpp::runtime_core.
+extern "C" chaos::il2cpp::runtime_core::threading::ExecutionContext* chaos_execution_context_capture() noexcept;
+extern "C" void chaos_execution_context_run(
+    chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx,
+    void (*callback)(void*), void* state) noexcept;
+extern "C" void chaos_execution_context_free(
+    chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx) noexcept;
+
 #endif  // CHAOS_IL2CPP_EXECUTION_CONTEXT_H_

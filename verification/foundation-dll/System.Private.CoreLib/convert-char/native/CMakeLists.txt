@@ -12,13 +12,16 @@ add_compile_definitions(CHAOS_IL2CPP_EH_WIN32_SEH)
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
+if(NOT CHAOS_NATIVE_BUILD)
+    set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
+endif()
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "verification_dispatch.generated.cpp"  # verification dispatch (sources)
     "subject0_safe_wrapper.cpp"
     ${CHAOS_CODEGEN_CPP}
 )

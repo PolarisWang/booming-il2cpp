@@ -60,6 +60,12 @@ typedef struct CodeRegistrationV0 {
     uint32_t type_capability_count;
     const VTableDescriptorV0* vtable_descriptors;
     uint32_t       vtable_descriptor_count;
+
+    /// Pointers to the .gc_slot_maps section for batch registration of GC slot maps.
+    /// AOT codegen emits one GcSlotMapSectionEntryHdrV0 per method into this section.
+    /// Null if the module has no AOT-compiled methods with GC refs.
+    const void* slot_map_section_begin;
+    const void* slot_map_section_end;
 } CodeRegistrationV0;
 
 /*
@@ -187,6 +193,14 @@ typedef struct GcSlotMapV0 {
     uint32_t num_gc_slots;       /* number of GC root slots in this frame */
     uint32_t slots[];            /* variable-length array of slot encodings */
 } GcSlotMapV0;
+
+/// Per-entry header in the .gc_slot_maps section.
+/// Each entry is: [GcSlotMapSectionEntryHdrV0][GcSlotMapV0 body][slots data].
+/// The runtime iterates the section by advancing entry_total_size bytes per entry.
+typedef struct GcSlotMapSectionEntryHdrV0 {
+    uint32_t entry_total_size;   /* total bytes of this section entry (incl. this field) */
+    const void* code_address;    /* code address this slot map belongs to */
+} GcSlotMapSectionEntryHdrV0;
 
 /// Section attribute for .gc_slot_maps — collected by the linker into
 /// a contiguous range that the runtime can iterate at GC time.

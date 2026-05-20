@@ -31,6 +31,7 @@
     "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()",
     "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
     "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
+    "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
     "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
     "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
     "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
@@ -50,13 +51,13 @@
     "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
     "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()"
   ],
-  "translationUnitMethodCount": 39,
+  "translationUnitMethodCount": 40,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 39,
+      "methodCount": 40,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
       "lastMethodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()"

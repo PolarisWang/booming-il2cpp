@@ -506,9 +506,7 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             return false;
         }
 
-        return entryPointMethod.IsStatic &&
-               entryPointMethod.Parameters.Count == 0 &&
-               !string.Equals(entryPointMethod.Name, "Run", StringComparison.Ordinal);
+        return entryPointMethod.IsStatic;
     }
 
     private static NativeReferenceLoweringPlanArtifact CreateGenericLoweringPlan(

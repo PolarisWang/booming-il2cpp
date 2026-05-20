@@ -203,7 +203,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -566245534,
+          "operand": 1331916646,
           "ilOffset": 36,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -506,7 +506,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": -566245534,
+          "operand": 1331916646,
           "ilOffset": 36,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -819,7 +819,7 @@
                 "value": "stub:definition=System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable);type=[];method=[System.Attribute]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -908,7 +908,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32();type=[System.Attribute];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1250,7 +1250,7 @@
                 "value": "stub:definition=System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable);type=[];method=[System.Attribute]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1339,7 +1339,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32();type=[System.Attribute];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1640,7 +1640,7 @@
                 "value": "stub:definition=System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable);type=[];method=[System.Attribute]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1729,7 +1729,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32();type=[System.Attribute];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2030,7 +2030,7 @@
                 "value": "stub:definition=System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable);type=[];method=[System.Attribute]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -2119,7 +2119,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32();type=[System.Attribute];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

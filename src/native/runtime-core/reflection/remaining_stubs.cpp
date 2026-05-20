@@ -74,6 +74,11 @@ CHAOS_IL2CPP_INTPTR ChaosTypeEquals(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP_INT
     return (desc_a != nullptr && desc_a == desc_b) ? 1 : 0;
 }
 
+CHAOS_IL2CPP_INTPTR ChaosTypeInequality(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP_INTPTR type_b) noexcept {
+    // Negation of ChaosTypeEquals
+    return ChaosTypeEquals(type_a, type_b) ? 0 : 1;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept {
     // Return the TypeInfoHot* for this type handle, if type_info_ptrs is populated.
     auto* type_info = GetTypeInfoFromHandle(type);

@@ -35,38 +35,73 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
+    struct ThreadingThreadBasicsNativeEntry_t {
+        void (*CustomEntryMethod0)(
+                void
+        );
+        void (*CustomEntryMethod10)(
+                void
+        );
+        void (*CustomEntryMethod1)(
+                void
+        );
+        void (*CustomEntryMethod2)(
+                void
+        );
+        void (*CustomEntryMethod3)(
+                void
+        );
+        void (*CustomEntryMethod4)(
+                void
+        );
+        void (*CustomEntryMethod5)(
+                void
+        );
+        void (*CustomEntryMethod6)(
+                void
+        );
+        void (*CustomEntryMethod7)(
+                void
+        );
+        void (*CustomEntryMethod8)(
+                void
+        );
+        void (*CustomEntryMethod9)(
+                void
+        );
+    } threadingThreadBasicsNativeEntry;
     struct ThreadingThreadBasicsSubjects_t {
-        void (*Subject_0)(
+        void (*CustomEntrySubject_0)(
                 void
         );
-        void (*Subject_1)(
+        void (*CustomEntrySubject_10)(
                 void
         );
-        void (*Subject_2)(
+        void (*CustomEntrySubject_1)(
                 void
         );
-        void (*Subject_3)(
+        void (*CustomEntrySubject_2)(
                 void
         );
-        void (*Subject_4)(
+        void (*CustomEntrySubject_3)(
                 void
         );
-        void (*Subject_5)(
+        void (*CustomEntrySubject_4)(
                 void
         );
-        void (*Subject_6)(
+        void (*CustomEntrySubject_5)(
                 void
         );
-        void (*Subject_7)(
+        void (*CustomEntrySubject_6)(
                 void
         );
-        void (*Subject_8)(
+        void (*CustomEntrySubject_7)(
                 void
         );
-        void (*Subject_9)(
+        void (*CustomEntrySubject_8)(
                 void
         );
-        void (*Subject_10)(
+        void (*CustomEntrySubject_9)(
                 void
         );
     } threadingThreadBasicsSubjects;
@@ -74,6 +109,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -84,60 +123,120 @@ extern const Functions kFunctions;
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
+struct ThreadingThreadBasicsNativeEntry {
+    static inline void CustomEntryMethod0(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod0(
+        );
+    }
+    static inline void CustomEntryMethod10(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod10(
+        );
+    }
+    static inline void CustomEntryMethod1(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod1(
+        );
+    }
+    static inline void CustomEntryMethod2(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod2(
+        );
+    }
+    static inline void CustomEntryMethod3(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod3(
+        );
+    }
+    static inline void CustomEntryMethod4(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod4(
+        );
+    }
+    static inline void CustomEntryMethod5(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod5(
+        );
+    }
+    static inline void CustomEntryMethod6(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod6(
+        );
+    }
+    static inline void CustomEntryMethod7(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod7(
+        );
+    }
+    static inline void CustomEntryMethod8(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod8(
+        );
+    }
+    static inline void CustomEntryMethod9(
+    ) {
+        return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod9(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 11;
+};
+
 struct ThreadingThreadBasicsSubjects {
-    static inline void Subject_0(
+    static inline void CustomEntrySubject_0(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_0(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_0(
         );
     }
-    static inline void Subject_1(
+    static inline void CustomEntrySubject_10(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_1(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_10(
         );
     }
-    static inline void Subject_2(
+    static inline void CustomEntrySubject_1(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_2(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_1(
         );
     }
-    static inline void Subject_3(
+    static inline void CustomEntrySubject_2(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_3(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_2(
         );
     }
-    static inline void Subject_4(
+    static inline void CustomEntrySubject_3(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_4(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_3(
         );
     }
-    static inline void Subject_5(
+    static inline void CustomEntrySubject_4(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_5(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_4(
         );
     }
-    static inline void Subject_6(
+    static inline void CustomEntrySubject_5(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_6(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_5(
         );
     }
-    static inline void Subject_7(
+    static inline void CustomEntrySubject_6(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_7(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_6(
         );
     }
-    static inline void Subject_8(
+    static inline void CustomEntrySubject_7(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_8(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_7(
         );
     }
-    static inline void Subject_9(
+    static inline void CustomEntrySubject_8(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_9(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_8(
         );
     }
-    static inline void Subject_10(
+    static inline void CustomEntrySubject_9(
     ) {
-        return kFunctions.threadingThreadBasicsSubjects.Subject_10(
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

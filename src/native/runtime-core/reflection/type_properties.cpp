@@ -224,6 +224,34 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetProperties(CHAOS_IL2CPP_INTPTR type_handle) {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
+    if (desc == nullptr || desc->properties == nullptr) return 0;
+
+    constexpr CHAOS_IL2CPP_UINT32 kMaxProperties = 256;
+    struct GetPropertiesBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static GetPropertiesBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
+
+    const CHAOS_IL2CPP_UINT32 count = desc->property_count > kMaxProperties ? kMaxProperties : desc->property_count;
+    s_buf = GetPropertiesBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(count);
+    s_buf.elements = s_elements;
+
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < count; i++)
+        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryPropertyHandle(&desc->properties[i]));
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
+}
+
 // =====================================================================
 // Type property checks — Module Registry Tier 0 (type_flags[])
 // =====================================================================

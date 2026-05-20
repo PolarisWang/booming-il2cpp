@@ -336,6 +336,11 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
             AddNurseryRange(reinterpret_cast<uintptr_t>(r->begin),
                             reinterpret_cast<uintptr_t>(r->end));
         }
+        if (kind == RegionKind::REGION_DOMAIN) {
+            AddDomainRange(domain_id,
+                reinterpret_cast<uintptr_t>(r->begin),
+                reinterpret_cast<uintptr_t>(r->end));
+        }
         return r;
     }
 
@@ -392,6 +397,13 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
                      reinterpret_cast<uintptr_t>(r->end));
     }
 
+    // If this is a DOMAIN region, publish to the lock-free domain range cache.
+    if (kind == RegionKind::REGION_DOMAIN) {
+        AddDomainRange(domain_id,
+            reinterpret_cast<uintptr_t>(r->begin),
+            reinterpret_cast<uintptr_t>(r->end));
+    }
+
     total_allocated_bytes_.fetch_add(region_size, std::memory_order_relaxed);
     return r;
 }
@@ -421,6 +433,11 @@ void RegionManager::FreeRegion(RegionId id) {
     if (r->kind == RegionKind::REGION_POH) {
         RemovePohRange(reinterpret_cast<uintptr_t>(r->begin),
                        reinterpret_cast<uintptr_t>(r->end));
+    }
+
+    // If this is a DOMAIN region, remove its range from the lock-free cache.
+    if (r->kind == RegionKind::REGION_DOMAIN) {
+        RemoveDomainRange(r->domain_id);
     }
 
     // Remove from domain index.
@@ -497,6 +514,11 @@ void RegionManager::ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id) {
                            reinterpret_cast<uintptr_t>(r->end));
         }
 
+        // If this is a DOMAIN-kind region, remove its range.
+        if (r->kind == RegionKind::REGION_DOMAIN) {
+            RemoveDomainRange(r->domain_id);
+        }
+
         // Recycle into free list.
         r->next = free_list_;
         free_list_ = r;
@@ -568,6 +590,27 @@ int RegionManager::AllocSlot() {
 bool RegionManager::IsInDomain(CHAOS_IL2CPP_UINT32 domain_id, const void* ptr) const {
     if (ptr == nullptr) return false;
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+
+    // Phase 1: lock-free range cache.  If the address is outside the
+    // cached bounds for this domain, reject immediately without mutex.
+    // Following the same pattern as IsNurseryPointer / IsPohPointer.
+    {
+        int count = domain_slot_count_.load(std::memory_order_acquire);
+        for (int i = 0; i < count; i++) {
+            uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
+            if (did == domain_id) [[unlikely]] {
+                uintptr_t b = domain_range_slots_[i].begin.load(std::memory_order_acquire);
+                uintptr_t e = domain_range_slots_[i].end.load(std::memory_order_acquire);
+                if (b >= e || addr < b || addr >= e) {
+                    return false;  // Outside cached range.
+                }
+                // Within cached range — fall through to precise check.
+                break;
+            }
+        }
+    }
+
+    // Phase 2: precise check under mutex.
     std::lock_guard<std::mutex> lock(mutex_);
 
     auto dit = domain_regions_.find(domain_id);
@@ -727,6 +770,69 @@ void RegionManager::RemovePohRange(uintptr_t begin, uintptr_t end) {
             poh_slots_[i].end.store(0, std::memory_order_release);
             std::atomic_thread_fence(std::memory_order_release);
             poh_slots_[i].begin.store(0, std::memory_order_release);
+            return;
+        }
+    }
+}
+
+void RegionManager::AddDomainRange(uint32_t domain_id, uintptr_t begin, uintptr_t end) {
+    if (begin >= end) return;
+
+    // Try to reuse a freed slot (domain_id == 0) or update existing.
+    int count = domain_slot_count_.load(std::memory_order_acquire);
+    for (int i = 0; i < count; i++) {
+        uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
+        if (did == domain_id) {
+            // Update existing entry — expand bounds outward.
+            uintptr_t cur_begin = domain_range_slots_[i].begin.load(std::memory_order_relaxed);
+            while (begin < cur_begin) {
+                if (domain_range_slots_[i].begin.compare_exchange_weak(cur_begin, begin,
+                        std::memory_order_release, std::memory_order_relaxed)) {
+                    break;
+                }
+            }
+            uintptr_t cur_end = domain_range_slots_[i].end.load(std::memory_order_relaxed);
+            while (end > cur_end) {
+                if (domain_range_slots_[i].end.compare_exchange_weak(cur_end, end,
+                        std::memory_order_release, std::memory_order_relaxed)) {
+                    break;
+                }
+            }
+            return;
+        }
+        if (did == 0) {
+            // Reusable slot.
+            domain_range_slots_[i].domain_id.store(domain_id, std::memory_order_release);
+            domain_range_slots_[i].begin.store(begin, std::memory_order_release);
+            std::atomic_thread_fence(std::memory_order_release);
+            domain_range_slots_[i].end.store(end, std::memory_order_release);
+            return;
+        }
+    }
+
+    // Extend the array.
+    int idx = domain_slot_count_.fetch_add(1, std::memory_order_acquire);
+    if (idx >= kMaxDomainSlots) {
+        CHAOS_IL2CPP_LOG_ERROR_M("CRAG", "domain_range_slot_overflow idx={0}", idx);
+        domain_slot_count_.fetch_sub(1, std::memory_order_release);
+        return;
+    }
+    domain_range_slots_[idx].domain_id.store(domain_id, std::memory_order_release);
+    domain_range_slots_[idx].begin.store(begin, std::memory_order_release);
+    std::atomic_thread_fence(std::memory_order_release);
+    domain_range_slots_[idx].end.store(end, std::memory_order_release);
+}
+
+void RegionManager::RemoveDomainRange(uint32_t domain_id) {
+    int count = domain_slot_count_.load(std::memory_order_acquire);
+    for (int i = 0; i < count; i++) {
+        uint32_t did = domain_range_slots_[i].domain_id.load(std::memory_order_acquire);
+        if (did == domain_id) {
+            // Zero end first, then domain_id (reader checks domain_id first via load → begin then end).
+            domain_range_slots_[i].end.store(0, std::memory_order_release);
+            std::atomic_thread_fence(std::memory_order_release);
+            domain_range_slots_[i].begin.store(0, std::memory_order_release);
+            domain_range_slots_[i].domain_id.store(0, std::memory_order_release);
             return;
         }
     }

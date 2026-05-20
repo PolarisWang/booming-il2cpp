@@ -8,7 +8,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 896.9,
+      "postPatchNsPerOp": 847.2,
       "slowdownPercent": 0.0
     },
     {
@@ -20,26 +20,22 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "status": "passed",
-      "prePatchNsPerOp": 1.72,
-      "postPatchNsPerOp": 3.5,
-      "slowdownPercent": 103.49
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 897.6,
+      "postPatchNsPerOp": 810.4,
       "slowdownPercent": 0.0
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 195.2,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 5,
@@ -74,10 +70,8 @@
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "status": "passed",
-      "prePatchNsPerOp": 153.23,
-      "postPatchNsPerOp": 145.4,
-      "slowdownPercent": -5.11
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 11,
@@ -124,9 +118,9 @@
   ],
   "summary": {
     "totalMethods": 18,
-    "nonStubMethods": 2,
-    "averageSlowdownPercent": 49.19,
-    "slowdownFactor": 1.4919,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

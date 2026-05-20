@@ -394,6 +394,18 @@ public sealed class NativeAotEmitter
                 Path = NativeAotArtifactNames.GeneratedModuleSource,
             });
         }
+        if (!string.IsNullOrEmpty(templateModel.ManifestJson))
+        {
+            sources.Add(new NativeAotGeneratedSource
+            {
+                // Use MethodsManifest (not Manifest) to avoid being overwritten by
+                // the artifact manifest (NativeAotManifestArtifact) written at
+                // NativeAotArtifactNames.Manifest in ConvertToCppHandler.EmitNativeAot().
+                RelativePath = NativeAotArtifactNames.MethodsManifest,
+                Contents = templateModel.ManifestJson,
+            });
+            // No artifact ref — this is consumed internally by the verification orchestrator.
+        }
 
         return (sources, artifacts);
     }

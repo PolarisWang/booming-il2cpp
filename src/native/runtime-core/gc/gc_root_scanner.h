@@ -65,11 +65,13 @@ void GcUnregisterSlotMap(const void* code_address) noexcept;
 const GcSlotMapV0* GcLookupSlotMap(const void* code_address);
 
 /// Register all GcSlotMaps from a contiguous section range.
-/// The @a begin and @a end pointers are linker-provided bounds of
-/// the .gc_slot_maps section.
+/// Each entry in the section is a GcSlotMapSectionEntryHdrV0 followed by
+/// the GcSlotMapV0 body (frame_size + num_gc_slots + slots[]).
+/// The @a begin and @a end pointers are the linker-provided bounds of
+/// the .gc_slot_maps section (or registered by AOT module load).
 void GcRegisterSlotMapsFromSection(
-    const GcSlotMapV0* begin,
-    const GcSlotMapV0* end);
+    const void* begin,
+    const void* end);
 
 // ── Root scanning entry points ─────────────────────────────────
 

@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: PrimitiveNumericConversionsPatchEntry
-add_library(chaos_gen_PrimitiveNumericConversionsPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsPatchEntry/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsPatchEntry/generated/chaos_generated_module.cpp
+# Assembly: PrimitiveNumericConversionsSubjects
+add_library(chaos_gen_PrimitiveNumericConversionsSubjects STATIC
+    ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsSubjects/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_PrimitiveNumericConversionsPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_PrimitiveNumericConversionsPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_PrimitiveNumericConversionsPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_PrimitiveNumericConversionsPatchEntry
+    chaos_gen_PrimitiveNumericConversionsSubjects
     ${NATIVE_LIBS}
 )
 

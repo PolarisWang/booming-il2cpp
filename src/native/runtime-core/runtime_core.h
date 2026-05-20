@@ -20,6 +20,15 @@
 // ChaosConvertToInt32FromDouble can use RaiseManagedException directly.
 #include "exception_helpers.h"
 
+// ── Thread state declarations ──
+// Included early (before generated_code_compat.h → stubs.h → threading_stubs.h)
+// so thread_state.h is NOT first seen inside stubs.h's `extern "C"` block.
+// If thread_state.h is first included from within an extern "C" context, ALL
+// its declarations (RegisterThread, tls_this_thread, SafepointPoll, etc.)
+// acquire C linkage — producing mangled-linker-symbol mismatches with the
+// C++ definitions in thread_state.cpp.
+#include "thread_state.h"
+
 // ── Compatibility declarations for older generated .cpp files ──
 // Must be included early (before any namespace) so declarations are at
 // global scope and visible inside anonymous namespaces in generated files.

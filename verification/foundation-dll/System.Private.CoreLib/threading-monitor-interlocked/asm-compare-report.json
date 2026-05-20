@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
-  "capturedAt": "2026-05-15T15:04:07",
+  "capturedAt": "2026-05-20T17:47:40",
+  "batchMode": true,
   "summary": {
     "totalMethods": 14,
     "okCount": 0,
@@ -23,132 +24,136 @@
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
-    "overallIrExpansionRatio": 0
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
   },
   "methodResults": [
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)",
-      "shortName": "Subject_0",
+      "shortName": "System.Threading.Monitor::Enter",
       "status": "error",
-      "error": "asm-compare timed out (120s)"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)",
-      "shortName": "Subject_1",
+      "shortName": "System.Threading.Monitor::Exit",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
-      "shortName": "Subject_2",
+      "shortName": "System.Threading.Monitor::TryEnter",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-      "shortName": "Subject_3",
+      "shortName": "System.Threading.Monitor::TryEnter",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)",
-      "shortName": "Subject_4",
+      "shortName": "System.Threading.Monitor::Pulse",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)",
-      "shortName": "Subject_5",
+      "shortName": "System.Threading.Monitor::PulseAll",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)",
-      "shortName": "Subject_6",
+      "shortName": "System.Threading.Monitor::Wait",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)",
-      "shortName": "Subject_7",
+      "shortName": "System.Threading.Interlocked::Increment",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)",
-      "shortName": "Subject_8",
+      "shortName": "System.Threading.Interlocked::Decrement",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.D",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
-      "shortName": "Subject_9",
+      "shortName": "System.Threading.Interlocked::Exchange",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
-      "shortName": "Subject_10",
+      "shortName": "System.Threading.Interlocked::CompareExchange",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
-      "shortName": "Subject_11",
+      "shortName": "System.Threading.Interlocked::Add",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
-      "shortName": "Subject_12",
+      "shortName": "System.Threading.Interlocked::MemoryBarrier",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 15 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Run:Sys kind=structured instr=36 blocks=17 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
-      "shortName": "Subject_13",
+      "shortName": "System.Threading.Volatile::Read",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\RuntimeSupport\\RuntimeHelperShapeRegistry.cs(2075,40): error CS1026: ) expected [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\n",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 143)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Monitor::Enter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::Exit\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEnter\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Monitor::TryEn",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 14 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-10/14] System.Threading.Interlocked::Exchange...  [3/3-3/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-2/14] System.Threading.Monitor::Exit...  [3/3-4/14] System.Threading.Monitor::TryEnter... not found in closure\n  [3/3-14/14] System.Threading.Volatile::Read... not found in closure\n  [3/3-13/14] System.Threading.Interlocked::MemoryBarrier... not "
     }
   ]
 }

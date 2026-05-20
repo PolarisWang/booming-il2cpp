@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ThreadingSyncSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_2",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_3",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_4",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_6",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_7",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_8",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_10",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_11",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_12",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_14",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_15",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_16",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_cctor",
+          "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

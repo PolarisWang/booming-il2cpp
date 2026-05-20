@@ -115,6 +115,31 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[18];
+void* kFunctionsFlat[18] = {
+    reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
+};
+
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;

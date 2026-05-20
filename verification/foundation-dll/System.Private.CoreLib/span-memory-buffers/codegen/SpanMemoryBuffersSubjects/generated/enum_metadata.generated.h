@@ -6697,2004 +6697,1432 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
     switch (h) {
         case 0x00205F0Fu: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.OpCodeValues
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OpCodeValues") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES;
         }
         case 0x008C168Fu: {
             // Verify: System.Private.CoreLib/System.Exception+ExceptionMessageKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Exception+ExceptionMessageKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND;
         }
         case 0x0430DE5Cu: {
             // Verify: System.Private.CoreLib/System.ExceptionResource
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ExceptionResource") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE;
         }
         case 0x04C34F8Cu: {
             // Verify: System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON;
         }
         case 0x0664927Au: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE;
         }
         case 0x06F09E30u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS;
         }
         case 0x0760E12Eu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV;
         }
         case 0x092690F2u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND;
         }
         case 0x09C21197u: {
             // Verify: System.Private.CoreLib/System.Resources.ResourceTypeCode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Resources.ResourceTypeCode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE;
         }
         case 0x09E2236Eu: {
             // Verify: System.Private.CoreLib/System.Collections.Generic.InsertionBehavior
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Collections.Generic.InsertionBehavior") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR;
         }
         case 0x0ACC828Bu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL;
         }
         case 0x0B715B4Fu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND;
         }
         case 0x0C4317C5u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE;
         }
         case 0x0C832793u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE;
         }
         case 0x0C8C51ECu: {
             // Verify: System.Private.CoreLib/System.Reflection.CorElementType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CorElementType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE;
         }
         case 0x0CE716D2u: {
             // Verify: System.Private.CoreLib/System.Threading.ThreadState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE;
         }
         case 0x0DFDE806u: {
             // Verify: System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES;
         }
         case 0x0E9F0B27u: {
             // Verify: System.Private.CoreLib/System.Base64FormattingOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Base64FormattingOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS;
         }
         case 0x0EEAE405u: {
             // Verify: System.Private.CoreLib/System.Reflection.GenericParameterAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.GenericParameterAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES;
         }
         case 0x0EF53829u: {
             // Verify: System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN;
         }
         case 0x11AC7745u: {
             // Verify: System.Private.CoreLib/System.IO.FileOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS;
         }
         case 0x1210298Cu: {
             // Verify: System.Private.CoreLib/System.Reflection.BindingFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.BindingFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS;
         }
         case 0x14CEEA24u: {
             // Verify: System.Private.CoreLib/System.Guid+GuidParseThrowStyle
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+GuidParseThrowStyle") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE;
         }
         case 0x15D6DCDCu: {
             // Verify: System.Private.CoreLib/System.Guid+ParseFailure
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+ParseFailure") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE;
         }
         case 0x163DDB74u: {
             // Verify: System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE;
         }
         case 0x16AD7532u: {
             // Verify: System.Private.CoreLib/System.IO.FileMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE;
         }
         case 0x17316DFCu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND;
         }
         case 0x178B6257u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR;
         }
         case 0x179942DFu: {
             // Verify: System.Memory/System.ExceptionArgument
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Memory/System.ExceptionArgument") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT;
         }
         case 0x18CE8119u: {
             // Verify: System.Private.CoreLib/System.Threading.OpenExistingResult
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.OpenExistingResult") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT;
         }
         case 0x1926A8B1u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS;
         }
         case 0x1AF95E40u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE;
         }
         case 0x1B9CA01Bu: {
             // Verify: System.Private.CoreLib/System.IO.MatchCasing
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.MatchCasing") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING;
         }
         case 0x1C2592F2u: {
             // Verify: System.Private.CoreLib/System.TimeZoneInfoOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfoOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS;
         }
         case 0x1CB0D003u: {
             // Verify: System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
         }
         case 0x1EEE04BBu: {
             // Verify: System.Private.CoreLib/Interop+NtDll+CreateOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS;
         }
         case 0x1FA7B368u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES;
         }
         case 0x233B39AAu: {
             // Verify: System.Private.CoreLib/System.DateTimeParse+DTT
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+DTT") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT;
         }
         case 0x233ECD44u: {
             // Verify: System.Private.CoreLib/System.StringSplitOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringSplitOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS;
         }
         case 0x24D6D3CFu: {
             // Verify: System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS;
         }
         case 0x2622F4A3u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS;
         }
         case 0x2668A964u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS;
         }
         case 0x26D0D2D8u: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendarDataType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarDataType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE;
         }
         case 0x276A755Bu: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.ScopeAction
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.ScopeAction") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION;
         }
         case 0x282CBE79u: {
             // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON;
         }
         case 0x28B038F0u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS;
         }
         case 0x2950534Cu: {
             // Verify: System.Private.CoreLib/System.Reflection.PropertyAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PropertyAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES;
         }
         case 0x2C1FCBE1u: {
             // Verify: System.Private.CoreLib/System.AttributeTargets
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.AttributeTargets") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS;
         }
         case 0x2C85D069u: {
             // Verify: System.Private.CoreLib/System.GC+StartNoGCRegionStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+StartNoGCRegionStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS;
         }
         case 0x2CA0F7ADu: {
             // Verify: System.Private.CoreLib/System.PlatformID
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.PlatformID") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID;
         }
         case 0x2CDFB3ABu: {
             // Verify: System.Private.CoreLib/System.Globalization.StrongBidiCategory
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.StrongBidiCategory") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY;
         }
         case 0x2CFE353Bu: {
             // Verify: System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS;
         }
         case 0x2D457B10u: {
             // Verify: System.Private.CoreLib/System.RuntimeType+MemberListType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+MemberListType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE;
         }
         case 0x2E5DB2F6u: {
             // Verify: System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS;
         }
         case 0x2EE27BB8u: {
             // Verify: System.Private.CoreLib/Interop+BOOLEAN
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOLEAN") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN;
         }
         case 0x307FF573u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP;
         }
         case 0x3270C0FBu: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS;
         }
         case 0x32C58962u: {
             // Verify: System.Private.CoreLib/System.DayOfWeek
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DayOfWeek") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK;
         }
         case 0x33C283FEu: {
             // Verify: System.Private.CoreLib/System.Reflection.PortableExecutableKinds
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PortableExecutableKinds") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS;
         }
         case 0x356AF1D4u: {
             // Verify: System.Private.CoreLib/Interop+BOOL
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOL") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL;
         }
         case 0x37757E73u: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES;
         }
         case 0x3786DF1Du: {
             // Verify: System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION;
         }
         case 0x385C362Du: {
             // Verify: System.Private.CoreLib/System.ParseFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ParseFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS;
         }
         case 0x3AC190AAu: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS;
         }
         case 0x3BD1C617u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Architecture
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Architecture") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE;
         }
         case 0x3C129112u: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM;
         }
         case 0x3C14A7B3u: {
             // Verify: System.Private.CoreLib/System.Security.SecurityRuleSet
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.SecurityRuleSet") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET;
         }
         case 0x3C7421A2u: {
             // Verify: System.Private.CoreLib/System.GCCollectionMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCCollectionMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE;
         }
         case 0x3CE2C6CFu: {
             // Verify: System.Private.CoreLib/System.Globalization.DateTimeFormatFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeFormatFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS;
         }
         case 0x3D344490u: {
             // Verify: System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION;
         }
         case 0x3FE4DD51u: {
             // Verify: System.Private.CoreLib/System.Globalization.GregorianCalendarTypes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.GregorianCalendarTypes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES;
         }
         case 0x408817F8u: {
             // Verify: System.Private.CoreLib/System.Reflection.CustomAttributeEncoding
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CustomAttributeEncoding") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING;
         }
         case 0x40977136u: {
             // Verify: System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE;
         }
         case 0x413999E5u: {
             // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE;
         }
         case 0x437EAD33u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG;
         }
         case 0x43BFF842u: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS;
         }
         case 0x444E2A6Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE;
         }
         case 0x444ED2B2u: {
             // Verify: System.Private.CoreLib/System.Text.TrimType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.TrimType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE;
         }
         case 0x4557DFB0u: {
             // Verify: System.Private.CoreLib/System.GC+EndNoGCRegionStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+EndNoGCRegionStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS;
         }
         case 0x4558486Bu: {
             // Verify: System.Private.CoreLib/System.Threading.StackCrawlMark
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.StackCrawlMark") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK;
         }
         case 0x457A11CEu: {
             // Verify: System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
         }
         case 0x45C71C51u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.TypeKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.TypeKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND;
         }
         case 0x47BE5D30u: {
             // Verify: System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT;
         }
         case 0x489A818Du: {
             // Verify: System.Private.CoreLib/System.Reflection.MdSigCallingConvention
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MdSigCallingConvention") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION;
         }
         case 0x48FF31C4u: {
             // Verify: System.Private.CoreLib/System.Globalization.TextInfo+Tristate
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TextInfo+Tristate") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE;
         }
         case 0x493D711Eu: {
             // Verify: System.Private.CoreLib/System.LazyState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.LazyState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE;
         }
         case 0x49552C72u: {
             // Verify: System.Private.CoreLib/System.ParseFailureKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ParseFailureKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND;
         }
         case 0x4A67C078u: {
             // Verify: System.Private.CoreLib/System.Environment+SpecialFolder
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Environment+SpecialFolder") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER;
         }
         case 0x4B96825Cu: {
             // Verify: System.Private.CoreLib/System.IO.UnixFileMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.UnixFileMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE;
         }
         case 0x4C86F999u: {
             // Verify: System.Private.CoreLib/Interop+NtDll+DesiredAccess
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+DesiredAccess") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS;
         }
         case 0x4D3A59C2u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL;
         }
         case 0x512353DAu: {
             // Verify: System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL;
         }
         case 0x521E1A98u: {
             // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES;
         }
         case 0x523FD939u: {
             // Verify: System.Private.CoreLib/System.Reflection.SignatureCallingConvention
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.SignatureCallingConvention") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION;
         }
         case 0x53EDDA05u: {
             // Verify: System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE;
         }
         case 0x5402673Eu: {
             // Verify: System.Private.CoreLib/System.IO.HandleInheritability
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.HandleInheritability") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY;
         }
         case 0x54E0C990u: {
             // Verify: System.Private.CoreLib/System.GC+RefreshMemoryStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+RefreshMemoryStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS;
         }
         case 0x55342577u: {
             // Verify: System.Private.CoreLib/System.MidpointRounding
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.MidpointRounding") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING;
         }
         case 0x5585C5C3u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS;
         }
         case 0x569F82E6u: {
             // Verify: System.Private.CoreLib/System.DTSubStringType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DTSubStringType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE;
         }
         case 0x56C31CE8u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND;
         }
         case 0x57713599u: {
             // Verify: System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE;
         }
         case 0x57E0CA54u: {
             // Verify: System.Private.CoreLib/System.DateTimeKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND;
         }
         case 0x59827356u: {
             // Verify: System.Private.CoreLib/System.TypeCode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeCode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE;
         }
         case 0x5A4EE7B9u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS;
         }
         case 0x5BC1BCE9u: {
             // Verify: System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS;
         }
         case 0x5CC85E16u: {
             // Verify: System.Private.CoreLib/Interop+NtDll+CreateDisposition
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateDisposition") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION;
         }
         case 0x5E87E290u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND;
         }
         case 0x5EC0F5CBu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION;
         }
         case 0x60C509DBu: {
             // Verify: System.Private.CoreLib/System.DateTimeParse+DS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+DS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS;
         }
         case 0x60D8C295u: {
             // Verify: System.Private.CoreLib/System.Globalization.DateTimeStyles
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeStyles") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES;
         }
         case 0x618CE4DCu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE;
         }
         case 0x61956273u: {
             // Verify: System.Private.CoreLib/System.Reflection.ProcessorArchitecture
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ProcessorArchitecture") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE;
         }
         case 0x621D8B23u: {
             // Verify: System.Private.CoreLib/System.Security.Permissions.SecurityAction
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.SecurityAction") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION;
         }
         case 0x640981AFu: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS;
         }
         case 0x64EE0BCFu: {
             // Verify: System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY;
         }
         case 0x6878DAA3u: {
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT;
         }
         case 0x69401F33u: {
             // Verify: System.Private.CoreLib/System.RuntimeType+DispatchWrapperType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+DispatchWrapperType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE;
         }
         case 0x69D8BE39u: {
             // Verify: System.Private.CoreLib/System.LoaderOptimization
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.LoaderOptimization") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION;
         }
         case 0x6A695F22u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT;
         }
         case 0x6B149D6Au: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND;
         }
         case 0x6B15C52Cu: {
             // Verify: System.Private.CoreLib/System.TokenType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TokenType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE;
         }
         case 0x6C30BDACu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE;
         }
         case 0x6DBE97D4u: {
             // Verify: System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS;
         }
         case 0x6E98EEDAu: {
             // Verify: System.Private.CoreLib/System.ComponentModel.EditorBrowsableState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ComponentModel.EditorBrowsableState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE;
         }
         case 0x700D0154u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.OperandType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OperandType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE;
         }
         case 0x71AB6FAAu: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodImplAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodImplAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES;
         }
         case 0x71C96144u: {
             // Verify: System.Private.CoreLib/System.IO.MatchType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.MatchType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE;
         }
         case 0x727B6C3Fu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
         }
         case 0x73C78E6Au: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA;
         }
         case 0x73CD94D5u: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND;
         }
         case 0x7501FBC5u: {
             // Verify: System.Private.CoreLib/System.Threading.EventResetMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.EventResetMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE;
         }
         case 0x756A19ADu: {
             // Verify: System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE;
         }
         case 0x7766AFD2u: {
             // Verify: System.Private.CoreLib/System.Threading.ApartmentState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ApartmentState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE;
         }
         case 0x7AF0D34Eu: {
             // Verify: System.Private.CoreLib/Interop+Globalization+ResultCode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Globalization+ResultCode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE;
         }
         case 0x7C14A2C7u: {
             // Verify: System.Private.CoreLib/System.ExceptionArgument
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ExceptionArgument") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT;
         }
         case 0x7D7E0E81u: {
             // Verify: System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE;
         }
         case 0x7E538B85u: {
             // Verify: System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS;
         }
         case 0x7F05DE79u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS;
         }
         case 0x80617111u: {
             // Verify: System.Private.CoreLib/System.RuntimeType+CheckValueStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+CheckValueStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS;
         }
         case 0x811582D0u: {
             // Verify: System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG;
         }
         case 0x815E7F97u: {
             // Verify: System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS;
         }
         case 0x81D9A6FEu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID;
         }
         case 0x8291778Eu: {
             // Verify: System.Private.CoreLib/System.Reflection.ParameterAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ParameterAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES;
         }
         case 0x8388F92Fu: {
             // Verify: System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON;
         }
         case 0x83A7057Cu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS;
         }
         case 0x841E4DCFu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES;
         }
         case 0x862972CDu: {
             // Verify: System.Private.CoreLib/System.Globalization.UnicodeCategory
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.UnicodeCategory") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY;
         }
         case 0x86B43E05u: {
             // Verify: System.Private.CoreLib/System.Reflection.EventAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.EventAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES;
         }
         case 0x86EA5932u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE;
         }
         case 0x87F25CC0u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS;
         }
         case 0x89116E2Bu: {
             // Verify: System.Private.CoreLib/System.Globalization.IcuLocaleDataParts
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.IcuLocaleDataParts") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS;
         }
         case 0x89321D70u: {
             // Verify: System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS;
         }
         case 0x89E3F3CEu: {
             // Verify: System.Private.CoreLib/System.Reflection.NullabilityState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.NullabilityState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE;
         }
         case 0x8AE75260u: {
             // Verify: System.Private.CoreLib/System.Runtime.GCLatencyMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCLatencyMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE;
         }
         case 0x8BA10731u: {
             // Verify: System.Private.CoreLib/System.Environment+SpecialFolderOption
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Environment+SpecialFolderOption") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION;
         }
         case 0x8BEF7DC8u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND;
         }
         case 0x8C0C1B85u: {
             // Verify: System.Private.CoreLib/System.Threading.ThreadPriority
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadPriority") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY;
         }
         case 0x8DFF0696u: {
             // Verify: System.Private.CoreLib/System.Threading.LazyThreadSafetyMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LazyThreadSafetyMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE;
         }
         case 0x8E714DC1u: {
             // Verify: System.Private.CoreLib/System.EnvironmentVariableTarget
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.EnvironmentVariableTarget") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET;
         }
         case 0x8F2C6B47u: {
             // Verify: System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT;
         }
         case 0x8FF66DECu: {
             // Verify: System.Private.CoreLib/System.Reflection.ImageFileMachine
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ImageFileMachine") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE;
         }
         case 0x904D32E3u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS;
         }
         case 0x9053E981u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS;
         }
         case 0x92770593u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE;
         }
         case 0x934DFFEDu: {
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanStyles
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanStyles") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES;
         }
         case 0x94BDCA52u: {
             // Verify: System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS;
         }
         case 0x951BBDB1u: {
             // Verify: System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY;
         }
         case 0x953E17DDu: {
             // Verify: System.Private.CoreLib/System.Security.Permissions.PermissionState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.PermissionState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE;
         }
         case 0x958994A7u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT;
         }
         case 0x962F322Eu: {
             // Verify: System.Private.CoreLib/System.IO.SearchOption
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SearchOption") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION;
         }
         case 0x97DCC476u: {
             // Verify: System.Private.CoreLib/Interop+ObjectAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ObjectAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES;
         }
         case 0x98517214u: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.CastResult
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.CastResult") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT;
         }
         case 0x98D0C7C6u: {
             // Verify: System.Private.CoreLib/System.TypeNameKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeNameKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND;
         }
         case 0x995A7820u: {
             // Verify: System.Private.CoreLib/System.Globalization.HebrewNumber+HS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumber+HS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS;
         }
         case 0x998F181Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT;
         }
         case 0x99BC0F28u: {
             // Verify: System.Private.CoreLib/System.Threading.LockRecursionPolicy
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LockRecursionPolicy") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY;
         }
         case 0x9A189910u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.VarEnum
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.VarEnum") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM;
         }
         case 0x9AE37DA4u: {
             // Verify: System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS;
         }
         case 0x9C6C4647u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND;
         }
         case 0x9CC616BAu: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendarWeekRule
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarWeekRule") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE;
         }
         case 0x9E92B1C3u: {
             // Verify: System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT;
         }
         case 0xA041F77Cu: {
             // Verify: System.Private.CoreLib/System.Globalization.FORMATFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.FORMATFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS;
         }
         case 0xA0EE8B97u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS;
         }
         case 0xA14311A8u: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY;
         }
         case 0xA2611655u: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendarId
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarId") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID;
         }
         case 0xA5ABCC22u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION;
         }
         case 0xA61F138Fu: {
             // Verify: System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN;
         }
         case 0xA698B412u: {
             // Verify: System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS;
         }
         case 0xA7C5BD9Bu: {
             // Verify: System.Private.CoreLib/System.Runtime.Versioning.ResourceScope
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.ResourceScope") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE;
         }
         case 0xA880B7BEu: {
             // Verify: System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS;
         }
         case 0xAB076184u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS;
         }
         case 0xAC000695u: {
             // Verify: System.Private.CoreLib/System.Reflection.AssemblyContentType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyContentType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE;
         }
         case 0xAC39E3DAu: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE;
         }
         case 0xAC71F9ADu: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendarAlgorithmType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarAlgorithmType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE;
         }
         case 0xAD24EBF0u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CharSet
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CharSet") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET;
         }
         case 0xADFECC6Du: {
             // Verify: System.Private.CoreLib/System.Reflection.InvocationFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.InvocationFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS;
         }
         case 0xAE3F2B49u: {
             // Verify: System.Private.CoreLib/System.Reflection.FieldAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.FieldAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES;
         }
         case 0xAE924D7Bu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS;
         }
         case 0xAEEC9415u: {
             // Verify: System.Private.CoreLib/System.DateTimeParse+TM
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+TM") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM;
         }
         case 0xB0EE334Bu: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT;
         }
         case 0xB1512204u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.CausalityRelation
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.CausalityRelation") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION;
         }
         case 0xB1F47058u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS;
         }
         case 0xB2CE6651u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.OpCodeType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OpCodeType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE;
         }
         case 0xB57D6640u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
         }
         case 0xB6463128u: {
             // Verify: System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL;
         }
         case 0xB680A94Du: {
             // Verify: System.Private.CoreLib/System.Globalization.DigitShapes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DigitShapes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES;
         }
         case 0xB69E8D3Eu: {
             // Verify: System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE;
         }
         case 0xB726C185u: {
             // Verify: System.Private.CoreLib/System.Reflection.PInvokeAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PInvokeAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES;
         }
         case 0xB73C071Au: {
             // Verify: System.Private.CoreLib/System.Number+NumberBufferKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+NumberBufferKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND;
         }
         case 0xB769D93Au: {
             // Verify: System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION;
         }
         case 0xB77E83BEu: {
             // Verify: System.Private.CoreLib/System.Security.SecurityCriticalScope
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.SecurityCriticalScope") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE;
         }
         case 0xB805614Eu: {
             // Verify: System.Private.CoreLib/System.Reflection.MetadataTokenType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MetadataTokenType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE;
         }
         case 0xB9B9E5EEu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS;
         }
         case 0xBAA247D5u: {
             // Verify: System.Private.CoreLib/System.Globalization.HebrewNumberParsingState
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumberParsingState") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE;
         }
         case 0xBBCDED50u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.FlowControl
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.FlowControl") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL;
         }
         case 0xBBDEC631u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS;
         }
         case 0xBCB6DC0Bu: {
             // Verify: System.Private.CoreLib/System.IO.FileAccess
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileAccess") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS;
         }
         case 0xBD10F4F5u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.PEFileKinds
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.PEFileKinds") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS;
         }
         case 0xBD85E5D7u: {
             // Verify: System.Private.CoreLib/Interop+Advapi32+ActivityControl
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+ActivityControl") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL;
         }
         case 0xBE0BA9B2u: {
             // Verify: System.Private.CoreLib/System.HexConverter+Casing
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.HexConverter+Casing") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING;
         }
         case 0xBE7F5639u: {
             // Verify: System.Private.CoreLib/System.IO.SeekOrigin
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SeekOrigin") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN;
         }
         case 0xBF18F5D5u: {
             // Verify: System.Private.CoreLib/System.Globalization.NumberStyles
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.NumberStyles") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES;
         }
         case 0xBF934014u: {
             // Verify: System.Private.CoreLib/System.GCNotificationStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCNotificationStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS;
         }
         case 0xBF93BC81u: {
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES;
         }
         case 0xBFCF687Bu: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.PackingSize
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.PackingSize") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE;
         }
         case 0xBFD8BD93u: {
             // Verify: System.Private.CoreLib/Interop+BCrypt+NTSTATUS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BCrypt+NTSTATUS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS;
         }
         case 0xC03D7F7Fu: {
             // Verify: System.Private.CoreLib/System.GCKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND;
         }
         case 0xC0716F8Fu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE;
         }
         case 0xC14F8D65u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG;
         }
         case 0xC1BDEC8Fu: {
             // Verify: System.Private.CoreLib/System.Number+ParsingStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+ParsingStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS;
         }
         case 0xC3197A07u: {
             // Verify: System.Private.CoreLib/System.Buffers.OperationStatus
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.OperationStatus") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS;
         }
         case 0xC33CE704u: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES;
         }
         case 0xC35AB28Eu: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA;
         }
         case 0xC4DFC1B5u: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS;
         }
         case 0xC6A9EB01u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT;
         }
         case 0xC761A896u: {
             // Verify: System.Private.CoreLib/Interop+ImpersonationLevel
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ImpersonationLevel") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL;
         }
         case 0xC8855036u: {
             // Verify: System.Private.CoreLib/System.IO.SearchTarget
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SearchTarget") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET;
         }
         case 0xCA2C73B5u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING;
         }
         case 0xCC731390u: {
             // Verify: System.Private.CoreLib/System.Reflection.CallingConventions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CallingConventions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS;
         }
         case 0xCE4AC3A5u: {
             // Verify: System.Private.CoreLib/System.Reflection.TypeAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.TypeAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES;
         }
         case 0xCF8B85EEu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS;
         }
         case 0xD01172F2u: {
             // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS;
         }
         case 0xD0F5E2B4u: {
             // Verify: System.Private.CoreLib/System.IO.FileAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES;
         }
         case 0xD108AF95u: {
             // Verify: System.Private.CoreLib/System.Globalization.MonthNameStyles
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.MonthNameStyles") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES;
         }
         case 0xD1175241u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE;
         }
         case 0xD3CFB0F0u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK;
         }
         case 0xD3F0C259u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT;
         }
         case 0xD5F6AC77u: {
             // Verify: System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS;
         }
         case 0xD61A7F8Au: {
             // Verify: System.Private.CoreLib/System.GC+GCConfigurationType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+GCConfigurationType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE;
         }
         case 0xD8BB0FE9u: {
             // Verify: System.Private.CoreLib/System.Reflection.ResourceAttributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ResourceAttributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES;
         }
         case 0xD9FD14EBu: {
             // Verify: System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER;
         }
         case 0xDA822A59u: {
             // Verify: System.Private.CoreLib/Interop+ContextTrackingMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ContextTrackingMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE;
         }
         case 0xDB611107u: {
             // Verify: System.Private.CoreLib/System.Reflection.MemberTypes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MemberTypes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES;
         }
         case 0xDDE7A5CDu: {
             // Verify: System.Private.CoreLib/System.Reflection.Associates+Attributes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Associates+Attributes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES;
         }
         case 0xDE0F47D8u: {
             // Verify: System.Private.CoreLib/System.IO.FileShare
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileShare") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE;
         }
         case 0xDE42696Du: {
             // Verify: System.Private.CoreLib/System.Text.NormalizationForm
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.NormalizationForm") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM;
         }
         case 0xE0861922u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND;
         }
         case 0xE0DD5C31u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE;
         }
         case 0xE31D97C2u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH;
         }
         case 0xE3699697u: {
             // Verify: System.Private.CoreLib/System.DefaultBinder+Primitives
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DefaultBinder+Primitives") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES;
         }
         case 0xE53A620Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP;
         }
         case 0xE608DBCBu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS;
         }
         case 0xE676676Fu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS;
         }
         case 0xE6F09D9Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS;
         }
         case 0xE782C1B5u: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureTypes
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureTypes") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES;
         }
         case 0xE9093830u: {
             // Verify: System.Private.CoreLib/System.DelegateBindingFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DelegateBindingFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS;
         }
         case 0xEB3094ABu: {
             // Verify: System.Private.CoreLib/System.StringComparison
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringComparison") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON;
         }
         case 0xEC06DE8Du: {
             // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND;
         }
         case 0xEE6E5227u: {
             // Verify: System.Private.CoreLib/System.Reflection.ResourceLocation
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ResourceLocation") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION;
         }
         case 0xEECC1B24u: {
             // Verify: System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM;
         }
         case 0xEFDA7B73u: {
             // Verify: System.Private.CoreLib/System.Security.Principal.PrincipalPolicy
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.PrincipalPolicy") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY;
         }
         case 0xF1D5A67Eu: {
             // Verify: System.Private.CoreLib/System.TypeNameFormatFlags
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeNameFormatFlags") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS;
         }
         case 0xF2221B2Au: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA;
         }
         case 0xF2A50EA1u: {
             // Verify: System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS;
         }
         case 0xF2FFBFF1u: {
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT;
         }
         case 0xF30EDDBBu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO;
         }
         case 0xF5ADD0B0u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS;
         }
         case 0xF722539Au: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTask
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTask") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK;
         }
         case 0xF7CFFA84u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.StackBehaviour
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.StackBehaviour") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR;
         }
         case 0xF88D7997u: {
             // Verify: System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE;
         }
         case 0xF95F14D7u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND;
         }
         case 0xF988EA4Au: {
             // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN;
         }
         case 0xFA31A8BAu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE;
         }
         case 0xFDF59BEDu: {
             // Verify: System.Private.CoreLib/System.Globalization.CompareOptions
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CompareOptions") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS;
         }
         case 0xFF0E6E27u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType
-            #ifndef CHAOS_IL2CPP_SHIP
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType") != 0) break;
-            #endif
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE;
         }
         default:
@@ -8708,296 +8136,299 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
 /// and call this function without going through the reflection API.
 /// Returns nullptr if the type is unknown (fallback to resolve_type_arg +
 /// chaos_find_enum_metadata).
+/// NOTE: 24-bit hash collisions are detected at codegen time and cause a
+/// build-time #error. If you see this at runtime, the codegen didn't emit
+/// the #error check — file a bug.
 inline static const EnumMetadataTable* chaos_find_enum_metadata_by_fnv24(
     CHAOS_IL2CPP_UINT32 fnv24) noexcept
 {
     switch (fnv24) {
-        case 0x205F0Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES;
-        case 0x8C168Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND;
-        case 0x30DE5Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE;
-        case 0xC34F8Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON;
-        case 0x64927Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE;
-        case 0xF09E30u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS;
-        case 0x60E12Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV;
-        case 0x2690F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND;
-        case 0xC21197u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE;
-        case 0xE2236Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR;
-        case 0xCC828Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL;
-        case 0x715B4Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND;
-        case 0x4317C5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE;
-        case 0x832793u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE;
-        case 0x8C51ECu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE;
-        case 0xE716D2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE;
-        case 0xFDE806u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES;
-        case 0x9F0B27u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS;
-        case 0xEAE405u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES;
-        case 0xF53829u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN;
-        case 0xAC7745u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS;
+        case 0x000695u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE;
+        case 0x01FBC5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE;
+        case 0x02673Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY;
+        case 0x05614Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE;
+        case 0x05DE79u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS;
+        case 0x06DE8Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND;
+        case 0x076184u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS;
+        case 0x08AF95u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES;
+        case 0x08DBCBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS;
+        case 0x093830u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS;
+        case 0x0981AFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS;
+        case 0x0BA9B2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING;
+        case 0x0C1B85u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY;
+        case 0x0D0154u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE;
+        case 0x0E6E27u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE;
+        case 0x0EDDBBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO;
+        case 0x0F47D8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE;
         case 0x10298Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS;
-        case 0xCEEA24u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE;
-        case 0xD6DCDCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE;
-        case 0x3DDB74u: return &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE;
-        case 0xAD7532u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE;
-        case 0x316DFCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND;
-        case 0x8B6257u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR;
-        case 0x9942DFu: return &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT;
-        case 0xCE8119u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT;
-        case 0x26A8B1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS;
-        case 0xF95E40u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE;
-        case 0x9CA01Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING;
-        case 0x2592F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS;
-        case 0xB0D003u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
-        case 0xEE04BBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS;
-        case 0xA7B368u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES;
-        case 0x3B39AAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT;
-        case 0x3ECD44u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS;
-        case 0xD6D3CFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS;
-        case 0x22F4A3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS;
-        case 0x68A964u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS;
-        case 0xD0D2D8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE;
-        case 0x6A755Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION;
-        case 0x2CBE79u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON;
-        case 0xB038F0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS;
-        case 0x50534Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES;
-        case 0x1FCBE1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS;
-        case 0x85D069u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS;
-        case 0xA0F7ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID;
-        case 0xDFB3ABu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY;
-        case 0xFE353Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS;
-        case 0x457B10u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE;
-        case 0x5DB2F6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS;
-        case 0xE27BB8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN;
-        case 0x7FF573u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP;
-        case 0x70C0FBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS;
-        case 0xC58962u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK;
-        case 0xC283FEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS;
-        case 0x6AF1D4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL;
-        case 0x757E73u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES;
-        case 0x86DF1Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION;
-        case 0x5C362Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS;
-        case 0xC190AAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS;
-        case 0xD1C617u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE;
+        case 0x10F4F5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS;
+        case 0x116E2Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS;
+        case 0x1172F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS;
         case 0x129112u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM;
+        case 0x149D6Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND;
+        case 0x14A2C7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT;
         case 0x14A7B3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET;
-        case 0x7421A2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE;
-        case 0xE2C6CFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS;
+        case 0x1582D0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG;
+        case 0x15C52Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE;
+        case 0x175241u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE;
+        case 0x189910u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM;
+        case 0x18F5D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES;
+        case 0x197A07u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS;
+        case 0x1A7F8Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE;
+        case 0x1BBDB1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY;
+        case 0x1D8B23u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION;
+        case 0x1D97C2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH;
+        case 0x1E1A98u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES;
+        case 0x1E4DCFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES;
+        case 0x1F138Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN;
+        case 0x1FCBE1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS;
+        case 0x205F0Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES;
+        case 0x221B2Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA;
+        case 0x22539Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK;
+        case 0x22F4A3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS;
+        case 0x2353DAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL;
+        case 0x24EBF0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET;
+        case 0x2592F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS;
+        case 0x2690F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND;
+        case 0x26A8B1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS;
+        case 0x26C185u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES;
+        case 0x2972CDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY;
+        case 0x2C6B47u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT;
+        case 0x2C73B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING;
+        case 0x2CBE79u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON;
+        case 0x2F322Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION;
+        case 0x3094ABu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON;
+        case 0x30BDACu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE;
+        case 0x30DE5Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE;
+        case 0x316DFCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND;
+        case 0x31A8BAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE;
+        case 0x321D70u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS;
+        case 0x342577u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING;
         case 0x344490u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION;
-        case 0xE4DD51u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES;
-        case 0x8817F8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING;
-        case 0x977136u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE;
         case 0x3999E5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE;
-        case 0x7EAD33u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG;
-        case 0xBFF842u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS;
+        case 0x39E3DAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE;
+        case 0x3A59C2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL;
+        case 0x3A620Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP;
+        case 0x3B39AAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT;
+        case 0x3C071Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND;
+        case 0x3CE704u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES;
+        case 0x3D711Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE;
+        case 0x3D7F7Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND;
+        case 0x3DDB74u: return &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE;
+        case 0x3E17DDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE;
+        case 0x3ECD44u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS;
+        case 0x3F2B49u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES;
+        case 0x3FD939u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION;
+        case 0x401F33u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE;
+        case 0x41F77Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS;
+        case 0x42696Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM;
+        case 0x4311A8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY;
+        case 0x4317C5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE;
+        case 0x457B10u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE;
+        case 0x463128u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL;
+        case 0x4AC3A5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES;
+        case 0x4D32E3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS;
+        case 0x4DFFEDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES;
         case 0x4E2A6Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE;
         case 0x4ED2B2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE;
+        case 0x4EE7B9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS;
+        case 0x4F8D65u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG;
+        case 0x50534Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES;
+        case 0x512204u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION;
+        case 0x517214u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT;
+        case 0x538B85u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS;
+        case 0x53E981u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS;
+        case 0x552C72u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND;
         case 0x57DFB0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS;
         case 0x58486Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK;
-        case 0x7A11CEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
-        case 0xC71C51u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND;
-        case 0xBE5D30u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT;
-        case 0x9A818Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION;
-        case 0xFF31C4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE;
-        case 0x3D711Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE;
-        case 0x552C72u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND;
-        case 0x67C078u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER;
-        case 0x96825Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE;
-        case 0x86F999u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS;
-        case 0x3A59C2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL;
-        case 0x2353DAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL;
-        case 0x1E1A98u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES;
-        case 0x3FD939u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION;
-        case 0xEDDA05u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE;
-        case 0x02673Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY;
-        case 0xE0C990u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS;
-        case 0x342577u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING;
-        case 0x85C5C3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS;
-        case 0x9F82E6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE;
-        case 0xC31CE8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND;
-        case 0x713599u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE;
-        case 0xE0CA54u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND;
-        case 0x827356u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE;
-        case 0x4EE7B9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS;
-        case 0xC1BCE9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS;
-        case 0xC85E16u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION;
-        case 0x87E290u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND;
-        case 0xC0F5CBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION;
-        case 0xC509DBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS;
-        case 0xD8C295u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES;
-        case 0x8CE4DCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE;
-        case 0x956273u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE;
-        case 0x1D8B23u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION;
-        case 0x0981AFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS;
-        case 0xEE0BCFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY;
-        case 0x78DAA3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT;
-        case 0x401F33u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE;
-        case 0xD8BE39u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION;
-        case 0x695F22u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT;
-        case 0x149D6Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND;
-        case 0x15C52Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE;
-        case 0x30BDACu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE;
-        case 0xBE97D4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS;
-        case 0x98EEDAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE;
-        case 0x0D0154u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE;
-        case 0xAB6FAAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES;
-        case 0xC96144u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE;
-        case 0x7B6C3Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
-        case 0xC78E6Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA;
-        case 0xCD94D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND;
-        case 0x01FBC5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE;
-        case 0x6A19ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE;
-        case 0x66AFD2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE;
-        case 0xF0D34Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE;
-        case 0x14A2C7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT;
-        case 0x7E0E81u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE;
-        case 0x538B85u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS;
-        case 0x05DE79u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS;
-        case 0x617111u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS;
-        case 0x1582D0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG;
-        case 0x5E7F97u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS;
-        case 0xD9A6FEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID;
-        case 0x91778Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES;
-        case 0x88F92Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON;
-        case 0xA7057Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS;
-        case 0x1E4DCFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES;
-        case 0x2972CDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY;
-        case 0xB43E05u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES;
-        case 0xEA5932u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE;
-        case 0xF25CC0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS;
-        case 0x116E2Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS;
-        case 0x321D70u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS;
-        case 0xE3F3CEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE;
-        case 0xE75260u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE;
-        case 0xA10731u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION;
-        case 0xEF7DC8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND;
-        case 0x0C1B85u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY;
-        case 0xFF0696u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE;
-        case 0x714DC1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET;
-        case 0x2C6B47u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT;
-        case 0xF66DECu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE;
-        case 0x4D32E3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS;
-        case 0x53E981u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS;
-        case 0x770593u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE;
-        case 0x4DFFEDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES;
-        case 0xBDCA52u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS;
-        case 0x1BBDB1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY;
-        case 0x3E17DDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE;
-        case 0x8994A7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT;
-        case 0x2F322Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION;
-        case 0xDCC476u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES;
-        case 0x517214u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT;
-        case 0xD0C7C6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND;
         case 0x5A7820u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS;
-        case 0x8F181Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT;
-        case 0xBC0F28u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY;
-        case 0x189910u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM;
-        case 0xE37DA4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS;
-        case 0x6C4647u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND;
-        case 0xC616BAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE;
-        case 0x92B1C3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT;
-        case 0x41F77Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS;
-        case 0xEE8B97u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS;
-        case 0x4311A8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY;
+        case 0x5AB28Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA;
+        case 0x5C362Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS;
+        case 0x5DB2F6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS;
+        case 0x5E7F97u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS;
+        case 0x5F14D7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND;
+        case 0x60E12Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV;
+        case 0x611107u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES;
         case 0x611655u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID;
-        case 0xABCC22u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION;
-        case 0x1F138Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN;
-        case 0x98B412u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS;
-        case 0xC5BD9Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE;
-        case 0x80B7BEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS;
-        case 0x076184u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS;
-        case 0x000695u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE;
-        case 0x39E3DAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE;
-        case 0x71F9ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE;
-        case 0x24EBF0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET;
-        case 0xFECC6Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS;
-        case 0x3F2B49u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES;
-        case 0x924D7Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS;
-        case 0xEC9415u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM;
-        case 0xEE334Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT;
-        case 0x512204u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION;
-        case 0xF47058u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS;
-        case 0xCE6651u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE;
-        case 0x7D6640u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
-        case 0x463128u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL;
-        case 0x80A94Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES;
-        case 0x9E8D3Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE;
-        case 0x26C185u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES;
-        case 0x3C071Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND;
+        case 0x617111u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS;
+        case 0x61A896u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL;
+        case 0x64927Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE;
+        case 0x66AFD2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE;
+        case 0x67C078u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER;
+        case 0x68A964u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS;
+        case 0x695F22u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT;
+        case 0x699697u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES;
         case 0x69D93Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION;
+        case 0x6A19ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE;
+        case 0x6A755Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION;
+        case 0x6AF1D4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL;
+        case 0x6C4647u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND;
+        case 0x6E5227u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION;
+        case 0x70C0FBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS;
+        case 0x713599u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE;
+        case 0x714DC1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET;
+        case 0x715B4Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND;
+        case 0x716F8Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE;
+        case 0x71F9ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE;
+        case 0x731390u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS;
+        case 0x7421A2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE;
+        case 0x757E73u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES;
+        case 0x76676Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS;
+        case 0x770593u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE;
+        case 0x78DAA3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT;
+        case 0x7A11CEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
+        case 0x7B6C3Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
+        case 0x7D6640u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
+        case 0x7E0E81u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE;
         case 0x7E83BEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE;
-        case 0x05614Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE;
-        case 0xB9E5EEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS;
-        case 0xA247D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE;
-        case 0xCDED50u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL;
-        case 0xDEC631u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS;
-        case 0xB6DC0Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS;
-        case 0x10F4F5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS;
-        case 0x85E5D7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL;
-        case 0x0BA9B2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING;
+        case 0x7EAD33u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG;
         case 0x7F5639u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN;
-        case 0x18F5D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES;
+        case 0x7FF573u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP;
+        case 0x80A94Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES;
+        case 0x80B7BEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS;
+        case 0x822A59u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE;
+        case 0x827356u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE;
+        case 0x82C1B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES;
+        case 0x832793u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE;
+        case 0x855036u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET;
+        case 0x85C5C3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS;
+        case 0x85D069u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS;
+        case 0x85E5D7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL;
+        case 0x861922u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND;
+        case 0x86DF1Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION;
+        case 0x86F999u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS;
+        case 0x87E290u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND;
+        case 0x8817F8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING;
+        case 0x88EA4Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN;
+        case 0x88F92Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON;
+        case 0x8994A7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT;
+        case 0x8B6257u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR;
+        case 0x8B85EEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS;
+        case 0x8C168Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND;
+        case 0x8C51ECu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE;
+        case 0x8CE4DCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE;
+        case 0x8D7997u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE;
+        case 0x8F181Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT;
+        case 0x91778Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES;
+        case 0x924D7Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS;
+        case 0x92B1C3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT;
         case 0x934014u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS;
         case 0x93BC81u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES;
-        case 0xCF687Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE;
-        case 0xD8BD93u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS;
-        case 0x3D7F7Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND;
-        case 0x716F8Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE;
-        case 0x4F8D65u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG;
-        case 0xBDEC8Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS;
-        case 0x197A07u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS;
-        case 0x3CE704u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES;
-        case 0x5AB28Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA;
-        case 0xDFC1B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS;
-        case 0xA9EB01u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT;
-        case 0x61A896u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL;
-        case 0x855036u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET;
-        case 0x2C73B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING;
-        case 0x731390u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS;
-        case 0x4AC3A5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES;
-        case 0x8B85EEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS;
-        case 0x1172F2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS;
-        case 0xF5E2B4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES;
-        case 0x08AF95u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES;
-        case 0x175241u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE;
-        case 0xCFB0F0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK;
-        case 0xF0C259u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT;
-        case 0xF6AC77u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS;
-        case 0x1A7F8Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE;
-        case 0xBB0FE9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES;
-        case 0xFD14EBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER;
-        case 0x822A59u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE;
-        case 0x611107u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES;
-        case 0xE7A5CDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES;
-        case 0x0F47D8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE;
-        case 0x42696Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM;
-        case 0x861922u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND;
-        case 0xDD5C31u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE;
-        case 0x1D97C2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH;
-        case 0x699697u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES;
-        case 0x3A620Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP;
-        case 0x08DBCBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS;
-        case 0x76676Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS;
-        case 0xF09D9Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS;
-        case 0x82C1B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES;
-        case 0x093830u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS;
-        case 0x3094ABu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON;
-        case 0x06DE8Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND;
-        case 0x6E5227u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION;
-        case 0xCC1B24u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM;
-        case 0xDA7B73u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY;
-        case 0xD5A67Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS;
-        case 0x221B2Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA;
+        case 0x956273u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE;
+        case 0x96825Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE;
+        case 0x977136u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE;
+        case 0x98B412u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS;
+        case 0x98EEDAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE;
+        case 0x9942DFu: return &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT;
+        case 0x9A818Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION;
+        case 0x9CA01Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING;
+        case 0x9E8D3Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE;
+        case 0x9F0B27u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS;
+        case 0x9F82E6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE;
+        case 0xA0F7ADu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID;
+        case 0xA10731u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION;
+        case 0xA247D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE;
         case 0xA50EA1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS;
-        case 0xFFBFF1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT;
-        case 0x0EDDBBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO;
+        case 0xA7057Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS;
+        case 0xA7B368u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES;
+        case 0xA9EB01u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT;
+        case 0xAB6FAAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES;
+        case 0xABCC22u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION;
+        case 0xAC7745u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS;
+        case 0xAD7532u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE;
         case 0xADD0B0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS;
-        case 0x22539Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK;
+        case 0xB038F0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS;
+        case 0xB0D003u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
+        case 0xB43E05u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES;
+        case 0xB6DC0Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS;
+        case 0xB9E5EEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS;
+        case 0xBB0FE9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES;
+        case 0xBC0F28u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY;
+        case 0xBDCA52u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS;
+        case 0xBDEC8Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS;
+        case 0xBE5D30u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT;
+        case 0xBE97D4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS;
+        case 0xBFF842u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS;
+        case 0xC0F5CBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION;
+        case 0xC190AAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS;
+        case 0xC1BCE9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS;
+        case 0xC21197u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE;
+        case 0xC283FEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS;
+        case 0xC31CE8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND;
+        case 0xC34F8Cu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON;
+        case 0xC509DBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS;
+        case 0xC58962u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK;
+        case 0xC5BD9Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE;
+        case 0xC616BAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE;
+        case 0xC71C51u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND;
+        case 0xC78E6Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA;
+        case 0xC85E16u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION;
+        case 0xC96144u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE;
+        case 0xCC1B24u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM;
+        case 0xCC828Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL;
+        case 0xCD94D5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND;
+        case 0xCDED50u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL;
+        case 0xCE6651u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE;
+        case 0xCE8119u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT;
+        case 0xCEEA24u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE;
+        case 0xCF687Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE;
+        case 0xCFB0F0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK;
         case 0xCFFA84u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR;
-        case 0x8D7997u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE;
-        case 0x5F14D7u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND;
-        case 0x88EA4Au: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN;
-        case 0x31A8BAu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE;
+        case 0xD0C7C6u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND;
+        case 0xD0D2D8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE;
+        case 0xD1C617u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE;
+        case 0xD5A67Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS;
+        case 0xD6D3CFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS;
+        case 0xD6DCDCu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE;
+        case 0xD8BD93u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS;
+        case 0xD8BE39u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION;
+        case 0xD8C295u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES;
+        case 0xD9A6FEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID;
+        case 0xDA7B73u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY;
+        case 0xDCC476u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES;
+        case 0xDD5C31u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE;
+        case 0xDEC631u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS;
+        case 0xDFB3ABu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY;
+        case 0xDFC1B5u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS;
+        case 0xE0C990u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS;
+        case 0xE0CA54u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND;
+        case 0xE2236Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR;
+        case 0xE27BB8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN;
+        case 0xE2C6CFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS;
+        case 0xE37DA4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS;
+        case 0xE3F3CEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE;
+        case 0xE4DD51u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES;
+        case 0xE716D2u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE;
+        case 0xE75260u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE;
+        case 0xE7A5CDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES;
+        case 0xEA5932u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE;
+        case 0xEAE405u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES;
+        case 0xEC9415u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM;
+        case 0xEDDA05u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE;
+        case 0xEE04BBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS;
+        case 0xEE0BCFu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY;
+        case 0xEE334Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT;
+        case 0xEE8B97u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS;
+        case 0xEF7DC8u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND;
+        case 0xF09D9Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS;
+        case 0xF09E30u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS;
+        case 0xF0C259u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT;
+        case 0xF0D34Eu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE;
+        case 0xF25CC0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS;
+        case 0xF47058u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS;
+        case 0xF53829u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN;
         case 0xF59BEDu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS;
-        case 0x0E6E27u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE;
+        case 0xF5E2B4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES;
+        case 0xF66DECu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE;
+        case 0xF6AC77u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS;
+        case 0xF95E40u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE;
+        case 0xFD14EBu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER;
+        case 0xFDE806u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES;
+        case 0xFE353Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS;
+        case 0xFECC6Du: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS;
+        case 0xFF0696u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE;
+        case 0xFF31C4u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE;
+        case 0xFFBFF1u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT;
         default:
             return nullptr;
     }

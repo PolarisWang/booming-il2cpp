@@ -190,6 +190,12 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"

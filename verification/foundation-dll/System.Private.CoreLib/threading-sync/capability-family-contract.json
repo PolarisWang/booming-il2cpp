@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/threading/sync",
+  "displayName": "Thread Synchronization Primitives (Mutex, Semaphore, Event, Barrier)",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
+    "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.Threading.SemaphoreSlim::Wait:System.Void()",
+    "System.Private.CoreLib/System.Threading.SemaphoreSlim::Release:System.Int32()",
+    "System.Private.CoreLib/System.Threading.SemaphoreSlim::get_CurrentCount:System.Int32()",
+    "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
+    "System.Private.CoreLib/System.Threading.ManualResetEvent::Set:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.ManualResetEvent::Reset:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.ManualResetEvent::WaitOne:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)",
+    "System.Private.CoreLib/System.Threading.AutoResetEvent::Set:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.AutoResetEvent::Reset:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.AutoResetEvent::WaitOne:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)",
+    "System.Private.CoreLib/System.Threading.SpinLock::Enter:System.Void(System.Boolean&)",
+    "System.Private.CoreLib/System.Threading.SpinLock::Exit:System.Void()",
+    "System.Private.CoreLib/System.Threading.SpinWait::SpinOnce:System.Void()"
+  ],
+  "methodSubjectCount": 17,
+  "customEntryIndices": [2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 16],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

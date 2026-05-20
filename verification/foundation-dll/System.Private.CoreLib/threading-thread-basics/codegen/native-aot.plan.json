@@ -3,9 +3,9 @@
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
   "assemblyName": "ThreadingThreadBasicsSubjects",
-  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
+  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0",
+  "entrySymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

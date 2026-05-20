@@ -33,10 +33,12 @@ public static class ErrorInfoBasicNativeEntry
         Exception? ex = Marshal.GetExceptionForHR(hr);
         if (ex == null) return 1; // expected non-null
         if (string.IsNullOrEmpty(ex.Message)) return 2; // expected message
-        // The message should contain the HRESULT hex string
+        // The message should contain the HRESULT hex string.
+        // Use case-sensitive Contains (Ordinal) — the external runtime stub
+        // for String.Contains(StringComparison) only supports Ordinal.
         string msg = ex.Message;
-        if (!msg.Contains("0x80004005", StringComparison.OrdinalIgnoreCase)
-            && !msg.Contains("80004005", StringComparison.OrdinalIgnoreCase))
+        if (!msg.Contains("0x80004005") && !msg.Contains("0X80004005")
+            && !msg.Contains("80004005"))
             return 3; // expected HRESULT in message
         return 0; // pass
     }

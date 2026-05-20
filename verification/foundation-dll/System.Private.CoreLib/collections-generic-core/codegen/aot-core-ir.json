@@ -132,7 +132,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::Clear:System.Void();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -403,7 +403,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::Add:System.Void(!0);type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -481,7 +481,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::Add:System.Void(!0);type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -559,7 +559,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::Add:System.Void(!0);type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -631,7 +631,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::RemoveAt:System.Void(System.Int32);type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -762,7 +762,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::Sort:System.Void();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -893,7 +893,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::ToArray:!0[]();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1147,7 +1147,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.Dictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

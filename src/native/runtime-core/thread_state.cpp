@@ -232,6 +232,22 @@ int32_t GetThreadCount() noexcept {
     return count;
 }
 
+// ── extern "C" bridges for threading_stubs ────────────────────────
+// MSVC generates C-linkage (undecorated) references from inside
+// extern "C" blocks, so threading_stubs.cpp cannot call
+// EnumerateThreads or access tls_this_thread directly.  These bridges
+// are defined here where C++ name lookup resolves correctly, and the
+// extern "C" linkage on the function names matches the C-linkage
+// references from threading_stubs.cpp.
+
+extern "C" void chaos_enumerate_threads(bool (*callback)(ManagedThread*)) noexcept {
+    EnumerateThreads(callback);
+}
+
+extern "C" ManagedThread* chaos_get_tls_this_thread() noexcept {
+    return tls_this_thread;
+}
+
 // ── Per-thread handshake safepoint ───────────────────────────────────
 //
 // Each ManagedThread has suspend_seq and suspend_ack fields.
@@ -395,7 +411,7 @@ static void __stdcall SuspendApf(ULONG_PTR param) {
 }
 #endif
 
-uint32_t RequestGlobalSafepoint() noexcept {
+extern "C" uint32_t RequestGlobalSafepoint() noexcept {
     // Support nesting: if the calling thread already holds the safepoint,
     // just bump the depth counter and return the current epoch.
     if (s_safepoint_depth > 0) {
@@ -560,7 +576,7 @@ uint32_t RequestGlobalSafepoint() noexcept {
     return epoch;
 }
 
-void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
+extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
     // Support nesting: decrement depth counter.  Only do the full
     // release when the outermost release occurs.
     if (s_safepoint_depth > 1) {

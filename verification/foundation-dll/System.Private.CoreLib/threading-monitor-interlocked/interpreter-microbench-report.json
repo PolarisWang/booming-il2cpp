@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
+  "capturedAt": "2026-05-20T17:47:40",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T17:47:40][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T17:47:40][WARN][CRAG] young_collection_no_region\n[2026-05-20T17:47:40][INFO][NUMA] numa_init count=%d\n[2026-05-20T17:47:40][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T17:47:40][INFO][OldGen] init done base=0x2961852858368 pages=2\n[2026-05-20T17:47:40][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T17:47:40][DEBUG][BGC] thread_started\n[2026-05-20T17:47:40][DEBUG][Finalizer] thread_started id={0}\nPassed: 14/14\n"
+}

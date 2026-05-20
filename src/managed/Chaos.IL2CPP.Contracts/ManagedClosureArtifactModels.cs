@@ -296,6 +296,7 @@ public static class NativeAotArtifactNames
     public const string CodegenMetrics = "native-aot.codegen-metrics.json";
     public const string LoweringPlan = "native-aot.plan.json";
     public const string Manifest = "native-aot.manifest.json";
+    public const string MethodsManifest = "native-aot.methods.json";
 }
 
 public sealed record NativeCodegenMetricsArtifact

@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/interface/dispatch",
-  "capturedAt": "2026-05-20T08:18:48",
+  "capturedAt": "2026-05-20T18:00:40",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "[2026-05-20T08:18:48][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T08:18:48][WARN][CRAG] young_collection_no_region\n[2026-05-20T08:18:48][INFO][NUMA] numa_init count=%d\n[2026-05-20T08:18:48][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T08:18:48][INFO][OldGen] init done base=0x1560953290752 pages=2\n[2026-05-20T08:18:48][DEBUG][codegen] T4 VEH handler registered\n"
+  "rawOutput": "[2026-05-20T18:00:40][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T18:00:40][WARN][CRAG] young_collection_no_region\n[2026-05-20T18:00:40][INFO][NUMA] numa_init count=%d\n[2026-05-20T18:00:40][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T18:00:40][INFO][OldGen] init done base=0x1618382028800 pages=2\n[2026-05-20T18:00:40][DEBUG][codegen] T4 VEH handler registered\nPassed: 35/35\n"
 }

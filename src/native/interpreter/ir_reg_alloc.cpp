@@ -1922,6 +1922,10 @@ static void TryOsrPromotion(RegisterFrame& frame,
         auto* existing_nm = static_cast<chaos::il2cpp::codegen::NativeMethod*>(
             pm->cached_native_method);
         if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
+            // Set OSR resume PC to loop header (frame.pc is the backward branch
+            // target after the branch handler executed).
+            chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
+
             using OsrEntry = void (*)(void*, void*);
             auto osr_entry = reinterpret_cast<OsrEntry>(
                 static_cast<uint8_t*>(existing_nm->code) + existing_nm->osr_entry_offset);
@@ -1955,6 +1959,9 @@ static void TryOsrPromotion(RegisterFrame& frame,
         pm->cached_native_method = nm;
         pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
         chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+
+        // Set OSR resume PC to loop header before calling OSR entry.
+        chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
 
         using OsrEntry = void (*)(void*, void*);
         auto osr_entry = reinterpret_cast<OsrEntry>(

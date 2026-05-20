@@ -7,25 +7,23 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 152.33,
-      "postPatchNsPerOp": 150.6,
-      "slowdownPercent": -1.14
+      "prePatchNsPerOp": 79.01,
+      "postPatchNsPerOp": 98.1,
+      "slowdownPercent": 24.16
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 143.57,
-      "postPatchNsPerOp": 181.3,
-      "slowdownPercent": 26.28
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 171.08,
-      "postPatchNsPerOp": 187.6,
-      "slowdownPercent": 9.66
+      "prePatchNsPerOp": 82.41,
+      "postPatchNsPerOp": 91.1,
+      "slowdownPercent": 10.54
     },
     {
       "methodIndex": 3,
@@ -37,17 +35,17 @@
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 340.59,
-      "postPatchNsPerOp": 380.4,
-      "slowdownPercent": 11.69
+      "prePatchNsPerOp": 224.72,
+      "postPatchNsPerOp": 213.5,
+      "slowdownPercent": -4.99
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 394.95,
-      "postPatchNsPerOp": 330.5,
-      "slowdownPercent": -16.32
+      "prePatchNsPerOp": 178.87,
+      "postPatchNsPerOp": 173.4,
+      "slowdownPercent": -3.06
     },
     {
       "methodIndex": 6,
@@ -76,16 +74,18 @@
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 2.85,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 47.37
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 163.96999999999997,
-      "postPatchNsPerOp": 195.6,
-      "slowdownPercent": 19.29
+      "prePatchNsPerOp": 69.68,
+      "postPatchNsPerOp": 93.3,
+      "slowdownPercent": 33.9
     },
     {
       "methodIndex": 12,
@@ -108,17 +108,15 @@
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 173.57,
-      "postPatchNsPerOp": 153.8,
-      "slowdownPercent": -11.39
+      "status": "failed",
+      "error": "JSON parse failed"
     }
   ],
   "summary": {
     "totalMethods": 16,
-    "nonStubMethods": 7,
-    "averageSlowdownPercent": 5.44,
-    "slowdownFactor": 1.0544,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": 17.99,
+    "slowdownFactor": 1.1799,
     "slowdownThresholdX": 50.0
   }
 }

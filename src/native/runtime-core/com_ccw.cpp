@@ -43,7 +43,15 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
 
     if (iid == nullptr) return kE_POINTER;
 
-    // Scan registered interfaces (entry 0 is always IUnknown).
+    // Aggregation: delegate all QI to the outer controlling IUnknown.
+    if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
+        // COM identity rule: QI for IUnknown returns the outer.
+        // Non-IUnknown QI is delegated entirely — the outer controls identity.
+        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
+        return outer_vtbl->QueryInterface(ccw->outer_unknown, iid, ppv);
+    }
+
+    // Non-aggregated: scan registered interfaces (entry 0 is always IUnknown).
     for (CHAOS_IL2CPP_SIZE i = 0; i < ccw->interface_count; ++i) {
         if (CHAOS_IL2CPP_MEMCMP(iid, ccw->interfaces[i].guid, 16) == 0) {
             if (i == 0) {
@@ -65,12 +73,20 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwAddRef(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
+    if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
+        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
+        return outer_vtbl->AddRef(ccw->outer_unknown);
+    }
     return ccw->refcount.fetch_add(1, std::memory_order_relaxed) + 1;
 }
 
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
+    if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
+        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
+        return outer_vtbl->Release(ccw->outer_unknown);
+    }
     CHAOS_IL2CPP_UINT32 remaining = ccw->refcount.fetch_sub(1, std::memory_order_acq_rel) - 1;
     if (remaining == 0) {
         CHAOS_IL2CPP_LOG_DEBUG_M("COM", "CCW {0} refcount reached 0, freeing", static_cast<void*>(ccw));
@@ -152,6 +168,78 @@ CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcep
     CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Created CCW {0} for managed object {1} (gc_handle={2})",
                               static_cast<void*>(ccw), managed_object, gc_handle);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ccw);
+}
+
+CHAOS_IL2CPP_INTPTR CreateCcwAggregated(void* managed_object, void* runtime_state,
+                                         void* outer_unknown) noexcept {
+    if (managed_object == nullptr || outer_unknown == nullptr) return 0;
+
+    auto* ccw = static_cast<ComCcw*>(std::malloc(sizeof(ComCcw)));
+    if (ccw == nullptr) return 0;
+
+    // Allocate a GCHandle to root the managed object.
+    CHAOS_IL2CPP_UINT64 gc_handle = static_cast<CHAOS_IL2CPP_UINT64>(CHAOS_GC_HANDLE_INVALID);
+    const auto* abi = static_cast<const RuntimeAbiV0*>(chaos_runtime_get_abi_v0());
+    if (abi != nullptr && abi->gc_handle_new != nullptr) {
+        gc_handle = static_cast<CHAOS_IL2CPP_UINT64>(
+            abi->gc_handle_new(
+                static_cast<RuntimeState*>(runtime_state),
+                managed_object,
+                false));  // not pinned
+    }
+
+    ccw->vtable = &s_ccw_vtbl;
+    ccw->refcount = 1;                      // Inner refcount (not controlling)
+    ccw->gc_handle = gc_handle;
+    ccw->runtime_state = runtime_state;
+    ccw->interface_count = 1;
+    ccw->outer_unknown = outer_unknown;
+    ccw->is_aggregated = true;
+
+    // interfaces[0] = IUnknown slot (populated for non-QI access).
+    ccw->interfaces[0].guid = kIidIUnknown;
+    ccw->interfaces[0].vtable = &s_ccw_vtbl;
+    ccw->interfaces[0].ccw_ptr = ccw;
+
+    for (CHAOS_IL2CPP_SIZE i = 1; i < kMaxCcwInterfaces; ++i) {
+        ccw->interfaces[i].guid = nullptr;
+        ccw->interfaces[i].vtable = nullptr;
+        ccw->interfaces[i].ccw_ptr = nullptr;
+    }
+
+    // Hold a reference on the outer to keep it alive.
+    auto* outer_vtbl = *static_cast<ComCcwVtbl**>(outer_unknown);
+    outer_vtbl->AddRef(outer_unknown);
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("COM",
+        "Created aggregated CCW {0} for managed object {1}, outer={2}",
+        static_cast<void*>(ccw), managed_object, outer_unknown);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ccw);
+}
+
+void DestroyCcw(void* ccw_ptr) noexcept {
+    if (ccw_ptr == nullptr) return;
+    auto* ccw = static_cast<ComCcw*>(ccw_ptr);
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Destroying CCW {0}", ccw_ptr);
+
+    // Release the outer_unknown reference held since creation.
+    if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
+        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
+        outer_vtbl->Release(ccw->outer_unknown);
+    }
+
+    // Release the GCHandle so the GC can collect the managed object.
+    if (ccw->gc_handle != static_cast<CHAOS_IL2CPP_UINT64>(CHAOS_GC_HANDLE_INVALID)) {
+        const auto* abi = static_cast<const RuntimeAbiV0*>(chaos_runtime_get_abi_v0());
+        if (abi != nullptr && abi->gc_handle_free != nullptr) {
+            abi->gc_handle_free(
+                static_cast<RuntimeState*>(ccw->runtime_state),
+                static_cast<GCHandle>(ccw->gc_handle));
+        }
+    }
+
+    std::free(ccw);
 }
 
 bool RegisterCcwInterface(void* ccw_ptr, const CHAOS_IL2CPP_UINT8* guid, void* vtable) noexcept {

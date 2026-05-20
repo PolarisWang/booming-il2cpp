@@ -138,7 +138,7 @@ def _build_patch_entrypoint(
     The patch variant uses MethodN that returns 0xB0000000+N sentinel values.
     """
     entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}PatchEntry"
 
     result = generate_and_build(
         entrypoint_dir,
@@ -162,7 +162,7 @@ def _build_semantic_patch_entrypoint(
     but valid results for semantic hotupdate verification.
     """
     entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}SemanticPatchEntry"
 
     result = generate_and_build(
         entrypoint_dir,
@@ -231,7 +231,7 @@ def _trim_ir(family_slug: str, variant: str = "semantic-patch") -> bool:
         "patch": "PatchEntry",
         "semantic-patch": "SemanticPatchEntry",
     }
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}{variant_suffix.get(variant, 'SemanticPatchEntry')}"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}{variant_suffix.get(variant, 'SemanticPatchEntry')}"
     entry_prefix = class_name
     ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / f"entrypoint-{variant}" / "closure-sp" / "analysis" / "aot-core-ir.json"
 

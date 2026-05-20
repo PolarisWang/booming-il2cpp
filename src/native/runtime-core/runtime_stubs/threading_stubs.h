@@ -1,7 +1,24 @@
 // ── Threading stub declarations ────────────────────────────────
 #pragma once
 
-CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept;
+#include <chaos/thread.h>
+#include "thread_state.h"
+
+/// Get the current managed thread object (fast path: TLS read, may be called from
+/// hot benchmark loops where inlining matters).  Implemented here as inline so the
+/// compiler can see through the TLS read at call sites in the same translation unit.
+inline CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept
+{
+    // Fast path: codegen mode — current_thread_object is always set during
+    // runtime_init (via s_main_thread_sentinel). Single TLS read, no fallback.
+    auto result = chaos::il2cpp::common::current_thread_object;
+    if (result != 0) return result;
+
+    // Slow path: interpreter mode or uninitialized thread — check tls_this_thread.
+    auto* thread = chaos::il2cpp::runtime_core::threading::tls_this_thread;
+    if (thread == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
+}
 void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32* lockTaken) noexcept;
 void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INT32 ChaosMonitorTryEnter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 timeout) noexcept;

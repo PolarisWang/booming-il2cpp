@@ -153,6 +153,7 @@ void EnumerateThreads(bool (*callback)(ManagedThread*)) noexcept;
 /// Approximate count of active threads.
 int32_t GetThreadCount() noexcept;
 
+
 // ── Hybrid GC safepoint ───────────────────────────────────────────────
 
 // GC mode constants for ManagedThread::gc_mode.
@@ -200,10 +201,10 @@ void EnterPreemptiveMode() noexcept;
 
 /// Request all managed threads to reach a safepoint.
 /// @returns the safepoint generation to pass to ReleaseGlobalSafepoint.
-uint32_t RequestGlobalSafepoint() noexcept;
+extern "C" uint32_t RequestGlobalSafepoint() noexcept;
 
 /// Release all threads from the given safepoint.
-void ReleaseGlobalSafepoint(uint32_t generation) noexcept;
+extern "C" void ReleaseGlobalSafepoint(uint32_t generation) noexcept;
 
 /// Hybrid root scanning: scan all threads' managed stacks using GcSlotMap
 /// (precise) where available, falling back to conservative scanning.
@@ -213,5 +214,10 @@ void ReleaseGlobalSafepoint(uint32_t generation) noexcept;
 void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, void* user_data), void* user_data) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core::threading
+
+// extern "C" bridges for threading_stubs — declared outside the
+// namespace so they are visible from chaos::il2cpp::runtime_core.
+extern "C" void chaos_enumerate_threads(bool (*callback)(chaos::il2cpp::runtime_core::threading::ManagedThread*)) noexcept;
+extern "C" chaos::il2cpp::runtime_core::threading::ManagedThread* chaos_get_tls_this_thread() noexcept;
 
 #endif  // CHAOS_IL2CPP_THREAD_STATE_H_

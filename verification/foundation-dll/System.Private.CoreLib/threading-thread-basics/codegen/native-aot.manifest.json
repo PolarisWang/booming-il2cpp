@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ThreadingThreadBasicsSubjects",
-  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen",
+  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
@@ -17,6 +17,14 @@
     {
       "kind": "generatedTranslationUnit",
       "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "generatedModuleHeader",
+      "path": "generated/chaos_generated_module.h"
+    },
+    {
+      "kind": "generatedModuleSource",
+      "path": "generated/chaos_generated_module.cpp"
     },
     {
       "kind": "codegenMetrics",

@@ -261,7 +261,8 @@ void CaptureNativeFrame(OsrState& osr,
                         const double* fpr_file,
                         const RegStackMapEntry& stack_entry,
                         uint32_t arg_count,
-                        uint32_t local_count) noexcept {
+                        uint32_t local_count,
+                        const uint8_t* gpr_tags) noexcept {
     if (gpr_file == nullptr) return;
 
     // pc is set by the caller (from the deopt entry).
@@ -274,7 +275,9 @@ void CaptureNativeFrame(OsrState& osr,
             uint32_t ur = static_cast<uint32_t>(vreg);
             if (ur < 64) {
                 osr.stack[i]      = gpr_file[ur];
-                osr.stack_tags[i] = static_cast<uint8_t>(ValueTag::Int64);
+                osr.stack_tags[i] = (gpr_tags != nullptr && gpr_tags[ur] != 0)
+                    ? gpr_tags[ur]
+                    : static_cast<uint8_t>(ValueTag::Int64);
             } else {
                 // FPR: read from fpr_file as raw uint64 bits.
                 uint32_t fpr_idx = ur - 64;
@@ -302,7 +305,9 @@ void CaptureNativeFrame(OsrState& osr,
             uint32_t ur = static_cast<uint32_t>(vreg);
             if (ur < 64) {
                 osr.locals[i]      = gpr_file[ur];
-                osr.local_tags[i]  = static_cast<uint8_t>(ValueTag::Int64);
+                osr.local_tags[i]  = (gpr_tags != nullptr && gpr_tags[ur] != 0)
+                    ? gpr_tags[ur]
+                    : static_cast<uint8_t>(ValueTag::Int64);
             } else {
                 osr.locals[i]      = 0;
                 osr.local_tags[i]  = static_cast<uint8_t>(ValueTag::Void);

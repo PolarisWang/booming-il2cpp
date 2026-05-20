@@ -685,13 +685,13 @@ def _compute_entry_point_subject_id(
         ABI: int()
         Format: <AssemblyName>/Program::Main:System.Int32()
     For patch and subjects variants:
-        Entry is Run(int) which returns int, takes int32.
-        ABI: int(int32)
-        Format: <AssemblyName>/<FullTypeName>::Run:System.Int32(System.Int32)
+        Entry is Run(int) which returns void, takes int32.
+        ABI: void(int32)
+        Format: <AssemblyName>/<FullTypeName>::Run:System.Void(System.Int32)
     """
     if variant == "patch":
         full_type = f"{namespace_name}.{class_name}" if namespace_name else class_name
-        return f"{class_name}/{full_type}::Run:System.Int32(System.Int32)"
+        return f"{class_name}/{full_type}::Run:System.Void(System.Int32)"
     if variant == "subjects":
         # Subjects variant no longer has Run(int entryIndex) — all Subject_N methods
         # are void(void) and dispatch is handled by RunNativeAot via s_hotpatch_entries.
@@ -793,7 +793,7 @@ def generate_and_build(
     custom method indices from contract customEntryIndices.
     """
     if class_name is None:
-        class_name = f"{_family_namespace_slug(family_id).title().replace('_', '')}NativeEntry"
+        class_name = f"{_family_namespace_slug(family_id).title().replace('_', '').replace(',', '')}NativeEntry"
 
     if variant == "subjects":
         class_name = class_name.replace("NativeEntry", "Subjects")

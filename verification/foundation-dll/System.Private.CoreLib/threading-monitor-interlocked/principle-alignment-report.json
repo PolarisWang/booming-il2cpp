@@ -1,7 +1,7 @@
 {
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:44:22.470450",
+  "generated_at": "2026-05-20T17:47:36.621867",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -351,25 +351,30 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 10 changed source files are outside expected architecture layers",
+      "summary": "1 of 35 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "build/native/compile_hotupdate_boxing.cmd",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 10,
+        "changed_source_count": 35,
         "layer_distribution": {
           "TestInfra": 2,
-          "Emitter": 3,
-          "Interpreter": 1,
-          "RuntimeCore": 2,
+          "Emitter": 2,
+          "CodeGenRoot": 1,
+          "RuntimeSupport": 1,
+          "Templates": 1,
+          "Bootstrap": 1,
+          "Codegen": 4,
+          "Interpreter": 3,
+          "RuntimeCore": 18,
           "Tests": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "build/native/compile_hotupdate_boxing.cmd",
             "reason": "outside expected architecture layers"
           }
         ]

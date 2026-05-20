@@ -141,7 +141,8 @@ void CaptureNativeFrame(OsrState& osr,
                         const double* fpr_file,
                         const RegStackMapEntry& stack_entry,
                         uint32_t arg_count,
-                        uint32_t local_count) noexcept;
+                        uint32_t local_count,
+                        const uint8_t* gpr_tags = nullptr) noexcept;
 
 }  // namespace chaos::il2cpp::interpreter
 

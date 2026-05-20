@@ -1,7 +1,7 @@
 {
   "family": "primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:38:19.148532",
+  "generated_at": "2026-05-20T18:35:11.114357",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -270,19 +270,34 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 18 changed source files within expected architecture layers",
-      "details": [],
-      "evidence": {
-        "changed_source_count": 18,
-        "layer_distribution": {
-          "TestInfra": 1,
-          "Emitter": 4,
-          "RuntimeSupport": 1,
-          "Codegen": 1,
-          "Interpreter": 1,
-          "RuntimeCore": 10
+      "status": "CONCERN",
+      "summary": "1 of 39 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "build/native/compile_hotupdate_boxing.cmd",
+          "reason": "outside expected architecture layers"
         }
+      ],
+      "evidence": {
+        "changed_source_count": 39,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Emitter": 2,
+          "CodeGenRoot": 1,
+          "RuntimeSupport": 1,
+          "Templates": 1,
+          "Bootstrap": 1,
+          "Codegen": 4,
+          "Interpreter": 3,
+          "RuntimeCore": 22,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "build/native/compile_hotupdate_boxing.cmd",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -341,10 +356,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

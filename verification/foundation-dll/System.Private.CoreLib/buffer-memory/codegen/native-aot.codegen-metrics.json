@@ -11,10 +11,10 @@
     "generated/chaos_generated_module.cpp"
   ],
   "generatedCppFileCount": 5,
-  "generatedCppTotalBytes": 654515,
+  "generatedCppTotalBytes": 661495,
   "largestGeneratedCppBytes": 510077,
   "generatedSymbolCount": 20,
-  "peakWorkingSetBytes": 501272576,
+  "peakWorkingSetBytes": 501583872,
   "structuredMethodCount": 13,
   "structuredExceptionBodyCount": 0,
   "flatFallbackCount": 0,

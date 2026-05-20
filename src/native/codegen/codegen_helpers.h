@@ -28,6 +28,7 @@ struct DeoptTlsState {
     uint8_t  gpr_tags[64] = {};   // Per-register ValueTag for GPRs
     uint8_t  fpr_tags[32] = {};   // Per-register ValueTag for FPRs
     uint32_t instr_pc     = 0;    // RegisterInstruction pc to resume at
+    uint32_t osr_resume_pc = 0;   // OSR resume PC (loop header). 0 = instruction 0.
     bool     deopt_happened = false; // Set to true when deopt trampoline fires
 };
 
@@ -162,5 +163,11 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept;
 // batch-copies all 64 GPRs + 32 FPRs from stack frame spill slots to
 // t_deopt_state along with their type tags.
 extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept;
+
+/// Resolve a loop-header instruction PC to an absolute native code address.
+/// Reads nm from the generated code's own return address, then uses the
+/// instr_offsets table to compute: code_base + instr_offsets[osr_resume_pc].
+/// Returns the absolute address to jump to, or code_base on failure.
+extern "C" void* OsrResolveLoopHeader() noexcept;
 
 #endif  // CHAOS_IL2CPP_CODEGEN_HELPERS_H_

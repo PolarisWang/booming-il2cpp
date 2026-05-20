@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: MathNumericsPatchEntry
-add_library(chaos_gen_MathNumericsPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/MathNumericsPatchEntry/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/MathNumericsPatchEntry/generated/chaos_generated_module.cpp
+# Assembly: MathNumericsSubjects
+add_library(chaos_gen_MathNumericsSubjects STATIC
+    ${CHAOS_GEN_DIR}/MathNumericsSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/MathNumericsSubjects/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_MathNumericsPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_MathNumericsPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_MathNumericsPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_MathNumericsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_MathNumericsSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_MathNumericsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_MathNumericsPatchEntry
+    chaos_gen_MathNumericsSubjects
     ${NATIVE_LIBS}
 )
 

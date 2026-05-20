@@ -23,6 +23,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -696,9 +697,16 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
 def _run_native_benchmarks(family_slug: str, assembly: str,
                            method_subject_ids: list[str],
                            stub_mask: int, throwing_mask: int = 0,
-                           iterations: int = 10000
+                           iterations: int = 10000,
+                           exe_path: Path | None = None,
+                           output_name: str = "native-benchmark.json"
                            ) -> tuple[list[dict], Path]:
-    """Run native benchmark for each non-stub, non-throwing method. Returns (results, native_path)."""
+    """Run native benchmark for each non-stub, non-throwing method.
+
+    Args:
+        exe_path: Optional explicit path to entry.exe. If None, uses _locate_entry_exe().
+        output_name: Output filename (e.g. native-aot-benchmark.json).
+    """
     from fact_verifier import verify_benchmark
 
     family_dir = _VERIFICATION_BASE / assembly / family_slug
@@ -724,7 +732,8 @@ def _run_native_benchmarks(family_slug: str, assembly: str,
             })
             continue
         bench = verify_benchmark(family_slug, assembly=assembly,
-                                 entry_index=idx, iterations=iterations, verbose=False)
+                                 entry_index=idx, iterations=iterations, verbose=False,
+                                 exe_path=exe_path)
         results.append({
             "methodIndex": idx,
             "methodSubjectId": mid,
@@ -735,7 +744,7 @@ def _run_native_benchmarks(family_slug: str, assembly: str,
             "status": bench.get("status", "failed"),
         })
 
-    native_path = native_dir / "native-benchmark.json"
+    native_path = native_dir / output_name
     with open(native_path, "w", encoding="utf-8") as f:
         json.dump({
             "schemaVersion": 1,
@@ -789,7 +798,7 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
             custom_methods.append(mc["methodSubjectId"])
 
     # Detect custom entry files
-    custom_entry_path = family_dir / "managed" / "subjects" / f"{family_slug.title().replace('-', '').replace('_', '')}Subjects.Custom.cs"
+    custom_entry_path = family_dir / "managed" / "subjects" / f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}Subjects.Custom.cs"
 
     trace("preflight", family=family_slug, method_count=len(mids),
           custom_methods=len(custom_methods),
@@ -811,11 +820,13 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
 def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, codegen_mode: str | None = None) -> StageResult:
     """Stage 1: Entrypoint generation + IL2CPP compile.
 
-    Delegates to pipeline_native_aot_runner.run_family() for the heavy lifting.
+    Delegates to pipeline_native_aot_runner.run_family() for the heavy lifting,
+    then generates verification dispatch C++ code from the codegen manifest
+    and rebuilds entry.exe to include the dispatch code.
     """
     start = time.perf_counter()
     try:
-        from pipeline_native_aot_runner import run_family
+        from pipeline_native_aot_runner import run_family, _build_entry_exe
     except ImportError:
         return StageResult(
             stage="codegen", status="error",
@@ -825,6 +836,36 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, c
 
     result = run_family(family_slug, assembly_name=assembly, codegen_mode=codegen_mode)
     ok = result.get("success", False)
+
+    # After codegen succeeds, generate verification dispatch code from manifest
+    if ok:
+        try:
+            from generate_verification_dispatch import generate_verification_dispatch
+
+            family_dir = _VERIFICATION_BASE / assembly / family_slug
+            codegen_dir = family_dir / "codegen"
+            # The manifest is emitted alongside subject files (e.g. *Subjects/native-aot.methods.json)
+            manifest_path = None
+            for d in codegen_dir.iterdir():
+                if d.is_dir() and d.name.endswith("Subjects"):
+                    candidate = d / "native-aot.methods.json"
+                    if candidate.exists():
+                        manifest_path = candidate
+                        break
+            dispatch_output = family_dir / "native" / "verification_dispatch.generated.cpp"
+
+            if manifest_path is not None:
+                generate_verification_dispatch(str(manifest_path), str(dispatch_output))
+                # Rebuild entry.exe with the new dispatch file
+                rebuild_ok = _build_entry_exe(family_slug, verification=family_dir.parent)
+                if not rebuild_ok:
+                    print(f"    [codegen] WARNING: entry.exe rebuild with dispatch code FAILED")
+            else:
+                print(f"    [codegen] manifest not found at {manifest_path} (skip dispatch generation)")
+        except ImportError:
+            print(f"    [codegen] generate_verification_dispatch not available (skip)")
+        except Exception as e:
+            print(f"    [codegen] dispatch generation error: {e} (skip)")
 
     trace("codegen", family=family_slug, success=ok,
           fact_static=result.get("fact_static_passed"), fact_runtime=result.get("fact_runtime_passed"))
@@ -1146,10 +1187,10 @@ def _stage_microbench(family_slug: str, assembly: str) -> StageResult:
 
 
 def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
-    """Stage 5: Managed vs native benchmark comparison.
+    """Stage 5: 3-way benchmark — managed (.NET JIT) vs native-aot vs native-jit.
 
-    Self-contained: runs managed harness, runs native benchmarks for each
-    non-stub method, compares via benchmark_comparator, writes report.
+    Self-contained: runs managed harness, builds JIT entry if needed, runs AOT
+    and JIT benchmarks for each non-stub method, compares all three.
     """
     start = time.perf_counter()
     from benchmark_comparator import compare
@@ -1175,14 +1216,39 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Step 1: Auto-generate managed benchmark harness (regenerates .cs AND .csproj).
-    # Always regenerate to ensure the harness reflects the current methodSubjectIds
-    # and does NOT use stale Convert.ToChar-only logic from a previous run.
+    # ── Step 0: Ensure entry-aot.exe exists ────────────────────────────
+    # The codegen stage builds entry.exe; save a copy as entry-aot.exe
+    # if not already done.  This lets us later build JIT mode without
+    # losing the AOT binary.
+    native_dir = family_dir / "native"
+    entry_exe = native_dir / "entry.exe"
+    aot_exe = native_dir / "entry-aot.exe"
+    jit_exe = native_dir / "entry-jit.exe"
+
+    if not aot_exe.exists() and entry_exe.exists():
+        shutil.copy2(str(entry_exe), str(aot_exe))
+        print(f"  [benchmark] saved entry.exe -> entry-aot.exe")
+
+    # ── Step 0b: Build JIT mode entry-jit.exe if needed ────────────────
+    if not jit_exe.exists():
+        try:
+            from pipeline_native_aot_runner import run_family, _build_entry_exe
+            print(f"  [benchmark] Building JIT-mode entry...")
+            jit_result = run_family(family_slug, assembly_name=assembly, codegen_mode="jit")
+            if jit_result.get("success"):
+                _build_entry_exe(family_slug, verification=_VERIFICATION_BASE / assembly, output_name="entry-jit.exe")
+                print(f"  [benchmark] JIT-mode entry built: entry-jit.exe")
+            else:
+                print(f"  [benchmark] JIT codegen FAILED, JIT benchmarks will be skipped")
+        except Exception as e:
+            print(f"  [benchmark] JIT build error: {e}, JIT benchmarks will be skipped")
+
+    # ── Step 1: Auto-generate managed benchmark harness ────────────────
     managed_path = None
     if mids:
         managed_path = _auto_generate_managed_benchmark(family_slug, assembly, mids)
 
-    # Build throwing_mask from managed results (methods that always throw)
+    # Build throwing_mask from managed results
     throwing_mask = 0
     if managed_path and managed_path.exists():
         try:
@@ -1195,21 +1261,38 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
         except (OSError, json.JSONDecodeError):
             pass
 
-    # Step 2: Run native benchmarks (skip throwing methods)
-    native_results, native_path = _run_native_benchmarks(
-        family_slug, assembly, mids, stub_mask, throwing_mask, iterations=100000)
+    # ── Step 2a: Run native-AOT benchmarks ─────────────────────────────
+    aot_available = aot_exe.exists()
+    if aot_available:
+        aot_results, aot_path = _run_native_benchmarks(
+            family_slug, assembly, mids, stub_mask, throwing_mask,
+            iterations=100000, exe_path=aot_exe, output_name="native-aot-benchmark.json")
+    else:
+        print(f"  [benchmark] entry-aot.exe not found, AOT benchmarks skipped")
+        aot_path = None
 
-    # Step 3: Compare
+    # ── Step 2b: Run native-JIT (interpreter) benchmarks ───────────────
+    jit_available = jit_exe.exists()
+    if jit_available:
+        jit_results, jit_path = _run_native_benchmarks(
+            family_slug, assembly, mids, stub_mask, throwing_mask,
+            iterations=100000, exe_path=jit_exe, output_name="native-jit-benchmark.json")
+    else:
+        print(f"  [benchmark] entry-jit.exe not found, JIT benchmarks skipped")
+        jit_path = None
+
+    # ── Step 3: 3-way comparison ───────────────────────────────────────
     if managed_path and managed_path.exists():
         report = compare(
             managed_path=managed_path,
-            native_path=native_path,
+            aot_path=aot_path,
+            jit_path=jit_path,
             output_path=report_path,
         )
     else:
-        # Native-only info report
+        # Native-only info report (no managed harness)
         report = {
-            "schemaVersion": 1,
+            "schemaVersion": 2,
             "assemblyName": assembly,
             "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
             "summary": {
@@ -1217,10 +1300,14 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
                 "matchedCount": 0,
                 "unmatchedCount": 0,
                 "invalidCount": len(mids),
-                "nativeFasterCount": 0,
+                "nativeAotFasterCount": 0,
+                "nativeJitFasterCount": 0,
                 "managedFasterCount": 0,
                 "equalCount": 0,
                 "averageSpeedupPercent": 0.0,
+                "averageNativeAotSpeedupPercent": 0.0,
+                "averageNativeJitSpeedupPercent": None,
+                "nativeJitSlowdownFactor": None,
             },
             "methodResults": [
                 {"methodSubjectId": m, "status": "managed_harness_unavailable"}
@@ -1232,17 +1319,16 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
             json.dump(report, f, indent=2, ensure_ascii=False)
 
     summary = report.get("summary", {})
-    avg_speedup = summary.get("averageSpeedupPercent", 0)
-    native_faster = summary.get("nativeFasterCount", 0)
+    avg_aot_speedup = summary.get("averageNativeAotSpeedupPercent") or summary.get("averageSpeedupPercent", 0)
+    avg_jit_speedup = summary.get("averageNativeJitSpeedupPercent")
+    native_aot_faster = summary.get("nativeAotFasterCount", 0)
+    native_jit_faster = summary.get("nativeJitFasterCount", 0)
     managed_faster = summary.get("managedFasterCount", 0)
     matched_count = summary.get("matchedCount", 0)
     total = summary.get("totalMethods", len(mids))
     invalid_count = summary.get("invalidCount", 0)
 
-    # ── Early skip: all methods are invalid (no managed harness available) ──
-    # This happens when the managed benchmark harness cannot generate call
-    # expressions for the family's methods (e.g. LINQ Enumerable methods
-    # with lambda parameters). Skip rather than fail.
+    # ── Early skip: all methods are invalid ────────────────────────────
     if invalid_count >= total - stub_total > 0:
         report_path.parent.mkdir(parents=True, exist_ok=True)
         with open(report_path, "w", encoding="utf-8") as f:
@@ -1253,45 +1339,47 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # ── Quality gate ────────────────────────────────────────────────
-    # Reason 1: too few matched (< half of non-stub, non-invalid methods)
-    # Stub methods are excluded from the ratio denominator since they
-    # cannot produce native benchmark measurements.
+    # ── Quality gate ──────────────────────────────────────────────────
     effective_total = max(total - stub_total - invalid_count, 1)
     min_match_ratio = 0.5
     match_ok = matched_count >= effective_total * min_match_ratio
-
-    # Reason 2: managed is significantly faster than native (failure threshold)
-    # Relaxed: only flag when managed is >5x faster (speedup < -400%), because
-    # stub→real GenericShapeDescriptor helpers have dispatch overhead vs.
-    # managed JIT running BCL code directly.
-    avg_speedup_is_catastrophic = avg_speedup < -400.0
+    avg_aot_is_catastrophic = avg_aot_speedup is not None and avg_aot_speedup < -400.0
 
     if not match_ok:
         bm_status = "failed"
         bm_reason = (f"matchedCount={matched_count}/{total} "
                      f"below threshold {min_match_ratio*100:.0f}%")
-    elif avg_speedup_is_catastrophic:
+    elif avg_aot_is_catastrophic:
         bm_status = "failed"
-        bm_reason = (f"avg_speedup={avg_speedup}% below -400% — "
+        bm_reason = (f"avg_native_aot_speedup={avg_aot_speedup}% below -400% — "
                      f"native translation severely underperforms managed JIT")
     else:
         bm_status = "passed"
         bm_reason = ""
 
-    trace("benchmark", family=family_slug, avg_speedup=avg_speedup,
-          native_faster=native_faster, managed_faster=managed_faster,
-          status=bm_status)
+    # Build summary line(s)
+    summary_parts = [f"avg_aot_speedup={avg_aot_speedup}%"]
+    if avg_jit_speedup is not None:
+        summary_parts.append(f"avg_jit_speedup={avg_jit_speedup}%")
+    summary_parts.append(f"native_aot_faster={native_aot_faster}/{matched_count}")
+    if native_jit_faster > 0:
+        summary_parts.append(f"native_jit_faster={native_jit_faster}")
+    if managed_faster > 0:
+        summary_parts.append(f"managed_faster={managed_faster}")
+    bm_summary = bm_reason or ", ".join(summary_parts)
+
+    trace("benchmark", family=family_slug, avg_aot_speedup=avg_aot_speedup,
+          avg_jit_speedup=avg_jit_speedup, status=bm_status)
 
     return StageResult(
         stage="benchmark", status=bm_status,
-        summary=bm_reason or (
-            f"avg_speedup={avg_speedup}%, "
-            f"native_faster={native_faster}/{matched_count}, "
-            f"managed_faster={managed_faster}/{matched_count}"),
+        summary=bm_summary,
         details={
-            "averageSpeedupPercent": avg_speedup,
-            "nativeFasterCount": native_faster,
+            "averageSpeedupPercent": avg_aot_speedup,
+            "averageNativeAotSpeedupPercent": avg_aot_speedup,
+            "averageNativeJitSpeedupPercent": avg_jit_speedup,
+            "nativeAotFasterCount": native_aot_faster,
+            "nativeJitFasterCount": native_jit_faster,
             "managedFasterCount": managed_faster,
             "matchedCount": matched_count,
             "totalMethods": total,
@@ -1617,12 +1705,17 @@ def _build_dashboard(family_slug: str, assembly: str,
         bd = benchmark.details
         dashboard["performance"] = {
             "averageSpeedupPercent": bd.get("averageSpeedupPercent", 0),
-            "nativeFasterCount": bd.get("nativeFasterCount", 0),
+            "nativeFasterCount": bd.get("nativeFasterCount", 0) or bd.get("nativeAotFasterCount", 0),
             "managedFasterCount": bd.get("managedFasterCount", 0),
             "matchedCount": bd.get("matchedCount", 0),
             "totalMethods": bd.get("totalMethods", 0),
             "invalidCount": bd.get("invalidCount", 0),
         }
+        # Add native-JIT metrics if available
+        avg_jit = bd.get("averageNativeJitSpeedupPercent")
+        if avg_jit is not None:
+            dashboard["performance"]["averageNativeJitSpeedupPercent"] = avg_jit
+            dashboard["performance"]["nativeJitFasterCount"] = bd.get("nativeJitFasterCount", 0)
 
     # ── 4. HotUpdate results ─────────────────────────────────────────────
     hotupdate = stages.get("hotupdate")

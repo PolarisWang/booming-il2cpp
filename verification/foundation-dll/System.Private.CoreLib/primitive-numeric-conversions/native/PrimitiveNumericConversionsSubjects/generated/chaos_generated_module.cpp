@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -14,6 +14,53 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
 
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8(
+        void
+);
+extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9(
+        void
+);
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -21,6 +68,11 @@ extern "C" const int kAotMethodCount;
 static const Functions s_functions = {
     {
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0,
+        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10,
+        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11,
+        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12,
+        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13,
+        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14,
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1,
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2,
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3,
@@ -30,16 +82,33 @@ static const Functions s_functions = {
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7,
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8,
         &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9,
-        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10,
-        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11,
-        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12,
-        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13,
-        &PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14,
     },
     15,
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[15];
+void* kFunctionsFlat[15] = {
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8),
+    reinterpret_cast<void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

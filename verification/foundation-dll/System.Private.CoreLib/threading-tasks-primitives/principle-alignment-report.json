@@ -1,17 +1,19 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T15:54:12.605854",
+  "generated_at": "2026-05-20T19:04:00.063096",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "Average speedup -215.76% — native significantly slower than managed [overridden — benchmark stage was skipped]",
+      "summary": "15/15 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -215.76,
-        "managed_faster_count": 2,
-        "native_faster_count": 11
+        "average_speedup_percent": 0.0,
+        "managed_faster_count": 0,
+        "native_faster_count": 0,
+        "invalid_count": 15,
+        "total_methods": 15
       }
     },
     "p1_lowering": {
@@ -369,37 +371,47 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "3 of 7 changed source files are outside expected architecture layers",
+      "summary": "3 of 44 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+          "file": "CMakeLists.txt",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+          "file": "build/native/compile_hotupdate_boxing.cmd",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 7,
+        "changed_source_count": 44,
         "layer_distribution": {
-          "RuntimeCore": 4
+          "TestInfra": 3,
+          "Emitter": 2,
+          "CodeGenRoot": 2,
+          "RuntimeSupport": 1,
+          "Templates": 1,
+          "Bootstrap": 1,
+          "Codegen": 4,
+          "Common": 1,
+          "Interpreter": 3,
+          "RuntimeCore": 22,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+            "file": "CMakeLists.txt",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+            "file": "build/native/compile_hotupdate_boxing.cmd",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -463,8 +475,8 @@
     "total": 12,
     "aligned": 8,
     "concern": 1,
-    "violation": 1,
-    "not_applicable": 2,
-    "overall": "CONCERN"
+    "violation": 0,
+    "not_applicable": 3,
+    "overall": "ALIGNED"
   }
 }

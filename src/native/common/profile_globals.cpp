@@ -4,6 +4,7 @@
 // these as extern in the enabled branch; this file provides the definitions.
 // When profiling is disabled the inline definitions in profile.h suffice.
 
+#include "chaos/config.h"  // defines CHAOS_IL2CPP_PROFILE_ENABLED in PROFILE builds
 #include "chaos/profile.h"
 
 // Guard: only define when the #if CHAOS_IL2CPP_PROFILE_ENABLED branch is active.

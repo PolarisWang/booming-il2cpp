@@ -109,6 +109,13 @@ struct NativeMethod {
     // 0 = no OSR entry (no loop headers in this method).
     uint32_t      osr_entry_offset = 0;
 
+    // Instruction offset table: instr_offsets[pc] = native byte offset.
+    // Used by OsrResolveLoopHeader to find the native address of a loop
+    // header instruction for OSR resume.  Allocated by GenerateNativeCode,
+    // freed by ~NativeMethod.  Populated only when osr_entry_offset != 0.
+    uint32_t*     instr_offsets      = nullptr;
+    uint32_t      instr_offset_count = 0;
+
     // Offset from RBP (native frame pointer) to RSP (stack frame base).
     // Used by GC stack walker to compute frame_ptr from the native RBP
     // for T4 frames.  Varies per-method with register caching.

@@ -36,6 +36,9 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct ReflectionModuleSubjects_t {
+        void (*CustomEntrySubject_5)(
+                void
+        );
         void (*Subject_0)(
                 void
         );
@@ -51,14 +54,15 @@ struct Functions {
         void (*Subject_4)(
                 void
         );
-        void (*CustomEntrySubject_5)(
-                void
-        );
     } reflectionModuleSubjects;
     int32_t method_count;
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -70,6 +74,11 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct ReflectionModuleSubjects {
+    static inline void CustomEntrySubject_5(
+    ) {
+        return kFunctions.reflectionModuleSubjects.CustomEntrySubject_5(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.reflectionModuleSubjects.Subject_0(
@@ -93,11 +102,6 @@ struct ReflectionModuleSubjects {
     static inline void Subject_4(
     ) {
         return kFunctions.reflectionModuleSubjects.Subject_4(
-        );
-    }
-    static inline void CustomEntrySubject_5(
-    ) {
-        return kFunctions.reflectionModuleSubjects.CustomEntrySubject_5(
         );
     }
     /// Total number of AOT-compiled methods in this type.

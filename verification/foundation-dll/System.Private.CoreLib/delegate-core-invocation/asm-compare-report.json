@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
-  "capturedAt": "2026-05-20T00:59:40",
+  "capturedAt": "2026-05-20T19:51:27",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -36,7 +36,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 1,
@@ -45,7 +45,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 2,
@@ -54,7 +54,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 3,
@@ -63,7 +63,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 4,
@@ -72,7 +72,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 5,
@@ -81,7 +81,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 6,
@@ -90,7 +90,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 7,
@@ -99,7 +99,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 8,
@@ -108,7 +108,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     },
     {
       "methodIndex": 9,
@@ -117,7 +117,7 @@
       "status": "error",
       "error": "JSON parse failed: Extra data: line 5 column 4 (char 136)",
       "stdout": "\n[\n  {\n    \"methodName\": \"System.Delegate::Combine\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::Remove\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::DynamicInvoke\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Delegate::get_Method\",\n    \"status\": \"not_",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-7/10] System.Delegate::CreateDelegate...  [3/3-10/10] System.Delegate::op_Inequality... not found in closure\n  [3/3-5/10] System.Delegate::get_Target... not found in closure\n  [3/3-6/10] System.Delegate::CreateDelegate... not found in closure\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3"
+      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/10] System.Delegate::get_Method... not found in closure\n  [3/3-2/10] System.Delegate::Remove... not found in closure\n  [3/3-8/10] System.MulticastDelegate::GetInvocationList... not found in closure\n  [3/3-9/10] System.Delegate::op_Equality... not found in closure\n  [3/3-3/10] System.Delegate::DynamicInvoke... not found in closure\n  [3/3-1/10] System.Delegate::Combine.."
     }
   ]
 }

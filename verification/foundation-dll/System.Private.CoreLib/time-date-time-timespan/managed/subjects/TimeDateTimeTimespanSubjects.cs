@@ -39,31 +39,31 @@ public static partial class TimeDateTimeTimespanSubjects
     // [4] System.Private.CoreLib/System.DateTime::ToString:System.String()
     public static void Subject_4()
     {
-        if (((DateTime.UtcNow.ToString()).Length) != 20) _exitCode = 1;
+        if (((DateTime.UtcNow.ToString()).Length) != 21) _exitCode = 1;
     }
 
     // [5] System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
     public static void Subject_5()
     {
-        if (((DateTime.UtcNow.ToString("hello")).Length) != 5) _exitCode = 1;
+        if (((DateTime.UtcNow.ToString("hello")).Length) != 6) _exitCode = 1;
     }
 
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
     public static void Subject_6()
     {
-        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != -1822186190) _exitCode = 1;
+        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 23153493) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
     public static void Subject_7()
     {
-        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != -1203522411) _exitCode = 1;
+        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != 373398201) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
     public static void Subject_8()
     {
-        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != -1934370423) _exitCode = 1;
+        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != -89051178) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)

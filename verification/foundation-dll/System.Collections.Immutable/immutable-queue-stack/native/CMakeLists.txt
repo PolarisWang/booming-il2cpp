@@ -12,7 +12,7 @@ add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Collections.Immutable/immutable-queue-stack/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native-profile")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
@@ -24,6 +24,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "verification_dispatch.generated.cpp"  # verification dispatch (sources)
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_CODEGEN_CPP}
 )

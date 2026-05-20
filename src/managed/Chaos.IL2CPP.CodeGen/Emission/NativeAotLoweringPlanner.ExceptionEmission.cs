@@ -142,7 +142,7 @@ public sealed partial class NativeAotLoweringPlanner
 				instructions[idx + 1].Op is "ldloc" &&
 				GetRequiredIntOperand(instructions[idx]) == GetRequiredIntOperand(instructions[idx + 1]))
 			{
-				// Don't skip the ldloc if it's a branch target ¡ª the label must be preserved.
+				// Don't skip the ldloc if it's a branch target Â¡Âª the label must be preserved.
 				if (branchTargetOffsets is not null &&
 					branchTargetOffsets.Contains(GetRequiredIlOffset(instructions[idx + 1])))
 				{
@@ -241,7 +241,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	// ©¤©¤ Shared throw/rethrow emission helpers ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
+	// Â©Â¤Â©Â¤ Shared throw/rethrow emission helpers Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤Â©Â¤
 	// Consolidated from three duplicate implementations:
 	//   EmitInstruction (structured EH linear)
 	//   EmitFlatGotoBody (flat goto fallback)
@@ -1068,10 +1068,15 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_value_owner = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(declaringTypeSubjectId)}>({ConsumeEvalStackValueExpression()});");
 				builder.AppendLine($"{indentation}    chaos_value_owner->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
-				builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
-				builder.AppendLine($"{indentation}    {{");
-				builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_value_owner);");
-				builder.AppendLine($"{indentation}    }}");
+				// Skip write barrier for primitive field types â€” they never hold GC references
+				string? fieldTypeId = targetRef.FieldTypeSubjectId;
+				if (fieldTypeId == null || !PrimitiveValueTypeSubjectIds.Contains(fieldTypeId))
+				{
+					builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        chaos_gc_dirty_card(chaos_value_owner);");
+					builder.AppendLine($"{indentation}    }}");
+				}
 			}
 			else
 			{
@@ -1903,13 +1908,12 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine($"{indentation}    auto* chaos_destination = chaos_resolve_managed_value_pointer<CHAOS_IL2CPP_INTPTR>({ConsumeEvalStackValueExpression()});");
 			builder.AppendLine($"{indentation}    *chaos_destination = chaos_value;");
-
-			builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_destination);");
+			// Primitive value types cannot contain GC references - skip write barrier
 		}
 		builder.AppendLine($"{indentation}}}");
-	}
+}
 
-	private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
 		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Type)
@@ -2297,7 +2301,7 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}        ");
 		}
 		builder.AppendLine($"{indentation}    }}");
-		// ©¤©¤ Single delegate path with hotpatch checkpoint ©¤©¤
+		// Â©Â¤Â©Â¤ Single delegate path with hotpatch checkpoint Â©Â¤Â©Â¤
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_ptr == 0)");
@@ -2507,13 +2511,13 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsEnumToStringCall(AotCoreIrInstructionArtifact instruction)
 	{
-		return instruction.Callee?.Contains("_ToString_", StringComparison.Ordinal) == true;
+		return instruction.Callee?.Contains("::ToString:", StringComparison.Ordinal) == true;
 	}
 
 	private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		string rawValueExpr = ConsumeEvalStackValueExpression();
-		string typeHandle = $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeTypeInfoSymbol(_pendingEnumBoxSubjectId!)})";
+		string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(_pendingEnumBoxSubjectId!)})";
 
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
@@ -2709,7 +2713,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		builder.AppendLine($"{indentation}    }}");
-		// VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
+		// VTable resolve Â¡Âª always through type_info->vtable_array (unified ThinLockableHeader)
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
@@ -3199,34 +3203,54 @@ public sealed partial class NativeAotLoweringPlanner
 			IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
 			IReadOnlySet<int> branchTargetOffsets)
 		{
+			// Some branch target offsets may fall in gaps with no instructions
+			// (e.g. nops stripped by the IL reader before AOT IR was built).
+			// Map each branch target to the nearest real instruction offset.
+			var realOffsets = instructions.Select(GetRequiredIlOffset).OrderBy(o => o).ToArray();
+			var targetFixup = new Dictionary<int, int>();
+			foreach (int target in branchTargetOffsets)
+			{
+				int idx = Array.BinarySearch(realOffsets, target);
+				if (idx < 0)
+				{
+					int nextIdx = ~idx;
+					if (nextIdx < realOffsets.Length)
+						targetFixup[target] = realOffsets[nextIdx];
+				}
+			}
+
+			int Resolve(int rawTarget) =>
+				targetFixup.TryGetValue(rawTarget, out int fixedTarget) ? fixedTarget : rawTarget;
+
 			var filtered = FilterRedundantStoreReloadPairs(instructions, branchTargetOffsets);
 			foreach (var instruction in filtered)
 			{
 				int offset = GetRequiredIlOffset(instruction);
-				if (branchTargetOffsets.Contains(offset))
+				int effectiveOffset = Resolve(offset);
+				if (branchTargetOffsets.Contains(offset) || effectiveOffset != offset)
 				{
-					builder.AppendLine($"chaos_label_{offset}:");
+					builder.AppendLine($"chaos_label_{effectiveOffset}:");
 				}
 
 				switch (instruction.Op)
 				{
-				case "br":
-				case "leave":
-				{
-					int target = GetRequiredIntOperand(instruction);
-					builder.AppendLine($"    goto chaos_label_{target};");
-					break;
-				}
+					case "br":
+					case "leave":
+					{
+						int target = Resolve(GetRequiredIntOperand(instruction));
+						builder.AppendLine($"    goto chaos_label_{target};");
+						break;
+					}
 				case "brfalse":
 				{
 					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} == 0)");
-					builder.AppendLine($"        goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"        goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					break;
 				}
 				case "brtrue":
 				{
 					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} != 0)");
-					builder.AppendLine($"        goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"        goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					break;
 				}
 				case "beq":
@@ -3235,7 +3259,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = {ConsumeEvalStackValueExpression()};");
 					builder.AppendLine($"        const auto chaos_left = {ConsumeEvalStackValueExpression()};");
 					builder.AppendLine($"        if (chaos_left == chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3245,7 +3269,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = {ConsumeEvalStackValueExpression()};");
 					builder.AppendLine($"        const auto chaos_left = {ConsumeEvalStackValueExpression()};");
 					builder.AppendLine($"        if (chaos_left != chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3255,7 +3279,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left >= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3265,7 +3289,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left >= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3275,7 +3299,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left > chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3285,7 +3309,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left > chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3295,7 +3319,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left <= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3305,7 +3329,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left <= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3315,7 +3339,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left < chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3325,7 +3349,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
 					builder.AppendLine($"        if (chaos_left < chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{GetRequiredIntOperand(instruction)};");
+					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
 					builder.AppendLine($"    }}");
 					break;
 				}
@@ -3338,7 +3362,7 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine($"        {{");
 					for (int i = 0; i < targets.Count; i++)
 					{
-						builder.AppendLine($"        case {i}: goto chaos_label_{targets[i]};");
+						builder.AppendLine($"        case {i}: goto chaos_label_{Resolve(targets[i])};");
 					}
 					builder.AppendLine($"        default: break;");
 					builder.AppendLine($"        }}");

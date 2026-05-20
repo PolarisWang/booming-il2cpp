@@ -36,7 +36,7 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct ConstantFortyTwo_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -130,7 +130,7 @@ struct Functions {
         );
     } runtimeState;
     struct SimpleMath_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -149,6 +149,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -159,10 +163,10 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct ConstantFortyTwo {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.constantFortyTwo..ctor(
+        return kFunctions.constantFortyTwo.ctor(
                     arg_0
         );
     }
@@ -349,10 +353,10 @@ struct RuntimeState {
 };
 
 struct SimpleMath {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.simpleMath..ctor(
+        return kFunctions.simpleMath.ctor(
                     arg_0
         );
     }

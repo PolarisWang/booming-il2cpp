@@ -36,34 +36,10 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct ReflectionAssemblySubjects_t {
+        void (*CustomEntrySubject_21)(
+                void
+        );
         void (*Subject_0)(
-                void
-        );
-        void (*Subject_1)(
-                void
-        );
-        void (*Subject_2)(
-                void
-        );
-        void (*Subject_3)(
-                void
-        );
-        void (*Subject_4)(
-                void
-        );
-        void (*Subject_5)(
-                void
-        );
-        void (*Subject_6)(
-                void
-        );
-        void (*Subject_7)(
-                void
-        );
-        void (*Subject_8)(
-                void
-        );
-        void (*Subject_9)(
                 void
         );
         void (*Subject_10)(
@@ -96,10 +72,34 @@ struct Functions {
         void (*Subject_19)(
                 void
         );
+        void (*Subject_1)(
+                void
+        );
         void (*Subject_20)(
                 void
         );
-        void (*Subject_21)(
+        void (*Subject_2)(
+                void
+        );
+        void (*Subject_3)(
+                void
+        );
+        void (*Subject_4)(
+                void
+        );
+        void (*Subject_5)(
+                void
+        );
+        void (*Subject_6)(
+                void
+        );
+        void (*Subject_7)(
+                void
+        );
+        void (*Subject_8)(
+                void
+        );
+        void (*Subject_9)(
                 void
         );
     } reflectionAssemblySubjects;
@@ -107,6 +107,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -118,54 +122,14 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct ReflectionAssemblySubjects {
+    static inline void CustomEntrySubject_21(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.CustomEntrySubject_21(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.reflectionAssemblySubjects.Subject_0(
-        );
-    }
-    static inline void Subject_1(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_1(
-        );
-    }
-    static inline void Subject_2(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_2(
-        );
-    }
-    static inline void Subject_3(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_3(
-        );
-    }
-    static inline void Subject_4(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_4(
-        );
-    }
-    static inline void Subject_5(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_5(
-        );
-    }
-    static inline void Subject_6(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_6(
-        );
-    }
-    static inline void Subject_7(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_7(
-        );
-    }
-    static inline void Subject_8(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_8(
-        );
-    }
-    static inline void Subject_9(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_9(
         );
     }
     static inline void Subject_10(
@@ -218,14 +182,54 @@ struct ReflectionAssemblySubjects {
         return kFunctions.reflectionAssemblySubjects.Subject_19(
         );
     }
+    static inline void Subject_1(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_1(
+        );
+    }
     static inline void Subject_20(
     ) {
         return kFunctions.reflectionAssemblySubjects.Subject_20(
         );
     }
-    static inline void Subject_21(
+    static inline void Subject_2(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_21(
+        return kFunctions.reflectionAssemblySubjects.Subject_2(
+        );
+    }
+    static inline void Subject_3(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_3(
+        );
+    }
+    static inline void Subject_4(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_4(
+        );
+    }
+    static inline void Subject_5(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_5(
+        );
+    }
+    static inline void Subject_6(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_6(
+        );
+    }
+    static inline void Subject_7(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_7(
+        );
+    }
+    static inline void Subject_8(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_8(
+        );
+    }
+    static inline void Subject_9(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

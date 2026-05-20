@@ -21,12 +21,15 @@ LAYER_RULES: dict[str, re.Pattern] = {
     "Templates": re.compile(r"src/managed/.*CodeGen/Templates/"),
     "Driver": re.compile(r"src/managed/.*Chaos\.IL2CPP\.Driver/"),
     "CodeGenRoot": re.compile(r"src/managed/.*Chaos\.IL2CPP\.CodeGen/"),
+    "ManagedContracts": re.compile(r"src/managed/.*Chaos\.IL2CPP\.Contracts/"),
     "RuntimeCore": re.compile(r"src/native/runtime-core/"),
     "Interpreter": re.compile(r"src/native/interpreter/"),
     "Bootstrap": re.compile(r"src/native/bootstrap/"),
     "Common": re.compile(r"src/native/common/"),
     "Codegen": re.compile(r"src/native/codegen/"),
     "HotUpdate": re.compile(r"src/native/hot-update/"),
+    "Contracts": re.compile(r"contracts/"),
+    "BuildConfig": re.compile(r"CMakeLists\.txt$"),
     "Tests": re.compile(r"tests/"),
     "TestInfra": re.compile(r"build/toolchains/run/testing/"),
 }
@@ -85,6 +88,9 @@ class P2LayerCorrectnessCheck(PrincipleCheck):
         # Get repo-wide changed files and filter to source files only
         all_changed = _get_repo_changed_files()
         source_files = [f for f in all_changed if not _is_generated_artifact(f)]
+
+        # Ignore deleted files — they don't affect architecture layer distribution.
+        source_files = [f for f in source_files if (_REPO_ROOT / f).exists()]
 
         if not source_files:
             return CheckResult(

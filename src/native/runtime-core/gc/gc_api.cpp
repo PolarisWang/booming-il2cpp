@@ -211,9 +211,14 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() no
 // chaos_gc_get_memory_info
 // ======================================================================
 
-extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexcept
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
+    CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 kind) noexcept
 {
-    auto* info = static_cast<GcMemoryInfoNative*>(out);
+    // obj is a managed GCMemoryInfoData object reference (points to MethodTable*).
+    // Compute interior pointer past the MethodTable* to reach the first data field.
+    (void)kind;  // unused (all GCKind values return the same snapshot)
+    auto* info = reinterpret_cast<GcMemoryInfoNative*>(
+        reinterpret_cast<char*>(static_cast<std::intptr_t>(obj)) + sizeof(void*));
     auto snap = GcGetSnapshot();
     auto heap_size = static_cast<CHAOS_IL2CPP_INT64>(
         g_old_gen.TotalAllocated() + g_loh.TotalAllocated());

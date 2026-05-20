@@ -1,7 +1,7 @@
 {
-  "total": 32,
-  "passed": 32,
-  "failed": 0,
+  "total": 35,
+  "passed": 34,
+  "failed": 1,
   "results": [
     {
       "family": "array-indexing-copy",
@@ -22,16 +22,13 @@
       "family": "buffer-memory",
       "variants": {
         "patch": {
-          "success": true,
-          "error": null
-        },
-        "semantic-patch": {
-          "success": true,
-          "skipped": true
+          "success": false,
+          "error": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.Custom.cs(16,23): error CS0102: The type 'BufferMemoryPatchEntry' already contains a definition for '_exitCode' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.Custom.cs(16,23): error CS0102: The type 'BufferMemoryPatchEntry' already contains a definition for '_exitCode' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.32\n"
         }
       },
-      "success": true,
-      "methodCount": 10
+      "success": false,
+      "methodCount": 10,
+      "error": "patch variant failed: D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.Custom.cs(16,23): error CS0102: The type 'BufferMemoryPatchEntry' already contains a definition for '_exitCode' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.Custom.cs(16,23): error CS0102: The type 'BufferMemoryPatchEntry' already contains a definition for '_exitCode' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\il2cpp_dist\\entrypoint-patch\\BufferMemoryPatchEntry.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.32\n"
     },
     {
       "family": "collections-generic-core",
@@ -76,7 +73,7 @@
         }
       },
       "success": true,
-      "methodCount": 12
+      "methodCount": 13
     },
     {
       "family": "generic-nullable-value",
@@ -482,7 +479,52 @@
       },
       "success": true,
       "methodCount": 8
+    },
+    {
+      "family": "ccw-basic",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 5
+    },
+    {
+      "family": "rcw-basic",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 7
+    },
+    {
+      "family": "dispatch-basic",
+      "variants": {
+        "patch": {
+          "success": true,
+          "error": null
+        },
+        "semantic-patch": {
+          "success": true,
+          "skipped": true
+        }
+      },
+      "success": true,
+      "methodCount": 5
     }
   ],
-  "timestamp": "2026-05-17T15:06:13"
+  "timestamp": "2026-05-20T19:53:46"
 }

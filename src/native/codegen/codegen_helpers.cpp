@@ -319,6 +319,8 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
     }
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 
@@ -380,7 +382,10 @@ extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept
     if (idx >= as->elements.size()) {
         as->elements.resize(idx + 1u);
     }
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+    chaos_gc_dirty_card(as);
 }
 
 // ── Type check helpers ──────────────────────────────────────────────────────
@@ -591,6 +596,22 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     }
 
     t_deopt_state.deopt_happened = true;
+}
+
+// ── OSR loop header resolver ─────────────────────────────────────────────────
+
+extern "C" void* OsrResolveLoopHeader() noexcept {
+    using namespace chaos::il2cpp::codegen;
+    void* ret_addr = _ReturnAddress();
+    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    if (nm == nullptr) return nullptr;
+
+    uint32_t resume_pc = t_deopt_state.osr_resume_pc;
+    if (resume_pc >= nm->instr_offset_count) {
+        resume_pc = 0;  // fall back to instruction 0
+    }
+    uint32_t native_off = nm->instr_offsets[resume_pc];
+    return static_cast<uint8_t*>(nm->code) + native_off;
 }
 
 // ── Deoptimization trampoline entry point ─────────────────────────────────────

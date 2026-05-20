@@ -749,7 +749,7 @@ static void (*kAotMethods[29])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[29])() = {
+extern "C" void (*kBenchmarkWrappers[29])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -779,6 +779,22 @@ static void (*kBenchmarkWrappers[29])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[28])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 7;
+extern "C" const int kSubjectEntryIndices[7] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -838,18 +854,278 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: switch-based direct dispatch per method.
+// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
+// the method body into the timing loop — eliminating function pointer indirection.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
+	switch (chaos_entry_index) {
+	case 0: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_0();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
 	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
+	case 1: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_1();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 2: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_2();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 3: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_3();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 4: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_4();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 5: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_5();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 6: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicSubjects_Subject_6();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 7: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_ConstantFortyTwo__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 8: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_ConstantFortyTwo_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 9: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 10: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32(0,0,0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 11: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32(0,0,0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 12: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw_System_IntPtr_System_IntPtr(0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 13: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 14: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 15: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr(0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 16: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 17: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 18: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 19: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 20: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 21: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripIdentity();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 22: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripQi();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 23: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 24: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RuntimeState_Get();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 25: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_RuntimeState_Set_System_IntPtr(0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 26: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_SimpleMath__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 27: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 28: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			RcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	default:
+		return -1.0;
+	}
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1077,6 +1353,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1192,6 +1469,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1307,6 +1585,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1422,6 +1701,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1537,6 +1817,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1652,6 +1933,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_5(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1767,6 +2049,7 @@ extern "C" void RcwBasicSubjects_RcwBasicSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1943,17 +2226,17 @@ extern "C" CHAOS_IL2CPP_INTPTR RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwFor
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		auto& _d5 = s_hotpatch_entries[5];
+		auto& _d12 = s_hotpatch_entries[12];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
 		{
 			alignas(16) uint8_t _d_ab[16];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d5.method_key, _d_ab, &_d_hpresult);
+				_d12.method_key, _d_ab, &_d_hpresult);
 		}
 		else
 		{
@@ -2056,13 +2339,13 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_Run_System_In
 		{
 			case 0:
 				{
-					auto& _d14 = s_hotpatch_entries[14];
+					auto& _d21 = s_hotpatch_entries[21];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
 					{
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d14.method_key, nullptr, &_d_hpresult);
+							_d21.method_key, nullptr, &_d_hpresult);
 					}
 					else
 					{
@@ -2073,13 +2356,13 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_Run_System_In
 				chaos_locals[2] = _s0;
 			case 1:
 				{
-					auto& _d15 = s_hotpatch_entries[15];
+					auto& _d22 = s_hotpatch_entries[22];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
 					{
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d15.method_key, nullptr, &_d_hpresult);
+							_d22.method_key, nullptr, &_d_hpresult);
 					}
 					else
 					{
@@ -2090,13 +2373,13 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_Run_System_In
 				chaos_locals[2] = _s0;
 			case 2:
 				{
-					auto& _d16 = s_hotpatch_entries[16];
+					auto& _d23 = s_hotpatch_entries[23];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
 					{
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d16.method_key, nullptr, &_d_hpresult);
+							_d23.method_key, nullptr, &_d_hpresult);
 					}
 					else
 					{
@@ -2108,13 +2391,13 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_Run_System_In
 			case 3:
 			{
 				{
-					auto& _d11 = s_hotpatch_entries[11];
+					auto& _d18 = s_hotpatch_entries[18];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
 					{
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d11.method_key, nullptr, &_d_hpresult);
+							_d18.method_key, nullptr, &_d_hpresult);
 					}
 					else
 					{
@@ -2194,16 +2477,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirect
 			_s2 = chaos_locals[0];
 			{
 				const auto chaos_arg_0 = _s2;
-				auto& _d2 = s_hotpatch_entries[2];
+				auto& _d9 = s_hotpatch_entries[9];
 				CHAOS_IL2CPP_INTPTR _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 				{
 					alignas(16) uint8_t _d_ab[8];
 					ArgBuffer _d_bw(_d_ab);
 					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d2.method_key, _d_ab, &_d_hpresult);
+						_d9.method_key, _d_ab, &_d_hpresult);
 				}
 				else
 				{
@@ -2225,10 +2508,10 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirect
 						const auto chaos_arg_2 = _s5;
 						const auto chaos_arg_1 = _s4;
 						const auto chaos_arg_0 = _s3;
-						auto& _d4 = s_hotpatch_entries[4];
+						auto& _d11 = s_hotpatch_entries[11];
 						CHAOS_IL2CPP_INT32 _d_hpresult{};
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
 						{
 							alignas(16) uint8_t _d_ab[20];
 							ArgBuffer _d_bw(_d_ab);
@@ -2237,7 +2520,7 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirect
 							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
 							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d4.method_key, _d_ab, &_d_hpresult);
+								_d11.method_key, _d_ab, &_d_hpresult);
 						}
 						else
 						{
@@ -2376,16 +2659,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 			_s2 = chaos_locals[0];
 			{
 				const auto chaos_arg_0 = _s2;
-				auto& _d2 = s_hotpatch_entries[2];
+				auto& _d9 = s_hotpatch_entries[9];
 				CHAOS_IL2CPP_INTPTR _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 				{
 					alignas(16) uint8_t _d_ab[8];
 					ArgBuffer _d_bw(_d_ab);
 					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d2.method_key, _d_ab, &_d_hpresult);
+						_d9.method_key, _d_ab, &_d_hpresult);
 				}
 				else
 				{
@@ -2401,16 +2684,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 					_s3 = chaos_locals[1];
 					{
 						const auto chaos_arg_0 = _s3;
-						auto& _d6 = s_hotpatch_entries[6];
+						auto& _d13 = s_hotpatch_entries[13];
 						CHAOS_IL2CPP_INTPTR _d_hpresult{};
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 						{
 							alignas(16) uint8_t _d_ab[8];
 							ArgBuffer _d_bw(_d_ab);
 							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d6.method_key, _d_ab, &_d_hpresult);
+								_d13.method_key, _d_ab, &_d_hpresult);
 						}
 						else
 						{
@@ -2428,16 +2711,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 							_s3 = chaos_locals[2];
 							{
 								const auto chaos_arg_0 = _s3;
-								auto& _d7 = s_hotpatch_entries[7];
+								auto& _d14 = s_hotpatch_entries[14];
 								CHAOS_IL2CPP_INTPTR _d_hpresult{};
-								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
+								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
 								{
 									alignas(16) uint8_t _d_ab[8];
 									ArgBuffer _d_bw(_d_ab);
 									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 									::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-										_d7.method_key, _d_ab, &_d_hpresult);
+										_d14.method_key, _d_ab, &_d_hpresult);
 								}
 								else
 								{
@@ -2461,15 +2744,15 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 											_s3 = chaos_locals[2];
 											{
 												const auto chaos_arg_0 = _s3;
-												auto& _d9 = s_hotpatch_entries[9];
-												if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-													&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+												auto& _d16 = s_hotpatch_entries[16];
+												if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
+													&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
 												{
 													alignas(16) uint8_t _d_ab[8];
 													ArgBuffer _d_bw(_d_ab);
 													_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 													::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-														_d9.method_key, _d_ab, nullptr);
+														_d16.method_key, _d_ab, nullptr);
 												}
 												else
 												{
@@ -2596,16 +2879,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 			_s2 = chaos_locals[0];
 			{
 				const auto chaos_arg_0 = _s2;
-				auto& _d2 = s_hotpatch_entries[2];
+				auto& _d9 = s_hotpatch_entries[9];
 				CHAOS_IL2CPP_INTPTR _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 				{
 					alignas(16) uint8_t _d_ab[8];
 					ArgBuffer _d_bw(_d_ab);
 					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d2.method_key, _d_ab, &_d_hpresult);
+						_d9.method_key, _d_ab, &_d_hpresult);
 				}
 				else
 				{
@@ -2621,16 +2904,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 					_s3 = chaos_locals[1];
 					{
 						const auto chaos_arg_0 = _s3;
-						auto& _d6 = s_hotpatch_entries[6];
+						auto& _d13 = s_hotpatch_entries[13];
 						CHAOS_IL2CPP_INTPTR _d_hpresult{};
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 						{
 							alignas(16) uint8_t _d_ab[8];
 							ArgBuffer _d_bw(_d_ab);
 							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d6.method_key, _d_ab, &_d_hpresult);
+								_d13.method_key, _d_ab, &_d_hpresult);
 						}
 						else
 						{
@@ -2692,17 +2975,17 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 							{
 								const auto chaos_arg_1 = _s4;
 								const auto chaos_arg_0 = _s3;
-								auto& _d8 = s_hotpatch_entries[8];
+								auto& _d15 = s_hotpatch_entries[15];
 								CHAOS_IL2CPP_INTPTR _d_hpresult{};
-								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
+								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
+									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
 								{
 									alignas(16) uint8_t _d_ab[16];
 									ArgBuffer _d_bw(_d_ab);
 									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
 									::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-										_d8.method_key, _d_ab, &_d_hpresult);
+										_d15.method_key, _d_ab, &_d_hpresult);
 								}
 								else
 								{
@@ -2725,16 +3008,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 									_s16 = chaos_locals[2];
 									{
 										const auto chaos_arg_0 = _s16;
-										auto& _d7 = s_hotpatch_entries[7];
+										auto& _d14 = s_hotpatch_entries[14];
 										CHAOS_IL2CPP_INTPTR _d_hpresult{};
-										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
+										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
 										{
 											alignas(16) uint8_t _d_ab[8];
 											ArgBuffer _d_bw(_d_ab);
 											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 											::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-												_d7.method_key, _d_ab, &_d_hpresult);
+												_d14.method_key, _d_ab, &_d_hpresult);
 										}
 										else
 										{
@@ -2752,15 +3035,15 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundT
 											_s16 = chaos_locals[2];
 											{
 												const auto chaos_arg_0 = _s16;
-												auto& _d9 = s_hotpatch_entries[9];
-												if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-													&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+												auto& _d16 = s_hotpatch_entries[16];
+												if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
+													&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
 												{
 													alignas(16) uint8_t _d_ab[8];
 													ArgBuffer _d_bw(_d_ab);
 													_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 													::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-														_d9.method_key, _d_ab, nullptr);
+														_d16.method_key, _d_ab, nullptr);
 												}
 												else
 												{
@@ -2873,16 +3156,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtable
 			_s2 = chaos_locals[0];
 			{
 				const auto chaos_arg_0 = _s2;
-				auto& _d2 = s_hotpatch_entries[2];
+				auto& _d9 = s_hotpatch_entries[9];
 				CHAOS_IL2CPP_INTPTR _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
 				{
 					alignas(16) uint8_t _d_ab[8];
 					ArgBuffer _d_bw(_d_ab);
 					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d2.method_key, _d_ab, &_d_hpresult);
+						_d9.method_key, _d_ab, &_d_hpresult);
 				}
 				else
 				{
@@ -2898,16 +3181,16 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtable
 					_s3 = chaos_locals[1];
 					{
 						const auto chaos_arg_0 = _s3;
-						auto& _d6 = s_hotpatch_entries[6];
+						auto& _d13 = s_hotpatch_entries[13];
 						CHAOS_IL2CPP_INTPTR _d_hpresult{};
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 						{
 							alignas(16) uint8_t _d_ab[8];
 							ArgBuffer _d_bw(_d_ab);
 							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d6.method_key, _d_ab, &_d_hpresult);
+								_d13.method_key, _d_ab, &_d_hpresult);
 						}
 						else
 						{
@@ -2931,10 +3214,10 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtable
 								const auto chaos_arg_2 = _s5;
 								const auto chaos_arg_1 = _s4;
 								const auto chaos_arg_0 = _s3;
-								auto& _d3 = s_hotpatch_entries[3];
+								auto& _d10 = s_hotpatch_entries[10];
 								CHAOS_IL2CPP_INT32 _d_hpresult{};
-								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
+								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
 								{
 									alignas(16) uint8_t _d_ab[20];
 									ArgBuffer _d_bw(_d_ab);
@@ -2943,7 +3226,7 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtable
 									_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
 									_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
 									::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-										_d3.method_key, _d_ab, &_d_hpresult);
+										_d10.method_key, _d_ab, &_d_hpresult);
 								}
 								else
 								{
@@ -2961,15 +3244,15 @@ extern "C" CHAOS_IL2CPP_INT32 RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtable
 									_s3 = chaos_locals[2];
 									{
 										const auto chaos_arg_0 = _s3;
-										auto& _d9 = s_hotpatch_entries[9];
-										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+										auto& _d16 = s_hotpatch_entries[16];
+										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
+											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
 										{
 											alignas(16) uint8_t _d_ab[8];
 											ArgBuffer _d_bw(_d_ab);
 											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 											::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-												_d9.method_key, _d_ab, nullptr);
+												_d16.method_key, _d_ab, nullptr);
 										}
 										else
 										{

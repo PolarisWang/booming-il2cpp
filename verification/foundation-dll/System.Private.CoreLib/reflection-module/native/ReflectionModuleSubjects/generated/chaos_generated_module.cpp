@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -14,23 +14,56 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
 
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5(
+        void
+);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0(
+        void
+);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1(
+        void
+);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(
+        void
+);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(
+        void
+);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(
+        void
+);
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
 // ═══════════════════════════════════════════════════════════════════════════
 
 static const Functions s_functions = {
     {
+        &ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5,
         &ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0,
         &ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1,
         &ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2,
         &ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3,
         &ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4,
-        &ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5,
     },
     6,
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[6];
+void* kFunctionsFlat[6] = {
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5),
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0),
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1),
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2),
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3),
+    reinterpret_cast<void*>(&ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
