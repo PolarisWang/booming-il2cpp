@@ -13,6 +13,7 @@
 #include "gc_region.h"
 #include "gc_events.h"
 #include "gc_old_gen.h"
+#include "gc_test_base.h"
 
 #include <gtest/gtest.h>
 
@@ -26,10 +27,7 @@ void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 }}}
 
-struct GcPohTest : ::testing::Test {
-    void SetUp() override {
-        InitYoungGeneration();
-    }
+struct GcPohTest : GcUnitTestBase {
 };
 
 // ── Test 1: Basic POH allocation ─────────────────────────────────

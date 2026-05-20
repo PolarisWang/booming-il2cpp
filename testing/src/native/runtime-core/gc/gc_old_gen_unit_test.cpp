@@ -9,25 +9,22 @@
 #include "gc_region.h"
 #include "gc_scheduler.h"
 #include "thread_state.h"
+#include "gc_test_base.h"
 #include <gtest/gtest.h>
 
 using namespace chaos::il2cpp::runtime_core;
 
-struct OldGenTest : ::testing::Test {
+struct OldGenTest : GcTestBase {
     void SetUp() override {
-        tid = threading::AllocateThreadId();
-        threading::RegisterThread(tid, nullptr);
-        threading::EnterCooperativeMode();
+        GcTestBase::SetUp();
 
         GcSetHeapBase(reinterpret_cast<void*>(uintptr_t(0)));
         g_old_gen.Init(0, 2);
     }
 
     void TearDown() override {
-        threading::UnregisterThread();
+        GcTestBase::TearDown();
     }
-
-    uint32_t tid;
 };
 
 TEST_F(OldGenTest, AllocateAndFree) {

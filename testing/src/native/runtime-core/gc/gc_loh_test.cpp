@@ -11,15 +11,13 @@
 #include "gc_loh.h"
 #include "gc_region.h"
 #include "gc_old_gen.h"
+#include "gc_test_base.h"
 
 #include <gtest/gtest.h>
 
 using namespace chaos::il2cpp::runtime_core;
 
-struct GcLohTest : ::testing::Test {
-    void SetUp() override {
-        InitYoungGeneration();
-    }
+struct GcLohTest : GcUnitTestBase {
 };
 
 // ── Test 1: Basic LOH allocation ──────────────────────────────────

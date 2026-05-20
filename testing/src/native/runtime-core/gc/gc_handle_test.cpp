@@ -15,6 +15,7 @@
 #include "gc_region.h"
 #include "gc_young_collector.h"
 #include "gc_layout.h"
+#include "gc_test_base.h"
 
 #include <gtest/gtest.h>
 
@@ -33,36 +34,7 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 
 using namespace chaos::il2cpp::runtime_core;
 
-// ── FakeTypeInfo for old-gen test objects ─────────────────────────────
-struct alignas(8) TestTypeInfo {
-    uint64_t stable_id;
-    uint64_t reserved[3];
-};
-
-static const void* g_test_type_info = nullptr;
-
-static void SetupTestType() {
-    uint64_t stable_id = GcLayoutRegistry::Instance()
-        .RegisterOrGetRawAllocType(256);
-    static TestTypeInfo s_ti{};
-    s_ti.stable_id = stable_id;
-    auto* reg = &GcLayoutRegistry::Instance();
-    reg->RegisterTypeInfoRange(
-        reinterpret_cast<uintptr_t>(&s_ti),
-        reinterpret_cast<uintptr_t>(&s_ti) + sizeof(TestTypeInfo));
-    g_test_type_info = &s_ti;
-}
-
-static void InitOldGenTestObject(void* obj) {
-    *static_cast<const void**>(obj) = g_test_type_info;
-}
-
-struct GcHandleTest : ::testing::Test {
-    void SetUp() override {
-        SetupTestType();
-        InitYoungGeneration();
-        threading::RegisterThread(threading::AllocateThreadId(), nullptr);
-    }
+struct GcHandleTest : GcUnitTestBase {
 };
 
 // ── Test 1: Strong handle keeps object alive ──────────────────────
@@ -143,7 +115,7 @@ TEST_F(GcHandleTest, DependentHandle) {
     void* secondary = NurseryAllocate(64);
     ASSERT_NE(primary, nullptr);
     ASSERT_NE(secondary, nullptr);
-    InitOldGenTestObject(primary);
+    *static_cast<const void**>(primary) = GetTestTypeInfo(256);
     std::memset(secondary, 0xEF, 64);
 
     CHAOS_IL2CPP_UINT64 dh = GcCreateDependentHandle(primary, secondary);
@@ -175,9 +147,9 @@ TEST_F(GcHandleTest, SetSecondary) {
     ASSERT_NE(primary, nullptr);
     ASSERT_NE(secondary1, nullptr);
     ASSERT_NE(secondary2, nullptr);
-    InitOldGenTestObject(primary);
-    std::memset(secondary1, 0xAA, 64);
-    std::memset(secondary2, 0xBB, 64);
+    *static_cast<const void**>(primary) = GetTestTypeInfo(256);
+    // Initialize secondary2 with a known pattern to verify it's preserved.
+    static_cast<unsigned char*>(secondary2)[0] = 0xBB;
 
     CHAOS_IL2CPP_UINT64 dh = GcCreateDependentHandle(primary, secondary1);
     ASSERT_NE(dh, 0u);

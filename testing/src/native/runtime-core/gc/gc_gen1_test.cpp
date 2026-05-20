@@ -14,27 +14,10 @@
 #include "gc_old_gen.h"
 #include "gc_layout.h"
 #include "thread_state.h"
+#include "gc_test_base.h"
 #include <gtest/gtest.h>
 
 using namespace chaos::il2cpp::runtime_core;
-
-struct alignas(8) TestTypeInfo {
-    uint64_t stable_id;
-    uint64_t reserved[3];
-};
-
-static const void* SetupTestType(uint32_t instance_size) {
-    uint64_t stable_id = GcLayoutRegistry::Instance()
-        .RegisterOrGetRawAllocType(instance_size);
-    static TestTypeInfo s_ti{};
-    s_ti.stable_id = stable_id;
-    auto* reg = &GcLayoutRegistry::Instance();
-    uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_ti);
-    reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(TestTypeInfo));
-    return &s_ti;
-}
-
-static const void* g_test_type_info = nullptr;
 
 static void ClearNursery() {
     auto* nursery = g_young_gen.region.load(std::memory_order_acquire);
@@ -47,30 +30,11 @@ static void ClearNursery() {
 }
 
 static void InitGen1Object(void* obj, uint32_t pattern) {
-    *static_cast<const void**>(obj) = g_test_type_info;
+    *static_cast<const void**>(obj) = GcUnitTestBase::GetTestTypeInfo(64);
     *reinterpret_cast<uint32_t*>(static_cast<char*>(obj) + 8) = pattern;
 }
 
-struct Gen1Test : ::testing::Test {
-    void SetUp() override {
-        tid = threading::AllocateThreadId();
-        threading::RegisterThread(tid, nullptr);
-        threading::EnterCooperativeMode();
-
-        InitYoungGeneration();
-
-        g_test_type_info = SetupTestType(64);
-        ASSERT_NE(g_test_type_info, nullptr);
-
-        void* warmup = g_old_gen.Allocate(8, true);
-        (void)warmup;
-    }
-
-    void TearDown() override {
-        threading::UnregisterThread();
-    }
-
-    uint32_t tid;
+struct Gen1Test : GcUnitTestBase {
 };
 
 TEST_F(Gen1Test, EmptyGen1) {
@@ -178,12 +142,12 @@ TEST_F(Gen1Test, Gen1Fragmentation) {
 
     uint64_t big_sid = GcLayoutRegistry::Instance()
         .RegisterOrGetRawAllocType(1024 * 1024);
-    static TestTypeInfo big_ti{};
+    static GcTestTypeInfo big_ti{};
     big_ti.stable_id = big_sid;
     {
         auto* reg = &GcLayoutRegistry::Instance();
         uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&big_ti);
-        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(TestTypeInfo));
+        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(GcTestTypeInfo));
     }
     void* big = TryAllocateInGen1(1024 * 1024);
     ASSERT_NE(big, nullptr);
@@ -211,7 +175,7 @@ TEST_F(Gen1Test, PromotionAgeThresholdTrigger) {
 
     void* gen1_obj = TryAllocateInGen1(64);
     ASSERT_NE(gen1_obj, nullptr);
-    *static_cast<const void**>(gen1_obj) = g_test_type_info;
+    *static_cast<const void**>(gen1_obj) = GcUnitTestBase::GetTestTypeInfo(64);
     volatile void* keep = gen1_obj;
     (void)keep;
 
