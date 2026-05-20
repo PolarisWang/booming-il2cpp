@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Collections.Immutable/immutable/interlocked",
+  "displayName": "Immutable Interlocked",
+  "methodSubjectIds": [],
+  "methodSubjectCount": 0,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

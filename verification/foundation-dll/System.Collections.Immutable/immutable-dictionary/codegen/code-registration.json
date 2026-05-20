@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableDictionarySubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_1",
+          "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_2",
+          "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

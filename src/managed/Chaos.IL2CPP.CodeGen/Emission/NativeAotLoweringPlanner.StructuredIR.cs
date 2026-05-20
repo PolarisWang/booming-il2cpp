@@ -719,7 +719,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (ite.PostMergeBody != null)
             {
-                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -789,7 +789,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (ite.PostMergeBody != null)
             {
-                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -847,6 +847,7 @@ public sealed partial class NativeAotLoweringPlanner
             or "add.ovf" or "sub.ovf" or "mul.ovf"
             or "ldlen" or "localloc" => 1,
         "mkrefany" => 2,
+        "call" or "callvirt" or "calli" or "newobj" => 1,
         _ => 0,
     };
 
@@ -1035,7 +1036,17 @@ public sealed partial class NativeAotLoweringPlanner
         string caseIndent = inner + "    ";
         string bodyIndent = caseIndent + "    ";
 
-        var filteredSwitch = FilterRedundantStoreReloadPairs(sw.SwitchInstructions);
+        // Collect ldloc slots from all case bodies + default body so the
+        // DCE filter preserves stloc instructions whose values are consumed
+        // by downstream case bodies through chaos_locals[N].
+        var switchBodyLocals = new HashSet<int>();
+        foreach (var caseBody in sw.CaseBodies.Values)
+            switchBodyLocals.UnionWith(CollectLdlocSlots(caseBody));
+        if (sw.DefaultBody != null)
+            switchBodyLocals.UnionWith(CollectLdlocSlots(sw.DefaultBody));
+
+        var filteredSwitch = FilterRedundantStoreReloadPairs(
+            sw.SwitchInstructions, externallyReferencedLocals: switchBodyLocals.Count > 0 ? switchBodyLocals : null);
         foreach (var instr in filteredSwitch)
             EmitInstruction(builder, instr, indentation);
 

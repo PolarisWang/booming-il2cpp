@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/sorted/set",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte,System.Byte)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>(System.Int32)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    }
+  ],
+  "summary": {
+    "totalMethods": 5,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

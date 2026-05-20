@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/array",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+      "status": "passed",
+      "prePatchNsPerOp": 1.88,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 32.98
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte,System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.01,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 79.1
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 1.14,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 119.3
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<String>:System.Collections.Immutable.ImmutableArray<System.String>(System.String)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 3,
+    "averageSlowdownPercent": 77.13,
+    "slowdownFactor": 1.7712999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

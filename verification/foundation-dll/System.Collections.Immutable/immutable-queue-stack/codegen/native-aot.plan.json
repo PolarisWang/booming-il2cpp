@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "ImmutableQueueStackSubjects",
+  "entrySubjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

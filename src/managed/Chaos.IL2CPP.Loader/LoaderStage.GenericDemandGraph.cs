@@ -123,7 +123,8 @@ public sealed partial class LoaderStage
         IDictionary<string, GenericInstantiationDemandModel> genericInstantiationDemandEntries,
         string requestingAssemblyName,
         TypeIdentity typeIdentity,
-        string demandSourceKind)
+        string demandSourceKind,
+        IReadOnlySet<string> valueTypeSubjectIds)
     {
         ArgumentNullException.ThrowIfNull(genericInstantiationDemandEntries);
         ArgumentException.ThrowIfNullOrWhiteSpace(requestingAssemblyName);
@@ -149,7 +150,7 @@ public sealed partial class LoaderStage
                 DemandSourceKind = demandSourceKind,
                 InstantiationKey = instantiationKey,
                 SupportKindCode = GenericSupportKind.Specialized,
-                SpecializationKindCode = GenericSpecializationKind.SpecializedBody,
+                SpecializationKindCode = ComputeGenericSpecializationKind(instantiationKey, valueTypeSubjectIds),
                 FamilyKindCode = ResolveGenericDemandFamilyKind("type", instantiationKey.ContextKind),
                 IsCrossAssembly = !string.Equals(requestingAssemblyName, typeIdentity.AssemblyName, StringComparison.Ordinal),
             };
@@ -159,7 +160,8 @@ public sealed partial class LoaderStage
         IDictionary<string, GenericInstantiationDemandModel> genericInstantiationDemandEntries,
         string requestingAssemblyName,
         MethodReferenceSummary methodReference,
-        string demandSourceKind)
+        string demandSourceKind,
+        IReadOnlySet<string> valueTypeSubjectIds)
     {
         ArgumentNullException.ThrowIfNull(genericInstantiationDemandEntries);
         ArgumentException.ThrowIfNullOrWhiteSpace(requestingAssemblyName);
@@ -185,7 +187,7 @@ public sealed partial class LoaderStage
                 DemandSourceKind = demandSourceKind,
                 InstantiationKey = instantiationKey,
                 SupportKindCode = GenericSupportKind.Specialized,
-                SpecializationKindCode = GenericSpecializationKind.SpecializedBody,
+                SpecializationKindCode = ComputeGenericSpecializationKind(instantiationKey, valueTypeSubjectIds),
                 FamilyKindCode = ResolveGenericDemandFamilyKind("method", instantiationKey.ContextKind),
                 IsCrossAssembly = !string.Equals(requestingAssemblyName, methodReference.AssemblyName, StringComparison.Ordinal),
             };
@@ -224,6 +226,50 @@ public sealed partial class LoaderStage
     private static string CreateDemandEntryKey(string requestingAssemblyName, string subjectKind, string subjectId)
     {
         return $"{requestingAssemblyName}|{subjectKind}|{subjectId}";
+    }
+
+    /// <summary>
+    /// Determines whether a generic instantiation is eligible for shared body codegen.
+    /// Returns <see cref="GenericSpecializationKind.SharedBody"/> when all type arguments
+    /// are reference types (matching the logic in <c>GenericSharing.IsSharedGenericInstantiation</c>).
+    /// Returns <see cref="GenericSpecializationKind.SpecializedBody"/> when any type argument
+    /// is a value type or an unresolved generic parameter.
+    /// </summary>
+    private static GenericSpecializationKind ComputeGenericSpecializationKind(
+        GenericInstantiationKey instantiationKey,
+        IReadOnlySet<string> valueTypeSubjectIds)
+    {
+        // Check type arguments — if all are reference types, this is shareable
+        if (instantiationKey.TypeArguments is { Count: > 0 })
+        {
+            foreach (var typeArg in instantiationKey.TypeArguments)
+            {
+                if (valueTypeSubjectIds.Contains(typeArg))
+                    return GenericSpecializationKind.SpecializedBody;
+                if (typeArg.Contains('!'))
+                    return GenericSpecializationKind.SpecializedBody;
+            }
+        }
+
+        // Check method arguments too
+        if (instantiationKey.MethodArguments is { Count: > 0 })
+        {
+            foreach (var methodArg in instantiationKey.MethodArguments)
+            {
+                if (valueTypeSubjectIds.Contains(methodArg))
+                    return GenericSpecializationKind.SpecializedBody;
+                if (methodArg.Contains('!'))
+                    return GenericSpecializationKind.SpecializedBody;
+            }
+        }
+
+        // All arguments are reference types or there are no arguments.
+        // Only return SharedBody when there is at least one argument to share by.
+        bool hasAnyArg = (instantiationKey.TypeArguments is { Count: > 0 } ||
+                          instantiationKey.MethodArguments is { Count: > 0 });
+        return hasAnyArg
+            ? GenericSpecializationKind.SharedBody
+            : GenericSpecializationKind.SpecializedBody;
     }
 
     private static void EnsureEquivalentDemand(

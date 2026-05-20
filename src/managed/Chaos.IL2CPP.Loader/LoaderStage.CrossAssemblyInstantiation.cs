@@ -26,6 +26,13 @@ public sealed partial class LoaderStage
             assembly => assembly.Assembly.Name,
             assembly => assembly.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal),
             StringComparer.Ordinal);
+        var valueTypeSubjectIdsByAssembly = loadedAssemblies.ToDictionary(
+            assembly => assembly.Assembly.Name,
+            assembly => (IReadOnlySet<string>)assembly.Types
+                .Where(t => t.IsValueType && !string.IsNullOrEmpty(t.SubjectId))
+                .Select(t => t.SubjectId)
+                .ToHashSet(StringComparer.Ordinal),
+            StringComparer.Ordinal);
 
         foreach (var assemblyPath in assemblyPaths)
         {
@@ -33,7 +40,8 @@ public sealed partial class LoaderStage
                 assemblyPath,
                 definitionMethodsByAssembly,
                 projectedMethodsByAssembly,
-                genericInstantiationDemandEntriesByAssembly);
+                genericInstantiationDemandEntriesByAssembly,
+                valueTypeSubjectIdsByAssembly);
         }
 
         return loadedAssemblies
@@ -60,7 +68,8 @@ public sealed partial class LoaderStage
         string assemblyPath,
         IReadOnlyDictionary<string, IReadOnlyDictionary<string, ManagedMethodModel>> definitionMethodsByAssembly,
         IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> projectedMethodsByAssembly,
-        IReadOnlyDictionary<string, Dictionary<string, GenericInstantiationDemandModel>> genericInstantiationDemandEntriesByAssembly)
+        IReadOnlyDictionary<string, Dictionary<string, GenericInstantiationDemandModel>> genericInstantiationDemandEntriesByAssembly,
+        IReadOnlyDictionary<string, IReadOnlySet<string>> valueTypeSubjectIdsByAssembly)
     {
         using var stream = File.OpenRead(assemblyPath);
         using var peReader = new PEReader(stream);
@@ -84,6 +93,7 @@ public sealed partial class LoaderStage
                 definitionMethodsByAssembly,
                 projectedMethodsByAssembly,
                 genericInstantiationDemandEntriesByAssembly,
+                valueTypeSubjectIdsByAssembly,
                 demandSourceKind: "memberReference");
         }
 
@@ -101,6 +111,7 @@ public sealed partial class LoaderStage
                 definitionMethodsByAssembly,
                 projectedMethodsByAssembly,
                 genericInstantiationDemandEntriesByAssembly,
+                valueTypeSubjectIdsByAssembly,
                 demandSourceKind: "methodSpec");
         }
     }
@@ -111,12 +122,14 @@ public sealed partial class LoaderStage
         IReadOnlyDictionary<string, IReadOnlyDictionary<string, ManagedMethodModel>> definitionMethodsByAssembly,
         IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> projectedMethodsByAssembly,
         IReadOnlyDictionary<string, Dictionary<string, GenericInstantiationDemandModel>> genericInstantiationDemandEntriesByAssembly,
+        IReadOnlyDictionary<string, IReadOnlySet<string>> valueTypeSubjectIdsByAssembly,
         string demandSourceKind)
     {
         if (string.Equals(methodReference.AssemblyName, sourceAssemblyName, StringComparison.Ordinal) ||
             !definitionMethodsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetDefinitionMethods) ||
             !projectedMethodsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetProjectedMethods) ||
-            !genericInstantiationDemandEntriesByAssembly.TryGetValue(methodReference.AssemblyName, out var targetDemandEntries))
+            !genericInstantiationDemandEntriesByAssembly.TryGetValue(methodReference.AssemblyName, out var targetDemandEntries) ||
+            !valueTypeSubjectIdsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetValueTypeSubjectIds))
         {
             return;
         }
@@ -125,7 +138,8 @@ public sealed partial class LoaderStage
             genericInstantiationDemandEntries: targetDemandEntries,
             requestingAssemblyName: sourceAssemblyName,
             methodReference: methodReference,
-            demandSourceKind: demandSourceKind);
+            demandSourceKind: demandSourceKind,
+            valueTypeSubjectIds: targetValueTypeSubjectIds);
         ProjectInstantiationMethod(
             methodReference.AssemblyName,
             methodReference,

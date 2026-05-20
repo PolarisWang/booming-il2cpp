@@ -1,0 +1,108 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableListSubjects",
+      "subjectKind": "field",
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.String\u003E:ImmutableList\u003CSystem.String\u003E(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.String\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

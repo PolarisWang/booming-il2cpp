@@ -896,6 +896,7 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
     # so the native CMakeLists.txt compiles the latest codegen output.
     codegen_dir = v / family_slug / "codegen"
+    synced_names = set()
     if codegen_dir.exists():
         for subdir in sorted(codegen_dir.iterdir()):
             if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
@@ -906,7 +907,40 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
             dst = native_dir / subdir.name / "generated" / "native-aot.generated.cpp"
             dst.parent.mkdir(parents=True, exist_ok=True)
             dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+            synced_names.add(subdir.name)
             print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
+
+    # Handle assembly name mismatch: codegen output directory (from the DLL assembly
+    # name) may differ from what CMakeLists.txt expects (e.g. InterfaceDispatchNativeEntry
+    # vs InterfaceDispatchSubjects).  If the CMakeLists-expected file is missing or stale,
+    # re-sync from the best available codegen source.
+    if cmakelists.exists() and codegen_dir.exists() and synced_names:
+        expected_cmake_dirs = set()
+        for line in cmakelists.read_text(encoding="utf-8").splitlines():
+            m = re.search(r'\$\{CHAOS_GEN_DIR\}/([^/]+)/generated/native-aot\.generated\.cpp', line)
+            if m:
+                expected_cmake_dirs.add(m.group(1))
+        missing_expected = expected_cmake_dirs - synced_names
+        if missing_expected:
+            # Find codegen sources available for the missing names
+            for expected in sorted(missing_expected):
+                expected_native = native_dir / expected / "generated" / "native-aot.generated.cpp"
+                # Check if a corresponding codegen source exists
+                expected_codegen = codegen_dir / expected / "generated" / "native-aot.generated.cpp"
+                if expected_codegen.exists():
+                    # Already has its own codegen output — sync it
+                    expected_native.parent.mkdir(parents=True, exist_ok=True)
+                    expected_native.write_text(expected_codegen.read_text(encoding="utf-8"), encoding="utf-8")
+                    print(f"    [build_entry] synced {expected_codegen.relative_to(codegen_dir)} to native/ (delayed)")
+                else:
+                    # Assembly name mismatch — find best source (most recently modified)
+                    best_src = max(
+                        (codegen_dir / s / "generated" / "native-aot.generated.cpp" for s in synced_names),
+                        key=lambda p: p.stat().st_mtime,
+                    )
+                    expected_native.parent.mkdir(parents=True, exist_ok=True)
+                    expected_native.write_text(best_src.read_text(encoding="utf-8"), encoding="utf-8")
+                    print(f"    [build_entry] synced {best_src.relative_to(codegen_dir)} -> {expected}/generated/ (assembly name mismatch)")
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)

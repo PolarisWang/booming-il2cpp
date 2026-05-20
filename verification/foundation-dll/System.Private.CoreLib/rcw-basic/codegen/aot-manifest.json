@@ -113,18 +113,6 @@
     {
       "assemblyName": "RcwBasicSubjects",
       "subjectKind": "method",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "RcwBasicSubjects",
-      "subjectKind": "method",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "RcwBasicSubjects",
-      "subjectKind": "method",
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "reason": "generated-direct-call"
     },
@@ -132,6 +120,18 @@
       "assemblyName": "RcwBasicSubjects",
       "subjectKind": "method",
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
       "reason": "generated-direct-call"
     },
     {

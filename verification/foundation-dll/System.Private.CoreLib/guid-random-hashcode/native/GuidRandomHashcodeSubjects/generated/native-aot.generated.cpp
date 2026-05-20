@@ -34,18 +34,30 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_GuidRandomHashcodeSubjects__PrivateImplementationDetails_ = {{nullptr, nullptr, 4123915259771640705ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GuidRandomHashcodeSubjects__PrivateImplementationDetails_ = static_cast<CHAOS_IL2CPP_INTPTR>(4123915259771640705ULL);inline TypeInfoV0 chaos_mt_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects = {{nullptr, nullptr, 5733992221058677214ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(5733992221058677214ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_INTPTR>(4429271818216920541ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Guid = {{nullptr, nullptr, 17983019571512764410ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Guid = static_cast<CHAOS_IL2CPP_INTPTR>(17983019571512764410ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Random = {{nullptr, nullptr, 5623716467429953792ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Random = static_cast<CHAOS_IL2CPP_INTPTR>(5623716467429953792ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GuidRandomHashcodeSubjects__PrivateImplementationDetails_ = static_cast<CHAOS_IL2CPP_INTPTR>(4123915259771640705ULL);
+inline TypeInfoV0 chaos_mt_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects = {{nullptr, nullptr, 5733992221058677214ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(5733992221058677214ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_INTPTR>(4429271818216920541ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Guid = {{nullptr, nullptr, 17983019571512764410ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Guid = static_cast<CHAOS_IL2CPP_INTPTR>(17983019571512764410ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Random = {{nullptr, nullptr, 5623716467429953792ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Random = static_cast<CHAOS_IL2CPP_INTPTR>(5623716467429953792ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -1175,7 +1187,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2(
 		const auto chaos_result = ChaosGuidGetHashCode(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1231323614);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1055817223);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1237,9 +1249,59 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3(
 	}
 }
 
-// AOT-unreachable stub: GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()
+// Managed method: GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4()
 extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	{{
+		_s0 = CHAOS_IL2CPP_STRING_ID("00000000-0000-0000-0000-000000000000");
+	}}
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
 // Managed method: GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5()
@@ -1338,7 +1400,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7(
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Random__Next_System_Int32__();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1603566048);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1783328179);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
@@ -1387,7 +1449,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8(
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Random__Next_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(40);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(7);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
@@ -1570,7 +1632,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_HashCode__ToHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1802641244);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-46067481);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1611,7 +1673,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_HashCode__Combine_System_Int32_System_Int32__System_Int32_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(809249845);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-803684049);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);

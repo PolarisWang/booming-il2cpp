@@ -325,6 +325,21 @@ public sealed partial class NativeAotLoweringPlanner
         _genericSharingCanonicalMap = BuildGenericSharingCanonicalMap(
             _methodsBySubjectId, _valueTypeSubjectIds);
 
+        // Apply global sharing directive from the lowering plan (if present).
+        // Global entries take priority: they ensure consistent canonical selection
+        // across compilation units that process different subsets of the same codebase.
+        if (loweringPlan.GlobalSharingCanonicalMap is { Count: > 0 } globalMap)
+        {
+            foreach (var (nonCanonicalSubjectId, canonicalSubjectId) in globalMap)
+            {
+                if (_methodsBySubjectId.TryGetValue(canonicalSubjectId, out var canonicalMethod) &&
+                    _methodsBySubjectId.TryGetValue(nonCanonicalSubjectId, out _))
+                {
+                    _genericSharingCanonicalMap[nonCanonicalSubjectId] = canonicalMethod.NativeSymbol;
+                }
+            }
+        }
+
         var methodsForLowering = fullAssemblyMode
             ? CollectAllMethods(aotCoreIr)
             : CollectReachableMethods(aotCoreIr, entryMethod);

@@ -1,0 +1,162 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableQueueStackSubjects",
+      "subjectKind": "field",
+      "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue::Create\u003CSystem.Byte\u003E:ImmutableQueue\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue\u003CSystem.Byte\u003E::get_IsEmpty:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue::Create\u003CSystem.Byte\u003E:ImmutableQueue\u003CSystem.Byte\u003E(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue::Create\u003CSystem.Byte\u003E:ImmutableQueue\u003CSystem.Byte\u003E(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue::Create\u003CSystem.Int32\u003E:ImmutableQueue\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue\u003CSystem.Int32\u003E::get_IsEmpty:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableQueue::Create\u003CSystem.Int32\u003E:ImmutableQueue\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack::Create\u003CSystem.Byte\u003E:ImmutableStack\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack\u003CSystem.Byte\u003E::get_IsEmpty:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack::Create\u003CSystem.Byte\u003E:ImmutableStack\u003CSystem.Byte\u003E(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack::Create\u003CSystem.Byte\u003E:ImmutableStack\u003CSystem.Byte\u003E(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack::Create\u003CSystem.Int32\u003E:ImmutableStack\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack\u003CSystem.Int32\u003E::get_IsEmpty:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableStack::Create\u003CSystem.Int32\u003E:ImmutableStack\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

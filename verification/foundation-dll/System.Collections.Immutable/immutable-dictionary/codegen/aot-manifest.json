@@ -1,0 +1,66 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableDictionarySubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableDictionarySubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableDictionarySubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableDictionarySubjects",
+      "subjectKind": "field",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

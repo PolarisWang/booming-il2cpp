@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Collections.Immutable/frozen/collections",
+  "displayName": "Frozen Collections",
+  "methodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<string,int>:System.Collections.Frozen.FrozenDictionary<System.String,System.Int32>()",
+    "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<Byte,Byte>:System.Collections.Frozen.FrozenDictionary<System.Byte,System.Byte>()"
+  ],
+  "methodSubjectCount": 2,
+  "customEntryIndices": [
+    0,
+    1
+  ],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

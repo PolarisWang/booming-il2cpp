@@ -39,6 +39,12 @@ struct Functions {
         void (*Subject_0)(
                 void
         );
+        void (*Subject_10)(
+                void
+        );
+        void (*Subject_11)(
+                void
+        );
         void (*Subject_1)(
                 void
         );
@@ -66,12 +72,6 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-        void (*Subject_10)(
-                void
-        );
-        void (*Subject_11)(
-                void
-        );
     } enumParsingSubjects;
     int32_t method_count;
 };
@@ -91,6 +91,16 @@ struct EnumParsingSubjects {
     static inline void Subject_0(
     ) {
         return kFunctions.enumParsingSubjects.Subject_0(
+        );
+    }
+    static inline void Subject_10(
+    ) {
+        return kFunctions.enumParsingSubjects.Subject_10(
+        );
+    }
+    static inline void Subject_11(
+    ) {
+        return kFunctions.enumParsingSubjects.Subject_11(
         );
     }
     static inline void Subject_1(
@@ -136,16 +146,6 @@ struct EnumParsingSubjects {
     static inline void Subject_9(
     ) {
         return kFunctions.enumParsingSubjects.Subject_9(
-        );
-    }
-    static inline void Subject_10(
-    ) {
-        return kFunctions.enumParsingSubjects.Subject_10(
-        );
-    }
-    static inline void Subject_11(
-    ) {
-        return kFunctions.enumParsingSubjects.Subject_11(
         );
     }
     /// Total number of AOT-compiled methods in this type.

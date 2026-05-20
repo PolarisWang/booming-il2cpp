@@ -64,7 +64,8 @@ extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count
 
         // Resolve metadata token → dispatch slot.
         uint32_t slot = registry.TokenToSlot(entry.module_id, entry.token);
-        if (slot == ~0u) continue;  // skip if no matching dispatch entry
+        std::fprintf(stderr, "[jit_reg] token=0x%08X module=%u -> slot=%u
+", entry.token, entry.module_id, slot);
 
         // Heap-allocate a PatchMethod that lives for the program lifetime.
         // NOTE: Do NOT use memset/memzero — PatchMethod contains atomics and

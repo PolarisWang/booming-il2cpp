@@ -34,14 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: AttributesCustomMetadataPatchEntry
-add_library(chaos_gen_AttributesCustomMetadataPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/AttributesCustomMetadataPatchEntry/generated/native-aot.generated.cpp
+# Assembly: AttributesCustomMetadataSubjects
+add_library(chaos_gen_AttributesCustomMetadataSubjects STATIC
+    ${CHAOS_GEN_DIR}/AttributesCustomMetadataSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/AttributesCustomMetadataSubjects/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_AttributesCustomMetadataPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_AttributesCustomMetadataPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_AttributesCustomMetadataPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_AttributesCustomMetadataSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_AttributesCustomMetadataSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_AttributesCustomMetadataSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -50,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_AttributesCustomMetadataPatchEntry
+    chaos_gen_AttributesCustomMetadataSubjects
     ${NATIVE_LIBS}
 )
 

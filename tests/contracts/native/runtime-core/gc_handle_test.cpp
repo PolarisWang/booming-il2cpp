@@ -482,6 +482,9 @@ void TestHandleTableGrowth() {
 }
 
 int main() {
+    // Set stdout to unbuffered for real-time output.
+    setvbuf(stdout, NULL, _IONBF, 0);
+
     puts("CRAG GCHandle unit test");
     puts("══════════════════════\n");
 
@@ -489,11 +492,14 @@ int main() {
     // a valid TypeInfo* at offset 0 of every old-gen object).
     SetupTestType();
 
-    // Note: InitYoungGeneration is intentionally NOT called here.
-    // Without it, NurseryAllocate falls through to the g_old_gen.Allocate
-    // fallback path, keeping all test allocations on old-gen pages.
-    // This is the correct behavior for a full-GC-focused handle test:
-    // handle reachability must be verifiable through old-gen mark/sweep.
+    // Initialize the young generation and register this thread so that
+    // NurseryAllocate uses proper TLAB-based nursery allocations rather
+    // than falling through to the old-gen fallback path.  Without this,
+    // all "nursery" allocations land on old-gen pages and participate in
+    // full-GC mark/sweep, which can cause page decommission while objects
+    // are still referenced via handles.
+    InitYoungGeneration();
+    threading::RegisterThread(threading::AllocateThreadId(), nullptr);
 
     TestStrongHandle();
     puts("After strong"); fflush(stdout);

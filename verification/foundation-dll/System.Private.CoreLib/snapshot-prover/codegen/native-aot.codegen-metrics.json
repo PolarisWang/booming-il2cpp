@@ -6,13 +6,15 @@
   "generatedSourcePaths": [
     "generated/runtime_helper_shapes.h",
     "generated/enum_metadata.generated.h",
-    "generated/native-aot.generated.cpp"
+    "generated/native-aot.generated.cpp",
+    "generated/chaos_generated_module.h",
+    "generated/chaos_generated_module.cpp"
   ],
-  "generatedCppFileCount": 3,
-  "generatedCppTotalBytes": 1109820,
-  "largestGeneratedCppBytes": 529787,
+  "generatedCppFileCount": 5,
+  "generatedCppTotalBytes": 1184738,
+  "largestGeneratedCppBytes": 513102,
   "generatedSymbolCount": 166,
-  "peakWorkingSetBytes": 525131776,
+  "peakWorkingSetBytes": 524996608,
   "structuredMethodCount": 143,
   "structuredExceptionBodyCount": 12,
   "flatFallbackCount": 2,

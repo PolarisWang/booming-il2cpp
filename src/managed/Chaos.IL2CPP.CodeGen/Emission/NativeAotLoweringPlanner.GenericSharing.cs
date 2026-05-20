@@ -56,14 +56,18 @@ public sealed partial class NativeAotLoweringPlanner
                     valueTypeInstantiations.Add(member);
             }
 
-            // Reference-type instantiations all share one canonical body
+            // Reference-type instantiations all share one canonical body.
+            // Canonical selection is deterministic:
+            //   1. Prefer an instantiation where ALL type arguments are System.Object
+            //      (the natural __Canon equivalent in CoreCLR).
+            //   2. Fall back to stable sort by SubjectId (dictionary order).
             if (refTypeInstantiations.Count >= 2)
             {
-                // Pick the first one as canonical (all ref-type instantiations have
-                // identical codegen output — the choice is arbitrary)
-                var canonical = refTypeInstantiations[0];
-                for (int i = 1; i < refTypeInstantiations.Count; i++)
+                var canonical = PickCanonicalInstantiation(refTypeInstantiations);
+                for (int i = 0; i < refTypeInstantiations.Count; i++)
                 {
+                    if (refTypeInstantiations[i] == canonical)
+                        continue;
                     map[refTypeInstantiations[i].SubjectId] = canonical.NativeSymbol;
                 }
             }
@@ -120,6 +124,77 @@ public sealed partial class NativeAotLoweringPlanner
                instKey.MethodArguments is { Count: > 0 };
     }
 
+    /// <summary>
+    /// Picks the canonical instantiation from a group of reference-type instantiations.
+    ///
+    /// Selection rules (deterministic):
+    ///   1. Prefer an instantiation where ALL type arguments are "System.Object"
+    ///      (the natural __Canon equivalent — System.Object is the universal base
+    ///      for all reference types).
+    ///   2. If multiple "all-Object" instantiations exist, pick the one with the
+    ///      smallest SubjectId (dictionary order).
+    ///   3. If no all-Object instantiation exists, sort all candidates by SubjectId
+    ///      and pick the smallest.
+    ///
+    /// These rules guarantee that the canonical choice is stable across builds
+    /// regardless of module processing order.
+    /// </summary>
+    private static AotCoreIrMethodArtifact PickCanonicalInstantiation(
+        List<AotCoreIrMethodArtifact> candidates)
+    {
+        // Phase 1: look for an instantiation where all type arguments are System.Object.
+        var allObjectInstantiations = candidates
+            .Where(c => AreAllTypeArgsSystemObject(c))
+            .ToList();
+
+        if (allObjectInstantiations.Count > 0)
+        {
+            // Multiple all-Object instantiations: pick smallest SubjectId.
+            return allObjectInstantiations
+                .OrderBy(c => c.SubjectId, StringComparer.Ordinal)
+                .First();
+        }
+
+        // Phase 2: no all-Object instantiation — deterministic sort by SubjectId.
+        return candidates
+            .OrderBy(c => c.SubjectId, StringComparer.Ordinal)
+            .First();
+    }
+
+    /// <summary>
+    /// Returns true when every type argument in the method's instantiation key
+    /// is exactly "System.Object".
+    /// </summary>
+    private static bool AreAllTypeArgsSystemObject(AotCoreIrMethodArtifact method)
+    {
+        var instKey = method.RuntimeGenericContext?.InstantiationKey;
+        if (instKey == null)
+            return false;
+
+        const string systemObject = "System.Object";
+
+        if (instKey.TypeArguments is { Count: > 0 })
+        {
+            foreach (var typeArg in instKey.TypeArguments)
+            {
+                if (!string.Equals(typeArg, systemObject, StringComparison.Ordinal))
+                    return false;
+            }
+        }
+
+        if (instKey.MethodArguments is { Count: > 0 })
+        {
+            foreach (var methodArg in instKey.MethodArguments)
+            {
+                if (!string.Equals(methodArg, systemObject, StringComparison.Ordinal))
+                    return false;
+            }
+        }
+
+        // At least one type or method argument must exist to be meaningful.
+        return (instKey.TypeArguments is { Count: > 0 } ||
+                instKey.MethodArguments is { Count: > 0 });
+    }
     /// <summary>
     /// Computes the canonical native symbol for a generic method's instantiation
     /// stub. For shared generics, the stub forwards to the canonical method's body

@@ -1,0 +1,83 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableSortedSetSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "name": "ImmutableSortedSetSubjects",
+      "displayName": "ImmutableSortedSetSubjects",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+      "name": "CustomEntrySubject_4",
+      "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

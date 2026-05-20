@@ -244,7 +244,7 @@ def generate(aname, fid, contract_path):
     cname = _class_name(fid)
     family_root = REPO / "verification" / "foundation-dll" / aname / slug
 
-    contract = json.loads(contract_path.read_text())
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
     mids = [str(m) for m in contract.get("methodSubjectIds", []) if str(m)]
     if not mids:
         return None
@@ -279,7 +279,7 @@ def generate(aname, fid, contract_path):
 
 
 def main():
-    ledger = json.loads(LEDGER.read_text())
+    ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     results = []
     for dll in ledger["dlls"]:
         aname = dll["assemblyName"]

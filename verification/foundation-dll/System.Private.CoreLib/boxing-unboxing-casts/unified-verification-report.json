@@ -2,8 +2,8 @@
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:31:35",
-  "duration_ms": 23429,
+  "timestamp": "2026-05-20T08:17:47",
+  "duration_ms": 24461,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\managed\\subjects\\build-output\\BoxingUnboxingCastsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21916
+      "duration_ms": 24042
     },
     "fact": {
       "stage": "fact",
@@ -42,30 +42,33 @@
         }
       },
       "errors": [],
-      "duration_ms": 368
+      "duration_ms": 381
     },
-    "audit": {
-      "stage": "audit",
+    "microbench": {
+      "stage": "microbench",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
       "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 2,
-        "principleStatus": "ALIGNED",
-        "methodsWithoutLowering": 0
+        "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 1143
+      "duration_ms": 33
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 81.82,
-    "overall": 90.91
+    "testedRate": 0.0,
+    "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
     "irTranslation": {
       "totalMethods": 11,
       "okCount": 0,

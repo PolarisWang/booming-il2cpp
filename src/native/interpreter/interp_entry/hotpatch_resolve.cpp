@@ -1,7 +1,7 @@
 namespace chaos::il2cpp::runtime_core {
 
-// ── External Runtime Dispatch Table Resolution ──────────────────────────
-// Resolves subjectIds → function pointers for the codegen-emitted
+// -- External Runtime Dispatch Table Resolution ----------------------------
+// Resolves subjectIds -> function pointers for the codegen-emitted
 // kChaosExternalRuntimeFnTable.  Uses the HotpatchNameRegistry which is
 // already populated during bootstrap with all AOT modules' dispatch tables.
 //
@@ -50,8 +50,20 @@ static void ParseSubjectIdForHotpatchLookup(
 
     // Method name: from after "::" to '('
     const char* paren = std::strchr(method_start + 2, '(');
-    if (paren == nullptr) {
-        // No params — take everything after "::"
+    const char* method_name_end = (paren == nullptr)
+        ? (method_start + 2 + std::strlen(method_start + 2))
+        : paren;
+
+    // Strip return-type suffix (":ReturnType") if present -- the hotpatch
+    // registry stores bare method names (e.g. "Run") while subject IDs
+    // include the return type (e.g. "Run:System.Int32").
+    const char* colon = nullptr;
+    for (const char* p = method_start + 2; p < method_name_end; ++p) {
+        if (*p == ':') { colon = p; break; }
+    }
+    if (colon != nullptr) {
+        out_method_name.assign(method_start + 2, colon - method_start - 2);
+    } else if (paren == nullptr) {
         out_method_name.assign(method_start + 2);
     } else {
         out_method_name.assign(method_start + 2, paren - method_start - 2);

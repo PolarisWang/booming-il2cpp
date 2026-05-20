@@ -45,6 +45,14 @@ public sealed partial class LoaderStage
         var syntheticPropertyMetadataToken = unchecked((int)0x71000000u);
         var syntheticMethodMetadataToken = unchecked((int)0x72000000u);
 
+        // Build the set of value type subjectIds for generic specialization classification.
+        var valueTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var defType in definitionTypes)
+        {
+            if (defType.IsValueType && !string.IsNullOrEmpty(defType.SubjectId))
+                valueTypeSubjectIds.Add(defType.SubjectId);
+        }
+
         for (var rowNumber = 1; rowNumber <= metadataReader.GetTableRowCount(TableIndex.TypeSpec); rowNumber++)
         {
             var typeSpecificationHandle = MetadataTokens.TypeSpecificationHandle(rowNumber);
@@ -63,7 +71,8 @@ public sealed partial class LoaderStage
                 genericInstantiationDemandEntries,
                 assemblyName,
                 typeIdentity,
-                demandSourceKind: "typeSpec");
+                demandSourceKind: "typeSpec",
+                valueTypeSubjectIds);
             projectedTypes[typeIdentity.SubjectId] = new ManagedTypeModel
             {
                 AssemblyName = typeIdentity.AssemblyName,
@@ -95,6 +104,9 @@ public sealed partial class LoaderStage
                 IsPreserved = definitionType.IsPreserved,
                 MetadataToken = MetadataTokens.GetToken(typeSpecificationHandle),
             };
+            // Track projected value types for generic specialization classification.
+            if (definitionType.IsValueType)
+                valueTypeSubjectIds.Add(typeIdentity.SubjectId);
             projectedTypeIdentities[typeIdentity.SubjectId] = typeIdentity;
         }
 
@@ -325,7 +337,8 @@ public sealed partial class LoaderStage
                 genericInstantiationDemandEntries,
                 assemblyName,
                 methodReference,
-                demandSourceKind: "memberReference");
+                demandSourceKind: "memberReference",
+                valueTypeSubjectIds);
             ProjectInstantiationMethod(
                 assemblyName,
                 methodReference,
@@ -347,7 +360,8 @@ public sealed partial class LoaderStage
                 genericInstantiationDemandEntries,
                 assemblyName,
                 methodReference,
-                demandSourceKind: "methodSpec");
+                demandSourceKind: "methodSpec",
+                valueTypeSubjectIds);
             ProjectInstantiationMethod(
                 assemblyName,
                 methodReference,

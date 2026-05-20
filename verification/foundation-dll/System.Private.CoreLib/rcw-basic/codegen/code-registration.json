@@ -116,26 +116,26 @@
         {
           "registrationKind": "methodPointer",
           "slot": 18,
-          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
-          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 19,
-          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
-          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 20,
           "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall",
           "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 21,
+          "slot": 19,
           "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable",
           "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",

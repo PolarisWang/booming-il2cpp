@@ -1,0 +1,1782 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-0",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetSubjects",
+        "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+        "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-0",
+        "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "ImmutableSortedSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableSortedSetSubjects"
+    },
+    {
+      "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-1",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetSubjects",
+        "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+        "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-1",
+        "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 34,
+          "handlerOffset": 35,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "ImmutableSortedSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E(System.Byte)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 32,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 46,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 35,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 37,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 46,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 46,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableSortedSetSubjects"
+    },
+    {
+      "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-2",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetSubjects",
+        "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+        "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-2",
+        "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 48,
+          "handlerOffset": 49,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.Byte[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 43,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stelem",
+          "opCode": 45,
+          "operand": "System.SByte",
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "runtimeServiceKind": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 18,
+          "resultType": "ImmutableSortedSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte[])",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte[])",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[])",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte[])",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[])",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E(System.Byte[])",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[])",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 37,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 46,
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 41,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 60,
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 49,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 52,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 60,
+          "ilOffset": 58,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 60,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableSortedSetSubjects"
+    },
+    {
+      "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-3",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+      "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_3()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetSubjects",
+        "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+        "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+        "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+        "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-3",
+        "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_3()"
+      },
+      "nativeSymbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "ImmutableSortedSet\u003CSystem.Int32\u003E",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableSortedSetSubjects"
+    },
+    {
+      "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-4",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_4()",
+      "identity": {
+        "assemblyName": "ImmutableSortedSetSubjects",
+        "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+        "definitionSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "immutable-sorted-set-subjects.immutable-sorted-set-subjects.custom-entry-subject-4",
+        "signature": "System.Void ImmutableSortedSetSubjects::CustomEntrySubject_4()"
+      },
+      "nativeSymbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 34,
+          "handlerOffset": 35,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "ImmutableSortedSet\u003CSystem.Int32\u003E",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E(System.Int32)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E(System.Int32)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E(System.Int32)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 32,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 46,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 35,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 37,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableSortedSetSubjects",
+            "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 46,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 46,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableSortedSetSubjects"
+    }
+  ]
+}

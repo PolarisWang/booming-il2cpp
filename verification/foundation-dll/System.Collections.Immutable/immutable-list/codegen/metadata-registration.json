@@ -1,0 +1,94 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableListSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "name": "ImmutableListSubjects",
+      "displayName": "ImmutableListSubjects",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::_exitCode",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_4:System.Void()",
+      "name": "CustomEntrySubject_4",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_5:System.Void()",
+      "name": "CustomEntrySubject_5",
+      "definitionSubjectId": "ImmutableListSubjects/ImmutableListSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "ImmutableListSubjects/ImmutableListSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

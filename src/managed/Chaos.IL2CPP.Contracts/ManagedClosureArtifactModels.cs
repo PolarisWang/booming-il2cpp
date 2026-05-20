@@ -690,6 +690,14 @@ public sealed record NativeAotLoweringPlanArtifact
     public string? AuditStatus { get; init; }
 
     public string? AuditMessage { get; init; }
+
+    /// <summary>
+    /// Optional global canonical sharing map for generic instantiation.
+    /// Maps non-canonical method SubjectId → canonical method SubjectId.
+    /// When present, this supplements or overrides the locally-computed
+    /// canonical map, ensuring consistency across compilation units.
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? GlobalSharingCanonicalMap { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedSource

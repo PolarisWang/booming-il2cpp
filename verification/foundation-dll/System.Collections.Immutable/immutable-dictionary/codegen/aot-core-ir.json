@@ -1,0 +1,990 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-0",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ImmutableDictionarySubjects",
+        "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+        "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-0",
+        "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "ImmutableDictionary\u003CSystem.String,System.Int32\u003E",
+          "callee": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableDictionary\u003CSystem.String,System.Int32\u003E()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.Int32\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableDictionarySubjects"
+    },
+    {
+      "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-1",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ImmutableDictionarySubjects",
+        "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+        "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-1",
+        "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E",
+          "callee": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.Byte,System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.Byte,System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.Byte,System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.Byte,System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.Byte,System.Byte\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableDictionarySubjects"
+    },
+    {
+      "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-2",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "ImmutableDictionarySubjects",
+        "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+        "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "immutable-dictionary-subjects.immutable-dictionary-subjects.custom-entry-subject-2",
+        "signature": "System.Void ImmutableDictionarySubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "ImmutableDictionarySubjects_ImmutableDictionarySubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "ImmutableDictionary\u003CSystem.String,System.String\u003E",
+          "callee": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.String]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.String]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.String"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.String]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.String]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E:ImmutableDictionary\u003CSystem.String,System.String\u003E()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary::Create\u003CSystem.String,System.String\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.String"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.String"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.String"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableDictionarySubjects",
+            "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableDictionarySubjects"
+    }
+  ]
+}

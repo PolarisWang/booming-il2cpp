@@ -204,32 +204,32 @@
     },
     {
       "assemblyName": "RcwBasicSubjects",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
       "metadataToken": 100663315,
       "parameterCount": 0
     },
     {
       "assemblyName": "RcwBasicSubjects",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
       "metadataToken": 100663316,
       "parameterCount": 0
     },
     {
       "assemblyName": "RcwBasicSubjects",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
-      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
       "metadataToken": 100663317,
       "parameterCount": 0
     },
     {
       "assemblyName": "RcwBasicSubjects",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
-      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
       "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
       "metadataToken": 100663318,
       "parameterCount": 0

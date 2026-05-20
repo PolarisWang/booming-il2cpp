@@ -11,6 +11,7 @@
 #include "gc_helpers.h"
 #include "reflection_query_model.h"
 #include "reflection_api.h"
+#include "reflection_metadata_impl.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -355,7 +356,32 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
         }
     }
 
-    // Fallback: resolve type_arg and look up by subject_id
+    // Bypass: type_arg may be a TypeInfoHandle (tagged pointer). Decode via
+    // TryDecodeReflectionQueryTypeHandle, compute fnv24 from subject_id_utf8,
+    // and look up via g_chaos_resolve_enum_metadata_by_fnv24 - avoids
+    // the resolve_type_arg round-trip for enum types known to our tables.
+    if (type_arg != 0) {
+        const auto* desc = TryDecodeReflectionQueryTypeHandle(
+            static_cast<TypeInfoHandle>(type_arg));
+        if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
+            uint32_t h = 2166136261u;
+            for (const char* s = desc->subject_id_utf8; *s; ++s) {
+                h ^= static_cast<uint8_t>(*s);
+                h *= 16777619u;
+            }
+            uint32_t fnv24 = h & 0xFFFFFFu;
+            const auto* meta = g_chaos_resolve_enum_metadata_by_fnv24
+                ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+                : nullptr;
+            if (meta != nullptr) {
+                s_enum_meta_type_key = type_arg;
+                s_enum_meta_cache = meta;
+                return meta;
+            }
+        }
+    }
+
+    // Fallback: resolve type_arg and look up by subject_id.
     const auto* desc = resolve_type_arg(type_arg);
     const auto* meta = (desc != nullptr && desc->subject_id_utf8 != nullptr)
         ? (g_chaos_resolve_enum_metadata

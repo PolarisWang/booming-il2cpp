@@ -1083,9 +1083,14 @@ static void worker_g(int thread_index, WorkerResult* result) {
         size_t size = LcgSize(thread_index, i, 33792, 262144);
         size = (size + 7) & ~static_cast<size_t>(7);
 
+        fprintf(stderr, "[G] t=%d i=%d size=%zu\n", thread_index, i, size);
+
         // Allocate directly from old gen (bypasses nursery entirely).
         void* p = g_old_gen.Allocate(size, true);
-        if (!p) continue;
+        if (!p) {
+            fprintf(stderr, "[G] t=%d i=%d Allocate FAILED\n", thread_index, i);
+            continue;
+        }
         result->allocations_succeeded++;
 
         WritePattern(p, size, thread_index, i);

@@ -2269,12 +2269,10 @@
           "op": "switch",
           "opCode": 69,
           "operand": [
+            29,
             37,
             45,
-            53,
-            61,
-            69,
-            77
+            53
           ],
           "ilOffset": 6,
           "resultType": "System.Void",
@@ -2283,15 +2281,15 @@
         {
           "op": "br",
           "opCode": 17,
-          "operand": 85,
-          "ilOffset": 35,
+          "operand": 61,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 37,
+          "ilOffset": 29,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
           "reference": {
@@ -2320,22 +2318,22 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 42,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 89,
-          "ilOffset": 43,
+          "operand": 65,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 45,
+          "ilOffset": 37,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
           "reference": {
@@ -2364,110 +2362,22 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 50,
+          "ilOffset": 42,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 89,
-          "ilOffset": 51,
+          "operand": 65,
+          "ilOffset": 43,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 53,
-          "resultType": "System.Int32",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 89,
-          "ilOffset": 59,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 61,
-          "resultType": "System.Int32",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 66,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 89,
-          "ilOffset": 67,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 69,
+          "ilOffset": 45,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
           "reference": {
@@ -2496,22 +2406,22 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 74,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 89,
-          "ilOffset": 75,
+          "operand": 65,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 77,
+          "ilOffset": 53,
           "resultType": "System.Int32",
           "callee": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
           "reference": {
@@ -2540,15 +2450,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 82,
+          "ilOffset": 58,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 89,
-          "ilOffset": 83,
+          "operand": 65,
+          "ilOffset": 59,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2556,7 +2466,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": -1,
-          "ilOffset": 85,
+          "ilOffset": 61,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2564,15 +2474,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 86,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 89,
-          "ilOffset": 87,
+          "operand": 65,
+          "ilOffset": 63,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2580,13 +2490,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 89,
+          "ilOffset": 65,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 90,
+          "ilOffset": 66,
           "isPreserveSig": false
         }
       ],
@@ -4270,1993 +4180,6 @@
       "declaringAssemblyName": "RcwBasicSubjects"
     },
     {
-      "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-multiple-wrappers",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-      "signature": "System.Int32 RcwBasicNativeEntry::TestRcwMultipleWrappers()",
-      "identity": {
-        "assemblyName": "RcwBasicSubjects",
-        "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-        "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-        "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-        "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-multiple-wrappers",
-        "signature": "System.Int32 RcwBasicNativeEntry::TestRcwMultipleWrappers()"
-      },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 13,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RuntimeState_Get",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 8,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 13,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 6,
-          "ilOffset": 15,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 6,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 29,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 37,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 42,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 8,
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 8,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 58,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2,
-          "ilOffset": 50,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 51,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 58,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 59,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 64,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 65,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 66,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 71,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 9,
-          "ilOffset": 73,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 9,
-          "ilOffset": 75,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 87,
-          "ilOffset": 77,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 79,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 80,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 82,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 87,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 88,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 3,
-          "ilOffset": 93,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 94,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 95,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 100,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 10,
-          "ilOffset": 102,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 10,
-          "ilOffset": 104,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 121,
-          "ilOffset": 106,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 109,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 4,
-          "ilOffset": 116,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 117,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 119,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 121,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 122,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 4,
-          "ilOffset": 127,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 129,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 130,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 5,
-          "ilOffset": 135,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 4,
-          "ilOffset": 137,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 5,
-          "ilOffset": 139,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 141,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 143,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 144,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 11,
-          "ilOffset": 146,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 11,
-          "ilOffset": 148,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 172,
-          "ilOffset": 150,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 153,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 154,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 160,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 161,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 5,
-          "ilOffset": 167,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 168,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 170,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 4,
-          "ilOffset": 172,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 174,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 175,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 177,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 178,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 12,
-          "ilOffset": 180,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 12,
-          "ilOffset": 182,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 206,
-          "ilOffset": 184,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 187,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 188,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 194,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 195,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 6,
-          "ilOffset": 201,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 202,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 204,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 206,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 207,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 213,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 214,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 220,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 221,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 225,
-          "ilOffset": 223,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 7,
-          "ilOffset": 225,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 227,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "RcwBasicSubjects"
-    },
-    {
-      "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-qi-unknown-interface",
-      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-      "signature": "System.Int32 RcwBasicNativeEntry::TestRcwQiUnknownInterface()",
-      "identity": {
-        "assemblyName": "RcwBasicSubjects",
-        "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
-        "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-        "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-        "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-qi-unknown-interface",
-        "signature": "System.Int32 RcwBasicNativeEntry::TestRcwQiUnknownInterface()"
-      },
-      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 11,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 1,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RuntimeState_Get",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 7,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 8,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 13,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 6,
-          "ilOffset": 15,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 6,
-          "ilOffset": 17,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 29,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 22,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 24,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 29,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 36,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 37,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 42,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 8,
-          "ilOffset": 44,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 8,
-          "ilOffset": 46,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 55,
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 2,
-          "ilOffset": 50,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 51,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 55,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 56,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 61,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 62,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 63,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 68,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 9,
-          "ilOffset": 70,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 9,
-          "ilOffset": 72,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 81,
-          "ilOffset": 74,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 76,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 77,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 79,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 16,
-          "ilOffset": 81,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newarr",
-          "opCode": 43,
-          "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 83,
-          "resultType": "System.Byte[]",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Byte"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Byte",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 88,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldtoken",
-          "opCode": 70,
-          "operand": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E::DA5979D52E989A03770DCD85298CC184B885A2D2AF51AEB79151BB6630C1D46E",
-          "ilOffset": 89,
-          "resultType": "System.RuntimeFieldHandle",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E::DA5979D52E989A03770DCD85298CC184B885A2D2AF51AEB79151BB6630C1D46E"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E::DA5979D52E989A03770DCD85298CC184B885A2D2AF51AEB79151BB6630C1D46E",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=16"
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 94,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 3,
-          "ilOffset": 99,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 16,
-          "ilOffset": 100,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 102,
-          "resultType": "System.IntPtr",
-          "callee": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.Int32)",
-          "reference": {
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectKind": "method",
-            "subjectId": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectId": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 4,
-          "ilOffset": 107,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 109,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 110,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 4,
-          "ilOffset": 111,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 16,
-          "ilOffset": 113,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 115,
-          "resultType": "System.Void",
-          "callee": "System.Runtime.InteropServices/Marshal::Copy:System.Void(System.Byte[],System.Int32,System.IntPtr,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectKind": "method",
-            "subjectId": "System.Runtime.InteropServices/Marshal::Copy:System.Void(System.Byte[],System.Int32,System.IntPtr,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectId": "System.Runtime.InteropServices/Marshal::Copy:System.Void(System.Byte[],System.Int32,System.IntPtr,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 121,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 4,
-          "ilOffset": 122,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 124,
-          "resultType": "System.IntPtr",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr",
-          "targetParameterCount": 2,
-          "targetReturnType": "System.IntPtr",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 5,
-          "ilOffset": 129,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 4,
-          "ilOffset": 131,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 133,
-          "resultType": "System.Void",
-          "callee": "System.Runtime.InteropServices/Marshal::FreeHGlobal:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectKind": "method",
-            "subjectId": "System.Runtime.InteropServices/Marshal::FreeHGlobal:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Runtime.InteropServices",
-            "subjectId": "System.Runtime.InteropServices/Marshal::FreeHGlobal:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 5,
-          "ilOffset": 139,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "System.Private.CoreLib/System.IntPtr::Zero",
-          "ilOffset": 141,
-          "resultType": "System.IntPtr",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "field",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "System.Private.CoreLib/System.IntPtr",
-            "declaringTypeShape": 1
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 146,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 148,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 149,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 10,
-          "ilOffset": 151,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 10,
-          "ilOffset": 153,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 170,
-          "ilOffset": 155,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 158,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 159,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 4,
-          "ilOffset": 165,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 166,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 168,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 170,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 171,
-          "resultType": "System.Void",
-          "callee": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-          "reference": {
-            "assemblyName": "RcwBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "RcwBasicSubjects",
-            "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 177,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 7,
-          "ilOffset": 178,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 180,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 7,
-          "ilOffset": 182,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 184,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "RcwBasicSubjects"
-    },
-    {
       "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-vtable-method-call",
       "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "signature": "System.Int32 RcwBasicNativeEntry::TestRcwVtableMethodCall()",
@@ -7362,6 +5285,152 @@
           "op": "ret",
           "opCode": 53,
           "ilOffset": 87,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "RcwBasicSubjects"
+    },
+    {
+      "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-multiple-wrappers",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "signature": "System.Int32 RcwBasicNativeEntry::TestRcwMultipleWrappers()",
+      "identity": {
+        "assemblyName": "RcwBasicSubjects",
+        "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+        "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+        "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+        "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-multiple-wrappers",
+        "signature": "System.Int32 RcwBasicNativeEntry::TestRcwMultipleWrappers()"
+      },
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "RcwBasicSubjects"
+    },
+    {
+      "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-qi-unknown-interface",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "signature": "System.Int32 RcwBasicNativeEntry::TestRcwQiUnknownInterface()",
+      "identity": {
+        "assemblyName": "RcwBasicSubjects",
+        "declaringTypeSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+        "definitionSubjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+        "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+        "methodId": "rcw-basic-subjects.rcw-basic-native-entry.test-rcw-qi-unknown-interface",
+        "signature": "System.Int32 RcwBasicNativeEntry::TestRcwQiUnknownInterface()"
+      },
+      "nativeSymbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 5,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
           "isPreserveSig": false
         }
       ],
