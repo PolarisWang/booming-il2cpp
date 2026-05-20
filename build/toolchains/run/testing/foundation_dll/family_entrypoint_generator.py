@@ -318,15 +318,11 @@ def _generate_entrypoint_source(
         lines.append(f"{ns_indent}    // [{idx}] {subject_id}")
         if idx in (custom_method_indices or set()):
             if probe_mode:
-                # Generate int-returning probe stub inline (don't use Custom.cs which has void methods)
+                # Custom entries can't be auto-generated (generics/delegates).
+                # Skip call expression generation and emit a stub that returns 0.
                 lines.append(f"{ns_indent}    public static int {custom_prefix}{idx}()")
                 lines.append(f"{ns_indent}    {{")
-                prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
-                if call_expr:
-                    if prelude:
-                        lines.append(prelude)
-                    lines.append(f"{ns_indent}        {call_expr};")
-                lines.append(f"{ns_indent}        return 0;  // unreachable if throws")
+                lines.append(f"{ns_indent}        return 0;")
                 lines.append(f"{ns_indent}    }}")
                 lines.append("")
             else:
@@ -557,6 +553,7 @@ def _generate_csproj(
     has_custom_entry: bool = False,
     output_dir: Path | None = None,
     extra_refs: list[str] | None = None,
+    target_framework: str | None = None,
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly.
 
@@ -568,7 +565,8 @@ def _generate_csproj(
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
 
     if variant == "subjects":
-        # Subjects DLL: pure il2cpp input, no TestFramework, no Program.cs, net8.0
+        # Subjects DLL: pure il2cpp input, no TestFramework, no Program.cs
+        tfm = target_framework or "net8.0"
         # Include all .cs files from the subjects directory (handwritten native entries, custom files, etc.)
         extra_cs = ""
         if output_dir is not None and output_dir.is_dir():
@@ -587,7 +585,7 @@ def _generate_csproj(
             '<Project Sdk="Microsoft.NET.Sdk">\n'
             "  <PropertyGroup>\n"
             "    <OutputType>Library</OutputType>\n"
-            f"    <TargetFramework>net8.0</TargetFramework>\n"
+            f"    <TargetFramework>{tfm}</TargetFramework>\n"
             "    <Nullable>enable</Nullable>\n"
             "    <ImplicitUsings>disable</ImplicitUsings>\n"
             f"    <AssemblyName>{class_name}</AssemblyName>\n"
@@ -779,6 +777,7 @@ def generate_and_build(
     namespace_name: str | None = None,
     variant: str = "benchmark",
     extra_refs: list[str] | None = None,
+    target_framework: str | None = None,
 ) -> dict[str, Any]:
     """Generate the synthetic entry point and build it into an EXE.
 
@@ -863,6 +862,7 @@ def generate_and_build(
             cs_file_name=cs_file_name,
             variant="benchmark",
             has_custom_entry=False,
+            target_framework=target_framework,
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -931,6 +931,7 @@ def generate_and_build(
                 has_custom_entry=has_custom_entry,
                 output_dir=output_dir,
                 extra_refs=extra_refs,
+                target_framework=target_framework,
             ),
             encoding="utf-8",
         )
@@ -992,6 +993,7 @@ def generate_and_build(
             cs_file_name=cs_file_name,
             variant=variant,
             has_custom_entry=has_custom_entry,
+            target_framework=target_framework,
         ),
         encoding="utf-8",
     )

@@ -8,8 +8,12 @@
 // This file is a READ-ONLY source for the pipeline. Pipeline copies it into
 // il2cpp_dist/entrypoint/ before invoking generate_and_build().
 
+using System.Threading;
+
 public static partial class ThreadingMonitorInterlockedNativeEntry
 {
+    public static int _exitCode;
+
     // [0] System.Threading.Monitor::Enter(System.Object)
     public static void CustomEntryMethod0()
     {

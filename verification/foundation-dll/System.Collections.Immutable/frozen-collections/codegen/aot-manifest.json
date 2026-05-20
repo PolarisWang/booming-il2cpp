@@ -1,0 +1,180 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::2341A9C4270F9019A09041DF3884CAE2426B73C9EE750D73EC0FBCB6C2250F45",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "FrozenCollectionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Int32\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    }
+  ]
+}

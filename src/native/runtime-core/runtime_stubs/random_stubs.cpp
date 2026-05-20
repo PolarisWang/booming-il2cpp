@@ -17,7 +17,18 @@ void ChaosRandomNextBytes(CHAOS_IL2CPP_INTPTR rng, CHAOS_IL2CPP_INTPTR buffer) n
     (void)rng;
     if (buffer == 0) return;
     auto* arr = get_managed_array_mut(buffer);
-    for (CHAOS_IL2CPP_INTPTR i = 0; i < arr->length; ++i) {
+    CHAOS_IL2CPP_INTPTR i = 0;
+    // Batch: generate 4 bytes per xorshift32 call, extracted via shifts
+    // Reduces per-byte TLS guard overhead of thread_local xorshift32 state
+    for (; i + 4 <= arr->length; i += 4) {
+        uint32_t r = stub_xorshift32();
+        arr->elements[i + 0] = static_cast<CHAOS_IL2CPP_INTPTR>(r & 0xFF);
+        arr->elements[i + 1] = static_cast<CHAOS_IL2CPP_INTPTR>((r >> 8) & 0xFF);
+        arr->elements[i + 2] = static_cast<CHAOS_IL2CPP_INTPTR>((r >> 16) & 0xFF);
+        arr->elements[i + 3] = static_cast<CHAOS_IL2CPP_INTPTR>((r >> 24) & 0xFF);
+    }
+    // Remaining bytes (0-3) — scalar fallback
+    for (; i < arr->length; ++i) {
         arr->elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(stub_xorshift32() & 0xFF);
     }
 }

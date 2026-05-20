@@ -3520,7 +3520,7 @@ static void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[46]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(7201466553693376363ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(628919584683901915ULL));},
 	[]() {kAotMethods[50]();},
 	[]() {kAotMethods[51]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[52])(0);},
@@ -11157,7 +11157,7 @@ extern "C" CHAOS_IL2CPP_INTPTR SnapshotTestFixtures_Wrapper__0_GetValue(CHAOS_IL
 	return _s0;
 }
 
-// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0); type=[System.Int32]; method=[]; support=Specialized; specialization=SpecializedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]
+// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0); type=[System.Int32]; method=[]; support=Specialized; specialization=SharedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]
 // Managed method: SnapshotTestFixtures/Wrapper<System.Int32>::.ctor(System.Int32)
 extern "C" void SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
@@ -11191,13 +11191,13 @@ extern "C" void SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32(CHA
 }
 
 // Generic instantiation stub: SnapshotTestFixtures/Wrapper<System.Int32>::.ctor(System.Int32)
-// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0); type=[System.Int32]; method=[]; support=Specialized; specialization=SpecializedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]
+// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0); type=[System.Int32]; method=[]; support=Specialized; specialization=SharedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::.ctor:System.Void(!0);type=[System.Int32];method=[]
 extern "C" void chaos_stub_definition_SnapshotTestFixtures_Wrapper_1___ctor_System_Void__0__type__System_Int32__method(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
 	SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0(); type=[System.Int32]; method=[]; support=Specialized; specialization=SpecializedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]
+// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0(); type=[System.Int32]; method=[]; support=Specialized; specialization=SharedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]
 // Managed method: SnapshotTestFixtures/Wrapper<System.Int32>::GetValue()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_Wrapper_System_Int32_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -11217,7 +11217,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_Wrapper_System_Int32_GetValue
 }
 
 // Generic instantiation stub: SnapshotTestFixtures/Wrapper<System.Int32>::GetValue()
-// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0(); type=[System.Int32]; method=[]; support=Specialized; specialization=SpecializedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]
+// Generic execution authority: definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0(); type=[System.Int32]; method=[]; support=Specialized; specialization=SharedBody; body=body:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]; stub=stub:definition=SnapshotTestFixtures/Wrapper`1::GetValue:!0();type=[System.Int32];method=[]
 extern "C" CHAOS_IL2CPP_INT32 chaos_stub_definition_SnapshotTestFixtures_Wrapper_1__GetValue__0___type__System_Int32__method(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return SnapshotTestFixtures_Wrapper_System_Int32_GetValue(chaos_fn_arg_0);

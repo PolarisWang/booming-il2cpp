@@ -1087,6 +1087,7 @@ static void worker_g(int thread_index, WorkerResult* result) {
 
         // Allocate directly from old gen (bypasses nursery entirely).
         void* p = g_old_gen.Allocate(size, true);
+        fprintf(stderr, "[G] t=%d i=%d AllocateOK p=%p\n", thread_index, i, p);
         if (!p) {
             fprintf(stderr, "[G] t=%d i=%d Allocate FAILED\n", thread_index, i);
             continue;

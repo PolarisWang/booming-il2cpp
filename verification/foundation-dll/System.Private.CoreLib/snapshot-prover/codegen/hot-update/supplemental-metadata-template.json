@@ -598,7 +598,7 @@
           "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601;type=[System.Int32];method=[]"
         },
         "supportKindCode": 3,
-        "specializationKindCode": 2,
+        "specializationKindCode": 1,
         "statusReasonCode": "loader-demand:typeSpec"
       },
       "genericDiagnostic": {
@@ -1932,7 +1932,7 @@
           "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
         },
         "supportKindCode": 3,
-        "specializationKindCode": 2,
+        "specializationKindCode": 1,
         "statusReasonCode": "loader-demand:memberReference"
       },
       "genericDiagnostic": {
@@ -1972,7 +1972,7 @@
           "value": "stub:definition=SnapshotTestFixtures/Wrapper\u00601::GetValue:!0();type=[System.Int32];method=[]"
         },
         "supportKindCode": 3,
-        "specializationKindCode": 2,
+        "specializationKindCode": 1,
         "statusReasonCode": "loader-demand:memberReference"
       },
       "genericDiagnostic": {

@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=4_Align=4",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::2341A9C4270F9019A09041DF3884CAE2426B73C9EE750D73EC0FBCB6C2250F45",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

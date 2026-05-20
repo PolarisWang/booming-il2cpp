@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Linq;
 
 public static partial class FrozenCollectionsSubjects
 {

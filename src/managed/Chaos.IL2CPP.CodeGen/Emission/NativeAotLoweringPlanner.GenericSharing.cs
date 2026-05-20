@@ -18,6 +18,18 @@ public sealed partial class NativeAotLoweringPlanner
         new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Set of NativeSymbols for canonical generic method bodies that require
+    /// the <c>chaos_generic_context</c> hidden parameter for runtime type
+    /// resolution (typeof(T), default(T), etc.).
+    ///
+    /// Built after <see cref="_genericSharingCanonicalMap"/> is finalized.
+    /// Shared canonical bodies receive this parameter and use it instead of
+    /// the side-table GenericContextRegistry. Non-canonical stubs also carry
+    /// it so they can forward to the canonical body.
+    /// </summary>
+    private HashSet<string> _sharedContextSymbols = new(StringComparer.Ordinal);
+
+    /// <summary>
     /// Builds the sharing canonical map by grouping generic methods by their open
     /// definition and classifying type arguments as reference type (SHARED) or
     /// value type (SPECIALIZED).
@@ -196,6 +208,35 @@ public sealed partial class NativeAotLoweringPlanner
                 instKey.MethodArguments is { Count: > 0 });
     }
     /// <summary>
+    /// Returns true when a method's native symbol corresponds to a shared
+    /// generic body (either canonical or stub) that requires a hidden
+    /// <c>chaos_generic_context</c> parameter for runtime type resolution.
+    ///
+    /// Shared methods call other shared methods with the same context pointer,
+    /// avoiding side-table lookups through GenericContextRegistry.
+    ///
+    /// Conservative: ALL methods in the sharing canonical map (both canonical
+    /// and non-canonical) receive the hidden parameter. This could be optimized
+    /// to only add it when the method body actually uses typeof(T) etc.
+    /// </summary>
+    private bool RequiresRuntimeGenericContextParameter(AotCoreIrMethodArtifact method)
+    {
+        // Canonical body: its NativeSymbol is a VALUE in the map.
+        // Non-canonical stub: its SubjectId is a KEY in the map.
+        return _genericSharingCanonicalMap.ContainsKey(method.SubjectId) ||
+               _genericSharingCanonicalMap.ContainsValue(method.NativeSymbol);
+    }
+
+    /// <summary>
+    /// Returns true when a native symbol corresponds to a shared generic
+    /// method that requires the hidden context parameter.
+    /// </summary>
+    private bool NativeSymbolRequiresRuntimeGenericContext(string nativeSymbol)
+    {
+        return _genericSharingCanonicalMap.ContainsValue(nativeSymbol);
+    }
+
+    /// <summary>
     /// Computes the canonical native symbol for a generic method's instantiation
     /// stub. For shared generics, the stub forwards to the canonical method's body
     /// instead of its own body.
@@ -217,5 +258,30 @@ public sealed partial class NativeAotLoweringPlanner
         if (_genericSharingCanonicalMap.TryGetValue(method.SubjectId, out var canonicalSymbol))
             return canonicalSymbol;
         return method.NativeSymbol;
+    }
+
+    /// <summary>
+    /// Builds the set of canonical NativeSymbols that need the hidden
+    /// <c>chaos_generic_context</c> parameter for runtime type resolution.
+    ///
+    /// Every canonical method body in the sharing map (every VALUE in
+    /// <see cref="_genericSharingCanonicalMap"/>) requires this parameter
+    /// because its body must resolve typeof(T) etc. without the side-table.
+    ///
+    /// Non-canonical shared stubs (KEYS in the map) also receive the
+    /// parameter to forward it to the canonical body.
+    /// </summary>
+    private HashSet<string> BuildSharedContextSymbols()
+    {
+        var symbols = new HashSet<string>(StringComparer.Ordinal);
+
+        // All values in the map are canonical body NativeSymbols — they
+        // need the context parameter for typeof(T) etc.
+        foreach (var canonicalSymbol in _genericSharingCanonicalMap.Values)
+        {
+            symbols.Add(canonicalSymbol);
+        }
+
+        return symbols;
     }
 }

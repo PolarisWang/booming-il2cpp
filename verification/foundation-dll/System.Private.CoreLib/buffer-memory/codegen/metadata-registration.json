@@ -33,8 +33,17 @@
       "memberType": "System.Int32"
     },
     {
-      "registrationKind": "method",
+      "registrationKind": "field",
       "slot": 4,
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
+      "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
@@ -45,7 +54,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 5,
+      "slot": 6,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
@@ -56,7 +65,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 6,
+      "slot": 7,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
@@ -67,7 +76,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 8,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
@@ -78,7 +87,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 9,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
@@ -89,7 +98,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 10,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
@@ -100,7 +109,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 11,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
@@ -111,7 +120,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 12,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
@@ -122,7 +131,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 13,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
@@ -133,7 +142,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 14,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
@@ -144,7 +153,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 15,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
       "name": "CustomEntryMethod0",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
@@ -155,7 +164,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 16,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
       "name": "CustomEntryMethod3",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
@@ -166,7 +175,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 16,
+      "slot": 17,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
       "name": "CustomEntryMethod9",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",

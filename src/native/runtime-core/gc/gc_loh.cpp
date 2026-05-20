@@ -123,13 +123,16 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
         return nullptr;
     }
 
+    fprintf(stderr, "[DBG_LOH] enter size=%zu this=%p &mutex_=%p\n", size, this, &mutex_);
     std::lock_guard<std::mutex> lock(mutex_);
+    fprintf(stderr, "[DBG_LOH] locked size=%zu\n", size);
 
     // Try free segment list first.
     LohSegment** pp = &free_segment_list_;
     while (*pp != nullptr) {
         LohSegment* seg = *pp;
         if (seg->payload_size >= size) {
+            fprintf(stderr, "[DBG_LOH] reuse seg=%p payload=%zu\n", seg, seg->payload_size);
             // Reuse this segment.
             *pp = seg->next;
             seg->next = segment_list_;
@@ -146,16 +149,21 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Allocate new segment.
+    fprintf(stderr, "[DBG_LOH] AllocateSegment size=%zu\n", size);
     auto* seg = AllocateSegment(size);
+    fprintf(stderr, "[DBG_LOH] AllocateSegment done seg=%p\n", seg);
     if (seg == nullptr) return nullptr;
 
+    fprintf(stderr, "[DBG_LOH] link seg=%p next=%p\n", seg, (void*)segment_list_);
     seg->next = segment_list_;
     segment_list_ = seg;
     segment_count_++;
     total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
 
     void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
+    fprintf(stderr, "[DBG_LOH] memset payload=%p size=%zu\n", payload, seg->payload_size);
     std::memset(payload, 0, seg->payload_size);
+    fprintf(stderr, "[DBG_LOH] return payload=%p\n", payload);
     return payload;
 }
 

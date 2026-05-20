@@ -597,7 +597,9 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     if (size > kOldGenMaxInline) {
         // Route objects > 85 KB to the Large Object Heap (no compaction).
         if (size > kLohThreshold) {
+            fprintf(stderr, "[DBG_ALLOC] LOH path size=%zu\n", size);
             void* loh_ptr = g_loh.Allocate(size);
+            fprintf(stderr, "[DBG_ALLOC] LOH done loh_ptr=%p\n", loh_ptr);
             if (loh_ptr != nullptr) {
                 GcRecordAlloc(size, true);
                 memory_domain::GcTrackDomainAlloc(size);
@@ -612,9 +614,12 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         // penalizes transient oversized allocations with unnecessary STW pauses.
         g_gc_scheduler.RequestFullGc();
 
+        fprintf(stderr, "[DBG_ALLOC] AllocatePage path size=%zu\n", size);
         auto* page = AllocatePage(size, scanning_required);
+        fprintf(stderr, "[DBG_ALLOC] AllocatePage done page=%p\n", page);
         if (page == nullptr) return nullptr;
         auto* result = page->Payload();
+        fprintf(stderr, "[DBG_ALLOC] Payload=%p memset=%zu\n", result, size);
         std::memset(result, 0, size);
         GcRecordAlloc(size, true);
         memory_domain::GcTrackDomainAlloc(size);

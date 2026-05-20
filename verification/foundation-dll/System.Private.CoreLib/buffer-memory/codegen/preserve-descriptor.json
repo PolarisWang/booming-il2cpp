@@ -21,6 +21,12 @@
       "reason": "full-assembly-closure"
     },
     {
+      "subjectKind": "field",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
       "subjectKind": "method",
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "preserve": "signature",

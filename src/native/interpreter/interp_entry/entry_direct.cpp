@@ -326,8 +326,6 @@ void InterpreterEntryDirect(
     std::call_once(g_tier3_cb_once, RegisterTier3CallbackFn);
     if (method_key == 0) return;
 
-    CHAOS_IL2CPP_LOG_DEBUG("InterpreterEntryDirect enter method_key=0x%zX", method_key);
-
     CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr
         && "InterpreterEntryDirect: thread TLS not attached");
     CHAOS_IL2CPP_ASSERT(threading::tls_this_thread_id > 0

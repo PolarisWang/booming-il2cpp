@@ -1,7 +1,7 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:42:55.894531",
+  "generated_at": "2026-05-20T08:46:10.498528",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -369,7 +369,7 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 21 changed source files are outside expected architecture layers",
+      "summary": "1 of 12 changed source files are outside expected architecture layers",
       "details": [
         {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
@@ -377,14 +377,13 @@
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 12,
         "layer_distribution": {
-          "TestInfra": 1,
+          "TestInfra": 2,
           "Emitter": 4,
-          "RuntimeSupport": 1,
-          "Codegen": 1,
           "Interpreter": 1,
-          "RuntimeCore": 12
+          "RuntimeCore": 3,
+          "Tests": 1
         },
         "violations": [
           {

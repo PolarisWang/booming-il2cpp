@@ -1,7 +1,7 @@
 {
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:34:38.151188",
+  "generated_at": "2026-05-20T08:40:52.086635",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -251,50 +251,23 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "4 of 18 changed source files are outside expected architecture layers",
+      "summary": "1 of 5 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.CrossAssemblyInstantiation.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericDemandGraph.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericInstantiationProjection.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/common/chaos/native_types.h",
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 18,
+        "changed_source_count": 5,
         "layer_distribution": {
-          "TestInfra": 4,
-          "Emitter": 3,
-          "RuntimeSupport": 1,
-          "Interpreter": 2,
-          "RuntimeCore": 2,
-          "Tests": 2
+          "Emitter": 2,
+          "Interpreter": 1,
+          "RuntimeCore": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.CrossAssemblyInstantiation.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericDemandGraph.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericInstantiationProjection.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/common/chaos/native_types.h",
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           }
         ]

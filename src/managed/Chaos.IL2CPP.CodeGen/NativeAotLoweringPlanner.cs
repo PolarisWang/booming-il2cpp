@@ -340,6 +340,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // Build the set of canonical NativeSymbols that need the hidden
+        // chaos_generic_context parameter for runtime type resolution.
+        _sharedContextSymbols = BuildSharedContextSymbols();
+
         var methodsForLowering = fullAssemblyMode
             ? CollectAllMethods(aotCoreIr)
             : CollectReachableMethods(aotCoreIr, entryMethod);
@@ -520,7 +524,7 @@ public sealed partial class NativeAotLoweringPlanner
         EmitStaticInitializationDefinitions(objectModelBuilder);
         EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode, out var aotRegistrationCode);
 
-        var methodDeclarations = BuildMethodDeclarations(methodsForLowering);
+        var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols);
         var methods = methodsForLowering
             .Select(method =>
             {
