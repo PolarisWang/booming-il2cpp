@@ -69,6 +69,7 @@ struct OldGenPage {
     bool            is_oversized;     // true = single-object oversized page
     int8_t          preferred_sc_idx; // size class index for most blocks on this page (-1 = mixed)
     int8_t          numa_node;         // NUMA node this page was allocated on (-1 = unknown)
+    bool            young_tenured;     // true = recent survivor promotion (BGC sweep priority)
     std::atomic<bool> in_use;         // true = actively used for allocation
     std::atomic<bool> sweep_lock{false}; // spinlock for concurrent sweep
 
@@ -173,6 +174,13 @@ public:
     /// compaction to prepare for the next BGC cycle.
     void BgcCompact();
 
+    // ── Pinned Object Heap (POH) support ──────────────────────────
+
+    /// Allocate in the Pinned Object Heap.  POH objects bypass young GC
+    /// copying and are always treated as live during BGC sweep.
+    /// Falls back to PohAllocate() in gc_region.cpp (REGION_POH regions).
+    static void* AllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept;
+
     // ── Pinned root support ─────────────────────────────────────
 
     /// Register a pinned root (object that must never be moved/collected).
@@ -204,6 +212,22 @@ public:
             uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
             uintptr_t page_end = page_start + page->payload_size;
             ScanDirtyCards(page_start, page_end, std::forward<Fn>(callback));
+        }
+    }
+
+    /// Batched variant: groups consecutive dirty cards into ranges.
+    /// Calls @a callback(range_start, range_end) for each dirty range,
+    /// reducing per-card callback overhead.  @a dirty_card_count is
+    /// updated with the total number of dirty cards found (not ranges).
+    template <typename Fn>
+    void ScanDirtyCardsInPagesBatched(CHAOS_IL2CPP_SIZE* dirty_card_count,
+                                       Fn&& callback) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto* page = page_list_; page != nullptr; page = page->next) {
+            if (!page->in_use.load(std::memory_order_acquire)) continue;
+            uintptr_t page_start = reinterpret_cast<uintptr_t>(page->Payload());
+            uintptr_t page_end = page_start + page->payload_size;
+            ScanDirtyCardsBatched(page_start, page_end, dirty_card_count, callback);
         }
     }
 
@@ -273,6 +297,22 @@ public:
     /// Check if an object in old-gen is marked (reachable in current GC cycle).
     /// Returns false if the object is not in old-gen or not marked.
     bool IsMarked(const void* obj) const;
+
+    /// Mark a memory range [begin, end) as containing young-tenured objects
+    /// (recently promoted from survivor).  BGC sweep prioritizes these pages
+    /// for earlier reclamation.
+    void MarkYoungTenuredRange(uintptr_t begin, uintptr_t end);
+
+    /// Clear young_tenured flags on all pages (called after BGC sweep
+    /// processes them).  Pages whose objects survived become mature tenured.
+    void ClearYoungTenuredFlags();
+
+    /// Estimate overall fragmentation ratio [0.0, 1.0] across all old-gen pages.
+    /// 0.0 = no fragmentation, 1.0 = fully empty.
+    /// Walks the page list (O(n) at page count), updates cached value.
+    /// Used by the scheduler to adjust nursery sizing: high fragmentation →
+    /// shrink nursery to reduce promotion rate, giving old gen time to compact.
+    float OverallFragmentation() const;
 
     /// Mark an object as reachable. Returns false if already marked.
     /// Public: called by DependentHandle/weak-handle processing during full GC.
@@ -390,11 +430,12 @@ private:
 
     // ── Cross-page compaction (Phase 4b) ──────────────────────────
 
-    static constexpr float kCrossPageFragThreshold = 0.40f;     // min frag to evacuate
-    /// Floor for dynamic evacuation budget: minimum 512 KB per cycle.
-    /// Actual budget = max(512KB, min(total_heap * 10%, 4MB)).
+    static constexpr float kCrossPageFragThreshold = 0.30f;     // min frag to evacuate
+    /// Floor for dynamic evacuation budget: minimum 1 MB per cycle.
+    /// Actual budget = max(1MB, min(total_heap * 10%, 8MB)).
     /// Scaled with heap size so large heaps compact more per cycle.
-    static constexpr CHAOS_IL2CPP_SIZE kMaxCrossPageCompactBytes = 512 * 1024;
+    /// Increased from 512KB for more aggressive fragmentation reduction.
+    static constexpr CHAOS_IL2CPP_SIZE kMaxCrossPageCompactBytes = 1024 * 1024;
 
     /// Run cross-page compaction: evacuate fragmented pages by moving
     /// live objects to free space on other pages, then freeing source pages.
@@ -432,7 +473,7 @@ public:
     OldGenPage* page_list_ = nullptr;   // singly-linked list of all pages
     int         page_count_ = 0;
 
-    std::mutex mutex_;                  // protects page list + free lists
+    mutable std::mutex mutex_;                  // protects page list + free lists
     std::atomic<CHAOS_IL2CPP_SIZE> total_allocated_{0};
 
     // Auto-init guard: true after Init() completes.
@@ -474,7 +515,17 @@ public:
     // Instead of VirtualFree, these are kept alive and recycled by AllocatePage
     // on the next allocation that needs a fresh page — avoids a system call.
     // Protected by mutex_.
-    std::vector<OldGenPage*> page_pool_;
+    // Trimmed to kMaxPoolSize entries at the end of each BgcSweep() to prevent
+    // unbounded memory retention after allocation spikes.
+    // Pages in the pool are MEM_DECOMMIT'd to release physical pages while
+    // keeping the virtual address range reserved.  On pop, the page is
+    // MEM_COMMIT'd before reuse.
+    struct PoolEntry {
+        OldGenPage* page;
+        CHAOS_IL2CPP_SIZE page_size;  // saved before decommit for recommit
+    };
+    static constexpr int kMaxPoolSize = 16;
+    std::vector<PoolEntry> page_pool_;
 
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};

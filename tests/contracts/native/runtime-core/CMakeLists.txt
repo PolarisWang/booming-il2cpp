@@ -807,6 +807,50 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_old_gen_unit_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# gc_gen1_test — Gen1 collection unit tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_gen1_test.cpp")
+    add_executable(chaos_gc_gen1_test gc_gen1_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_gen1_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_gen1_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_gen1_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_gen1_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_gen1_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_gen1_benchmark — Gen1 collection performance baseline
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_gen1_benchmark.cpp")
+    add_executable(chaos_gc_gen1_benchmark gc_gen1_benchmark.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_gen1_benchmark PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_gen1_benchmark PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_gen1_benchmark PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_gen1_benchmark
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_gen1_benchmark
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
 # ============================================================
 # Phase B — MEDIUM priority new tests
 # ============================================================

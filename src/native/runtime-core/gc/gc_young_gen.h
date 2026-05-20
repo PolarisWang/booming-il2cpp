@@ -77,9 +77,16 @@ struct YoungGeneration {
 
     /// Promotion age threshold: number of young GCs an object survives
     /// in the survivor area before being promoted to old gen.
-    /// Fixed at 1 in V0: survive once in young → survivor, survive
-    /// once in survivor → old gen.
-    static constexpr int kPromotionAgeThreshold = 1;
+    /// Dynamic (set by scheduler based on EMA survival rate):
+    ///   1 = current behavior: every survivor object promotes on next GC
+    ///   2+ = objects survive N cycles in survivor before promotion
+    ///   - Low survival rate → higher threshold (filter more aggressively)
+    ///   - High survival rate → lower threshold (promote faster)
+    std::atomic<int> promotion_age_threshold_{1};
+
+    /// Young GC counter, incremented each young GC cycle.
+    /// Used by the dynamic promotion threshold to decide drain intervals.
+    std::atomic<int> young_gc_count_{0};
 };
 
 // ── Global state ─────────────────────────────────────────────

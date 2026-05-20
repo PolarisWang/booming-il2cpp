@@ -66,6 +66,11 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() no
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 kind) noexcept;
 
+/// Get GC collection count for a specific generation (GC.CollectionCount).
+/// @param generation  0=young (gen0), 1=gen1 (survivor), 2+=full (gen2/old).
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_collection_count(
+    CHAOS_IL2CPP_INT32 generation) noexcept;
+
 /// Check if a pointer resides in the GC-managed heap.
 /// Returns true when @a ptr points at or above the managed heap base
 /// (i.e., within the card-table-covered address range).  Stack-allocated

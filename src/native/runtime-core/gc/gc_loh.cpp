@@ -2,6 +2,8 @@
 
 #include <chaos/log.h>
 
+#include "gc_card_table.h"
+
 #include <cstdlib>
 #include <new>
 
@@ -167,6 +169,13 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
 
     void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
+    // Register the LOH segment payload with the card table so that
+    // DirtyCard() write barrier tracks pointer writes into LOH objects.
+    // This enables young GC Phase 1 to discover LOH→nursery references
+    // via card scanning.
+    GcRegisterHeapRange(
+        reinterpret_cast<uintptr_t>(payload),
+        reinterpret_cast<uintptr_t>(payload) + seg->payload_size);
     std::memset(payload, 0, seg->payload_size);
     return payload;
 }
@@ -248,6 +257,11 @@ CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
         *fp = excess->next;
         CHAOS_IL2CPP_LOG_DEBUG_M("LOH", "sweep_release_segment payload={0}",
             static_cast<unsigned long long>(excess->payload_size));
+
+        // Unregister payload range from card table before VirtualFree.
+        GcUnregisterHeapRange(
+            reinterpret_cast<uintptr_t>(excess) + sizeof(LohSegment),
+            reinterpret_cast<uintptr_t>(excess) + sizeof(LohSegment) + excess->payload_size);
 
         // DIAGNOSTIC: check if this address looks like a valid VirtualAlloc
         // before freeing. Prevents crash from double-free or invalid pointer.

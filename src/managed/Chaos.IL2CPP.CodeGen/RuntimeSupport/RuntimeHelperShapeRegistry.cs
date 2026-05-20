@@ -847,6 +847,14 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // === GC.CollectionCount(int) — returns collection count per generation ===
+            registry.Register("System.GC", "CollectionCount", ["System.Int32"],
+                ShapeKind.SimpleForward, "chaos_gc_get_collection_count",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
             // === GCMemoryInfo ===
             // Matches the BCL InternalCall signature: GetMemoryInfo(GCMemoryInfoData data, int kind)
             // GCMemoryInfoData is a class; codegen passes the object reference as a native int (pointer),

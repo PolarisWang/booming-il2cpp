@@ -2,8 +2,8 @@
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T19:04:35",
-  "duration_ms": 65937,
+  "timestamp": "2026-05-20T20:44:00",
+  "duration_ms": 84012,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -44,7 +44,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\managed\\subjects\\build-output\\ThreadingTasksPrimitivesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 28921
+      "duration_ms": 26621
     },
     "fact": {
       "stage": "fact",
@@ -58,52 +58,71 @@
         }
       },
       "errors": [],
-      "duration_ms": 356
+      "duration_ms": 101
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (44/44)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 44,
+          "total": 44,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 31
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 1,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1261
+      "duration_ms": 899
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "failed",
-      "summary": "asm-compare: 0/15 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "status": "passed",
+      "summary": "asm-compare: 15/15 methods OK, avg JIT=44.0 instr, avg AOT IR=12.6 instr, expansion=0.29x",
       "details": {
         "totalMethods": 15,
-        "okCount": 0,
-        "failedCount": 15,
+        "okCount": 15,
+        "failedCount": 0,
         "skippedCount": 0,
         "jitInstructionCount": {
-          "min": 0,
-          "max": 0,
-          "avg": 0,
-          "total": 0
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 660
         },
         "aotInstructionCount": {
-          "min": 0,
-          "max": 0,
-          "avg": 0,
-          "total": 0
+          "min": 3,
+          "max": 26,
+          "avg": 12.6,
+          "total": 189
         },
         "totalExternalRuntimeCalls": 0,
         "totalVirtualDispatches": 0,
         "totalBoxingOps": 0,
-        "topInstructionCategories": {},
-        "overallIrExpansionRatio": 0,
-        "averageExpansionRatio": 0
+        "topInstructionCategories": {
+          "external_runtime_call": 30
+        },
+        "overallIrExpansionRatio": 0.29,
+        "averageExpansionRatio": 0.29,
+        "maxExpansionRatio": 0.59,
+        "minExpansionRatio": 0.07
       },
       "errors": [],
-      "duration_ms": 3168
+      "duration_ms": 2739
     },
     "microbench": {
       "stage": "microbench",
@@ -113,15 +132,18 @@
         "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 59
+      "duration_ms": 64
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_speedup=-130.18%, native_faster=11/13, managed_faster=2/13",
+      "summary": "avg_aot_speedup=-146.16%, avg_jit_speedup=-71166.7%, native_aot_faster=11/13, native_jit_faster=1, managed_faster=2",
       "details": {
-        "averageSpeedupPercent": -130.18,
-        "nativeFasterCount": 11,
+        "averageSpeedupPercent": -146.16,
+        "averageNativeAotSpeedupPercent": -146.16,
+        "averageNativeJitSpeedupPercent": -71166.7,
+        "nativeAotFasterCount": 11,
+        "nativeJitFasterCount": 1,
         "managedFasterCount": 2,
         "matchedCount": 13,
         "totalMethods": 15,
@@ -129,34 +151,45 @@
         "benchmarkQuality": "ok"
       },
       "errors": [],
-      "duration_ms": 31389
+      "duration_ms": 51140
     },
-    "hotupdate": {
-      "stage": "hotupdate",
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "44/44 passed, 0 failed (stub=0)",
+      "summary": "avg_slowdown=117.92% (2.2x) over 15 methods (AOT patched path)",
       "details": {
-        "passedMethods": 44,
-        "failedMethods": 0,
-        "totalMethods": 44,
-        "realMethods": 44,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 50
-    },
-    "post_hotupdate_benchmark": {
-      "stage": "post_hotupdate_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=81.0% (1.8x) over 15 methods (interpreter path — expected)",
-      "details": {
-        "averageSlowdownPercent": 81.0,
-        "slowdownFactor": 1.81,
+        "averageSlowdownPercent": 117.92,
+        "slowdownFactor": 2.1792000000000002,
         "threshold": 50.0,
         "nonStubMethods": 15
       },
       "errors": [],
-      "duration_ms": 726
+      "duration_ms": 758
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "44/44 passed, 0 failed",
+      "details": {
+        "passed": 44,
+        "failed": 0,
+        "total": 44
+      },
+      "errors": [],
+      "duration_ms": 26
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=2.33% (1.0x) over 15 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 2.33,
+        "slowdownFactor": 1.0232999999999999,
+        "threshold": 50.0,
+        "nonStubMethods": 15
+      },
+      "errors": [],
+      "duration_ms": 1625
     }
   },
   "coverage": {
@@ -175,43 +208,52 @@
     },
     "irTranslation": {
       "totalMethods": 15,
-      "okCount": 0,
-      "failedCount": 15,
-      "overallIrExpansionRatio": 0,
-      "averageExpansionRatio": 0,
-      "maxExpansionRatio": 0,
-      "jitInstructionAvg": 0,
-      "aotInstructionAvg": 0,
+      "okCount": 15,
+      "failedCount": 0,
+      "overallIrExpansionRatio": 0.29,
+      "averageExpansionRatio": 0.29,
+      "maxExpansionRatio": 0.59,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 12.6,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
-      "topInstructionCategories": {}
+      "topInstructionCategories": {
+        "external_runtime_call": 30
+      }
     },
     "performance": {
-      "averageSpeedupPercent": -130.18,
+      "averageSpeedupPercent": -146.16,
       "nativeFasterCount": 11,
       "managedFasterCount": 2,
       "matchedCount": 13,
       "totalMethods": 15,
-      "invalidCount": 2
+      "invalidCount": 2,
+      "averageNativeJitSpeedupPercent": -71166.7,
+      "nativeJitFasterCount": 1
     },
     "hotupdate": {
-      "functional": {
+      "aotOverhead": {
+        "averageSlowdownPercent": 117.92,
+        "slowdownFactor": 2.1792000000000002,
+        "nonStubMethods": 15
+      },
+      "jitFunctional": {
         "passedMethods": 44,
         "failedMethods": 0,
         "totalMethods": 44
       },
-      "interpreterOverhead": {
-        "averageSlowdownPercent": 81.0,
-        "slowdownFactor": 1.81,
+      "jitOverhead": {
+        "averageSlowdownPercent": 2.33,
+        "slowdownFactor": 1.0232999999999999,
         "nonStubMethods": 15
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0.85,
-      "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.81,
-      "asmPassRate": 0.0
+      "irExpansionRatio": 0.29,
+      "interpreterSlowdownFactor": 2.1792000000000002,
+      "asmPassRate": 100.0
     }
   },
   "regression": {
@@ -227,9 +269,9 @@
       "currentMetrics": {
         "totalMethods": 15,
         "matchedCount": 13,
-        "nativeFasterCount": 11,
+        "nativeFasterCount": 0,
         "managedFasterCount": 2,
-        "averageSpeedupPercent": -130.18
+        "averageSpeedupPercent": -146.16
       }
     },
     "hasRegression": false,

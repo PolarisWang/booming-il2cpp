@@ -228,11 +228,7 @@ int main(int argc, char** argv) {
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
-#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
-#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
-#endif
 #endif
             try {
                 RunNativeAot(i);
@@ -246,6 +242,7 @@ int main(int argc, char** argv) {
         int passed_count = kAotMethodCount - failed_count;
         printf("Passed: %d/%d\n", passed_count, kAotMethodCount);
         std::fflush(stdout);
+        CHAOS_IL2CPP_PROFILE_DUMP();
         _exit(failed_count);
         return failed_count;
     }

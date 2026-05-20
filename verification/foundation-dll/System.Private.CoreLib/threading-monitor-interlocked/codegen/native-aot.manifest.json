@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ThreadingMonitorInterlockedSubjects",
   "entrySubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

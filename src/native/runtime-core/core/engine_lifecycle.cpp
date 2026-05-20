@@ -80,11 +80,32 @@ const CHAOS_IL2CPP_THREAD::id g_main_thread_id = CHAOS_IL2CPP_THIS_THREAD_GET_ID
 CHAOS_IL2CPP_ATOMIC(RuntimeMode) g_runtime_mode = RuntimeMode::Aot;
 CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_next_task_id{1};
 
-// GC handle table: maps handle IDs to object instances.
-// GcHandleEntry struct is defined in engine_lifecycle.h.
-CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
+// GC handle table: sharded for multi-thread scalability.
+// Each shard has its own mutex. Handle ID % kHandleShardCount selects the shard.
+// This replaces the single-mutex design that bottlenecked multi-threaded
+// handle creation/free under concurrent allocation pressure.
+static constexpr int kHandleShardCount = 64;
+static std::mutex s_gc_handle_shard_mutexes[kHandleShardCount];
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_shards[kHandleShardCount];
 CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle{1};
-CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
+static std::atomic<int> s_gc_handle_count{0};
+
+// Legacy compatibility aliases — point to shard 0's data.
+// New code should use the GcCreate*/GcFree*/GcGet*/GcSet* API directly.
+CHAOS_IL2CPP_MUTEX& s_gc_handle_mutex = s_gc_handle_shard_mutexes[0];
+CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry)& s_gc_handle_table = s_gc_handle_shards[0];
+
+inline int HandleShardIndex(CHAOS_IL2CPP_UINT64 handle) noexcept {
+    return static_cast<int>(handle % kHandleShardCount);
+}
+
+inline std::mutex& HandleShardMutex(CHAOS_IL2CPP_UINT64 handle) noexcept {
+    return s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+}
+
+inline auto& HandleShardMap(CHAOS_IL2CPP_UINT64 handle) noexcept {
+    return s_gc_handle_shards[HandleShardIndex(handle)];
+}
 
 // Dependent handle table: (primary, secondary) pairs for ConditionalWeakTable.
 // Semantics: if primary is alive during GC, secondary is kept alive.
@@ -110,10 +131,15 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, bool) s_pin_set;
 
 void GcIterateHandleTable(void (*callback)(void* object, void* user_data),
                            void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        if (kv.second.object_instance != nullptr) {
-            callback(kv.second.object_instance, user_data);
+    // Iterate all shards.  Under safepoint (called from GC), no concurrent
+    // modifications can occur — lock each shard defensively to support
+    // non-safepoint callers (e.g., test code).
+    for (int s = 0; s < kHandleShardCount; s++) {
+        std::lock_guard<std::mutex> lock(s_gc_handle_shard_mutexes[s]);
+        for (auto& kv : s_gc_handle_shards[s]) {
+            if (kv.second.object_instance != nullptr) {
+                callback(kv.second.object_instance, user_data);
+            }
         }
     }
 }
@@ -125,12 +151,14 @@ void GcIterateHandleTable(void (*callback)(void* object, void* user_data),
 /// avoid scanning objects that will be handled by the next young GC.
 void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
                               void* user_data) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        void* obj = kv.second.object_instance;
-        if (obj == nullptr) continue;
-        if (!RegionManager::Instance().IsNurseryPointer(obj)) {
-            callback(obj, user_data);
+    for (int s = 0; s < kHandleShardCount; s++) {
+        std::lock_guard<std::mutex> lock(s_gc_handle_shard_mutexes[s]);
+        for (auto& kv : s_gc_handle_shards[s]) {
+            void* obj = kv.second.object_instance;
+            if (obj == nullptr) continue;
+            if (!RegionManager::Instance().IsNurseryPointer(obj)) {
+                callback(obj, user_data);
+            }
         }
     }
 }
@@ -140,8 +168,9 @@ void GcIterateTenuredHandles(void (*callback)(void* object, void* user_data),
 //    were defined but never called — dead code eliminated 2026-05-18)
 
 void GcProcessWeakHandlesAfterYoungGC() noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
+    for (int s = 0; s < kHandleShardCount; s++) {
+        std::lock_guard<std::mutex> lock(s_gc_handle_shard_mutexes[s]);
+        for (auto& kv : s_gc_handle_shards[s]) {
         if (!kv.second.weak) continue;
         void* obj = kv.second.object_instance;
         if (obj == nullptr) continue;
@@ -162,6 +191,7 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
             kv.second.object_instance = nullptr;
         }
     }
+    }
 }
 
 // ======================================================================
@@ -170,62 +200,81 @@ void GcProcessWeakHandlesAfterYoungGC() noexcept {
 
 CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, false, false };
+    auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
+    auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
+    std::lock_guard<std::mutex> lock(*shard_mutex);
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
 
 CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true, false };
+    auto& shard_map = HandleShardMap(handle);
+    auto& shard_mutex = HandleShardMutex(handle);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
 
 CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, false, true, true };
+    auto& shard_map = HandleShardMap(handle);
+    auto& shard_mutex = HandleShardMutex(handle);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
 
 CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
     if (object_instance == nullptr) return 0;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, true, false, false };
+    auto& shard_map = HandleShardMap(handle);
+    auto& shard_mutex = HandleShardMutex(handle);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
 }
 
 void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     if (handle_id == 0) return;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    auto it = s_gc_handle_table.find(handle_id);
-    if (it != s_gc_handle_table.end()) {
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it != shard_map.end()) {
         if (it->second.pinned) {
             GcRemovePinnedObject(it->second.object_instance);
         }
-        s_gc_handle_table.erase(it);
+        shard_map.erase(it);
+        s_gc_handle_count.fetch_sub(1, std::memory_order_relaxed);
     }
 }
 
 void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     if (handle_id == 0) return nullptr;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    auto it = s_gc_handle_table.find(handle_id);
-    if (it == s_gc_handle_table.end()) return nullptr;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end()) return nullptr;
     return it->second.object_instance;
 }
 
 void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept {
     if (handle_id == 0) return;
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    auto it = s_gc_handle_table.find(handle_id);
-    if (it == s_gc_handle_table.end()) return;
+    auto& shard_mutex = HandleShardMutex(handle_id);
+    auto& shard_map = HandleShardMap(handle_id);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    auto it = shard_map.find(handle_id);
+    if (it == shard_map.end()) return;
     if (it->second.pinned && it->second.object_instance != nullptr) {
         GcRemovePinnedObject(it->second.object_instance);
     }
@@ -377,15 +426,16 @@ int GcProcessDependentHandlesAfterFullGC() noexcept {
 // collect dead weak-handle entries at that point and null them later,
 // after finalization (for WeakTrackResurrection semantics).
 
-/// Fast empty check for the handle table (no lock).
+/// Fast empty check for the handle table (atomic counter, no lock).
 bool GcHasAnyHandles() noexcept {
-    return !s_gc_handle_table.empty();
+    return s_gc_handle_count.load(std::memory_order_acquire) > 0;
 }
 
 void GcCollectDeadWeakHandles(
     std::vector<std::pair<uint64_t, void*>>& out_dead) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
+    for (int s = 0; s < kHandleShardCount; s++) {
+        std::lock_guard<std::mutex> lock(s_gc_handle_shard_mutexes[s]);
+        for (auto& kv : s_gc_handle_shards[s]) {
         if (!kv.second.weak) continue;
         void* obj = kv.second.object_instance;
         if (obj == nullptr) continue;
@@ -403,14 +453,17 @@ void GcCollectDeadWeakHandles(
             out_dead.emplace_back(kv.first, obj);
         }
     }
+    }
 }
 
 void GcProcessCollectedWeakHandles(
     const std::vector<std::pair<uint64_t, void*>>& dead_handles) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
     for (auto& entry : dead_handles) {
-        auto it = s_gc_handle_table.find(entry.first);
-        if (it == s_gc_handle_table.end()) continue;
+        auto& shard_mutex = HandleShardMutex(entry.first);
+        auto& shard_map = HandleShardMap(entry.first);
+        std::lock_guard<std::mutex> lock(shard_mutex);
+        auto it = shard_map.find(entry.first);
+        if (it == shard_map.end()) continue;
 
         // WeakTrackResurrection handles are NOT nullified here.
         // They survive one extra BGC cycle — if the object was resurrected
@@ -470,14 +523,16 @@ int GcProcessDependentHandlesAfterBgc() noexcept {
 
 void GcRelocateHandles(
     const std::vector<std::pair<void*, void*>>& relocations) noexcept {
-    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
-    for (auto& kv : s_gc_handle_table) {
-        void* obj = kv.second.object_instance;
-        if (obj == nullptr) continue;
-        for (auto& r : relocations) {
-            if (r.first == obj) {
-                kv.second.object_instance = r.second;
-                break;
+    for (int s = 0; s < kHandleShardCount; s++) {
+        std::lock_guard<std::mutex> lock(s_gc_handle_shard_mutexes[s]);
+        for (auto& kv : s_gc_handle_shards[s]) {
+            void* obj = kv.second.object_instance;
+            if (obj == nullptr) continue;
+            for (auto& r : relocations) {
+                if (r.first == obj) {
+                    kv.second.object_instance = r.second;
+                    break;
+                }
             }
         }
     }

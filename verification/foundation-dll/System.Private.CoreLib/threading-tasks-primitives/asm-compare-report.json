@@ -2,167 +2,588 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
-  "capturedAt": "2026-05-20T19:04:03",
+  "capturedAt": "2026-05-20T20:43:07",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
-    "okCount": 0,
-    "failedCount": 15,
+    "okCount": 15,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 0,
-      "max": 0,
-      "avg": 0,
-      "total": 0
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 660
     },
     "aotInstructionCount": {
-      "min": 0,
-      "max": 0,
-      "avg": 0,
-      "total": 0
+      "min": 3,
+      "max": 26,
+      "avg": 12.6,
+      "total": 189
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
-    "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0,
-    "averageExpansionRatio": 0
+    "topInstructionCategories": {
+      "external_runtime_call": 30
+    },
+    "overallIrExpansionRatio": 0.29,
+    "averageExpansionRatio": 0.29,
+    "maxExpansionRatio": 0.59,
+    "minExpansionRatio": 0.07
   },
   "methodResults": [
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
-      "shortName": "System.Threading.Tasks.Task::Run",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
-      "shortName": "System.Threading.Tasks.Task::Run",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Run<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Func<System.Int32>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
-      "shortName": "System.Threading.Tasks.Task::Delay",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 6,
+        "ratio": 0.14,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2",
+        "instructions": 6
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
-      "shortName": "System.Threading.Tasks.Task::Wait",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
-      "shortName": "System.Threading.Tasks.Task::Wait",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
-      "shortName": "System.Threading.Tasks.Task::get_IsCompleted",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
-      "shortName": "System.Threading.Tasks.Task::get_Status",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
-      "shortName": "System.Threading.Tasks.Task::ContinueWith",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 26,
+        "ratio": 0.59,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7",
+        "instructions": 26
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
-      "shortName": "System.Threading.Tasks.Task::WhenAll",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_8",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8",
+        "instructions": 7
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
-      "shortName": "System.Threading.Tasks.Task::WhenAny",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_9",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 24,
+        "ratio": 0.55,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9",
+        "instructions": 24
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task<System.Threading.Tasks.Task>(System.Threading.Tasks.Task,System.Threading.Tasks.Task)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task<System.Threading.Tasks.Task>::get_Result:System.Threading.Tasks.Task()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 5
+      }
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
-      "shortName": "System.Threading.Tasks.Task::FromResult",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_10",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::get_Result:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
-      "shortName": "System.Threading.Thread::Start",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_11",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 5,
+        "ratio": 0.11,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
+        "instructions": 5
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
-      "shortName": "System.Threading.Thread::Sleep",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_12",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 3,
+        "ratio": 0.07,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
+        "instructions": 3
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
-      "shortName": "System.Threading.Thread::get_CurrentThread",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_13",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
-      "shortName": "System.Threading.Thread::get_ManagedThreadId",
-      "status": "error",
-      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
-      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
+      "shortName": "Subject_14",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     }
   ]
 }

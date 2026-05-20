@@ -1,19 +1,26 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T19:04:00.063096",
+  "generated_at": "2026-05-20T20:43:04.502621",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "NOT_APPLICABLE",
-      "summary": "15/15 methods are stubs — benchmark data not meaningful",
+      "status": "CONCERN",
+      "summary": "avg_aot_speedup=-84.06% (filtered=58.1% excluding 1 stub-limitation methods)",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 0.0,
-        "managed_faster_count": 0,
-        "native_faster_count": 0,
-        "invalid_count": 15,
-        "total_methods": 15
+        "average_speedup_percent": -84.06,
+        "filtered_average_speedup_percent": 58.15,
+        "excluded_stub_methods": 1,
+        "excluded_stub_details": {
+          "get_CurrentThread:System.Threading.Thread()": -1790.55
+        },
+        "average_native_jit_speedup_percent": -85940.65,
+        "managed_faster_count": 2,
+        "native_aot_faster_count": 11,
+        "native_jit_faster_count": 1,
+        "matched_count": 13,
+        "regression_ratio": 0.154
       }
     },
     "p1_lowering": {
@@ -371,47 +378,32 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "3 of 44 changed source files are outside expected architecture layers",
+      "summary": "2 of 17 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "CMakeLists.txt",
+          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/native/compile_hotupdate_boxing.cmd",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+          "file": "wiki/06-测试验证/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 44,
+        "changed_source_count": 17,
         "layer_distribution": {
-          "TestInfra": 3,
+          "TestInfra": 4,
           "Emitter": 2,
-          "CodeGenRoot": 2,
-          "RuntimeSupport": 1,
-          "Templates": 1,
-          "Bootstrap": 1,
-          "Codegen": 4,
-          "Common": 1,
-          "Interpreter": 3,
-          "RuntimeCore": 22,
-          "Tests": 1
+          "CodeGenRoot": 1,
+          "RuntimeCore": 8
         },
         "violations": [
           {
-            "file": "CMakeLists.txt",
+            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/native/compile_hotupdate_boxing.cmd",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+            "file": "wiki/06-测试验证/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -474,9 +466,9 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 1,
+    "concern": 2,
     "violation": 0,
-    "not_applicable": 3,
-    "overall": "ALIGNED"
+    "not_applicable": 2,
+    "overall": "CONCERN"
   }
 }

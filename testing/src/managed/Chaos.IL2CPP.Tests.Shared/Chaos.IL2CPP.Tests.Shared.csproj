@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Chaos.IL2CPP.Tests.Shared</RootNamespace>
+    <AssemblyName>Chaos.IL2CPP.Tests.Shared</AssemblyName>
+  </PropertyGroup>
+</Project>

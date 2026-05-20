@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 1,
+  "defaultStringId": 5395473506543290551,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_StringConcatHelper_TestConcat",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Build outputs
+build/
+bin/
+obj/
+
+# Test results
+results/
+
+# IDE
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake

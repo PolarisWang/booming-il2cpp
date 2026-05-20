@@ -33,6 +33,7 @@
 #include "codegen_bridge.h"
 #include "runtime_abi.h"
 #include "runtime_core.h"
+#include "gc_api.h"
 #include "gc_bgc_inline.h"
 #include "gc_helpers.h"
 #include "runtime_stubs/misc_stubs.h"
@@ -225,6 +226,10 @@ private:
             }
             if (std::strstr(sub, "System.GC::GetGeneration:")) {
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR obj) -> CHAOS_IL2CPP_INT32 { return ChaosGcGetGeneration(obj); });
+                continue;
+            }
+            if (std::strstr(sub, "System.GC::CollectionCount:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INT32 generation) -> CHAOS_IL2CPP_INT32 { return chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(generation); });
                 continue;
             }
 

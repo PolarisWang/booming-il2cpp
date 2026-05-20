@@ -614,6 +614,11 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "reason": "closed-world-method"
     },

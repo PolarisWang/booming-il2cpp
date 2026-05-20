@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Chaos.IL2CPP.Tests.IL.Parsing</RootNamespace>
+    <AssemblyName>Chaos.IL2CPP.Tests.IL.Parsing</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chaos.IL2CPP.Tests.Shared\Chaos.IL2CPP.Tests.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)..\..\..\data\il\**\*.*" Link="data\il\%(RecursiveDir)%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

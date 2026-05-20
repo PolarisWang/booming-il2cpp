@@ -1,0 +1,71 @@
+{
+  "subjectId": "foundation-dll-System.Private.CoreLib-primitive-numeric-conversions",
+  "displayName": "Primitive Numeric Conversions",
+  "category": "foundation-dll-family",
+  "defaultGoal": "correctness.dev",
+  "defaultMatrix": "windows-verify",
+  "defaultValidationProfile": "verify-dev",
+  "source": {
+    "type": "foundation-dll-family",
+    "path": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions",
+    "primaryProjectPath": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions",
+    "familySlug": "primitive-numeric-conversions",
+    "assembly": "System.Private.CoreLib"
+  },
+  "validationProfiles": {
+    "verify-dev": [
+      "verify"
+    ]
+  },
+  "validation": {
+    "verify": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "tags": [
+    "foundation-dll",
+    "family"
+  ],
+  "executionPipelines": [
+    {
+      "pipelineId": "family-verify",
+      "displayName": "Foundation-DLL Family Verification",
+      "stages": [
+        {
+          "stageId": "family-verify",
+          "kind": "family-verify-foundation-dll",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": []
+        }
+      ]
+    }
+  ],
+  "environmentMatrices": [
+    {
+      "matrixId": "windows-verify",
+      "pipelineId": "family-verify",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows",
+        "targetPlatform": "windows",
+        "toolchainProfile": "native-aot",
+        "runtimeProfile": "native"
+      },
+      "validationIntent": {
+        "validationMode": "report",
+        "adaptationLevel": "full",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
+      }
+    }
+  ]
+}

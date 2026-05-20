@@ -9,6 +9,11 @@ namespace chaos::il2cpp::runtime_core {
 
 GcStats g_gc_stats;
 
+// Process start time for pause_time_percentage computation.
+// Initialized at module load (static init) before any GC activity.
+const std::chrono::steady_clock::time_point g_gc_start_time =
+    std::chrono::steady_clock::now();
+
 // ── Pause time histogram ───────────────────────────────────────
 std::atomic<uint64_t> g_gc_pause_histogram[kGcPauseBucketCount];
 
@@ -38,14 +43,27 @@ GcSnapshot GcGetSnapshot() noexcept {
     snap.alloc_bytes     = g_gc_stats.alloc_bytes.load(std::memory_order_acquire);
     snap.alloc_oversized = g_gc_stats.alloc_oversized.load(std::memory_order_acquire);
 
+    // Gen1 counters.
+    snap.gen1_collections      = g_gc_stats.gen1_collections.load(std::memory_order_acquire);
+    snap.gen1_objects_promoted = g_gc_stats.gen1_objects_promoted.load(std::memory_order_acquire);
+    snap.gen1_bytes_promoted   = g_gc_stats.gen1_bytes_promoted.load(std::memory_order_acquire);
+    snap.gen1_bytes_reclaimed  = g_gc_stats.gen1_bytes_reclaimed.load(std::memory_order_acquire);
+
+    // GC sequence number and last generation.
+    snap.gc_index = g_gc_stats.gc_index.load(std::memory_order_acquire);
+    snap.last_gc_generation = g_gc_stats.last_gc_generation.load(std::memory_order_acquire);
+
     // Derived pause totals.
     snap.young_pause_ns_total = g_gc_stats.young_pause_ns.load(std::memory_order_acquire);
     snap.full_pause_ns_total  = g_gc_stats.full_pause_ns.load(std::memory_order_acquire);
+    snap.gen1_pause_ns_total  = g_gc_stats.gen1_pause_ns.load(std::memory_order_acquire);
 
     snap.young_pause_ns_avg = (snap.young_collections > 0)
         ? snap.young_pause_ns_total / snap.young_collections : 0;
     snap.full_pause_ns_avg = (snap.full_collections > 0)
         ? snap.full_pause_ns_total / snap.full_collections : 0;
+    snap.gen1_pause_ns_avg = (snap.gen1_collections > 0)
+        ? snap.gen1_pause_ns_total / snap.gen1_collections : 0;
 
     // Histogram snapshot.
     for (int i = 0; i < kGcPauseBucketCount; i++) {
@@ -98,6 +116,22 @@ void GcDumpStats() noexcept {
             g_gc_stats.full_objects_marked.load(std::memory_order_relaxed),
             g_gc_stats.full_bytes_reclaimed.load(std::memory_order_relaxed),
             g_gc_stats.full_finalizers_run.load(std::memory_order_relaxed),
+            total_ns,
+            avg_ns);
+    }
+
+    // ── Gen1 collection ───────────────────────────────────────────
+    uint64_t gen1_count = g_gc_stats.gen1_collections.load(std::memory_order_relaxed);
+    if (gen1_count > 0) {
+        uint64_t total_ns = g_gc_stats.gen1_pause_ns.load(std::memory_order_relaxed);
+        uint64_t avg_ns = gen1_count > 0 ? total_ns / gen1_count : 0;
+        CHAOS_IL2CPP_LOG_WRITE_RAW_M(
+            "GC|gen1|collections={0}|promoted_objects={1}|promoted_bytes={2}"
+            "|reclaimed={3}|total_pause_ns={4}|avg_pause_ns={5}\n",
+            gen1_count,
+            g_gc_stats.gen1_objects_promoted.load(std::memory_order_relaxed),
+            g_gc_stats.gen1_bytes_promoted.load(std::memory_order_relaxed),
+            g_gc_stats.gen1_bytes_reclaimed.load(std::memory_order_relaxed),
             total_ns,
             avg_ns);
     }

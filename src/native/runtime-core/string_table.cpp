@@ -45,15 +45,18 @@ void InitializeFromAot(const StringEntry* entries, CHAOS_IL2CPP_UINT32 count)
 
 StringView Resolve(StringId id)
 {
-    if (id == kStringIdNull)
-    {
-        return StringView{};
-    }
-
     // Thread-local single-entry fast path: hot interned strings repeat.
+    // Must be checked BEFORE the null guard because on the hot path
+    // (99.99%+ of calls) id is never null — TLS gives us the answer
+    // with a single 8-byte compare, skipping the null branch entirely.
     if (id == g_tls_resolve.id)
     {
         return g_tls_resolve.view;
+    }
+
+    if (id == kStringIdNull)
+    {
+        return StringView{};
     }
 
     // 1. Binary search in AOT entries (read-only, no lock needed, must be sorted by id).
@@ -67,8 +70,9 @@ StringView Resolve(StringId id)
 
         if (result != end && result->id == id)
         {
-            g_tls_resolve = {id, StringView{result->utf8_data, result->byte_count}};
-            return StringView{result->utf8_data, result->byte_count};
+            const StringView view{result->utf8_data, result->byte_count};
+            g_tls_resolve = {id, view};
+            return view;
         }
     }
 
@@ -78,6 +82,7 @@ StringView Resolve(StringId id)
         const auto it = g_dynamic_entries.find(id);
         if (it != g_dynamic_entries.end())
         {
+            g_tls_resolve = {id, it->second};
             return it->second;
         }
     }

@@ -76,7 +76,7 @@ using SatbEntry = void*;
 // During STW re-mark, all thread-local buffers are drained directly.
 // ======================================================================
 
-static constexpr int kBgcSatbBufferSize = 512;
+static constexpr int kBgcSatbBufferSize = 1024;
 
 /// SATB buffer (heap-allocated, indexed by tls_satb_buffer_index).
 struct SatbThreadBuffer {
@@ -335,6 +335,14 @@ private:
     /// Dead finalizable entries collected during BgcSweep.
     /// Uses namespace-level FinalizerEntry (defined in gc_old_gen.h).
     std::vector<FinalizerEntry> bgc_dead_finalizables_;
+
+    // ── Incremental marking (time-slicing) ──────────────────────
+
+    /// Maximum CPU burst for concurrent mark before yielding to mutators.
+    static constexpr auto kMarkSliceBudget = std::chrono::microseconds(2000);
+
+    /// Sleep duration when the time budget is exceeded, yielding to mutators.
+    static constexpr auto kMarkSliceInterval = std::chrono::microseconds(500);
 
     // ── BGC weak handle support ───────────────────────────────────
 

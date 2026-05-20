@@ -250,22 +250,12 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitThrowCpp(StringBuilder builder, string throwValueExpression, string indentation)
 	{
 		ResetArrayCheckCache();
-		builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-		builder.AppendLine($"{indentation}chaos::il2cpp::runtime_core::chaos_raise_exception({throwValueExpression});");
-		builder.AppendLine("#else");
-		builder.AppendLine($"{indentation}throw chaos_managed_exception{{{throwValueExpression}}};");
-		builder.AppendLine("#endif");
+		builder.AppendLine($"{indentation}CHAOS_EH_THROW({throwValueExpression});");
 	}
 
 	private void EmitRethrowCpp(StringBuilder builder, string indentation)
 	{
-		builder.AppendLine("#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-		builder.AppendLine($"{indentation}chaos::il2cpp::runtime_core::chaos_raise_exception(");
-		builder.AppendLine($"{indentation}    reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-		builder.AppendLine($"{indentation}        chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-		builder.AppendLine("#else");
-		builder.AppendLine($"{indentation}throw;");
-		builder.AppendLine("#endif");
+		builder.AppendLine($"{indentation}CHAOS_EH_RETHROW;");
 	}
 
 	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)

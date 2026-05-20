@@ -73,6 +73,12 @@
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
     }
   ]
 }

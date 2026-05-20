@@ -94,10 +94,14 @@ def generate_verification_dispatch(
             subject_indices[i] = i
 
     if subject_indices:
-        write(f'extern "C" const int kSubjectEntryCount = {len(subject_indices)};')
-        write(f'extern "C" const int kSubjectEntryIndices[{len(subject_indices)}] = {{')
-        write("    " + ", ".join(str(i) for i in subject_indices))
-        write("};")
+        # NOTE: kSubjectEntryCount / kSubjectEntryIndices are defined in
+        # native-aot.generated.cpp (with actual values).  We declare them
+        # extern here to avoid multiply-defined-symbol linker errors when
+        # both TUs are compiled into entry.exe.
+        write(f'extern "C" const int kSubjectEntryCount;')
+        write(f'extern "C" const int kSubjectEntryIndices[];')
+        write('// (defined in native-aot.generated.cpp)')
+        write('')
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────

@@ -61,8 +61,8 @@ enum class GcLatencyMode : uint8_t {
 //     FULL  — run a full (old-gen) mark-sweep
 //
 // == Nursery sizing ==
-//   RecommendedNurserySize() returns [128KB, 1MB].
-//   Target = survival_rate * 2 * last_nursery_used, clamped to bounds.
+//   RecommendedNurserySize() returns [64KB, 4MB].
+//   Target = survival_rate * multiplier * last_nursery_used, clamped to bounds.
 //   When survival is low → shrink nursery (less to copy on each GC).
 //   When survival is high → grow nursery (buy more time between GCs).
 // ======================================================================
@@ -72,6 +72,7 @@ enum class GcCollectionKind {
     YOUNG = 1,
     FULL = 2,       // STW full GC (memory pressure / emergency)
     FULL_BGC = 3,   // Background concurrent mark (low-latency)
+    GEN1 = 4,       // Gen1 mark-sweep collection — DEAD CODE (never returned)
 };
 
 class GcScheduler {
@@ -105,6 +106,21 @@ public:
     /// @param total_heap_bytes  Estimated total heap size (old-gen page usage)
     ///        for scheduling the next full GC trigger threshold.
     void RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t pause_ns = 0) noexcept;
+
+    // ── Gen1 collection recording ──────────────────────────────────
+
+    /// Record a Gen1 collection result. Resets Gen1 budget counter.
+    /// @param bytes_promoted  Bytes promoted from Gen1 to Gen2.
+    /// @param objects_in_gen1  Total objects that existed in Gen1 before collection
+    ///                         (for survival rate computation).
+    /// @param pause_ns  STW pause duration in nanoseconds.
+    void RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
+                              CHAOS_IL2CPP_SIZE objects_in_gen1,
+                              uint64_t pause_ns = 0) noexcept;
+
+    /// Record Gen0→Gen1 promotions. Called from young collector when
+    /// objects are promoted into the survivor area (Gen1).
+    void RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept;
 
     /// Record page count growth since last full GC.
     /// When page_count grows rapidly without matching reclaim, the GC
@@ -164,7 +180,7 @@ public:
     // ── Nursery sizing ───────────────────────────────────────────
 
     /// Recommended nursery size in bytes, based on survival rate.
-    /// Clamped to [128KB, 1MB].
+    /// Clamped to [64KB, 4MB].
     CHAOS_IL2CPP_SIZE RecommendedNurserySize() const noexcept;
 
     /// Last nursery used bytes (for sizing calculation).
@@ -194,17 +210,58 @@ public:
         return gc_cooldown_skips_.load(std::memory_order_acquire) == 0;
     }
 
+    /// Get the scheduler-recommended promotion age threshold.
+    /// Computed from Gen1 EMA survival rate and pause-time cost.
+    /// Set by RecordGen1Collection, read by young collector's Phase 4.
+    int GetRecommendedPromotionAge() const noexcept {
+        return scheduler_recommended_threshold_.load(std::memory_order_acquire);
+    }
+
+    /// Recommended survivor area size in bytes.
+    /// Computed from EMA of promoted bytes per young GC and Gen1 survival rate.
+    /// Clamped to [kMinSurvivorSize, kMaxSurvivorSize].
+    CHAOS_IL2CPP_SIZE RecommendedSurvivorSize() const noexcept;
+
+    // ── Survivor sizing constants ──────────────────────────────────
+    /// Minimum survivor area: 2 MB.  Below this, Gen1 filtering is too
+    /// constrained and objects promote to Gen2 too quickly.
+    static constexpr CHAOS_IL2CPP_SIZE kMinSurvivorSize = 2 * 1024 * 1024;   // 2 MB
+    /// Maximum survivor area: 10 MB.  Above this, the nursery becomes too
+    /// small (< 6 MB) and young GC frequency increases unacceptably.
+    static constexpr CHAOS_IL2CPP_SIZE kMaxSurvivorSize = 10 * 1024 * 1024;  // 10 MB
+    /// Default survivor area (current fixed split).
+    static constexpr CHAOS_IL2CPP_SIZE kDefaultSurvivorSize = 8 * 1024 * 1024; // 8 MB
+
+    /// Young-collection EMA survival rate (nursery→survivor promotion).
     double SurvivalRate() const noexcept {
         return BitsToDouble(survival_rate_bits_.load(std::memory_order_relaxed));
     }
     CHAOS_IL2CPP_SIZE TotalAllocatedSinceLastGC() const noexcept;
 
+    // ── Old-gen fragmentation ───────────────────────────────────
+
+    /// Set old-gen fragmentation ratio [0..1000] (fixed-point, *1000).
+    /// Called from RecordYoungCollection for nursery sizing.
+    void SetOldGenFragmentation(float frag) noexcept {
+        uint32_t fp = static_cast<uint32_t>(frag * 1000.0f);
+        if (fp > 1000) fp = 1000;
+        old_gen_fragmentation_fp_.store(fp, std::memory_order_release);
+    }
+
+    /// Get old-gen fragmentation ratio [0.0, 1.0].
+    float OldGenFragmentation() const noexcept {
+        return static_cast<float>(
+            old_gen_fragmentation_fp_.load(std::memory_order_acquire)) / 1000.0f;
+    }
+
 private:
+    std::atomic<uint32_t> old_gen_fragmentation_fp_{0};
+
     // ── Constants ────────────────────────────────────────────────
 
     static constexpr double kEmaAlpha = 1.0 / 16.0;  // ~6% weight per sample
-    static constexpr CHAOS_IL2CPP_SIZE kMinNurserySize = 128 * 1024;     // 128 KB
-    static constexpr CHAOS_IL2CPP_SIZE kMaxNurserySize = 1024 * 1024;    // 1 MB
+    static constexpr CHAOS_IL2CPP_SIZE kMinNurserySize = 64 * 1024;      // 64 KB
+    static constexpr CHAOS_IL2CPP_SIZE kMaxNurserySize = 4 * 1024 * 1024; // 4 MB
     static constexpr CHAOS_IL2CPP_SIZE kDefaultNurserySize = 256 * 1024; // 256 KB
 
     // Young GC trigger: allocation since last young GC exceeds this
@@ -217,13 +274,44 @@ private:
 
     // Full GC trigger: allocation since last full GC exceeds this
     // multiplier × estimated heap size.
-    static constexpr float kFullTriggerMultiplier = 4.0f;
+    // Reduced from 4.0x to 2.0x for more frequent BGC cycles, keeping
+    // old-gen dead objects from accumulating between collections.
+    static constexpr float kFullTriggerMultiplier = 2.0f;
+
+    // High-pressure threshold: when alloc_since_last_full_gc exceeds
+    // this multiplier × estimated_heap_size, the scheduler tightens
+    // young GC triggers to reduce old-gen allocation rate.  Set higher
+    // than kFullTriggerMultiplier so that normal full GCs fire first;
+    // this only kicks in when the full GC is blocked or deferred.
+    static constexpr float kHighPressureTriggerMultiplier = 3.0f;
 
     // When page_count has grown by this many pages since the last full GC
     // without a collection, trigger FULL_BGC.  Prevents unbounded page list
     // growth when the allocation-rate-based trigger (kFullTriggerMultiplier)
     // is too slow to react to rapid page allocation bursts.
-    static constexpr int kMaxPageGrowthThreshold = 32;
+    // Reduced from 32 to 16 for earlier BGC intervention.
+    static constexpr int kMaxPageGrowthThreshold = 16;
+
+    // ── Gen1 constants ─────────────────────────────────────────────
+    // NOTE: These constants and the Gen1 budget tracking fields below are
+    // dead code.  GcScheduler::DecideCollection() never returns GEN1 — the
+    // actual Gen1 trigger is in GcYoungCollection Phase 4 via
+    // promotion_age_threshold_ (gc_young_gen.h).  The budget-based Gen1
+    // trigger was part of the original design but was replaced by the
+    // age-based trigger before release.
+    //
+    // If Gen1 budget-based triggering is re-enabled in the future:
+    //   - kGen1TriggerMultiplier: trigger when Gen1 alloc exceeds this ×
+    //     survivor capacity
+    //   - kGen1MaxInterval: trigger at least every N young GCs
+
+    // Gen1 trigger: allocation into Gen1 (0→1 promotion bytes) exceeds
+    // this multiplier × survivor capacity since last Gen1 collection.
+    static constexpr float kGen1TriggerMultiplier = 4.0f;
+
+    // Max interval: trigger Gen1 at least every N young GCs even if the
+    // byte-based budget has not been exhausted.
+    static constexpr int kGen1MaxInterval = 8;
 
     // ── State ────────────────────────────────────────────────────
 
@@ -239,8 +327,55 @@ private:
     // Total bytes allocated by the application since the last collection.
     std::atomic<CHAOS_IL2CPP_SIZE> alloc_since_last_gc_{0};
 
+    /// EMA of bytes promoted per young GC (nursery→survivor).
+    /// Updated by RecordYoungCollection, used by RecommendedSurvivorSize
+    /// to estimate how much survivor space is needed between Gen1 collections.
+    std::atomic<CHAOS_IL2CPP_SIZE> avg_promoted_bytes_{0};
+
     // Total bytes allocated since the last full GC.
     std::atomic<CHAOS_IL2CPP_SIZE> alloc_since_last_full_gc_{0};
+
+    // ── Gen1 budget tracking ──────────────────────────────────────
+    // DEAD CODE: These fields are written by RecordGen1Collection /
+    // RecordGen1Allocation but never read by the collection decision.
+    // See the Gen1 constants note above for context.
+
+    // Gen0→Gen1 promotion bytes accumulated since last Gen1 collection.
+    std::atomic<CHAOS_IL2CPP_SIZE> gen1_alloc_since_last_gc_{0};
+
+    // Number of young (Gen0) collections since last Gen1 collection.
+    std::atomic<int> gen0_since_last_gen1_gc_{0};
+
+    // ── Gen1 EMA survival tracking ──────────────────────────────────
+    /// EMA-smoothed Gen1 survival rate (survivor→Gen2 promotion).
+    /// Updated by RecordGen1Collection using the same kEmaAlpha as the
+    /// young-collection EMA.  Used for promotion age tuning.
+    std::atomic<uint64_t> gen1_survival_rate_bits_{0};
+
+    /// Running total of Gen1 pause time (ns).  Accumulated by
+    /// RecordGen1Collection for computing avg pause per promoted byte.
+    std::atomic<uint64_t> gen1_total_pause_ns_{0};
+
+    /// Running total of bytes promoted from Gen1→Gen2.  Paired with
+    /// gen1_total_pause_ns_ to compute pause-time cost per byte.
+    std::atomic<CHAOS_IL2CPP_SIZE> gen1_total_promoted_bytes_{0};
+
+    /// Pause-time tolerance: maximum ns per promoted byte before the
+    /// scheduler nudges the promotion age threshold up (fewer promotions
+    /// per Gen1 collection = shorter pause).  Tuned for the mark-sweep +
+    /// memcpy cost of ~5-10 ns/byte in the common case.
+    static constexpr uint64_t kGen1MaxNsPerByte = 10;  // 10 ns/byte
+
+    /// Minimum promotion age threshold (fastest promotion to Gen2).
+    static constexpr int kGen1MinPromotionAge = 1;
+    /// Maximum promotion age threshold (longest filtering in Gen1).
+    static constexpr int kGen1MaxPromotionAge = 12;
+
+    /// Scheduler-recommended promotion age threshold.
+    /// Computed from Gen1 EMA survival rate + pause-time cost.
+    /// Written by RecordGen1Collection, read by the young collector
+    /// (gc_young_collector.cpp Phase 4) instead of computing locally.
+    std::atomic<int> scheduler_recommended_threshold_{1};
 
     // Net page count growth since last full GC (new pages - reclaimed).
     // Tracked via RecordPageCountGrowth(), reset in RecordFullCollection().

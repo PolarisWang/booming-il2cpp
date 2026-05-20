@@ -72,6 +72,15 @@ extern std::atomic<size_t> g_card_l1_size;
 /// Base address of the managed heap.  Set once at startup via GcSetHeapBase().
 extern uintptr_t g_heap_base;
 
+/// Nursery address range for DirtyCard fast skip.
+/// When the written-to address is within the nursery, the card table entry
+/// is unnecessary — young GC Phase 2 scans the entire nursery precisely
+/// (object-by-object).  DirtyCard can skip the card table entirely for
+/// nursery-internal writes, saving an L2 segment access (~cache miss).
+/// Updated by GcSetCardTableNurseryRange() when the nursery is resized.
+extern uintptr_t g_nursery_range_begin;
+extern uintptr_t g_nursery_range_end;
+
 // ── Inline barrier helpers ─────────────────────────────────────
 
 /// Mark the card covering @a obj as dirty.
@@ -81,6 +90,18 @@ inline void DirtyCard(const void* obj) noexcept {
     uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
     if (addr < g_heap_base) [[unlikely]] {
         return;  // below heap base — not managed memory
+    }
+    // Nursery fast skip: young GC Phase 2 scans the entire nursery
+    // precisely (object-by-object with TypeInfo layouts).  The card
+    // table is only needed for old-gen/LOH objects that young GC
+    // would not otherwise scan.  Skipping nursery writes avoids an
+    // expensive L2 segment access (cache miss) on the hot path.
+    // The globals use relaxed ordering — this is an optimization hint;
+    // false-negative (miss nursery) adds a harmless card write, and
+    // false-positive (skip needed card) cannot happen because nursery
+    // writes never need card tracking.
+    if (addr >= g_nursery_range_begin && addr < g_nursery_range_end) [[likely]] {
+        return;
     }
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
@@ -97,6 +118,14 @@ inline void DirtyCard(const void* obj) noexcept {
             seg->cards[card_idx] = 0xFF;
         }
     }
+}
+
+/// Inline wrapper for codegen-emitted barrier calls.  Defined in the header
+/// so the compiler can inline it into generated C++ code (avoiding the
+/// function-call overhead of the out-of-line definition in gc_api.cpp).
+/// The codegen includes this header via <gc/gc_card_table.h>.
+extern "C" inline void chaos_gc_dirty_card(const void* obj) noexcept {
+    DirtyCard(obj);
 }
 
 /// Check whether the card covering @a obj is dirty.
@@ -134,12 +163,25 @@ inline void GcSetHeapBase(void* heap_base) noexcept {
     g_heap_base = reinterpret_cast<uintptr_t>(heap_base);
 }
 
+/// Set the nursery address range for DirtyCard fast skip.
+/// Thread-safe for concurrent DirtyCard readers: uses volatile stores
+/// so the write propogates, but callers must ensure the nursery is fully
+/// initialized before threads can write to managed objects in it.
+void GcSetCardTableNurseryRange(uintptr_t begin, uintptr_t end) noexcept;
+
 /// Register a heap range [start, end) with the card table.
 /// Allocates L2 segments for any L1 entries that are still null.
 /// Thread-safe: uses CAS to avoid double allocation.
 /// Called from old-gen page allocation (under mutex, but may race with
 /// concurrent DirtyCard reads on other threads).
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end);
+
+/// Unregister a heap range [start, end) from the card table.
+/// Sets L1 entries to null and frees the corresponding L2 segments.
+/// Thread-safe: uses CAS and is safe against concurrent DirtyCard reads
+/// (a null L1 entry is treated as "no segment" by DirtyCard).
+/// Called from LOH sweep when releasing excess segments to the OS.
+void GcUnregisterHeapRange(uintptr_t start, uintptr_t end) noexcept;
 
 /// Clear the entire card table (e.g., after young GC).
 /// Uses a tracked segment list to avoid walking all 64K L1 entries.
@@ -174,6 +216,61 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
                 callback(global_card_idx, card_start, card_end);
             }
         }
+    }
+}
+
+/// Scan the card table for dirty cards within [@a start, @a end), batching
+/// consecutive dirty cards into a single callback(range_start, range_end) call.
+/// This reduces per-card callback overhead for young GC card table scans where
+/// adjacent cards are often all dirty (e.g., after a large object array write).
+/// @param dirty_card_count  Optional accumulator for total dirty cards found.
+/// @param callback  Called as callback(range_start, range_end) for each batch.
+template <typename Fn>
+inline void ScanDirtyCardsBatched(uintptr_t start, uintptr_t end,
+                                   CHAOS_IL2CPP_SIZE* dirty_card_count,
+                                   Fn&& callback) noexcept {
+    if (start < g_heap_base) start = g_heap_base;
+    if (end <= g_heap_base) return;
+
+    uintptr_t first = (start - g_heap_base) >> kCardShift;
+    uintptr_t last  = (end - 1 - g_heap_base) >> kCardShift;
+
+    uintptr_t first_seg = first / kCardsPerSegment;
+    uintptr_t last_seg  = last / kCardsPerSegment;
+
+    bool in_run = false;
+    uintptr_t run_start_addr = 0;
+
+    for (uintptr_t si = first_seg; si <= last_seg && si < g_card_l1_size.load(std::memory_order_acquire); si++) {
+        auto* seg = g_card_l1[si].load(std::memory_order_acquire);
+        if (seg == nullptr) {
+            in_run = false;
+            continue;
+        }
+
+        uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
+        uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);
+
+        for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
+            if (seg->cards[ci] != 0) {
+                if (dirty_card_count) (*dirty_card_count)++;
+                if (!in_run) {
+                    run_start_addr = g_heap_base + ((si * kCardsPerSegment + ci) << kCardShift);
+                    in_run = true;
+                }
+            } else {
+                if (in_run) {
+                    callback(run_start_addr,
+                             g_heap_base + ((si * kCardsPerSegment + ci) << kCardShift));
+                    in_run = false;
+                }
+            }
+        }
+    }
+
+    // Flush final dirty run — extend to the scan range end
+    if (in_run) {
+        callback(run_start_addr, end);
     }
 }
 

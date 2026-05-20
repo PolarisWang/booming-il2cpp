@@ -692,6 +692,9 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 "<chaos/common.h>",
                 "<chaos/type_info.h>",
                 "\"runtime_core.h\"",
+                // Unified exception-handling macros (CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN / etc.)
+                // Must appear after runtime_core.h which provides the EH backend type definitions.
+                "<chaos/eh.h>",
                 "\"com_ccw.h\"",
                 "\"codegen_bridge.h\"",
                 "\"module_registry.h\"",
@@ -2772,21 +2775,67 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (methods.Count == 0) return string.Empty;
 
-        // Build simplified method entries for the Scriban template (kAotMethods[] + RunNativeAot() only).
+        ulong defaultStringId = _stringIdMapping is { Count: > 0 }
+            ? _stringIdMapping.First().Value
+            : 0UL;
+
         var methodEntries = new List<ScriptObject>(methods.Count);
+        var subjectEntries = new List<ScriptObject>();
         for (int i = 0; i < methods.Count; i++)
         {
-            methodEntries.Add(new ScriptObject
+            var method = methods[i];
+            var ac = method.ParameterCount;
+            var isInstance = !method.IsStatic;
+
+            var paramList = new List<ScriptObject>(ac + (isInstance ? 1 : 0));
+            if (isInstance)
+            {
+                paramList.Add(new ScriptObject
+                {
+                    ["is_string"] = false,
+                    ["is_this"] = true,
+                });
+            }
+            for (int j = 0; j < ac; j++)
+            {
+                var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
+                // Use IsStringParameterSlot (defined in InvocationAbi.cs partial class)
+                var isString = abi != null && IsStringParameterSlot(abi);
+                paramList.Add(new ScriptObject
+                {
+                    ["is_string"] = isString,
+                    ["is_this"] = false,
+                });
+            }
+
+            var entry = new ScriptObject
             {
                 ["index"] = i,
-                ["native_symbol"] = methods[i].NativeSymbol,
-            });
+                ["native_symbol"] = method.NativeSymbol,
+                ["param_count"] = ac + (isInstance ? 1 : 0),
+                ["params"] = paramList,
+                ["is_instance"] = isInstance,
+            };
+
+            methodEntries.Add(entry);
+
+            int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+            if (subjectIdx >= 0)
+            {
+                subjectEntries.Add(new ScriptObject
+                {
+                    ["subject_index"] = subjectIdx,
+                    ["method_index"] = i,
+                });
+            }
         }
 
         var model = new ScriptObject
         {
             ["methods"] = methodEntries,
             ["methods_count"] = methods.Count,
+            ["default_string_id"] = (long)defaultStringId,
+            ["subject_entries"] = subjectEntries,
         };
 
         var template = NativeAotTemplateCatalog.GetDispatchEntryCodeTemplate();

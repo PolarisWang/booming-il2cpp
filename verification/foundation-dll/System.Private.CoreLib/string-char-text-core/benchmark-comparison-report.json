@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/string/char/text/core",
   "summary": {
@@ -7,10 +7,14 @@
     "matchedCount": 0,
     "unmatchedCount": 0,
     "invalidCount": 20,
-    "nativeFasterCount": 0,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
     "managedFasterCount": 0,
     "equalCount": 0,
-    "averageSpeedupPercent": 0.0
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
   },
   "methodResults": [
     {

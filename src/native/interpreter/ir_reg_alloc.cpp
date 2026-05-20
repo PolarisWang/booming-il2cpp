@@ -51,6 +51,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
 
         // Pack header: op_code | dst_reg | src1_reg | src2_reg | flags
         uint64_t header = op_val & 0xFFFF;
+        uint8_t src3_reg = 0;
 
         // Determine dst register for has_dst opcodes
         uint8_t dst_reg = 0;
@@ -59,6 +60,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         uint8_t src2_reg = 0;
         bool has_src1 = false;
         bool has_src2 = false;
+        bool has_src3 = false;
         uint32_t calli_func_ptr_vreg = 0;
 
         switch (ir.op_code) {
@@ -189,13 +191,13 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         case IROpCode::StFld:
         {
             if (virt_sp >= 1) {
-                src1_reg = virt_stack[--virt_sp];  // value
+                src1_reg = virt_stack[--virt_sp];  // value (top)
             }
             if (virt_sp >= 1) {
-                // obj stays for the handler to pop
-                has_src2 = true;
+                src2_reg = virt_stack[--virt_sp];  // obj (second)
             }
             has_src1 = true;
+            has_src2 = true;
             break;
         }
 
@@ -310,10 +312,18 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         // ── StElem: pop value, pop index, pop array ──
         case IROpCode::StElem:
         {
-            for (int si = 0; si < 3 && !virt_sp == 0; ++si) {
-                --virt_sp;
+            if (virt_sp >= 1) {
+                src1_reg = virt_stack[--virt_sp];  // value (top)
+            }
+            if (virt_sp >= 1) {
+                src2_reg = virt_stack[--virt_sp];  // index
+            }
+            if (virt_sp >= 1) {
+                src3_reg = virt_stack[--virt_sp];  // array
             }
             has_src1 = true;
+            has_src2 = true;
+            has_src3 = true;
             break;
         }
 
@@ -443,6 +453,7 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         if (has_dst)  flags |= kRegHasDst;
         if (has_src1) flags |= kRegHasSrc1;
         if (has_src2) flags |= kRegHasSrc2;
+        if (has_src3) flags |= kRegHasSrc3;
 
         // Check for call-like, branch, store opcodes
         switch (ir.op_code) {
@@ -501,6 +512,9 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         header |= (static_cast<uint64_t>(src1_reg)   << 24);
         header |= (static_cast<uint64_t>(src2_reg)   << 32);
         header |= (static_cast<uint64_t>(flags)      << 40);
+        if (flags & kRegHasSrc3) {
+            header |= (static_cast<uint64_t>(src3_reg) << 48);
+        }
 
         ri.header = header;
 
@@ -1070,19 +1084,15 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
 
 static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StElem");
-    // For StElem with 3-operand: allocator pops value, index, array in reverse.
-    // But the RegisterInstruction only has src1, src2. We need a third source.
-    // Use a simpler approach: read from the regs directly using consecutive regs
-    // (value = rX, index = rX+1, array = rX+2 where X = src1_reg).
-    uint32_t base = instr.src1_reg();
-    uint64_t val = frame.regs.reg(base);
-    uint32_t index = static_cast<uint32_t>(frame.regs.reg(base + 1));
-    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(base + 2));
+    // 3-operand store: src1=value (top), src2=index, src3=array (bottom).
+    uint64_t val   = frame.regs.reg(instr.src1_reg());
+    uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src3_reg()));
     if (arr == nullptr) { ++frame.pc; return; }
     if (index >= arr->elements.size()) {
         arr->elements.resize(index + 1u);
     }
-    uint8_t tag = frame.regs.reg_tag(base);
+    uint8_t tag = frame.regs.reg_tag(instr.src1_reg());
     switch (static_cast<ValueTag>(tag)) {
     case ValueTag::Int32:
         arr->elements[index] = InterpreterValue::from_i32(static_cast<int32_t>(val)); break;

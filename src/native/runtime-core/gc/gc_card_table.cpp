@@ -6,6 +6,7 @@
 #include <memory>
 #include <mutex>
 #include <new>
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -28,6 +29,19 @@ static std::mutex g_card_segment_list_mutex;
 
 // ── Heap base (set once at startup) ────────────────────────────
 uintptr_t g_heap_base = 0;
+
+// ── Nursery range (for DirtyCard fast skip) ──────────────────
+uintptr_t g_nursery_range_begin = 0;
+uintptr_t g_nursery_range_end = 0;
+
+void GcSetCardTableNurseryRange(uintptr_t begin, uintptr_t end) noexcept {
+    // Volatile stores ensure visibility across threads without requiring
+    // an atomic RMW.  The DirtyCard fast path reads these with relaxed
+    // ordering; a stale read (old range) at worst causes an unnecessary
+    // card table access — correctness is preserved.
+    g_nursery_range_begin = begin;
+    g_nursery_range_end = end;
+}
 
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
     if (start >= end) return;
@@ -136,6 +150,57 @@ void ClearAllCards() noexcept {
     while (node != nullptr) {
         std::memset(node->segment->cards, 0, sizeof(node->segment->cards));
         node = node->next;
+    }
+}
+
+void GcUnregisterHeapRange(uintptr_t start, uintptr_t end) noexcept {
+    if (start >= end) return;
+    if (g_heap_base == 0) return;
+
+    uintptr_t first_idx = (start - g_heap_base) >> kCardShift;
+    uintptr_t last_idx  = (end - 1 - g_heap_base) >> kCardShift;
+
+    uintptr_t first_seg = first_idx / kCardsPerSegment;
+    uintptr_t last_seg  = last_idx / kCardsPerSegment;
+
+    size_t l1_size = g_card_l1_size.load(std::memory_order_acquire);
+
+    // Phase 1: CAS each L1 entry to null and collect segments to free.
+    // Using CAS instead of store to safely claim ownership — the thread
+    // that successfully CASes the entry from non-null to null owns it.
+    std::vector<CardSegment*> to_free;
+    for (uintptr_t si = first_seg; si <= last_seg && si < l1_size; si++) {
+        CardSegment* expected = g_card_l1[si].load(std::memory_order_acquire);
+        if (expected == nullptr) continue;
+        if (g_card_l1[si].compare_exchange_strong(expected, nullptr,
+                std::memory_order_release, std::memory_order_acquire)) {
+            to_free.push_back(expected);
+        }
+    }
+
+    if (to_free.empty()) return;
+
+    // Phase 2: Remove freed segments from the tracked list and free them.
+    {
+        std::lock_guard<std::mutex> lock(g_card_segment_list_mutex);
+        CardSegmentNode** pp = &g_card_segment_list;
+        while (*pp != nullptr) {
+            CardSegmentNode* node = *pp;
+            bool found = false;
+            for (auto* seg : to_free) {
+                if (node->segment == seg) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                *pp = node->next;
+                CHAOS_IL2CPP_FREE(node->segment);
+                CHAOS_IL2CPP_FREE(node);
+            } else {
+                pp = &node->next;
+            }
+        }
     }
 }
 

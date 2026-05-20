@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -645,10 +646,12 @@ extern "C" const int kSubjectEntryIndices[15] = {
 	11,
 	12,
 	13,
-	14
+	14,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -705,153 +708,281 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: switch-based direct dispatch per method.
-// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
-// the method body into the timing loop — eliminating function pointer indirection.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	switch (chaos_entry_index) {
-	case 0: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
-	case 1: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 2: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 3: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 4: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 5: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 6: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 7: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 8: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 9: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 10: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 11: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 12: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 13: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 14: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	default:
-		return -1.0;
-	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry0;
+	/* ── Entry 1: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry1;
+	/* ── Entry 2: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry2;
+	/* ── Entry 3: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry4;
+	/* ── Entry 5: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry5;
+	/* ── Entry 6: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry6;
+	/* ── Entry 7: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry7;
+	/* ── Entry 8: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry8;
+	/* ── Entry 9: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry9;
+	/* ── Entry 10: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry10;
+	/* ── Entry 11: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry11;
+	/* ── Entry 12: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry12;
+	/* ── Entry 13: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry13;
+	/* ── Entry 14: PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry14;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry1 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry2 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry3 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry4 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry5 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry6 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry7 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry8 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry9 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry10 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10 */
+	.entry10 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry11 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11 */
+	.entry11 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry12 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12 */
+	.entry12 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry13 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13 */
+	.entry13 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry14 = PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14 */
+	.entry14 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 500u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[15] = {
@@ -888,6 +1019,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = nullptr,
 	.vtable_descriptor_count = 0u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -1014,7 +1148,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToBoolean_System_Boolean_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToBoolean(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1064,7 +1198,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToByte_System_Byte_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToByte(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1104,7 +1238,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt16_System_Int16_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToInt16(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1144,7 +1278,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToInt32(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1186,7 +1320,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt64_System_Int64_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToInt64(chaos_arg_0);
 		_s0 = ChaosStoreInt64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
@@ -1229,7 +1363,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToSingle_System_Single_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToSingle(chaos_arg_0);
 		_s0 = ChaosStoreFloat32(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s0)));
@@ -1272,7 +1406,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDouble_System_Double_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToDouble(chaos_arg_0);
 		_s0 = ChaosStoreFloat64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
@@ -1314,7 +1448,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosConvertToDecimal(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1358,7 +1492,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToString_System_String_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+		const auto chaos_result = ChaosFormatInt32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1406,7 +1540,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	_s0 = ChaosStoreFloat64(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToString_System_String_System_Double_(ChaosLoadFloat64(chaos_arg_0));
+		const auto chaos_result = ChaosFormatDouble(ChaosLoadFloat64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1454,7 +1588,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	_s0 = ChaosStoreFloat64(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToDecimal_System_Decimal_System_Double_(ChaosLoadFloat64(chaos_arg_0));
+		const auto chaos_result = ChaosDecimalFromDouble(ChaosLoadFloat64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1497,7 +1631,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	_s0 = ChaosStoreFloat64(42);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Convert__ToInt32_System_Int32_System_Double_(ChaosLoadFloat64(chaos_arg_0));
+		const auto chaos_result = ChaosConvertToInt32FromDouble(ChaosLoadFloat64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1537,7 +1671,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Int32__Parse_System_Int32_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosParseInt32(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1579,7 +1713,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Int64__Parse_System_Int64_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosParseInt64(chaos_arg_0);
 		_s0 = ChaosStoreInt64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
@@ -1622,7 +1756,7 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Double__Parse_System_Double_System_String_(chaos_arg_0);
+		const auto chaos_result = ChaosParseDouble(chaos_arg_0);
 		_s0 = ChaosStoreFloat64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
