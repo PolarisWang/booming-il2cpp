@@ -319,6 +319,21 @@ static CHAOS_IL2CPP_INTPTR lookup_cached_enum_name(CHAOS_IL2CPP_INT64 value) noe
 
 // ── Public Enum stub functions ────────────────────────────────────
 
+// Enum type validation: return nullptr when the resolved type is not actually an
+// enum. Callers must check the return and return an appropriate error/sentinel
+// value.  CHAOS_IL2CPP_FAIL cannot be used here because all stub functions are
+// noexcept — a throw would call std::terminate with /EHsc.
+//
+// Returns desc unchanged for enum types.
+static inline const ReflectionQueryTypeDescriptor*
+check_enum_type(const ReflectionQueryTypeDescriptor* desc) noexcept
+{
+    if (desc != nullptr && (desc->reserved_flags & kFlagIsEnum) == 0) {
+        return nullptr;
+    }
+    return desc;
+}
+
 // ── Direct type_arg → metadata cache ──────────────────────────────
 // Single-entry thread_local cache: maps the raw type_arg (TypeInfoHandle
 // or managed Type object pointer) directly to the metadata table.
@@ -538,6 +553,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumIsDefined(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
     return find_field_by_value(desc, val) != nullptr ? 1 : 0;
 }
 
@@ -569,6 +585,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     ensure_enum_str_cache(type, nullptr, desc);
     auto cached = lookup_cached_enum_name(val);
@@ -608,6 +625,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return enum_alloc_ptr_array(0);
+    if (check_enum_type(desc) == nullptr) return enum_alloc_ptr_array(0);
 
     CHAOS_IL2CPP_UINT32 count = count_enum_fields(desc);
     auto arr = enum_alloc_ptr_array(count);
@@ -647,6 +665,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return enum_alloc_ptr_array(0);
+    if (check_enum_type(desc) == nullptr) return enum_alloc_ptr_array(0);
 
     CHAOS_IL2CPP_UINT32 count = count_enum_fields(desc);
     auto arr = enum_alloc_ptr_array(count);
@@ -702,6 +721,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr) {
@@ -751,6 +771,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr && ignoreCase) {
@@ -767,6 +788,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
     if (type == 0 || value == 0) return 0;
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(value);
+
+    // Validate enum type before format processing — non-enum types (e.g. byte)
+    // must throw, even for unrecognized format strings like "hello"
+    {
+        const auto* meta = enum_resolve_meta(type);
+        if (meta == nullptr) {
+            const auto* desc = resolve_type_arg(type);
+            if (check_enum_type(desc) == nullptr) return 0;
+        }
+    }
 
     // Read format specifier
     CHAOS_IL2CPP_UINTPTR fmt_len = 0;
@@ -880,6 +911,64 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type_handle);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
+
+    ensure_enum_str_cache(type_handle, nullptr, desc);
+    auto cached = lookup_cached_enum_name(val);
+    if (cached != 0) return cached;
+
+    const auto* field = find_field_by_value(desc, val);
+    if (field == nullptr || field->name_utf8 == nullptr) {
+        // Fallback: return decimal (manual itoa)
+        char buf[32];
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_i64_dec(buf_end, val);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
+        auto result = enum_alloc_string(len);
+        write_string_data(result, start, len);
+        return result;
+    }
+
+    const auto name_len = std::strlen(field->name_utf8);
+    auto result = enum_alloc_string(name_len);
+    write_string_data(result, field->name_utf8, name_len);
+    return result;
+}
+
+/// Enum.ToString() raw path — skips box reading for the box-elimination peephole.
+/// Takes type_handle and raw_value directly instead of reading them from a boxed object.
+/// Used by codegen when it detects box + call Enum::ToString and fuses them.
+CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT64 raw_value) noexcept
+{
+    if (type_handle == 0) return 0;
+
+    const CHAOS_IL2CPP_INT64 val = raw_value;
+
+    // Fast path: direct metadata (no resolve_type_arg)
+    const auto* meta = enum_resolve_meta(type_handle);
+    if (meta != nullptr) {
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
+            if (meta->fields[i].value == val) {
+                const auto name_len = std::strlen(meta->fields[i].name);
+                auto result = enum_alloc_string(name_len);
+                write_string_data(result, meta->fields[i].name, name_len);
+                return result;
+            }
+        }
+        // Not found in metadata — return decimal
+        char buf[32];
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_i64_dec(buf_end, val);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
+        auto result = enum_alloc_string(len);
+        write_string_data(result, start, len);
+        return result;
+    }
+
+    // Fallback: reflection API
+    const auto* desc = resolve_type_arg(type_handle);
+    if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     ensure_enum_str_cache(type_handle, nullptr, desc);
     auto cached = lookup_cached_enum_name(val);
@@ -961,6 +1050,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr) {
@@ -1019,6 +1109,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHA
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) return 0;
+    if (check_enum_type(desc) == nullptr) return 0;
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr && ignoreCase) {

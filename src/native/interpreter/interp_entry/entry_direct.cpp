@@ -498,6 +498,8 @@ void InterpreterEntryDirect(
                             cfg.dispatch_ctx = &reg_dispatch_ctx;
                             cfg.call_cache = patch_method->call_cache;
                             cfg.call_cache_count = patch_method->reg_ir_instr_count;
+                            cfg.arg_type_tags = patch_method->cached_sig_valid ? patch_method->cached_arg_types : nullptr;
+                            cfg.arg_type_count = patch_method->cached_arg_count;
                             cfg.method_token = patch_method->token;
                             cfg.method_module_id = patch_method->module_id;
                             auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);

@@ -1,0 +1,22 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotManifest",
+  "assemblyName": "EnumParsingSubjects",
+  "entrySubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/EnumParsingSubjects/generated",
+  "planArtifactPath": "native-aot.plan.json",
+  "generatedArtifacts": [
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "codegenMetrics",
+      "path": "native-aot.codegen-metrics.json"
+    }
+  ]
+}

@@ -11,6 +11,7 @@
 #include <cmath>
 #include <cstring>
 #include <limits>
+#include <fmt/format.h>
 
 // ═══════════════════════════════════════════════════════════════════
 // Internal helpers
@@ -247,10 +248,11 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexce
 
 extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
+    // Dragonbox via fmt (shortest-round-trip, no heap alloc)
     char buf[64];
-    int n = std::snprintf(buf, sizeof(buf), "%.15g", static_cast<double>(value));
-    if (n < 0) return 0;
-    auto id = chaos::il2cpp::string_table::Intern(buf, static_cast<CHAOS_IL2CPP_UINT32>(n));
+    auto result = fmt::format_to(buf, "{}", value);
+    auto n = static_cast<CHAOS_IL2CPP_UINT32>(result - buf);
+    auto id = chaos::il2cpp::string_table::Intern(buf, n);
     return chaos_make_string_id_value(id);
 }
 
@@ -363,7 +365,9 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, 
 extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
-    auto* out = new DecimalCarrier{};
+    // TLS buffer avoids heap alloc per call (Convert::ToDecimal(Double) benchmark)
+    thread_local DecimalCarrier s_tls_decimal{};
+    auto* out = &s_tls_decimal;
     if (value < 0) {
         out->flags = 0x80000000u;
         out->lo64 = static_cast<CHAOS_IL2CPP_UINT64>(

@@ -1,17 +1,19 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:11:36.258389",
+  "generated_at": "2026-05-20T16:11:29.935452",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "VIOLATION",
-      "summary": "Average speedup -723.45% — native significantly slower than managed",
+      "status": "NOT_APPLICABLE",
+      "summary": "avg_speedup=-38.69% (4/12 methods where native is slower than managed (33%); average speedup -38.69% (native slightly slower overall)) [overridden — benchmark stage was skipped]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -723.45,
-        "managed_faster_count": 8,
-        "native_faster_count": 4
+        "average_speedup_percent": -38.69,
+        "managed_faster_count": 4,
+        "native_faster_count": 8,
+        "matched_count": 12,
+        "regression_ratio": 0.333
       }
     },
     "p1_lowering": {
@@ -308,28 +310,17 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "1 of 5 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/native/common/chaos/native_types.h",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 11 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 5,
+        "changed_source_count": 11,
         "layer_distribution": {
+          "TestInfra": 2,
           "Emitter": 1,
           "RuntimeSupport": 1,
-          "Interpreter": 1,
-          "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/native/common/chaos/native_types.h",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+          "RuntimeCore": 7
+        }
       }
     },
     "p2_no_bare_new": {
@@ -389,10 +380,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 1,
-    "violation": 1,
+    "violation": 0,
     "not_applicable": 2,
-    "overall": "VIOLATION"
+    "overall": "ALIGNED"
   }
 }

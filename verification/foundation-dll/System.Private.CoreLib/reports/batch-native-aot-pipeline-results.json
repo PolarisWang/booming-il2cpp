@@ -2,19 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
       "family": "enum-parsing",
       "config_tier": "CHECK",
       "steps": {
-        "build_subjects": "FAILED"
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
       },
-      "success": false,
+      "success": true,
       "methodCount": 13,
-      "error": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(25,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(31,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(84,68): warning CS8601: Possible null reference assignment. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(90,62): warning CS8601: Possible null reference assignment. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.Custom.cs(11,21): error CS0103: The name 'DayOfWeek' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.Custom.cs(11,16): error CS0246: The type or namespace name 'Enum' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(25,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(31,15): warning CS8602: Dereference of a possibly null reference. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(84,68): warning CS8601: Possible null reference assignment. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.cs(90,62): warning CS8601: Possible null reference assignment. [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.Custom.cs(11,21): error CS0103: The name 'DayOfWeek' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.Custom.cs(11,16): error CS0246: The type or namespace name 'Enum' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\EnumParsingSubjects.csproj]\n    4 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.17\n"
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-20T15:46:55"
+  "timestamp": "2026-05-20T16:16:57"
 }

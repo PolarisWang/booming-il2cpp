@@ -2867,6 +2867,22 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // === FieldInfo::get_FieldType ===
+            registry.Register("System.Reflection.FieldInfo", "get_FieldType", [],
+                ShapeKind.SimpleForward, "ChaosReflectionGetFieldType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            // === PropertyInfo::get_PropertyType ===
+            registry.Register("System.Reflection.PropertyInfo", "get_PropertyType", [],
+                ShapeKind.SimpleForward, "ChaosReflectionGetPropertyType",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
             // === Type::get_FullName ===
             registry.Register("System.Type", "get_FullName", [],
                 ShapeKind.SimpleForward, "ChaosReflectionGetTypeFullName",

@@ -199,8 +199,29 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
-    if (desc == nullptr) return 0;
-    return static_cast<CHAOS_IL2CPP_INTPTR>(desc->field_count);
+    if (desc == nullptr || desc->fields == nullptr) return 0;
+
+    constexpr CHAOS_IL2CPP_UINT32 kMaxFields = 256;
+    struct GetFieldsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static GetFieldsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
+
+    const CHAOS_IL2CPP_UINT32 count = desc->field_count > kMaxFields ? kMaxFields : desc->field_count;
+    s_buf = GetFieldsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(count);
+    s_buf.elements = s_elements;
+
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < count; i++)
+        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(&desc->fields[i]));
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 // =====================================================================

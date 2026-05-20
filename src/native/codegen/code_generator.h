@@ -71,6 +71,14 @@ struct CodeGenConfig {
     // so method_replacement::Register can find and demote matching T4 entries.
     uint32_t method_token = 0;
     uint32_t method_module_id = 0;
+
+    // ── Argument type tags for LdArg precision ──────────────────────────
+    // Cached argument type tags from PatchMethod (ValueTag values).
+    // When non-null, LdArg type inference uses these instead of conservative
+    // ObjectRef, enabling precise GC slot maps for method arguments.
+    // Indexed by `RegisterInstruction::imm::operand_index`.
+    const uint8_t* arg_type_tags = nullptr;
+    uint32_t       arg_type_count = 0;
 };
 
 /// Generate native x64 code from a RegisterMethod.

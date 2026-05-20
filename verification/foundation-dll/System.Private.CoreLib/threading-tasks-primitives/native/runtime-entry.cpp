@@ -51,6 +51,13 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern "C" const int kAotMethodCount;
 
+// kSubjectEntryIndices/kSubjectEntryCount defined in codegen-emitted code
+// (native-aot.generated.cpp).  Maps subject index → kAotMethod index so that
+// --benchmark N uses the correct AOT method slot even when kAotMethods[] has
+// lambda/closure entries interleaved with subject methods.
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
@@ -241,22 +248,27 @@ int main(int argc, char** argv) {
     case RunMode::Benchmark: {
         double elapsed_ms = -1.0;
         chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+        // Map subject index → kAotMethod index using the codegen-emitted table,
+        // because kAotMethods[] includes lambdas/closures interleaved with subjects.
+        int aot_method_index = (entry_index >= 0 && entry_index < kSubjectEntryCount)
+            ? kSubjectEntryIndices[entry_index]
+            : entry_index;
         try {
-            elapsed_ms = BenchmarkMethod(entry_index, iterations);
+            elapsed_ms = BenchmarkMethod(aot_method_index, iterations);
         } catch (...) {
             elapsed_ms = -1.0;
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         if (elapsed_ms < 0.0) {
-            printf("{\"error\":\"invalid method index %d\"}\n", entry_index);
+            printf("{\"error\":\"invalid method index %d (subject %d)\"}\n", aot_method_index, entry_index);
             std::fflush(stdout);
             _exit(-1);
             return -1;
         }
         double ops_per_sec = iterations / (elapsed_ms / 1000.0);
         printf("{\"elapsedMilliseconds\":%.3f,\"calibratedMs\":%.3f,\"calOverheadMs\":0.000,"
-               "\"opsPerSecond\":%.1f,\"iterations\":%d,\"methodIndex\":%d}\n",
-               elapsed_ms, elapsed_ms, ops_per_sec, iterations, entry_index);
+               "\"opsPerSecond\":%.1f,\"iterations\":%d,\"methodIndex\":%d,\"subjectIndex\":%d}\n",
+               elapsed_ms, elapsed_ms, ops_per_sec, iterations, aot_method_index, entry_index);
         std::fflush(stdout);
         _exit(0);
         return 0;
@@ -290,11 +302,14 @@ int main(int argc, char** argv) {
                 hot_result |= (1 << i);
             }
         }
+        int aot_method_index = (entry_index >= 0 && entry_index < kSubjectEntryCount)
+            ? kSubjectEntryIndices[entry_index]
+            : entry_index;
         chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
             try {
-                RunNativeAot(entry_index);
+                RunNativeAot(aot_method_index);
             } catch (...) {
                 // Skip iteration on exception
             }
@@ -303,18 +318,21 @@ int main(int argc, char** argv) {
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
-        printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"hotResult\":%d}\n",
-               ns_per_op, elapsed_ms, iterations, entry_index, hot_result);
+        printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"subjectIndex\":%d,\"hotResult\":%d}\n",
+               ns_per_op, elapsed_ms, iterations, aot_method_index, entry_index, hot_result);
         std::fflush(stdout);
         _exit(0);
         return 0;
     }
     case RunMode::PatchAndBenchmark: {
+        int aot_method_index = (entry_index >= 0 && entry_index < kSubjectEntryCount)
+            ? kSubjectEntryIndices[entry_index]
+            : entry_index;
         chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
         auto start = std::chrono::steady_clock::now();
         for (int i = 0; i < iterations; i++) {
             try {
-                RunNativeAot(entry_index);
+                RunNativeAot(aot_method_index);
             } catch (...) {
                 // Skip iteration on exception
             }
@@ -323,8 +341,8 @@ int main(int argc, char** argv) {
         auto end = std::chrono::steady_clock::now();
         auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
-        printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
-               ns_per_op, elapsed_ms, iterations, entry_index);
+        printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d,\"subjectIndex\":%d}\n",
+               ns_per_op, elapsed_ms, iterations, aot_method_index, entry_index);
         std::fflush(stdout);
         _exit(0);
         return 0;

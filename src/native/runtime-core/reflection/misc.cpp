@@ -151,6 +151,22 @@ CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR /*param
     return 0;
 }
 
+// ── GetFieldType ──────────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldType(CHAOS_IL2CPP_INTPTR field_handle) noexcept {
+    auto* field = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+        static_cast<FieldInfoHandle>(field_handle));
+    if (field == nullptr || field->member_type_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(field->member_type_utf8));
+}
+
+// ── GetPropertyType ───────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertyType(CHAOS_IL2CPP_INTPTR property_handle) noexcept {
+    auto* prop = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(property_handle));
+    if (prop == nullptr || prop->member_type_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(prop->member_type_utf8));
+}
+
 // ── GetFieldsBindingflags ───────────────────────────────────────────
 // For now, ignore BindingFlags and delegate to GetFields.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {

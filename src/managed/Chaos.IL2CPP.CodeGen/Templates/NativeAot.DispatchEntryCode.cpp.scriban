@@ -17,6 +17,23 @@ extern "C" void (*kBenchmarkWrappers[{{ methods_count }}])() = {
 {{~ end ~}}
 };
 
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+{{~ if subject_entry_count > 0 ~}}
+extern "C" const int kSubjectEntryCount = {{ subject_entry_count }};
+extern "C" const int kSubjectEntryIndices[{{ subject_entry_count }}] = {
+{{~ for idx in subject_entry_indices ~}}
+    {{ idx }}{{ if !for.last }},{{ end }}
+{{~ end ~}}
+};
+{{~ else ~}}
+extern "C" const int kSubjectEntryCount = 0;
+extern "C" const int* const kSubjectEntryIndices = nullptr;
+{{~ end ~}}
+
 // Single-method dispatch via hotpatch dispatch table.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
     CHAOS_IL2CPP_INT32 chaos_entry_index)

@@ -139,11 +139,16 @@ def _build_subjects_dll(
 
     # Copy handwritten partial class files (e.g. Custom.cs) to subjects dir
     # so generate_and_build() detects them as custom entries.
+    # Only copy files whose class name matches the subjects variant
+    # (e.g. EnumParsingSubjects.Custom.cs, not EnumParsingPatchEntry.Custom.cs).
     handwritten_dir = v / family_slug / "handwritten"
+    subjects_class = f"{family_slug.title().replace('-', '').replace('_', '')}Subjects"
     if handwritten_dir.exists():
         cs_files = sorted(handwritten_dir.glob("*.cs"))
         if cs_files:
             for f in cs_files:
+                if not f.name.startswith(subjects_class):
+                    continue
                 dest = subjects_dir / f.name
                 dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
 
@@ -918,8 +923,12 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     build_dir = native_dir / "build"
     # Remove stale cmake cache to avoid generator/platform mismatch errors
     if build_dir.exists():
-        shutil.rmtree(build_dir)
-    build_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            shutil.rmtree(build_dir)
+        except PermissionError:
+            print(f"    [build_entry] warning: could not remove build_dir, continuing anyway")
+    if not build_dir.exists():
+        build_dir.mkdir(parents=True, exist_ok=True)
 
     # Step 1: CMake configure
     print(f"    [build_entry] cmake configure...")

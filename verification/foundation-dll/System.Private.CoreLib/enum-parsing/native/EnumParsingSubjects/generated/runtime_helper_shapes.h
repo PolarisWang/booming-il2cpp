@@ -177,6 +177,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_GETCUSTOMATTRIBUTE_SYSTEM_REFLECTION_ASSEMBLY_SYSTEM_TYPE = 0x61E9D75Du,
     SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_ASSEMBLY_SYSTEM_TYPE = 0xAD3A0BDDu,
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_FIELDHANDLE = 0x33A71175u,
+    SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_FIELDTYPE = 0xF7101AB7u,
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISINITONLY = 0xA13A986Fu,
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISLITERAL = 0xF11C975Cu,
     SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_DECLARINGTYPE = 0x8D177D62u,
@@ -209,6 +210,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GETINDEXPARAMETERS = 0x9F8FA739u,
     SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GET_CANREAD = 0x7A0A3CC4u,
     SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GET_CANWRITE = 0x83D369E1u,
+    SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GET_PROPERTYTYPE = 0x7D4266F9u,
     SHAPE_SYSTEM_RUNTIMEFIELDHANDLE_GETHASHCODE = 0x0A8071EEu,
     SHAPE_SYSTEM_RUNTIMEMETHODHANDLE_GETHASHCODE = 0x1932D0D9u,
     SHAPE_SYSTEM_RUNTIMETYPEHANDLE_GETHASHCODE = 0xA0D792DAu,
@@ -323,7 +325,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 309u,
+    SHAPE_COUNT = 311u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -741,6 +743,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionFieldGetFieldHandle(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_FIELDTYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosReflectionGetFieldType(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_DECLARINGTYPE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionGetDeclaringType(args...));
@@ -836,6 +842,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GETINDEXPARAMETERS) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionPropertyGetIndexParameters(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_PROPERTYINFO_GET_PROPERTYTYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosReflectionGetPropertyType(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_DEFAULTINTERPOLATEDSTRINGHANDLER_TOSTRINGANDCLEAR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1536,7 +1546,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 309u,
+static_assert(SHAPE_COUNT == 311u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

@@ -629,6 +629,7 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceMapExpr = "nullptr";
 				ifaceCountExpr = "0";
 			}
+			if (!valueTypeSubjectIds.Contains(item3))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
@@ -1045,9 +1046,13 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				{
 					// This value type is boxed but has no explicit fields
 					// (e.g. an enum like DayOfWeek). Emit a default backing
-					// field so that codegen boxing (which assigns intptr_t
-					// to .value) compiles without a C2664 conversion error.
+					// field with intptr_t converting ctor so that codegen
+					// boxing (which assigns intptr_t to .value) compiles.
+					string vtName = GetNativeValueTypeSymbol(typeSubjectId2);
 					builder.AppendLine("    CHAOS_IL2CPP_INTPTR _backing = 0;");
+					builder.AppendLine($"    {vtName}() = default;");
+					builder.AppendLine("    // cppcheck-suppress noExplicitConstructor");
+					builder.AppendLine($"    {vtName}(CHAOS_IL2CPP_INTPTR v) noexcept : _backing(v) {{}}");
 				}
 				builder.AppendLine("};");
 				builder.AppendLine();

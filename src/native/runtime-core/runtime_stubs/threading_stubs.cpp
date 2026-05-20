@@ -18,12 +18,15 @@ extern "C" {
 
 CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept
 {
+    // Fast path: codegen mode — current_thread_object is always set during
+    // runtime_init (via s_main_thread_sentinel). Single TLS read, no fallback.
+    auto result = chaos::il2cpp::common::current_thread_object;
+    if (result != 0) return result;
+
+    // Slow path: interpreter mode or uninitialized thread — check tls_this_thread.
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return 0;
-    if (thread->managed_object != nullptr)
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
-    // Fallback to TLS current_thread_object (set for codegen main thread)
-    return chaos::il2cpp::common::current_thread_object;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
 }
 
 void chaos_thread_ctor(
