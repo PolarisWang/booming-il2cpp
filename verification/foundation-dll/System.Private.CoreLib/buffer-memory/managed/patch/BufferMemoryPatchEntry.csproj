@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BufferMemoryPatchEntry.cs" />
+    <Compile Include="BufferMemoryPatchEntry.Custom.cs" />
   </ItemGroup>
 </Project>

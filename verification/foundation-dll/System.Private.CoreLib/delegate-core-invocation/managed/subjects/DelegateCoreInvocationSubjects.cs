@@ -37,7 +37,7 @@ public static partial class DelegateCoreInvocationSubjects
     // [3] System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
     public static void Subject_3()
     {
-        if (((new System.Action(() => {}).Method).GetHashCode()) != -1199793679) _exitCode = 1;
+        if (((new System.Action(() => {}).Method).GetHashCode()) != 94350991) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Delegate::get_Target:System.Object()

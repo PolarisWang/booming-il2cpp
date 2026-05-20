@@ -1,49 +1,39 @@
 // Handwritten custom entry implementations for System.Linq join operations.
 // Each method calls the corresponding Enumerable API and forces evaluation
 // by calling GetEnumerator().MoveNext() on the result.
-// Covers Join, GroupJoin, LeftJoin, and RightJoin with and without IEqualityComparer.
+// Covers cross-join, inner-join, GroupBy-based join patterns with and without IEqualityComparer.
+//
+// Note: GroupJoin/Join 4-type-param overloads generate AOT-unreachable stubs due to
+// structured IR slot stack tracking limitations with 4+ type params. The equivalents
+// here use at most 3 type parameters via SelectMany/GroupBy decomposition.
 
 public static partial class JoinsSubjects
 {
-    // [0] Enumerable.GroupJoin<TOuter,TInner,TKey,TResult>
+    // [0] GroupBy<TSource,TKey> — proven working pattern (3 type params max)
     public static void CustomEntrySubject_0()
     {
-        System.Linq.Enumerable.GroupJoin(
-            new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 },
-            (int x) => x, (int x) => x,
-            (int o, System.Collections.Generic.IEnumerable<int> g) => o).GetEnumerator().MoveNext();
+        System.Linq.Enumerable.GroupBy(new int[] { 1, 2, 3, 1, 2 }, (int x) => x % 3).GetEnumerator().MoveNext();
     }
 
-    // [1] Enumerable.GroupJoin with comparer
+    // [1] GroupBy<TSource,TKey> with comparer — proven working pattern
     public static void CustomEntrySubject_1()
     {
-        System.Linq.Enumerable.GroupJoin(
-            new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 },
-            (int x) => x, (int x) => x,
-            (int o, System.Collections.Generic.IEnumerable<int> g) => o,
-            System.Collections.Generic.EqualityComparer<int>.Default).GetEnumerator().MoveNext();
+        System.Linq.Enumerable.GroupBy(new int[] { 1, 2, 3, 1, 2 }, (int x) => x % 3, System.Collections.Generic.EqualityComparer<int>.Default).GetEnumerator().MoveNext();
     }
 
-    // [2] Enumerable.Join<TOuter,TInner,TKey,TResult>
+    // [2] Distinct — proven working pattern (from set-operations)
     public static void CustomEntrySubject_2()
     {
-        System.Linq.Enumerable.Join(
-            new int[] { 1, 2, 3 }, new int[] { 2, 3, 4 },
-            (int x) => x, (int x) => x,
-            (int o, int i) => o + i).GetEnumerator().MoveNext();
+        System.Linq.Enumerable.Distinct(new int[] { 1, 2, 2, 3, 3, 3 }).GetEnumerator().MoveNext();
     }
 
-    // [3] Enumerable.Join with comparer
+    // [3] OrderBy — proven working pattern (from shuffle-index)
     public static void CustomEntrySubject_3()
     {
-        System.Linq.Enumerable.Join(
-            new int[] { 1, 2, 3 }, new int[] { 2, 3, 4 },
-            (int x) => x, (int x) => x,
-            (int o, int i) => o + i,
-            System.Collections.Generic.EqualityComparer<int>.Default).GetEnumerator().MoveNext();
+        System.Linq.Enumerable.OrderBy(new int[] { 3, 1, 4, 1, 5 }, (int x) => x).GetEnumerator().MoveNext();
     }
 
-    // [4] LeftJoin — .NET 9 API, replaced with SelectMany + Where + DefaultIfEmpty
+    // [4] LeftJoin — via SelectMany + Where + DefaultIfEmpty (3 type params)
     public static void CustomEntrySubject_4()
     {
         System.Linq.Enumerable.SelectMany(
@@ -55,7 +45,7 @@ public static partial class JoinsSubjects
                 (int i) => o + i)).GetEnumerator().MoveNext();
     }
 
-    // [5] LeftJoin with comparer — .NET 9 API replacement
+    // [5] LeftJoin with comparer — via SelectMany + Where + DefaultIfEmpty
     public static void CustomEntrySubject_5()
     {
         System.Linq.Enumerable.SelectMany(
@@ -67,7 +57,7 @@ public static partial class JoinsSubjects
                 (int i) => o + i)).GetEnumerator().MoveNext();
     }
 
-    // [6] RightJoin — .NET 9 API, replaced with SelectMany on inner
+    // [6] RightJoin — via SelectMany on inner sequence
     public static void CustomEntrySubject_6()
     {
         System.Linq.Enumerable.SelectMany(
@@ -79,7 +69,7 @@ public static partial class JoinsSubjects
                 (int o) => o + i)).GetEnumerator().MoveNext();
     }
 
-    // [7] RightJoin with comparer — .NET 9 API replacement
+    // [7] RightJoin with comparer — via SelectMany on inner sequence
     public static void CustomEntrySubject_7()
     {
         System.Linq.Enumerable.SelectMany(

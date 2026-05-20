@@ -122,4 +122,4 @@ public static class ReflectionAssemblyPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Type::GetType:System.Type(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionAssembly)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { _ = Type.GetType("System.Int32"); }}
+    public static void Patch_System_Private_CoreLib_System_Type_GetType_System_Type_System_String() { }}

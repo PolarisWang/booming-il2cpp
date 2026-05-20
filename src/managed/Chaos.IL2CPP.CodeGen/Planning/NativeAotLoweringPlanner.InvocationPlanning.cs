@@ -800,7 +800,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Priority 1: Inline shape — emit C++ expression directly at call site,
         // before external runtime helper check, because inline expansion gives
         // the best performance (no function call at all, matches JIT inlining).
-        if (_shapeRegistry.TryMatchInlineShape(callee, out var cppExpr))
+        if (_shapeRegistry.TryMatchInlineShape(callee, out var cppExpr, out var matchedDescriptor))
         {
             // Compute ABI dynamically from SubjectId instead of hardcoding.
             // Parse return type and parameter count from the SubjectId format:
@@ -810,7 +810,11 @@ public sealed partial class NativeAotLoweringPlanner
                 ? CreateLegacyReturnAbiSlot(returnTypeName)
                 : CreateVoidAbiSlot();
 
-            var paramCount = InferParameterCountFromSubjectId(callee);
+            // For instance methods, the SubjectId has 0 explicit params but the
+            // `this` pointer IS on the eval stack.  Add 1 so that the emitter
+            // consumes `this` from the stack and substitutes {0} in the template.
+            var explicitParams = InferParameterCountFromSubjectId(callee);
+            var paramCount = explicitParams + (matchedDescriptor!.IsInstanceMethod ? 1 : 0);
             var paramAbis = new AotCoreIrAbiSlotArtifact[paramCount];
             for (int i = 0; i < paramCount; i++)
                 paramAbis[i] = CreateNativeIntAbiSlot();

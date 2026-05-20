@@ -128,12 +128,14 @@
 
 // ── Profile scope accumulation ────────────────────────────────────────────
 // CHAOS_IL2CPP_PROFILE_ENABLED controls profile.h RAII scope timers (RDTSC).
-// Default to ON whenever trace is enabled (CHECK / PROFILE builds), giving
-// allocation-path profile data at zero extra maintenance cost.
-// Define CHAOS_IL2CPP_PROFILE_ENABLED=0 before including config.h to
-// force-disable (e.g. in a TU that is extremely hot and cannot tolerate the
-// ~30-cycle per-scope overhead).
-#if defined(CHAOS_IL2CPP_TRACE_ENABLED) && !defined(CHAOS_IL2CPP_PROFILE_ENABLED)
+// Only enabled in PROFILE builds (for performance analysis).  CHECK mode
+// does NOT enable profiling because its ~30-cycle per-scope overhead (~60
+// cycles per GC allocation) dominates benchmark results and creates an
+// unfair comparison vs the fully-optimized managed JIT baseline.
+// Any TU can override with `#define CHAOS_IL2CPP_PROFILE_ENABLED 1` before
+// including config.h to force-enable profiling in CHECK mode for targeted
+// hotspot analysis.
+#if defined(CHAOS_IL2CPP_CONFIG_PROFILE) && !defined(CHAOS_IL2CPP_PROFILE_ENABLED)
 #  define CHAOS_IL2CPP_PROFILE_ENABLED 1
 #endif
 

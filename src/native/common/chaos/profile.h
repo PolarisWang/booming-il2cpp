@@ -404,6 +404,13 @@ struct NullProfileScope {
     }
 };
 
+// Stub thread data — referenced by thread_state.cpp for UnregisterThread.
+// When profiling is disabled, both Register/UnregisterThread are no-ops.
+struct NullThreadProfileData { int registration_slot{-1}; };
+inline thread_local NullThreadProfileData g_tls_profile{};
+inline void UnregisterThread(NullThreadProfileData&) noexcept {}
+inline void RegisterThread(NullThreadProfileData&) noexcept {}
+
 // NullProfileScope constructor is constexpr → compiler eliminates
 // both the object and the string argument entirely.
 } // namespace chaos::il2cpp::common

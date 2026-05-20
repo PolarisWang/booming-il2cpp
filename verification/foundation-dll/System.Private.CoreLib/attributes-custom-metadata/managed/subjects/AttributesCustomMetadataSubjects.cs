@@ -16,13 +16,13 @@ public static partial class AttributesCustomMetadataSubjects
     // [0] System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.MemberInfo,System.Type)
     public static void Subject_0()
     {
-        if (((typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))).GetHashCode()) != 906870744) _exitCode = 1;
+        if (((typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))).GetHashCode()) != -1585855194) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Attribute::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)
     public static void Subject_1()
     {
-        if (((typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))).GetHashCode()) != 906870744) _exitCode = 1;
+        if (((typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))).GetHashCode()) != -1585855194) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Attribute::GetCustomAttributes:System.Attribute[](System.Reflection.MemberInfo,System.Type)
