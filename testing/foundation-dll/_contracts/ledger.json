@@ -1,16 +1,117 @@
 {
   "schemaVersion": "2.0",
-  "description": "Foundation DLL capability family ledger — new framework. Synchronized from capability-family-ledger.json.",
+  "description": "Foundation DLL capability family ledger — new framework. Synchronized from verification/ contracts.",
   "assemblies": [
     {
-      "assemblyName": "System.Private.CoreLib",
+      "assemblyName": "System.Collections.Immutable",
       "families": [
         {
-          "familyId": "family/System.Private.CoreLib/convert/char",
-          "slug": "convert-char",
-          "displayName": "Convert.Char Conversions",
-          "methodCount": 18,
-          "obligations": ["functional"],
+          "familyId": "family/System.Collections.Immutable/extensions/marshal",
+          "slug": "extensions-marshal",
+          "displayName": "Extensions Marshal",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/frozen/collections",
+          "slug": "frozen-collections",
+          "displayName": "Frozen Collections",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/array",
+          "slug": "immutable-array",
+          "displayName": "Immutable Array",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/dictionary",
+          "slug": "immutable-dictionary",
+          "displayName": "Immutable Dictionary",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/hash/set",
+          "slug": "immutable-hash-set",
+          "displayName": "Immutable Hash Set",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/interlocked",
+          "slug": "immutable-interlocked",
+          "displayName": "Immutable Interlocked",
+          "methodCount": 1,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/list",
+          "slug": "immutable-list",
+          "displayName": "Immutable List",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/queue/stack",
+          "slug": "immutable-queue-stack",
+          "displayName": "Immutable Queue and Stack",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/sorted/dictionary",
+          "slug": "immutable-sorted-dictionary",
+          "displayName": "Immutable Sorted Dictionary",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Collections.Immutable/immutable/sorted/set",
+          "slug": "immutable-sorted-set",
+          "displayName": "Immutable Sorted Set",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
           "migrationStatus": "imported",
           "lastVerified": ""
         }
@@ -18,11 +119,662 @@
     },
     {
       "assemblyName": "System.Linq",
-      "families": []
+      "families": [
+        {
+          "familyId": "family/System.Linq/aggregation",
+          "slug": "aggregation",
+          "displayName": "LINQ Aggregation",
+          "methodCount": 11,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/filtering",
+          "slug": "filtering",
+          "displayName": "LINQ Filtering",
+          "methodCount": 9,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/generation-concat",
+          "slug": "generation-concat",
+          "displayName": "LINQ Generation & Concat",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/grouping-lookup",
+          "slug": "grouping-lookup",
+          "displayName": "LINQ Grouping & Lookup",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/joins",
+          "slug": "joins",
+          "displayName": "LINQ Joins",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/materialization",
+          "slug": "materialization",
+          "displayName": "LINQ Materialization",
+          "methodCount": 17,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/numeric-aggregation",
+          "slug": "numeric-aggregation",
+          "displayName": "LINQ Numeric Aggregation",
+          "methodCount": 90,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/ordering",
+          "slug": "ordering",
+          "displayName": "LINQ Ordering",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/partitioning",
+          "slug": "partitioning",
+          "displayName": "LINQ Partitioning",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/projection",
+          "slug": "projection",
+          "displayName": "LINQ Projection",
+          "methodCount": 9,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/set-operations",
+          "slug": "set-operations",
+          "displayName": "LINQ Set Operations",
+          "methodCount": 18,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Linq/shuffle-index",
+          "slug": "shuffle-index",
+          "displayName": "LINQ Shuffle & Index",
+          "methodCount": 24,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        }
+      ]
     },
     {
-      "assemblyName": "System.Collections.Immutable",
-      "families": []
+      "assemblyName": "System.Private.CoreLib",
+      "families": [
+        {
+          "familyId": "family/System.Private.CoreLib/array/indexing-copy",
+          "slug": "array-indexing-copy",
+          "displayName": "Array Indexing And Copy",
+          "methodCount": 13,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+          "slug": "attributes-custom-metadata",
+          "displayName": "Attributes And Custom Metadata",
+          "methodCount": 9,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/boxing/unboxing-casts",
+          "slug": "boxing-unboxing-casts",
+          "displayName": "Boxing Unboxing Casts",
+          "methodCount": 11,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/buffer/memory",
+          "slug": "buffer-memory",
+          "displayName": "Buffer.Memory Operations",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/ccw/basic",
+          "slug": "ccw-basic",
+          "displayName": "CCW Basic",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/codegen/codegen-edge-cases",
+          "slug": "codegen-edge-cases",
+          "displayName": "CodeGen Edge Cases — Flat Fallback Patterns",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/collections/generic-core",
+          "slug": "collections-generic-core",
+          "displayName": "Generic Collections Core",
+          "methodCount": 16,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/convert/char",
+          "slug": "convert-char",
+          "displayName": "Convert.Char Conversions",
+          "methodCount": 18,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
+          "slug": "delegate-core-invocation",
+          "displayName": "Delegate Core Invocation",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/dispatch/basic",
+          "slug": "dispatch-basic",
+          "displayName": "Dispatch Basic",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/enum/parsing",
+          "slug": "enum-parsing",
+          "displayName": "Enum Parsing And Formatting",
+          "methodCount": 13,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/error/info/basic",
+          "slug": "error-info-basic",
+          "displayName": "ErrorInfo Basic",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/exception/throw-diagnostics",
+          "slug": "exception-throw-diagnostics",
+          "displayName": "Exception Throw Diagnostics",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/garbage-collection",
+          "slug": "garbage-collection",
+          "displayName": "Garbage Collection",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/generic/nullable-value",
+          "slug": "generic-nullable-value",
+          "displayName": "Generic Nullable Value Semantics",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/globalization/culture",
+          "slug": "globalization-culture",
+          "displayName": "Globalization Culture",
+          "methodCount": 13,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/guid/random/hashcode",
+          "slug": "guid-random-hashcode",
+          "displayName": "Guid Random HashCode",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/interface/dispatch",
+          "slug": "interface-dispatch",
+          "displayName": "Interface Dispatch",
+          "methodCount": 9,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/interface/dispatch,pinvoke/dllimport,primitive/numeric/conversions/core",
+          "slug": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+          "displayName": "Interface Dispatch,Pinvoke Dllimport,Primitive Numeric Conversions Core",
+          "methodCount": 23,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/io/streams-basics",
+          "slug": "io-streams-basics",
+          "displayName": "IO Streams Basics",
+          "methodCount": 18,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/math/numerics",
+          "slug": "math-numerics",
+          "displayName": "Math Numerics",
+          "methodCount": 18,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/object/equality-identity",
+          "slug": "object-equality-identity",
+          "displayName": "Object Equality And Identity",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/pinvoke/dllimport",
+          "slug": "pinvoke-dllimport",
+          "displayName": "PInvoke DllImport",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/primitive/numeric-conversions",
+          "slug": "primitive-numeric-conversions",
+          "displayName": "Primitive Numeric Conversions",
+          "methodCount": 15,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/primitive/numeric-conversions-core",
+          "slug": "primitive-numeric-conversions-core",
+          "displayName": "Primitive Numeric Conversions Core",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/rcw/basic",
+          "slug": "rcw-basic",
+          "displayName": "RCW Basic",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/activation",
+          "slug": "reflection-activation",
+          "displayName": "Activation And Instantiation",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/assembly",
+          "slug": "reflection-assembly",
+          "displayName": "Assembly Reflection",
+          "methodCount": 22,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/binding",
+          "slug": "reflection-binding",
+          "displayName": "BindingFlags And Invocation",
+          "methodCount": 12,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/field-property",
+          "slug": "reflection-field-property",
+          "displayName": "Reflection Field Property",
+          "methodCount": 34,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/generics",
+          "slug": "reflection-generics",
+          "displayName": "Generics Reflection",
+          "methodCount": 12,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/member-basics",
+          "slug": "reflection-member-basics",
+          "displayName": "Reflection Member Basics",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/member-complete",
+          "slug": "reflection-member-complete",
+          "displayName": "MemberInfo Complete",
+          "methodCount": 22,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/module",
+          "slug": "reflection-module",
+          "displayName": "Module Reflection",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/parameters",
+          "slug": "reflection-parameters",
+          "displayName": "Parameter Info",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/reflection/type",
+          "slug": "reflection-type",
+          "displayName": "Reflection Type Queries",
+          "methodCount": 43,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+          "slug": "runtime-compiler-services",
+          "displayName": "Runtime Compiler Services",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/SnapshotTestFixtures/snapshot/prover",
+          "slug": "snapshot-prover",
+          "displayName": "Snapshot Fixture Runtime Prover",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/span/memory-buffers",
+          "slug": "span-memory-buffers",
+          "displayName": "Span Memory Buffers",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/string/char-text-core",
+          "slug": "string-char-text-core",
+          "displayName": "String And Char Text Core",
+          "methodCount": 20,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/string/construction",
+          "slug": "string-construction",
+          "displayName": "String Construction And Static Helpers",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/threading/monitor-interlocked",
+          "slug": "threading-monitor-interlocked",
+          "displayName": "Monitor And Interlocked",
+          "methodCount": 14,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/threading/sync",
+          "slug": "threading-sync",
+          "displayName": "Thread Synchronization Primitives (Mutex, Semaphore, Event, Barrier)",
+          "methodCount": 17,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/threading/tasks-primitives",
+          "slug": "threading-tasks-primitives",
+          "displayName": "Tasks And Threading Primitives",
+          "methodCount": 15,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/threading/thread-basics",
+          "slug": "threading-thread-basics",
+          "displayName": "Thread Basics (State, Priority, Abort, Interrupt)",
+          "methodCount": 11,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/time/date-time-timespan",
+          "slug": "time-date-time-timespan",
+          "displayName": "Date Time TimeSpan",
+          "methodCount": 16,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/type/runtime-handles",
+          "slug": "type-runtime-handles",
+          "displayName": "Type Runtime Handles",
+          "methodCount": 13,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        }
+      ]
     }
   ]
 }

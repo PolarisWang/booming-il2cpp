@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/collections/generic-core",
+  "displayName": "Generic Collections Core",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Collections.Generic.List`1::Add:System.Void(T)",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::IndexOf:System.Int32(T)",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::Remove:System.Boolean(T)",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
+    "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
+    "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)",
+    "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
+    "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)",
+    "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::ContainsKey:System.Boolean(TKey)",
+    "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Remove:System.Boolean(TKey)",
+    "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Add:System.Boolean(T)",
+    "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Contains:System.Boolean(T)",
+    "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)"
+  ],
+  "methodSubjectCount": 16,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

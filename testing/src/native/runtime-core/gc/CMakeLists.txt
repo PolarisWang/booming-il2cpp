@@ -83,6 +83,12 @@ add_chaos_test(test_gc_scheduler
     LIBS ${CHAOS_GC_LIBS}
 )
 
+# gc_memory_domain_test — MemoryDomain lifecycle, tagged allocation, usage limits
+add_chaos_test(test_gc_memory_domain
+    memory_domain_test.cpp ${CHAOS_GC_STUBS}
+    LIBS ${CHAOS_GC_LIBS}
+)
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch C — GC functional tests (need stubs + young gen init)
 # ═══════════════════════════════════════════════════════════════════════════
@@ -157,6 +163,29 @@ add_chaos_test(test_gc_finalizer
     LIBS ${CHAOS_GC_LIBS}
 )
 
+# gc_full_gc_test — Full GC collection channel tests
+add_chaos_test(test_gc_full_gc
+    gc_full_gc_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+
+# gc_managed_api_test — Managed GC API native verification tests
+# NOTE: gc_api.cpp and its transitive dependencies are compiled directly because
+# the prebuilt chaos_runtime_core.lib uses GNU ar format that MSVC link.exe
+# cannot search for COMDAT resolution.
+add_chaos_test(test_gc_managed_api
+    gc_managed_api_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_api.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_stats.cpp
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_include_directories(test_gc_managed_api PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_managed_api PRIVATE /FORCE:MULTIPLE)
+
 # gc_safepoint_test — Safepoint protocol unit tests
 add_chaos_test(test_gc_safepoint
     gc_safepoint_test.cpp ${CHAOS_GC_STUBS}
@@ -181,6 +210,12 @@ add_chaos_test(test_gc_sanity
     LIBS ${CHAOS_GC_LIBS}
 )
 
+# gc_domain_unload_test — Domain unloader orchestration (C4)
+add_chaos_test(test_gc_domain_unload
+    domain_unload_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch E — Stress tests (labelled "stress", excluded from default run)
 # ═══════════════════════════════════════════════════════════════════════════
@@ -202,6 +237,115 @@ add_chaos_test(test_gc_gen1_benchmark
     LIBS ${CHAOS_GC_LIBS}
 )
 set_tests_properties(test_gc_gen1_benchmark PROPERTIES LABELS "benchmark;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch G — Migrated from old contracts: stress/smoke tests (G1)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_worker_pool_test — GcWorkerPool smoke test (no stress label, quick)
+add_chaos_test(test_gc_worker_pool
+    gc_worker_pool_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+
+# gc_mini_stress_test — Minimal multi-threaded nursery stress
+add_chaos_test(test_gc_mini_stress
+    gc_mini_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_mini_stress PROPERTIES LABELS "stress;gc")
+
+# gc_monitor_stress_test — Monitor Enter/Exit/Wait/Pulse with GC interleave
+# NOTE: gc_young_collector.cpp compiled directly (same pattern as
+# test_gc_young_collector) because GcYoungCollection() is needed and
+# the prebuilt chaos_runtime_core.lib uses GNU ar format that MSVC
+# link.exe cannot search for COMDAT resolution.
+add_chaos_test(test_gc_monitor_stress
+    gc_monitor_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_include_directories(test_gc_monitor_stress PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_monitor_stress PRIVATE /FORCE:MULTIPLE)
+set_tests_properties(test_gc_monitor_stress PROPERTIES LABELS "stress;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch H — Migrated from old contracts: medium stress tests (G2)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_finalizer_stress_test — Finalizer stress (F1-F5)
+add_chaos_test(test_gc_finalizer_stress
+    gc_finalizer_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_finalizer_stress PROPERTIES LABELS "stress;gc")
+
+# loh_stress_test — Large Object Heap stress (L1-L5)
+add_chaos_test(test_gc_loh_stress
+    loh_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_loh_stress PROPERTIES LABELS "stress;gc")
+
+# oversized_stress_test — Oversized allocation stress (O1-O4)
+add_chaos_test(test_gc_oversized_stress
+    oversized_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_oversized_stress PROPERTIES LABELS "stress;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch I — BGC tests (G3)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_bgc_smoke_test — BGC cycle lifecycle + young-GC interop
+add_chaos_test(test_gc_bgc_smoke
+    gc_bgc_smoke_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_include_directories(test_gc_bgc_smoke PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_bgc_smoke PRIVATE /FORCE:MULTIPLE)
+set_tests_properties(test_gc_bgc_smoke PROPERTIES LABELS "stress;gc")
+
+# gc_bgc_root_scan_test — Young-to-old root scan during BGC
+add_chaos_test(test_gc_bgc_root_scan
+    gc_bgc_root_scan_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
+
+# gc_bgc_stress_test — BGC concurrent stress, work-stealing, graph mutation
+add_chaos_test(test_gc_bgc_stress
+    gc_bgc_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_bgc_stress PROPERTIES LABELS "stress;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch J — Large stress tests (G4)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_general_stress_test — Multi-threaded general GC stress (BaselineConcurrent,
+# MixedSizeAllocation, AggressiveYoungGc, ExtendedGcPressure)
+add_chaos_test(test_gc_general_stress
+    gc_general_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_general_stress PROPERTIES LABELS "stress;gc" TIMEOUT 300)
+
+# delegate_stress_test — Multi-threaded delegate stress (A1-E5)
+add_chaos_test(test_gc_delegate_stress
+    delegate_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_delegate_stress PROPERTIES LABELS "stress;gc" TIMEOUT 300)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Original smoke test
