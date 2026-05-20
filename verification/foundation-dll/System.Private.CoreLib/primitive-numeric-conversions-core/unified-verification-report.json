@@ -2,8 +2,8 @@
   "family": "primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T19:21:37",
-  "duration_ms": 18052,
+  "timestamp": "2026-05-20T01:38:19",
+  "duration_ms": 21887,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\build-output\\PrimitiveNumericConversionsCoreSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 17160
+      "duration_ms": 20519
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 332
+      "duration_ms": 369
     },
     "audit": {
       "stage": "audit",
@@ -56,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 556
+      "duration_ms": 997
     }
   },
   "coverage": {

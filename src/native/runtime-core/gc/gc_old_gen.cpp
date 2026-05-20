@@ -3,11 +3,13 @@
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
+#include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
 #include "gc_events.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_numa.h"
 #include "gc_parallel_mark.h"
 #include "gc_region.h"
 #include "gc_young_gen.h"
@@ -50,21 +52,20 @@ MarkSweepOldGen g_old_gen;
 // ======================================================================
 
 static void* VirtualAllocPage(CHAOS_IL2CPP_SIZE size) {
-#if defined(_WIN32) || defined(_WIN64)
-    auto* ptr = VirtualAlloc(nullptr, size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    int numa_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
+    auto* ptr = static_cast<OldGenPage*>(GcNumaVirtualAlloc(size, numa_node));
     if (ptr == nullptr) {
+#if defined(_WIN32) || defined(_WIN64)
         CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "VirtualAlloc failed size={0} err={1}",
             static_cast<unsigned long long>(size), GetLastError());
-    }
-    return ptr;
 #else
-    auto* ptr = mmap(nullptr, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (ptr == MAP_FAILED) {
-        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "mmap failed size={0}", static_cast<unsigned long long>(size));
-        return nullptr;
+        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "mmap/GcNumaVirtualAlloc failed size={0}",
+            static_cast<unsigned long long>(size));
+#endif
+    } else {
+        ptr->numa_node = static_cast<int8_t>(numa_node);
     }
     return ptr;
-#endif
 }
 
 static void VirtualFreePage(void* ptr, CHAOS_IL2CPP_SIZE size) {
@@ -152,9 +153,13 @@ void* OldGenPage::FindObjectContaining(const void* interior_ptr) const {
 // ======================================================================
 
 bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
-    (void)heap_hint;  // hint not used yet �� VirtualAlloc picks address
+    (void)heap_hint;
 
-    CHAOS_IL2CPP_LOG_INFO_M("OldGen", "init initial_pages={0}", initial_pages);
+    // Initialize NUMA subsystem (idempotent).
+    GcNumaInit();
+
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen", "init initial_pages={0} numa_nodes={1}",
+        initial_pages, GcNumaNodeCount());
 
     for (int i = 0; i < initial_pages; i++) {
         auto* page = AllocatePage(kOldGenPageSize, true);
@@ -2076,6 +2081,13 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
 
+    // Stop any in-progress BGC concurrent mark before we clear bitmaps
+    // and re-mark from roots.  BGC runs in preemptive mode and would
+    // otherwise continue modifying the mark bitmap concurrently while
+    // we clear and re-mark it, causing stale marks from a different
+    // root snapshot to survive into our mark phase.
+    BgcController::Instance().StopConcurrentMark();
+
     // V4-H3: Snapshot pinned_roots_ under mutex to avoid data race with
     // AddPinnedRoot (which pushes under the same mutex).  Iterating the
     // vector without locking is UB if a concurrent push_back triggers
@@ -2135,12 +2147,16 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         threading::EnumerateThreads(
             [](threading::ManagedThread* thread) -> bool {
                 // Scan the shared young generation region directly.
-                // All threads share one young region; scan [begin, current).
+                // All threads share one young region; scan [begin, bump).
+                // Uses g_young_gen.bump (the true allocation frontier
+                // advanced by TLAB claims) rather than region->current
+                // (which is frozen at begin after each young GC reset).
                 Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
                 if (young_region == nullptr) return true;
-                if (young_region->current > young_region->begin) {
+                void* cur = g_young_gen.bump.load(std::memory_order_acquire);
+                if (cur > young_region->begin) {
                     g_old_gen.ScanRangeForRoots(
-                        young_region->begin, young_region->current);
+                        young_region->begin, cur);
                 }
 
                 // Scan the survivor area as roots.  Survivor objects were
@@ -2169,7 +2185,18 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         threading::GcScanAllThreadRoots(
             [](void* root_addr, bool /*is_interior*/, void* user_data) {
                 auto* self = static_cast<MarkSweepOldGen*>(user_data);
-                self->TryMarkRoot(root_addr);
+                if (self->TryMarkRoot(root_addr)) return;
+
+                // Not an old-gen root. Check if it points to a LOH segment.
+                // LOH objects are never on old-gen pages, so TryMarkRoot
+                // (which uses FindPage) will miss them.  Without this check,
+                // thread-stack references to LOH objects are invisible to
+                // the full GC; g_loh.Sweep() will free the segment, causing
+                // use-after-free when the worker thread accesses it.
+                auto val = *reinterpret_cast<void**>(root_addr);
+                if (val != nullptr && g_loh.IsInLOH(val)) {
+                    g_loh.MarkObject(val);
+                }
             },
             this);
         if (mark_stack_.size() > before_roots) {

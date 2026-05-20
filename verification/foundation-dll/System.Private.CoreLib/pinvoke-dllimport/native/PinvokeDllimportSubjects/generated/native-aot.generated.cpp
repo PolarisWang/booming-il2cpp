@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -1125,211 +1126,28 @@ extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEn
 	return {};
 }
 
-// Managed method: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentProcess()
+// AOT-unreachable stub: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d0 = s_hotpatch_entries[0];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d0.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		if (chaos_left != chaos_right)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		chaos_locals[1] = _s0;
-		_s0 = chaos_locals[1];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-	}
+	return {};
 }
 
-// Managed method: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentThread()
+// AOT-unreachable stub: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d1 = s_hotpatch_entries[1];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
-		if (chaos_left != chaos_right)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		chaos_locals[1] = _s0;
-		_s0 = chaos_locals[1];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-	}
+	return {};
 }
 
-// Managed method: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetModuleHandle()
+// AOT-unreachable stub: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		auto& _d2 = s_hotpatch_entries[2];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-		{
-			alignas(16) uint8_t _d_ab[8];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d2.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String(chaos_arg_0);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s0 == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		chaos_locals[1] = _s0;
-		_s0 = chaos_locals[1];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-	}
+	return {};
 }
 
-// Managed method: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetProcessId()
+// AOT-unreachable stub: PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-	{
-		auto& _d0 = s_hotpatch_entries[0];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-		{
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d0.method_key, nullptr, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess();
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		auto& _d3 = s_hotpatch_entries[3];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-		{
-			alignas(16) uint8_t _d_ab[8];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d3.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr(chaos_arg_0);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s0 == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		chaos_locals[2] = _s0;
-		_s0 = chaos_locals[2];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-	}
+	return {};
 }
 
 

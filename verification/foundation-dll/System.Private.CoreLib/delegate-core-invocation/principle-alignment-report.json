@@ -1,7 +1,7 @@
 {
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:08:25.504163",
+  "generated_at": "2026-05-20T01:33:35.791357",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -289,17 +289,10 @@
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "CONCERN",
-      "summary": "1 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosObjectCtor",
-          "call_count": 1
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 1
-      }
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
     },
     "p2_abstraction_balance": {
       "check_id": "p2_abstraction_balance",
@@ -310,11 +303,30 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "1 of 11 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 11,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 2
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -373,9 +385,9 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 6,
+    "aligned": 7,
     "concern": 2,
-    "violation": 1,
+    "violation": 0,
     "not_applicable": 3,
     "overall": "CONCERN"
   }

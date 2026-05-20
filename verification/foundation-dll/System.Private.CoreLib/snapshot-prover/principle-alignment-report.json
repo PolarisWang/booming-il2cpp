@@ -1,7 +1,7 @@
 {
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:09:14.428759",
+  "generated_at": "2026-05-20T01:43:57.779857",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -128,17 +128,10 @@
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "CONCERN",
-      "summary": "1 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosObjectCtor",
-          "call_count": 1
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 1
-      }
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
     },
     "p2_abstraction_balance": {
       "check_id": "p2_abstraction_balance",
@@ -150,65 +143,26 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "6 of 15 changed source files are outside expected architecture layers",
+      "summary": "1 of 21 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "codegen_diag.txt",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "codegen_ldloc_diag.txt",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/25-Marshal平台ABI与互操作体系.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/02-翻译路径参考/12-PInvoke翻译路径.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/07-COM互操作/02-CCW实现.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 15,
+        "changed_source_count": 21,
         "layer_distribution": {
-          "TestInfra": 3,
-          "Emitter": 2,
+          "TestInfra": 1,
+          "Emitter": 4,
           "RuntimeSupport": 1,
-          "RuntimeCore": 1,
-          "Tests": 2
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 12
         },
         "violations": [
           {
-            "file": "codegen_diag.txt",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "codegen_ldloc_diag.txt",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/25-Marshal平台ABI与互操作体系.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/02-翻译路径参考/12-PInvoke翻译路径.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/07-COM互操作/02-CCW实现.md",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -270,10 +224,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 7,
-    "concern": 2,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "CONCERN"
+    "overall": "ALIGNED"
   }
 }

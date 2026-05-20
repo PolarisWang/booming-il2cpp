@@ -76,3 +76,4 @@ target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})
+target_link_options(entry PRIVATE /FORCE:MULTIPLE)

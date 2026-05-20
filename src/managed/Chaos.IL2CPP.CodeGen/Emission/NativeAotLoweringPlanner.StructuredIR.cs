@@ -36,7 +36,8 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrInstructionArtifact BranchTerminator,
         StructuredIRNode ThenBody,
         StructuredIRNode? ElseBody,
-        StructuredIRNode? PostMergeBody = null
+        StructuredIRNode? PostMergeBody = null,
+        int PreConditionDepth = 0
     ) : StructuredIRNode;
 
     /// <summary>Header-controlled while loop.</summary>
@@ -336,7 +337,8 @@ public sealed partial class NativeAotLoweringPlanner
                     ite.BranchTerminator,
                     StripExceptionPartitionExitTerminators(ite.ThenBody),
                     ite.ElseBody is null ? null : StripExceptionPartitionExitTerminators(ite.ElseBody),
-                    ite.PostMergeBody is null ? null : StripExceptionPartitionExitTerminators(ite.PostMergeBody)),
+                    ite.PostMergeBody is null ? null : StripExceptionPartitionExitTerminators(ite.PostMergeBody),
+                    ite.PreConditionDepth),
             IRWhileLoop loop
                 => new IRWhileLoop(
                     loop.ConditionInstructions,
@@ -447,6 +449,28 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+        // When an IRBlock is emitted as a child of IRSequence or inside a
+        // branch body, it may start with instructions that pop values pushed
+        // by predecessor CFG blocks. Ensure the structured slot depth is
+        // adequate by simulating the initial pop-only prefix.
+        if (_activeStructuredSlotContext is { Depth: 0 } ctx)
+        {
+            int requiredDepth = 0;
+            foreach (var instr in block.BodyInstructions)
+            {
+                int pops = EstimatePopCount(instr.Op);
+                int pushes = EstimatePushCount(instr.Op);
+                if (pushes > 0 && pushes >= pops)
+                    break; // Self-sustaining from here
+                if (pops > pushes)
+                    requiredDepth += pops - pushes;
+                else
+                    break;
+            }
+            if (requiredDepth > 0)
+                ctx.RestoreDepth(requiredDepth);
+        }
+
         foreach (var instr in block.BodyInstructions)
         {
             EmitInstruction(builder, instr, indentation);
@@ -599,7 +623,44 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Capture depth before condition instructions — both branches must start
         // from this depth so they converge on the same slot names.
-        int preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
+        int preConditionDepth = ite.PreConditionDepth;
+        if (preConditionDepth == 0)
+        {
+            preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
+        }
+
+        // postConditionDepth will be set after the condition-effect computation below.
+        int postConditionDepth = preConditionDepth;
+
+        // Compute net eval-stack effect of condition instructions + terminator.
+        // When the structured IR reconstruction places values pushed by a
+        // predecessor CFG block outside the condition instruction list, the
+        // depth may be undercounted. We compensate by computing the required
+        // depth from the instructions themselves.
+        {
+            int condPushes = 0, condPops = 0;
+            foreach (var instr in ite.ConditionInstructions)
+            {
+                condPushes += EstimatePushCount(instr.Op);
+                condPops += EstimatePopCount(instr.Op);
+            }
+            int termPops = EstimateTerminatorPopCount(terminator.Op);
+            // net = (preDepth + condPushes - condPops - termPops) must be >= 0
+            // ⇒ minimum preDepth = condPops + termPops - condPushes
+            int requiredDepth = Math.Max(0, condPops + termPops - condPushes);
+            if (preConditionDepth < requiredDepth)
+                preConditionDepth = requiredDepth;
+
+            // Depth AFTER condition instructions + terminator have run.
+            // Both then-body and else-body execute at this depth, since the
+            // terminator leaves residual values on the eval stack that the
+            // branch bodies must see (e.g., ldsfld; dup; brtrue → brtrue pops
+            // only the dup copy, leaving the original ldsfld value for the
+            // else body's pop).
+            postConditionDepth = preConditionDepth + condPushes - condPops - termPops;
+            if (postConditionDepth < 0) postConditionDepth = 0;
+        }
+        _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
 
         // Scan then/else bodies for ldloc slots referenced externally. When a stloc+ldloc
         // pair in the condition writes to a slot later read by the body, the filter must
@@ -651,7 +712,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
@@ -721,7 +782,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
@@ -736,7 +797,58 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
-    // 鈹€鈹€ While loop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
+    // ─── Eval-stack helpers for depth compensation ───────────────────────
+
+    /// <summary>
+    /// Estimate how many values a compare/branch terminator pops from the eval stack.
+    /// </summary>
+    private static int EstimateTerminatorPopCount(string op) => op switch
+    {
+        "brtrue" or "brfalse" => 1,
+        "beq" or "bne.un" or "bge" or "bge.un" or "bgt" or "ble" or "blt" => 2,
+        _ => 0,
+    };
+
+    private static int EstimatePopCount(string op) => op switch
+    {
+        "stloc" or "stloc.s" or "starg" or "pop" or "initobj" => 1,
+        "stfld" or "stobj" or "stsfld"
+            or "stelem" or "stelem.i" or "stelem.ref"
+            or "stind.i4" or "stind.i1" or "stind.i2" or "stind.i8"
+            or "stind.r4" or "stind.r8" or "stind.ref" or "stind.i"
+            or "cpblk" or "initblk" or "throw" => 2,
+        _ => 0,
+    };
+
+    private static int EstimatePushCount(string op) => op switch
+    {
+        "ldc.i4" or "ldc.i8" or "ldc.r4" or "ldc.r8"
+            or "ldarg" or "ldstr" or "ldtoken" or "ldarga"
+            or "ldnull" or "ldloc" or "ldloc.s" or "ldloca"
+            or "ldsfld" or "ldsflda" or "ldftn" or "ldvirtftn"
+            or "newarr" or "sizeof" => 1,
+        "box" or "unbox" or "unbox.any"
+            or "castclass" or "isinst"
+            or "ldlen" or "localloc"
+            or "ldfld" or "ldflda" or "ldobj" or "ldelema"
+            or "ldelem" or "ldelem.i" or "ldelem.ref"
+            or "ldind.i4" or "ldind.u1" or "ldind.i1"
+            or "ldind.u2" or "ldind.i2" or "ldind.u4"
+            or "ldind.i8" or "ldind.r4" or "ldind.r8" or "ldind.ref" or "ldind.i"
+            or "conv.i4" or "conv.i1" or "conv.i2" or "conv.i8"
+            or "conv.u8" or "conv.r4" or "conv.r8" or "conv.u"
+            or "conv.u1" or "conv.u2" or "conv.u4"
+            or "conv.r.un" or "ckfinite"
+            or "not" or "neg" or "dup"
+            or "cgt.un" or "ceq" or "cgt" or "clt"
+            or "add" or "sub" or "mul" or "div" or "div.un" or "rem" or "rem.un"
+            or "shl" or "shr" or "shr.un"
+            or "and" or "or" or "xor"
+            or "add.ovf" or "sub.ovf" or "mul.ovf"
+            or "ldlen" or "localloc" => 1,
+        "mkrefany" => 2,
+        _ => 0,
+    };
 
     private void EmitIRWhileLoop(
         StringBuilder builder,

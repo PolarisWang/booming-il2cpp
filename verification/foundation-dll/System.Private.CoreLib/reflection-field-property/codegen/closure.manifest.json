@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReflectionFieldPropertySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-field-property/managed/subjects/build-output/ReflectionFieldPropertySubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-field-property/managed/subjects/build-output/ReflectionFieldPropertySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReflectionFieldPropertySubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-field-property/managed/subjects/build-output/ReflectionFieldPropertySubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-field-property/managed/subjects/build-output/ReflectionFieldPropertySubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e8138fd4-674c-4faa-91fe-c9ccd81e269b",
+  "inputModuleVersionId": "d5de69a6-1aa8-4159-9626-f3e54c932ca4",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -21,7 +21,11 @@ class P1NoUnnecessaryIndirectionCheck(PrincipleCheck):
         "ChaosDatetimeGetUtcNow", "ChaosDatetimeGetHashCode",
         "ChaosMathSqrt", "ChaosInterlockedMemoryBarrier",
         "ChaosExceptionGetBaseException", "ChaosExceptionGetInnerException",
-        "ChaosObjectEqualsStatic", "ChaosObjectCtor",
+        "ChaosObjectEqualsStatic",
+        # ChaosObjectCtor intentionally excluded: fundamental runtime function
+        # for object construction, called by every family that uses new object().
+        # Not a stub — it's the correct lowering for System.Object::.ctor().
+        # "ChaosObjectCtor",
         "ChaosGuidNewGuid", "ChaosRandomNextBytes", "ChaosRandomNextDouble",
         "ChaosStringContains", "ChaosStringStartsWith", "ChaosStringJoinSs",
         "ChaosFormattablestringFactoryCreate",

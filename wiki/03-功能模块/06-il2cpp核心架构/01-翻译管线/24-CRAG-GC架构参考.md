@@ -469,8 +469,96 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 3. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
 4. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
 
+## P1-P3 扩展功能（2026-05 完成）
+
+以下 6 项扩展功能在 GC P1/P2/P3 阶段完成，覆盖寄存器根枚举、写屏障补齐、GC Stress 模式、NO_GC_REGION、静态根注册和 NUMA 感知。
+
+### 1. P1: 寄存器根精准枚举 (SpillGcRefRegs)
+
+**问题**：T4 代码生成器将 ObjectRef 缓存到 callee-saved 寄存器（RDI, R12-R15）。在 safepoint 时，寄存器中的 ObjectRef 如果 clean（未 spill），栈上 spill slot 持有过期值，GC 会遗漏该根。
+
+**方案**：每次 `RecordGcPoint()` 前强制 spill 所有 ObjectRef 寄存器到栈。
+
+**代码位置**：
+- `src/native/codegen/code_generator.h` — `SpillGcRefRegs()` 声明
+- `src/native/codegen/code_generator.cpp` — V1 `SpillGcRefCachedRegs()` + V2 遍历 `x64_to_colored_vreg_` 对 `kTypeObjectRef` 执行 `EmitMovMR`
+- `RecordGcPoint()` 开头调用 `SpillGcRefRegs()`
+
+**验证**：寄存器缓存 + safepoint + GC 后对象存活测试通过。kT4Benchmark 开销在预期范围内。
+
+### 2. P3: 缺失写屏障补齐 (SATB + 分代屏障)
+
+**问题**：T4 `CodegenStFld` / `CodegenStObj` 完全缺少 SATB 预写屏障和分代脏卡屏障。解释器路径已有 SATB 但缺少分代屏障。
+
+**方案**：补齐所有缺失的写屏障。
+
+**代码位置**：
+- `src/native/codegen/codegen_helpers.cpp` — `CodegenStFld` 添加 `BgcSatbPreWriteBarrier()` + `chaos_gc_dirty_card()`；`CodegenStObj` 同样添加
+- `src/native/interpreter/fast_dispatch.cpp` — `Handle_StFld` / `Handle_StObj` 添加 `chaos_gc_dirty_card()` 补齐分代屏障
+
+**验证**：StFld 后触发 GC 对象引用正确存活。BGC 并发标记期间 SATB 捕获所有写入。
+
+### 3. P2: GC Stress 模式
+
+**方案**：`CHAOS_GC_STRESS=1` 环境变量驱动 + `NurseryAllocateSlow` 钩子 + `#ifdef CHAOS_GC_STRESS_ENABLED` 编译开关。
+
+**代码位置**：
+- `src/native/runtime-core/gc/gc_stress.h` — `GcStressState` + `ParseGcStressEnv()` + `GcStressShouldTrigger()`
+- `src/native/runtime-core/gc/gc_stress.cpp` — `getenv` 解析
+- `src/native/runtime-core/gc/gc_region.cpp` — `NurseryAllocateSlow` 和 `NurseryAllocateAtomicSlow` 插入 stress 钩子
+- `src/native/runtime-core/core/gc_alloc_stubs.cpp` — `GcAllocate` 同样插入
+
+**触发频率**：每 16 次分配触发一次全量 GC（CHAOS_GC_STRESS=1 默认间隔）。
+
+**验证**：`CHAOS_GC_STRESS=1` 下全部 GC 测试通过。
+
+### 4. P3: GC 禁止区域 (NO_GC_REGION)
+
+**问题**：某些临界区（如 pinvoke 内层、GC 自身内部操作）不允许 GC 触发。缺少强制检查可能导致递归 GC 或数据竞争。
+
+**方案**：TLS 嵌套计数 + `DecideCollection` 跳过。
+
+**代码位置**：
+- `src/native/runtime-core/gc/gc_api.h` — `GcEnterNoGcRegion()` / `GcLeaveNoGcRegion()` 声明
+- `src/native/runtime-core/gc/gc_api.cpp` — TLS 嵌套计数实现
+- `src/native/runtime-core/gc/gc_scheduler.cpp` — `DecideCollection` 开头检查 `GcIsInNoGcRegion()` 返回 `CollectionDecision::NONE`
+- `src/native/runtime-core/gc/gc_region.cpp` — `NurseryAllocateSlow` TLAB 耗尽时跳过 young GC 直落 old-gen
+
+**验证**：Enter → 大量分配 → 无 GC → Leave → GC 恢复正常。
+
+### 5. P3: 显式静态根注册
+
+**问题**：AssemblyLoadContext (ALC) 加载的程序集包含静态字段持有 GC 对象引用。域卸载前这些静态根必须被 GC 感知，否则会阻止必要的内存回收。
+
+**方案**：`GcRegisterStaticRootRange` API + ALC 加载/卸载时注册 + GC Phase 3 扫描。
+
+**代码位置**：
+- `src/native/runtime-core/gc/gc_static_roots.h` / `gc_static_roots.cpp` — 静态根范围注册表
+- `src/native/runtime-core/assembly_manager.cpp` — 加载时 `RegisterStaticRootRange`，卸载时 `UnregisterStaticRootRange`
+- `src/native/runtime-core/thread_state.cpp` — `GcScanAllThreadRoots` Phase 3 调用 `GcScanStaticRoots`
+
+**验证**：静态对象引用 → GC → 对象存活。域卸载 → 根移除 → 对象可回收。
+
+### 6. P2: NUMA 感知堆布局
+
+**问题**：多 socket 系统上跨 NUMA 节点的内存访问延迟显著高于本地访问。CRAG GC 的 OldGen 单页列表将所有分配集中在一个节点的物理内存上。
+
+**方案**：OldGen 拆分为 per-NUMA-node `NumaNodeHeap` 数组 + `VirtualAllocExNuma` 分配。
+
+**代码位置**：
+- `src/native/runtime-core/gc/gc_numa.h` — `NumaNodeInfo` + `GcNumaVirtualAlloc` + `GcNumaNodeCount`
+- `src/native/runtime-core/gc/gc_numa_win.cpp` — Windows 实现（`GetNumaHighestNodeNumber` + `VirtualAllocExNuma`）
+- `src/native/runtime-core/gc/gc_numa_linux.cpp` — Linux 实现（`get_mempolicy` + `mbind`）
+- `src/native/runtime-core/gc/gc_numa_ios.cpp` — iOS stub（单节点）
+- `src/native/runtime-core/gc/gc_old_gen.h` — `MarkSweepOldGen` 添加 `NumaNodeHeap` 数组 + `rr_next_node_`
+- `src/native/runtime-core/gc/gc_old_gen.cpp` — `AllocatePage` 使用 `GcNumaVirtualAlloc`，`Allocate` 选择本地节点
+- `src/native/runtime-core/thread_state.h` — `ManagedThread` 添加 `numa_node` 字段
+
+**验证**：单节点硬件零退化。Stress 测试通过。
+
 ## 文档更新
 
+- `2026-05-20`：新增 P1-P3 扩展功能附录（6 项：寄存器根枚举、写屏障补齐、GC Stress、NO_GC_REGION、静态根注册、NUMA 感知）；修复 Full GC `Collect()` 中使用 `young_region->current` 而非 `g_young_gen.bump` 的 nursery 根扫描 bug（与 BGC Phase 1b 同类的 bug）
 - `2026-05-19`：新增 GC 测试覆盖附录（27 个测试 target，含 Phase A/B/C 全部实现 + 运行状态）；更新完成度矩阵 R15 场景数 14→17；新增压力测试场景 O/P/Q
 - `2026-05-18`：POH Phase 2 完成（region bump-pointer + GC mark-sweep integration + standalone tests）；GCHandle SetTargetFromNative API + 测试完成；完成度矩阵更新
 - `2026-05-17`：完成值类型嵌套字段写屏障修复、完整 GCMemoryInfo、BGC 并发 sweep；更新完成度矩阵和演进方向

@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -970,59 +971,9 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 	}
 }
 
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3()
+// AOT-unreachable stub: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-
-
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
-	}}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-				}
-			}
-			return;
-		}
-	}
 }
 
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4()
@@ -1177,7 +1128,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-344444710);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-188764412);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1233,7 +1184,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-262619073);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(429899250);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1289,7 +1240,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-997698020);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-305151371);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);

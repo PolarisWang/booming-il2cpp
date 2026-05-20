@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -2684,21 +2685,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_0.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_1.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			_s5 = 0;
@@ -2734,21 +2735,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_2{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_2.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_2.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_2);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_3{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_3.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_3.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_3);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			_s5 = 0;
@@ -2795,21 +2796,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 		{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_4{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_4.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_4.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_4);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_5{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_5.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_5.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_5);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			_s5 = 0;
@@ -4531,13 +4532,13 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_0.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s3 = 0;
 			{
@@ -4578,13 +4579,13 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_1.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s3 = 0;
 			{
@@ -4636,13 +4637,13 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 		{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_2{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_2.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_2.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_2);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s3 = 0;
 			{
@@ -4975,21 +4976,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_0{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_0.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_0.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_1{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_1.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_1.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_1);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			{
@@ -5030,21 +5031,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 	{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_2{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_2.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_2.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_2);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_3{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_3.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_3.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_3);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			{
@@ -5096,21 +5097,21 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 		{
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_4{};
 			{
 				const auto chaos_value = _s1;
-				chaos_box_storage_4.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_4.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_4);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_boxed_type_System_Private_CoreLib_System_Int32 chaos_box_storage_5{};
 			{
 				const auto chaos_value = _s2;
-				chaos_box_storage_5.header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_box_storage_5.value = chaos_value;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_box_storage_5);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = 0;
 			{

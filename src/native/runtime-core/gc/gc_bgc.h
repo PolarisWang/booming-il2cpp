@@ -208,6 +208,13 @@ public:
     /// Drains mark stack + SATB + sweeps immediately.
     void ForceComplete();
 
+    /// Stop concurrent mark and set BGC to IDLE without sweeping.
+    /// Called under safepoint from full GC (Collect) to prevent BGC
+    /// concurrent mark from interfering with STW mark/sweep.
+    /// Drains SATB and work deques, then resets BGC to IDLE.
+    /// Does NOT sweep — the full GC handles all sweeping.
+    void StopConcurrentMark();
+
     /// Collect dead weak handles into bgc_dead_weak_handles_ (post-BgcSweep).
     void CollectDeadWeakHandlesForBgc();
 

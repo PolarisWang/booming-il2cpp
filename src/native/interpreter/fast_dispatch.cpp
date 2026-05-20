@@ -15,6 +15,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <chaos/log.h>
 #include <chaos/profile.h>
 #include <gc/gc_bgc_inline.h>
+#include <gc/gc_helpers.h>
 
 // Global static field storage from the full InterpreterVM.
 // FastFrame reads/writes this directly so StSFld/LdSFld don't trigger fallback.
@@ -753,6 +754,7 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
         storage->fields.resize(idx + 1);
         storage->fields[idx] = val;
     }
+    chaos_gc_dirty_card(obj);
     ++frame.pc;
 }
 
@@ -1178,6 +1180,7 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
     using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
     arr->elements[index] = val;
+    chaos_gc_dirty_card(arr);
     ++frame.pc;
 }
 
@@ -1357,6 +1360,7 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
         using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
         BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
         *iv = val;
+        chaos_gc_dirty_card(iv);
     }
     ++frame.pc;
 }

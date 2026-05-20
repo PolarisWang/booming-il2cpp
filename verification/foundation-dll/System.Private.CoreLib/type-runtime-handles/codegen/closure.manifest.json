@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TypeRuntimeHandlesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "TypeRuntimeHandlesSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "affb529c-56a3-44c9-abf0-299294160a92",
+  "inputModuleVersionId": "f7ca5fc6-1fbd-435b-842b-18d50ac64580",
   "artifacts": [
     {
       "kind": "typedIlIr",

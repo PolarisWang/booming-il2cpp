@@ -1,17 +1,17 @@
 {
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:11:47.241166",
+  "generated_at": "2026-05-20T01:35:52.215872",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "Average speedup -144.0% — native significantly slower than managed [overridden — codegen-mode=jit, interpreter path is expected to be slower]",
+      "summary": "Average speedup -229.3% — native significantly slower than managed [overridden — benchmark stage was skipped]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -144.0,
-        "managed_faster_count": 8,
-        "native_faster_count": 2
+        "average_speedup_percent": -229.3,
+        "managed_faster_count": 9,
+        "native_faster_count": 1
       }
     },
     "p1_lowering": {
@@ -348,11 +348,19 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "status": "ALIGNED",
+      "summary": "All 16 changed source files within expected architecture layers",
       "details": [],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 16,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 8
+        }
       }
     },
     "p2_no_bare_new": {
@@ -412,10 +420,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 0,
-    "violation": 2,
+    "violation": 1,
     "not_applicable": 2,
-    "overall": "VIOLATION"
+    "overall": "ALIGNED"
   }
 }

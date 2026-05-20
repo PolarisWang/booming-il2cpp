@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CodegenEdgeCasesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CodegenEdgeCasesSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e8f38391-9d8e-4f6a-9eb6-e9d2fde8affe",
+  "inputModuleVersionId": "7c01513f-fb68-44b8-950c-a3d38fe85de3",
   "artifacts": [
     {
       "kind": "typedIlIr",

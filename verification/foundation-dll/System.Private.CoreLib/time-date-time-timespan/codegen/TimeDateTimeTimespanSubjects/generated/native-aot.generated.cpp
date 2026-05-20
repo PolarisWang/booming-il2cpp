@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -860,7 +861,6 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-#pragma code_seg(".text$hot")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0(void)
 {
@@ -886,274 +886,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 	}
 	return;
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2024);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__DaysInMonth_System_Int32_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(29);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_3 = _s2;
-		const auto chaos_arg_2 = _s1;
-		const auto chaos_arg_1 = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_TimeSpan, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_TimeSpan.hot;
-		chaos_external_runtime_System_Private_CoreLib_System_TimeSpan___ctor_System_Void_System_Int32_System_Int32_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-
-
-	_s0 = ChaosStoreFloat64(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromDays_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
-		_s0 = ChaosStoreInt64(chaos_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-178675456);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-
-
-	_s0 = ChaosStoreFloat64(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromHours_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
-		_s0 = ChaosStoreInt64(chaos_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(171512160);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-
-
-	_s0 = ChaosStoreFloat64(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromMinutes_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
-		_s0 = ChaosStoreInt64(chaos_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-569803771);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15()
-extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-
-
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("1:00:00");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__Parse_System_TimeSpan_System_String_(chaos_arg_0);
-		_s0 = ChaosStoreInt64(chaos_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1640261640);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	{
-		if (_s1 != 0)
-		{
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-			}
-		}
-		return;
-	}
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1(void)
 {
@@ -1188,9 +921,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 	}
 	return;
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2(void)
 {
@@ -1239,66 +970,12 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
-// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3()
+// AOT-unreachable stub: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-
-
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
-	}}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
-			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
-				}
-			}
-			return;
-		}
-	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_4(void)
 {
@@ -1329,7 +1006,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -1352,9 +1029,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_5(void)
 {
@@ -1390,7 +1065,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -1413,9 +1088,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_6(void)
 {
@@ -1455,7 +1128,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-906367942);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-188764412);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1471,9 +1144,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_7(void)
 {
@@ -1513,7 +1184,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-556237671);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(429899250);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1529,9 +1200,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_8(void)
 {
@@ -1571,7 +1240,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__GetHashCode_System_Int32__(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1593209350);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-305151371);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1587,9 +1256,7 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9()
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_9(void)
 {
@@ -1632,7 +1299,259 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 		return;
 	}
 }
-#pragma code_seg()
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2024);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_DateTime__DaysInMonth_System_Int32_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(29);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_arg_3 = _s2;
+		const auto chaos_arg_2 = _s1;
+		const auto chaos_arg_1 = _s0;
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_TimeSpan, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_TimeSpan.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_TimeSpan___ctor_System_Void_System_Int32_System_Int32_System_Int32_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	return;
+}
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = ChaosStoreFloat64(42);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromDays_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
+		_s0 = ChaosStoreInt64(chaos_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-178675456);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	{
+		if (_s1 != 0)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = ChaosStoreFloat64(42);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromHours_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
+		_s0 = ChaosStoreInt64(chaos_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(171512160);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	{
+		if (_s1 != 0)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = ChaosStoreFloat64(42);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__FromMinutes_System_TimeSpan_System_Double_(ChaosLoadInt64(chaos_arg_0));
+		_s0 = ChaosStoreInt64(chaos_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-569803771);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == ChaosLoadFloat64(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	{
+		if (_s1 != 0)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15()
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	{{
+		_s0 = CHAOS_IL2CPP_STRING_ID("1:00:00");
+	}}
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__Parse_System_TimeSpan_System_String_(chaos_arg_0);
+		_s0 = ChaosStoreInt64(chaos_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1640261640);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	{
+		if (_s1 != 0)
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
 
 
 

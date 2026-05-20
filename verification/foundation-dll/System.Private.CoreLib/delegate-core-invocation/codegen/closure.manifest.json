@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DelegateCoreInvocationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DelegateCoreInvocationSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/delegate-core-invocation/managed/subjects/build-output/DelegateCoreInvocationSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "65126949-97a8-477a-8efc-7352d289e15b",
+  "inputModuleVersionId": "5b70326f-37fe-4afa-b7cc-53b84cacf6a7",
   "artifacts": [
     {
       "kind": "typedIlIr",

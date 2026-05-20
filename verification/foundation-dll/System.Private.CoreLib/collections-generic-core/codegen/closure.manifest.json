@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CollectionsGenericCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CollectionsGenericCoreSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/collections-generic-core/managed/subjects/build-output/CollectionsGenericCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "053f66d2-886f-42e8-9c7e-f33387c6d6bc",
+  "inputModuleVersionId": "d551b544-6eb0-48f8-a246-93e52b9ee147",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -47,51 +47,90 @@ const void* chaos_vtable_SnapshotTestFixtures_SealedHelper[];
 const void* chaos_vtable_SnapshotTestFixtures_Wrapper__0_[];
 const void* chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_[];
 inline TypeInfoV0 chaos_mt_SnapshotProverSubjects_SnapshotProverSubjects = {{nullptr, nullptr, 17700440604878766952ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverSubjects_SnapshotProverSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(17700440604878766952ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_BaseClass = {{nullptr, chaos_vtable_SnapshotTestFixtures_BaseClass, 16934624807659080947ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_BaseClass = static_cast<CHAOS_IL2CPP_INTPTR>(16934624807659080947ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_DerivedClass = {{&chaos_mt_SnapshotTestFixtures_BaseClass.hot, chaos_vtable_SnapshotTestFixtures_DerivedClass, 5213792135327273735ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_DerivedClass = static_cast<CHAOS_IL2CPP_INTPTR>(5213792135327273735ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_FieldHelper = {{nullptr, nullptr, 14105055411266533488ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_FieldHelper = static_cast<CHAOS_IL2CPP_INTPTR>(14105055411266533488ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasInstanceFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasInstanceFields, 17812473439196761566ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasInstanceFields = static_cast<CHAOS_IL2CPP_INTPTR>(17812473439196761566ULL);static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_ImplHelper[] = {
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverSubjects_SnapshotProverSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(17700440604878766952ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_BaseClass = {{nullptr, chaos_vtable_SnapshotTestFixtures_BaseClass, 16934624807659080947ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_BaseClass = static_cast<CHAOS_IL2CPP_INTPTR>(16934624807659080947ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_DerivedClass = {{&chaos_mt_SnapshotTestFixtures_BaseClass.hot, chaos_vtable_SnapshotTestFixtures_DerivedClass, 5213792135327273735ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_DerivedClass = static_cast<CHAOS_IL2CPP_INTPTR>(5213792135327273735ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_FieldHelper = {{nullptr, nullptr, 14105055411266533488ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_FieldHelper = static_cast<CHAOS_IL2CPP_INTPTR>(14105055411266533488ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasInstanceFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasInstanceFields, 17812473439196761566ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasInstanceFields = static_cast<CHAOS_IL2CPP_INTPTR>(17812473439196761566ULL);
+static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_ImplHelper[] = {
 	{ chaos_type_id_SnapshotTestFixtures_IMyInterface, 3, 1 }
 };
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_ImplHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_ImplHelper, 2682382514493266270ULL, 4u, 32, 1, 1}, {chaos_iface_map_SnapshotTestFixtures_ImplHelper, nullptr, 1, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_ImplHelper = static_cast<CHAOS_IL2CPP_INTPTR>(2682382514493266270ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_InstanceHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_InstanceHelper, 7539435265304875683ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_InstanceHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7539435265304875683ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_LdftnHelper___O = {{nullptr, nullptr, 9616880548282383388ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_LdftnHelper___O = static_cast<CHAOS_IL2CPP_INTPTR>(9616880548282383388ULL);static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_MarkedClass[] = {
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_ImplHelper = static_cast<CHAOS_IL2CPP_INTPTR>(2682382514493266270ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_InstanceHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_InstanceHelper, 7539435265304875683ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_InstanceHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7539435265304875683ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_LdftnHelper___O = {{nullptr, nullptr, 9616880548282383388ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_LdftnHelper___O = static_cast<CHAOS_IL2CPP_INTPTR>(9616880548282383388ULL);
+static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_MarkedClass[] = {
 	{ chaos_type_id_SnapshotTestFixtures_IMarker, 0, 0 }
 };
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MarkedClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MarkedClass, 6112983511997078372ULL, 1u, 32, 1, 1}, {chaos_iface_map_SnapshotTestFixtures_MarkedClass, nullptr, 1, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MarkedClass = static_cast<CHAOS_IL2CPP_INTPTR>(6112983511997078372ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MyClass, 17017755788800598734ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyClass = static_cast<CHAOS_IL2CPP_INTPTR>(17017755788800598734ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_SealedHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_SealedHelper, 8545221821474343780ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_SealedHelper = static_cast<CHAOS_IL2CPP_INTPTR>(8545221821474343780ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_StaticFieldWriteHelper = {{nullptr, nullptr, 7187250757378180401ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_StaticFieldWriteHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7187250757378180401ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper__0_ = {{nullptr, chaos_vtable_SnapshotTestFixtures_Wrapper__0_, 15764982902837746946ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(15764982902837746946ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_, 1845517801504066080ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(1845517801504066080ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = {{nullptr, nullptr, 9130424216747936531ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(9130424216747936531ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = {{nullptr, nullptr, 11554060213542038524ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(11554060213542038524ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_ = {{nullptr, nullptr, 8124737553590710378ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_List_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8124737553590710378ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Double = {{nullptr, nullptr, 1099026126681926114ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_INTPTR>(1099026126681926114ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 143744549824129343ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(143744549824129343ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int16 = {{nullptr, nullptr, 11007710000311077999ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_INTPTR>(11007710000311077999ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int64 = {{nullptr, nullptr, 11012495074916106146ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_INTPTR>(11012495074916106146ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_OverflowException = {{nullptr, nullptr, 531363262308024406ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_OverflowException = static_cast<CHAOS_IL2CPP_INTPTR>(531363262308024406ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_SByte = {{nullptr, nullptr, 13054279835592181566ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_SByte = static_cast<CHAOS_IL2CPP_INTPTR>(13054279835592181566ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Single = {{nullptr, nullptr, 4813876735449938439ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_INTPTR>(4813876735449938439ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt16 = {{nullptr, nullptr, 4060647147365029652ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt16 = static_cast<CHAOS_IL2CPP_INTPTR>(4060647147365029652ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt32 = {{nullptr, nullptr, 4058804365876526466ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt32 = static_cast<CHAOS_IL2CPP_INTPTR>(4058804365876526466ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMarker = {{nullptr, nullptr, 13604930402668384013ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MarkedClass = static_cast<CHAOS_IL2CPP_INTPTR>(6112983511997078372ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MyClass, 17017755788800598734ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyClass = static_cast<CHAOS_IL2CPP_INTPTR>(17017755788800598734ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_SealedHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_SealedHelper, 8545221821474343780ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_SealedHelper = static_cast<CHAOS_IL2CPP_INTPTR>(8545221821474343780ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_StaticFieldWriteHelper = {{nullptr, nullptr, 7187250757378180401ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_StaticFieldWriteHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7187250757378180401ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper__0_ = {{nullptr, chaos_vtable_SnapshotTestFixtures_Wrapper__0_, 15764982902837746946ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(15764982902837746946ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_, 1845517801504066080ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(1845517801504066080ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = {{nullptr, nullptr, 9130424216747936531ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(9130424216747936531ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = {{nullptr, nullptr, 11554060213542038524ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(11554060213542038524ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_ = {{nullptr, nullptr, 8124737553590710378ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_List_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8124737553590710378ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Double = {{nullptr, nullptr, 1099026126681926114ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_INTPTR>(1099026126681926114ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 143744549824129343ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(143744549824129343ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int16 = {{nullptr, nullptr, 11007710000311077999ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_INTPTR>(11007710000311077999ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int64 = {{nullptr, nullptr, 11012495074916106146ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_INTPTR>(11012495074916106146ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_OverflowException = {{nullptr, nullptr, 531363262308024406ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_OverflowException = static_cast<CHAOS_IL2CPP_INTPTR>(531363262308024406ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_SByte = {{nullptr, nullptr, 13054279835592181566ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_SByte = static_cast<CHAOS_IL2CPP_INTPTR>(13054279835592181566ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Single = {{nullptr, nullptr, 4813876735449938439ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_INTPTR>(4813876735449938439ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt16 = {{nullptr, nullptr, 4060647147365029652ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt16 = static_cast<CHAOS_IL2CPP_INTPTR>(4060647147365029652ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt32 = {{nullptr, nullptr, 4058804365876526466ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt32 = static_cast<CHAOS_IL2CPP_INTPTR>(4058804365876526466ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMarker = {{nullptr, nullptr, 13604930402668384013ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMyInterface = {{nullptr, nullptr, 3080637198406087848ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyValueType = {{nullptr, nullptr, 3606843832057080951ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyValueType = static_cast<CHAOS_IL2CPP_INTPTR>(3606843832057080951ULL);
@@ -3481,7 +3520,7 @@ static void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[46]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(628919584683901915ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(803950926144638187ULL));},
 	[]() {kAotMethods[50]();},
 	[]() {kAotMethods[51]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[52])(0);},
@@ -6836,10 +6875,84 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestList(vo
 	return static_cast<CHAOS_IL2CPP_INT32>(_s1);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()
+// Managed method: SnapshotTestFixtures/CollectionsHelper::TestSet()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestSet(void)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_HashSet_System_Int32_, {});
+		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_.hot;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Add_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Contains_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Remove_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s0 = chaos_locals[1];
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		chaos_locals[2] = _s0;
+		_s0 = chaos_locals[2];
+		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	}
 }
 
 // Managed method: SnapshotTestFixtures/ConversionHelper::ConvertToInt()
@@ -7357,10 +7470,32 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FloatOpsHelper_RunFloatOps(vo
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()
+// Managed method: SnapshotTestFixtures/FlowControl::IsPositive()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FlowControl_IsPositive(void)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		chaos_locals[1] = _s0;
+		_s0 = chaos_locals[1];
+		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	}
 }
 
 // Managed method: SnapshotTestFixtures/GenericHelper::UseGeneric()
@@ -8094,10 +8229,149 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemAllHelper_TestAllElems(
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
+// Managed method: SnapshotTestFixtures/LdftnHelper::GetFnPtr()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdftnHelper_GetFnPtr(void)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = chaos_static_SnapshotTestFixtures_LdftnHelper___O___0___GetValue;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = 0;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 40)
+				static auto* chaos_ftn_thunk = +[](void) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[40];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, nullptr, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(_d_entry.direct_ptr)();
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_SnapshotTestFixtures_LdftnHelper___O___0___GetValue = chaos_value;
+			}
+		}
+		chaos_locals[0] = _s0;
+		_s0 = chaos_locals[0];
+		{
+			const auto chaos_delegate_value = _s0;
+			if (chaos_delegate_value == 0)
+			{
+				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			}
+			auto* chaos_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Func_System_Int32_*>(chaos_delegate_value);
+			if (chaos_delegate->chaos_delegate_invocation_count > 0)
+			{
+				const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);
+				if (chaos_invocation_list == nullptr ||
+					static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+
+				CHAOS_IL2CPP_INT32 chaos_result{};
+				for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
+				{
+					const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
+					if (chaos_invocation_delegate_value == 0)
+					{
+						CHAOS_IL2CPP_FAIL();
+					}
+					auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Func_System_Int32_*>(chaos_invocation_delegate_value);
+					if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
+					{
+						CHAOS_IL2CPP_FAIL();
+					}
+					if (chaos_invocation_delegate->chaos_delegate_target == 0)
+					{
+						const auto chaos_open_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(chaos_invocation_delegate->chaos_delegate_method_ptr);
+						chaos_result = chaos_open_function();
+					}
+					else
+					{
+						const auto chaos_closed_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_invocation_delegate->chaos_delegate_method_ptr);
+						chaos_result = chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target);
+					}
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			else
+			{
+				if (chaos_delegate->chaos_delegate_method_ptr == 0)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				CHAOS_IL2CPP_INT32 __chaos_hotpatch_result{};
+				bool __chaos_hotpatch_taken = false;
+				uint64_t __chaos_args_buf[1] = {0};
+				uint64_t __chaos_ret_buf[2] = {};
+				if (chaos_delegate->chaos_delegate_method_token != 0)
+				{
+					__chaos_hotpatch_taken = ::chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(
+						chaos_delegate->chaos_delegate_method_token,
+						__chaos_args_buf, __chaos_ret_buf, 0);
+					if (__chaos_hotpatch_taken)
+					{
+						__chaos_hotpatch_result = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(__chaos_ret_buf);
+					}
+				}
+
+				if (__chaos_hotpatch_taken)
+				{
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(__chaos_hotpatch_result);
+				}
+				else
+				{
+					if (chaos_delegate->chaos_delegate_target == 0)
+					{
+						const auto chaos_open_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(chaos_delegate->chaos_delegate_method_ptr);
+						const auto chaos_result = chaos_open_function();
+						_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+					}
+					else
+					{
+						const auto chaos_closed_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_delegate->chaos_delegate_method_ptr);
+						const auto chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target);
+						_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+					}
+				}
+			}
+		}
+		chaos_locals[1] = _s3;
+		_s3 = chaos_locals[1];
+		return static_cast<CHAOS_IL2CPP_INT32>(_s3);
+	}
 }
 
 // Managed method: SnapshotTestFixtures/LdindI1Helper::RunLdindI1()
@@ -10049,10 +10323,32 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunConvU4(vo
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()
+// Managed method: SnapshotTestFixtures/SimpleGapsHelper::RunLdnull()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunLdnull(void)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
+
+	_s0 = 0;
+	{
+		if (_s0 == 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		else
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		chaos_locals[1] = _s0;
+		_s0 = chaos_locals[1];
+		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	}
 }
 
 // Managed method: SnapshotTestFixtures/SizeOfHelper::GetSize()

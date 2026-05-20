@@ -704,9 +704,28 @@ public sealed partial class NativeAotLoweringPlanner
 		return false;
 	}
 
+	// Primitive value types that need inline INTPTR storage, not a struct definition.
+	private static readonly System.Collections.Generic.HashSet<string> PrimitiveValueTypeSubjectIds = new(System.StringComparer.Ordinal)
+	{
+		"System.Private.CoreLib/System.Boolean",
+		"System.Private.CoreLib/System.Byte",
+		"System.Private.CoreLib/System.SByte",
+		"System.Private.CoreLib/System.Int16",
+		"System.Private.CoreLib/System.UInt16",
+		"System.Private.CoreLib/System.Int32",
+		"System.Private.CoreLib/System.UInt32",
+		"System.Private.CoreLib/System.Int64",
+		"System.Private.CoreLib/System.UInt64",
+		"System.Private.CoreLib/System.Single",
+		"System.Private.CoreLib/System.Double",
+		"System.Private.CoreLib/System.Char",
+		"System.Private.CoreLib/System.IntPtr",
+		"System.Private.CoreLib/System.UIntPtr",
+	};
+
 	private static bool IsStructuredValueTypeSubjectId(string subjectId)
 	{
-		return !string.Equals(subjectId, "System.Private.CoreLib/System.Int32", StringComparison.Ordinal);
+		return !PrimitiveValueTypeSubjectIds.Contains(subjectId);
 	}
 
 	private static string SanitizeSubjectId(string subjectId)

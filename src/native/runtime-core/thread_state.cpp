@@ -5,6 +5,7 @@
 
 #include "gc_region.h"
 #include "gc_root_scanner.h"
+#include "gc_static_roots.h"
 #include "gc_card_table.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
@@ -684,5 +685,8 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
 
         return true;  // continue enumeration
     });
-}}  // namespace chaos::il2cpp::runtime_core::threading
+
+    // Phase 3: Scan registered static root ranges (ALC-isolated static fields).
+    GcScanStaticRoots(s_callback, s_user_data);
+}}
 

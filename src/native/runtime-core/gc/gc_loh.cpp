@@ -236,7 +236,20 @@ CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
         *fp = excess->next;
         CHAOS_IL2CPP_LOG_DEBUG_M("LOH", "sweep_release_segment payload={0}",
             static_cast<unsigned long long>(excess->payload_size));
-        FreeSegment(excess);
+
+        // DIAGNOSTIC: check if this address looks like a valid VirtualAlloc
+        // before freeing. Prevents crash from double-free or invalid pointer.
+        MEMORY_BASIC_INFORMATION mbi;
+        if (VirtualQuery(excess, &mbi, sizeof(mbi)) == sizeof(mbi) &&
+            mbi.State == MEM_COMMIT && mbi.AllocationBase == excess) {
+            FreeSegment(excess);
+        } else {
+            CHAOS_IL2CPP_LOG_WARN_M("LOH",
+                "sweep_skip_invalid_segment ptr={0} size={1} state={2}",
+                reinterpret_cast<void*>(excess),
+                static_cast<unsigned long long>(excess->payload_size),
+                static_cast<unsigned long>(mbi.State));
+        }
     }
 
     return reclaimed;

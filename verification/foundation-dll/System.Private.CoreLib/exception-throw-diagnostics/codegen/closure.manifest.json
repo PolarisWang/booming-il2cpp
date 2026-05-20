@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ExceptionThrowDiagnosticsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ExceptionThrowDiagnosticsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/managed/subjects/build-output/ExceptionThrowDiagnosticsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "98b203a7-4c00-4c2a-8264-2bc31d70f796",
+  "inputModuleVersionId": "b013c826-bae0-4720-b807-bb387a5866e5",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -33,15 +34,24 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException = {{nullptr, nullptr, 3627294964229478006ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_PlatformNotSupportedException = static_cast<CHAOS_IL2CPP_INTPTR>(3627294964229478006ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException = {{nullptr, nullptr, 1689251155357643907ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_ThreadInterruptedException = static_cast<CHAOS_IL2CPP_INTPTR>(1689251155357643907ULL);inline TypeInfoV0 chaos_mt_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects = {{nullptr, nullptr, 14346524912209378424ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_PlatformNotSupportedException = static_cast<CHAOS_IL2CPP_INTPTR>(3627294964229478006ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException = {{nullptr, nullptr, 1689251155357643907ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_ThreadInterruptedException = static_cast<CHAOS_IL2CPP_INTPTR>(1689251155357643907ULL);
+inline TypeInfoV0 chaos_mt_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects = {{nullptr, nullptr, 14346524912209378424ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(14346524912209378424ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -679,7 +689,6 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-#pragma code_seg(".text$hot")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_0()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_0(void)
 {
@@ -699,7 +708,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -720,228 +729,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$warm")
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_Priority_System_Void_System_Threading_ThreadPriority_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-	}
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$warm")
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_IsBackground_System_Void_System_Boolean_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-	}
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$warm")
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-
-
-	{
-		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Interrupt_System_Void__(chaos_arg_0);
-	}
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$warm")
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
-// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10()
-extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				throw;
-			}
-		}
-		_s0 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_arg_0 = _s0;
-				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
-	return;
-}
-#pragma code_seg()
-
-#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_1()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_1(void)
 {
@@ -963,7 +751,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
@@ -986,9 +774,33 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		return;
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_2()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_Priority_System_Void_System_Threading_ThreadPriority_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+	}
+	return;
+}
+
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_3()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_3(void)
 {
@@ -1006,25 +818,25 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 
 	{
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_IsBackground_System_Boolean__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != 0)
+		if (_s1 != 0)
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
 		else
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
@@ -1041,9 +853,33 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_4()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_4(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__set_IsBackground_System_Void_System_Boolean_(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+	}
+	return;
+}
+
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_5()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_5(void)
 {
@@ -1061,25 +897,25 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 
 	{
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		const auto chaos_arg_0 = _s0;
-		if (CHAOS_IL2CPP_UNLIKELY(chaos_arg_0 == 0))
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
 		{
 			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
 		}
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_IsThreadPoolThread_System_Boolean__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != 0)
+		if (_s1 != 0)
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
 		else
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
@@ -1096,9 +932,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_6()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_6(void)
 {
@@ -1228,9 +1062,40 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 #endif
 	return;
 }
-#pragma code_seg()
 
-#pragma code_seg(".text$cold")
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_7()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_7(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+
+
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__get_CurrentThread_System_Threading_Thread__();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Interrupt_System_Void__(chaos_arg_0);
+	}
+	return;
+}
+
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_8()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
+}
+
 // Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_9()
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_9(void)
 {
@@ -1247,16 +1112,16 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 
 	{
 		const auto chaos_result = chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Yield_System_Boolean__();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
-		if (_s0 != 0)
+		if (_s1 != 0)
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 		}
 		else
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		}
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
@@ -1273,7 +1138,130 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subj
 		}
 	}
 }
-#pragma code_seg()
+
+// Managed method: ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::Subject_10()
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Subject_10(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+
+
+#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+	}
+	catch (const chaos_managed_exception& chaos_exception)
+	{
+		if (chaos_exception.object_value < 0) { throw; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				throw;
+			}
+		}
+		_s0 = chaos_exception.object_value;
+	}
+#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+	__try
+	{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+	}
+		__except(CHAOS_SEH_FILTER_ALL())
+	{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+	}
+#else
+	{
+		auto* _chaos_jmp =
+			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
+		if (setjmp(*_chaos_jmp) == 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects___exitCode = chaos_value;
+			}
+		}
+		else
+		{
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		{
+			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+			chaos::il2cpp::runtime_core::chaos_raise_exception(
+				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+		}
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
+			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			{
+				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+				chaos::il2cpp::runtime_core::chaos_raise_exception(
+					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			}
+		}
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
+		}
+		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
+	}
+#endif
+	return;
+}
 
 
 

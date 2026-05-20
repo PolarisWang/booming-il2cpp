@@ -1,19 +1,19 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:07:55.678064",
+  "generated_at": "2026-05-20T01:33:13.122949",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "ALIGNED",
-      "summary": "avg_speedup=54.93%",
+      "summary": "avg_speedup=50.86%",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 54.93,
-        "managed_faster_count": 0,
-        "native_faster_count": 11,
+        "average_speedup_percent": 50.86,
+        "managed_faster_count": 1,
+        "native_faster_count": 10,
         "matched_count": 11,
-        "regression_ratio": 0.0
+        "regression_ratio": 0.091
       }
     },
     "p1_lowering": {
@@ -430,11 +430,30 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "1 of 11 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 11,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 2
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -495,8 +514,8 @@
   "summary": {
     "total": 12,
     "aligned": 9,
-    "concern": 0,
-    "violation": 1,
+    "concern": 1,
+    "violation": 0,
     "not_applicable": 2,
     "overall": "ALIGNED"
   }

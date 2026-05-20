@@ -67,6 +67,21 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexc
 /// value types return false, allowing callers to skip the write barrier.
 extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept;
 
+// ── NO_GC_REGION API ─────────────────────────────────────────────────────
+
+/// Enter a NO_GC_REGION: nested counter prevents any GC from occurring
+/// on this thread.  Must be paired with GcLeaveNoGcRegion().
+/// Safe to nest: each Enter increments a TLS counter, each Leave decrements.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enter_no_gc_region() noexcept;
+
+/// Leave a NO_GC_REGION.  When the counter reaches zero, any deferred GC
+/// that was requested during the region will be executed.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept;
+
+/// Check whether the current thread is inside a NO_GC_REGION.
+/// Returns true when the TLS nesting counter > 0.
+bool GcIsInNoGcRegion() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_API_H_
