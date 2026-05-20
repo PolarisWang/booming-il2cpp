@@ -1,0 +1,708 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects.custom-entry-subject-0",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ImmutableInterlockedSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ImmutableInterlockedSubjects",
+        "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects",
+        "definitionSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects.custom-entry-subject-0",
+        "signature": "System.Void ImmutableInterlockedSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 63,
+          "handlerOffset": 64,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 2,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+          "ilOffset": 10,
+          "resultType": "System.Func\u003CSystem.String,System.String\u003E",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Func\u003CSystem.String,System.String\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 15,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 41,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 19,
+          "resultType": "ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ImmutableInterlockedSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+          "ilOffset": 24,
+          "resultType": "System.IntPtr",
+          "callee": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "method",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 30,
+          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.String,System.String\u003E",
+          "callee": "System.Private.CoreLib/System.Func\u003CSystem.String,System.String\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.String\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.String\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 35,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Func\u003CSystem.String,System.String\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.Boolean",
+          "callee": "System.Collections.Immutable/ImmutableInterlocked::Update\u003CSystem.String\u003E:System.Boolean(System.String\u0026,System.Func\u003CSystem.String,System.String\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/ImmutableInterlocked::Update\u003CSystem.String\u003E:System.Boolean(System.String\u0026,System.Func\u003CSystem.String,System.String\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/ImmutableInterlocked::Update\u003CSystem.String\u003E:System.Boolean(System.String\u0026,System.Func\u003CSystem.String,System.String\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E);type=[];method=[System.String]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E);type=[];method=[System.String]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E);type=[];method=[System.String]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E);type=[];method=[System.String]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/ImmutableInterlocked::Update\u003CSystem.String\u003E:System.Boolean(System.String\u0026,System.Func\u003CSystem.String,System.String\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/ImmutableInterlocked::Update\u003CSystem.String\u003E(System.String\u0026,System.Func\u003CSystem.String,System.String\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 47,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 48,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 49,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 52,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 61,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 55,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode",
+          "ilOffset": 56,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 75,
+          "ilOffset": 62,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 64,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode",
+          "ilOffset": 67,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 75,
+          "ilOffset": 73,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 75,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableInterlockedSubjects"
+    },
+    {
+      "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.cctor",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "signature": "System.Void ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor()",
+      "identity": {
+        "assemblyName": "ImmutableInterlockedSubjects",
+        "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.cctor",
+        "signature": "System.Void ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor()"
+      },
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_cctor",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 0,
+          "resultType": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+          "callee": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "method",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ImmutableInterlockedSubjects",
+            "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ImmutableInterlockedSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableInterlockedSubjects"
+    },
+    {
+      "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.ctor",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "signature": "System.Void ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor()",
+      "identity": {
+        "assemblyName": "ImmutableInterlockedSubjects",
+        "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.ctor",
+        "signature": "System.Void ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor()"
+      },
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableInterlockedSubjects"
+    },
+    {
+      "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.custom-entry-subject-0-b-1-0",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+      "signature": "System.String ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0(System.String)",
+      "identity": {
+        "assemblyName": "ImmutableInterlockedSubjects",
+        "declaringTypeSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+        "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+        "methodId": "immutable-interlocked-subjects.immutable-interlocked-subjects-c.custom-entry-subject-0-b-1-0",
+        "signature": "System.String ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0(System.String)"
+      },
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_CustomEntrySubject_0_b__1_0_System_String",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeSubjectId": "System.Private.CoreLib/System.String",
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": " world",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ImmutableInterlockedSubjects"
+    }
+  ]
+}

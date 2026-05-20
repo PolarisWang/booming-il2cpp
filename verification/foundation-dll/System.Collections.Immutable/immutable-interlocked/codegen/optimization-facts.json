@@ -1,0 +1,71 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)",
+      "devirtualized": true
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}
