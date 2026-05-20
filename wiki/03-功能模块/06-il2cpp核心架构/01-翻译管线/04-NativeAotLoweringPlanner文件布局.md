@@ -1,6 +1,6 @@
 # NativeAotLoweringPlanner 文件布局
 
-`NativeAotLoweringPlanner` 是 CodeGen 层的中央编排器，以 C# partial class 分布在 **24 个文件**（3 区域 + 模型常量）：
+`NativeAotLoweringPlanner` 是 CodeGen 层的中央编排器，以 C# partial class 分布在 **25 个文件**（3 区域 + 模型常量）：
 
 - **Planning/** — 3 个文件，负责 lowering 决策
 - **Emission/** — 10 个文件，负责 C++ 代码生成
@@ -25,7 +25,7 @@
 | `Planning/NativeAotLoweringPlanner.MetadataSupport.cs` | metadata 初始化发射决策 |
 | `Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs` | 静态初始化规划 |
 
-## Emission 区域（10 个文件）
+## Emission 区域（11 个文件）
 
 按功能领域划分，而非按 IL opcode 一对一映射：
 
@@ -41,6 +41,7 @@
 | `Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs` | 反射对象发射 |
 | `Emission/NativeAotLoweringPlanner.GenericRegistration.cs` | 泛型注册表发射（Gen-2 Handle scheme） |
 | `Emission/NativeAotLoweringPlanner.ModuleRegistration.cs` | ModuleRegistrationV0 发射 |
+| `Emission/NativeAotLoweringPlanner.GeneratedModule.cs` | A1+A2 生成：typed dispatch table header (chaos_generated_module.h) + dispatch wiring source (chaos_generated_module.cpp) |
 
 ## RuntimeSupport 区域（9 个文件）
 

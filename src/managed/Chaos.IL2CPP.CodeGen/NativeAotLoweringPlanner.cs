@@ -643,6 +643,12 @@ extern ""C"" void ChaosJitRegisterAll() {}
         // Compute enum metadata header (may be empty if no enum types found)
         var enumMetaHeader = GenerateEnumMetadataHeader();
 
+        // Build A1 typed dispatch table header + A2 dispatch wiring source.
+        // These are emitted as separate files (chaos_generated_module.h/.cpp) for
+        // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering);
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering);
+
         return new NativeAotTemplateModel
         {
             Includes =
@@ -697,6 +703,8 @@ extern ""C"" void ChaosJitRegisterAll() {}
             WorkloadAbi = loweringPlan.WorkloadAbi,
             GlobalDeclarations = globalDeclarations,
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
+            GeneratedModuleHeaderContent = moduleHeader,
+            GeneratedModuleSourceContent = moduleSource,
         };
     }
 
@@ -3245,6 +3253,22 @@ public sealed record NativeAotTemplateModel
     /// project's <c>chaos::il2cpp::codegen::*</c> convention.
     /// </summary>
     public string CodegenNamespace { get; init; } = "";
+
+    /// <summary>
+    /// C++ header content for the A1 typed dispatch table (chaos_generated_module.h).
+    /// Contains typed function pointer arrays grouped by declaring type, enabling
+    /// typed dispatch (ChaosRuntimeHost) instead of generic RunNativeAot() path.
+    /// Empty string when module generation is not active.
+    /// </summary>
+    public string GeneratedModuleHeaderContent { get; init; } = "";
+
+    /// <summary>
+    /// C++ source content for the A2 dispatch wiring (chaos_generated_module.cpp).
+    /// Contains extern "C" symbol wiring, proxy wrapper class (ChaosRuntimeHost)
+    /// and ChaosGeneratedModuleActivate entry point.
+    /// Empty string when module generation is not active.
+    /// </summary>
+    public string GeneratedModuleSourceContent { get; init; } = "";
 }
 
 public sealed record NativeAotMethodTemplateModel
