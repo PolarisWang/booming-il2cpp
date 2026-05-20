@@ -55,7 +55,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_Syst
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_DayOfWeek = {{nullptr, nullptr, 2017024780185438178ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_DayOfWeek = {{nullptr, nullptr, 2017024780185438178ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
@@ -173,6 +172,9 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
 struct chaos_valuetype_System_Private_CoreLib_System_DayOfWeek
 {
 	CHAOS_IL2CPP_INTPTR _backing = 0;
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek() = default;
+	// cppcheck-suppress noExplicitConstructor
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek(CHAOS_IL2CPP_INTPTR v) noexcept : _backing(v) {}
 };
 
 struct chaos_boxed_type_System_Private_CoreLib_System_DayOfWeek

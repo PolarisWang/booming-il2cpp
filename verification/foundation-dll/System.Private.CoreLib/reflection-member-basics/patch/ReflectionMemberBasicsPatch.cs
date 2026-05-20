@@ -62,7 +62,7 @@ public static class ReflectionMemberBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { }
+    public static void Patch_System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type() { _ = (int)(typeof(byte).GetFields(BindingFlags.Public | BindingFlags.Static)[0].FieldType != null ? 1 : 0); }
     // Verify PropertyInfo.GetValue after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
@@ -82,4 +82,4 @@ public static class ReflectionMemberBasicsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionMemberBasics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; }}
+    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type() { _ = (int)(typeof(DateTime).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType != null ? 1 : 0); }}

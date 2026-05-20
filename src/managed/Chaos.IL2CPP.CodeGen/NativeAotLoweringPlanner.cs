@@ -32,6 +32,9 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string> _valueTypeSubjectIds =
         new HashSet<string>(StringComparer.Ordinal);
 
+    private IReadOnlySet<string> _enumTypeSubjectIds =
+        new HashSet<string>(StringComparer.Ordinal);
+
     private CustomAttributeSupportModel _customAttributeSupport = CustomAttributeSupportModel.Empty;
     private AssemblyReflectionSupportModel _assemblyReflectionSupport = AssemblyReflectionSupportModel.Empty;
     private ReflectionMemberSupportModel _reflectionMemberSupport = ReflectionMemberSupportModel.Empty;
@@ -315,6 +318,7 @@ public sealed partial class NativeAotLoweringPlanner
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
+        _enumTypeSubjectIds = CollectEnumTypeSubjectIds(_reflectionMemberSupport, _cachedClosureAssemblyPaths);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
         _interfaceTypeSubjectIds = CollectInterfaceTypeSubjectIds(aotCoreIr);
         _comInterfaceVtableData = CollectComInterfaceVtableData(aotCoreIr, _methodsBySubjectId, metadataRegistration);
@@ -2804,15 +2808,67 @@ public sealed partial class NativeAotLoweringPlanner
             });
         }
 
+        // ── Build subject → kAotMethod index mapping ─────────────────────
+        // Subject methods have SubjectIds containing "::CustomEntrySubject_N:" or "::Subject_N:".
+        // Extract N to build a mapping: subjectIndex → kAotMethodIndex.
+        var subjectEntryIndices = new List<int>();
+        for (int i = 0; i < methods.Count; i++)
+        {
+            int subjectIdx = ExtractSubjectIndex(methods[i].SubjectId);
+            if (subjectIdx >= 0)
+            {
+                while (subjectEntryIndices.Count <= subjectIdx)
+                    subjectEntryIndices.Add(-1);
+                subjectEntryIndices[subjectIdx] = i;
+            }
+        }
+        // Fill any trailing -1 entries with fallback indices (subject == kAotMethod).
+        for (int i = 0; i < subjectEntryIndices.Count; i++)
+        {
+            if (subjectEntryIndices[i] < 0)
+                subjectEntryIndices[i] = i;
+        }
+
         var model = new ScriptObject
         {
             ["methods"] = methodEntries,
             ["methods_count"] = methods.Count,
             ["default_string_id"] = (long)defaultStringId,
+            ["subject_entry_indices"] = subjectEntryIndices.ToArray(),
+            ["subject_entry_count"] = subjectEntryIndices.Count,
         };
 
         var template = NativeAotTemplateCatalog.GetDispatchEntryCodeTemplate();
         return ScribanTemplateRenderer.RenderTemplate(template, model);
+    }
+
+    /// <summary>
+    /// Extract subject index from a SubjectId string.
+    /// Subject methods have SubjectIds ending like "::CustomEntrySubject_N:..." or "::Subject_N:...".
+    /// Returns -1 if the SubjectId is not a subject method.
+    /// </summary>
+    private static int ExtractSubjectIndex(string subjectId)
+    {
+        const string customPrefix = "::CustomEntrySubject_";
+        const string subjectPrefix = "::Subject_";
+
+        // Try CustomEntrySubject_N first.
+        int idx = subjectId.IndexOf(customPrefix, StringComparison.Ordinal);
+        int prefixLen = customPrefix.Length;
+        if (idx < 0)
+        {
+            idx = subjectId.IndexOf(subjectPrefix, StringComparison.Ordinal);
+            prefixLen = subjectPrefix.Length;
+        }
+        if (idx < 0) return -1;
+
+        int start = idx + prefixLen;
+        if (start >= subjectId.Length) return -1;
+        int end = start;
+        while (end < subjectId.Length && char.IsAsciiDigit(subjectId[end]))
+            end++;
+        if (end == start) return -1;
+        return int.Parse(subjectId.Substring(start, end - start), CultureInfo.InvariantCulture);
     }
 
     // ── Step 2: CodeRegistrationV0 + MetadataRegistrationV0 + CodegenRegistrationOptionsV0 ──
@@ -3192,6 +3248,85 @@ private static long? ReadFieldConstantValue(
         return null;
     }
 }
+    /// <summary>
+    /// Collect enum type subject IDs from reflection member support data (preferred)
+    /// or fall back to scanning PE metadata of closure assemblies.
+    /// </summary>
+    private static IReadOnlySet<string> CollectEnumTypeSubjectIds(
+        ReflectionMemberSupportModel reflectionMemberSupport,
+        IReadOnlyList<string> closureAssemblyPaths)
+    {
+        // Prefer reflection member field entries when available
+        if (reflectionMemberSupport.FieldEntries.Count > 0)
+        {
+            return new HashSet<string>(
+                reflectionMemberSupport.FieldEntries.Select(f => f.DeclaringTypeSubjectId),
+                StringComparer.Ordinal);
+        }
+
+        // Fallback: scan PE metadata of closure assemblies for enum types
+        var enumSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        var seenSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var assemblyPath in closureAssemblyPaths)
+        {
+            try
+            {
+                CollectEnumTypeSubjectIdsFromAssembly(assemblyPath, seenSubjectIds, enumSubjectIds);
+            }
+            catch
+            {
+                // Skip assemblies that can't be read
+                continue;
+            }
+        }
+
+        return enumSubjectIds;
+    }
+
+    /// <summary>
+    /// Scan a single assembly's PE metadata for enum type definitions and
+    /// add their subject IDs to the provided set.
+    /// </summary>
+    private static void CollectEnumTypeSubjectIdsFromAssembly(
+        string assemblyPath,
+        HashSet<string> seenSubjectIds,
+        HashSet<string> enumSubjectIds)
+    {
+        if (string.IsNullOrEmpty(assemblyPath) || !File.Exists(assemblyPath))
+            return;
+
+        using var stream = File.OpenRead(assemblyPath);
+        using var peReader = new System.Reflection.PortableExecutable.PEReader(stream);
+        if (!peReader.HasMetadata)
+            return;
+
+        var metadataReader = peReader.GetMetadataReader();
+        if (!metadataReader.IsAssembly)
+            return;
+
+        var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+
+        foreach (var handle in metadataReader.TypeDefinitions)
+        {
+            var typeDef = metadataReader.GetTypeDefinition(handle);
+            var parentHandle = typeDef.BaseType;
+
+            if (parentHandle.IsNil)
+                continue;
+
+            var parentFullName = ResolveBaseTypeName(metadataReader, parentHandle);
+            if (parentFullName == null ||
+                !string.Equals(parentFullName, "System.Enum", StringComparison.Ordinal))
+                continue;
+
+            var subjectId = ComputeTypeDefSubjectId(metadataReader, handle, assemblyName);
+            if (string.IsNullOrEmpty(subjectId) || !seenSubjectIds.Add(subjectId))
+                continue;
+
+            enumSubjectIds.Add(subjectId);
+        }
+    }
 }
 
 public sealed record NativeAotTemplateModel

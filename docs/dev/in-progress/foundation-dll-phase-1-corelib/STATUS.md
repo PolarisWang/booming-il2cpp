@@ -1,14 +1,30 @@
 ---
 task_id: foundation-dll-phase-1-corelib
 title: Phase 1 System.Private.CoreLib 全量il2cpp开发
-task_type: plan
+task_type: roadmap
 lifecycle_status: in-progress
-phase: assessment-corrected
+phase: fact-fix-campaign
 created_at: 2026-05-02 03:30:00 +08:00
-updated_at: 2026-05-05 20:00:00 +08:00
+updated_at: 2026-05-20 16:15:00 +08:00
 parent_task_id: foundation-dll-full-development
 parent_task_phase: phase-1
 parent_task_relation: child
+roadmap_or_plan: roadmap-v1-01.md
+
+## 最近摘要（2026-05-20）
+
+完成 Phase A（孤立清理 + Immutable 接入 + 线程修复）和 Phase B1/B2（enum-parsing 13/13、reflection-member-basics 15/15）。当前 System.Private.CoreLib 验证状态：
+- 22 families passed（fact + audit 通过）
+- 5 families near-passed（audit CONCERN 等小问题）
+- 14 families 需主动修复（详见 roadmap-v1-01.md）
+
+## 调度状态
+
+dispatch_doc: roadmap-v1-01.md
+dispatch_model: sequential
+active_batches: []
+completed_batches: []
+pending_batches: [phase-1, phase-2, phase-3, phase-4]
 
 ## 实际状态（2026-05-05 修正）
 

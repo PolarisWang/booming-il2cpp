@@ -311,8 +311,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("MethodBase", "Invoke", 2): "skip",  # MethodBase.Invoke(object, object[])
     # MethodInfo.GetParameters — requires ParameterInfo array support
     ("MethodInfo", "GetParameters", 0): "skip",  # MethodInfo.GetParameters()    # Nullable with value
-    # FieldInfo.get_FieldType — sentinel stub returns non-null but subsequent GetHashCode crashes
-    ("FieldInfo", "get_FieldType", 0): "skip",  # Runtime reflection stub not implemented
+    # FieldInfo.get_FieldType — SimpleForward codegen lowering
+    ("FieldInfo", "get_FieldType", 0): "(int)(typeof(byte).GetFields(BindingFlags.Public | BindingFlags.Static)[0].FieldType != null ? 1 : 0)",
     ("Nullable", "get_Value", 0): "((int?)42).Value",
     ("Nullable", "GetValueOrDefault", 0): "default(Nullable<int>).GetValueOrDefault()",
     ("Nullable", "GetValueOrDefault", 1): "default(Nullable<int>).GetValueOrDefault(42)",
@@ -368,7 +368,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("PropertyInfo", "GetValue", 1): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)",
     ("PropertyInfo", "GetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null, null)",
     ("PropertyInfo", "SetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42)",
-    ("PropertyInfo", "get_PropertyType", 0): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType",
+    ("PropertyInfo", "get_PropertyType", 0): "(int)(typeof(DateTime).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType != null ? 1 : 0)",
     # Exception — StackTrace is null on non-thrown exception
     ("Exception", "get_StackTrace", 0): "((new Exception().StackTrace) ?? \"\")",  # null on non-thrown exception → use null-coalescing
     # Math with invalid precision

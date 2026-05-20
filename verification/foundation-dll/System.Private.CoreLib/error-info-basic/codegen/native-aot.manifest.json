@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ErrorInfoBasicSubjects",
   "entrySubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/error-info-basic/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/error-info-basic/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

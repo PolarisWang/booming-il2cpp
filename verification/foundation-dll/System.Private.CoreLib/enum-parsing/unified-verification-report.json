@@ -2,10 +2,84 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T08:22:33",
-  "duration_ms": 3486,
+  "timestamp": "2026-05-20T16:11:35",
+  "duration_ms": 6574,
   "overall_status": "passed",
   "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "13 methods, 1 custom entries",
+      "details": {
+        "methodCount": 13,
+        "customMethodCount": 1,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Private.CoreLib/System.Enum::BoxToString:System.String()"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (13/13)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 13,
+          "total": 13
+        }
+      },
+      "errors": [],
+      "duration_ms": 45
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1223
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/13 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 13,
+        "okCount": 0,
+        "failedCount": 13,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 4670
+    },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
@@ -14,29 +88,40 @@
         "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 33
+      "duration_ms": 45
     },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "avg_speedup=-445.0% below -400% — native translation severely underperforms managed JIT",
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "13/13 passed, 0 failed (stub=0)",
       "details": {
-        "averageSpeedupPercent": -445.0,
-        "nativeFasterCount": 2,
-        "managedFasterCount": 10,
-        "matchedCount": 12,
-        "totalMethods": 12,
-        "invalidCount": 0,
-        "benchmarkQuality": "avg_speedup=-445.0% below -400% — native translation severely underperforms managed JIT"
+        "passedMethods": 13,
+        "failedMethods": 0,
+        "totalMethods": 13,
+        "realMethods": 13,
+        "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 3450
+      "duration_ms": 44
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 543
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "testedRate": 0.0,
-    "overall": 0.0
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {
@@ -48,9 +133,9 @@
       "poolSize": 0
     },
     "irTranslation": {
-      "totalMethods": 12,
+      "totalMethods": 13,
       "okCount": 0,
-      "failedCount": 12,
+      "failedCount": 13,
       "overallIrExpansionRatio": 0,
       "averageExpansionRatio": 0,
       "maxExpansionRatio": 0,
@@ -61,25 +146,29 @@
       "totalBoxingOps": 0,
       "topInstructionCategories": {}
     },
-    "performance": {
-      "averageSpeedupPercent": -445.0,
-      "nativeFasterCount": 2,
-      "managedFasterCount": 10,
-      "matchedCount": 12,
-      "totalMethods": 12,
-      "invalidCount": 0
+    "performance": {},
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 13,
+        "failedMethods": 0,
+        "totalMethods": 13
+      },
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
     },
-    "hotupdate": {},
     "keyRatios": {
-      "nativeFasterRatio": 0.17,
+      "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0,
+      "interpreterSlowdownFactor": 1.0,
       "asmPassRate": 0.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "regressed",
+      "status": "matched",
       "baselineMetrics": {
         "totalMethods": 12,
         "matchedCount": 0,
@@ -90,14 +179,12 @@
       "currentMetrics": {
         "totalMethods": 12,
         "matchedCount": 12,
-        "nativeFasterCount": 2,
-        "managedFasterCount": 10,
-        "averageSpeedupPercent": -445.0
+        "nativeFasterCount": 8,
+        "managedFasterCount": 4,
+        "averageSpeedupPercent": -38.69
       }
     },
-    "hasRegression": true,
-    "regressions": [
-      "Managed-faster ratio 83% exceeds native-faster ratio 17% (10/12 methods)"
-    ]
+    "hasRegression": false,
+    "regressions": []
   }
 }

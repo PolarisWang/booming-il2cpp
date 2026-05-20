@@ -18,6 +18,7 @@ namespace Chaos.IL2CPP.CodeGen;
 public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
+	private string? _pendingEnumBoxSubjectId;
 
 	// Array bounds check cache for structured slot mode.
 	// When consecutive array operations access the same array and index
@@ -141,7 +142,7 @@ public sealed partial class NativeAotLoweringPlanner
 				instructions[idx + 1].Op is "ldloc" &&
 				GetRequiredIntOperand(instructions[idx]) == GetRequiredIntOperand(instructions[idx + 1]))
 			{
-				// Don't skip the ldloc if it's a branch target â€” the label must be preserved.
+				// Don't skip the ldloc if it's a branch target ¡ª the label must be preserved.
 				if (branchTargetOffsets is not null &&
 					branchTargetOffsets.Contains(GetRequiredIlOffset(instructions[idx + 1])))
 				{
@@ -240,7 +241,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	// â”€â”€ Shared throw/rethrow emission helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+	// ©¤©¤ Shared throw/rethrow emission helpers ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
 	// Consolidated from three duplicate implementations:
 	//   EmitInstruction (structured EH linear)
 	//   EmitFlatGotoBody (flat goto fallback)
@@ -318,10 +319,22 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearFieldLoad(builder, instruction, indentation);
 			break;
 		case "call":
-			EmitLinearCall(builder, instruction, indentation);
+			if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+			{
+				EmitFusedEnumBoxToString(builder, instruction, indentation);
+				_pendingEnumBoxSubjectId = null;
+			}
+			else
+				EmitLinearCall(builder, instruction, indentation);
 			break;
 		case "callvirt":
-			EmitLinearCallVirt(builder, instruction, indentation);
+			if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+			{
+				EmitFusedEnumBoxToString(builder, instruction, indentation);
+				_pendingEnumBoxSubjectId = null;
+			}
+			else
+				EmitLinearCallVirt(builder, instruction, indentation);
 			break;
 		case "newobj":
 			EmitLinearNewObject(builder, instruction, indentation);
@@ -904,8 +917,20 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		}
 		case "box":
-			EmitLinearBox(builder, instruction, indentation);
-			break;
+			{
+				AotCoreIrReferenceArtifact boxTargetRef = GetRequiredTargetReference(instruction);
+				if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type && IsEnumRef(boxTargetRef))
+				{
+					_pendingEnumBoxSubjectId = boxTargetRef.SubjectId;
+					// Skip box emission - raw value stays on eval stack,
+					// consumed by subsequent call/callvirt peephole.
+				}
+				else
+				{
+					EmitLinearBox(builder, instruction, indentation);
+				}
+				break;
+			}
 		case "unbox":
 			EmitLinearUnbox(builder, instruction, indentation);
 			break;
@@ -2272,7 +2297,7 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}        ");
 		}
 		builder.AppendLine($"{indentation}    }}");
-		// â”€â”€ Single delegate path with hotpatch checkpoint â”€â”€
+		// ©¤©¤ Single delegate path with hotpatch checkpoint ©¤©¤
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_ptr == 0)");
@@ -2475,6 +2500,27 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine(indentation + "}");
 	}
 
+	private bool IsEnumRef(AotCoreIrReferenceArtifact targetRef)
+	{
+		return _enumTypeSubjectIds.Contains(targetRef.SubjectId);
+	}
+
+	private static bool IsEnumToStringCall(AotCoreIrInstructionArtifact instruction)
+	{
+		return instruction.Callee?.Contains("_ToString_", StringComparison.Ordinal) == true;
+	}
+
+	private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	{
+		string rawValueExpr = ConsumeEvalStackValueExpression();
+		string typeHandle = $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeTypeInfoSymbol(_pendingEnumBoxSubjectId!)})";
+
+		builder.AppendLine($"{indentation}{{");
+		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+		EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
+		builder.AppendLine($"{indentation}}}");
+	}
+
 	private void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck)
 	{
 		string a = MapAbiSlotReturnType(returnAbi);
@@ -2663,7 +2709,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 		builder.AppendLine($"{indentation}    }}");
-		// VTable resolve â€” always through type_info->vtable_array (unified ThinLockableHeader)
+		// VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
 		{

@@ -1,7 +1,7 @@
 {
   "family": "reflection-member-complete",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T15:52:06.319299",
+  "generated_at": "2026-05-20T16:24:20.549861",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -510,41 +510,21 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "3 of 4 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 17 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 4,
+        "changed_source_count": 17,
         "layer_distribution": {
-          "RuntimeCore": 1
-        },
-        "violations": [
-          {
-            "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+          "TestInfra": 2,
+          "Emitter": 2,
+          "CodeGenRoot": 1,
+          "RuntimeSupport": 1,
+          "Templates": 1,
+          "Codegen": 2,
+          "Interpreter": 1,
+          "RuntimeCore": 7
+        }
       }
     },
     "p2_no_bare_new": {
@@ -604,10 +584,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 9,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "CONCERN"
+    "overall": "ALIGNED"
   }
 }

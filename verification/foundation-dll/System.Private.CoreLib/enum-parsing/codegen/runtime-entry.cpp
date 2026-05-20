@@ -24,6 +24,7 @@
 #include "runtime_stubs/misc_stubs.h"
 #include "gc/gc_bgc_inline.h"
 #include "jit_registration.h"
+#include "EnumParsingSubjects/generated/patchdata.generated.h"
 
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
 extern "C" void* kChaosExternalRuntimeFnTable[];

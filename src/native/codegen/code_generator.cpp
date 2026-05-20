@@ -405,17 +405,34 @@ void NativeCodeGenerator::PropagateTypes(
         SetVregType(dst, kTypeObjectRef); break;
 
     // LdFld/LdSFld: V1 conservatively marks as ObjectRef
+    // TODO(B3): precise field type metadata (requires per-field type map from module)
     case IROpCode::LdFld:  case IROpCode::LdSFld:
         SetVregType(dst, kTypeObjectRef); break;
 
-    // Call: V1 conservatively marks return as ObjectRef
+    // Call: use ret_tag from call_cache for precise return type
     case IROpCode::Call:  case IROpCode::CallVirt:
-    case IROpCode::CallBridge: case IROpCode::Calli:
-        SetVregType(dst, kTypeObjectRef); break;
+    case IROpCode::CallBridge: case IROpCode::Calli: {
+        uint8_t tag = kTypeObjectRef;
+        if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+            auto& cached = static_cast<const CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+            if (cached.ret_tag != 0xFF && cached.ret_tag <= kTypeObjectRef)
+                tag = cached.ret_tag;
+        }
+        SetVregType(dst, tag);
+        break;
+    }
 
-    // LdArg: conservative — arguments may be objects
-    case IROpCode::LdArg:
-        SetVregType(dst, kTypeObjectRef); break;
+    // LdArg: use cached argument type tags for precision
+    case IROpCode::LdArg: {
+        uint8_t tag = kTypeObjectRef;
+        if (config_.arg_type_tags != nullptr && instr.imm.operand_index < config_.arg_type_count) {
+            uint8_t arg_tag = config_.arg_type_tags[instr.imm.operand_index];
+            if (arg_tag <= kTypeObjectRef)
+                tag = arg_tag;
+        }
+        SetVregType(dst, tag);
+        break;
+    }
 
     // LdLoc, StLoc (src register holds stored type)
     case IROpCode::LdLoc:

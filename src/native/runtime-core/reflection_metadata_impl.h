@@ -12,6 +12,7 @@
 #define CHAOS_IL2CPP_REFLECTION_METADATA_IMPL_H_
 
 #include "reflection_query_model.h"
+#include "module_registry.h"
 
 namespace chaos::il2cpp::runtime_core::aot_metadata {
 
@@ -89,6 +90,8 @@ constexpr ReflectionQueryTypeDescriptor kTypeEnum = {
     nullptr, 0,
     nullptr, 0,
     kEnumMethods, 2,
+    nullptr, 0,
+    kFlagIsEnum | kFlagIsAbstract | kFlagIsPublic,
 };
 
 // =====================================================================
@@ -118,6 +121,8 @@ constexpr ReflectionQueryTypeDescriptor kTypeByte = {
     kByteFields, 1,
     nullptr, 0,
     kByteMethods, 6,
+    nullptr, 0,
+    kFlagIsValueType | kFlagIsSealed | kFlagIsPublic,
 };
 
 // =====================================================================
@@ -198,6 +203,43 @@ constexpr ReflectionQueryTypeDescriptor kTypeException = {
     kExceptionFields, 4,
     nullptr, 0,
     kExceptionMethods, 6,
+    nullptr, 0,
+    kFlagIsPublic,
+};
+
+// =====================================================================
+// Type: System.DayOfWeek (token: 0x02000010 — approximate)
+// Enum type with 7 named values: Sunday=0 through Saturday=6
+// =====================================================================
+constexpr ReflectionQueryFieldDescriptor kDayOfWeekFields[] = {
+    { 0x04000050, "System.Private.CoreLib/System.DayOfWeek::value__", "value__", "System.Int32", 0LL },
+    { 0x04000051, "System.Private.CoreLib/System.DayOfWeek::Sunday", "Sunday", "System.DayOfWeek", 0LL },
+    { 0x04000052, "System.Private.CoreLib/System.DayOfWeek::Monday", "Monday", "System.DayOfWeek", 1LL },
+    { 0x04000053, "System.Private.CoreLib/System.DayOfWeek::Tuesday", "Tuesday", "System.DayOfWeek", 2LL },
+    { 0x04000054, "System.Private.CoreLib/System.DayOfWeek::Wednesday", "Wednesday", "System.DayOfWeek", 3LL },
+    { 0x04000055, "System.Private.CoreLib/System.DayOfWeek::Thursday", "Thursday", "System.DayOfWeek", 4LL },
+    { 0x04000056, "System.Private.CoreLib/System.DayOfWeek::Friday", "Friday", "System.DayOfWeek", 5LL },
+    { 0x04000057, "System.Private.CoreLib/System.DayOfWeek::Saturday", "Saturday", "System.DayOfWeek", 6LL },
+};
+
+constexpr ReflectionQueryMethodDescriptor kDayOfWeekMethods[] = {
+    { 0x06000070, "System.Private.CoreLib/System.DayOfWeek::.ctor()", ".ctor", "System.Void", 0, nullptr, 0 },
+    { 0x06000071, "System.Private.CoreLib/System.DayOfWeek::ToString()", "ToString", "System.String", 0, nullptr, 0 },
+};
+
+constexpr ReflectionQueryTypeDescriptor kTypeDayOfWeek = {
+    0x02000010,
+    "System.Private.CoreLib/System.DayOfWeek",
+    "System.Private.CoreLib/System.DayOfWeek",
+    "System",
+    "DayOfWeek",
+    "DayOfWeek",
+    &kTypeEnum,
+    kDayOfWeekFields, 8,
+    nullptr, 0,
+    kDayOfWeekMethods, 2,
+    nullptr, 0,
+    kFlagIsEnum | kFlagIsSealed | kFlagIsPublic,
 };
 
 // =====================================================================
@@ -211,6 +253,7 @@ constexpr ReflectionQueryTypeDescriptor const* kAllTypes[] = {
     &kTypeString,
     &kTypeType,
     &kTypeException,
+    &kTypeDayOfWeek,
 };
 
 constexpr uint32_t kAllTypeCount = sizeof(kAllTypes) / sizeof(kAllTypes[0]);

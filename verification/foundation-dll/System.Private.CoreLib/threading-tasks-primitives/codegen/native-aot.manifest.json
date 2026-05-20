@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ThreadingTasksPrimitivesSubjects",
   "entrySubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
