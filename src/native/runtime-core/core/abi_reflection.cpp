@@ -9,12 +9,11 @@ GCHandle CHAOS_RUNTIME_ABI_CALL GcHandleNew(
         return CHAOS_GC_HANDLE_INVALID;
     }
 
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
-    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle++;
-    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned, false /*weak*/, false /*track_resurrection*/ };
-
+    CHAOS_IL2CPP_UINT64 handle;
     if (pinned) {
-        GcAddPinnedObject(object_instance);
+        handle = GcCreatePinnedHandle(object_instance);
+    } else {
+        handle = GcCreateStrongHandle(object_instance);
     }
 
     return static_cast<GCHandle>(handle);
@@ -25,14 +24,7 @@ void CHAOS_RUNTIME_ABI_CALL GcHandleFree(
     GCHandle gc_handle) {
     if (runtime_state == nullptr || gc_handle == CHAOS_GC_HANDLE_INVALID) return;
 
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(s_gc_handle_mutex);
-    auto it = s_gc_handle_table.find(static_cast<CHAOS_IL2CPP_UINT64>(gc_handle));
-    if (it != s_gc_handle_table.end()) {
-        if (it->second.pinned) {
-            GcRemovePinnedObject(it->second.object_instance);
-        }
-        s_gc_handle_table.erase(it);
-    }
+    GcFreeHandle(static_cast<CHAOS_IL2CPP_UINT64>(gc_handle));
 }
 
 void CHAOS_RUNTIME_ABI_CALL RaiseManagedException(

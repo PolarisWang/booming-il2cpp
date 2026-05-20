@@ -1,3 +1,0 @@
-EXTRACT:chaos_runtime_core.dir\RelWithDebInfo\thread_state.obj 
-chaos_runtime_core_copy.lib 
-/OUT:thread_state_extracted.obj 

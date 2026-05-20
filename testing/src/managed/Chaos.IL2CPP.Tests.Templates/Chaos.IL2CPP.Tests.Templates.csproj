@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Chaos.IL2CPP.Tests.Templates</RootNamespace>
+    <AssemblyName>Chaos.IL2CPP.Tests.Templates</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.CodeGen\Chaos.IL2CPP.CodeGen.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Tests.Shared\Chaos.IL2CPP.Tests.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\..\src\managed\Chaos.IL2CPP.CodeGen\Templates\**\*.scriban" Link="Templates\%(RecursiveDir)%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

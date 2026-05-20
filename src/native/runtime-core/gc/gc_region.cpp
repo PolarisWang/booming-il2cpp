@@ -6,6 +6,7 @@
 
 #include "gc_bgc.h"
 #include "gc_events.h"
+#include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
@@ -263,6 +264,23 @@ void InitYoungGeneration() noexcept {
         g_young_gen.survivor_begin = mid;
         g_young_gen.survivor_end = mid + half_size;
         g_young_gen.survivor_bump.store(mid, std::memory_order_release);
+
+        // Register nursery+survivor range with the card table so that
+        // DirtyCard() write barrier covers writes to these regions.
+        // Without this registration, the card table has no L2 segments
+        // for the nursery/survivor address range and all writes are
+        // silently dropped, creating a correctness hole for BGC
+        // concurrent mark (Gen1→Gen2 references established during
+        // concurrent mark are never recorded in dirty cards).
+        GcRegisterHeapRange(
+            reinterpret_cast<uintptr_t>(region_begin),
+            reinterpret_cast<uintptr_t>(region_begin + kDefaultYoungRegionSize));
+
+        // Set nursery range for DirtyCard fast skip (young GC Phase 2
+        // scans nursery precisely, so card writes are unnecessary).
+        GcSetCardTableNurseryRange(
+            reinterpret_cast<uintptr_t>(region_begin),
+            reinterpret_cast<uintptr_t>(mid));
     }
 }
 
@@ -897,6 +915,26 @@ extern "C" void chaos_gc_collect() noexcept {
         uint32_t gen = threading::RequestGlobalSafepoint();
         GcYoungCollection();
         threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Step 1.5: Gen1 collection (if Gen1/survivor has objects).
+    // Collects the survivor area and promotes live objects to Gen2.
+    if (g_young_gen.survivor_begin != nullptr) {
+        char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        if (s_bump > g_young_gen.survivor_begin) {
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto gen1_result = GcGen1Collection();
+            threading::ReleaseGlobalSafepoint(gen);
+            GcRecordGen1Collection(
+                gen1_result.objects_promoted,
+                gen1_result.bytes_promoted,
+                gen1_result.bytes_reclaimed,
+                gen1_result.pause_ns);
+            g_gc_scheduler.RecordGen1Collection(
+                gen1_result.bytes_promoted,
+                gen1_result.objects_in_gen1,
+                gen1_result.pause_ns);
+        }
     }
 
     // Step 2: Full old-gen collection (mark-sweep, potentially parallel).

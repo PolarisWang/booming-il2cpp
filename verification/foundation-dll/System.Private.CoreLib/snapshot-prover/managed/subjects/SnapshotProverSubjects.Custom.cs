@@ -21,4 +21,8 @@ public static partial class SnapshotProverSubjects
     {
         if (VoidCaller.DoNothing() != VoidCaller.DoNothing()) _exitCode = 8;
     }
+
+    // Alias required by the hotupdate patch entry template (SnapshotProverPatchEntry.cs)
+    // which uses CustomEntryMethod8() naming convention.
+    public static void CustomEntryMethod8() => CustomEntrySubject_8();
 }

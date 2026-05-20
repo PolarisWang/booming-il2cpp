@@ -30,7 +30,10 @@ convert-char/
 ├── native/                                ← [执行入口] Native wrapper
 │   ├── CMakeLists.txt
 │   ├── runtime-entry.cpp
-│   └── runtime-patchdata.cpp              → Stage 2d 生成
+│   ├── runtime-patchdata.cpp              → Stage 2d 生成
+│   ├── entry.exe                          (AOT dispatch, 默认)
+│   ├── entry-aot.exe                      (AOT dispatch, 显式副本)
+│   └── entry-jit.exe                      (JIT/interpreter dispatch)
 │
 └── reports/                               ← 验证报告
 ```
@@ -54,12 +57,14 @@ convert-char/
                     │
                     cmake + cl
                     ▼
-              native/build/entry.exe
+              native/build/entry.exe        (AOT, 默认)
+              native/build/entry-aot.exe    (AOT, 显式)
+              native/build/entry-jit.exe    (JIT/interpreter)
                     │
-                    ├── (no args)        → Fact 模式: run all subjects
+                    ├── (no args)        → Fact AOT 模式
                     ├── --bench N [I]    → Benchmark 模式
                     ├── --hotupdate      → HotUpdate 模式
-                    └── --patch-bench    → Patch + Benchmark
+                    └── --hotupdate-and-benchmark N [I] → Patch + Benchmark
 ```
 
 ### 三个并行验证流
@@ -68,30 +73,47 @@ convert-char/
 Managed 侧 (dotnet)                 Native 侧 (entry.exe)
 ─────────────────────               ─────────────────────
 
-dotnet test ConvertChar.csproj      entry.exe           → Fact Assert
+dotnet test ConvertChar.csproj      entry.exe           → Fact AOT Assert
   ↓ xUnit Fact                        ↓ 所有 Subject_N
   Convert.ToChar(65) == 'A'           exit code 0 = Pass
 
-dotnet run ConvertChar.csproj       entry.exe --bench N → 性能
-  ↓ JIT 基线 timing                   ↓ Codegen timing
+                                    entry-jit.exe       → Fact JIT Assert
+                                      ↓ 同 Subject_N，走 interpreter 路径
 
-                                    entry.exe --hotupdate → 补丁
-                                      ↓ 加载 patch → 再跑
+dotnet run ConvertChar.csproj       entry-aot.exe --bench N → AOT 性能
+  ↓ JIT 基线 timing                   entry-jit.exe --bench N → JIT 性能
+
+                                    entry-aot.exe --hotupdate → 补丁 AOT
+                                    entry-jit.exe --hotupdate → 补丁 JIT
 ```
 
-## 7 阶段管线
+## 14 阶段管线
 
-`run foundation-dll verify-family` 自动执行以下阶段：
+`run foundation-dll verify-family` 自动执行以下 14 阶段：
 
-| 阶段 | 名称 | 说明 |
-|------|------|------|
-| 0 | Preflight | Contract 完整性检测 |
-| 1a | Build subjects DLL | 生成 + 编译 Subjects DLL |
-| 1b | Codegen | chaos-il2cpp convert-to-cpp → `codegen/` |
-| 1c | [删除] | **不做任何后处理** |
-| 1d | Patch data | 生成 `native/runtime-patchdata.cpp` |
-| 2 | Build entry.exe | cmake → `native/build/entry.exe` |
-| 3-7 | Fact/Audit/Bench/HU/Aggregate | 运行 + 报告 |
+| #  | 阶段 | 名称 | 说明 |
+|----|------|------|------|
+| 0  | Preflight | Contract 完整性检测 | 加载 `.contract.json`，检查 family 元数据 |
+| 1  | Codegen (AOT) | AOT 构建 + 保存 entry-aot.exe | chaos-il2cpp → `codegen/` → cmake → `entry.exe`，另存 `entry-aot.exe` |
+| 2  | JitCodegen | JIT 构建 entry-jit.exe | codegen_mode=jit → cmake → `entry-jit.exe`，恢复 `entry.exe` |
+| 3  | Fact AOT | AOT 事实验证 | `entry.exe` 无参数，验证 Assert 全部通过 |
+| 4  | Fact JIT | JIT 事实验证 | `entry-jit.exe` 无参数，验证 interpreter 路径通过 |
+| 5  | Audit | 机制 + 原则审计 | 检查 false-passing、stub、skip、原则对齐 |
+| 6  | AsmCompare | JIT vs AOT 指令分析 | 对比 IL → IR → asm 的扩展比 |
+| 7  | Microbench | 解释器内部指标 | FramePool、FastExecute、CallVirt 等微基准 |
+| 8  | Benchmark | 3-way 性能对比 | managed(.NET JIT) vs entry-aot.exe vs entry-jit.exe |
+| 9  | HotUpdate AOT Fact | 补丁 AOT 验证 | `entry-aot.exe --hotupdate`，验证补丁正确性 |
+| 10 | HotUpdate AOT Bench | 补丁 AOT 性能 | `entry-aot.exe --hotupdate-and-benchmark` |
+| 11 | HotUpdate JIT Fact | 补丁 JIT 验证 | `entry-jit.exe --hotupdate`，验证 interpreter 路径补丁 |
+| 12 | HotUpdate JIT Bench | 补丁 JIT 性能 | `entry-jit.exe --hotupdate-and-benchmark` |
+| 13 | Aggregate | 评分 + 报告 | 生成 `unified-verification-report.json` |
+
+### 关键设计说明
+
+- **两个 exe 的分工**: Codegen 阶段构建 `entry.exe` 并另存 `entry-aot.exe`；JitCodegen 阶段构建 `entry-jit.exe` 后恢复 `entry.exe` 为 AOT 版本。后续阶段按需使用 `entry-aot.exe` 或 `entry-jit.exe`。
+- **JIT codegen 失败不阻塞**: JIT 构建失败不影响后续 AOT 阶段，但会在汇总中标记为 failed。
+- **HotUpdate 双路验证**: 补丁同时通过 AOT dispatch 和 JIT/interpreter 两条路径验证，确保补丁机制的跨路径正确性。
+- **benchmark 基线**: AOT benchmark 基线写入 `native/native-aot-benchmark.json`，JIT benchmark 基线写入 `native/native-jit-benchmark.json`。
 
 ## 中间产物
 
@@ -100,15 +122,21 @@ dotnet run ConvertChar.csproj       entry.exe --bench N → 性能
 | 1 | `managed/subjects/ConvertCharSubjects.dll` | il2cpp 输入 |
 | 2 | `codegen/native-aot.generated.cpp` | il2cpp 翻译结果（核心产出） |
 | 3 | `native/runtime-patchdata.cpp` | HotUpdate patch 数据 |
-| 4 | `native/build/entry.exe` | 最终可执行 |
-| 5 | `managed/ConvertChar.dll` | 托管 dotnet test/run |
+| 4 | `native/build/entry.exe` | AOT dispatch 可执行 |
+| 5 | `native/build/entry-aot.exe` | AOT dispatch 显式副本 |
+| 6 | `native/build/entry-jit.exe` | JIT/interpreter dispatch 可执行 |
+| 7 | `managed/ConvertChar.dll` | 托管 dotnet test/run |
 
 ## 入口命令
 
 ```bash
-# 完整 7 阶段管线
+# 完整 14 阶段管线
 run foundation-dll verify-family --family convert-char
 run foundation-dll verify-family --family convert-char --mode strict
+
+# 指定跳过某些阶段
+python build/toolchains/run/testing/foundation_dll/family_verification_orchestrator.py \
+  convert-char --skip jit_codegen hotupdate_jit_fact hotupdate_jit_benchmark
 
 # 直接运行 pipeline（仅 codegen + fact verify）
 python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py \

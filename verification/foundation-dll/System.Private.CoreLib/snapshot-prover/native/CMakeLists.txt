@@ -25,6 +25,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "verification_dispatch.generated.cpp"  # verification dispatch (sources)
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_CODEGEN_CPP}
     ${CHAOS_MODULE_CPP}

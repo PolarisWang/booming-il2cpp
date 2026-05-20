@@ -51,10 +51,13 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern "C" const int kAotMethodCount;
 
+// RunMicrobench is defined in microbench.cpp (auto-generated in native/ directory).
+extern "C" void RunMicrobench();
+
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
-enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark };
+enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark, Microbench };
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -201,10 +204,12 @@ int main(int argc, char** argv) {
         mode = RunMode::HotUpdateAndBenchmark;
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
-    } else if (argc >= 3 && std::strcmp(argv[1], "--patch-bench") == 0) {
+    } else if (argc >= 2 && std::strcmp(argv[1], "--patch-bench") == 0) {
         mode = RunMode::PatchAndBenchmark;
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
+    } else if (argc >= 2 && std::strcmp(argv[1], "--microbench") == 0) {
+        mode = RunMode::Microbench;
     } else if (argc >= 2) {
         entry_index = std::atoi(argv[1]);  // backward compat: numeric entry index
     }
@@ -325,6 +330,12 @@ int main(int argc, char** argv) {
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
+        std::fflush(stdout);
+        _exit(0);
+        return 0;
+    }
+    case RunMode::Microbench: {
+        RunMicrobench();
         std::fflush(stdout);
         _exit(0);
         return 0;

@@ -701,6 +701,63 @@ def _compute_entry_point_subject_id(
     return f"{class_name}/Program::Main:System.Int32()"
 
 
+def _build_csproj_safe(csproj_path: Path, build_out: Path) -> subprocess.CompletedProcess:
+    """Build a .csproj, working around MSBuild comma-in-path limitation on Windows.
+
+    MSBuild's argument parser splits on commas within paths, so any path
+    containing commas (from compound family slugs like
+    "interface-dispatch,pinvoke-dllimport,...") causes MSBuild to interpret
+    path fragments as separate arguments.
+
+    Fix: copy the entire build context to a temp directory without commas,
+    build there, then copy the DLL back to the original build_out.
+    """
+    import shutil
+    import tempfile
+
+    csproj_str = str(csproj_path)
+    build_out_str = str(build_out)
+    if "," not in csproj_str and "," not in build_out_str:
+        return subprocess.run(
+            ["dotnet", "build", csproj_str, "-o", build_out_str, "--nologo", "-v", "quiet"],
+            capture_output=True, text=True,
+        )
+
+    # Create temp dirs without commas
+    temp_dir = Path(tempfile.mkdtemp(prefix="compound_build_"))
+    temp_out_dir = Path(tempfile.mkdtemp(prefix="compound_out_"))
+
+    # Copy csproj and all source files to temp build dir
+    temp_csproj = temp_dir / csproj_path.name
+    shutil.copy2(csproj_path, temp_csproj)
+
+    src_dir = csproj_path.parent
+    for f in src_dir.iterdir():
+        if f.suffix == ".cs":
+            shutil.copy2(f, temp_dir / f.name)
+
+    result = subprocess.run(
+        ["dotnet", "build", str(temp_csproj), "-o", str(temp_out_dir), "--nologo", "-v", "quiet"],
+        capture_output=True, text=True,
+    )
+
+    if result.returncode == 0:
+        # Copy DLLs back to original build_out directory
+        build_out.mkdir(parents=True, exist_ok=True)
+        for dll in temp_out_dir.glob("*.dll"):
+            shutil.copy2(dll, build_out / dll.name)
+        for exe in temp_out_dir.glob("*.exe"):
+            shutil.copy2(exe, build_out / exe.name)
+        for pdb in temp_out_dir.glob("*.pdb"):
+            shutil.copy2(pdb, build_out / pdb.name)
+
+    # Cleanup temp dirs
+    shutil.rmtree(temp_dir, ignore_errors=True)
+    shutil.rmtree(temp_out_dir, ignore_errors=True)
+
+    return result
+
+
 def _run_probe_and_capture(
     output_dir: Path,
     class_name: str,
@@ -873,10 +930,7 @@ def generate_and_build(
 
         print(f"[probe] Building {class_name} probe...")
         build_out = output_dir / "build-output"
-        build_result = subprocess.run(
-            ["dotnet", "build", str(output_dir / csproj_name), "-o", str(build_out), "--nologo", "-v", "quiet"],
-            capture_output=True, text=True,
-        )
+        build_result = _build_csproj_safe(output_dir / csproj_name, build_out)
         if build_result.returncode != 0:
             print(f"[probe] Build FAILED: {build_result.stderr[:200]}")
             return {}
@@ -938,10 +992,7 @@ def generate_and_build(
         )
         print(f"[subjects] Building {class_name} DLL...")
         build_out = output_dir / "build-output"
-        result = subprocess.run(
-            ["dotnet", "build", str(csproj_path), "-o", str(build_out), "--nologo", "-v", "quiet"],
-            capture_output=True, text=True,
-        )
+        result = _build_csproj_safe(csproj_path, build_out)
         if result.returncode != 0:
             print(f"[subjects] Build FAILED for {class_name}:")
             if result.stdout:
@@ -1001,10 +1052,7 @@ def generate_and_build(
 
     print(f"[entrypoint] Building {class_name} (final)...")
     build_out = output_dir / "build-output"
-    result = subprocess.run(
-        ["dotnet", "build", str(csproj_path), "-o", str(build_out), "--nologo", "-v", "quiet"],
-        capture_output=True, text=True,
-    )
+    result = _build_csproj_safe(csproj_path, build_out)
     if result.returncode != 0:
         print(f"[entrypoint] Build FAILED for {class_name}:")
         if result.stdout:

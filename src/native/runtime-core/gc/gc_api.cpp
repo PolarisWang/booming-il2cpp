@@ -3,10 +3,13 @@
 #include <chaos/log.h>
 
 #include "gc_helpers.h"
+#include "gc_gen1.h"
 #include "gc_loh.h"
 #include "gc_old_gen.h"
+#include "gc_region.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
+#include "gc_young_collector.h"
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -110,14 +113,6 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 }
 
 // ======================================================================
-// chaos_gc_dirty_card — write barrier for generational GC
-// ======================================================================
-
-extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
-    DirtyCard(obj);
-}
-
-// ======================================================================
 // chaos_is_gc_pointer — fast check for GC-heap membership
 // ======================================================================
 
@@ -152,8 +147,55 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
         CHAOS_IL2CPP_LOG_DEBUG("GC_API", "collect_with_mode optimized (request deferred)");
     } else {
         // Forced / Aggressive / Default: immediate blocking collect.
-        // CRAG has 2 generations: gen-0 (young) and gen-1 (old).
-        chaos_gc_collect();
+        // Route by generation parameter:
+        //   gen < 0 || gen >= 2 → full chain (young + gen1 + old + finalizers)
+        //   gen == 1            → young + gen1 + finalizers (no old-gen collect)
+        //   gen == 0            → young only + finalizers
+        if (generation < 0 || generation >= 2) {
+            // Full chain — matches existing chaos_gc_collect behavior.
+            chaos_gc_collect();
+        } else if (generation == 1) {
+            // Mid chain: young + gen1 + finalizers.
+            // Use force_skip_gen1 to prevent Phase 4 double-trigger;
+            // call GcGen1Collection directly after young GC completes.
+            Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+            void* bump = g_young_gen.bump.load(std::memory_order_acquire);
+            if (young_region != nullptr && bump > young_region->begin) {
+                uint32_t gen = threading::RequestGlobalSafepoint();
+                GcYoungCollection(true);
+                threading::ReleaseGlobalSafepoint(gen);
+            }
+            // Always attempt Gen1 collection (survivor may have data from
+            // prior young GCs even if current young region was empty).
+            if (g_young_gen.survivor_begin != nullptr) {
+                char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+                if (s_bump > g_young_gen.survivor_begin) {
+                    uint32_t gen = threading::RequestGlobalSafepoint();
+                    auto gen1_result = GcGen1Collection();
+                    threading::ReleaseGlobalSafepoint(gen);
+                    GcRecordGen1Collection(
+                        gen1_result.objects_promoted,
+                        gen1_result.bytes_promoted,
+                        gen1_result.bytes_reclaimed,
+                        gen1_result.pause_ns);
+                    g_gc_scheduler.RecordGen1Collection(
+                        gen1_result.bytes_promoted,
+                        gen1_result.objects_in_gen1,
+                        gen1_result.pause_ns);
+                }
+            }
+            g_old_gen.RunFinalizers();
+        } else {
+            // Young only: gen == 0.  Skip Gen1 entirely.
+            Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+            void* bump = g_young_gen.bump.load(std::memory_order_acquire);
+            if (young_region != nullptr && bump > young_region->begin) {
+                uint32_t gen = threading::RequestGlobalSafepoint();
+                GcYoungCollection(true);
+                threading::ReleaseGlobalSafepoint(gen);
+            }
+            g_old_gen.RunFinalizers();
+        }
     }
 }
 
@@ -211,6 +253,20 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() no
 // chaos_gc_get_memory_info
 // ======================================================================
 
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_collection_count(
+    CHAOS_IL2CPP_INT32 generation) noexcept
+{
+    auto snap = GcGetSnapshot();
+    switch (generation) {
+    case 0:
+        return static_cast<CHAOS_IL2CPP_INT32>(snap.young_collections);
+    case 1:
+        return static_cast<CHAOS_IL2CPP_INT32>(snap.gen1_collections);
+    default:
+        return static_cast<CHAOS_IL2CPP_INT32>(snap.full_collections);
+    }
+}
+
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 kind) noexcept
 {
@@ -241,13 +297,78 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     info->promoted_bytes = promoted;
     info->pinned_objects_count = 0;
     info->finalization_pending_count = static_cast<int64_t>(snap.finalization_pending_count);
-    info->index = 0;
-    info->generation = 1;
-    info->pause_time_percentage = 0;
+    info->index = static_cast<int64_t>(snap.gc_index);
+    info->generation = snap.last_gc_generation;
+    {
+        uint64_t total_pause_ns = snap.young_pause_ns_total
+            + snap.gen1_pause_ns_total
+            + snap.full_pause_ns_total;
+        auto elapsed = std::chrono::steady_clock::now() - g_gc_start_time;
+        uint64_t elapsed_ns = static_cast<uint64_t>(
+            std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count());
+        info->pause_time_percentage = (elapsed_ns > 0)
+            ? static_cast<int32_t>((total_pause_ns * 100) / elapsed_ns)
+            : 0;
+    }
     info->compacted = static_cast<uint8_t>(
         g_gc_stats.last_compacted.load(std::memory_order_relaxed));
     info->concurrent = static_cast<uint8_t>(
         g_gc_stats.last_concurrent.load(std::memory_order_relaxed));
+
+    // ── GenerationInfo array (5 entries: gen0, gen1, gen2, gen3, LOH) ──
+    // Each entry: SizeBeforeBytes, SizeAfterBytes, FragBeforeBytes, FragAfterBytes
+    // CRAG has 2 effective generations; map to BCL's 5-generation model.
+    CHAOS_IL2CPP_SIZE nursery_capacity = 0;
+    {
+        auto* nursery = g_young_gen.region.load(std::memory_order_acquire);
+        if (nursery != nullptr) {
+            nursery_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+                nursery->end - nursery->begin);
+        }
+    }
+    CHAOS_IL2CPP_SIZE survivor_occupancy = 0;
+    if (g_young_gen.survivor_begin != nullptr) {
+        auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        if (s_bump > g_young_gen.survivor_begin) {
+            survivor_occupancy = static_cast<CHAOS_IL2CPP_SIZE>(
+                s_bump - g_young_gen.survivor_begin);
+        }
+    }
+
+    // Gen0 (young/nursery)
+    info->gen0_size_before = static_cast<int64_t>(nursery_capacity);
+    info->gen0_size_after = 0;  // nursery is reset after GC
+    info->gen0_frag_before = 0;
+    info->gen0_frag_after = 0;
+
+    // Gen1 (survivor)
+    int64_t gen1_reclaimed = static_cast<int64_t>(snap.gen1_bytes_reclaimed);
+    info->gen1_size_before = static_cast<int64_t>(survivor_occupancy);
+    info->gen1_size_after = (survivor_occupancy > gen1_reclaimed)
+        ? static_cast<int64_t>(survivor_occupancy) - gen1_reclaimed : 0;
+    info->gen1_frag_before = gen1_reclaimed;
+    info->gen1_frag_after = 0;
+
+    // Gen2 (old gen)
+    int64_t old_alloc = static_cast<int64_t>(g_old_gen.TotalAllocated());
+    int64_t old_reclaimed = static_cast<int64_t>(snap.full_bytes_reclaimed);
+    info->gen2_size_before = old_alloc;
+    info->gen2_size_after = (old_alloc > old_reclaimed) ? old_alloc - old_reclaimed : old_alloc;
+    info->gen2_frag_before = old_reclaimed;
+    info->gen2_frag_after = old_reclaimed;
+
+    // Gen3 (not present in CRAG)
+    info->gen3_size_before = 0;
+    info->gen3_size_after = 0;
+    info->gen3_frag_before = 0;
+    info->gen3_frag_after = 0;
+
+    // LOH
+    int64_t loh_alloc = static_cast<int64_t>(g_loh.TotalAllocated());
+    info->loh_size_before = loh_alloc;
+    info->loh_size_after = loh_alloc;
+    info->loh_frag_before = 0;
+    info->loh_frag_after = 0;
 }
 
 // ======================================================================

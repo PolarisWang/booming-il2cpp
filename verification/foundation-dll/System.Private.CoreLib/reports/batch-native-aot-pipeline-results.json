@@ -2,22 +2,19 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 1,
-  "failed": 0,
+  "passed": 0,
+  "failed": 1,
   "results": [
     {
-      "family": "enum-parsing",
+      "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
       "config_tier": "CHECK",
       "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
+        "build_subjects": "FAILED"
       },
-      "success": true,
-      "methodCount": 13,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
+      "success": false,
+      "methodCount": 23,
+      "error": "MSBUILD : error MSB1006: Property is not valid.\nSwitch: pinvoke-dllimport\n\nFor switch syntax, type \"MSBuild -help\"\n"
     }
   ],
-  "timestamp": "2026-05-20T19:50:46"
+  "timestamp": "2026-05-20T22:52:37"
 }

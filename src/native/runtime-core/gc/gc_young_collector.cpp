@@ -6,7 +6,9 @@
 
 #include "gc_card_table.h"
 #include "gc_events.h"
+#include "gc_gen1.h"
 #include "gc_layout.h"
+#include "gc_loh.h"
 #include "gc_old_gen.h"
 #include "gc_young_gen.h"
 #include "gc_scheduler.h"
@@ -194,16 +196,25 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     }
 
     // ── Age tenuring: determine destination based on current location ──
-    // Objects in the survivor area have survived one young GC and are
-    // promoted to old gen.  Objects in the young half are promoted to
-    // the survivor area (they survive one more GC before reaching old gen).
+    // Objects in Gen1 (survivor area) have survived at least one young GC.
+    // With dynamic threshold, they may stay in Gen1 for more cycles
+    // before promotion (threshold > 1 → copy back to Gen1).
+    // Objects in Gen0 (young half) always copy to Gen1 (first survival).
     void* target;
-    if (IsInSurvivor(obj)) {
-        target = g_old_gen.Allocate(obj_size, true);  // promote to old gen
+    if (IsInGen1(obj)) {
+        int threshold = g_young_gen.promotion_age_threshold_.load(
+            std::memory_order_acquire);
+        if (threshold > 1) {
+            target = TryAllocateInGen1(obj_size);
+            if (target == nullptr) {
+                target = g_old_gen.Allocate(obj_size, true);
+            }
+        } else {
+            target = g_old_gen.Allocate(obj_size, true);
+        }
     } else {
-        target = TryAllocateInSurvivor(obj_size);       // copy to survivor area
+        target = TryAllocateInGen1(obj_size);
         if (target == nullptr) {
-            // Survivor area exhausted — fall back to old gen.
             target = g_old_gen.Allocate(obj_size, true);
         }
     }
@@ -229,10 +240,26 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
 // Young collection
 // ======================================================================
 
-YoungCollectionResult GcYoungCollection() {
-    CHAOS_IL2CPP_PROFILE_SCOPE("GcYoungCollection");
+YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
+    // If force_skip_gen1 is true, skip Phase 4 Gen1 collection even if
+    // promotion_age_threshold_ would normally trigger it.  Used for the
+    // gen=0 (young-only) path in chaos_gc_collect_with_mode.
+    (void)force_skip_gen1;
 
     YoungCollectionResult result = {};
+
+    // ── Phase timing (for per-GC-cycle trace) ──────────────────────────
+    struct PhaseTime {
+        decltype(std::chrono::steady_clock::now()) phase1_start;
+        decltype(std::chrono::steady_clock::now()) phase2_start;
+        decltype(std::chrono::steady_clock::now()) phase2b_start;
+        decltype(std::chrono::steady_clock::now()) phase3_start;
+        decltype(std::chrono::steady_clock::now()) phase3b_start;
+        decltype(std::chrono::steady_clock::now()) phase4_start;
+        decltype(std::chrono::steady_clock::now()) phase4_end;
+        uint64_t phase1_ns = 0, phase2_ns = 0, phase2b_ns = 0;
+        uint64_t phase3_ns = 0, phase3b_ns = 0, phase4_ns = 0;
+    } pt;
 
     Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
     if (nursery == nullptr) {
@@ -261,11 +288,31 @@ YoungCollectionResult GcYoungCollection() {
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase1_DirtyCards");
         result.dirty_cards_scanned = 0;
-        g_old_gen.ScanDirtyCardsInPages(
-            [&](uintptr_t /*card_idx*/, uintptr_t /*card_start*/, uintptr_t card_end) {
-                result.dirty_cards_scanned++;
-                uintptr_t card_begin = card_end - kCardSize;
-                for (uintptr_t slot = card_begin; slot < card_end; slot += sizeof(void*)) {
+        // Batched scan: groups consecutive dirty cards into ranges,
+        // reducing per-card callback overhead (common when large object
+        // arrays span multiple cards).
+        // Scan old-gen pages for Gen2→nursery references.
+        g_old_gen.ScanDirtyCardsInPagesBatched(
+            &result.dirty_cards_scanned,
+            [&](uintptr_t range_start, uintptr_t range_end) {
+                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
+                    auto* ptr_slot = reinterpret_cast<void**>(slot);
+                    void* val = *ptr_slot;
+                    if (val != nullptr && IsInNursery(val)) {
+                        void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                        if (tenured != nullptr) {
+                            *ptr_slot = tenured;
+                        }
+                    }
+                }
+            });
+        // Scan LOH segments for LOH→nursery references.
+        // LOH segments are registered with the card table, so DirtyCard()
+        // tracks all pointer writes into LOH objects during the mutator phase.
+        g_loh.ScanDirtyCardsInSegmentsBatched(
+            &result.dirty_cards_scanned,
+            [&](uintptr_t range_start, uintptr_t range_end) {
+                for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
                     auto* ptr_slot = reinterpret_cast<void**>(slot);
                     void* val = *ptr_slot;
                     if (val != nullptr && IsInNursery(val)) {
@@ -277,6 +324,8 @@ YoungCollectionResult GcYoungCollection() {
                 }
             });
     }
+    pt.phase1_ns = static_cast<uint64_t>(std::chrono::duration_cast<
+        std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count());
 
     // ── Phase 2: Precise object-by-object nursery scan ──
     {
@@ -361,44 +410,43 @@ YoungCollectionResult GcYoungCollection() {
             scan_ptr += obj_size;
         }
     }
+    pt.phase2_ns = static_cast<uint64_t>(std::chrono::duration_cast<
+        std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count()) - pt.phase1_ns;
 
-    // ── Phase 2b: Survivor area scan ──
-    // Scan survivor objects for pointers to the young half.  Survivor
-    // objects were promoted from the young half in a previous GC and may
-    // have been modified since then to point to newly allocated young
-    // objects.  These young referents must be scavenged to survivor.
+    // ── Phase 2b: Survivor dirty card scan ──
+    // The survivor range is registered with the card table, so DirtyCard()
+    // tracks all pointer writes into survivor objects during the mutator
+    // phase.  Scan only dirty cards in the survivor range for efficiency,
+    // replacing the prior full-walk of every survivor object.
+    //
+    // This is correct because at young GC start, the nursery was empty
+    // (bump reset).  Any survivor→nursery pointer must have been
+    // established AFTER ClearAllCards(), which means the write barrier
+    // set the corresponding card dirty.
     if (g_young_gen.survivor_begin != nullptr) {
-        char* s_cur = g_young_gen.survivor_begin;
         char* s_end = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-        auto& layout_registry = GcLayoutRegistry::Instance();
-        while (s_cur < s_end) {
-            void* survivor_obj = s_cur;
-            const void* ti = *reinterpret_cast<const void* const*>(survivor_obj);
-            if (layout_registry.IsValidTypeInfoPointer(ti)) {
-                uint64_t sid = layout_registry.ReadStableId(ti);
-                const auto* slayout = layout_registry.Lookup(sid);
-                if (slayout != nullptr && slayout->pointer_count > 0) {
-                    uint32_t sobj_size = slayout->instance_size;
-                    for (uint16_t i = 0; i < slayout->pointer_count; i++) {
-                        uint16_t off = slayout->pointer_offsets[i].offset;
-                        auto* slot = reinterpret_cast<void**>(s_cur + off);
-                        void* val = *slot;
-                        if (val == nullptr) continue;
-                        if (IsInNursery(val)) {
+        if (s_end > g_young_gen.survivor_begin) {
+            ScanDirtyCardsBatched(
+                reinterpret_cast<uintptr_t>(g_young_gen.survivor_begin),
+                reinterpret_cast<uintptr_t>(s_end),
+                &result.dirty_cards_scanned,
+                [&](uintptr_t range_start, uintptr_t range_end) {
+                    for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
+                        auto* ptr_slot = reinterpret_cast<void**>(slot);
+                        void* val = *ptr_slot;
+                        if (val != nullptr && IsInNursery(val)) {
                             void* tenured = GcScavengeObjectKnownNursery(val, &result);
-                            if (tenured != nullptr && tenured != val) {
-                                *slot = tenured;
+                            if (tenured != nullptr) {
+                                *ptr_slot = tenured;
                             }
                         }
                     }
-                    s_cur += sobj_size;
-                    continue;
-                }
-            }
-            // Fallback: advance by conservative estimate.
-            s_cur += kMaxEstObjectSize;
+                });
         }
     }
+    pt.phase2b_ns = static_cast<uint64_t>(std::chrono::duration_cast<
+        std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count())
+        - pt.phase1_ns - pt.phase2_ns;
 
 phase3:
     // ── Phase 3: Cheney BFS ──
@@ -452,12 +500,18 @@ phase3:
             }
         }
     }
+    pt.phase3_ns = static_cast<uint64_t>(std::chrono::duration_cast<
+        std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count())
+        - pt.phase1_ns - pt.phase2_ns - pt.phase2b_ns;
 
     // ── Phase 3b: Process weak GCHandles ──
     GcProcessWeakHandlesAfterYoungGC();
 
     // Phase 3c: Process dependent handles (ConditionalWeakTable).
     GcProcessDependentHandlesAfterYoungGC();
+    pt.phase3b_ns = static_cast<uint64_t>(std::chrono::duration_cast<
+        std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count())
+        - pt.phase1_ns - pt.phase2_ns - pt.phase2b_ns - pt.phase3_ns;
 
     // ── Phase 4: Sweep young generation ──
     // Reset g_young_gen.bump to the beginning of the region.
@@ -466,41 +520,70 @@ phase3:
         nursery_used - nursery_begin);
     result.bytes_reclaimed = nursery_used_bytes;
 
-    // Survivor area exhaustion check: if the survivor bump has reached
-    // near the survivor end, promote all remaining survivor objects to
-    // old gen and reset the survivor bump.
-    if (g_young_gen.survivor_begin != nullptr) {
-        constexpr CHAOS_IL2CPP_SIZE kSurvivorNearFullThreshold = 4096;
-        char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-        CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
-            s_bump - g_young_gen.survivor_begin);
-        CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
-            g_young_gen.survivor_end - g_young_gen.survivor_begin);
-        if (s_used + kSurvivorNearFullThreshold >= s_capacity) {
-            char* s_cur = g_young_gen.survivor_begin;
-            auto& sv_layout_registry = GcLayoutRegistry::Instance();
-            while (s_cur < s_bump) {
-                void* sv_obj = s_cur;
-                const void* sv_ti = *reinterpret_cast<const void* const*>(sv_obj);
-                CHAOS_IL2CPP_SIZE sv_size;
-                if (sv_ti != nullptr && sv_layout_registry.IsValidTypeInfoPointer(sv_ti)) {
-                    uint64_t sv_sid = sv_layout_registry.ReadStableId(sv_ti);
-                    const auto* sv_layout = sv_layout_registry.Lookup(sv_sid);
-                    sv_size = (sv_layout != nullptr && sv_layout->instance_size > 0)
-                        ? static_cast<CHAOS_IL2CPP_SIZE>(sv_layout->instance_size)
-                        : kMaxEstObjectSize;
-                } else {
-                    sv_size = kMaxEstObjectSize;
+    // Increment young GC counter for dynamic promotion threshold.
+    int gc_count = g_young_gen.young_gc_count_.fetch_add(1, std::memory_order_relaxed) + 1;
+
+    // ── Phase 4: Gen1 collection ──
+    // Trigger Gen1 (survivor) collection based on promotion_age_threshold.
+    // When force_skip_gen1 is true, skip Gen1 entirely (gen=0 young-only path).
+    if (!force_skip_gen1) {
+        int threshold = g_young_gen.promotion_age_threshold_.load(
+            std::memory_order_acquire);
+        bool should_collect_gen1 = (threshold <= 1) || (gc_count % threshold == 0);
+
+        if (g_young_gen.survivor_begin != nullptr) {
+            char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+            CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
+                s_bump - g_young_gen.survivor_begin);
+            constexpr CHAOS_IL2CPP_SIZE kGen1NearFullThreshold = 4096;
+            CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+                g_young_gen.survivor_end - g_young_gen.survivor_begin);
+            bool near_full = (s_used + kGen1NearFullThreshold >= s_capacity);
+
+            if (s_used > 0 && (should_collect_gen1 || near_full)) {
+                auto gen1_result = GcGen1Collection();
+                // GcGen1Collection resets survivor_bump after collection.
+                result.objects_promoted += gen1_result.objects_promoted;
+                result.bytes_promoted += gen1_result.bytes_promoted;
+                GcRecordGen1Collection(
+                    gen1_result.objects_promoted,
+                    gen1_result.bytes_promoted,
+                    gen1_result.bytes_reclaimed,
+                    gen1_result.pause_ns);
+                g_gc_scheduler.RecordGen1Collection(
+                    gen1_result.bytes_promoted,
+                    gen1_result.objects_in_gen1,
+                    gen1_result.pause_ns);
+
+                // ── Read scheduler-recommended promotion age ──
+                // The scheduler computes the recommended threshold from
+                // Gen1 EMA survival rate (smoothing out per-collection noise)
+                // and pause-time cost awareness.  This replaces the previous
+                // ad-hoc tuning using raw per-collection survival rate.
+                int scheduler_threshold = g_gc_scheduler.GetRecommendedPromotionAge();
+
+                // Survivor-occupancy override: if the survivor area is nearly
+                // full after this collection, force threshold to 1 regardless
+                // of the scheduler recommendation, preventing overflow.
+                float occupancy = static_cast<float>(s_used) /
+                    static_cast<float>(s_capacity);
+                if (occupancy > 0.90f && scheduler_threshold > 1) {
+                    scheduler_threshold = 1;
                 }
-                void* promoted = g_old_gen.Allocate(sv_size, true);
-                if (promoted != nullptr) {
-                    std::memcpy(promoted, sv_obj, sv_size);
-                    result.objects_promoted++;
-                    result.bytes_promoted += sv_size;
+
+                if (scheduler_threshold !=
+                    g_young_gen.promotion_age_threshold_.load(
+                        std::memory_order_relaxed)) {
+                    g_young_gen.promotion_age_threshold_.store(
+                        scheduler_threshold, std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                        "promotion_age_threshold: {0} (scheduler, "
+                        "occ={1:.2f})",
+                        scheduler_threshold, occupancy);
                 }
-                s_cur += sv_size;
             }
-            g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+            // else: skip Gen1 collection — let objects age in Gen1.
+            // Survivor bump is NOT reset, preserving contents for next young GC.
         }
     }
 
@@ -508,6 +591,66 @@ phase3:
     nursery->current = nursery->begin;
     g_young_gen.bump.store(nursery->begin, std::memory_order_release);
     g_young_gen.region_end.store(nursery->end, std::memory_order_release);
+
+    // ── Dynamic survivor sizing ──
+    // Adjust the nursery/survivor split based on Gen1 survival rate and
+    // average promotion volume.  Safe at safepoint: all threads stopped,
+    // survivor_bump was already reset (either by Gen1 collection or the
+    // survivor was empty), and the nursery bump is now at begin.
+    if (g_young_gen.survivor_begin != nullptr &&
+        g_young_gen.survivor_end != nullptr) {
+        CHAOS_IL2CPP_SIZE current_survivor = static_cast<CHAOS_IL2CPP_SIZE>(
+            g_young_gen.survivor_end - g_young_gen.survivor_begin);
+        CHAOS_IL2CPP_SIZE target_survivor =
+            g_gc_scheduler.RecommendedSurvivorSize();
+        // Minimum delta to avoid churn on every young GC.
+        constexpr CHAOS_IL2CPP_SIZE kMinSplitDelta = 256 * 1024;  // 256 KB
+        if (target_survivor > current_survivor &&
+            target_survivor - current_survivor >= kMinSplitDelta) {
+            // Grow survivor: move split boundary left (shrink nursery).
+            char* region_begin = nursery->begin;
+            char* region_physical_end = g_young_gen.survivor_end;
+            char* new_mid = region_physical_end - target_survivor;
+            // Ensure nursery stays >= 4 MB.
+            CHAOS_IL2CPP_SIZE new_nursery = static_cast<CHAOS_IL2CPP_SIZE>(
+                new_mid - region_begin);
+            constexpr CHAOS_IL2CPP_SIZE kMinNurserySize = 4 * 1024 * 1024;  // 4 MB
+            if (new_nursery >= kMinNurserySize) {
+                nursery->end = new_mid;
+                g_young_gen.survivor_begin = new_mid;
+                g_young_gen.region_end.store(new_mid, std::memory_order_release);
+                GcSetCardTableNurseryRange(
+                    reinterpret_cast<uintptr_t>(region_begin),
+                    reinterpret_cast<uintptr_t>(new_mid));
+                CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                    "survivor_grown: {0} -> {1} bytes",
+                    static_cast<unsigned long long>(current_survivor),
+                    static_cast<unsigned long long>(target_survivor));
+            }
+        } else if (target_survivor < current_survivor &&
+                   current_survivor - target_survivor >= kMinSplitDelta) {
+            // Shrink survivor: move split boundary right (grow nursery).
+            char* region_begin = nursery->begin;
+            char* region_physical_end = g_young_gen.survivor_end;
+            char* new_mid = region_physical_end - target_survivor;
+            // Ensure survivor doesn't go below minimum.
+            constexpr CHAOS_IL2CPP_SIZE kMinSurvivorSize = 2 * 1024 * 1024;  // 2 MB
+            CHAOS_IL2CPP_SIZE actual_survivor = static_cast<CHAOS_IL2CPP_SIZE>(
+                region_physical_end - new_mid);
+            if (actual_survivor >= kMinSurvivorSize) {
+                nursery->end = new_mid;
+                g_young_gen.survivor_begin = new_mid;
+                g_young_gen.region_end.store(new_mid, std::memory_order_release);
+                GcSetCardTableNurseryRange(
+                    reinterpret_cast<uintptr_t>(region_begin),
+                    reinterpret_cast<uintptr_t>(new_mid));
+                CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                    "survivor_shrunk: {0} -> {1} bytes",
+                    static_cast<unsigned long long>(current_survivor),
+                    static_cast<unsigned long long>(target_survivor));
+            }
+        }
+    }
 
     // Clear ALL threads' TLAB ranges via EnumerateThreads.
     threading::EnumerateThreads(
@@ -526,6 +669,7 @@ phase3:
     auto pause_end = std::chrono::steady_clock::now();
     uint64_t pause_ns = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
+    pt.phase4_ns = pause_ns - pt.phase1_ns - pt.phase2_ns - pt.phase2b_ns - pt.phase3_ns - pt.phase3b_ns;
 
     GcRecordYoungCollection(
         result.objects_promoted,
@@ -537,9 +681,24 @@ phase3:
     g_gc_scheduler.RecordYoungCollection(
         nursery_used_bytes, result.bytes_promoted, pause_ns);
 
-    CHAOS_IL2CPP_LOG_INFO_M("CRAG", "young_collection done promoted={0} cards={1} pause_ns={2}",
+    // Report old-gen fragmentation for adaptive nursery sizing.
+    // High fragmentation → shrink nursery to reduce promotion rate.
+    g_gc_scheduler.SetOldGenFragmentation(g_old_gen.OverallFragmentation());
+
+    CHAOS_IL2CPP_LOG_INFO_M("CRAG",
+        "young trace promoted={0} prom_bytes={1} reclaimed={2} cards={3} "
+        "total_us={4} p1_us={5} p2_us={6} p2b_us={7} p3_us={8} p3b_us={9} p4_us={10}",
         static_cast<unsigned long long>(result.objects_promoted),
-        static_cast<unsigned long long>(result.dirty_cards_scanned), pause_ns);
+        static_cast<unsigned long long>(result.bytes_promoted),
+        static_cast<unsigned long long>(result.bytes_reclaimed),
+        static_cast<unsigned long long>(result.dirty_cards_scanned),
+        pause_ns / 1000,
+        pt.phase1_ns / 1000,
+        pt.phase2_ns / 1000,
+        pt.phase2b_ns / 1000,
+        pt.phase3_ns / 1000,
+        pt.phase3b_ns / 1000,
+        pt.phase4_ns / 1000);
 
     GcFireEvent(GcEvent::GC_YOUNG_DONE);
     return result;

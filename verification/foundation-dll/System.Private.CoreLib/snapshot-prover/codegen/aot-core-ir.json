@@ -3500,6 +3500,76 @@
       "declaringAssemblyName": "SnapshotTestFixtures"
     },
     {
+      "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-method8",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "signature": "System.Void SnapshotProverSubjects::CustomEntryMethod8()",
+      "identity": {
+        "assemblyName": "SnapshotProverSubjects",
+        "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+        "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+        "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+        "methodId": "snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-method8",
+        "signature": "System.Void SnapshotProverSubjects::CustomEntryMethod8()"
+      },
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 0,
+          "resultType": "System.Void",
+          "callee": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+          "reference": {
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectKind": "method",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SnapshotProverSubjects",
+            "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SnapshotProverSubjects"
+    },
+    {
       "methodId": "snapshot-test-fixtures.loop-helper.sum-to-five",
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "signature": "System.Int32 LoopHelper::SumToFive()",

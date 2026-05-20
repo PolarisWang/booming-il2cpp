@@ -256,11 +256,15 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 // immediate_i4 carries the token/type info.
                 instr.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(
                     JsonIntOr(operand_val, 0));
+                instr.field_offset = static_cast<CHAOS_IL2CPP_SIZE>(
+                    JsonIntOr(operand_val, 0));
                 break;
 
             case interpreter::IROpCode::LdSFld:
             case interpreter::IROpCode::StSFld:
                 instr.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(
+                    JsonIntOr(operand_val, 0));
+                instr.field_offset = static_cast<CHAOS_IL2CPP_SIZE>(
                     JsonIntOr(operand_val, 0));
                 break;
 

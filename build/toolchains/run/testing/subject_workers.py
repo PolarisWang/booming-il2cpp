@@ -4633,6 +4633,105 @@ def run_benchmark_comparison_aggregate(*, repo_root: Path, request: dict[str, An
     )
 
 
+# ── Foundation-DLL Family Verification Worker ──────────────────────────
+# Wraps the existing verify_family() 13-stage pipeline as a subject worker.
+# Expects source.type == "foundation-dll-family" with source.familySlug
+# and source.assembly.
+def run_family_verify_foundation_dll(
+    *, repo_root: Path, request: dict[str, Any]
+) -> dict[str, Any]:
+    source = dict(request["selection"]["source"])
+    family_slug = str(source.get("familySlug") or "")
+    assembly = str(source.get("assembly") or "System.Private.CoreLib")
+
+    if not family_slug:
+        return _failure_result(
+            bucket_manifest_path=str(request["paths"]["manifestPath"]),
+            report_paths=list(request["paths"]["reportPaths"]),
+            failure="source.familySlug is required for foundation-dll-family verification",
+        )
+
+    # Import the verification orchestrator (delayed to avoid circular imports).
+    # The orchestrator and its helpers use same-package imports
+    # (e.g. "from multi_benchmark_runner import ...") that require the
+    # foundation_dll package directory to be directly on sys.path.
+    _run_toolchains_root = repo_root / "build" / "toolchains" / "run"
+    _fdl_pkg_root = _run_toolchains_root / "testing" / "foundation_dll"
+    for _p in [str(_run_toolchains_root), str(_fdl_pkg_root)]:
+        if _p not in sys.path:
+            sys.path.insert(0, _p)
+    from family_verification_orchestrator import verify_family  # type: ignore[import-unverified]
+
+    start = time.perf_counter()
+    try:
+        payload = verify_family(family_slug, assembly=assembly)
+    except Exception as exc:
+        duration_ms = int((time.perf_counter() - start) * 1000)
+        return _failure_result(
+            bucket_manifest_path=str(request["paths"]["manifestPath"]),
+            report_paths=list(request["paths"]["reportPaths"]),
+            failure=f"verify_family({family_slug}, {assembly}) raised: {exc}",
+            duration_ms=duration_ms,
+        )
+
+    duration_ms = int((time.perf_counter() - start) * 1000)
+    report = payload.get("unifiedReport", payload)
+    overall = report.get("overall_status", "failed")
+    passed = overall == "passed"
+
+    # Write the unified report as primary evidence (to the first report path dir)
+    evidence_paths: list[str] = []
+    _report_paths = list(request["paths"].get("reportPaths") or [])
+    if _report_paths:
+        evidence_dir = _resolve(repo_root, str(_report_paths[0])).parent
+        evidence_dir.mkdir(parents=True, exist_ok=True)
+        evidence_path = evidence_dir / "unified-verification-report.json"
+        import json as _json
+        _json.dump(report, evidence_path.open("w", encoding="utf-8"), indent=2, ensure_ascii=False)
+        evidence_paths = [_relative(repo_root, evidence_path)]
+
+    if not passed:
+        return _failure_result(
+            bucket_manifest_path=str(request["paths"]["manifestPath"]),
+            report_paths=_report_paths,
+            primary_evidence_paths=evidence_paths,
+            failure=f"verify_family {family_slug}: {overall}",
+            duration_ms=duration_ms,
+            details=report,
+        )
+
+    return _success_result(
+        bucket_manifest_path=str(request["paths"]["manifestPath"]),
+        report_paths=_report_paths,
+        primary_evidence_paths=evidence_paths,
+        duration_ms=duration_ms,
+        details=report,
+    )
+
+
+def _failure_result(
+    *,
+    bucket_manifest_path: str,
+    report_paths: list[str],
+    primary_evidence_paths: list[str] | None = None,
+    stdout_path: str | None = None,
+    stderr_path: str | None = None,
+    duration_ms: int = 0,
+    details: dict[str, Any] | None = None,
+    failure: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "status": "fail",
+        "bucketManifestPath": bucket_manifest_path,
+        "reportPaths": report_paths,
+        "primaryEvidencePaths": primary_evidence_paths or [],
+        "metrics": {"durationMs": duration_ms},
+        "diagnostics": {"stdoutPath": stdout_path, "stderrPath": stderr_path},
+        "details": dict(details or {}),
+        "failure": failure,
+    }
+
+
 DEFAULT_STAGE_WORKERS = {
     "source-resolve": run_source_resolve,
     "host-input-build": run_dotnet_host_input_builder,
@@ -4651,4 +4750,5 @@ DEFAULT_STAGE_WORKERS = {
     "runtime-trace-compare": run_runtime_trace_compare,
     "interpreter-runtime-perf": run_interpreter_runtime_perf,
     "benchmark-comparison-aggregate": run_benchmark_comparison_aggregate,
+    "family-verify-foundation-dll": run_family_verify_foundation_dll,
 }

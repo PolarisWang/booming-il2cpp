@@ -1,7 +1,7 @@
 {
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:43:57.779857",
+  "generated_at": "2026-05-20T23:34:39.642600",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -10,103 +10,234 @@
       "details": [],
       "evidence": {
         "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
         "managed_faster_count": 0,
-        "native_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
         "invalid_count": 10,
         "total_methods": 10
       }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "CONCERN",
+      "summary": "47/52 methods have lowering (file has lowering in helper functions)",
       "details": [],
       "evidence": {
         "has_lowering": true,
+        "file_has_lowering": true,
+        "methods_with_lowering": 47,
+        "methods_total": 52,
         "stub_count": 0,
-        "simple_forward_count": 0,
-        "methods_with_lowering": 20,
-        "methods_total": 20
+        "simple_forward_count": 0
       },
       "per_method": [
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
+          "has_lowering": false
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
           "has_lowering": true
         },
         {
-          "name": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
+          "has_lowering": false
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
+          "has_lowering": false
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
+          "has_lowering": false
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
+          "has_lowering": false
+        },
+        {
+          "name": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9",
           "has_lowering": true
         }
       ]
@@ -143,26 +274,37 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 21 changed source files are outside expected architecture layers",
+      "summary": "2 of 48 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/06-测试验证/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 48,
         "layer_distribution": {
-          "TestInfra": 1,
-          "Emitter": 4,
-          "RuntimeSupport": 1,
-          "Codegen": 1,
+          "TestInfra": 8,
+          "Emitter": 2,
+          "CodeGenRoot": 1,
+          "RuntimeSupport": 2,
+          "Templates": 1,
+          "Driver": 1,
           "Interpreter": 1,
-          "RuntimeCore": 12
+          "RuntimeCore": 26,
+          "Contracts": 4
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/06-测试验证/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -199,24 +341,25 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 157 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 11 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 157,
-        "entries_with_interrupt_ptr": 157,
+        "table_size": 11,
+        "entries_with_interrupt_ptr": 11,
         "has_hotpatch_module": true
       }
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\snapshot-prover\\native\\snapshot-prover.patchdata",
           "System.Private.CoreLib\\snapshot-prover\\managed\\patch\\patchdata\\snapshot-prover.patchdata"
         ]
       }
@@ -224,10 +367,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 7,
+    "concern": 2,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

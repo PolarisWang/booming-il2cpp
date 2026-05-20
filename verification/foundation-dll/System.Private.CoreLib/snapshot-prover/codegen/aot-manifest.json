@@ -123,6 +123,12 @@
       "reason": "generated-direct-call"
     },
     {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
       "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",

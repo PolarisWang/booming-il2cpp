@@ -36,10 +36,9 @@ extern CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINTPTR, void*) g_engine_ha
 extern CHAOS_IL2CPP_VECTOR(EngineLifecycleRegistration) g_engine_lifecycle_registrations;
 extern const CHAOS_IL2CPP_THREAD::id g_main_thread_id;
 
-// GC handle state (referenced from abi_reflection.cpp in unity build).
-extern CHAOS_IL2CPP_MUTEX s_gc_handle_mutex;
-extern CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_UINT64) s_next_gc_handle;
-extern CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, GcHandleEntry) s_gc_handle_table;
+// GC handle state (sharded implementation in engine_lifecycle.cpp).
+// Use GcCreateStrongHandle / GcFreeHandle / etc. for thread-safe access.
+// Direct extern access to internals is deprecated — update callers to use the API.
 
 // ── Internal handle API (no RuntimeState required, for tests / internal use) ──
 

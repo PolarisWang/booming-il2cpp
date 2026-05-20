@@ -4,6 +4,7 @@
 #include <chaos/native_types.h>
 
 #include "gc_events.h"
+#include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
 #include "gc_old_gen.h"
@@ -172,6 +173,42 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
         });
 
     // Drain again after dirty cards.
+    marked += DrainWorkerDeque(0, 0);
+
+    // ── Gen1 re-scan via card table ──────────────────────────
+    // The nursery+survivor range is registered with the card table
+    // via GcRegisterHeapRange, so DirtyCard() write barrier tracks
+    // all pointer writes into Gen1 objects during concurrent mark.
+    // Scan only dirty cards in the survivor range for efficiency,
+    // replacing the prior full-walk re-scan.
+    {
+        auto* sv_begin = g_young_gen.survivor_begin;
+        if (sv_begin != nullptr) {
+            auto* sv_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+            if (sv_bump > sv_begin) {
+                auto& ctrl = BgcController::Instance();
+                ScanDirtyCards(
+                    reinterpret_cast<uintptr_t>(sv_begin),
+                    reinterpret_cast<uintptr_t>(sv_bump),
+                    [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
+                        for (auto* slot = reinterpret_cast<void**>(card_start);
+                             slot < reinterpret_cast<void**>(card_end);
+                             slot++) {
+                            void* ref = *slot;
+                            if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
+                                if (g_old_gen.BgcTryMark(ref)) {
+                                    std::lock_guard<std::mutex> lock(
+                                        ctrl.bgc_workers_[0].steal_mutex);
+                                    ctrl.bgc_workers_[0].deque.push_back(ref);
+                                }
+                            }
+                        }
+                    });
+            }
+        }
+    }
+
+    // Drain again after Gen1 re-scan.
     marked += DrainWorkerDeque(0, 0);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "stw_remark_done marked={0} cards={1}",
@@ -349,6 +386,44 @@ void BgcController::PopulateRootSet() {
         }
     }
 
+    // Phase 1b2: Scan Gen1 (survivor area) for Gen2 pointers.
+    // Gen1 objects may reference Gen2 objects.  These Gen2 references
+    // must be marked by BGC to prevent premature reclamation.
+    {
+        auto* sv_begin = g_young_gen.survivor_begin;
+        if (sv_begin != nullptr) {
+            auto* sv_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+            if (sv_bump > sv_begin) {
+                auto& ctrl = BgcController::Instance();
+                auto& layout_registry = GcLayoutRegistry::Instance();
+                auto* s_cur = sv_begin;
+                while (s_cur < sv_bump) {
+                    const void* ti = *reinterpret_cast<const void* const*>(s_cur);
+                    CHAOS_IL2CPP_SIZE obj_size = kGen1MaxEstObjectSize;
+                    if (ti != nullptr && layout_registry.IsValidTypeInfoPointer(ti)) {
+                        uint64_t sid = layout_registry.ReadStableId(ti);
+                        const auto* layout = layout_registry.Lookup(sid);
+                        if (layout != nullptr && layout->instance_size > 0) {
+                            obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
+                            for (uint16_t i = 0; i < layout->pointer_count; i++) {
+                                uint16_t off = layout->pointer_offsets[i].offset;
+                                void* child = *reinterpret_cast<void**>(s_cur + off);
+                                if (child != nullptr && g_old_gen.IsInOldGen(child)) {
+                                    if (g_old_gen.BgcTryMark(child)) {
+                                        std::lock_guard<std::mutex> lock(
+                                            ctrl.bgc_workers_[0].steal_mutex);
+                                        ctrl.bgc_workers_[0].deque.push_back(child);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    s_cur += obj_size;
+                }
+            }
+        }
+    }
+
     // Phase 1c: Scan all thread stacks as conservative roots.
     // This catches old-gen references that live in thread-local stack
     // slots and are NOT in any TLS nursery.
@@ -405,7 +480,64 @@ void BgcController::PopulateRootSet() {
             nullptr);
     }
 
-    // Phase 1e: Process initial mark stack to build transitive root closure.
+    // Phase 1e: Scan POH regions for Gen2 pointers.
+    // POH objects bypass young GC (never copied), so their references
+    // to old-gen objects must be captured during BGC root scanning.
+    // Without this, a POH object holding the only reference to a Gen2
+    // object would cause that Gen2 object to be incorrectly swept.
+    {
+        auto& rm = RegionManager::Instance();
+        int poh_count = rm.GetPohRegionCount();
+        if (poh_count > 0) {
+            auto& ctrl = BgcController::Instance();
+            auto& layout_registry = GcLayoutRegistry::Instance();
+            for (Region* r = rm.GetFirstPohRegion(); r != nullptr;
+                 r = rm.GetNextPohRegion(r)) {
+                if (r->current <= r->begin) continue;
+                char* poh_cur = r->begin;
+                while (poh_cur < r->current) {
+                    const void* ti = *reinterpret_cast<const void* const*>(poh_cur);
+                    if (ti != nullptr && layout_registry.IsValidTypeInfoPointer(ti)) {
+                        uint64_t sid = layout_registry.ReadStableId(ti);
+                        const auto* layout = layout_registry.Lookup(sid);
+                        if (layout != nullptr && layout->instance_size > 0) {
+                            CHAOS_IL2CPP_SIZE obj_size = static_cast<CHAOS_IL2CPP_SIZE>(
+                                layout->instance_size);
+                            for (uint16_t i = 0; i < layout->pointer_count; i++) {
+                                uint16_t off = layout->pointer_offsets[i].offset;
+                                void* child = *reinterpret_cast<void**>(poh_cur + off);
+                                if (child != nullptr && g_old_gen.IsInOldGen(child)) {
+                                    if (g_old_gen.BgcTryMark(child)) {
+                                        std::lock_guard<std::mutex> lock(
+                                            ctrl.bgc_workers_[0].steal_mutex);
+                                        ctrl.bgc_workers_[0].deque.push_back(child);
+                                    }
+                                }
+                            }
+                            poh_cur += obj_size;
+                            continue;
+                        }
+                    }
+                    // Conservative fallback: scan all pointer-aligned slots.
+                    for (uintptr_t off = 0; off + sizeof(void*) <=
+                         static_cast<uintptr_t>(r->end - poh_cur);
+                         off += sizeof(void*)) {
+                        void* child = *reinterpret_cast<void**>(poh_cur + off);
+                        if (child != nullptr && g_old_gen.IsInOldGen(child)) {
+                            if (g_old_gen.BgcTryMark(child)) {
+                                std::lock_guard<std::mutex> lock(
+                                    ctrl.bgc_workers_[0].steal_mutex);
+                                ctrl.bgc_workers_[0].deque.push_back(child);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    // Phase 1f: Process initial mark stack to build transitive root closure.
     // This runs under safepoint, so it's fast (no concurrent interference).
     DrainWorkerDeque(0, 0);
 }
@@ -456,6 +588,7 @@ void BgcController::BgcThreadMain() {
             constexpr CHAOS_IL2CPP_SIZE kBatchSize = 64;
             int idle_rounds = 0;
             bool freeze_initiated = false;
+            auto slice_start = std::chrono::steady_clock::now();
 
             while (true) {
                 bool progressed = false;
@@ -489,6 +622,16 @@ void BgcController::BgcThreadMain() {
                     freeze_initiated = false;
                     // Yield to avoid starving mutators.
                     std::this_thread::yield();
+
+                    // Incremental marking: if we've exceeded the time budget,
+                    // yield CPU to mutators by sleeping for the interval.
+                    // NotifyBgc() from SATB flushes will wake us early.
+                    auto slice_elapsed = std::chrono::steady_clock::now() - slice_start;
+                    if (slice_elapsed >= kMarkSliceBudget) {
+                        slice_start = std::chrono::steady_clock::now();
+                        std::unique_lock<std::mutex> lock(bgc_cv_mutex_);
+                        bgc_cv_.wait_for(lock, kMarkSliceInterval);
+                    }
                 } else {
                     idle_rounds++;
                     // After several idle rounds with no progress,
@@ -1103,14 +1246,26 @@ void GcAdvanceBgcCycle() noexcept {
         if (decision != GcCollectionKind::FULL_BGC) return;
         bgc.StartBgcCycle();
     } else if (phase == BgcPhase::REMARK_NEEDED) {
+        auto remark_start = std::chrono::steady_clock::now();
         uint32_t gen = threading::RequestGlobalSafepoint();
         bgc.StwRemark();
         bgc.StartConcurrentSweep();
         threading::ReleaseGlobalSafepoint(gen);
+        uint64_t remark_ns = static_cast<uint64_t>(
+            std::chrono::duration_cast<std::chrono::nanoseconds>(
+                std::chrono::steady_clock::now() - remark_start).count());
+        CHAOS_IL2CPP_LOG_INFO_M("BGC", "remark_done pause_us={0}",
+            remark_ns / 1000);
     } else if (phase == BgcPhase::COMPACT_NEEDED) {
+        auto compact_start = std::chrono::steady_clock::now();
         uint32_t gen = threading::RequestGlobalSafepoint();
         bgc.StwCompact();
         threading::ReleaseGlobalSafepoint(gen);
+        uint64_t compact_ns = static_cast<uint64_t>(
+            std::chrono::duration_cast<std::chrono::nanoseconds>(
+                std::chrono::steady_clock::now() - compact_start).count());
+        CHAOS_IL2CPP_LOG_INFO_M("BGC", "compact_done pause_us={0}",
+            compact_ns / 1000);
     }
 }
 

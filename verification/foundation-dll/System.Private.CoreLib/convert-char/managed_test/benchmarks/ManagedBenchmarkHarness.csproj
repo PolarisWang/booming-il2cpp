@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PublishAot Condition="'$(TargetFramework)' == 'net8.0'">true</PublishAot>
+    <PublishAot Condition="'$(TargetFramework)' == 'net10.0'">true</PublishAot>
   </PropertyGroup>
 </Project>

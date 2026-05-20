@@ -39,6 +39,7 @@ enum class GcEvent : uint8_t {
     GC_FULL_START  = 7,    // Full GC began
     GC_FULL_DONE   = 8,    // Full GC completed (with stats)
     GC_OOM         = 9,    // Out-of-memory condition (allocation failed after GC)
+    GC_GEN1_COLLECT = 10,   // Gen1 mark-sweep collection
 };
 
 /// Maximum number of registered callbacks.

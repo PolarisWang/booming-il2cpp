@@ -1,7 +1,7 @@
 {
   "family": "interface-dispatch",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T18:29:24.700762",
+  "generated_at": "2026-05-20T22:45:57.299610",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -10,8 +10,10 @@
       "details": [],
       "evidence": {
         "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
         "managed_faster_count": 0,
-        "native_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
         "invalid_count": 9,
         "total_methods": 9
       }
@@ -251,30 +253,37 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 39 changed source files are outside expected architecture layers",
+      "summary": "2 of 39 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native/compile_hotupdate_boxing.cmd",
+          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/06-测试验证/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
         "changed_source_count": 39,
         "layer_distribution": {
-          "TestInfra": 2,
+          "TestInfra": 6,
           "Emitter": 2,
           "CodeGenRoot": 1,
-          "RuntimeSupport": 1,
+          "RuntimeSupport": 2,
           "Templates": 1,
-          "Bootstrap": 1,
-          "Codegen": 4,
-          "Interpreter": 3,
-          "RuntimeCore": 22,
-          "Tests": 1
+          "Driver": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 19,
+          "Contracts": 4
         },
         "violations": [
           {
-            "file": "build/native/compile_hotupdate_boxing.cmd",
+            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/06-测试验证/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]

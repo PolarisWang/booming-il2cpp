@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 2,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_DerivedClass__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

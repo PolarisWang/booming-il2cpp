@@ -3,6 +3,8 @@
 
 #include <chaos/native_types.h>
 
+#include "gc_card_table.h"
+
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
@@ -75,6 +77,26 @@ public:
     /// Check if a LOH object is marked (reachable).
     /// Returns false if the object is not in the LOH or not marked.
     bool IsMarked(const void* obj) const;
+
+    /// Scan dirty cards across all LOH segments for young GC.
+    /// Calls @a callback(range_start, range_end) for each dirty range,
+    /// grouping consecutive dirty cards.  @a dirty_card_count is updated
+    /// with the total number of dirty cards found.
+    template <typename Fn>
+    void ScanDirtyCardsInSegmentsBatched(CHAOS_IL2CPP_SIZE* dirty_card_count,
+                                          Fn&& callback) {
+        // LOH segments are registered with the card table via GcRegisterHeapRange
+        // (added in Allocate).  Walk segments and scan dirty cards within each
+        // segment's payload range.
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
+            if (!seg->in_use.load(std::memory_order_acquire)) continue;
+            uintptr_t payload_start = reinterpret_cast<uintptr_t>(seg) + sizeof(LohSegment);
+            uintptr_t payload_end = payload_start + seg->payload_size;
+            ScanDirtyCardsBatched(payload_start, payload_end,
+                                  dirty_card_count, callback);
+        }
+    }
 
     /// Total number of active segments.
     int SegmentCount() const { return segment_count_; }

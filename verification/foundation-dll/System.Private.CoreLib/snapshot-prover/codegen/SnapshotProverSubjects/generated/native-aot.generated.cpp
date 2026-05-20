@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -231,34 +232,34 @@ const void* chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_[] =
 };
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_BaseClass[] =
 {
-	{ 0x000000A0u, reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass__ctor) },
-	{ 0x0000009Fu, reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass_Compute) },
+	{ 0x000000A1u, reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass__ctor) },
+	{ 0x000000A0u, reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass_Compute) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_DerivedClass[] =
 {
-	{ 0x000000A2u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor) },
-	{ 0x000000A1u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass_Compute) },
+	{ 0x000000A3u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor) },
+	{ 0x000000A2u, reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass_Compute) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_HasFields[] =
 {
-	{ 0x000000BCu, reinterpret_cast<void*>(&SnapshotTestFixtures_HasFields__ctor) },
+	{ 0x000000BDu, reinterpret_cast<void*>(&SnapshotTestFixtures_HasFields__ctor) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_HasInstanceFields[] =
 {
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000AAu, reinterpret_cast<void*>(&SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32) },
+	{ 0x000000ABu, reinterpret_cast<void*>(&SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_ImplHelper[] =
 {
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x00000113u, reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper__ctor_System_Int32) },
-	{ 0x00000114u, reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue) },
+	{ 0x00000114u, reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper__ctor_System_Int32) },
+	{ 0x00000115u, reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_InstanceHelper[] =
@@ -271,24 +272,24 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFix
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_MarkedClass[] =
 {
-	{ 0x000000A4u, reinterpret_cast<void*>(&SnapshotTestFixtures_MarkedClass__ctor) },
+	{ 0x000000A5u, reinterpret_cast<void*>(&SnapshotTestFixtures_MarkedClass__ctor) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_MyClass[] =
 {
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x000000D7u, reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass__ctor_System_Int32) },
-	{ 0x000000D8u, reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass_GetValue) },
+	{ 0x000000D8u, reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass__ctor_System_Int32) },
+	{ 0x000000D9u, reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass_GetValue) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_SealedHelper[] =
 {
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x0000010Fu, reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper__ctor_System_Int32) },
+	{ 0x00000110u, reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper__ctor_System_Int32) },
 	{ 0u, nullptr },
-	{ 0x00000110u, reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper_GetValueVirtual) },
+	{ 0x00000111u, reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper_GetValueVirtual) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_Wrapper__0_[] =
@@ -298,16 +299,16 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFix
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x00000118u, reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0__ctor_0) },
-	{ 0x00000119u, reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0_GetValue) },
+	{ 0x00000119u, reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0__ctor_0) },
+	{ 0x0000011Au, reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0_GetValue) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_Wrapper_System_Int32_[] =
 {
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0x00000116u, reinterpret_cast<void*>(&chaos_stub_definition_SnapshotTestFixtures_Wrapper_1___ctor_System_Void__0__type__System_Int32__method) },
-	{ 0x00000117u, reinterpret_cast<void*>(&chaos_stub_definition_SnapshotTestFixtures_Wrapper_1__GetValue__0___type__System_Int32__method) },
+	{ 0x00000117u, reinterpret_cast<void*>(&chaos_stub_definition_SnapshotTestFixtures_Wrapper_1___ctor_System_Void__0__type__System_Int32__method) },
+	{ 0x00000118u, reinterpret_cast<void*>(&chaos_stub_definition_SnapshotTestFixtures_Wrapper_1__GetValue__0___type__System_Int32__method) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -812,6 +813,11 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 	switch (chaos_type_handle)
 	{
 		case static_cast<CHAOS_IL2CPP_INTPTR>(47319400u):
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntryMethod8") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(115722086u);
+			}
+
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_8") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(104742814u);
@@ -2011,6 +2017,7 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8(void);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticOps_RunAdd(void);
@@ -2173,7 +2180,8 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[158] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[159] = {
+	0u,
 	0u,
 	0u,
 	0u,
@@ -2336,14 +2344,14 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[158] = {
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[157];
+	::ChaosAbiMethodEntryV0 entries[158];
 	CHAOS_IL2CPP_UINT8 params[39];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		157u,
+		158u,
 		39u,
-		1229870042u,  // FNV-1a over entries+params
+		3765795490u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -2357,6 +2365,7 @@ static constexpr struct {
 		{ 0u, 0u },  // SnapshotProverSubjects_SnapshotProverSubjects_Subject_7
 		{ 0u, 0u },  // SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8
 		{ 0u, 0u },  // SnapshotProverSubjects_SnapshotProverSubjects_Subject_9
+		{ 0u, 0u },  // SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8
 		{ 1u, 0u },  // SnapshotTestFixtures_AddressHelper_RunAddress
 		{ 1u, 0u },  // SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare
 		{ 1u, 0u },  // SnapshotTestFixtures_ArithmeticOps_RunAdd
@@ -2614,128 +2623,128 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("SnapshotProverSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[157] = {
-	{ "RunAddress", 0x000000BDu, 0u },  // AddressHelper
-	{ "RunCompare", 0x000000A8u, 0u },  // ArithmeticCompareHelper
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[158] = {
+	{ "RunAddress", 0x000000BEu, 0u },  // AddressHelper
+	{ "RunCompare", 0x000000A9u, 0u },  // ArithmeticCompareHelper
 	{ "RunAdd", 0x0000007Du, 0u },  // ArithmeticOps
-	{ "MakeAndFill", 0x00000099u, 0u },  // ArrayHelper
-	{ "RunLength", 0x000000B0u, 0u },  // ArrayLengthHelper
-	{ "RunArrayRef", 0x000000CAu, 0u },  // ArrayRefHelper
-	{ ".ctor", 0x000000A0u, 0u },  // BaseClass
-	{ "Compute", 0x0000009Fu, 0u },  // BaseClass
-	{ "RunBitwise", 0x000000AEu, 0u },  // BitwiseHelper
-	{ "DemoBoxStore", 0x0000010Cu, 0u },  // BoxInterfaceArrayDemo
+	{ "MakeAndFill", 0x0000009Au, 0u },  // ArrayHelper
+	{ "RunLength", 0x000000B1u, 0u },  // ArrayLengthHelper
+	{ "RunArrayRef", 0x000000CBu, 0u },  // ArrayRefHelper
+	{ ".ctor", 0x000000A1u, 0u },  // BaseClass
+	{ "Compute", 0x000000A0u, 0u },  // BaseClass
+	{ "RunBitwise", 0x000000AFu, 0u },  // BitwiseHelper
+	{ "DemoBoxStore", 0x0000010Du, 0u },  // BoxInterfaceArrayDemo
 	{ "BoxAndUnbox", 0x0000008Du, 0u },  // BoxingHelper
-	{ "RunBranchCompareB", 0x000000BBu, 0u },  // BranchCompareBHelper
-	{ "RunBranchCompare", 0x000000B4u, 0u },  // BranchCompareHelper
-	{ "RunBranchDup", 0x000000A9u, 0u },  // BranchDupHelper
-	{ "RunBranchUnsignedB", 0x000000E5u, 0u },  // BranchUnsignedBHelper
-	{ "RunBranchUnsigned", 0x000000E4u, 0u },  // BranchUnsignedHelper
+	{ "RunBranchCompareB", 0x000000BCu, 0u },  // BranchCompareBHelper
+	{ "RunBranchCompare", 0x000000B5u, 0u },  // BranchCompareHelper
+	{ "RunBranchDup", 0x000000AAu, 0u },  // BranchDupHelper
+	{ "RunBranchUnsignedB", 0x000000E6u, 0u },  // BranchUnsignedBHelper
+	{ "RunBranchUnsigned", 0x000000E5u, 0u },  // BranchUnsignedHelper
 	{ "CreateAndUse", 0x0000008Bu, 0u },  // CallVirtHelper
-	{ "RunCalli", 0x000000D6u, 1u },  // CalliHelper
-	{ "RunCallvirt", 0x000000C3u, 0u },  // CallvirtHelper
-	{ "TestDict", 0x00000105u, 0u },  // CollectionsHelper
-	{ "TestList", 0x00000104u, 0u },  // CollectionsHelper
-	{ "TestSet", 0x00000106u, 0u },  // CollectionsHelper
-	{ "RunConvSmall", 0x000000B9u, 0u },  // ConvSmallIntHelper
-	{ "RunConvWide", 0x000000B6u, 0u },  // ConvWideHelper
-	{ "ConvertToInt", 0x00000091u, 0u },  // ConversionHelper
-	{ "RunCpblk", 0x000000C5u, 0u },  // CpblkHelper
-	{ "RunCpobj", 0x000000C1u, 0u },  // CpobjHelper
-	{ "RunDelegate", 0x0000009Eu, 0u },  // DelegateHelper
-	{ ".ctor", 0x000000A2u, 0u },  // DerivedClass
-	{ "Compute", 0x000000A1u, 0u },  // DerivedClass
-	{ "SafeDivide", 0x0000009Au, 0u },  // EhHelper
-	{ "CallExternal", 0x00000107u, 0u },  // ExternalCaller
+	{ "RunCalli", 0x000000D7u, 1u },  // CalliHelper
+	{ "RunCallvirt", 0x000000C4u, 0u },  // CallvirtHelper
+	{ "TestDict", 0x00000106u, 0u },  // CollectionsHelper
+	{ "TestList", 0x00000105u, 0u },  // CollectionsHelper
+	{ "TestSet", 0x00000107u, 0u },  // CollectionsHelper
+	{ "RunConvSmall", 0x000000BAu, 0u },  // ConvSmallIntHelper
+	{ "RunConvWide", 0x000000B7u, 0u },  // ConvWideHelper
+	{ "ConvertToInt", 0x00000092u, 0u },  // ConversionHelper
+	{ "RunCpblk", 0x000000C6u, 0u },  // CpblkHelper
+	{ "RunCpobj", 0x000000C2u, 0u },  // CpobjHelper
+	{ "RunDelegate", 0x0000009Fu, 0u },  // DelegateHelper
+	{ ".ctor", 0x000000A3u, 0u },  // DerivedClass
+	{ "Compute", 0x000000A2u, 0u },  // DerivedClass
+	{ "SafeDivide", 0x0000009Bu, 0u },  // EhHelper
+	{ "CallExternal", 0x00000108u, 0u },  // ExternalCaller
 	{ "GetAndIncrement", 0x0000008Fu, 0u },  // FieldHelper
-	{ "RunFloatOps", 0x000000B5u, 0u },  // FloatOpsHelper
+	{ "RunFloatOps", 0x000000B6u, 0u },  // FloatOpsHelper
 	{ "IsPositive", 0x00000085u, 0u },  // FlowControl
-	{ "UseGeneric", 0x0000009Bu, 0u },  // GenericHelper
-	{ "DemoCombine", 0x0000010Bu, 0u },  // GenericsVirtEhDemo
-	{ ".ctor", 0x000000BCu, 0u },  // HasFields
-	{ ".ctor", 0x000000AAu, 1u },  // HasInstanceFields
-	{ "ConsumeString", 0x00000094u, 1u },  // Helper
-	{ "GetValue", 0x00000095u, 0u },  // Helper
-	{ "Nop", 0x00000092u, 0u },  // Helper
-	{ "Square", 0x00000093u, 1u },  // Helper
-	{ "Run", 0x0000010Eu, 0u },  // HotUpdateWithGenericsDemo
-	{ "Run", 0x0000010Du, 0u },  // HotUpdateWithTypesDemo
-	{ ".ctor", 0x00000113u, 1u },  // ImplHelper
-	{ "GetValue", 0x00000114u, 0u },  // ImplHelper
-	{ "ReadWriteRef", 0x000000A7u, 0u },  // IndirectHelper
-	{ "CreateAndUseFields", 0x000000ABu, 0u },  // InstanceFieldHelper
+	{ "UseGeneric", 0x0000009Cu, 0u },  // GenericHelper
+	{ "DemoCombine", 0x0000010Cu, 0u },  // GenericsVirtEhDemo
+	{ ".ctor", 0x000000BDu, 0u },  // HasFields
+	{ ".ctor", 0x000000ABu, 1u },  // HasInstanceFields
+	{ "ConsumeString", 0x00000095u, 1u },  // Helper
+	{ "GetValue", 0x00000096u, 0u },  // Helper
+	{ "Nop", 0x00000093u, 0u },  // Helper
+	{ "Square", 0x00000094u, 1u },  // Helper
+	{ "Run", 0x0000010Fu, 0u },  // HotUpdateWithGenericsDemo
+	{ "Run", 0x0000010Eu, 0u },  // HotUpdateWithTypesDemo
+	{ ".ctor", 0x00000114u, 1u },  // ImplHelper
+	{ "GetValue", 0x00000115u, 0u },  // ImplHelper
+	{ "ReadWriteRef", 0x000000A8u, 0u },  // IndirectHelper
+	{ "CreateAndUseFields", 0x000000ACu, 0u },  // InstanceFieldHelper
 	{ ".ctor", 0x00000087u, 1u },  // InstanceHelper
 	{ "GetValue", 0x00000089u, 0u },  // InstanceHelper
-	{ "RunInterfaceTest", 0x00000115u, 0u },  // InterfaceDevirtHelper
-	{ "Double", 0x00000109u, 1u },  // InternalHelper
-	{ "RunLdVirtftn", 0x000000D9u, 0u },  // LdVirtftnHelper
-	{ "RunLdarga", 0x000000C0u, 1u },  // LdargaHelper
-	{ "RunLdcI8", 0x000000B8u, 0u },  // LdcI8Helper
-	{ "TestAllElems", 0x000000DAu, 0u },  // LdelemAllHelper
-	{ "RunLdelema", 0x000000BFu, 0u },  // LdelemaHelper
-	{ "GetFnPtr", 0x00000097u, 0u },  // LdftnHelper
-	{ "RunLdindI1", 0x000000BAu, 0u },  // LdindI1Helper
-	{ "RunLdindI8", 0x000000C7u, 0u },  // LdindI8Helper
-	{ "RunLdindI", 0x00000102u, 0u },  // LdindStindGapsHelper
-	{ "RunLdindI4", 0x00000101u, 0u },  // LdindStindGapsHelper
-	{ "RunStindI", 0x00000103u, 0u },  // LdindStindGapsHelper
-	{ "RunLdindUnsigned", 0x000000C6u, 0u },  // LdindUnsignedHelper
-	{ "RunLdindWide", 0x000000C8u, 0u },  // LdindWideHelper
-	{ "RunLdtoken", 0x000000BEu, 0u },  // LdtokenHelper
-	{ "RunAlloc", 0x000000B2u, 0u },  // LocalAllocHelper
-	{ "SumToFive", 0x00000090u, 0u },  // LoopHelper
-	{ ".ctor", 0x000000A4u, 0u },  // MarkedClass
+	{ "RunInterfaceTest", 0x00000116u, 0u },  // InterfaceDevirtHelper
+	{ "Double", 0x0000010Au, 1u },  // InternalHelper
+	{ "RunLdVirtftn", 0x000000DAu, 0u },  // LdVirtftnHelper
+	{ "RunLdarga", 0x000000C1u, 1u },  // LdargaHelper
+	{ "RunLdcI8", 0x000000B9u, 0u },  // LdcI8Helper
+	{ "TestAllElems", 0x000000DBu, 0u },  // LdelemAllHelper
+	{ "RunLdelema", 0x000000C0u, 0u },  // LdelemaHelper
+	{ "GetFnPtr", 0x00000098u, 0u },  // LdftnHelper
+	{ "RunLdindI1", 0x000000BBu, 0u },  // LdindI1Helper
+	{ "RunLdindI8", 0x000000C8u, 0u },  // LdindI8Helper
+	{ "RunLdindI", 0x00000103u, 0u },  // LdindStindGapsHelper
+	{ "RunLdindI4", 0x00000102u, 0u },  // LdindStindGapsHelper
+	{ "RunStindI", 0x00000104u, 0u },  // LdindStindGapsHelper
+	{ "RunLdindUnsigned", 0x000000C7u, 0u },  // LdindUnsignedHelper
+	{ "RunLdindWide", 0x000000C9u, 0u },  // LdindWideHelper
+	{ "RunLdtoken", 0x000000BFu, 0u },  // LdtokenHelper
+	{ "RunAlloc", 0x000000B3u, 0u },  // LocalAllocHelper
+	{ "SumToFive", 0x00000091u, 0u },  // LoopHelper
+	{ ".ctor", 0x000000A5u, 0u },  // MarkedClass
 	{ "RunSquare", 0x00000083u, 0u },  // MathHelper
-	{ "RunArglist", 0x000000EAu, 0u },  // MoreRareOpsHelper
-	{ "RunJmp", 0x000000EEu, 0u },  // MoreRareOpsHelper
-	{ "RunMkrefany", 0x000000EBu, 0u },  // MoreRareOpsHelper
-	{ "RunRefanytype", 0x000000EDu, 0u },  // MoreRareOpsHelper
-	{ "RunRefanyval", 0x000000ECu, 0u },  // MoreRareOpsHelper
-	{ "RunMulDiv", 0x000000B3u, 0u },  // MulDivHelper
-	{ "DispatchBoth", 0x00000108u, 0u },  // MultiDispatcher
-	{ ".ctor", 0x000000D7u, 1u },  // MyClass
-	{ "GetValue", 0x000000D8u, 0u },  // MyClass
-	{ "RunNegShift", 0x000000B7u, 0u },  // NegShiftHelper
-	{ "ConvOvfI1", 0x000000EFu, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfI1Un", 0x000000F0u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfI2Un", 0x000000F2u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfI4Un", 0x000000F4u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfI8Un", 0x000000F6u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfIUn", 0x000000F8u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfU1Un", 0x000000F1u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfU2Un", 0x000000F3u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfU4Un", 0x000000F5u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfU8Un", 0x000000F7u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfUUn", 0x000000F9u, 1u },  // OverflowConvExtHelper
-	{ "ConvOvfI2", 0x000000D1u, 1u },  // OverflowConvHelper
-	{ "ConvOvfI4", 0x000000CFu, 0u },  // OverflowConvHelper
-	{ "ConvOvfI8", 0x000000D4u, 1u },  // OverflowConvHelper
-	{ "ConvOvfU1", 0x000000D0u, 1u },  // OverflowConvHelper
-	{ "ConvOvfU2", 0x000000D2u, 1u },  // OverflowConvHelper
-	{ "ConvOvfU4", 0x000000D3u, 1u },  // OverflowConvHelper
-	{ "ConvOvfU8", 0x000000D5u, 1u },  // OverflowConvHelper
-	{ "RunOverflowAdd", 0x000000CCu, 0u },  // OverflowHelper
-	{ "RunOverflowMul", 0x000000CEu, 0u },  // OverflowHelper
-	{ "RunOverflowSub", 0x000000CDu, 0u },  // OverflowHelper
-	{ "RunOverflowAddUn", 0x000000E7u, 0u },  // OverflowUnHelper
-	{ "RunOverflowMulUn", 0x000000E9u, 0u },  // OverflowUnHelper
-	{ "RunOverflowSubUn", 0x000000E8u, 0u },  // OverflowUnHelper
-	{ "TestConvRUn", 0x000000E2u, 1u },  // RareOpsHelper
-	{ "TestInitBlk", 0x000000E0u, 1u },  // RareOpsHelper
-	{ "TestStarg", 0x000000E1u, 1u },  // RareOpsHelper
-	{ "RunRethrow", 0x000000E6u, 0u },  // RethrowHelper
-	{ "RunSealedVirtual", 0x00000111u, 0u },  // SealedClassVirtualHelper
-	{ ".ctor", 0x0000010Fu, 1u },  // SealedHelper
-	{ "GetValueVirtual", 0x00000110u, 0u },  // SealedHelper
-	{ "RunShift", 0x000000AFu, 0u },  // ShiftHelper
-	{ "RunConvI", 0x000000FCu, 0u },  // SimpleGapsHelper
-	{ "RunConvOvfI", 0x000000FDu, 1u },  // SimpleGapsHelper
-	{ "RunConvOvfIUn", 0x000000FFu, 1u },  // SimpleGapsHelper
-	{ "RunConvOvfU", 0x000000FEu, 1u },  // SimpleGapsHelper
-	{ "RunConvOvfUUn", 0x00000100u, 1u },  // SimpleGapsHelper
-	{ "RunConvU4", 0x000000FBu, 0u },  // SimpleGapsHelper
-	{ "RunLdnull", 0x000000FAu, 0u },  // SimpleGapsHelper
-	{ "GetSize", 0x000000A6u, 0u },  // SizeOfHelper
+	{ "RunArglist", 0x000000EBu, 0u },  // MoreRareOpsHelper
+	{ "RunJmp", 0x000000EFu, 0u },  // MoreRareOpsHelper
+	{ "RunMkrefany", 0x000000ECu, 0u },  // MoreRareOpsHelper
+	{ "RunRefanytype", 0x000000EEu, 0u },  // MoreRareOpsHelper
+	{ "RunRefanyval", 0x000000EDu, 0u },  // MoreRareOpsHelper
+	{ "RunMulDiv", 0x000000B4u, 0u },  // MulDivHelper
+	{ "DispatchBoth", 0x00000109u, 0u },  // MultiDispatcher
+	{ ".ctor", 0x000000D8u, 1u },  // MyClass
+	{ "GetValue", 0x000000D9u, 0u },  // MyClass
+	{ "RunNegShift", 0x000000B8u, 0u },  // NegShiftHelper
+	{ "ConvOvfI1", 0x000000F0u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfI1Un", 0x000000F1u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfI2Un", 0x000000F3u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfI4Un", 0x000000F5u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfI8Un", 0x000000F7u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfIUn", 0x000000F9u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfU1Un", 0x000000F2u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfU2Un", 0x000000F4u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfU4Un", 0x000000F6u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfU8Un", 0x000000F8u, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfUUn", 0x000000FAu, 1u },  // OverflowConvExtHelper
+	{ "ConvOvfI2", 0x000000D2u, 1u },  // OverflowConvHelper
+	{ "ConvOvfI4", 0x000000D0u, 0u },  // OverflowConvHelper
+	{ "ConvOvfI8", 0x000000D5u, 1u },  // OverflowConvHelper
+	{ "ConvOvfU1", 0x000000D1u, 1u },  // OverflowConvHelper
+	{ "ConvOvfU2", 0x000000D3u, 1u },  // OverflowConvHelper
+	{ "ConvOvfU4", 0x000000D4u, 1u },  // OverflowConvHelper
+	{ "ConvOvfU8", 0x000000D6u, 1u },  // OverflowConvHelper
+	{ "RunOverflowAdd", 0x000000CDu, 0u },  // OverflowHelper
+	{ "RunOverflowMul", 0x000000CFu, 0u },  // OverflowHelper
+	{ "RunOverflowSub", 0x000000CEu, 0u },  // OverflowHelper
+	{ "RunOverflowAddUn", 0x000000E8u, 0u },  // OverflowUnHelper
+	{ "RunOverflowMulUn", 0x000000EAu, 0u },  // OverflowUnHelper
+	{ "RunOverflowSubUn", 0x000000E9u, 0u },  // OverflowUnHelper
+	{ "TestConvRUn", 0x000000E3u, 1u },  // RareOpsHelper
+	{ "TestInitBlk", 0x000000E1u, 1u },  // RareOpsHelper
+	{ "TestStarg", 0x000000E2u, 1u },  // RareOpsHelper
+	{ "RunRethrow", 0x000000E7u, 0u },  // RethrowHelper
+	{ "RunSealedVirtual", 0x00000112u, 0u },  // SealedClassVirtualHelper
+	{ ".ctor", 0x00000110u, 1u },  // SealedHelper
+	{ "GetValueVirtual", 0x00000111u, 0u },  // SealedHelper
+	{ "RunShift", 0x000000B0u, 0u },  // ShiftHelper
+	{ "RunConvI", 0x000000FDu, 0u },  // SimpleGapsHelper
+	{ "RunConvOvfI", 0x000000FEu, 1u },  // SimpleGapsHelper
+	{ "RunConvOvfIUn", 0x00000100u, 1u },  // SimpleGapsHelper
+	{ "RunConvOvfU", 0x000000FFu, 1u },  // SimpleGapsHelper
+	{ "RunConvOvfUUn", 0x00000101u, 1u },  // SimpleGapsHelper
+	{ "RunConvU4", 0x000000FCu, 0u },  // SimpleGapsHelper
+	{ "RunLdnull", 0x000000FBu, 0u },  // SimpleGapsHelper
+	{ "GetSize", 0x000000A7u, 0u },  // SizeOfHelper
 	{ "Subject_0", 0x0000007Cu, 0u },  // SnapshotProverSubjects
 	{ "Subject_1", 0x0000007Eu, 0u },  // SnapshotProverSubjects
 	{ "Subject_2", 0x00000080u, 0u },  // SnapshotProverSubjects
@@ -2746,32 +2755,33 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[157] = {
 	{ "Subject_7", 0x0000008Au, 0u },  // SnapshotProverSubjects
 	{ "CustomEntrySubject_8", 0x0000008Eu, 0u },  // SnapshotProverSubjects
 	{ "Subject_9", 0x0000008Cu, 0u },  // SnapshotProverSubjects
-	{ "WriteAndRead", 0x000000ACu, 0u },  // StaticFieldWriteHelper
-	{ "TestAllElems", 0x000000DBu, 0u },  // StelemAllHelper
-	{ "RunStindNarrow", 0x000000C2u, 0u },  // StindNarrowHelper
-	{ "RunStindWide", 0x000000C9u, 0u },  // StindWideHelper
-	{ "TestConcat", 0x0000010Au, 0u },  // StringConcatHelper
-	{ "TestFormatOne", 0x000000E3u, 0u },  // StringFormatHelper
+	{ "CustomEntryMethod8", 0x00000090u, 0u },  // SnapshotProverSubjects
+	{ "WriteAndRead", 0x000000ADu, 0u },  // StaticFieldWriteHelper
+	{ "TestAllElems", 0x000000DCu, 0u },  // StelemAllHelper
+	{ "RunStindNarrow", 0x000000C3u, 0u },  // StindNarrowHelper
+	{ "RunStindWide", 0x000000CAu, 0u },  // StindWideHelper
+	{ "TestConcat", 0x0000010Bu, 0u },  // StringConcatHelper
+	{ "TestFormatOne", 0x000000E4u, 0u },  // StringFormatHelper
 	{ "UseString", 0x0000007Fu, 0u },  // StringOps
-	{ "Classify", 0x00000096u, 0u },  // SwitchHelper
-	{ "GetValue", 0x00000098u, 0u },  // TargetHelper
-	{ "CheckPositive", 0x000000CBu, 1u },  // ThrowHelper
-	{ "CheckAndCast", 0x000000A5u, 0u },  // TypeCheckHelper
-	{ "RunUnbox", 0x000000C4u, 0u },  // UnboxHelper
-	{ "TestCkfinite", 0x000000DFu, 1u },  // UnsignedOpsHelper
-	{ "TestCltUn", 0x000000DCu, 0u },  // UnsignedOpsHelper
-	{ "TestDivUn", 0x000000DDu, 0u },  // UnsignedOpsHelper
-	{ "TestRemUn", 0x000000DEu, 0u },  // UnsignedOpsHelper
-	{ "RunValueType", 0x000000B1u, 0u },  // ValueTypeHelper
-	{ "UseVirtualDispatch", 0x000000ADu, 0u },  // VirtualDispatchHelper
-	{ "UseVirtual", 0x000000A3u, 0u },  // VirtualHelper
+	{ "Classify", 0x00000097u, 0u },  // SwitchHelper
+	{ "GetValue", 0x00000099u, 0u },  // TargetHelper
+	{ "CheckPositive", 0x000000CCu, 1u },  // ThrowHelper
+	{ "CheckAndCast", 0x000000A6u, 0u },  // TypeCheckHelper
+	{ "RunUnbox", 0x000000C5u, 0u },  // UnboxHelper
+	{ "TestCkfinite", 0x000000E0u, 1u },  // UnsignedOpsHelper
+	{ "TestCltUn", 0x000000DDu, 0u },  // UnsignedOpsHelper
+	{ "TestDivUn", 0x000000DEu, 0u },  // UnsignedOpsHelper
+	{ "TestRemUn", 0x000000DFu, 0u },  // UnsignedOpsHelper
+	{ "RunValueType", 0x000000B2u, 0u },  // ValueTypeHelper
+	{ "UseVirtualDispatch", 0x000000AEu, 0u },  // VirtualDispatchHelper
+	{ "UseVirtual", 0x000000A4u, 0u },  // VirtualHelper
 	{ "DoNothing", 0x00000081u, 0u },  // VoidCaller
-	{ ".ctor", 0x00000118u, 1u },  // Wrapper<!0>
-	{ "GetValue", 0x00000119u, 0u },  // Wrapper<!0>
-	{ ".ctor", 0x0000009Cu, 1u },  // Wrapper`1
-	{ "GetValue", 0x0000009Du, 0u },  // Wrapper`1
-	{ ".ctor", 0x00000116u, 1u },  // Wrapper<System.Int32>
-	{ "GetValue", 0x00000117u, 0u },  // Wrapper<System.Int32>
+	{ ".ctor", 0x00000119u, 1u },  // Wrapper<!0>
+	{ "GetValue", 0x0000011Au, 0u },  // Wrapper<!0>
+	{ ".ctor", 0x0000009Du, 1u },  // Wrapper`1
+	{ "GetValue", 0x0000009Eu, 0u },  // Wrapper`1
+	{ ".ctor", 0x00000117u, 1u },  // Wrapper<System.Int32>
+	{ "GetValue", 0x00000118u, 0u },  // Wrapper<System.Int32>
 };
 
 // Type name index entries (namespace, short_name)
@@ -2852,349 +2862,351 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[97] = {
 	{ "ShiftHelper", "", 112u, 1u },
 	{ "SimpleGapsHelper", "", 113u, 7u },
 	{ "SizeOfHelper", "", 120u, 1u },
-	{ "SnapshotProverSubjects", "", 121u, 10u },
-	{ "StaticFieldWriteHelper", "", 131u, 1u },
-	{ "StelemAllHelper", "", 132u, 1u },
-	{ "StindNarrowHelper", "", 133u, 1u },
-	{ "StindWideHelper", "", 134u, 1u },
-	{ "StringConcatHelper", "", 135u, 1u },
-	{ "StringFormatHelper", "", 136u, 1u },
-	{ "StringOps", "", 137u, 1u },
-	{ "SwitchHelper", "", 138u, 1u },
-	{ "TargetHelper", "", 139u, 1u },
-	{ "ThrowHelper", "", 140u, 1u },
-	{ "TypeCheckHelper", "", 141u, 1u },
-	{ "UnboxHelper", "", 142u, 1u },
-	{ "UnsignedOpsHelper", "", 143u, 4u },
-	{ "ValueTypeHelper", "", 147u, 1u },
-	{ "VirtualDispatchHelper", "", 148u, 1u },
-	{ "VirtualHelper", "", 149u, 1u },
-	{ "VoidCaller", "", 150u, 1u },
-	{ "Wrapper<!0>", "", 151u, 2u },
-	{ "Wrapper`1", "", 153u, 2u },
-	{ "Wrapper<System.Int32>", "Wrapper<System", 155u, 2u },
+	{ "SnapshotProverSubjects", "", 121u, 11u },
+	{ "StaticFieldWriteHelper", "", 132u, 1u },
+	{ "StelemAllHelper", "", 133u, 1u },
+	{ "StindNarrowHelper", "", 134u, 1u },
+	{ "StindWideHelper", "", 135u, 1u },
+	{ "StringConcatHelper", "", 136u, 1u },
+	{ "StringFormatHelper", "", 137u, 1u },
+	{ "StringOps", "", 138u, 1u },
+	{ "SwitchHelper", "", 139u, 1u },
+	{ "TargetHelper", "", 140u, 1u },
+	{ "ThrowHelper", "", 141u, 1u },
+	{ "TypeCheckHelper", "", 142u, 1u },
+	{ "UnboxHelper", "", 143u, 1u },
+	{ "UnsignedOpsHelper", "", 144u, 4u },
+	{ "ValueTypeHelper", "", 148u, 1u },
+	{ "VirtualDispatchHelper", "", 149u, 1u },
+	{ "VirtualHelper", "", 150u, 1u },
+	{ "VoidCaller", "", 151u, 1u },
+	{ "Wrapper<!0>", "", 152u, 2u },
+	{ "Wrapper`1", "", 154u, 2u },
+	{ "Wrapper<System.Int32>", "Wrapper<System", 156u, 2u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[157] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[158] = {
 	{ 0x0000007Cu, 0u },
-	{ 0x0000007Du, 12u },
+	{ 0x0000007Du, 13u },
 	{ 0x0000007Eu, 1u },
-	{ 0x0000007Fu, 137u },
+	{ 0x0000007Fu, 138u },
 	{ 0x00000080u, 2u },
-	{ 0x00000081u, 150u },
+	{ 0x00000081u, 151u },
 	{ 0x00000082u, 3u },
-	{ 0x00000083u, 80u },
+	{ 0x00000083u, 81u },
 	{ 0x00000084u, 4u },
-	{ 0x00000085u, 44u },
+	{ 0x00000085u, 45u },
 	{ 0x00000086u, 5u },
-	{ 0x00000087u, 59u },
+	{ 0x00000087u, 60u },
 	{ 0x00000088u, 6u },
-	{ 0x00000089u, 60u },
+	{ 0x00000089u, 61u },
 	{ 0x0000008Au, 7u },
-	{ 0x0000008Bu, 27u },
+	{ 0x0000008Bu, 28u },
 	{ 0x0000008Cu, 9u },
-	{ 0x0000008Du, 19u },
+	{ 0x0000008Du, 20u },
 	{ 0x0000008Eu, 8u },
-	{ 0x0000008Fu, 42u },
-	{ 0x00000090u, 78u },
-	{ 0x00000091u, 32u },
-	{ 0x00000092u, 51u },
+	{ 0x0000008Fu, 43u },
+	{ 0x00000090u, 10u },
+	{ 0x00000091u, 79u },
+	{ 0x00000092u, 33u },
 	{ 0x00000093u, 52u },
-	{ 0x00000094u, 49u },
+	{ 0x00000094u, 53u },
 	{ 0x00000095u, 50u },
-	{ 0x00000096u, 138u },
-	{ 0x00000097u, 67u },
-	{ 0x00000098u, 139u },
-	{ 0x00000099u, 13u },
-	{ 0x0000009Au, 40u },
-	{ 0x0000009Bu, 45u },
-	{ 0x0000009Cu, 151u },
+	{ 0x00000096u, 51u },
+	{ 0x00000097u, 139u },
+	{ 0x00000098u, 68u },
+	{ 0x00000099u, 140u },
+	{ 0x0000009Au, 14u },
+	{ 0x0000009Bu, 41u },
+	{ 0x0000009Cu, 46u },
 	{ 0x0000009Du, 152u },
-	{ 0x0000009Eu, 37u },
-	{ 0x0000009Fu, 17u },
-	{ 0x000000A0u, 16u },
-	{ 0x000000A1u, 39u },
-	{ 0x000000A2u, 38u },
-	{ 0x000000A3u, 149u },
-	{ 0x000000A4u, 79u },
-	{ 0x000000A5u, 141u },
-	{ 0x000000A6u, 130u },
-	{ 0x000000A7u, 57u },
-	{ 0x000000A8u, 11u },
-	{ 0x000000A9u, 23u },
-	{ 0x000000AAu, 48u },
-	{ 0x000000ABu, 58u },
-	{ 0x000000ACu, 131u },
-	{ 0x000000ADu, 148u },
-	{ 0x000000AEu, 18u },
-	{ 0x000000AFu, 122u },
-	{ 0x000000B0u, 14u },
-	{ 0x000000B1u, 147u },
-	{ 0x000000B2u, 77u },
-	{ 0x000000B3u, 86u },
-	{ 0x000000B4u, 22u },
-	{ 0x000000B5u, 43u },
-	{ 0x000000B6u, 34u },
-	{ 0x000000B7u, 90u },
-	{ 0x000000B8u, 64u },
-	{ 0x000000B9u, 33u },
-	{ 0x000000BAu, 68u },
-	{ 0x000000BBu, 21u },
-	{ 0x000000BCu, 47u },
-	{ 0x000000BDu, 10u },
-	{ 0x000000BEu, 75u },
-	{ 0x000000BFu, 65u },
-	{ 0x000000C0u, 63u },
-	{ 0x000000C1u, 36u },
-	{ 0x000000C2u, 133u },
-	{ 0x000000C3u, 28u },
-	{ 0x000000C4u, 142u },
-	{ 0x000000C5u, 35u },
-	{ 0x000000C6u, 73u },
-	{ 0x000000C7u, 69u },
-	{ 0x000000C8u, 74u },
-	{ 0x000000C9u, 134u },
-	{ 0x000000CAu, 15u },
-	{ 0x000000CBu, 140u },
-	{ 0x000000CCu, 109u },
-	{ 0x000000CDu, 111u },
-	{ 0x000000CEu, 110u },
-	{ 0x000000CFu, 103u },
-	{ 0x000000D0u, 105u },
-	{ 0x000000D1u, 102u },
-	{ 0x000000D2u, 106u },
+	{ 0x0000009Eu, 153u },
+	{ 0x0000009Fu, 38u },
+	{ 0x000000A0u, 18u },
+	{ 0x000000A1u, 17u },
+	{ 0x000000A2u, 40u },
+	{ 0x000000A3u, 39u },
+	{ 0x000000A4u, 150u },
+	{ 0x000000A5u, 80u },
+	{ 0x000000A6u, 142u },
+	{ 0x000000A7u, 131u },
+	{ 0x000000A8u, 58u },
+	{ 0x000000A9u, 12u },
+	{ 0x000000AAu, 24u },
+	{ 0x000000ABu, 49u },
+	{ 0x000000ACu, 59u },
+	{ 0x000000ADu, 132u },
+	{ 0x000000AEu, 149u },
+	{ 0x000000AFu, 19u },
+	{ 0x000000B0u, 123u },
+	{ 0x000000B1u, 15u },
+	{ 0x000000B2u, 148u },
+	{ 0x000000B3u, 78u },
+	{ 0x000000B4u, 87u },
+	{ 0x000000B5u, 23u },
+	{ 0x000000B6u, 44u },
+	{ 0x000000B7u, 35u },
+	{ 0x000000B8u, 91u },
+	{ 0x000000B9u, 65u },
+	{ 0x000000BAu, 34u },
+	{ 0x000000BBu, 69u },
+	{ 0x000000BCu, 22u },
+	{ 0x000000BDu, 48u },
+	{ 0x000000BEu, 11u },
+	{ 0x000000BFu, 76u },
+	{ 0x000000C0u, 66u },
+	{ 0x000000C1u, 64u },
+	{ 0x000000C2u, 37u },
+	{ 0x000000C3u, 134u },
+	{ 0x000000C4u, 29u },
+	{ 0x000000C5u, 143u },
+	{ 0x000000C6u, 36u },
+	{ 0x000000C7u, 74u },
+	{ 0x000000C8u, 70u },
+	{ 0x000000C9u, 75u },
+	{ 0x000000CAu, 135u },
+	{ 0x000000CBu, 16u },
+	{ 0x000000CCu, 141u },
+	{ 0x000000CDu, 110u },
+	{ 0x000000CEu, 112u },
+	{ 0x000000CFu, 111u },
+	{ 0x000000D0u, 104u },
+	{ 0x000000D1u, 106u },
+	{ 0x000000D2u, 103u },
 	{ 0x000000D3u, 107u },
-	{ 0x000000D4u, 104u },
-	{ 0x000000D5u, 108u },
-	{ 0x000000D6u, 26u },
-	{ 0x000000D7u, 88u },
+	{ 0x000000D4u, 108u },
+	{ 0x000000D5u, 105u },
+	{ 0x000000D6u, 109u },
+	{ 0x000000D7u, 27u },
 	{ 0x000000D8u, 89u },
-	{ 0x000000D9u, 76u },
-	{ 0x000000DAu, 66u },
-	{ 0x000000DBu, 132u },
-	{ 0x000000DCu, 144u },
+	{ 0x000000D9u, 90u },
+	{ 0x000000DAu, 77u },
+	{ 0x000000DBu, 67u },
+	{ 0x000000DCu, 133u },
 	{ 0x000000DDu, 145u },
 	{ 0x000000DEu, 146u },
-	{ 0x000000DFu, 143u },
-	{ 0x000000E0u, 116u },
+	{ 0x000000DFu, 147u },
+	{ 0x000000E0u, 144u },
 	{ 0x000000E1u, 117u },
-	{ 0x000000E2u, 115u },
-	{ 0x000000E3u, 136u },
-	{ 0x000000E4u, 25u },
-	{ 0x000000E5u, 24u },
-	{ 0x000000E6u, 118u },
-	{ 0x000000E7u, 112u },
-	{ 0x000000E8u, 114u },
-	{ 0x000000E9u, 113u },
-	{ 0x000000EAu, 81u },
-	{ 0x000000EBu, 83u },
-	{ 0x000000ECu, 85u },
-	{ 0x000000EDu, 84u },
-	{ 0x000000EEu, 82u },
-	{ 0x000000EFu, 91u },
+	{ 0x000000E2u, 118u },
+	{ 0x000000E3u, 116u },
+	{ 0x000000E4u, 137u },
+	{ 0x000000E5u, 26u },
+	{ 0x000000E6u, 25u },
+	{ 0x000000E7u, 119u },
+	{ 0x000000E8u, 113u },
+	{ 0x000000E9u, 115u },
+	{ 0x000000EAu, 114u },
+	{ 0x000000EBu, 82u },
+	{ 0x000000ECu, 84u },
+	{ 0x000000EDu, 86u },
+	{ 0x000000EEu, 85u },
+	{ 0x000000EFu, 83u },
 	{ 0x000000F0u, 92u },
-	{ 0x000000F1u, 97u },
-	{ 0x000000F2u, 93u },
-	{ 0x000000F3u, 98u },
-	{ 0x000000F4u, 94u },
-	{ 0x000000F5u, 99u },
-	{ 0x000000F6u, 95u },
-	{ 0x000000F7u, 100u },
-	{ 0x000000F8u, 96u },
-	{ 0x000000F9u, 101u },
-	{ 0x000000FAu, 129u },
-	{ 0x000000FBu, 128u },
-	{ 0x000000FCu, 123u },
+	{ 0x000000F1u, 93u },
+	{ 0x000000F2u, 98u },
+	{ 0x000000F3u, 94u },
+	{ 0x000000F4u, 99u },
+	{ 0x000000F5u, 95u },
+	{ 0x000000F6u, 100u },
+	{ 0x000000F7u, 96u },
+	{ 0x000000F8u, 101u },
+	{ 0x000000F9u, 97u },
+	{ 0x000000FAu, 102u },
+	{ 0x000000FBu, 130u },
+	{ 0x000000FCu, 129u },
 	{ 0x000000FDu, 124u },
-	{ 0x000000FEu, 126u },
-	{ 0x000000FFu, 125u },
-	{ 0x00000100u, 127u },
-	{ 0x00000101u, 71u },
-	{ 0x00000102u, 70u },
-	{ 0x00000103u, 72u },
-	{ 0x00000104u, 30u },
-	{ 0x00000105u, 29u },
-	{ 0x00000106u, 31u },
-	{ 0x00000107u, 41u },
-	{ 0x00000108u, 87u },
-	{ 0x00000109u, 62u },
-	{ 0x0000010Au, 135u },
-	{ 0x0000010Bu, 46u },
-	{ 0x0000010Cu, 20u },
-	{ 0x0000010Du, 54u },
-	{ 0x0000010Eu, 53u },
-	{ 0x0000010Fu, 120u },
+	{ 0x000000FEu, 125u },
+	{ 0x000000FFu, 127u },
+	{ 0x00000100u, 126u },
+	{ 0x00000101u, 128u },
+	{ 0x00000102u, 72u },
+	{ 0x00000103u, 71u },
+	{ 0x00000104u, 73u },
+	{ 0x00000105u, 31u },
+	{ 0x00000106u, 30u },
+	{ 0x00000107u, 32u },
+	{ 0x00000108u, 42u },
+	{ 0x00000109u, 88u },
+	{ 0x0000010Au, 63u },
+	{ 0x0000010Bu, 136u },
+	{ 0x0000010Cu, 47u },
+	{ 0x0000010Du, 21u },
+	{ 0x0000010Eu, 55u },
+	{ 0x0000010Fu, 54u },
 	{ 0x00000110u, 121u },
-	{ 0x00000111u, 119u },
-	{ 0x00000113u, 55u },
+	{ 0x00000111u, 122u },
+	{ 0x00000112u, 120u },
 	{ 0x00000114u, 56u },
-	{ 0x00000115u, 61u },
-	{ 0x00000116u, 155u },
+	{ 0x00000115u, 57u },
+	{ 0x00000116u, 62u },
 	{ 0x00000117u, 156u },
-	{ 0x00000118u, 153u },
+	{ 0x00000118u, 157u },
 	{ 0x00000119u, 154u },
+	{ 0x0000011Au, 155u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[157] = {
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_0
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_1
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_2
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_3
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_4
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_5
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_6
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_7
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::CustomEntrySubject_8
-	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverSubjects::Subject_9
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_AddressHelper_RunAddress), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AddressHelper::RunAddress
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ArithmeticCompareHelper::RunCompare
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticOps_RunAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ArithmeticOps::RunAdd
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayHelper_MakeAndFill), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ArrayHelper::MakeAndFill
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayLengthHelper_RunLength), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ArrayLengthHelper::RunLength
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayRefHelper_RunArrayRef), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ArrayRefHelper::RunArrayRef
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // BaseClass::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass_Compute), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BaseClass::Compute
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BitwiseHelper_RunBitwise), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BitwiseHelper::RunBitwise
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BoxingHelper_BoxAndUnbox), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BoxingHelper::BoxAndUnbox
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BoxInterfaceArrayDemo::DemoBoxStore
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BranchCompareBHelper::RunBranchCompareB
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BranchCompareHelper::RunBranchCompare
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchDupHelper_RunBranchDup), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BranchDupHelper::RunBranchDup
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BranchUnsignedBHelper::RunBranchUnsignedB
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // BranchUnsignedHelper::RunBranchUnsigned
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CalliHelper::RunCalli
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CallVirtHelper_CreateAndUse), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CallVirtHelper::CreateAndUse
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CallvirtHelper_RunCallvirt), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CallvirtHelper::RunCallvirt
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestDict), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CollectionsHelper::TestDict
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestList), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CollectionsHelper::TestList
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestSet), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CollectionsHelper::TestSet
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConversionHelper_ConvertToInt), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConversionHelper::ConvertToInt
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvSmallIntHelper::RunConvSmall
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConvWideHelper_RunConvWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ConvWideHelper::RunConvWide
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CpblkHelper_RunCpblk), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CpblkHelper::RunCpblk
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CpobjHelper_RunCpobj), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CpobjHelper::RunCpobj
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DelegateHelper_RunDelegate), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateHelper::RunDelegate
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DerivedClass::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass_Compute), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DerivedClass::Compute
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_EhHelper_SafeDivide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EhHelper::SafeDivide
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ExternalCaller_CallExternal), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ExternalCaller::CallExternal
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FieldHelper_GetAndIncrement), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // FieldHelper::GetAndIncrement
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FloatOpsHelper_RunFloatOps), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // FloatOpsHelper::RunFloatOps
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FlowControl_IsPositive), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // FlowControl::IsPositive
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_GenericHelper_UseGeneric), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // GenericHelper::UseGeneric
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GenericsVirtEhDemo::DemoCombine
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HasFields__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // HasFields::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // HasInstanceFields::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_ConsumeString_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Helper::ConsumeString
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Helper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_Nop), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Helper::Nop
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_Square_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Helper::Square
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // HotUpdateWithGenericsDemo::Run
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HotUpdateWithTypesDemo_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // HotUpdateWithTypesDemo::Run
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ImplHelper::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ImplHelper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_IndirectHelper_ReadWriteRef), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // IndirectHelper::ReadWriteRef
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InstanceFieldHelper::CreateAndUseFields
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // InstanceHelper::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InstanceHelper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InterfaceDevirtHelper::RunInterfaceTest
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InternalHelper_Double_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // InternalHelper::Double
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdargaHelper::RunLdarga
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdcI8Helper_RunLdcI8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdcI8Helper::RunLdcI8
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdelemaHelper_RunLdelema), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdelemaHelper::RunLdelema
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdelemAllHelper_TestAllElems), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdelemAllHelper::TestAllElems
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdftnHelper_GetFnPtr), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LdftnHelper::GetFnPtr
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindI1Helper_RunLdindI1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindI1Helper::RunLdindI1
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindI8Helper_RunLdindI8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindI8Helper::RunLdindI8
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindStindGapsHelper::RunLdindI
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindStindGapsHelper::RunLdindI4
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunStindI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindStindGapsHelper::RunStindI
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindUnsignedHelper::RunLdindUnsigned
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindWideHelper_RunLdindWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdindWideHelper::RunLdindWide
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdtokenHelper_RunLdtoken), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LdtokenHelper::RunLdtoken
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LdVirtftnHelper::RunLdVirtftn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LocalAllocHelper_RunAlloc), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LocalAllocHelper::RunAlloc
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LoopHelper_SumToFive), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // LoopHelper::SumToFive
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MarkedClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // MarkedClass::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MathHelper_RunSquare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MathHelper::RunSquare
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunArglist), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MoreRareOpsHelper::RunArglist
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunJmp), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MoreRareOpsHelper::RunJmp
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MoreRareOpsHelper::RunMkrefany
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MoreRareOpsHelper::RunRefanytype
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MoreRareOpsHelper::RunRefanyval
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MulDivHelper_RunMulDiv), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MulDivHelper::RunMulDiv
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MultiDispatcher_DispatchBoth), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MultiDispatcher::DispatchBoth
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // MyClass::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // MyClass::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_NegShiftHelper_RunNegShift), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NegShiftHelper::RunNegShift
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfI1
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfI1Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfI2Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfI4Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfI8Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfIUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfU1Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfU2Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfU4Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfU8Un
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvExtHelper::ConvOvfUUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfI2
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfI4
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfI8
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfU1
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfU2
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfU4
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowConvHelper::ConvOvfU8
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowHelper::RunOverflowAdd
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowMul), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowHelper::RunOverflowMul
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowSub), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowHelper::RunOverflowSub
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowUnHelper::RunOverflowAddUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowUnHelper::RunOverflowMulUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // OverflowUnHelper::RunOverflowSubUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // RareOpsHelper::TestConvRUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // RareOpsHelper::TestInitBlk
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // RareOpsHelper::TestStarg
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RethrowHelper_RunRethrow), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // RethrowHelper::RunRethrow
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SealedClassVirtualHelper::RunSealedVirtual
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SealedHelper::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper_GetValueVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SealedHelper::GetValueVirtual
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ShiftHelper_RunShift), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ShiftHelper::RunShift
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvI
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvOvfI
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvOvfIUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvOvfU
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvOvfUUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvU4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunConvU4
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunLdnull), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SimpleGapsHelper::RunLdnull
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SizeOfHelper_GetSize), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SizeOfHelper::GetSize
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StaticFieldWriteHelper::WriteAndRead
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StelemAllHelper_TestAllElems), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StelemAllHelper::TestAllElems
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StindNarrowHelper::RunStindNarrow
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StindWideHelper_RunStindWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StindWideHelper::RunStindWide
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringConcatHelper_TestConcat), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StringConcatHelper::TestConcat
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringFormatHelper_TestFormatOne), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringFormatHelper::TestFormatOne
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringOps_UseString), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // StringOps::UseString
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SwitchHelper_Classify), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SwitchHelper::Classify
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_TargetHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // TargetHelper::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThrowHelper::CheckPositive
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_TypeCheckHelper_CheckAndCast), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // TypeCheckHelper::CheckAndCast
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnboxHelper_RunUnbox), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // UnboxHelper::RunUnbox
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // UnsignedOpsHelper::TestCkfinite
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // UnsignedOpsHelper::TestCltUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // UnsignedOpsHelper::TestDivUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // UnsignedOpsHelper::TestRemUn
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ValueTypeHelper_RunValueType), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ValueTypeHelper::RunValueType
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // VirtualDispatchHelper::UseVirtualDispatch
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VirtualHelper_UseVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // VirtualHelper::UseVirtual
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VoidCaller_DoNothing), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // VoidCaller::DoNothing
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_1__ctor_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Wrapper`1::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_1_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Wrapper`1::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0__ctor_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Wrapper<!0>::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Wrapper<!0>::GetValue
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // Wrapper<System.Int32>::.ctor
-	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_System_Int32_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Wrapper<System.Int32>::GetValue
+static HotpatchEntryV0 s_hotpatch_entries[158] = {
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_0
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_1
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_2
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_3
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_4
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_5
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_6
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_7
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::CustomEntrySubject_8
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::Subject_9
+	{ reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SnapshotProverSubjects::CustomEntryMethod8
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_AddressHelper_RunAddress), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // AddressHelper::RunAddress
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ArithmeticCompareHelper::RunCompare
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticOps_RunAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ArithmeticOps::RunAdd
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayHelper_MakeAndFill), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ArrayHelper::MakeAndFill
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayLengthHelper_RunLength), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ArrayLengthHelper::RunLength
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ArrayRefHelper_RunArrayRef), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ArrayRefHelper::RunArrayRef
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BaseClass::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BaseClass_Compute), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BaseClass::Compute
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BitwiseHelper_RunBitwise), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BitwiseHelper::RunBitwise
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BoxingHelper_BoxAndUnbox), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BoxingHelper::BoxAndUnbox
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BoxInterfaceArrayDemo::DemoBoxStore
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BranchCompareBHelper::RunBranchCompareB
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BranchCompareHelper::RunBranchCompare
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchDupHelper_RunBranchDup), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BranchDupHelper::RunBranchDup
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BranchUnsignedBHelper::RunBranchUnsignedB
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // BranchUnsignedHelper::RunBranchUnsigned
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CalliHelper::RunCalli
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CallVirtHelper_CreateAndUse), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CallVirtHelper::CreateAndUse
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CallvirtHelper_RunCallvirt), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CallvirtHelper::RunCallvirt
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestDict), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CollectionsHelper::TestDict
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestList), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CollectionsHelper::TestList
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CollectionsHelper_TestSet), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CollectionsHelper::TestSet
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConversionHelper_ConvertToInt), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ConversionHelper::ConvertToInt
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ConvSmallIntHelper::RunConvSmall
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ConvWideHelper_RunConvWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ConvWideHelper::RunConvWide
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CpblkHelper_RunCpblk), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CpblkHelper::RunCpblk
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_CpobjHelper_RunCpobj), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CpobjHelper::RunCpobj
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DelegateHelper_RunDelegate), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateHelper::RunDelegate
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DerivedClass::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_DerivedClass_Compute), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DerivedClass::Compute
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_EhHelper_SafeDivide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EhHelper::SafeDivide
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ExternalCaller_CallExternal), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ExternalCaller::CallExternal
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FieldHelper_GetAndIncrement), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // FieldHelper::GetAndIncrement
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FloatOpsHelper_RunFloatOps), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // FloatOpsHelper::RunFloatOps
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_FlowControl_IsPositive), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // FlowControl::IsPositive
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_GenericHelper_UseGeneric), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // GenericHelper::UseGeneric
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // GenericsVirtEhDemo::DemoCombine
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HasFields__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // HasFields::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // HasInstanceFields::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_ConsumeString_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Helper::ConsumeString
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Helper::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_Nop), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Helper::Nop
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Helper_Square_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Helper::Square
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // HotUpdateWithGenericsDemo::Run
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_HotUpdateWithTypesDemo_Run), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // HotUpdateWithTypesDemo::Run
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ImplHelper::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ImplHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ImplHelper::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_IndirectHelper_ReadWriteRef), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // IndirectHelper::ReadWriteRef
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // InstanceFieldHelper::CreateAndUseFields
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // InstanceHelper::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InstanceHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // InstanceHelper::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // InterfaceDevirtHelper::RunInterfaceTest
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_InternalHelper_Double_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // InternalHelper::Double
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdargaHelper::RunLdarga
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdcI8Helper_RunLdcI8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdcI8Helper::RunLdcI8
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdelemaHelper_RunLdelema), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdelemaHelper::RunLdelema
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdelemAllHelper_TestAllElems), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdelemAllHelper::TestAllElems
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdftnHelper_GetFnPtr), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdftnHelper::GetFnPtr
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindI1Helper_RunLdindI1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindI1Helper::RunLdindI1
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindI8Helper_RunLdindI8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindI8Helper::RunLdindI8
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindStindGapsHelper::RunLdindI
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindStindGapsHelper::RunLdindI4
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunStindI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindStindGapsHelper::RunStindI
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindUnsignedHelper::RunLdindUnsigned
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdindWideHelper_RunLdindWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdindWideHelper::RunLdindWide
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdtokenHelper_RunLdtoken), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdtokenHelper::RunLdtoken
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LdVirtftnHelper::RunLdVirtftn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LocalAllocHelper_RunAlloc), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LocalAllocHelper::RunAlloc
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_LoopHelper_SumToFive), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopHelper::SumToFive
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MarkedClass__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MarkedClass::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MathHelper_RunSquare), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MathHelper::RunSquare
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunArglist), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MoreRareOpsHelper::RunArglist
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunJmp), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MoreRareOpsHelper::RunJmp
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MoreRareOpsHelper::RunMkrefany
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MoreRareOpsHelper::RunRefanytype
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MoreRareOpsHelper::RunRefanyval
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MulDivHelper_RunMulDiv), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MulDivHelper::RunMulDiv
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MultiDispatcher_DispatchBoth), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MultiDispatcher::DispatchBoth
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MyClass::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_MyClass_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // MyClass::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_NegShiftHelper_RunNegShift), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // NegShiftHelper::RunNegShift
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfI1
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfI1Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfI2Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfI4Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfI8Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfIUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfU1Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfU2Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfU4Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfU8Un
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvExtHelper::ConvOvfUUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfI2
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfI4
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfI8
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfU1
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfU2
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfU4
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowConvHelper::ConvOvfU8
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowAdd), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowHelper::RunOverflowAdd
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowMul), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowHelper::RunOverflowMul
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowSub), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowHelper::RunOverflowSub
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowUnHelper::RunOverflowAddUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowUnHelper::RunOverflowMulUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // OverflowUnHelper::RunOverflowSubUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // RareOpsHelper::TestConvRUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // RareOpsHelper::TestInitBlk
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // RareOpsHelper::TestStarg
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_RethrowHelper_RunRethrow), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // RethrowHelper::RunRethrow
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SealedClassVirtualHelper::RunSealedVirtual
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SealedHelper::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SealedHelper_GetValueVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SealedHelper::GetValueVirtual
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ShiftHelper_RunShift), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ShiftHelper::RunShift
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvI), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvI
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvOvfI
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvOvfIUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvOvfU
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvOvfUUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvU4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunConvU4
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunLdnull), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SimpleGapsHelper::RunLdnull
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SizeOfHelper_GetSize), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SizeOfHelper::GetSize
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StaticFieldWriteHelper::WriteAndRead
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StelemAllHelper_TestAllElems), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StelemAllHelper::TestAllElems
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StindNarrowHelper::RunStindNarrow
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StindWideHelper_RunStindWide), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StindWideHelper::RunStindWide
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringConcatHelper_TestConcat), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StringConcatHelper::TestConcat
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringFormatHelper_TestFormatOne), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StringFormatHelper::TestFormatOne
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_StringOps_UseString), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // StringOps::UseString
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_SwitchHelper_Classify), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SwitchHelper::Classify
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_TargetHelper_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TargetHelper::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ThrowHelper::CheckPositive
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_TypeCheckHelper_CheckAndCast), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TypeCheckHelper::CheckAndCast
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnboxHelper_RunUnbox), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // UnboxHelper::RunUnbox
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // UnsignedOpsHelper::TestCkfinite
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // UnsignedOpsHelper::TestCltUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // UnsignedOpsHelper::TestDivUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // UnsignedOpsHelper::TestRemUn
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_ValueTypeHelper_RunValueType), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ValueTypeHelper::RunValueType
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // VirtualDispatchHelper::UseVirtualDispatch
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VirtualHelper_UseVirtual), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // VirtualHelper::UseVirtual
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_VoidCaller_DoNothing), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // VoidCaller::DoNothing
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_1__ctor_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper`1::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_1_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper`1::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0__ctor_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper<!0>::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper__0_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper<!0>::GetValue
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper<System.Int32>::.ctor
+	{ reinterpret_cast<void*>(&SnapshotTestFixtures_Wrapper_System_Int32_GetValue), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // Wrapper<System.Int32>::GetValue
 };
 
 // Module hotpatch bundle
@@ -3203,11 +3215,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	97u,
 	s_hotpatch_methods,
-	157u,
+	158u,
 	s_hotpatch_slots,
-	157u,
+	158u,
 	s_hotpatch_entries,
-	157u,
+	158u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -3330,7 +3342,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 52;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[157])() = {
+static void (*kAotMethods[158])() = {
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_2),
@@ -3341,6 +3353,7 @@ static void (*kAotMethods[157])() = {
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_7),
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8),
 	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_9),
+	reinterpret_cast<void(*)()>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8),
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_AddressHelper_RunAddress),
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare),
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_ArithmeticOps_RunAdd),
@@ -3495,7 +3508,7 @@ static void (*kAotMethods[157])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[157])() = {
+extern "C" void (*kBenchmarkWrappers[158])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -3512,9 +3525,9 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[13]();},
 	[]() {kAotMethods[14]();},
 	[]() {kAotMethods[15]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[16]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[18]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[18])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {kAotMethods[19]();},
 	[]() {kAotMethods[20]();},
 	[]() {kAotMethods[21]();},
@@ -3522,8 +3535,8 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[23]();},
 	[]() {kAotMethods[24]();},
 	[]() {kAotMethods[25]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(0);},
-	[]() {kAotMethods[27]();},
+	[]() {kAotMethods[26]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(0);},
 	[]() {kAotMethods[28]();},
 	[]() {kAotMethods[29]();},
 	[]() {kAotMethods[30]();},
@@ -3534,33 +3547,33 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[35]();},
 	[]() {kAotMethods[36]();},
 	[]() {kAotMethods[37]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[38])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[38]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[39])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[40]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[40])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {kAotMethods[41]();},
 	[]() {kAotMethods[42]();},
 	[]() {kAotMethods[43]();},
 	[]() {kAotMethods[44]();},
 	[]() {kAotMethods[45]();},
 	[]() {kAotMethods[46]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(7201466553693376363ULL));},
-	[]() {kAotMethods[50]();},
+	[]() {kAotMethods[47]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[50])(chaos_make_string_id_value(803950926144638187ULL));},
 	[]() {kAotMethods[51]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[52])(0);},
-	[]() {kAotMethods[53]();},
+	[]() {kAotMethods[52]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[53])(0);},
 	[]() {kAotMethods[54]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[55])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[56])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[57]();},
+	[]() {kAotMethods[55]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[56])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[57])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {kAotMethods[58]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[59])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[60])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[61]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[62])(0);},
+	[]() {kAotMethods[59]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[60])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[61])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[62]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[63])(0);},
-	[]() {kAotMethods[64]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[64])(0);},
 	[]() {kAotMethods[65]();},
 	[]() {kAotMethods[66]();},
 	[]() {kAotMethods[67]();},
@@ -3575,8 +3588,8 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[76]();},
 	[]() {kAotMethods[77]();},
 	[]() {kAotMethods[78]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[79])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[80]();},
+	[]() {kAotMethods[79]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[80])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {kAotMethods[81]();},
 	[]() {kAotMethods[82]();},
 	[]() {kAotMethods[83]();},
@@ -3584,10 +3597,10 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[85]();},
 	[]() {kAotMethods[86]();},
 	[]() {kAotMethods[87]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[88])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[89])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[90]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[91])(0);},
+	[]() {kAotMethods[88]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[89])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[90])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[91]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[92])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[93])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[94])(0);},
@@ -3599,32 +3612,32 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[100])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[101])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[102])(0);},
-	[]() {kAotMethods[103]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[104])(0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[103])(0);},
+	[]() {kAotMethods[104]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[105])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[106])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[107])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[108])(0);},
-	[]() {kAotMethods[109]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[109])(0);},
 	[]() {kAotMethods[110]();},
 	[]() {kAotMethods[111]();},
 	[]() {kAotMethods[112]();},
 	[]() {kAotMethods[113]();},
 	[]() {kAotMethods[114]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[115])(0);},
+	[]() {kAotMethods[115]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[116])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[117])(0);},
-	[]() {kAotMethods[118]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[118])(0);},
 	[]() {kAotMethods[119]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[120])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[121])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[122]();},
+	[]() {kAotMethods[120]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[121])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[122])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {kAotMethods[123]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[124])(0);},
+	[]() {kAotMethods[124]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[125])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[126])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[127])(0);},
-	[]() {kAotMethods[128]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[128])(0);},
 	[]() {kAotMethods[129]();},
 	[]() {kAotMethods[130]();},
 	[]() {kAotMethods[131]();},
@@ -3636,23 +3649,24 @@ extern "C" void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[137]();},
 	[]() {kAotMethods[138]();},
 	[]() {kAotMethods[139]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[140])(0);},
-	[]() {kAotMethods[141]();},
+	[]() {kAotMethods[140]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[141])(0);},
 	[]() {kAotMethods[142]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[143])(0);},
-	[]() {kAotMethods[144]();},
+	[]() {kAotMethods[143]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[144])(0);},
 	[]() {kAotMethods[145]();},
 	[]() {kAotMethods[146]();},
 	[]() {kAotMethods[147]();},
 	[]() {kAotMethods[148]();},
 	[]() {kAotMethods[149]();},
 	[]() {kAotMethods[150]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[151])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[152])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[153])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[154])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[155])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[156])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[151]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[152])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[153])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[154])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[155])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[156])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[157])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -3671,10 +3685,12 @@ extern "C" const int kSubjectEntryIndices[10] = {
 	6,
 	7,
 	8,
-	9
+	9,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -3731,1434 +3747,2540 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: switch-based direct dispatch per method.
-// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
-// the method body into the timing loop — eliminating function pointer indirection.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	switch (chaos_entry_index) {
-	case 0: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_0();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 1: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 2: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_2();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 3: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_3();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 4: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 5: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_5();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 6: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_6();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 7: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_7();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 8: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 9: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotProverSubjects_SnapshotProverSubjects_Subject_9();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 10: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_AddressHelper_RunAddress();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 11: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 12: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ArithmeticOps_RunAdd();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 13: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ArrayHelper_MakeAndFill();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 14: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ArrayLengthHelper_RunLength();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 15: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ArrayRefHelper_RunArrayRef();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 16: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BaseClass__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 17: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BaseClass_Compute(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 18: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BitwiseHelper_RunBitwise();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 19: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BoxingHelper_BoxAndUnbox();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 20: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 21: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 22: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 23: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BranchDupHelper_RunBranchDup();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 24: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 25: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 26: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 27: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CallVirtHelper_CreateAndUse();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 28: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CallvirtHelper_RunCallvirt();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 29: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CollectionsHelper_TestDict();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 30: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CollectionsHelper_TestList();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 31: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CollectionsHelper_TestSet();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 32: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ConversionHelper_ConvertToInt();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 33: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 34: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ConvWideHelper_RunConvWide();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 35: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CpblkHelper_RunCpblk();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 36: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_CpobjHelper_RunCpobj();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 37: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_DelegateHelper_RunDelegate();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 38: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_DerivedClass__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 39: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_DerivedClass_Compute(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 40: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_EhHelper_SafeDivide();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 41: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ExternalCaller_CallExternal();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 42: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_FieldHelper_GetAndIncrement();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 43: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_FloatOpsHelper_RunFloatOps();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 44: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_FlowControl_IsPositive();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 45: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_GenericHelper_UseGeneric();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 46: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 47: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_HasFields__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 48: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 49: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Helper_ConsumeString_System_String(chaos_make_string_id_value(7201466553693376363ULL));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 50: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Helper_GetValue();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 51: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Helper_Nop();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 52: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Helper_Square_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 53: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 54: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_HotUpdateWithTypesDemo_Run();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 55: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ImplHelper__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 56: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ImplHelper_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 57: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_IndirectHelper_ReadWriteRef();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 58: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 59: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_InstanceHelper__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 60: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_InstanceHelper_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 61: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 62: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_InternalHelper_Double_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 63: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 64: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdcI8Helper_RunLdcI8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 65: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdelemaHelper_RunLdelema();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 66: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdelemAllHelper_TestAllElems();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 67: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdftnHelper_GetFnPtr();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 68: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindI1Helper_RunLdindI1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 69: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindI8Helper_RunLdindI8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 70: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 71: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 72: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindStindGapsHelper_RunStindI();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 73: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 74: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdindWideHelper_RunLdindWide();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 75: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdtokenHelper_RunLdtoken();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 76: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 77: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LocalAllocHelper_RunAlloc();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 78: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_LoopHelper_SumToFive();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 79: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MarkedClass__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 80: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MathHelper_RunSquare();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 81: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MoreRareOpsHelper_RunArglist();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 82: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MoreRareOpsHelper_RunJmp();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 83: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 84: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 85: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 86: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MulDivHelper_RunMulDiv();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 87: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MultiDispatcher_DispatchBoth();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 88: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MyClass__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 89: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_MyClass_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 90: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_NegShiftHelper_RunNegShift();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 91: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 92: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 93: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 94: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 95: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 96: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 97: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 98: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 99: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 100: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 101: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 102: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 103: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 104: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 105: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 106: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 107: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 108: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 109: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowHelper_RunOverflowAdd();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 110: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowHelper_RunOverflowMul();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 111: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowHelper_RunOverflowSub();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 112: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 113: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 114: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 115: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 116: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 117: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 118: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_RethrowHelper_RunRethrow();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 119: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 120: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SealedHelper__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 121: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SealedHelper_GetValueVirtual(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 122: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ShiftHelper_RunShift();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 123: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvI();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 124: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 125: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 126: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 127: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 128: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunConvU4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 129: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SimpleGapsHelper_RunLdnull();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 130: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SizeOfHelper_GetSize();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 131: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 132: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StelemAllHelper_TestAllElems();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 133: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 134: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StindWideHelper_RunStindWide();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 135: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StringConcatHelper_TestConcat();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 136: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StringFormatHelper_TestFormatOne();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 137: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_StringOps_UseString();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 138: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_SwitchHelper_Classify();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 139: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_TargetHelper_GetValue();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 140: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 141: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_TypeCheckHelper_CheckAndCast();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 142: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_UnboxHelper_RunUnbox();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 143: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 144: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 145: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 146: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 147: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_ValueTypeHelper_RunValueType();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 148: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 149: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_VirtualHelper_UseVirtual();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 150: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_VoidCaller_DoNothing();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 151: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper_1__ctor_0(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 152: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper_1_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 153: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper__0__ctor_0(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 154: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper__0_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 155: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 156: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			SnapshotTestFixtures_Wrapper_System_Int32_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	default:
-		return -1.0;
-	}
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
+	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: SnapshotProverSubjects_SnapshotProverSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry0;
+	/* ── Entry 1: SnapshotProverSubjects_SnapshotProverSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry1;
+	/* ── Entry 2: SnapshotProverSubjects_SnapshotProverSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry2;
+	/* ── Entry 3: SnapshotProverSubjects_SnapshotProverSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: SnapshotProverSubjects_SnapshotProverSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry4;
+	/* ── Entry 5: SnapshotProverSubjects_SnapshotProverSubjects_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry5;
+	/* ── Entry 6: SnapshotProverSubjects_SnapshotProverSubjects_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry6;
+	/* ── Entry 7: SnapshotProverSubjects_SnapshotProverSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry7;
+	/* ── Entry 8: SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry8;
+	/* ── Entry 9: SnapshotProverSubjects_SnapshotProverSubjects_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry9;
+	/* ── Entry 10: SnapshotTestFixtures_AddressHelper_RunAddress ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry10;
+	/* ── Entry 11: SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[11];
+	} entry11;
+	/* ── Entry 12: SnapshotTestFixtures_ArithmeticOps_RunAdd ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry12;
+	/* ── Entry 13: SnapshotTestFixtures_ArrayHelper_MakeAndFill ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry13;
+	/* ── Entry 14: SnapshotTestFixtures_ArrayLengthHelper_RunLength ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry14;
+	/* ── Entry 15: SnapshotTestFixtures_ArrayRefHelper_RunArrayRef ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry15;
+	/* ── Entry 16: SnapshotTestFixtures_BaseClass__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry16;
+	/* ── Entry 17: SnapshotTestFixtures_BaseClass_Compute ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry17;
+	/* ── Entry 18: SnapshotTestFixtures_BitwiseHelper_RunBitwise ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[10];
+	} entry18;
+	/* ── Entry 19: SnapshotTestFixtures_BoxingHelper_BoxAndUnbox ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry19;
+	/* ── Entry 20: SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry20;
+	/* ── Entry 21: SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[12];
+	} entry21;
+	/* ── Entry 22: SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[11];
+	} entry22;
+	/* ── Entry 23: SnapshotTestFixtures_BranchDupHelper_RunBranchDup ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry23;
+	/* ── Entry 24: SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry24;
+	/* ── Entry 25: SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry25;
+	/* ── Entry 26: SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry26;
+	/* ── Entry 27: SnapshotTestFixtures_CallVirtHelper_CreateAndUse ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry27;
+	/* ── Entry 28: SnapshotTestFixtures_CallvirtHelper_RunCallvirt ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry28;
+	/* ── Entry 29: SnapshotTestFixtures_CollectionsHelper_TestDict ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry29;
+	/* ── Entry 30: SnapshotTestFixtures_CollectionsHelper_TestList ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry30;
+	/* ── Entry 31: SnapshotTestFixtures_CollectionsHelper_TestSet ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry31;
+	/* ── Entry 32: SnapshotTestFixtures_ConversionHelper_ConvertToInt ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry32;
+	/* ── Entry 33: SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[12];
+	} entry33;
+	/* ── Entry 34: SnapshotTestFixtures_ConvWideHelper_RunConvWide ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry34;
+	/* ── Entry 35: SnapshotTestFixtures_CpblkHelper_RunCpblk ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry35;
+	/* ── Entry 36: SnapshotTestFixtures_CpobjHelper_RunCpobj ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry36;
+	/* ── Entry 37: SnapshotTestFixtures_DelegateHelper_RunDelegate ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry37;
+	/* ── Entry 38: SnapshotTestFixtures_DerivedClass__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry38;
+	/* ── Entry 39: SnapshotTestFixtures_DerivedClass_Compute ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry39;
+	/* ── Entry 40: SnapshotTestFixtures_EhHelper_SafeDivide ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry40;
+	/* ── Entry 41: SnapshotTestFixtures_ExternalCaller_CallExternal ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry41;
+	/* ── Entry 42: SnapshotTestFixtures_FieldHelper_GetAndIncrement ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry42;
+	/* ── Entry 43: SnapshotTestFixtures_FloatOpsHelper_RunFloatOps ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry43;
+	/* ── Entry 44: SnapshotTestFixtures_FlowControl_IsPositive ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry44;
+	/* ── Entry 45: SnapshotTestFixtures_GenericHelper_UseGeneric ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry45;
+	/* ── Entry 46: SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry46;
+	/* ── Entry 47: SnapshotTestFixtures_HasFields__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry47;
+	/* ── Entry 48: SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry48;
+	/* ── Entry 49: SnapshotTestFixtures_Helper_ConsumeString_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry49;
+	/* ── Entry 50: SnapshotTestFixtures_Helper_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry50;
+	/* ── Entry 51: SnapshotTestFixtures_Helper_Square_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry51;
+	/* ── Entry 52: SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry52;
+	/* ── Entry 53: SnapshotTestFixtures_HotUpdateWithTypesDemo_Run ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry53;
+	/* ── Entry 54: SnapshotTestFixtures_ImplHelper__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry54;
+	/* ── Entry 55: SnapshotTestFixtures_ImplHelper_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry55;
+	/* ── Entry 56: SnapshotTestFixtures_IndirectHelper_ReadWriteRef ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry56;
+	/* ── Entry 57: SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry57;
+	/* ── Entry 58: SnapshotTestFixtures_InstanceHelper__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry58;
+	/* ── Entry 59: SnapshotTestFixtures_InstanceHelper_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry59;
+	/* ── Entry 60: SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry60;
+	/* ── Entry 61: SnapshotTestFixtures_InternalHelper_Double_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry61;
+	/* ── Entry 62: SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry62;
+	/* ── Entry 63: SnapshotTestFixtures_LdcI8Helper_RunLdcI8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry63;
+	/* ── Entry 64: SnapshotTestFixtures_LdelemaHelper_RunLdelema ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry64;
+	/* ── Entry 65: SnapshotTestFixtures_LdelemAllHelper_TestAllElems ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry65;
+	/* ── Entry 66: SnapshotTestFixtures_LdftnHelper_GetFnPtr ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry66;
+	/* ── Entry 67: SnapshotTestFixtures_LdindI1Helper_RunLdindI1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry67;
+	/* ── Entry 68: SnapshotTestFixtures_LdindI8Helper_RunLdindI8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry68;
+	/* ── Entry 69: SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry69;
+	/* ── Entry 70: SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry70;
+	/* ── Entry 71: SnapshotTestFixtures_LdindStindGapsHelper_RunStindI ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry71;
+	/* ── Entry 72: SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[11];
+	} entry72;
+	/* ── Entry 73: SnapshotTestFixtures_LdindWideHelper_RunLdindWide ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry73;
+	/* ── Entry 74: SnapshotTestFixtures_LdtokenHelper_RunLdtoken ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry74;
+	/* ── Entry 75: SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry75;
+	/* ── Entry 76: SnapshotTestFixtures_LocalAllocHelper_RunAlloc ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry76;
+	/* ── Entry 77: SnapshotTestFixtures_LoopHelper_SumToFive ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry77;
+	/* ── Entry 78: SnapshotTestFixtures_MarkedClass__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry78;
+	/* ── Entry 79: SnapshotTestFixtures_MathHelper_RunSquare ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry79;
+	/* ── Entry 80: SnapshotTestFixtures_MoreRareOpsHelper_RunArglist ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry80;
+	/* ── Entry 81: SnapshotTestFixtures_MoreRareOpsHelper_RunJmp ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry81;
+	/* ── Entry 82: SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry82;
+	/* ── Entry 83: SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry83;
+	/* ── Entry 84: SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry84;
+	/* ── Entry 85: SnapshotTestFixtures_MulDivHelper_RunMulDiv ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry85;
+	/* ── Entry 86: SnapshotTestFixtures_MultiDispatcher_DispatchBoth ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry86;
+	/* ── Entry 87: SnapshotTestFixtures_MyClass__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry87;
+	/* ── Entry 88: SnapshotTestFixtures_MyClass_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry88;
+	/* ── Entry 89: SnapshotTestFixtures_NegShiftHelper_RunNegShift ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry89;
+	/* ── Entry 90: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry90;
+	/* ── Entry 91: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry91;
+	/* ── Entry 92: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry92;
+	/* ── Entry 93: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry93;
+	/* ── Entry 94: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry94;
+	/* ── Entry 95: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry95;
+	/* ── Entry 96: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry96;
+	/* ── Entry 97: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry97;
+	/* ── Entry 98: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry98;
+	/* ── Entry 99: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry99;
+	/* ── Entry 100: SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry100;
+	/* ── Entry 101: SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry101;
+	/* ── Entry 102: SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry102;
+	/* ── Entry 103: SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry103;
+	/* ── Entry 104: SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry104;
+	/* ── Entry 105: SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry105;
+	/* ── Entry 106: SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry106;
+	/* ── Entry 107: SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry107;
+	/* ── Entry 108: SnapshotTestFixtures_OverflowHelper_RunOverflowAdd ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry108;
+	/* ── Entry 109: SnapshotTestFixtures_OverflowHelper_RunOverflowMul ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry109;
+	/* ── Entry 110: SnapshotTestFixtures_OverflowHelper_RunOverflowSub ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry110;
+	/* ── Entry 111: SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry111;
+	/* ── Entry 112: SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry112;
+	/* ── Entry 113: SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry113;
+	/* ── Entry 114: SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry114;
+	/* ── Entry 115: SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry115;
+	/* ── Entry 116: SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry116;
+	/* ── Entry 117: SnapshotTestFixtures_RethrowHelper_RunRethrow ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry117;
+	/* ── Entry 118: SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry118;
+	/* ── Entry 119: SnapshotTestFixtures_SealedHelper__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry119;
+	/* ── Entry 120: SnapshotTestFixtures_SealedHelper_GetValueVirtual ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry120;
+	/* ── Entry 121: SnapshotTestFixtures_ShiftHelper_RunShift ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry121;
+	/* ── Entry 122: SnapshotTestFixtures_SimpleGapsHelper_RunConvI ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry122;
+	/* ── Entry 123: SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry123;
+	/* ── Entry 124: SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry124;
+	/* ── Entry 125: SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry125;
+	/* ── Entry 126: SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry126;
+	/* ── Entry 127: SnapshotTestFixtures_SimpleGapsHelper_RunConvU4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry127;
+	/* ── Entry 128: SnapshotTestFixtures_SimpleGapsHelper_RunLdnull ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry128;
+	/* ── Entry 129: SnapshotTestFixtures_SizeOfHelper_GetSize ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry129;
+	/* ── Entry 130: SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry130;
+	/* ── Entry 131: SnapshotTestFixtures_StelemAllHelper_TestAllElems ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry131;
+	/* ── Entry 132: SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry132;
+	/* ── Entry 133: SnapshotTestFixtures_StindWideHelper_RunStindWide ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[12];
+	} entry133;
+	/* ── Entry 134: SnapshotTestFixtures_StringConcatHelper_TestConcat ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry134;
+	/* ── Entry 135: SnapshotTestFixtures_StringFormatHelper_TestFormatOne ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry135;
+	/* ── Entry 136: SnapshotTestFixtures_StringOps_UseString ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry136;
+	/* ── Entry 137: SnapshotTestFixtures_SwitchHelper_Classify ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry137;
+	/* ── Entry 138: SnapshotTestFixtures_TargetHelper_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry138;
+	/* ── Entry 139: SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry139;
+	/* ── Entry 140: SnapshotTestFixtures_TypeCheckHelper_CheckAndCast ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry140;
+	/* ── Entry 141: SnapshotTestFixtures_UnboxHelper_RunUnbox ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry141;
+	/* ── Entry 142: SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry142;
+	/* ── Entry 143: SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry143;
+	/* ── Entry 144: SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry144;
+	/* ── Entry 145: SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry145;
+	/* ── Entry 146: SnapshotTestFixtures_ValueTypeHelper_RunValueType ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry146;
+	/* ── Entry 147: SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry147;
+	/* ── Entry 148: SnapshotTestFixtures_VirtualHelper_UseVirtual ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry148;
+	/* ── Entry 149: SnapshotTestFixtures_VoidCaller_DoNothing ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry149;
+	/* ── Entry 150: SnapshotTestFixtures_Wrapper_1__ctor_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry150;
+	/* ── Entry 151: SnapshotTestFixtures_Wrapper_1_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry151;
+	/* ── Entry 152: SnapshotTestFixtures_Wrapper__0__ctor_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry152;
+	/* ── Entry 153: SnapshotTestFixtures_Wrapper__0_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry153;
+	/* ── Entry 154: SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry154;
+	/* ── Entry 155: SnapshotTestFixtures_Wrapper_System_Int32_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry155;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry1 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_1),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry2 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_2),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry3 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_3),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry4 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_4),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry5 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_5),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry6 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_6),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry7 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_7),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry8 = SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8 */
+	.entry8 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry9 = SnapshotProverSubjects_SnapshotProverSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_9),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry10 = SnapshotTestFixtures_AddressHelper_RunAddress */
+	.entry10 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_AddressHelper_RunAddress),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry11 = SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare */
+	.entry11 = {
+		/* entry_total_size = 64 */ 64u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare),
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
+	},
+	/* entry12 = SnapshotTestFixtures_ArithmeticOps_RunAdd */
+	.entry12 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ArithmeticOps_RunAdd),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry13 = SnapshotTestFixtures_ArrayHelper_MakeAndFill */
+	.entry13 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ArrayHelper_MakeAndFill),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry14 = SnapshotTestFixtures_ArrayLengthHelper_RunLength */
+	.entry14 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ArrayLengthHelper_RunLength),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry15 = SnapshotTestFixtures_ArrayRefHelper_RunArrayRef */
+	.entry15 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ArrayRefHelper_RunArrayRef),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry16 = SnapshotTestFixtures_BaseClass__ctor */
+	.entry16 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BaseClass__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry17 = SnapshotTestFixtures_BaseClass_Compute */
+	.entry17 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BaseClass_Compute),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry18 = SnapshotTestFixtures_BitwiseHelper_RunBitwise */
+	.entry18 = {
+		/* entry_total_size = 60 */ 60u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BitwiseHelper_RunBitwise),
+		/* frame_size = 80 */ 80u,
+		/* num_gc_slots = 10 */ 10u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u }
+	},
+	/* entry19 = SnapshotTestFixtures_BoxingHelper_BoxAndUnbox */
+	.entry19 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BoxingHelper_BoxAndUnbox),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry20 = SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore */
+	.entry20 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry21 = SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB */
+	.entry21 = {
+		/* entry_total_size = 68 */ 68u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB),
+		/* frame_size = 96 */ 96u,
+		/* num_gc_slots = 12 */ 12u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
+	},
+	/* entry22 = SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare */
+	.entry22 = {
+		/* entry_total_size = 64 */ 64u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare),
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
+	},
+	/* entry23 = SnapshotTestFixtures_BranchDupHelper_RunBranchDup */
+	.entry23 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BranchDupHelper_RunBranchDup),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry24 = SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB */
+	.entry24 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry25 = SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned */
+	.entry25 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry26 = SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32 */
+	.entry26 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry27 = SnapshotTestFixtures_CallVirtHelper_CreateAndUse */
+	.entry27 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CallVirtHelper_CreateAndUse),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry28 = SnapshotTestFixtures_CallvirtHelper_RunCallvirt */
+	.entry28 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CallvirtHelper_RunCallvirt),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry29 = SnapshotTestFixtures_CollectionsHelper_TestDict */
+	.entry29 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CollectionsHelper_TestDict),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry30 = SnapshotTestFixtures_CollectionsHelper_TestList */
+	.entry30 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CollectionsHelper_TestList),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry31 = SnapshotTestFixtures_CollectionsHelper_TestSet */
+	.entry31 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CollectionsHelper_TestSet),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry32 = SnapshotTestFixtures_ConversionHelper_ConvertToInt */
+	.entry32 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ConversionHelper_ConvertToInt),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry33 = SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall */
+	.entry33 = {
+		/* entry_total_size = 68 */ 68u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall),
+		/* frame_size = 96 */ 96u,
+		/* num_gc_slots = 12 */ 12u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
+	},
+	/* entry34 = SnapshotTestFixtures_ConvWideHelper_RunConvWide */
+	.entry34 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ConvWideHelper_RunConvWide),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry35 = SnapshotTestFixtures_CpblkHelper_RunCpblk */
+	.entry35 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CpblkHelper_RunCpblk),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry36 = SnapshotTestFixtures_CpobjHelper_RunCpobj */
+	.entry36 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_CpobjHelper_RunCpobj),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry37 = SnapshotTestFixtures_DelegateHelper_RunDelegate */
+	.entry37 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_DelegateHelper_RunDelegate),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry38 = SnapshotTestFixtures_DerivedClass__ctor */
+	.entry38 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_DerivedClass__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry39 = SnapshotTestFixtures_DerivedClass_Compute */
+	.entry39 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_DerivedClass_Compute),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry40 = SnapshotTestFixtures_EhHelper_SafeDivide */
+	.entry40 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_EhHelper_SafeDivide),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry41 = SnapshotTestFixtures_ExternalCaller_CallExternal */
+	.entry41 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ExternalCaller_CallExternal),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry42 = SnapshotTestFixtures_FieldHelper_GetAndIncrement */
+	.entry42 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_FieldHelper_GetAndIncrement),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry43 = SnapshotTestFixtures_FloatOpsHelper_RunFloatOps */
+	.entry43 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_FloatOpsHelper_RunFloatOps),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry44 = SnapshotTestFixtures_FlowControl_IsPositive */
+	.entry44 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_FlowControl_IsPositive),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry45 = SnapshotTestFixtures_GenericHelper_UseGeneric */
+	.entry45 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_GenericHelper_UseGeneric),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry46 = SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine */
+	.entry46 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry47 = SnapshotTestFixtures_HasFields__ctor */
+	.entry47 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_HasFields__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry48 = SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32 */
+	.entry48 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry49 = SnapshotTestFixtures_Helper_ConsumeString_System_String */
+	.entry49 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Helper_ConsumeString_System_String),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry50 = SnapshotTestFixtures_Helper_GetValue */
+	.entry50 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Helper_GetValue),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry51 = SnapshotTestFixtures_Helper_Square_System_Int32 */
+	.entry51 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Helper_Square_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry52 = SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run */
+	.entry52 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry53 = SnapshotTestFixtures_HotUpdateWithTypesDemo_Run */
+	.entry53 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_HotUpdateWithTypesDemo_Run),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry54 = SnapshotTestFixtures_ImplHelper__ctor_System_Int32 */
+	.entry54 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ImplHelper__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry55 = SnapshotTestFixtures_ImplHelper_GetValue */
+	.entry55 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ImplHelper_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry56 = SnapshotTestFixtures_IndirectHelper_ReadWriteRef */
+	.entry56 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_IndirectHelper_ReadWriteRef),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry57 = SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields */
+	.entry57 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry58 = SnapshotTestFixtures_InstanceHelper__ctor_System_Int32 */
+	.entry58 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_InstanceHelper__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry59 = SnapshotTestFixtures_InstanceHelper_GetValue */
+	.entry59 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_InstanceHelper_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry60 = SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest */
+	.entry60 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry61 = SnapshotTestFixtures_InternalHelper_Double_System_Int32 */
+	.entry61 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_InternalHelper_Double_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry62 = SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32 */
+	.entry62 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 8u }
+	},
+	/* entry63 = SnapshotTestFixtures_LdcI8Helper_RunLdcI8 */
+	.entry63 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdcI8Helper_RunLdcI8),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry64 = SnapshotTestFixtures_LdelemaHelper_RunLdelema */
+	.entry64 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdelemaHelper_RunLdelema),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry65 = SnapshotTestFixtures_LdelemAllHelper_TestAllElems */
+	.entry65 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdelemAllHelper_TestAllElems),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry66 = SnapshotTestFixtures_LdftnHelper_GetFnPtr */
+	.entry66 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdftnHelper_GetFnPtr),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry67 = SnapshotTestFixtures_LdindI1Helper_RunLdindI1 */
+	.entry67 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindI1Helper_RunLdindI1),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry68 = SnapshotTestFixtures_LdindI8Helper_RunLdindI8 */
+	.entry68 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindI8Helper_RunLdindI8),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry69 = SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI */
+	.entry69 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry70 = SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4 */
+	.entry70 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry71 = SnapshotTestFixtures_LdindStindGapsHelper_RunStindI */
+	.entry71 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindStindGapsHelper_RunStindI),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry72 = SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned */
+	.entry72 = {
+		/* entry_total_size = 64 */ 64u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned),
+		/* frame_size = 88 */ 88u,
+		/* num_gc_slots = 11 */ 11u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u }
+	},
+	/* entry73 = SnapshotTestFixtures_LdindWideHelper_RunLdindWide */
+	.entry73 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdindWideHelper_RunLdindWide),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry74 = SnapshotTestFixtures_LdtokenHelper_RunLdtoken */
+	.entry74 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdtokenHelper_RunLdtoken),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry75 = SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn */
+	.entry75 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry76 = SnapshotTestFixtures_LocalAllocHelper_RunAlloc */
+	.entry76 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LocalAllocHelper_RunAlloc),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry77 = SnapshotTestFixtures_LoopHelper_SumToFive */
+	.entry77 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_LoopHelper_SumToFive),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry78 = SnapshotTestFixtures_MarkedClass__ctor */
+	.entry78 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MarkedClass__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry79 = SnapshotTestFixtures_MathHelper_RunSquare */
+	.entry79 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MathHelper_RunSquare),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry80 = SnapshotTestFixtures_MoreRareOpsHelper_RunArglist */
+	.entry80 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunArglist),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry81 = SnapshotTestFixtures_MoreRareOpsHelper_RunJmp */
+	.entry81 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunJmp),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry82 = SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany */
+	.entry82 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry83 = SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype */
+	.entry83 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry84 = SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval */
+	.entry84 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry85 = SnapshotTestFixtures_MulDivHelper_RunMulDiv */
+	.entry85 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MulDivHelper_RunMulDiv),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry86 = SnapshotTestFixtures_MultiDispatcher_DispatchBoth */
+	.entry86 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MultiDispatcher_DispatchBoth),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry87 = SnapshotTestFixtures_MyClass__ctor_System_Int32 */
+	.entry87 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MyClass__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry88 = SnapshotTestFixtures_MyClass_GetValue */
+	.entry88 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_MyClass_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry89 = SnapshotTestFixtures_NegShiftHelper_RunNegShift */
+	.entry89 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_NegShiftHelper_RunNegShift),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry90 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32 */
+	.entry90 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry91 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32 */
+	.entry91 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry92 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32 */
+	.entry92 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry93 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64 */
+	.entry93 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry94 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single */
+	.entry94 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry95 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32 */
+	.entry95 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry96 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32 */
+	.entry96 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry97 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32 */
+	.entry97 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry98 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64 */
+	.entry98 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry99 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double */
+	.entry99 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry100 = SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32 */
+	.entry100 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry101 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32 */
+	.entry101 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry102 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4 */
+	.entry102 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry103 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single */
+	.entry103 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry104 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32 */
+	.entry104 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry105 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32 */
+	.entry105 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry106 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64 */
+	.entry106 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry107 = SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double */
+	.entry107 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry108 = SnapshotTestFixtures_OverflowHelper_RunOverflowAdd */
+	.entry108 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowAdd),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry109 = SnapshotTestFixtures_OverflowHelper_RunOverflowMul */
+	.entry109 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowMul),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry110 = SnapshotTestFixtures_OverflowHelper_RunOverflowSub */
+	.entry110 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowHelper_RunOverflowSub),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry111 = SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn */
+	.entry111 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry112 = SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn */
+	.entry112 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry113 = SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn */
+	.entry113 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry114 = SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single */
+	.entry114 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry115 = SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32 */
+	.entry115 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry116 = SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32 */
+	.entry116 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 8u }
+	},
+	/* entry117 = SnapshotTestFixtures_RethrowHelper_RunRethrow */
+	.entry117 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_RethrowHelper_RunRethrow),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry118 = SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual */
+	.entry118 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry119 = SnapshotTestFixtures_SealedHelper__ctor_System_Int32 */
+	.entry119 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SealedHelper__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry120 = SnapshotTestFixtures_SealedHelper_GetValueVirtual */
+	.entry120 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SealedHelper_GetValueVirtual),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry121 = SnapshotTestFixtures_ShiftHelper_RunShift */
+	.entry121 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ShiftHelper_RunShift),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry122 = SnapshotTestFixtures_SimpleGapsHelper_RunConvI */
+	.entry122 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvI),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry123 = SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32 */
+	.entry123 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry124 = SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32 */
+	.entry124 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry125 = SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32 */
+	.entry125 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	},
+	/* entry126 = SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32 */
+	.entry126 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry127 = SnapshotTestFixtures_SimpleGapsHelper_RunConvU4 */
+	.entry127 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunConvU4),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry128 = SnapshotTestFixtures_SimpleGapsHelper_RunLdnull */
+	.entry128 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SimpleGapsHelper_RunLdnull),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry129 = SnapshotTestFixtures_SizeOfHelper_GetSize */
+	.entry129 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SizeOfHelper_GetSize),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry130 = SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead */
+	.entry130 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry131 = SnapshotTestFixtures_StelemAllHelper_TestAllElems */
+	.entry131 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StelemAllHelper_TestAllElems),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry132 = SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow */
+	.entry132 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry133 = SnapshotTestFixtures_StindWideHelper_RunStindWide */
+	.entry133 = {
+		/* entry_total_size = 68 */ 68u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StindWideHelper_RunStindWide),
+		/* frame_size = 96 */ 96u,
+		/* num_gc_slots = 12 */ 12u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
+	},
+	/* entry134 = SnapshotTestFixtures_StringConcatHelper_TestConcat */
+	.entry134 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StringConcatHelper_TestConcat),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry135 = SnapshotTestFixtures_StringFormatHelper_TestFormatOne */
+	.entry135 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StringFormatHelper_TestFormatOne),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry136 = SnapshotTestFixtures_StringOps_UseString */
+	.entry136 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_StringOps_UseString),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry137 = SnapshotTestFixtures_SwitchHelper_Classify */
+	.entry137 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_SwitchHelper_Classify),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry138 = SnapshotTestFixtures_TargetHelper_GetValue */
+	.entry138 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_TargetHelper_GetValue),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry139 = SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32 */
+	.entry139 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 8u, 16u }
+	},
+	/* entry140 = SnapshotTestFixtures_TypeCheckHelper_CheckAndCast */
+	.entry140 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_TypeCheckHelper_CheckAndCast),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry141 = SnapshotTestFixtures_UnboxHelper_RunUnbox */
+	.entry141 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_UnboxHelper_RunUnbox),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry142 = SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double */
+	.entry142 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 8u }
+	},
+	/* entry143 = SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn */
+	.entry143 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry144 = SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn */
+	.entry144 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry145 = SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn */
+	.entry145 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry146 = SnapshotTestFixtures_ValueTypeHelper_RunValueType */
+	.entry146 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_ValueTypeHelper_RunValueType),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry147 = SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch */
+	.entry147 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry148 = SnapshotTestFixtures_VirtualHelper_UseVirtual */
+	.entry148 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_VirtualHelper_UseVirtual),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry149 = SnapshotTestFixtures_VoidCaller_DoNothing */
+	.entry149 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_VoidCaller_DoNothing),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry150 = SnapshotTestFixtures_Wrapper_1__ctor_0 */
+	.entry150 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper_1__ctor_0),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry151 = SnapshotTestFixtures_Wrapper_1_GetValue */
+	.entry151 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper_1_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry152 = SnapshotTestFixtures_Wrapper__0__ctor_0 */
+	.entry152 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper__0__ctor_0),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry153 = SnapshotTestFixtures_Wrapper__0_GetValue */
+	.entry153 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper__0_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry154 = SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32 */
+	.entry154 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry155 = SnapshotTestFixtures_Wrapper_System_Int32_GetValue */
+	.entry155 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&SnapshotTestFixtures_Wrapper_System_Int32_GetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 5404u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[157] = {
+static void* const kMethodPointers[158] = {
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0),
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_1),
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_2),
@@ -5169,6 +6291,7 @@ static void* const kMethodPointers[157] = {
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_7),
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8),
 	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_9),
+	reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8),
 	reinterpret_cast<void*>(&SnapshotTestFixtures_AddressHelper_RunAddress),
 	reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare),
 	reinterpret_cast<void*>(&SnapshotTestFixtures_ArithmeticOps_RunAdd),
@@ -5469,7 +6592,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 157u,
+	.method_pointer_count      = 158u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -5480,6 +6603,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
 	.vtable_descriptor_count = 11u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -5518,7 +6644,7 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 static constexpr ReflectionQueryFieldDescriptor kReflFields_SnapshotProverSubjects_SnapshotProverSubjects[1] = {
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotProverSubjects_SnapshotProverSubjects[10] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotProverSubjects_SnapshotProverSubjects[11] = {
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -5529,6 +6655,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotProverSubj
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()", "CustomEntryMethod8", "System.Void", 0, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_AddressHelper[1] = {
@@ -5968,7 +7095,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtur
 
 static const ReflectionQueryTypeDescriptor kReflTypes[97] = {
 	{ 0u, "SnapshotProverSubjects/SnapshotProverSubjects", "SnapshotProverSubjects/SnapshotProverSubjects", "", "SnapshotProverSubjects", "SnapshotProverSubjects", nullptr, kReflFields_SnapshotProverSubjects_SnapshotProverSubjects, 1u, nullptr, 0u,
-	kReflMethods_SnapshotProverSubjects_SnapshotProverSubjects, 10u },
+	kReflMethods_SnapshotProverSubjects_SnapshotProverSubjects, 11u },
 	{ 0u, "SnapshotTestFixtures/AddressHelper", "SnapshotTestFixtures/AddressHelper", "", "AddressHelper", "AddressHelper", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_SnapshotTestFixtures_AddressHelper, 1u },
 	{ 0u, "SnapshotTestFixtures/ArithmeticCompareHelper", "SnapshotTestFixtures/ArithmeticCompareHelper", "", "ArithmeticCompareHelper", "ArithmeticCompareHelper", nullptr, nullptr, 0u, nullptr, 0u,
@@ -6318,103 +7445,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -6434,103 +7480,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -6550,103 +7515,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -6666,103 +7550,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -6782,103 +7585,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -6898,103 +7620,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_5(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -7014,103 +7655,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -7130,103 +7690,22 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -7245,13 +7724,13 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject
 
 
 	{
-		auto& _d150 = s_hotpatch_entries[150];
+		auto& _d151 = s_hotpatch_entries[151];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d150)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d150))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d151)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d151))
 		{
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d150.method_key, nullptr, &_d_hpresult);
+				_d151.method_key, nullptr, &_d_hpresult);
 		}
 		else
 		{
@@ -7260,13 +7739,13 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	{
-		auto& _d150 = s_hotpatch_entries[150];
+		auto& _d151 = s_hotpatch_entries[151];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d150)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d150))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d151)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d151))
 		{
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d150.method_key, nullptr, &_d_hpresult);
+				_d151.method_key, nullptr, &_d_hpresult);
 		}
 		else
 		{
@@ -7306,103 +7785,45 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8()
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
+		auto& _d8 = s_hotpatch_entries[8];
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
 		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
+			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				_d8.method_key, nullptr, nullptr);
 		}
 		else
 		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
+			SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8();
 		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 	}
-#endif
 	return;
 }
 
@@ -7678,7 +8099,7 @@ extern "C" void SnapshotTestFixtures_BaseClass__ctor(CHAOS_IL2CPP_INTPTR chaos_f
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -8163,9 +8584,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_I
 
 	_s0 = 0;
 	{
-		// Hotpatch-aware ldftn wrapper (slot 52)
+		// Hotpatch-aware ldftn wrapper (slot 53)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INT32 chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[52];
+			auto& _d_entry = s_hotpatch_entries[53];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -8306,16 +8727,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallVirtHelper_CreateAndUse(v
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d60 = s_hotpatch_entries[60];
+		auto& _d61 = s_hotpatch_entries[61];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d60)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d60))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d61)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d61))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d60.method_key, _d_ab, &_d_hpresult);
+				_d61.method_key, _d_ab, &_d_hpresult);
 		}
 		else
 		{
@@ -8349,16 +8770,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallvirtHelper_RunCallvirt(vo
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d60 = s_hotpatch_entries[60];
+		auto& _d61 = s_hotpatch_entries[61];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d60)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d60))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d61)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d61))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d60.method_key, _d_ab, &_d_hpresult);
+				_d61.method_key, _d_ab, &_d_hpresult);
 		}
 		else
 		{
@@ -8651,9 +9072,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DelegateHelper_RunDelegate(vo
 
 	_s0 = 0;
 	{
-		// Hotpatch-aware ldftn wrapper (slot 50)
+		// Hotpatch-aware ldftn wrapper (slot 51)
 		static auto* chaos_ftn_thunk = +[](void) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[50];
+			auto& _d_entry = s_hotpatch_entries[51];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -8778,15 +9199,15 @@ extern "C" void SnapshotTestFixtures_DerivedClass__ctor(CHAOS_IL2CPP_INTPTR chao
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d16 = s_hotpatch_entries[16];
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
+		auto& _d17 = s_hotpatch_entries[17];
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d16.method_key, _d_ab, nullptr);
+				_d17.method_key, _d_ab, nullptr);
 		}
 		else
 		{
@@ -8828,106 +9249,23 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 	chaos_locals[0] = _s0;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	chaos_locals[1] = _s0;
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 			_s1 = chaos_locals[1];
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosDiv(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 			chaos_locals[0] = _s0;
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
 			chaos_locals[0] = _s0;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
-			_s1 = chaos_locals[1];
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosDiv(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-			chaos_locals[0] = _s0;
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[0] = _s0;
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
-			_s1 = chaos_locals[1];
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosDiv(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-			chaos_locals[0] = _s0;
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[0] = _s0;
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	_s0 = chaos_locals[0];
 	chaos_locals[2] = _s0;
 	_s0 = chaos_locals[2];
@@ -9089,9 +9427,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 	CHAOS_IL2CPP_INTPTR _s5{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
 				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
@@ -9104,117 +9440,20 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s1;
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s1 = chaos_exception.object_value;
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			{
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			chaos_locals[1] = _s1;
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			{
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			chaos_locals[1] = _s1;
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
-	_s1 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+			chaos_locals[1] = _s0;
+	CHAOS_EH_END
+	_s0 = chaos_locals[1];
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
 // Managed method: SnapshotTestFixtures/HasFields::.ctor()
@@ -9228,7 +9467,7 @@ extern "C" void SnapshotTestFixtures_HasFields__ctor(CHAOS_IL2CPP_INTPTR chaos_f
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -9247,7 +9486,7 @@ extern "C" void SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32(CHAOS_
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -9351,7 +9590,7 @@ extern "C" void SnapshotTestFixtures_ImplHelper__ctor_System_Int32(CHAOS_IL2CPP_
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -9479,7 +9718,7 @@ extern "C" void SnapshotTestFixtures_InstanceHelper__ctor_System_Int32(CHAOS_IL2
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -9794,9 +10033,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdftnHelper_GetFnPtr(void)
 		{
 			_s0 = 0;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 50)
+				// Hotpatch-aware ldftn wrapper (slot 51)
 				static auto* chaos_ftn_thunk = +[](void) -> CHAOS_IL2CPP_INT32 {
-					auto& _d_entry = s_hotpatch_entries[50];
+					auto& _d_entry = s_hotpatch_entries[51];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -10525,16 +10764,12 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdtokenHelper_RunLdtoken(void
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(40745025u);
 	{
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__get_TypeHandle_System_RuntimeTypeHandle__(chaos_arg_0);
+		const auto chaos_result = ChaosReflectionGetTypeHandle(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	chaos_locals[0] = _s0;
@@ -10727,7 +10962,7 @@ extern "C" void SnapshotTestFixtures_MarkedClass__ctor(CHAOS_IL2CPP_INTPTR chaos
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -10748,16 +10983,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MathHelper_RunSquare(void)
 	_s0 = chaos_locals[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		auto& _d52 = s_hotpatch_entries[52];
+		auto& _d53 = s_hotpatch_entries[53];
 		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d52)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d52))
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d53)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d53))
 		{
 			alignas(16) uint8_t _d_ab[4];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d52.method_key, _d_ab, &_d_hpresult);
+				_d53.method_key, _d_ab, &_d_hpresult);
 		}
 		else
 		{
@@ -10868,7 +11103,7 @@ extern "C" void SnapshotTestFixtures_MyClass__ctor_System_Int32(CHAOS_IL2CPP_INT
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -11501,115 +11736,20 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_RethrowHelper_RunRethrow(void
 	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			chaos_locals[0] = _s0;
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
-#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-#else
-			throw;
-#endif
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			chaos_locals[0] = _s0;
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-#else
-			throw;
-#endif
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			chaos_locals[0] = _s0;
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-#if defined(CHAOS_IL2CPP_EH_SETJMP) || defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-#else
-			throw;
-#endif
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			CHAOS_EH_RETHROW;
+	CHAOS_EH_END
 	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -11660,7 +11800,7 @@ extern "C" void SnapshotTestFixtures_SealedHelper__ctor_System_Int32(CHAOS_IL2CP
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -12343,15 +12483,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringConcatHelper_TestConcat
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		auto& _d49 = s_hotpatch_entries[49];
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d49)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d49))
+		auto& _d50 = s_hotpatch_entries[50];
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d50)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d50))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d49.method_key, _d_ab, nullptr);
+				_d50.method_key, _d_ab, nullptr);
 		}
 		else
 		{
@@ -12416,15 +12556,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void)
 	}}
 	{
 		const auto chaos_arg_0 = _s0;
-		auto& _d49 = s_hotpatch_entries[49];
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d49)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d49))
+		auto& _d50 = s_hotpatch_entries[50];
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d50)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d50))
 		{
 			alignas(16) uint8_t _d_ab[8];
 			ArgBuffer _d_bw(_d_ab);
 			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d49.method_key, _d_ab, nullptr);
+				_d50.method_key, _d_ab, nullptr);
 		}
 		else
 		{
@@ -12862,12 +13002,12 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VoidCaller_DoNothing(void)
 
 
 	{
-		auto& _d51 = s_hotpatch_entries[51];
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d51)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d51))
+		auto& _d52 = s_hotpatch_entries[52];
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d52)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d52))
 		{
 			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d51.method_key, nullptr, nullptr);
+				_d52.method_key, nullptr, nullptr);
 		}
 		else
 		{
@@ -12894,7 +13034,7 @@ extern "C" void SnapshotTestFixtures_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -12944,7 +13084,7 @@ extern "C" void SnapshotTestFixtures_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chao
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -12995,7 +13135,7 @@ extern "C" void SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32(CHA
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
@@ -13052,6 +13192,336 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_stub_definition_SnapshotTestFixtures_Wrapper
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 157;
+extern "C" const int kAotMethodCount = 158;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-0\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-0\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_0()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_ArithmeticOps_RunAdd\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_ArithmeticOps_RunAdd\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-1\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-1\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_1()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_VoidCaller_DoNothing\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_VoidCaller_DoNothing\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-2\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-2\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_2()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_MathHelper_RunSquare\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_MathHelper_RunSquare\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-3\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-3\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_3()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_FlowControl_IsPositive\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_FlowControl_IsPositive\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-4\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-4\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_4()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_CallVirtHelper_CreateAndUse\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_CallVirtHelper_CreateAndUse\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-5\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-5\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_5()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_BoxingHelper_BoxAndUnbox\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_BoxingHelper_BoxAndUnbox\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-6\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-6\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_6()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_ConversionHelper_ConvertToInt\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_ConversionHelper_ConvertToInt\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-7\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-7\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_7()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_LoopHelper_SumToFive\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_LoopHelper_SumToFive\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-subject-8\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::CustomEntrySubject_8()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-subject-8\",\"signature\":\"System.Void SnapshotProverSubjects::CustomEntrySubject_8()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_VoidCaller_DoNothing\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_VoidCaller_DoNothing\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":26,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":8,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":21,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":26,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-9\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.subject-9\",\"signature\":\"System.Void SnapshotProverSubjects::Subject_9()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":29,\"handlerOffset\":30,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":3,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":27,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"ilOffset\":33,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":41,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-method8\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()\",\"signature\":\"System.Void SnapshotProverSubjects::CustomEntryMethod8()\",\"identity\":{\"assemblyName\":\"SnapshotProverSubjects\",\"declaringTypeSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects\",\"definitionSubjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()\",\"methodId\":\"snapshot-prover-subjects.snapshot-prover-subjects.custom-entry-method8\",\"signature\":\"System.Void SnapshotProverSubjects::CustomEntryMethod8()\"},\"nativeSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":0,\"resultType\":\"System.Void\",\"callee\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotProverSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotProverSubjects\",\"subjectId\":\"SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Void\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotProverSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"snapshot-test-fixtures.address-helper.run-address\",\"subjectId\":\"SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()\",\"signature\":\"System.Int32 AddressHelper::RunAddress()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/AddressHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.address-helper.run-address\",\"signature\":\"System.Int32 AddressHelper::RunAddress()\"},\"nativeSymbol\":\"SnapshotTestFixtures_AddressHelper_RunAddress\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"SnapshotTestFixtures/HasFields\",\"callee\":\"SnapshotTestFixtures/HasFields::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/HasFields::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasFields\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/HasFields::instanceVal\",\"ilOffset\":8,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/HasFields::instanceVal\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasFields::instanceVal\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasFields\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"snapshot-test-fixtures.arithmetic-compare-helper.run-compare\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()\",\"signature\":\"System.Int32 ArithmeticCompareHelper::RunCompare()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ArithmeticCompareHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.arithmetic-compare-helper.run-compare\",\"signature\":\"System.Int32 ArithmeticCompareHelper::RunCompare()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":9,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"sub\",\"opCode\":26,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"rem\",\"opCode\":29,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":32,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":36,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":38,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":48,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":46,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":49,\"isPreserveSig\":false},{\"op\":\"cgt\",\"opCode\":33,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":7,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":7,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":64,\"ilOffset\":56,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":58,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":4,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":62,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":64,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":65,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":67,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":69,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":8,\"ilOffset\":70,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":74,\"ilOffset\":72,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":8,\"ilOffset\":74,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":76,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_13[] = "{\"methodId\":\"snapshot-test-fixtures.arithmetic-ops.run-add\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"signature\":\"System.Int32 ArithmeticOps::RunAdd()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ArithmeticOps\",\"definitionSubjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.arithmetic-ops.run-add\",\"signature\":\"System.Int32 ArithmeticOps::RunAdd()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ArithmeticOps_RunAdd\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":7,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_14[] = "{\"methodId\":\"snapshot-test-fixtures.array-helper.make-and-fill\",\"subjectId\":\"SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()\",\"signature\":\"System.Int32 ArrayHelper::MakeAndFill()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ArrayHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.array-helper.make-and-fill\",\"signature\":\"System.Int32 ArrayHelper::MakeAndFill()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ArrayHelper_MakeAndFill\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":12,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_15[] = "{\"methodId\":\"snapshot-test-fixtures.array-length-helper.run-length\",\"subjectId\":\"SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()\",\"signature\":\"System.Int32 ArrayLengthHelper::RunLength()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ArrayLengthHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.array-length-helper.run-length\",\"signature\":\"System.Int32 ArrayLengthHelper::RunLength()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ArrayLengthHelper_RunLength\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_16[] = "{\"methodId\":\"snapshot-test-fixtures.array-ref-helper.run-array-ref\",\"subjectId\":\"SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()\",\"signature\":\"System.Int32 ArrayRefHelper::RunArrayRef()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ArrayRefHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.array-ref-helper.run-array-ref\",\"signature\":\"System.Int32 ArrayRefHelper::RunArrayRef()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ArrayRefHelper_RunArrayRef\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":6,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_17[] = "{\"methodId\":\"snapshot-test-fixtures.base-class.ctor\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\",\"signature\":\"System.Void BaseClass::.ctor()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BaseClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\",\"methodId\":\"snapshot-test-fixtures.base-class.ctor\",\"signature\":\"System.Void BaseClass::.ctor()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BaseClass__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/BaseClass\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_18[] = "{\"methodId\":\"snapshot-test-fixtures.base-class.compute\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"signature\":\"System.Int32 BaseClass::Compute()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BaseClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.base-class.compute\",\"signature\":\"System.Int32 BaseClass::Compute()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BaseClass_Compute\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_19[] = "{\"methodId\":\"snapshot-test-fixtures.bitwise-helper.run-bitwise\",\"subjectId\":\"SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()\",\"signature\":\"System.Int32 BitwiseHelper::RunBitwise()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BitwiseHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.bitwise-helper.run-bitwise\",\"signature\":\"System.Int32 BitwiseHelper::RunBitwise()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BitwiseHelper_RunBitwise\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":7,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":165,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":90,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"and\",\"opCode\":57,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"or\",\"opCode\":58,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"xor\",\"opCode\":59,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"not\",\"opCode\":60,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":36,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":40,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":42,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_20[] = "{\"methodId\":\"snapshot-test-fixtures.boxing-helper.box-and-unbox\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"signature\":\"System.Int32 BoxingHelper::BoxAndUnbox()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BoxingHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.boxing-helper.box-and-unbox\",\"signature\":\"System.Int32 BoxingHelper::BoxAndUnbox()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BoxingHelper_BoxAndUnbox\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":3,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"unbox.any\",\"opCode\":36,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":10,\"resultType\":\"System.Private.CoreLib/System.Int32\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":11,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":18,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":19,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_21[] = "{\"methodId\":\"snapshot-test-fixtures.box-interface-array-demo.demo-box-store\",\"subjectId\":\"SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()\",\"signature\":\"System.Int32 BoxInterfaceArrayDemo::DemoBoxStore()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BoxInterfaceArrayDemo\",\"definitionSubjectId\":\"SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.box-interface-array-demo.demo-box-store\",\"signature\":\"System.Int32 BoxInterfaceArrayDemo::DemoBoxStore()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":47,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":6,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_22[] = "{\"methodId\":\"snapshot-test-fixtures.branch-compare-b-helper.run-branch-compare-b\",\"subjectId\":\"SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()\",\"signature\":\"System.Int32 BranchCompareBHelper::RunBranchCompareB()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BranchCompareBHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.branch-compare-b-helper.run-branch-compare-b\",\"signature\":\"System.Int32 BranchCompareBHelper::RunBranchCompareB()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":8,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"cgt\",\"opCode\":33,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":26,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":30,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":35,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":43,\"ilOffset\":37,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":39,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":41,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":44,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":46,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":62,\"ilOffset\":56,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":58,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":4,\"ilOffset\":59,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":62,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":7,\"ilOffset\":63,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":67,\"ilOffset\":65,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":7,\"ilOffset\":67,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":69,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_23[] = "{\"methodId\":\"snapshot-test-fixtures.branch-compare-helper.run-branch-compare\",\"subjectId\":\"SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()\",\"signature\":\"System.Int32 BranchCompareHelper::RunBranchCompare()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BranchCompareHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.branch-compare-helper.run-branch-compare\",\"signature\":\"System.Int32 BranchCompareHelper::RunBranchCompare()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":9,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":23,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"cgt\",\"opCode\":33,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":29,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":36,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":37,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":38,\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":51,\"ilOffset\":45,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":47,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":4,\"ilOffset\":48,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":50,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":51,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":52,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":53,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":55,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":7,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":7,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":68,\"ilOffset\":62,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":64,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":8,\"ilOffset\":65,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":67,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":68,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":8,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":73,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":8,\"ilOffset\":73,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":75,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_24[] = "{\"methodId\":\"snapshot-test-fixtures.branch-dup-helper.run-branch-dup\",\"subjectId\":\"SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()\",\"signature\":\"System.Int32 BranchDupHelper::RunBranchDup()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BranchDupHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.branch-dup-helper.run-branch-dup\",\"signature\":\"System.Int32 BranchDupHelper::RunBranchDup()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BranchDupHelper_RunBranchDup\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":6,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":17,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"beq\",\"opCode\":20,\"operand\":24,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":21,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":30,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":25,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":31,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":32,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":35,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":37,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":45,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":41,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":45,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":46,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":50,\"ilOffset\":48,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":52,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_25[] = "{\"methodId\":\"snapshot-test-fixtures.branch-unsigned-b-helper.run-branch-unsigned-b\",\"subjectId\":\"SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()\",\"signature\":\"System.Int32 BranchUnsignedBHelper::RunBranchUnsignedB()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BranchUnsignedBHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.branch-unsigned-b-helper.run-branch-unsigned-b\",\"signature\":\"System.Int32 BranchUnsignedBHelper::RunBranchUnsignedB()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"mul\",\"opCode\":27,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":11,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_26[] = "{\"methodId\":\"snapshot-test-fixtures.branch-unsigned-helper.run-branch-unsigned\",\"subjectId\":\"SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()\",\"signature\":\"System.Int32 BranchUnsignedHelper::RunBranchUnsigned()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/BranchUnsignedHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.branch-unsigned-helper.run-branch-unsigned\",\"signature\":\"System.Int32 BranchUnsignedHelper::RunBranchUnsigned()\"},\"nativeSymbol\":\"SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":11,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_27[] = "{\"methodId\":\"snapshot-test-fixtures.calli-helper.run-calli\",\"subjectId\":\"SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)\",\"signature\":\"System.Int32 CalliHelper::RunCalli(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CalliHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.calli-helper.run-calli\",\"signature\":\"System.Int32 CalliHelper::RunCalli(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"callee\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":8,\"resultType\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::Invoke:System.Int32(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::Invoke:System.Int32(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::Invoke:System.Int32(System.Int32)\",\"openDefinitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0);type=[System.Int32,System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0);type=[System.Int32,System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::Invoke:System.Int32(System.Int32)\",\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0)\",\"displaySubjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32,System.Int32\\u003E::Invoke(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00602::Invoke:!1(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_28[] = "{\"methodId\":\"snapshot-test-fixtures.call-virt-helper.create-and-use\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"signature\":\"System.Int32 CallVirtHelper::CreateAndUse()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CallVirtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.call-virt-helper.create-and-use\",\"signature\":\"System.Int32 CallVirtHelper::CreateAndUse()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CallVirtHelper_CreateAndUse\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"SnapshotTestFixtures/InstanceHelper\",\"callee\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_InstanceHelper_GetValue\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_29[] = "{\"methodId\":\"snapshot-test-fixtures.callvirt-helper.run-callvirt\",\"subjectId\":\"SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()\",\"signature\":\"System.Int32 CallvirtHelper::RunCallvirt()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CallvirtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.callvirt-helper.run-callvirt\",\"signature\":\"System.Int32 CallvirtHelper::RunCallvirt()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CallvirtHelper_RunCallvirt\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"SnapshotTestFixtures/InstanceHelper\",\"callee\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_InstanceHelper_GetValue\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_30[] = "{\"methodId\":\"snapshot-test-fixtures.collections-helper.test-dict\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()\",\"signature\":\"System.Int32 CollectionsHelper::TestDict()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CollectionsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.collections-helper.test-dict\",\"signature\":\"System.Int32 CollectionsHelper::TestDict()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CollectionsHelper_TestDict\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":5,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":11,\"resultType\":\"System.Void\",\"callee\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Add:System.Void(System.Int32,System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Add:System.Void(System.Int32,System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Add:System.Void(System.Int32,System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1);type=[System.Int32,System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1);type=[System.Int32,System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Add:System.Void(System.Int32,System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Add(System.Int32,System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Add:System.Void(!0,!1)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":21,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\\u0026)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\\u0026)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026);type=[System.Int32,System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026);type=[System.Int32,System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32\\u0026)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::TryGetValue(System.Int32,System.Int32\\u0026)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::TryGetValue:System.Boolean(!0,!1\\u0026)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::ContainsKey:System.Boolean(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::ContainsKey:System.Boolean(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::ContainsKey:System.Boolean(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::ContainsKey:System.Boolean(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::ContainsKey(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::ContainsKey:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":35,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Remove:System.Boolean(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0);type=[System.Int32,System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u003CSystem.Int32,System.Int32\\u003E::Remove(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.Dictionary\\u00602::Remove:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\",\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":49,\"ilOffset\":44,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":50,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":56,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":53,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":57,\"ilOffset\":54,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":57,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":58,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":59,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":60,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":64,\"ilOffset\":62,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":64,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":66,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_31[] = "{\"methodId\":\"snapshot-test-fixtures.collections-helper.test-list\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()\",\"signature\":\"System.Int32 CollectionsHelper::TestList()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CollectionsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.collections-helper.test-list\",\"signature\":\"System.Int32 CollectionsHelper::TestList()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CollectionsHelper_TestList\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Void\",\"callee\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::Add:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::Add:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::Add:System.Void(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0);type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0);type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::Add:System.Void(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::Add(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::Add:System.Void(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":25,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":25,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":26,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_32[] = "{\"methodId\":\"snapshot-test-fixtures.collections-helper.test-set\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()\",\"signature\":\"System.Int32 CollectionsHelper::TestSet()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CollectionsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.collections-helper.test-set\",\"signature\":\"System.Int32 CollectionsHelper::TestSet()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CollectionsHelper_TestSet\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Add:System.Boolean(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Add:System.Boolean(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Add:System.Boolean(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0);type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0);type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Add:System.Boolean(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Add(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Add:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Contains:System.Boolean(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Contains:System.Boolean(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Contains:System.Boolean(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0);type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0);type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Contains:System.Boolean(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Contains(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Contains:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":25,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":28,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Remove:System.Boolean(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0);type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0);type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Remove:System.Boolean(System.Int32)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u003CSystem.Int32\\u003E::Remove(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.HashSet\\u00601::Remove:System.Boolean(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":34,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":40,\"ilOffset\":35,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":41,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":44,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":45,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_33[] = "{\"methodId\":\"snapshot-test-fixtures.conversion-helper.convert-to-int\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"signature\":\"System.Int32 ConversionHelper::ConvertToInt()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ConversionHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.conversion-helper.convert-to-int\",\"signature\":\"System.Int32 ConversionHelper::ConvertToInt()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ConversionHelper_ConvertToInt\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_34[] = "{\"methodId\":\"snapshot-test-fixtures.conv-small-int-helper.run-conv-small\",\"subjectId\":\"SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()\",\"signature\":\"System.Int32 ConvSmallIntHelper::RunConvSmall()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ConvSmallIntHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.conv-small-int-helper.run-conv-small\",\"signature\":\"System.Int32 ConvSmallIntHelper::RunConvSmall()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":6,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":4660,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"conv.i1\",\"opCode\":39,\"ilOffset\":8,\"resultType\":\"System.SByte\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"conv.i2\",\"opCode\":39,\"ilOffset\":11,\"resultType\":\"System.Int16\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"conv.u1\",\"opCode\":39,\"ilOffset\":14,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"conv.u2\",\"opCode\":39,\"ilOffset\":17,\"resultType\":\"System.UInt16\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":25,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":32,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":34,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_35[] = "{\"methodId\":\"snapshot-test-fixtures.conv-wide-helper.run-conv-wide\",\"subjectId\":\"SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()\",\"signature\":\"System.Int32 ConvWideHelper::RunConvWide()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ConvWideHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.conv-wide-helper.run-conv-wide\",\"signature\":\"System.Int32 ConvWideHelper::RunConvWide()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ConvWideHelper_RunConvWide\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":5,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":5,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":9,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":21,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_36[] = "{\"methodId\":\"snapshot-test-fixtures.cpblk-helper.run-cpblk\",\"subjectId\":\"SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()\",\"signature\":\"System.Int32 CpblkHelper::RunCpblk()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CpblkHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.cpblk-helper.run-cpblk\",\"signature\":\"System.Int32 CpblkHelper::RunCpblk()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CpblkHelper_RunCpblk\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_37[] = "{\"methodId\":\"snapshot-test-fixtures.cpobj-helper.run-cpobj\",\"subjectId\":\"SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()\",\"signature\":\"System.Int32 CpobjHelper::RunCpobj()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/CpobjHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.cpobj-helper.run-cpobj\",\"signature\":\"System.Int32 CpobjHelper::RunCpobj()\"},\"nativeSymbol\":\"SnapshotTestFixtures_CpobjHelper_RunCpobj\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_38[] = "{\"methodId\":\"snapshot-test-fixtures.delegate-helper.run-delegate\",\"subjectId\":\"SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()\",\"signature\":\"System.Int32 DelegateHelper::RunDelegate()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/DelegateHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.delegate-helper.run-delegate\",\"signature\":\"System.Int32 DelegateHelper::RunDelegate()\"},\"nativeSymbol\":\"SnapshotTestFixtures_DelegateHelper_RunDelegate\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"callee\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":8,\"resultType\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"openDefinitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"displaySubjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_39[] = "{\"methodId\":\"snapshot-test-fixtures.derived-class.ctor\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\",\"signature\":\"System.Void DerivedClass::.ctor()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/DerivedClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\",\"methodId\":\"snapshot-test-fixtures.derived-class.ctor\",\"signature\":\"System.Void DerivedClass::.ctor()\"},\"nativeSymbol\":\"SnapshotTestFixtures_DerivedClass__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/DerivedClass\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_BaseClass__ctor\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Void\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_40[] = "{\"methodId\":\"snapshot-test-fixtures.derived-class.compute\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::Compute:System.Int32()\",\"signature\":\"System.Int32 DerivedClass::Compute()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/DerivedClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/DerivedClass::Compute:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::Compute:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.derived-class.compute\",\"signature\":\"System.Int32 DerivedClass::Compute()\"},\"nativeSymbol\":\"SnapshotTestFixtures_DerivedClass_Compute\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_41[] = "{\"methodId\":\"snapshot-test-fixtures.eh-helper.safe-divide\",\"subjectId\":\"SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()\",\"signature\":\"System.Int32 EhHelper::SafeDivide()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/EhHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.eh-helper.safe-divide\",\"signature\":\"System.Int32 EhHelper::SafeDivide()\"},\"nativeSymbol\":\"SnapshotTestFixtures_EhHelper_SafeDivide\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":6,\"tryLength\":9,\"handlerOffset\":15,\"handlerLength\":7,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"div\",\"opCode\":28,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-1,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_42[] = "{\"methodId\":\"snapshot-test-fixtures.external-caller.call-external\",\"subjectId\":\"SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()\",\"signature\":\"System.Int32 ExternalCaller::CallExternal()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ExternalCaller\",\"definitionSubjectId\":\"SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.external-caller.call-external\",\"signature\":\"System.Int32 ExternalCaller::CallExternal()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ExternalCaller_CallExternal\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_43[] = "{\"methodId\":\"snapshot-test-fixtures.field-helper.get-and-increment\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()\",\"signature\":\"System.Int32 FieldHelper::GetAndIncrement()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FieldHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.field-helper.get-and-increment\",\"signature\":\"System.Int32 FieldHelper::GetAndIncrement()\"},\"nativeSymbol\":\"SnapshotTestFixtures_FieldHelper_GetAndIncrement\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FieldHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"ilOffset\":8,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FieldHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"ilOffset\":13,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/FieldHelper::_counter\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FieldHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":21,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":22,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_44[] = "{\"methodId\":\"snapshot-test-fixtures.float-ops-helper.run-float-ops\",\"subjectId\":\"SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()\",\"signature\":\"System.Int32 FloatOpsHelper::RunFloatOps()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FloatOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.float-ops-helper.run-float-ops\",\"signature\":\"System.Int32 FloatOpsHelper::RunFloatOps()\"},\"nativeSymbol\":\"SnapshotTestFixtures_FloatOpsHelper_RunFloatOps\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":5,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.r4\",\"opCode\":2,\"operand\":3.5,\"ilOffset\":1,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.r8\",\"opCode\":3,\"operand\":7.2,\"ilOffset\":7,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"conv.r4\",\"opCode\":41,\"ilOffset\":18,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"conv.r8\",\"opCode\":42,\"ilOffset\":21,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":31,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":31,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":33,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_45[] = "{\"methodId\":\"snapshot-test-fixtures.flow-control.is-positive\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"signature\":\"System.Int32 FlowControl::IsPositive()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/FlowControl\",\"definitionSubjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.flow-control.is-positive\",\"signature\":\"System.Int32 FlowControl::IsPositive()\"},\"nativeSymbol\":\"SnapshotTestFixtures_FlowControl_IsPositive\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":3,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":9,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":10,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":13,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":14,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_46[] = "{\"methodId\":\"snapshot-test-fixtures.generic-helper.use-generic\",\"subjectId\":\"SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()\",\"signature\":\"System.Int32 GenericHelper::UseGeneric()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/GenericHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.generic-helper.use-generic\",\"signature\":\"System.Int32 GenericHelper::UseGeneric()\"},\"nativeSymbol\":\"SnapshotTestFixtures_GenericHelper_UseGeneric\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"callee\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601;type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601;type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:typeSpec\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_Wrapper_System_Int32_GetValue\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":18,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":19,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_47[] = "{\"methodId\":\"snapshot-test-fixtures.generics-virt-eh-demo.demo-combine\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"signature\":\"System.Int32 GenericsVirtEhDemo::DemoCombine()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo\",\"definitionSubjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.generics-virt-eh-demo.demo-combine\",\"signature\":\"System.Int32 GenericsVirtEhDemo::DemoCombine()\"},\"nativeSymbol\":\"SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":16,\"handlerOffset\":17,\"handlerLength\":6,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count:System.Int32()\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.List\\u003CSystem.Int32\\u003E::get_Count()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.List\\u00601::get_Count:System.Int32()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_48[] = "{\"methodId\":\"snapshot-test-fixtures.has-fields.ctor\",\"subjectId\":\"SnapshotTestFixtures/HasFields::.ctor:System.Void()\",\"signature\":\"System.Void HasFields::.ctor()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasFields\",\"definitionSubjectId\":\"SnapshotTestFixtures/HasFields::.ctor:System.Void()\",\"subjectId\":\"SnapshotTestFixtures/HasFields::.ctor:System.Void()\",\"methodId\":\"snapshot-test-fixtures.has-fields.ctor\",\"signature\":\"System.Void HasFields::.ctor()\"},\"nativeSymbol\":\"SnapshotTestFixtures_HasFields__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/HasFields\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_49[] = "{\"methodId\":\"snapshot-test-fixtures.has-instance-fields.ctor\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void HasInstanceFields::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasInstanceFields\",\"definitionSubjectId\":\"SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.has-instance-fields.ctor\",\"signature\":\"System.Void HasInstanceFields::.ctor(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/HasInstanceFields\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/HasInstanceFields\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasInstanceFields\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_50[] = "{\"methodId\":\"snapshot-test-fixtures.helper.consume-string\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"signature\":\"System.Void Helper::ConsumeString(System.String)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"methodId\":\"snapshot-test-fixtures.helper.consume-string\",\"signature\":\"System.Void Helper::ConsumeString(System.String)\"},\"nativeSymbol\":\"SnapshotTestFixtures_Helper_ConsumeString_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_51[] = "{\"methodId\":\"snapshot-test-fixtures.helper.get-value\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"signature\":\"System.Int32 Helper::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.helper.get-value\",\"signature\":\"System.Int32 Helper::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_Helper_GetValue\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_52[] = "{\"methodId\":\"snapshot-test-fixtures.helper.nop\",\"subjectId\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\",\"signature\":\"System.Void Helper::Nop()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\",\"subjectId\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\",\"methodId\":\"snapshot-test-fixtures.helper.nop\",\"signature\":\"System.Void Helper::Nop()\"},\"nativeSymbol\":\"SnapshotTestFixtures_Helper_Nop\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_53[] = "{\"methodId\":\"snapshot-test-fixtures.helper.square\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"signature\":\"System.Int32 Helper::Square(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.helper.square\",\"signature\":\"System.Int32 Helper::Square(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_Helper_Square_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"mul\",\"opCode\":27,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_54[] = "{\"methodId\":\"snapshot-test-fixtures.hot-update-with-generics-demo.run\",\"subjectId\":\"SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()\",\"signature\":\"System.Int32 HotUpdateWithGenericsDemo::Run()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HotUpdateWithGenericsDemo\",\"definitionSubjectId\":\"SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.hot-update-with-generics-demo.run\",\"signature\":\"System.Int32 HotUpdateWithGenericsDemo::Run()\"},\"nativeSymbol\":\"SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_55[] = "{\"methodId\":\"snapshot-test-fixtures.hot-update-with-types-demo.run\",\"subjectId\":\"SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()\",\"signature\":\"System.Int32 HotUpdateWithTypesDemo::Run()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HotUpdateWithTypesDemo\",\"definitionSubjectId\":\"SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.hot-update-with-types-demo.run\",\"signature\":\"System.Int32 HotUpdateWithTypesDemo::Run()\"},\"nativeSymbol\":\"SnapshotTestFixtures_HotUpdateWithTypesDemo_Run\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_56[] = "{\"methodId\":\"snapshot-test-fixtures.impl-helper.ctor\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void ImplHelper::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ImplHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.impl-helper.ctor\",\"signature\":\"System.Void ImplHelper::.ctor(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_ImplHelper__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/ImplHelper\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/ImplHelper\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/ImplHelper::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ImplHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_57[] = "{\"methodId\":\"snapshot-test-fixtures.impl-helper.get-value\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()\",\"signature\":\"System.Int32 ImplHelper::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ImplHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.impl-helper.get-value\",\"signature\":\"System.Int32 ImplHelper::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ImplHelper_GetValue\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/ImplHelper\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/ImplHelper::_val\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ImplHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_58[] = "{\"methodId\":\"snapshot-test-fixtures.indirect-helper.read-write-ref\",\"subjectId\":\"SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()\",\"signature\":\"System.Int32 IndirectHelper::ReadWriteRef()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/IndirectHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.indirect-helper.read-write-ref\",\"signature\":\"System.Int32 IndirectHelper::ReadWriteRef()\"},\"nativeSymbol\":\"SnapshotTestFixtures_IndirectHelper_ReadWriteRef\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stind.i4\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":15,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":16,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_59[] = "{\"methodId\":\"snapshot-test-fixtures.instance-field-helper.create-and-use-fields\",\"subjectId\":\"SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()\",\"signature\":\"System.Int32 InstanceFieldHelper::CreateAndUseFields()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InstanceFieldHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.instance-field-helper.create-and-use-fields\",\"signature\":\"System.Int32 InstanceFieldHelper::CreateAndUseFields()\"},\"nativeSymbol\":\"SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"SnapshotTestFixtures/HasInstanceFields\",\"callee\":\"SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"ilOffset\":12,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasInstanceFields\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"ilOffset\":18,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/HasInstanceFields::Value\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/HasInstanceFields\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_60[] = "{\"methodId\":\"snapshot-test-fixtures.instance-helper.ctor\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void InstanceHelper::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.instance-helper.ctor\",\"signature\":\"System.Void InstanceHelper::.ctor(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_InstanceHelper__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/InstanceHelper\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/InstanceHelper\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/InstanceHelper::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_61[] = "{\"methodId\":\"snapshot-test-fixtures.instance-helper.get-value\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"signature\":\"System.Int32 InstanceHelper::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.instance-helper.get-value\",\"signature\":\"System.Int32 InstanceHelper::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_InstanceHelper_GetValue\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/InstanceHelper\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/InstanceHelper::_val\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/InstanceHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InstanceHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_62[] = "{\"methodId\":\"snapshot-test-fixtures.interface-devirt-helper.run-interface-test\",\"subjectId\":\"SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()\",\"signature\":\"System.Int32 InterfaceDevirtHelper::RunInterfaceTest()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InterfaceDevirtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.interface-devirt-helper.run-interface-test\",\"signature\":\"System.Int32 InterfaceDevirtHelper::RunInterfaceTest()\"},\"nativeSymbol\":\"SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"SnapshotTestFixtures/ImplHelper\",\"callee\":\"SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/ImplHelper\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[\"SnapshotTestFixtures/IMyInterface\"],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_IMyInterface_GetValue\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_63[] = "{\"methodId\":\"snapshot-test-fixtures.internal-helper.double\",\"subjectId\":\"SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)\",\"signature\":\"System.Int32 InternalHelper::Double(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/InternalHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.internal-helper.double\",\"signature\":\"System.Int32 InternalHelper::Double(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_InternalHelper_Double_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"mul\",\"opCode\":27,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_64[] = "{\"methodId\":\"snapshot-test-fixtures.ldarga-helper.run-ldarga\",\"subjectId\":\"SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)\",\"signature\":\"System.Int32 LdargaHelper::RunLdarga(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdargaHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.ldarga-helper.run-ldarga\",\"signature\":\"System.Int32 LdargaHelper::RunLdarga(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_65[] = "{\"methodId\":\"snapshot-test-fixtures.ldc-i8-helper.run-ldc-i8\",\"subjectId\":\"SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()\",\"signature\":\"System.Int64 LdcI8Helper::RunLdcI8()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdcI8Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()\",\"subjectId\":\"SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()\",\"methodId\":\"snapshot-test-fixtures.ldc-i8-helper.run-ldc-i8\",\"signature\":\"System.Int64 LdcI8Helper::RunLdcI8()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdcI8Helper_RunLdcI8\",\"isStatic\":true,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i8\",\"opCode\":1,\"operand\":1000000000000,\"ilOffset\":0,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_66[] = "{\"methodId\":\"snapshot-test-fixtures.ldelema-helper.run-ldelema\",\"subjectId\":\"SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()\",\"signature\":\"System.Int32 LdelemaHelper::RunLdelema()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdelemaHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldelema-helper.run-ldelema\",\"signature\":\"System.Int32 LdelemaHelper::RunLdelema()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdelemaHelper_RunLdelema\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelema\",\"opCode\":95,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":10,\"resultType\":\"System.IntPtr\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stind.i4\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":22,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_67[] = "{\"methodId\":\"snapshot-test-fixtures.ldelem-all-helper.test-all-elems\",\"subjectId\":\"SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()\",\"signature\":\"System.Int32 LdelemAllHelper::TestAllElems()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdelemAllHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldelem-all-helper.test-all-elems\",\"signature\":\"System.Int32 LdelemAllHelper::TestAllElems()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdelemAllHelper_TestAllElems\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-6,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":19,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":22,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":28,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_68[] = "{\"methodId\":\"snapshot-test-fixtures.ldftn-helper.get-fn-ptr\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()\",\"signature\":\"System.Int32 LdftnHelper::GetFnPtr()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdftnHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldftn-helper.get-fn-ptr\",\"signature\":\"System.Int32 LdftnHelper::GetFnPtr()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdftnHelper_GetFnPtr\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\",\"ilOffset\":1,\"resultType\":\"System.Func\\u003CSystem.Int32\\u003E\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Func\\u003CSystem.Int32\\u003E\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":28,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":10,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"ilOffset\":11,\"resultType\":\"System.IntPtr\",\"callee\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":17,\"resultType\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\",\"ilOffset\":23,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO::\\u003C0\\u003E__GetValue\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdftnHelper\\u002B\\u003C\\u003EO\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Func\\u003CSystem.Int32\\u003E\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":29,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":30,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"openDefinitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Func\\u00601::Invoke:!0();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke:System.Int32()\",\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"displaySubjectId\":\"System.Private.CoreLib/System.Func\\u003CSystem.Int32\\u003E::Invoke()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Private.CoreLib/System.Func\\u00601::Invoke:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":38,\"ilOffset\":36,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":38,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":39,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_69[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-i1-helper.run-ldind-i1\",\"subjectId\":\"SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()\",\"signature\":\"System.Int32 LdindI1Helper::RunLdindI1()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindI1Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-i1-helper.run-ldind-i1\",\"signature\":\"System.Int32 LdindI1Helper::RunLdindI1()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindI1Helper_RunLdindI1\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.SByte\",\"ilOffset\":2,\"resultType\":\"System.SByte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.SByte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.SByte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.SByte\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.SByte\",\"ilOffset\":15,\"resultType\":\"System.SByte\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_70[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-i8-helper.run-ldind-i8\",\"subjectId\":\"SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()\",\"signature\":\"System.Int32 LdindI8Helper::RunLdindI8()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindI8Helper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-i8-helper.run-ldind-i8\",\"signature\":\"System.Int32 LdindI8Helper::RunLdindI8()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindI8Helper_RunLdindI8\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int64\",\"ilOffset\":2,\"resultType\":\"System.Int64[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int64\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int64\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i8\",\"opCode\":1,\"operand\":4294967296,\"ilOffset\":10,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int64\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int64\",\"ilOffset\":22,\"resultType\":\"System.Int64\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":29,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":29,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":30,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_71[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunLdindI()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunLdindI()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":12,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_72[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i4\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunLdindI4()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-ldind-i4\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunLdindI4()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":12,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_73[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-stind-i\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunStindI()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-stind-gaps-helper.run-stind-i\",\"signature\":\"System.Int32 LdindStindGapsHelper::RunStindI()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindStindGapsHelper_RunStindI\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":12,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_74[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-unsigned-helper.run-ldind-unsigned\",\"subjectId\":\"SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()\",\"signature\":\"System.Int32 LdindUnsignedHelper::RunLdindUnsigned()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindUnsignedHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-unsigned-helper.run-ldind-unsigned\",\"signature\":\"System.Int32 LdindUnsignedHelper::RunLdindUnsigned()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":200,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.SByte\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.UInt16\",\"ilOffset\":17,\"resultType\":\"System.UInt16[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.UInt16\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.UInt16\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":40000,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int16\",\"ilOffset\":29,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.UInt32\",\"ilOffset\":32,\"resultType\":\"System.UInt32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.UInt32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.UInt32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":37,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100000,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":44,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":45,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":46,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Byte\",\"ilOffset\":48,\"resultType\":\"System.Byte\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":49,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.UInt16\",\"ilOffset\":51,\"resultType\":\"System.UInt16\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":52,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":53,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":55,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.UInt32\",\"ilOffset\":56,\"resultType\":\"System.UInt32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"conv.u8\",\"opCode\":40,\"ilOffset\":57,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":58,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":59,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":60,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":63,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":63,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":64,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_75[] = "{\"methodId\":\"snapshot-test-fixtures.ldind-wide-helper.run-ldind-wide\",\"subjectId\":\"SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()\",\"signature\":\"System.Int32 LdindWideHelper::RunLdindWide()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdindWideHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldind-wide-helper.run-ldind-wide\",\"signature\":\"System.Int32 LdindWideHelper::RunLdindWide()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdindWideHelper_RunLdindWide\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":15,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_76[] = "{\"methodId\":\"snapshot-test-fixtures.ldtoken-helper.run-ldtoken\",\"subjectId\":\"SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()\",\"signature\":\"System.Int32 LdtokenHelper::RunLdtoken()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdtokenHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ldtoken-helper.run-ldtoken\",\"signature\":\"System.Int32 LdtokenHelper::RunLdtoken()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdtokenHelper_RunLdtoken\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":0,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":5,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.RuntimeTypeHandle\",\"callee\":\"System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":18,\"resultType\":\"System.IntPtr\",\"callee\":\"System.Private.CoreLib/System.RuntimeTypeHandle::get_Value:System.IntPtr()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.RuntimeTypeHandle::get_Value:System.IntPtr()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.RuntimeTypeHandle::get_Value:System.IntPtr()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.IntPtr::ToInt32:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IntPtr::ToInt32:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IntPtr::ToInt32:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":31,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_77[] = "{\"methodId\":\"snapshot-test-fixtures.ld-virtftn-helper.run-ld-virtftn\",\"subjectId\":\"SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()\",\"signature\":\"System.Int32 LdVirtftnHelper::RunLdVirtftn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LdVirtftnHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.ld-virtftn-helper.run-ld-virtftn\",\"signature\":\"System.Int32 LdVirtftnHelper::RunLdVirtftn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"SnapshotTestFixtures/MyClass\",\"callee\":\"SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyClass\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_MyClass_GetValue\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":18,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":19,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_78[] = "{\"methodId\":\"snapshot-test-fixtures.local-alloc-helper.run-alloc\",\"subjectId\":\"SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()\",\"signature\":\"System.Int32 LocalAllocHelper::RunAlloc()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LocalAllocHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.local-alloc-helper.run-alloc\",\"signature\":\"System.Int32 LocalAllocHelper::RunAlloc()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LocalAllocHelper_RunAlloc\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":256,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.u\",\"opCode\":66,\"ilOffset\":6,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"localloc\",\"opCode\":77,\"ilOffset\":7,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stind.i1\",\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldind.u1\",\"ilOffset\":15,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":19,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_79[] = "{\"methodId\":\"snapshot-test-fixtures.loop-helper.sum-to-five\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"signature\":\"System.Int32 LoopHelper::SumToFive()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/LoopHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.loop-helper.sum-to-five\",\"signature\":\"System.Int32 LoopHelper::SumToFive()\"},\"nativeSymbol\":\"SnapshotTestFixtures_LoopHelper_SumToFive\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":15,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":7,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":28,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_80[] = "{\"methodId\":\"snapshot-test-fixtures.marked-class.ctor\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass::.ctor:System.Void()\",\"signature\":\"System.Void MarkedClass::.ctor()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MarkedClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/MarkedClass::.ctor:System.Void()\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass::.ctor:System.Void()\",\"methodId\":\"snapshot-test-fixtures.marked-class.ctor\",\"signature\":\"System.Void MarkedClass::.ctor()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MarkedClass__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/MarkedClass\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_81[] = "{\"methodId\":\"snapshot-test-fixtures.math-helper.run-square\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"signature\":\"System.Int32 MathHelper::RunSquare()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MathHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.math-helper.run-square\",\"signature\":\"System.Int32 MathHelper::RunSquare()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MathHelper_RunSquare\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":3,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_Helper_Square_System_Int32\",\"targetParameterCount\":1,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_82[] = "{\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-arglist\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunArglist()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-arglist\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunArglist()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MoreRareOpsHelper_RunArglist\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_83[] = "{\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-jmp\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunJmp()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-jmp\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunJmp()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MoreRareOpsHelper_RunJmp\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_84[] = "{\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-mkrefany\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunMkrefany()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-mkrefany\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunMkrefany()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_85[] = "{\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-refanytype\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunRefanytype()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-refanytype\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunRefanytype()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_86[] = "{\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-refanyval\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunRefanyval()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.more-rare-ops-helper.run-refanyval\",\"signature\":\"System.Int32 MoreRareOpsHelper::RunRefanyval()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_87[] = "{\"methodId\":\"snapshot-test-fixtures.mul-div-helper.run-mul-div\",\"subjectId\":\"SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()\",\"signature\":\"System.Int32 MulDivHelper::RunMulDiv()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MulDivHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.mul-div-helper.run-mul-div\",\"signature\":\"System.Int32 MulDivHelper::RunMulDiv()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MulDivHelper_RunMulDiv\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":14,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_88[] = "{\"methodId\":\"snapshot-test-fixtures.multi-dispatcher.dispatch-both\",\"subjectId\":\"SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()\",\"signature\":\"System.Int32 MultiDispatcher::DispatchBoth()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MultiDispatcher\",\"definitionSubjectId\":\"SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.multi-dispatcher.dispatch-both\",\"signature\":\"System.Int32 MultiDispatcher::DispatchBoth()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MultiDispatcher_DispatchBoth\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_89[] = "{\"methodId\":\"snapshot-test-fixtures.my-class.ctor\",\"subjectId\":\"SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void MyClass::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.my-class.ctor\",\"signature\":\"System.Void MyClass::.ctor(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_MyClass__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/MyClass\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/MyClass\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/MyClass::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyClass::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyClass::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyClass\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_90[] = "{\"methodId\":\"snapshot-test-fixtures.my-class.get-value\",\"subjectId\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\",\"signature\":\"System.Int32 MyClass::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyClass\",\"definitionSubjectId\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/MyClass::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.my-class.get-value\",\"signature\":\"System.Int32 MyClass::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_MyClass_GetValue\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/MyClass\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/MyClass::_val\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyClass::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyClass::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyClass\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_91[] = "{\"methodId\":\"snapshot-test-fixtures.neg-shift-helper.run-neg-shift\",\"subjectId\":\"SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()\",\"signature\":\"System.Int32 NegShiftHelper::RunNegShift()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/NegShiftHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.neg-shift-helper.run-neg-shift\",\"signature\":\"System.Int32 NegShiftHelper::RunNegShift()\"},\"nativeSymbol\":\"SnapshotTestFixtures_NegShiftHelper_RunNegShift\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":5,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"neg\",\"opCode\":30,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-2147483648,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"shr\",\"opCode\":62,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":26,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_92[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i1\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI1(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i1\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI1(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i1\",\"opCode\":88,\"ilOffset\":1,\"resultType\":\"System.SByte\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_93[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i1-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI1Un(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i1-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI1Un(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i1.un\",\"ilOffset\":2,\"resultType\":\"System.SByte\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_94[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i2-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI2Un(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i2-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI2Un(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i2.un\",\"ilOffset\":2,\"resultType\":\"System.Int16\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_95[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i4-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI4Un(System.Int64)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i4-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfI4Un(System.Int64)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":10,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u8\",\"opCode\":92,\"ilOffset\":1,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i4.un\",\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_96[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i8-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)\",\"signature\":\"System.Int64 OverflowConvExtHelper::ConvOvfI8Un(System.Single)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i8-un\",\"signature\":\"System.Int64 OverflowConvExtHelper::ConvOvfI8Un(System.Single)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single\",\"isStatic\":true,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":8,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"conv.r8\",\"opCode\":42,\"ilOffset\":1,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i8\",\"opCode\":89,\"ilOffset\":2,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_97[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfIUn(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-i-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfIUn(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i.un\",\"opCode\":87,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":4,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_98[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u1-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU1Un(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u1-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU1Un(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u1.un\",\"ilOffset\":2,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_99[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u2-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU2Un(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u2-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU2Un(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u2.un\",\"ilOffset\":2,\"resultType\":\"System.UInt16\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_100[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u4-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU4Un(System.Int64)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u4-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfU4Un(System.Int64)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":10,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u8\",\"opCode\":92,\"ilOffset\":1,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4.un\",\"ilOffset\":2,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_101[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u8-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)\",\"signature\":\"System.Int64 OverflowConvExtHelper::ConvOvfU8Un(System.Double)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u8-un\",\"signature\":\"System.Int64 OverflowConvExtHelper::ConvOvfU8Un(System.Double)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double\",\"isStatic\":true,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":9,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u8\",\"opCode\":92,\"ilOffset\":1,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i8.un\",\"ilOffset\":2,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_102[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfUUn(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-ext-helper.conv-ovf-u-un\",\"signature\":\"System.Int32 OverflowConvExtHelper::ConvOvfUUn(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.u\",\"opCode\":66,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":4,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_103[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i2\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfI2(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i2\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfI2(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i2\",\"opCode\":88,\"ilOffset\":1,\"resultType\":\"System.Int16\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_104[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i4\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfI4()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i4\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfI4()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_105[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i8\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)\",\"signature\":\"System.Int64 OverflowConvHelper::ConvOvfI8(System.Single)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-i8\",\"signature\":\"System.Int64 OverflowConvHelper::ConvOvfI8(System.Single)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single\",\"isStatic\":true,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":8,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i8\",\"opCode\":89,\"ilOffset\":1,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_106[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u1\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU1(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u1\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU1(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u1\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_107[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u2\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU2(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u2\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU2(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u2\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt16\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_108[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u4\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU4(System.Int64)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u4\",\"signature\":\"System.Int32 OverflowConvHelper::ConvOvfU4(System.Int64)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":10,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_109[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u8\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)\",\"signature\":\"System.Int64 OverflowConvHelper::ConvOvfU8(System.Double)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)\",\"subjectId\":\"SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)\",\"methodId\":\"snapshot-test-fixtures.overflow-conv-helper.conv-ovf-u8\",\"signature\":\"System.Int64 OverflowConvHelper::ConvOvfU8(System.Double)\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double\",\"isStatic\":true,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":9,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u8\",\"opCode\":92,\"ilOffset\":1,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i8.un\",\"ilOffset\":2,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_110[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-add\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowAdd()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-add\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowAdd()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowHelper_RunOverflowAdd\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2147483647,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":5,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_111[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-mul\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowMul()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-mul\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowMul()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowHelper_RunOverflowMul\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_112[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-sub\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowSub()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-helper.run-overflow-sub\",\"signature\":\"System.Int32 OverflowHelper::RunOverflowSub()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowHelper_RunOverflowSub\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":50,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_113[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-add-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowAddUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-add-un\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowAddUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":150,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":5,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_114[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-mul-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowMulUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-mul-un\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowMulUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_115[] = "{\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-sub-un\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowSubUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.overflow-un-helper.run-overflow-sub-un\",\"signature\":\"System.Int32 OverflowUnHelper::RunOverflowSubUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":70,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_116[] = "{\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-conv-r-un\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)\",\"signature\":\"System.Int32 RareOpsHelper::TestConvRUn(System.Single)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/RareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)\",\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-conv-r-un\",\"signature\":\"System.Int32 RareOpsHelper::TestConvRUn(System.Single)\"},\"nativeSymbol\":\"SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":8,\"typeShape\":2}],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"conv.u4\",\"opCode\":39,\"ilOffset\":2,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"conv.r.un\",\"opCode\":64,\"ilOffset\":5,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"conv.r8\",\"opCode\":42,\"ilOffset\":6,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":13,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":14,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_117[] = "{\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-init-blk\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\\u0026)\",\"signature\":\"System.Void RareOpsHelper::TestInitBlk(System.Int32\\u0026)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/RareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\\u0026)\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\\u0026)\",\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-init-blk\",\"signature\":\"System.Void RareOpsHelper::TestInitBlk(System.Int32\\u0026)\"},\"nativeSymbol\":\"SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_118[] = "{\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-starg\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)\",\"signature\":\"System.Int32 RareOpsHelper::TestStarg(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/RareOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.rare-ops-helper.test-starg\",\"signature\":\"System.Int32 RareOpsHelper::TestStarg(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_119[] = "{\"methodId\":\"snapshot-test-fixtures.rethrow-helper.run-rethrow\",\"subjectId\":\"SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()\",\"signature\":\"System.Int32 RethrowHelper::RunRethrow()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/RethrowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.rethrow-helper.run-rethrow\",\"signature\":\"System.Int32 RethrowHelper::RunRethrow()\"},\"nativeSymbol\":\"SnapshotTestFixtures_RethrowHelper_RunRethrow\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":5,\"handlerOffset\":6,\"handlerLength\":4,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":10,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"rethrow\",\"opCode\":49,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":11,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_120[] = "{\"methodId\":\"snapshot-test-fixtures.sealed-class-virtual-helper.run-sealed-virtual\",\"subjectId\":\"SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()\",\"signature\":\"System.Int32 SealedClassVirtualHelper::RunSealedVirtual()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SealedClassVirtualHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.sealed-class-virtual-helper.run-sealed-virtual\",\"signature\":\"System.Int32 SealedClassVirtualHelper::RunSealedVirtual()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"SnapshotTestFixtures/SealedHelper\",\"callee\":\"SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_SealedHelper_GetValueVirtual\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_121[] = "{\"methodId\":\"snapshot-test-fixtures.sealed-helper.ctor\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void SealedHelper::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SealedHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.sealed-helper.ctor\",\"signature\":\"System.Void SealedHelper::.ctor(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_SealedHelper__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/SealedHelper\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/SealedHelper\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/SealedHelper::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SealedHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_122[] = "{\"methodId\":\"snapshot-test-fixtures.sealed-helper.get-value-virtual\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\",\"signature\":\"System.Int32 SealedHelper::GetValueVirtual()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SealedHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.sealed-helper.get-value-virtual\",\"signature\":\"System.Int32 SealedHelper::GetValueVirtual()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SealedHelper_GetValueVirtual\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/SealedHelper\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/SealedHelper::_val\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/SealedHelper::_val\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SealedHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_123[] = "{\"methodId\":\"snapshot-test-fixtures.shift-helper.run-shift\",\"subjectId\":\"SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()\",\"signature\":\"System.Int32 ShiftHelper::RunShift()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ShiftHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.shift-helper.run-shift\",\"signature\":\"System.Int32 ShiftHelper::RunShift()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ShiftHelper_RunShift\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":8,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":3,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"shl\",\"opCode\":61,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"shr\",\"opCode\":62,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":17,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":18,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_124[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-i\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvI()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-i\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvI()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvI\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i\",\"opCode\":65,\"ilOffset\":3,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":10,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":11,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_125[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfI(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfI(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i\",\"opCode\":65,\"ilOffset\":1,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_126[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i-un\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfIUn(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-i-un\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfIUn(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.i.un\",\"opCode\":87,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":4,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_127[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfU(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfU(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u\",\"opCode\":90,\"ilOffset\":1,\"resultType\":\"System.UIntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":3,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_128[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u-un\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfUUn(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-ovf-u-un\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvOvfUUn(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.ovf.u4\",\"opCode\":91,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"conv.u\",\"opCode\":66,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":4,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_129[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-u4\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvU4()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-conv-u4\",\"signature\":\"System.Int32 SimpleGapsHelper::RunConvU4()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunConvU4\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":8,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_130[] = "{\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-ldnull\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()\",\"signature\":\"System.Int32 SimpleGapsHelper::RunLdnull()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.simple-gaps-helper.run-ldnull\",\"signature\":\"System.Int32 SimpleGapsHelper::RunLdnull()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SimpleGapsHelper_RunLdnull\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":3,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":9,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":10,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":13,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":14,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_131[] = "{\"methodId\":\"snapshot-test-fixtures.size-of-helper.get-size\",\"subjectId\":\"SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()\",\"signature\":\"System.Int32 SizeOfHelper::GetSize()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SizeOfHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.size-of-helper.get-size\",\"signature\":\"System.Int32 SizeOfHelper::GetSize()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SizeOfHelper_GetSize\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"sizeof\",\"opCode\":72,\"operand\":\"SnapshotTestFixtures/SmallStruct\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"type\",\"subjectId\":\"SnapshotTestFixtures/SmallStruct\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/SmallStruct\",\"typeShape\":2,\"arrayElementTypeShape\":0,\"isSealed\":true,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.ValueType\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":10,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":11,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_132[] = "{\"methodId\":\"snapshot-test-fixtures.static-field-write-helper.write-and-read\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()\",\"signature\":\"System.Int32 StaticFieldWriteHelper::WriteAndRead()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.static-field-write-helper.write-and-read\",\"signature\":\"System.Int32 StaticFieldWriteHelper::WriteAndRead()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget\",\"ilOffset\":3,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget\",\"ilOffset\":8,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StaticFieldWriteHelper\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_133[] = "{\"methodId\":\"snapshot-test-fixtures.stelem-all-helper.test-all-elems\",\"subjectId\":\"SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()\",\"signature\":\"System.Int32 StelemAllHelper::TestAllElems()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StelemAllHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.stelem-all-helper.test-all-elems\",\"signature\":\"System.Int32 StelemAllHelper::TestAllElems()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StelemAllHelper_TestAllElems\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":2,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-6,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int32\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":19,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int32\",\"ilOffset\":22,\"resultType\":\"System.Int32\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":28,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_134[] = "{\"methodId\":\"snapshot-test-fixtures.stind-narrow-helper.run-stind-narrow\",\"subjectId\":\"SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()\",\"signature\":\"System.Int32 StindNarrowHelper::RunStindNarrow()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StindNarrowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.stind-narrow-helper.run-stind-narrow\",\"signature\":\"System.Int32 StindNarrowHelper::RunStindNarrow()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.Byte[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int16\",\"ilOffset\":9,\"resultType\":\"System.Int16[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int16\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int16\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.SByte\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":100,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Int16\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":25,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Byte\",\"ilOffset\":27,\"resultType\":\"System.Byte\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Int16\",\"ilOffset\":30,\"resultType\":\"System.Int16\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":32,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":35,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":35,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":36,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_135[] = "{\"methodId\":\"snapshot-test-fixtures.stind-wide-helper.run-stind-wide\",\"subjectId\":\"SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()\",\"signature\":\"System.Int32 StindWideHelper::RunStindWide()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StindWideHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.stind-wide-helper.run-stind-wide\",\"signature\":\"System.Int32 StindWideHelper::RunStindWide()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StindWideHelper_RunStindWide\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Single\",\"ilOffset\":2,\"resultType\":\"System.Single[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Single\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Single\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Double\",\"ilOffset\":9,\"resultType\":\"System.Double[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Double\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Double\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Object\",\"ilOffset\":16,\"resultType\":\"System.Object[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Object\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.r4\",\"opCode\":2,\"operand\":3.5,\"ilOffset\":24,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Single\",\"ilOffset\":29,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.r8\",\"opCode\":3,\"operand\":7.2,\"ilOffset\":32,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"stelem\",\"opCode\":45,\"operand\":\"System.Double\",\"ilOffset\":41,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hi\",\"ilOffset\":44,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"stelem.ref\",\"opCode\":45,\"ilOffset\":49,\"resultType\":\"System.Void\",\"runtimeServiceKind\":13,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Single\",\"ilOffset\":52,\"resultType\":\"System.Single\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"conv.r8\",\"opCode\":42,\"ilOffset\":53,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":55,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Double\",\"ilOffset\":56,\"resultType\":\"System.Double\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":57,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":58,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":59,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldelem.ref\",\"opCode\":44,\"ilOffset\":61,\"resultType\":\"System.Object\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":67,\"ilOffset\":62,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":64,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":68,\"ilOffset\":65,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":67,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":68,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":72,\"ilOffset\":70,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":73,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_136[] = "{\"methodId\":\"snapshot-test-fixtures.string-concat-helper.test-concat\",\"subjectId\":\"SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()\",\"signature\":\"System.Int32 StringConcatHelper::TestConcat()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StringConcatHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.string-concat-helper.test-concat\",\"signature\":\"System.Int32 StringConcatHelper::TestConcat()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StringConcatHelper_TestConcat\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Hello\",\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Void\",\"callee\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_Helper_ConsumeString_System_String\",\"targetParameterCount\":1,\"targetReturnType\":\"System.Void\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_137[] = "{\"methodId\":\"snapshot-test-fixtures.string-format-helper.test-format-one\",\"subjectId\":\"SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()\",\"signature\":\"System.Int32 StringFormatHelper::TestFormatOne()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StringFormatHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.string-format-helper.test-format-one\",\"signature\":\"System.Int32 StringFormatHelper::TestFormatOne()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StringFormatHelper_TestFormatOne\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Value: {0}\",\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":8,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":13,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":18,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_138[] = "{\"methodId\":\"snapshot-test-fixtures.string-ops.use-string\",\"subjectId\":\"SnapshotTestFixtures/StringOps::UseString:System.Int32()\",\"signature\":\"System.Int32 StringOps::UseString()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/StringOps\",\"definitionSubjectId\":\"SnapshotTestFixtures/StringOps::UseString:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/StringOps::UseString:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.string-ops.use-string\",\"signature\":\"System.Int32 StringOps::UseString()\"},\"nativeSymbol\":\"SnapshotTestFixtures_StringOps_UseString\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Hello\",\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Void\",\"callee\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_Helper_ConsumeString_System_String\",\"targetParameterCount\":1,\"targetReturnType\":\"System.Void\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_139[] = "{\"methodId\":\"snapshot-test-fixtures.switch-helper.classify\",\"subjectId\":\"SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()\",\"signature\":\"System.Int32 SwitchHelper::Classify()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/SwitchHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.switch-helper.classify\",\"signature\":\"System.Int32 SwitchHelper::Classify()\"},\"nativeSymbol\":\"SnapshotTestFixtures_SwitchHelper_Classify\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":7,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"beq\",\"opCode\":20,\"operand\":19,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":13,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":2,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"beq\",\"opCode\":20,\"operand\":24,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":29,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":33,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":20,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":33,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":33,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":37,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":37,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":41,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":41,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":42,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_140[] = "{\"methodId\":\"snapshot-test-fixtures.target-helper.get-value\",\"subjectId\":\"SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()\",\"signature\":\"System.Int32 TargetHelper::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/TargetHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.target-helper.get-value\",\"signature\":\"System.Int32 TargetHelper::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_TargetHelper_GetValue\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":2,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_141[] = "{\"methodId\":\"snapshot-test-fixtures.throw-helper.check-positive\",\"subjectId\":\"SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)\",\"signature\":\"System.Int32 ThrowHelper::CheckPositive(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ThrowHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)\",\"subjectId\":\"SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.throw-helper.check-positive\",\"signature\":\"System.Int32 ThrowHelper::CheckPositive(System.Int32)\"},\"nativeSymbol\":\"SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"blt\",\"opCode\":21,\"operand\":7,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":8,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-1,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_142[] = "{\"methodId\":\"snapshot-test-fixtures.type-check-helper.check-and-cast\",\"subjectId\":\"SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()\",\"signature\":\"System.Int32 TypeCheckHelper::CheckAndCast()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/TypeCheckHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.type-check-helper.check-and-cast\",\"signature\":\"System.Int32 TypeCheckHelper::CheckAndCast()\"},\"nativeSymbol\":\"SnapshotTestFixtures_TypeCheckHelper_CheckAndCast\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"SnapshotTestFixtures/MarkedClass\",\"callee\":\"SnapshotTestFixtures/MarkedClass::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[\"SnapshotTestFixtures/IMarker\"],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"SnapshotTestFixtures/MarkedClass\",\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/MarkedClass\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"type\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[\"SnapshotTestFixtures/IMarker\"],\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":15,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":32,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":23,\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/MarkedClass::Value\",\"ilOffset\":24,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass::Value\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MarkedClass::Value\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MarkedClass\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":36,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":-1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":36,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":36,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":37,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_143[] = "{\"methodId\":\"snapshot-test-fixtures.unbox-helper.run-unbox\",\"subjectId\":\"SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()\",\"signature\":\"System.Int32 UnboxHelper::RunUnbox()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/UnboxHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.unbox-helper.run-unbox\",\"signature\":\"System.Int32 UnboxHelper::RunUnbox()\"},\"nativeSymbol\":\"SnapshotTestFixtures_UnboxHelper_RunUnbox\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_144[] = "{\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-ckfinite\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)\",\"signature\":\"System.Double UnsignedOpsHelper::TestCkfinite(System.Double)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)\",\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-ckfinite\",\"signature\":\"System.Double UnsignedOpsHelper::TestCkfinite(System.Double)\"},\"nativeSymbol\":\"SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double\",\"isStatic\":true,\"returnType\":\"System.Double\",\"returnAbi\":{\"carrierKindCode\":9,\"typeShape\":2},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":9,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Double::IsFinite:System.Boolean(System.Double)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Double::IsFinite:System.Boolean(System.Double)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Double::IsFinite:System.Boolean(System.Double)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":19,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.r8\",\"opCode\":3,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":20,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":20,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_145[] = "{\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-clt-un\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestCltUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-clt-un\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestCltUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":5,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":5,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":11,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_146[] = "{\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-div-un\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestDivUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-div-un\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestDivUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"div.un\",\"opCode\":55,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_147[] = "{\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-rem-un\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestRemUn()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.unsigned-ops-helper.test-rem-un\",\"signature\":\"System.Int32 UnsignedOpsHelper::TestRemUn()\"},\"nativeSymbol\":\"SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":3,\"ilOffset\":4,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"rem.un\",\"opCode\":56,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":13,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_148[] = "{\"methodId\":\"snapshot-test-fixtures.value-type-helper.run-value-type\",\"subjectId\":\"SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()\",\"signature\":\"System.Int32 ValueTypeHelper::RunValueType()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/ValueTypeHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.value-type-helper.run-value-type\",\"signature\":\"System.Int32 ValueTypeHelper::RunValueType()\"},\"nativeSymbol\":\"SnapshotTestFixtures_ValueTypeHelper_RunValueType\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"SnapshotTestFixtures/MyValueType\",\"ilOffset\":3,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"type\",\"subjectId\":\"SnapshotTestFixtures/MyValueType\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyValueType\",\"typeShape\":2,\"arrayElementTypeShape\":0,\"isSealed\":true,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.ValueType\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/MyValueType::X\",\"ilOffset\":13,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::X\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::X\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyValueType\",\"declaringTypeShape\":2,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":18,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":10,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/MyValueType::Y\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::Y\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::Y\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyValueType\",\"declaringTypeShape\":2,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/MyValueType::X\",\"ilOffset\":28,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::X\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::X\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyValueType\",\"declaringTypeShape\":2,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":33,\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/MyValueType::Y\",\"ilOffset\":34,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::Y\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/MyValueType::Y\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/MyValueType\",\"declaringTypeShape\":2,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":44,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_149[] = "{\"methodId\":\"snapshot-test-fixtures.virtual-dispatch-helper.use-virtual-dispatch\",\"subjectId\":\"SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()\",\"signature\":\"System.Int32 VirtualDispatchHelper::UseVirtualDispatch()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/VirtualDispatchHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.virtual-dispatch-helper.use-virtual-dispatch\",\"signature\":\"System.Int32 VirtualDispatchHelper::UseVirtualDispatch()\"},\"nativeSymbol\":\"SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"SnapshotTestFixtures/DerivedClass\",\"callee\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"SnapshotTestFixtures/BaseClass\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_BaseClass_Compute\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_150[] = "{\"methodId\":\"snapshot-test-fixtures.virtual-helper.use-virtual\",\"subjectId\":\"SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()\",\"signature\":\"System.Int32 VirtualHelper::UseVirtual()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/VirtualHelper\",\"definitionSubjectId\":\"SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.virtual-helper.use-virtual\",\"signature\":\"System.Int32 VirtualHelper::UseVirtual()\"},\"nativeSymbol\":\"SnapshotTestFixtures_VirtualHelper_UseVirtual\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":1,\"resultType\":\"SnapshotTestFixtures/DerivedClass\",\"callee\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/DerivedClass\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"SnapshotTestFixtures/BaseClass\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/BaseClass::Compute:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_BaseClass_Compute\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Int32\",\"dispatchKindCode\":2,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":16,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_151[] = "{\"methodId\":\"snapshot-test-fixtures.void-caller.do-nothing\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"signature\":\"System.Int32 VoidCaller::DoNothing()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/VoidCaller\",\"definitionSubjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"subjectId\":\"SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.void-caller.do-nothing\",\"signature\":\"System.Int32 VoidCaller::DoNothing()\"},\"nativeSymbol\":\"SnapshotTestFixtures_VoidCaller_DoNothing\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"method\",\"subjectId\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Helper::Nop:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"targetSymbol\":\"SnapshotTestFixtures_Helper_Nop\",\"targetParameterCount\":0,\"targetReturnType\":\"System.Void\",\"dispatchKindCode\":1,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":11,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_152[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-1.ctor\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"signature\":\"System.Void Wrapper\\u00601::.ctor(!0)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"methodId\":\"snapshot-test-fixtures.wrapper-1.ctor\",\"signature\":\"System.Void Wrapper\\u00601::.ctor(!0)\"},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper_1__ctor_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"!0\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"!0\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_153[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-1.get-value\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"signature\":\"!0 Wrapper\\u00601::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"methodId\":\"snapshot-test-fixtures.wrapper-1.get-value\",\"signature\":\"!0 Wrapper\\u00601::GetValue()\"},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper_1_GetValue\",\"isStatic\":false,\"returnType\":\"!0\",\"returnAbi\":{\"carrierKindCode\":2,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u00601\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"ilOffset\":1,\"resultType\":\"!0\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"!0\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_154[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-0.ctor\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::.ctor:System.Void(!0)\",\"signature\":\"System.Void Wrapper\\u003C!0\\u003E::.ctor(!0)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::.ctor:System.Void(!0)\",\"methodId\":\"snapshot-test-fixtures.wrapper-0.ctor\",\"signature\":\"System.Void Wrapper\\u003C!0\\u003E::.ctor(!0)\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::.ctor:System.Void(!0)\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::.ctor(!0)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper__0__ctor_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"!0\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"!0\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_155[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-0.get-value\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::GetValue:!0()\",\"signature\":\"!0 Wrapper\\u003C!0\\u003E::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::GetValue:!0()\",\"methodId\":\"snapshot-test-fixtures.wrapper-0.get-value\",\"signature\":\"!0 Wrapper\\u003C!0\\u003E::GetValue()\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::GetValue:!0()\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::GetValue()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper__0_GetValue\",\"isStatic\":false,\"returnType\":\"!0\",\"returnAbi\":{\"carrierKindCode\":2,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"ilOffset\":1,\"resultType\":\"!0\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003C!0\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"!0\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_156[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-system-int32.ctor\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Int32)\",\"signature\":\"System.Void Wrapper\\u003CSystem.Int32\\u003E::.ctor(System.Int32)\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Int32)\",\"methodId\":\"snapshot-test-fixtures.wrapper-system-int32.ctor\",\"signature\":\"System.Void Wrapper\\u003CSystem.Int32\\u003E::.ctor(System.Int32)\",\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]\"}},\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor:System.Void(System.Int32)\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::.ctor(System.Int32)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::.ctor:System.Void(!0)\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":8,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stfld\",\"opCode\":11,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"ilOffset\":10,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":3,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":15,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+static const char kMethodJson_157[] = "{\"methodId\":\"snapshot-test-fixtures.wrapper-system-int32.get-value\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"signature\":\"System.Int32 Wrapper\\u003CSystem.Int32\\u003E::GetValue()\",\"identity\":{\"assemblyName\":\"SnapshotTestFixtures\",\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"methodId\":\"snapshot-test-fixtures.wrapper-system-int32.get-value\",\"signature\":\"System.Int32 Wrapper\\u003CSystem.Int32\\u003E::GetValue()\",\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"}},\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0();type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue:System.Int32()\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::GetValue()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::GetValue:!0()\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"nativeSymbol\":\"SnapshotTestFixtures_Wrapper_System_Int32_GetValue\",\"isStatic\":false,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"isPreserveSig\":false},{\"op\":\"ldfld\",\"opCode\":10,\"operand\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"SnapshotTestFixtures\",\"subjectKind\":\"field\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SnapshotTestFixtures\",\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"openDefinitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=SnapshotTestFixtures/Wrapper\\u00601::_val;type=[System.Int32];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:typeSpec:field-projection\"},\"genericDiagnostic\":{\"subjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"displaySubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E::_val\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"SnapshotTestFixtures/Wrapper\\u00601::_val\",\"typeArguments\":[\"System.Int32\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SnapshotTestFixtures/Wrapper\\u003CSystem.Int32\\u003E\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":2,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SnapshotTestFixtures\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[158] =
+{
+    { kMethodJson_0, 5269u, 0x0000007Cu, 0u },
+    { kMethodJson_1, 5269u, 0x0000007Eu, 0u },
+    { kMethodJson_2, 5269u, 0x00000080u, 0u },
+    { kMethodJson_3, 5285u, 0x00000082u, 0u },
+    { kMethodJson_4, 5325u, 0x00000084u, 0u },
+    { kMethodJson_5, 5301u, 0x00000086u, 0u },
+    { kMethodJson_6, 5341u, 0x00000088u, 0u },
+    { kMethodJson_7, 5269u, 0x0000008Au, 0u },
+    { kMethodJson_8, 4138u, 0x0000008Eu, 0u },
+    { kMethodJson_9, 5349u, 0x0000008Cu, 0u },
+    { kMethodJson_10, 2144u, 0x00000090u, 0u },
+    { kMethodJson_11, 2938u, 0x000000BEu, 0u },
+    { kMethodJson_12, 5875u, 0x000000A9u, 0u },
+    { kMethodJson_13, 1246u, 0x0000007Du, 0u },
+    { kMethodJson_14, 2916u, 0x0000009Au, 0u },
+    { kMethodJson_15, 2474u, 0x000000B1u, 0u },
+    { kMethodJson_16, 1571u, 0x000000CBu, 0u },
+    { kMethodJson_17, 1803u, 0x000000A1u, 0u },
+    { kMethodJson_18, 1217u, 0x000000A0u, 0u },
+    { kMethodJson_19, 3699u, 0x000000AFu, 0u },
+    { kMethodJson_20, 2817u, 0x0000008Du, 0u },
+    { kMethodJson_21, 1644u, 0x0000010Du, 0u },
+    { kMethodJson_22, 5903u, 0x000000BCu, 0u },
+    { kMethodJson_23, 6167u, 0x000000B5u, 0u },
+    { kMethodJson_24, 4797u, 0x000000AAu, 0u },
+    { kMethodJson_25, 2232u, 0x000000E6u, 0u },
+    { kMethodJson_26, 2211u, 0x000000E5u, 0u },
+    { kMethodJson_27, 5618u, 0x000000D7u, 0u },
+    { kMethodJson_28, 3016u, 0x0000008Bu, 0u },
+    { kMethodJson_29, 2729u, 0x000000C4u, 0u },
+    { kMethodJson_30, 15707u, 0x00000106u, 0u },
+    { kMethodJson_31, 7280u, 0x00000105u, 0u },
+    { kMethodJson_32, 10945u, 0x00000107u, 0u },
+    { kMethodJson_33, 2130u, 0x00000092u, 0u },
+    { kMethodJson_34, 3356u, 0x000000BAu, 0u },
+    { kMethodJson_35, 2580u, 0x000000B7u, 0u },
+    { kMethodJson_36, 1244u, 0x000000C6u, 0u },
+    { kMethodJson_37, 1244u, 0x000000C2u, 0u },
+    { kMethodJson_38, 5144u, 0x0000009Fu, 0u },
+    { kMethodJson_39, 1923u, 0x000000A3u, 0u },
+    { kMethodJson_40, 1244u, 0x000000A2u, 0u },
+    { kMethodJson_41, 2872u, 0x0000009Bu, 0u },
+    { kMethodJson_42, 1303u, 0x00000108u, 0u },
+    { kMethodJson_43, 3601u, 0x0000008Fu, 0u },
+    { kMethodJson_44, 2752u, 0x000000B6u, 0u },
+    { kMethodJson_45, 2114u, 0x00000085u, 0u },
+    { kMethodJson_46, 5794u, 0x0000009Cu, 0u },
+    { kMethodJson_47, 5310u, 0x0000010Cu, 0u },
+    { kMethodJson_48, 1803u, 0x000000BDu, 0u },
+    { kMethodJson_49, 2881u, 0x000000ABu, 0u },
+    { kMethodJson_50, 1298u, 0x00000095u, 0u },
+    { kMethodJson_51, 1198u, 0x00000096u, 0u },
+    { kMethodJson_52, 1047u, 0x00000093u, 0u },
+    { kMethodJson_53, 1475u, 0x00000094u, 0u },
+    { kMethodJson_54, 1334u, 0x0000010Fu, 0u },
+    { kMethodJson_55, 1307u, 0x0000010Eu, 0u },
+    { kMethodJson_56, 2771u, 0x00000114u, 0u },
+    { kMethodJson_57, 1882u, 0x00000115u, 0u },
+    { kMethodJson_58, 2218u, 0x000000A8u, 0u },
+    { kMethodJson_59, 4074u, 0x000000ACu, 0u },
+    { kMethodJson_60, 2831u, 0x00000087u, 0u },
+    { kMethodJson_61, 1938u, 0x00000089u, 0u },
+    { kMethodJson_62, 2851u, 0x00000116u, 0u },
+    { kMethodJson_63, 1550u, 0x0000010Au, 0u },
+    { kMethodJson_64, 1368u, 0x000000C1u, 0u },
+    { kMethodJson_65, 1261u, 0x000000B9u, 0u },
+    { kMethodJson_66, 3551u, 0x000000C0u, 0u },
+    { kMethodJson_67, 3763u, 0x000000DBu, 0u },
+    { kMethodJson_68, 6983u, 0x00000098u, 0u },
+    { kMethodJson_69, 2915u, 0x000000BBu, 0u },
+    { kMethodJson_70, 3204u, 0x000000C8u, 0u },
+    { kMethodJson_71, 2985u, 0x00000103u, 0u },
+    { kMethodJson_72, 2993u, 0x00000102u, 0u },
+    { kMethodJson_73, 2986u, 0x00000104u, 0u },
+    { kMethodJson_74, 6417u, 0x000000C7u, 0u },
+    { kMethodJson_75, 2949u, 0x000000C9u, 0u },
+    { kMethodJson_76, 4727u, 0x000000BFu, 0u },
+    { kMethodJson_77, 3147u, 0x000000DAu, 0u },
+    { kMethodJson_78, 2269u, 0x000000B3u, 0u },
+    { kMethodJson_79, 3242u, 0x00000091u, 0u },
+    { kMethodJson_80, 1823u, 0x000000A5u, 0u },
+    { kMethodJson_81, 2420u, 0x00000083u, 0u },
+    { kMethodJson_82, 1318u, 0x000000EBu, 0u },
+    { kMethodJson_83, 1286u, 0x000000EFu, 0u },
+    { kMethodJson_84, 1326u, 0x000000ECu, 0u },
+    { kMethodJson_85, 1342u, 0x000000EEu, 0u },
+    { kMethodJson_86, 1334u, 0x000000EDu, 0u },
+    { kMethodJson_87, 1266u, 0x000000B4u, 0u },
+    { kMethodJson_88, 1312u, 0x00000109u, 0u },
+    { kMethodJson_89, 2726u, 0x000000D8u, 0u },
+    { kMethodJson_90, 1840u, 0x000000D9u, 0u },
+    { kMethodJson_91, 2754u, 0x000000B8u, 0u },
+    { kMethodJson_92, 1551u, 0x000000F0u, 0u },
+    { kMethodJson_93, 1657u, 0x000000F1u, 0u },
+    { kMethodJson_94, 1657u, 0x000000F3u, 0u },
+    { kMethodJson_95, 1658u, 0x000000F5u, 0u },
+    { kMethodJson_96, 1670u, 0x000000F7u, 0u },
+    { kMethodJson_97, 1753u, 0x000000F9u, 0u },
+    { kMethodJson_98, 1656u, 0x000000F2u, 0u },
+    { kMethodJson_99, 1658u, 0x000000F4u, 0u },
+    { kMethodJson_100, 1659u, 0x000000F6u, 0u },
+    { kMethodJson_101, 1665u, 0x000000F8u, 0u },
+    { kMethodJson_102, 1746u, 0x000000FAu, 0u },
+    { kMethodJson_103, 1522u, 0x000000D2u, 0u },
+    { kMethodJson_104, 1321u, 0x000000D0u, 0u },
+    { kMethodJson_105, 1530u, 0x000000D5u, 0u },
+    { kMethodJson_106, 1521u, 0x000000D1u, 0u },
+    { kMethodJson_107, 1523u, 0x000000D3u, 0u },
+    { kMethodJson_108, 1524u, 0x000000D4u, 0u },
+    { kMethodJson_109, 1618u, 0x000000D6u, 0u },
+    { kMethodJson_110, 1330u, 0x000000CDu, 0u },
+    { kMethodJson_111, 1322u, 0x000000CFu, 0u },
+    { kMethodJson_112, 1322u, 0x000000CEu, 0u },
+    { kMethodJson_113, 1361u, 0x000000E8u, 0u },
+    { kMethodJson_114, 1360u, 0x000000EAu, 0u },
+    { kMethodJson_115, 1360u, 0x000000E9u, 0u },
+    { kMethodJson_116, 2401u, 0x000000E3u, 0u },
+    { kMethodJson_117, 1320u, 0x000000E1u, 0u },
+    { kMethodJson_118, 1379u, 0x000000E2u, 0u },
+    { kMethodJson_119, 1852u, 0x000000E7u, 0u },
+    { kMethodJson_120, 2881u, 0x00000112u, 0u },
+    { kMethodJson_121, 2801u, 0x00000110u, 0u },
+    { kMethodJson_122, 1968u, 0x00000111u, 0u },
+    { kMethodJson_123, 2584u, 0x000000B0u, 0u },
+    { kMethodJson_124, 1925u, 0x000000FDu, 0u },
+    { kMethodJson_125, 1610u, 0x000000FEu, 0u },
+    { kMethodJson_126, 1732u, 0x00000100u, 0u },
+    { kMethodJson_127, 1615u, 0x000000FFu, 0u },
+    { kMethodJson_128, 1725u, 0x00000101u, 0u },
+    { kMethodJson_129, 1746u, 0x000000FCu, 0u },
+    { kMethodJson_130, 2143u, 0x000000FBu, 0u },
+    { kMethodJson_131, 2011u, 0x000000A7u, 0u },
+    { kMethodJson_132, 3056u, 0x000000ADu, 0u },
+    { kMethodJson_133, 3789u, 0x000000DCu, 0u },
+    { kMethodJson_134, 4557u, 0x000000C3u, 0u },
+    { kMethodJson_135, 6674u, 0x000000CAu, 0u },
+    { kMethodJson_136, 2466u, 0x0000010Bu, 0u },
+    { kMethodJson_137, 3120u, 0x000000E4u, 0u },
+    { kMethodJson_138, 2375u, 0x0000007Fu, 0u },
+    { kMethodJson_139, 3779u, 0x00000097u, 0u },
+    { kMethodJson_140, 1254u, 0x00000099u, 0u },
+    { kMethodJson_141, 1894u, 0x000000CCu, 0u },
+    { kMethodJson_142, 4686u, 0x000000A6u, 0u },
+    { kMethodJson_143, 1244u, 0x000000C5u, 0u },
+    { kMethodJson_144, 2515u, 0x000000E0u, 0u },
+    { kMethodJson_145, 2120u, 0x000000DDu, 0u },
+    { kMethodJson_146, 2125u, 0x000000DEu, 0u },
+    { kMethodJson_147, 2125u, 0x000000DFu, 0u },
+    { kMethodJson_148, 5358u, 0x000000B2u, 0u },
+    { kMethodJson_149, 3139u, 0x000000AEu, 0u },
+    { kMethodJson_150, 2999u, 0x000000A4u, 0u },
+    { kMethodJson_151, 2180u, 0x00000081u, 0u },
+    { kMethodJson_152, 3928u, 0x0000009Du, 0u },
+    { kMethodJson_153, 3036u, 0x0000009Eu, 0u },
+    { kMethodJson_154, 4402u, 0x00000119u, 0u },
+    { kMethodJson_155, 3480u, 0x0000011Au, 0u },
+    { kMethodJson_156, 5825u, 0x00000117u, 0u },
+    { kMethodJson_157, 4826u, 0x00000118u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 158u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

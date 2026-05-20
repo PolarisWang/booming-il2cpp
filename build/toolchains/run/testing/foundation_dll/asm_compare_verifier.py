@@ -156,16 +156,17 @@ def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
 
 
 def _short_method_name(full_id: str) -> str:
-    """Extract TypeName::MethodName from a full methodSubjectId."""
-    m = re.match(r'(?:[^/]+/)?([^:]+)::([^:]+)(?::|$)', full_id)
-    if m:
-        type_part = m.group(1)
-        method = m.group(2)
-        type_name = type_part.split("/")[-1]
-        return f"{type_name}::{method}"
+    """Extract MethodName:ReturnType(Params) from full methodSubjectId.
+
+    Must match AsmCompareHandler's methodMap index format:
+        m.SubjectId.Substring(m.SubjectId.LastIndexOf("::") + 2)
+    which gives everything after the last '::', e.g.:
+        "ToChar:System.Char(System.Boolean)"  (includes return type)
+        "Wait:System.Void()"
+    """
     if "::" in full_id:
-        return full_id.split("::")[-1]
-    return ""
+        return full_id.rsplit("::", 1)[-1]
+    return full_id
 
 
 def _discover_subjects_dll(family_slug: str, assembly: str) -> Path | None:
@@ -198,7 +199,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
     Uses --methods with comma-separated Subject_N names.
     Pipeline + C++ generation runs once for all methods.
     """
-    short_names = [_short_method_name(mid) or f"Subject_{i}" for i, mid in enumerate(mids)]
+    short_names = [f"Subject_{i}" for i in range(len(mids))]
     methods_arg = ",".join(short_names)
 
     cfg = os.environ.get("CHAOS_BUILD_CONFIG", "Release")
@@ -254,9 +255,14 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
         }
 
     stdout = result.stdout or ""
-    json_start = stdout.find("{")
-    if json_start > 0:
-        stdout = stdout[json_start:]
+    stdout = stdout.strip()
+    # Handle both JSON array (batch) and object (single) output
+    arr_start = stdout.find("[")
+    obj_start = stdout.find("{")
+    if arr_start >= 0 and (obj_start < 0 or arr_start < obj_start):
+        stdout = stdout[arr_start:]
+    elif obj_start >= 0:
+        stdout = stdout[obj_start:]
 
     try:
         data = json.loads(stdout)

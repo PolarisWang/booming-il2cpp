@@ -46,7 +46,7 @@ struct YoungCollectionResult {
 /// Perform a young collection on the shared young generation.
 /// Operates on g_young_gen.region (set before call, reset after).
 /// Called after STW safepoint has been reached.
-YoungCollectionResult GcYoungCollection();
+YoungCollectionResult GcYoungCollection(bool force_skip_gen1 = false);
 
 /// Check whether @a ptr points into any nursery region.
 /// Used by the card table scanner to filter old→nursery references.

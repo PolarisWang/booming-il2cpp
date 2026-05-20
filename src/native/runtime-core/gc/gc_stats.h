@@ -40,9 +40,20 @@ struct GcStats {
     std::atomic<CHAOS_IL2CPP_SIZE> finalization_pending_count{0};
     std::atomic<uint64_t> full_pause_ns{0};
 
+    // ── Gen1 collection ───────────────────────────────────────────
+    std::atomic<uint64_t> gen1_collections{0};
+    std::atomic<uint64_t> gen1_objects_promoted{0};
+    std::atomic<uint64_t> gen1_bytes_promoted{0};
+    std::atomic<uint64_t> gen1_bytes_reclaimed{0};
+    std::atomic<uint64_t> gen1_pause_ns{0};
+
     // ── Last-GC metadata (for GCMemoryInfo) ──────────────────────
     std::atomic<int32_t> last_compacted{0};
     std::atomic<int32_t> last_concurrent{0};
+    std::atomic<int32_t> last_gc_generation{1};  // 0=young, 1=gen1, 2=full
+
+    // ── GC sequence number (monotonically increasing) ────────────
+    std::atomic<uint64_t> gc_index{0};
 
     // ── Allocation (process-wide aggregate) ───────────────────────
     std::atomic<uint64_t> alloc_total{0};
@@ -51,6 +62,10 @@ struct GcStats {
 };
 
 extern GcStats g_gc_stats;
+
+/// Process start time (steady clock) for PauseTimePercentage computation.
+/// Set once at module load in gc_stats.cpp.
+extern const std::chrono::steady_clock::time_point g_gc_start_time;
 
 // ── Pause time histogram buckets (in nanoseconds) ───────────────
 
@@ -127,11 +142,21 @@ struct GcSnapshot {
     uint64_t alloc_bytes;
     uint64_t alloc_oversized;
 
+    // ── Gen1 ──
+    uint64_t gen1_collections;
+    uint64_t gen1_objects_promoted;
+    uint64_t gen1_bytes_promoted;
+    uint64_t gen1_bytes_reclaimed;
+
     // Derived
     uint64_t young_pause_ns_total;
     uint64_t full_pause_ns_total;
     uint64_t young_pause_ns_avg;
     uint64_t full_pause_ns_avg;
+    uint64_t gen1_pause_ns_total;
+    uint64_t gen1_pause_ns_avg;
+    uint64_t gc_index;
+    int32_t last_gc_generation;
 
     // Histogram
     uint64_t pause_histogram[kGcPauseBucketCount];
@@ -161,8 +186,32 @@ struct GcMemoryInfoNative {
     int32_t pause_time_percentage;              // 84  — always 0
     uint8_t compacted;                          // 88
     uint8_t concurrent;                         // 89
-    uint8_t _padding[6];                        // 90-95
-};  // 96 bytes
+    uint8_t _generationInfo_padding[6];         // 90-95 — pad to 96
+
+    // ── _generationInfo inline array (5 × GCGenerationInfo, 32 bytes each = 160 bytes) ──
+    // Matches the BCL GCMemoryInfoData._generationInfo field layout.
+    // Each entry: SizeBeforeBytes(0), SizeAfterBytes(8), FragBeforeBytes(16), FragAfterBytes(24)
+    int64_t gen0_size_before;                   // 96
+    int64_t gen0_size_after;                    // 104
+    int64_t gen0_frag_before;                   // 112
+    int64_t gen0_frag_after;                    // 120
+    int64_t gen1_size_before;                   // 128
+    int64_t gen1_size_after;                    // 136
+    int64_t gen1_frag_before;                   // 144
+    int64_t gen1_frag_after;                    // 152
+    int64_t gen2_size_before;                   // 160
+    int64_t gen2_size_after;                    // 168
+    int64_t gen2_frag_before;                   // 176
+    int64_t gen2_frag_after;                    // 184
+    int64_t gen3_size_before;                   // 192  — always 0 (no gen3 in CRAG)
+    int64_t gen3_size_after;                    // 200
+    int64_t gen3_frag_before;                   // 208
+    int64_t gen3_frag_after;                    // 216
+    int64_t loh_size_before;                    // 224
+    int64_t loh_size_after;                     // 232
+    int64_t loh_frag_before;                    // 240
+    int64_t loh_frag_after;                     // 248
+};  // 256 bytes
 
 // ── Inline record helpers (hot-path, header for max inlining) ─────
 
@@ -179,6 +228,8 @@ inline void GcRecordYoungCollection(
     g_gc_stats.young_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
     g_gc_stats.young_cards_scanned.fetch_add(cards_scanned, std::memory_order_relaxed);
     g_gc_stats.young_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    g_gc_stats.gc_index.fetch_add(1, std::memory_order_relaxed);
+    g_gc_stats.last_gc_generation.store(0, std::memory_order_relaxed);
     GcRecordPauseHistogram(pause_ns);
     GcRecordEventRing(false, pause_ns, objects_promoted, bytes_reclaimed);
 }
@@ -200,8 +251,27 @@ inline void GcRecordFullCollection(
     g_gc_stats.full_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
     g_gc_stats.last_compacted.store(compacted, std::memory_order_relaxed);
     g_gc_stats.last_concurrent.store(concurrent, std::memory_order_relaxed);
+    g_gc_stats.gc_index.fetch_add(1, std::memory_order_relaxed);
+    g_gc_stats.last_gc_generation.store(2, std::memory_order_relaxed);
     GcRecordPauseHistogram(pause_ns);
     GcRecordEventRing(true, pause_ns, objects_marked, bytes_reclaimed);
+}
+
+inline void GcRecordGen1Collection(
+    CHAOS_IL2CPP_SIZE objects_promoted,
+    CHAOS_IL2CPP_SIZE bytes_promoted,
+    CHAOS_IL2CPP_SIZE bytes_reclaimed,
+    uint64_t pause_ns) noexcept
+{
+    g_gc_stats.gen1_collections.fetch_add(1, std::memory_order_relaxed);
+    g_gc_stats.gen1_objects_promoted.fetch_add(objects_promoted, std::memory_order_relaxed);
+    g_gc_stats.gen1_bytes_promoted.fetch_add(bytes_promoted, std::memory_order_relaxed);
+    g_gc_stats.gen1_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
+    g_gc_stats.gen1_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    g_gc_stats.gc_index.fetch_add(1, std::memory_order_relaxed);
+    g_gc_stats.last_gc_generation.store(1, std::memory_order_relaxed);
+    GcRecordPauseHistogram(pause_ns);
+    GcRecordEventRing(false, pause_ns, objects_promoted, bytes_reclaimed);
 }
 
 inline void GcRecordAlloc(CHAOS_IL2CPP_SIZE bytes, bool oversized) noexcept {

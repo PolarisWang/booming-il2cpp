@@ -841,6 +841,14 @@
       "parameterCount": 0
     },
     {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
       "assemblyName": "SnapshotTestFixtures",
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "definitionSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",

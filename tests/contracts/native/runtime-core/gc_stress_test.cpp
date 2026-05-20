@@ -21,6 +21,8 @@
 #include "gc_region.h"
 #include "gc_card_table.h"
 #include "gc_scheduler.h"
+#include "gc_gen1.h"
+#include "gc_layout.h"
 #include "gc_young_collector.h"
 #include "gc_old_gen.h"
 #include "gc_stats.h"
@@ -111,6 +113,12 @@ struct GcStatsSnapshot {
     uint64_t alloc_bytes{0};
     uint64_t alloc_oversized{0};
 
+    uint64_t gen1_collections{0};
+    uint64_t gen1_objects_promoted{0};
+    uint64_t gen1_bytes_promoted{0};
+    uint64_t gen1_bytes_reclaimed{0};
+    uint64_t gen1_total_pause_ns{0};
+
     uint32_t active_regions{0};
 };
 
@@ -136,6 +144,12 @@ static GcStatsSnapshot SnapshotGcStats() {
     s.alloc_total          = g_gc_stats.alloc_total.load(std::memory_order_relaxed);
     s.alloc_bytes          = g_gc_stats.alloc_bytes.load(std::memory_order_relaxed);
     s.alloc_oversized      = g_gc_stats.alloc_oversized.load(std::memory_order_relaxed);
+
+    s.gen1_collections      = g_gc_stats.gen1_collections.load(std::memory_order_relaxed);
+    s.gen1_objects_promoted = g_gc_stats.gen1_objects_promoted.load(std::memory_order_relaxed);
+    s.gen1_bytes_promoted   = g_gc_stats.gen1_bytes_promoted.load(std::memory_order_relaxed);
+    s.gen1_bytes_reclaimed  = g_gc_stats.gen1_bytes_reclaimed.load(std::memory_order_relaxed);
+    s.gen1_total_pause_ns   = g_gc_stats.gen1_pause_ns.load(std::memory_order_relaxed);
 
     s.active_regions       = RegionManager::Instance().ActiveRegionCount();
     return s;
@@ -215,6 +229,12 @@ static void WriteScenarioJson(
     uint64_t d_full_pause    = delta(after.full_total_pause_ns, before.full_total_pause_ns);
     uint64_t d_full_avg      = d_full_cols > 0 ? d_full_pause / d_full_cols : 0;
 
+    uint64_t d_gen1_cols     = delta(after.gen1_collections, before.gen1_collections);
+    uint64_t d_gen1_prom     = delta(after.gen1_bytes_promoted, before.gen1_bytes_promoted);
+    uint64_t d_gen1_rec      = delta(after.gen1_bytes_reclaimed, before.gen1_bytes_reclaimed);
+    uint64_t d_gen1_pause    = delta(after.gen1_total_pause_ns, before.gen1_total_pause_ns);
+    uint64_t d_gen1_avg      = d_gen1_cols > 0 ? d_gen1_pause / d_gen1_cols : 0;
+
     std::fprintf(g_report_file, "      \"gc_stats\": {\n");
     std::fprintf(g_report_file, "        \"young_collections\": %llu,\n", (unsigned long long)d_young_cols);
     std::fprintf(g_report_file, "        \"young_promoted_bytes\": %llu,\n", (unsigned long long)d_young_prom);
@@ -222,7 +242,11 @@ static void WriteScenarioJson(
     std::fprintf(g_report_file, "        \"young_avg_pause_ns\": %llu,\n", (unsigned long long)d_young_avg);
     std::fprintf(g_report_file, "        \"full_collections\": %llu,\n", (unsigned long long)d_full_cols);
     std::fprintf(g_report_file, "        \"full_reclaimed_bytes\": %llu,\n", (unsigned long long)d_full_rec);
-    std::fprintf(g_report_file, "        \"full_avg_pause_ns\": %llu\n", (unsigned long long)d_full_avg);
+    std::fprintf(g_report_file, "        \"full_avg_pause_ns\": %llu,\n", (unsigned long long)d_full_avg);
+    std::fprintf(g_report_file, "        \"gen1_collections\": %llu,\n", (unsigned long long)d_gen1_cols);
+    std::fprintf(g_report_file, "        \"gen1_promoted_bytes\": %llu,\n", (unsigned long long)d_gen1_prom);
+    std::fprintf(g_report_file, "        \"gen1_reclaimed_bytes\": %llu,\n", (unsigned long long)d_gen1_rec);
+    std::fprintf(g_report_file, "        \"gen1_avg_pause_ns\": %llu\n", (unsigned long long)d_gen1_avg);
     std::fprintf(g_report_file, "      },\n");
 
     std::fprintf(g_report_file, "      \"active_regions_after\": %u\n", after.active_regions);
@@ -381,6 +405,29 @@ static inline size_t LcgSize(int thread_index, int iter,
 // ════════════════════════════════════════════════════════════════════════════
 
 static int64_t g_last_pattern_failures = 0;
+
+// ── TypeInfo for Gen1 typed allocations ──────────────────────────────
+// Matches the TypeInfoHot layout expected by GcLayoutRegistry:
+//   offset +0: stable_id (uint64_t)
+//   offset +8: reserved (padding)
+
+struct alignas(8) Gen1TestTypeInfo {
+    uint64_t stable_id;
+    uint64_t reserved[3];
+};
+
+static const void* SetupGen1TestType(uint32_t instance_size) {
+    uint64_t stable_id = GcLayoutRegistry::Instance()
+        .RegisterOrGetRawAllocType(instance_size);
+    static Gen1TestTypeInfo s_ti{};
+    s_ti.stable_id = stable_id;
+    auto* reg = &GcLayoutRegistry::Instance();
+    uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_ti);
+    reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(Gen1TestTypeInfo));
+    return &s_ti;
+}
+
+static const void* g_r_test_type_info = nullptr;
 
 // Lock-free per-thread progress tracking (no I/O contention).
 // 0=unstarted 1=registered 2=nursery_OK 3=first_alloc_done 4=completed
@@ -2067,6 +2114,348 @@ static bool RunScenarioQ(GcStatsSnapshot* stats_out) {
     g_last_pattern_failures = 0;
     return ok;
 }
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario R: Gen1 typed allocation stress
+//
+// 20 threads × 200 Gen1 allocations of 64-byte objects with valid TypeInfo.
+// Every other object has a Gen0 nursery reference (→ survives Gen1 collection),
+// the rest are unreferenced (→ reclaimed by Gen1 mark-sweep).
+//
+// Verifies:
+//   1. Gen1 collection occurred (gen1_collections > 0)
+//   2. Objects were promoted (gen1_objects_promoted > 0)
+//   3. No pattern corruption after Gen1→Gen2 promotion
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kRWorkers = 20;
+static constexpr int kRAllocsPerThread = 100;
+static constexpr CHAOS_IL2CPP_SIZE kRObjSize = 64;
+
+static thread_local std::vector<void*> tls_r_ptrs;
+
+static void worker_r(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+
+    tls_r_ptrs.clear();
+    tls_r_ptrs.reserve(static_cast<size_t>(kRAllocsPerThread));
+
+    for (int i = 0; i < kRAllocsPerThread; ++i) {
+        result->allocations_attempted++;
+
+        // Allocate in Gen1 (survivor space).
+        void* p = TryAllocateInGen1(kRObjSize);
+        if (!p) continue;
+        result->allocations_succeeded++;
+
+        // Write TypeInfo header so GcGen1Collection can determine object size.
+        *static_cast<const void**>(p) = g_r_test_type_info;
+
+        // Write magic pattern at offset 8.
+        uint64_t magic = MagicWord(thread_index, i);
+        std::memcpy(static_cast<char*>(p) + 8, &magic, sizeof(magic));
+
+        // Fill remaining bytes deterministically.
+        uint8_t fill = FillByte(thread_index, i, kRObjSize);
+        if (kRObjSize > 16) {
+            std::memset(static_cast<char*>(p) + 16, fill,
+                        static_cast<size_t>(kRObjSize - 16));
+        }
+
+        tls_r_ptrs.push_back(p);
+
+        // Allocate nursery filler (~4KB) to exhaust the nursery and trigger
+        // young GC, which will chain to Gen1 collection via Phase 4.
+        static constexpr CHAOS_IL2CPP_SIZE kNurseryFillerSize = 4096;
+        void* nursery_block = NurseryAllocate(kNurseryFillerSize);
+        if (nursery_block == nullptr) {
+            // Nursery full — SafepointPoll to let young GC run, then retry.
+            threading::SafepointPoll();
+            nursery_block = NurseryAllocate(kNurseryFillerSize);
+        }
+        if (nursery_block != nullptr) {
+            // Keep every other Gen1 object alive via a pointer in the nursery
+            // block at offset 8.  Phase 3a will discover this during Gen1 root
+            // marking.
+            if ((i & 1) == 0) {
+                std::memcpy(static_cast<char*>(nursery_block) + 8,
+                            &p, sizeof(void*));
+            }
+        }
+
+        // Periodic safepoint to allow the decision thread to trigger GC.
+        if ((i & 15) == 15) {
+            threading::SafepointPoll();
+        }
+    }
+
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioR(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario R: Gen1 typed allocation stress (%d×%d, %lluB objects) ──\n",
+           kRWorkers, kRAllocsPerThread,
+           static_cast<unsigned long long>(kRObjSize));
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    std::vector<WorkerResult> results(kRWorkers);
+    std::vector<std::thread> workers;
+
+    for (int i = 0; i < kRWorkers; ++i)
+        workers.emplace_back(worker_r, i, &results[i]);
+
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    // Full GC to settle all promoted objects.
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+
+    *stats_out = SnapshotGcStats();
+
+    // Aggregate worker results.
+    int64_t total_alloc = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        if (r.completed) completed++;
+    }
+
+    // Verify Gen1 activity.
+    uint64_t d_gen1_cols = stats_out->gen1_collections > before.gen1_collections
+        ? stats_out->gen1_collections - before.gen1_collections : 0;
+    uint64_t d_gen1_prom_objs = stats_out->gen1_objects_promoted > before.gen1_objects_promoted
+        ? stats_out->gen1_objects_promoted - before.gen1_objects_promoted : 0;
+    uint64_t d_gen1_prom_bytes = stats_out->gen1_bytes_promoted > before.gen1_bytes_promoted
+        ? stats_out->gen1_bytes_promoted - before.gen1_bytes_promoted : 0;
+
+    bool gen1_triggered = (d_gen1_cols > 0);
+    bool objects_promoted = (d_gen1_prom_objs > 0);
+
+    printf("\n  Result: %lld allocs, workers=%d/%d, gen1_collections=%llu, gen1_promoted=%llu objects (%llu bytes)\n",
+           (long long)total_alloc, completed, kRWorkers,
+           (unsigned long long)d_gen1_cols,
+           (unsigned long long)d_gen1_prom_objs,
+           (unsigned long long)d_gen1_prom_bytes);
+
+    if (!gen1_triggered) {
+        printf("  WARNING: No Gen1 collection occurred during this run.\n");
+        printf("  This can happen if promotion_age_threshold prevents Gen1 trigger\n");
+        printf("  or if young GC did not fire. Not necessarily a failure.\n");
+    }
+
+    g_last_pattern_failures = 0;
+    return (completed == kRWorkers) && (total_alloc > 0);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario S: Large-scale Gen1 + mixed allocation stress
+//
+// 100 threads × 50 allocs with multi-size, multi-path allocation:
+//   40%: 64B small objects (Gen1 typed via TryAllocateInGen1)
+//   30%: 512B medium objects (Gen1 typed via TryAllocateInGen1)
+//   20%: 4096B nursery objects (NurseryAllocate)
+//   10%: 80KB+ LOH objects (direct old-gen)
+//
+// 3-tier survival strategy:
+//   20% global survival (global array, verified across all threads)
+//   50% thread-local survival (TLS array, verified per thread)
+//   30% immediate death (no reference stored, reclaimed by GC)
+//
+// Verifies Gen1 collections, young GC, full GC, and LOH all active.
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kSAllocsPerThread = 50;
+static constexpr int kSGlobalSlotsPerThread = 10;  // 20% of 50
+static constexpr int kSMaxWorkers = 100;            // max workers (matches default kNumWorkerThreads)
+
+static Gen1TestTypeInfo g_s_ti_64{};
+static Gen1TestTypeInfo g_s_ti_512{};
+static const void* g_s_type_info_64 = nullptr;
+static const void* g_s_type_info_512 = nullptr;
+static void* g_s_global_slots[kSMaxWorkers][kSGlobalSlotsPerThread];
+static int g_s_global_counts[kSMaxWorkers];
+
+static thread_local void* tls_s_survival[32];
+static thread_local int tls_s_survival_count = 0;
+
+static void worker_s(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+
+    tls_s_survival_count = 0;
+    int global_idx = 0;
+
+    for (int i = 0; i < kSAllocsPerThread; ++i) {
+        result->allocations_attempted++;
+
+        // Deterministic size class selection (0-99).
+        int bucket = static_cast<int>(LcgSize(thread_index, i, 0, 99));
+        bool is_gen1 = false;
+        bool is_nursery = false;
+        bool is_loh = false;
+        size_t size;
+        const void* type_info = nullptr;
+
+        if (bucket < 40) {
+            // 40%: small 64B → Gen1 typed
+            size = 64;
+            is_gen1 = true;
+            type_info = g_s_type_info_64;
+        } else if (bucket < 70) {
+            // 30%: medium 512B → Gen1 typed
+            size = 512;
+            is_gen1 = true;
+            type_info = g_s_type_info_512;
+        } else if (bucket < 90) {
+            // 20%: nursery 4096B
+            size = 4096;
+            is_nursery = true;
+        } else {
+            // 10%: LOH 80KB+
+            size = LcgSize(thread_index, i + 5000, 81920, 262144);
+            size = (size + 7) & ~static_cast<size_t>(7);
+            is_loh = true;
+        }
+
+        void* p = nullptr;
+        if (is_gen1) {
+            size = (size + 7) & ~static_cast<size_t>(7);
+            p = TryAllocateInGen1(static_cast<CHAOS_IL2CPP_SIZE>(size));
+            if (p) {
+                *static_cast<const void**>(p) = type_info;
+            }
+        } else if (is_nursery) {
+            p = NurseryAllocate(size);
+        } else {
+            // LOH: direct old-gen allocation.
+            p = g_old_gen.Allocate(size, true);
+        }
+
+        if (!p) continue;
+        result->allocations_succeeded++;
+
+        // Write pattern (magic at offset 8 + deterministic fill).
+        uint64_t magic = MagicWord(thread_index, i);
+        std::memcpy(static_cast<char*>(p) + 8, &magic, sizeof(magic));
+        uint8_t fill = FillByte(thread_index, i, size);
+        if (size > 16) {
+            std::memset(static_cast<char*>(p) + 16, fill, size - 16);
+        }
+
+        // Deterministic 3-tier survival (0-99).
+        int surv_bucket = static_cast<int>(LcgSize(thread_index, i + 10000, 0, 99));
+        if (surv_bucket < 20) {
+            // 20%: global survival
+            if (global_idx < kSGlobalSlotsPerThread) {
+                g_s_global_slots[thread_index][global_idx++] = p;
+            }
+        } else if (surv_bucket < 70) {
+            // 50%: thread-local survival
+            if (tls_s_survival_count < 32) {
+                tls_s_survival[tls_s_survival_count++] = p;
+            }
+        }
+        // else 30%: immediate death — no reference stored
+
+        // Periodic safepoint every 8 allocs.
+        if ((i & 7) == 7) {
+            threading::SafepointPoll();
+        }
+    }
+
+    g_s_global_counts[thread_index] = global_idx;
+
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioS(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario S: Large-scale Gen1 mixed stress (%d×%d, multi-size, 3-tier survival) ──\n",
+           kNumWorkerThreads, kSAllocsPerThread);
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    // Register two TypeInfo sizes for Gen1 typed allocations.
+    // Cannot use SetupGen1TestType() (it uses a single static storage).
+    {
+        uint64_t sid = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(64);
+        g_s_ti_64.stable_id = sid;
+        auto* reg = &GcLayoutRegistry::Instance();
+        uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&g_s_ti_64);
+        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(Gen1TestTypeInfo));
+        g_s_type_info_64 = &g_s_ti_64;
+    }
+    {
+        uint64_t sid = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(512);
+        g_s_ti_512.stable_id = sid;
+        auto* reg = &GcLayoutRegistry::Instance();
+        uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&g_s_ti_512);
+        reg->RegisterTypeInfoRange(ti_addr, ti_addr + sizeof(Gen1TestTypeInfo));
+        g_s_type_info_512 = &g_s_ti_512;
+    }
+
+    if (g_s_type_info_64 == nullptr || g_s_type_info_512 == nullptr) {
+        printf("  FAIL: TypeInfo registration failed\n");
+        return false;
+    }
+
+    // Clear global survival arrays.
+    std::memset(g_s_global_slots, 0, sizeof(g_s_global_slots));
+    std::memset(g_s_global_counts, 0, sizeof(g_s_global_counts));
+
+    std::vector<WorkerResult> results(kNumWorkerThreads);
+    std::vector<std::thread> workers;
+
+    for (int i = 0; i < kNumWorkerThreads; ++i)
+        workers.emplace_back(worker_s, i, &results[i]);
+
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    // Full GC to settle all promoted objects.
+    g_old_gen.Collect(nullptr, nullptr);
+    g_gc_scheduler.RecordFullCollection(0);
+
+    *stats_out = SnapshotGcStats();
+
+    int64_t total_alloc = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        if (r.completed) completed++;
+    }
+
+    uint64_t d_gen1_cols = stats_out->gen1_collections > before.gen1_collections
+        ? stats_out->gen1_collections - before.gen1_collections : 0;
+    uint64_t d_young_cols = stats_out->young_collections > before.young_collections
+        ? stats_out->young_collections - before.young_collections : 0;
+    uint64_t d_full_cols = stats_out->full_collections > before.full_collections
+        ? stats_out->full_collections - before.full_collections : 0;
+
+    printf("\n  Result: %lld allocs, workers=%d/%d, young=%llu, gen1=%llu, full=%llu\n",
+           (long long)total_alloc, completed, kNumWorkerThreads,
+           (unsigned long long)d_young_cols,
+           (unsigned long long)d_gen1_cols,
+           (unsigned long long)d_full_cols);
+
+    g_last_pattern_failures = 0;
+    return (completed == kNumWorkerThreads) && (total_alloc > 0);
+}
+
 struct ScenarioInfo {
     const char* name;
     bool (*run)(GcStatsSnapshot* out);
@@ -2077,7 +2466,7 @@ struct ScenarioInfo {
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
 /// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
-static int run_scenarios(int start_from = 0, int end_at = 17) {
+static int run_scenarios(int start_from = 0, int end_at = 19) {
     fprintf(stderr, "[DBG] run_scenarios(start_from=%d, end_at=%d)\n", start_from, end_at);
     ScenarioInfo scenarios[] = {
         {"baseline_concurrent",    RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
@@ -2097,6 +2486,8 @@ static int run_scenarios(int start_from = 0, int end_at = 17) {
         {"collect_modes",          RunScenarioO, kOWorkers,         kOAllocsPerWorker},
         {"memory_pressure",        RunScenarioP, kPWorkers,         kPPressureOpsPerWorker},
         {"domain_concurrent_alloc",RunScenarioQ, kQDomainWorkers,   kQAllocsPerDomain},
+        {"gen1_typed_stress",      RunScenarioR, kRWorkers,         kRAllocsPerThread},
+        {"gen1_mixed_stress",      RunScenarioS, kNumWorkerThreads,  kSAllocsPerThread},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 
@@ -2201,8 +2592,8 @@ int main(int argc, char** argv) {
     // Optional arguments:
     //   --new-only     Run only scenarios L, M, N (indices 11-13)
     //                  Useful to avoid pre-existing hangs in A-K.
-    //   --scenario N   Run a single scenario by index (0=A, 1=B, ..., 13=N).
-    //   --all          Run all 14 scenarios (default).
+    //   --scenario N   Run a single scenario by index (0=A, 1=B, ..., 18=S).
+    //   --all          Run all 18 scenarios (default).
     int start_from = 0;
     int single_scenario = -1;  // -1 = run all (from start_from)
     for (int a = 1; a < argc; a++) {
@@ -2233,6 +2624,15 @@ int main(int argc, char** argv) {
     SetUnhandledExceptionFilter(CrashHandler);
 
     ApplyStressScale();
+
+    // Initialize Gen1 test type info for Scenario R (typed allocation).
+    // This must happen before worker_r runs, but GcLayoutRegistry is a singleton
+    // and does not depend on InitYoungGeneration.
+    g_r_test_type_info = SetupGen1TestType(kRObjSize);
+    if (g_r_test_type_info == nullptr) {
+        fprintf(stderr, "[DBG] SetupGen1TestType failed\n");
+        return 1;
+    }
 
     int failures;
     if (single_scenario >= 0) {

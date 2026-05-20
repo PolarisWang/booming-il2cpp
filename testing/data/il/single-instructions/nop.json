@@ -1,0 +1,6 @@
+[{
+    "opcode": 0x00,
+    "name": "nop",
+    "size": 1,
+    "description": "No operation"
+}]

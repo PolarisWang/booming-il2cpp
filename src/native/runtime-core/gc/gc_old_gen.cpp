@@ -9,6 +9,7 @@
 #include "gc_events.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_region.h"
 #include "gc_numa.h"
 #include "gc_parallel_mark.h"
 #include "gc_region.h"
@@ -234,10 +235,17 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (!page_pool_.empty()) {
-            auto* recycled = page_pool_.back();
+            auto entry = page_pool_.back();
             page_pool_.pop_back();
 
-            // Re-initialize non-permanent header fields.
+#if defined(_WIN32) || defined(_WIN64)
+            // Recommit the decommitted page.  MEM_DECOMMIT in FreeRegion
+            // releases physical pages but keeps the VA range reserved.
+            VirtualAlloc(entry.page, entry.page_size, MEM_COMMIT, PAGE_READWRITE);
+#endif
+            auto* recycled = entry.page;
+
+            // Re-initialize all header fields that were lost during decommit.
             recycled->scanning = scanning;
             recycled->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
                 ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
@@ -633,6 +641,8 @@ void* MarkSweepOldGen::TryAllocateFromFreeLists(CHAOS_IL2CPP_SIZE size, int sc_i
 }
 
 void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) {
+
+    // ── Auto-init guard: if Init() hasn't been called yet, do it now ──
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Allocate");
 
     if (size == 0) return nullptr;
@@ -792,6 +802,10 @@ void MarkSweepOldGen::Free(void* ptr) {
     // accidental pointer retention through the mark phase.  Full-page
     // memset happens at page carve time.
     std::memset(ptr, 0, 64);
+}
+
+void* MarkSweepOldGen::AllocatePinned(CHAOS_IL2CPP_SIZE size) noexcept {
+    return PohAllocate(size);
 }
 
 void* MarkSweepOldGen::Reallocate(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
@@ -1430,6 +1444,41 @@ float MarkSweepOldGen::PageFragmentation(const OldGenPage* page) const {
     CHAOS_IL2CPP_SIZE live = marked_slots * sizeof(void*);
     float ratio = 1.0f - (static_cast<float>(live) / static_cast<float>(page->payload_size));
     return (ratio < 0.0f) ? 0.0f : ratio;
+}
+
+float MarkSweepOldGen::OverallFragmentation() const {
+    // Lightweight estimate: walk the page list, compute weighted average
+    // fragmentation.  O(n) at page count (typically hundreds).
+    // Uses relaxed loads since caller is at safepoint or GC completion.
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    CHAOS_IL2CPP_SIZE total_payload = 0;
+    CHAOS_IL2CPP_SIZE total_free = 0;
+
+    auto* p = page_list_;
+    while (p != nullptr) {
+        if (p->in_use.load(std::memory_order_relaxed) && !p->is_oversized) {
+            auto bm = GcMarkBitmap(const_cast<unsigned char*>(p->MarkBitmap()),
+                                    p->bitmap_bytes);
+            auto* bitmap = bm.Words();
+            CHAOS_IL2CPP_SIZE num_words = bm.WordCount();
+            CHAOS_IL2CPP_SIZE max_bm_slots = p->payload_size / sizeof(void*);
+            if (num_words * 64 > max_bm_slots) num_words = (max_bm_slots + 63) / 64;
+            CHAOS_IL2CPP_SIZE marked = 0;
+            for (CHAOS_IL2CPP_SIZE w = 0; w < num_words; w++) {
+                marked += static_cast<CHAOS_IL2CPP_SIZE>(GcPopCount64(bitmap[w]));
+            }
+            CHAOS_IL2CPP_SIZE live_bytes = marked * sizeof(void*);
+            total_payload += p->payload_size;
+            total_free += (live_bytes < p->payload_size)
+                ? (p->payload_size - live_bytes) : 0;
+        }
+        p = p->next;
+    }
+
+    if (total_payload == 0) return 0.0f;
+    float frag = static_cast<float>(total_free) / static_cast<float>(total_payload);
+    return (frag < 0.0f) ? 0.0f : (frag > 1.0f) ? 1.0f : frag;
 }
 
 MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
@@ -2143,6 +2192,33 @@ void MarkSweepOldGen::CrossPageCompact() {
         static_cast<unsigned long long>(total_evacuate));
 }
 
+void MarkSweepOldGen::MarkYoungTenuredRange(uintptr_t begin, uintptr_t end) {
+    // Mark all pages whose payload overlaps [begin, end) as young_tenured.
+    // These pages contain recently-promoted objects from survivor and should
+    // be prioritized by BGC sweep.
+    std::lock_guard<std::mutex> lock(mutex_);
+    auto* p = page_list_;
+    while (p != nullptr) {
+        if (p->in_use.load(std::memory_order_relaxed) && !p->is_oversized) {
+            uintptr_t payload_start = reinterpret_cast<uintptr_t>(p->Payload());
+            uintptr_t payload_end = payload_start + p->payload_size;
+            if (payload_start < end && payload_end > begin) {
+                p->young_tenured = true;
+            }
+        }
+        p = p->next;
+    }
+}
+
+void MarkSweepOldGen::ClearYoungTenuredFlags() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    auto* p = page_list_;
+    while (p != nullptr) {
+        p->young_tenured = false;
+        p = p->next;
+    }
+}
+
 void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data), void* user_data) {
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Collect");
 
@@ -2813,17 +2889,37 @@ bool MarkSweepOldGen::BgcTryMark(void* obj) {
 
 void MarkSweepOldGen::BgcSweep() {
     // Snapshot page list under mutex.
+    // Prioritize young_tenured pages (recent survivor promotions) so
+    // ephemeral tenured objects are reclaimed earlier in the sweep cycle.
     std::vector<OldGenPage*> pages;
+    std::vector<OldGenPage*> young_pages;
     {
         std::lock_guard<std::mutex> lock(mutex_);
         pages.reserve(static_cast<size_t>(page_count_));
+        young_pages.reserve(static_cast<size_t>(page_count_));
         auto* p = page_list_;
         while (p != nullptr) {
-            pages.push_back(p);
+            if (p->young_tenured && p->in_use.load(std::memory_order_acquire)) {
+                young_pages.push_back(p);
+            } else {
+                pages.push_back(p);
+            }
             p = p->next;
         }
     }
 
+    // ── Concurrent sweep with time-slicing ──
+    // Yield periodically to avoid starving mutators during large sweeps.
+    static constexpr auto kSweepSliceBudget = std::chrono::microseconds(5000);
+    static constexpr auto kSweepSliceInterval = std::chrono::microseconds(500);
+    auto sweep_slice_start = std::chrono::steady_clock::now();
+
+    // Sweep young_tenured pages first, then the rest.
+    for (auto* yp : young_pages) {
+        if (!yp->in_use.load(std::memory_order_acquire)) continue;
+        SweepPage(yp, false);
+        CoalescePage(yp);
+    }
 
     // Parallel sweep via GcWorkerPool.
     // Restored after BGC hang investigation — see git log for details.
@@ -2836,6 +2932,13 @@ void MarkSweepOldGen::BgcSweep() {
             if (!page->in_use.load(std::memory_order_acquire)) continue;
             SweepPage(page, false);
             CoalescePage(page);
+
+            // Time-slice: yield after exceeding budget to let mutators run.
+            auto elapsed = std::chrono::steady_clock::now() - sweep_slice_start;
+            if (elapsed >= kSweepSliceBudget) {
+                sweep_slice_start = std::chrono::steady_clock::now();
+                std::this_thread::sleep_for(kSweepSliceInterval);
+            }
         }
     }
 
@@ -2862,7 +2965,13 @@ void MarkSweepOldGen::BgcSweep() {
                     }
                 }
                 if (should_pool) {
-                    page_pool_.push_back(p);
+                    // Decommit the page to release physical pages while
+                    // keeping the VA range reserved for fast recommit.
+                    auto pool_page_size = p->page_size;
+#if defined(_WIN32) || defined(_WIN64)
+                    VirtualFree(p, pool_page_size, MEM_DECOMMIT);
+#endif
+                    page_pool_.push_back(PoolEntry{ p, pool_page_size });
                 } else {
                     // Defer VirtualFree to BgcCompact (STW safepoint).
                     deferred_free_pages_.push_back(p);
@@ -2881,6 +2990,20 @@ void MarkSweepOldGen::BgcSweep() {
         // can modify page_list_ between count and fill loops inside
         // RebuildPageArray, causing heap buffer overflow on the new_pages array.
         RebuildPageArray();
+
+        // Trim excess pool pages: release over kMaxPoolSize back to OS.
+        // Pool pages are 100%-free normal pages unlinked from page_list_;
+        // mutators cannot reference them via page_array_ (just rebuilt above).
+        // On Windows, decommitted pages are released with MEM_RELEASE.
+        while (page_pool_.size() > kMaxPoolSize) {
+            auto excess = page_pool_.front();
+            page_pool_.erase(page_pool_.begin());
+#if defined(_WIN32) || defined(_WIN64)
+            VirtualFree(excess.page, 0, MEM_RELEASE);
+#else
+            VirtualFreePage(excess.page, excess.page_size);
+#endif
+        }
     }
 
     // Reclaim retired GcLayout tables (safe during BGC sweep since the
@@ -2891,6 +3014,11 @@ void MarkSweepOldGen::BgcSweep() {
     // Phase 5: Sweep the Large Object Heap.
     // LOH segments that were not marked during concurrent mark are freed.
     g_loh.Sweep();
+
+    // Clear young_tenured flags after sweep.  Pages whose objects survived
+    // have been swept and their free lists rebuilt; remaining live objects
+    // are now considered mature tenured for the next BGC cycle.
+    ClearYoungTenuredFlags();
 
 }
 
@@ -2903,6 +3031,9 @@ void MarkSweepOldGen::BgcCompact() {
     pinned_compact_skip_ = pinned_roots_;
 
     // Phase 1: Decide compaction mode (reads mark bitmap preserved by BgcSweep).
+    // Note: adjacent-page coalescing is handled by CrossPageCompact with the
+    // improved threshold (kCrossPageFragThreshold=0.30) and increased budget
+    // (kMaxCrossPageCompactBytes=1MB), which properly handles global relocation.
     CompactMode compact_mode = DecideCompactMode();
 
     if (compact_mode == CompactMode::CROSS_PAGE) {

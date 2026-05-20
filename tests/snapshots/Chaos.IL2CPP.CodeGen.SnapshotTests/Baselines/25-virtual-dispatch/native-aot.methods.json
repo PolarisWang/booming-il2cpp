@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SnapshotTestFixtures",
+  "methodCount": 2,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SnapshotTestFixtures_DerivedClass__ctor",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

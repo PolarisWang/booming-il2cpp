@@ -38,12 +38,6 @@
 | 文档 | 主题 | 说明 |
 | --- | --- | --- |
 | [`CodeGen快照测试规范.md`](./CodeGen快照测试规范.md) | CodeGen 增量回归测试 | 定义 NativeAotEmitter 输出的快照测试体系：夹具结构、基线管理、开发工作流集成 |
-<<<<<<< Updated upstream
-| [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md) | Foundation DLL 验证管线 | 覆盖完整流程：两阶段探测、Assert ExitCode 模式、7 阶段管线、自定义条目 |
-=======
-| [`L2-Native验证Gate流程.md`](./L2-Native验证Gate流程.md) | L2 native 验证门 | 说明 foundation-dll Fact L2 验证的架构、异常处理、tag 问题与运行方式 |
-| [`L2-Native-Crash-Analysis.md`](./L2-Native-Crash-Analysis.md) | L2 native crash 分析 | 使用 MAP 文件 + cdb 将 crash offset 解析为源码级符号的方法论与工具 |
->>>>>>> Stashed changes
 | [`测试方法清单.md`](./测试方法清单.md) | 全链路测试方法索引 | **推荐入口** — 系统梳理 Python、C# Foundation-DLL、Native 编译三条测试链的所有测试方法和管线阶段，按文件/类/方法粒度索引 |
 | [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md) | Verification V1 测试流程 | 说明新的 canonical 测试流程、formal source、覆盖模型、投影视图与旧流程清理规则 |
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
@@ -87,6 +81,7 @@
 
 ## 最近更新
 
+- `2026-05-20`：Native C++ 单元测试全部迁移到 GoogleTest（`testing/` 目录，28 个 ctest 目标）。更新 [`测试方法清单.md`](./测试方法清单.md)，新增第九章 Native C++ 单元测试。
 - `2026-05-09`：更新 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，补充 handwrite partial class 集成模式、`handwritten/` 覆盖保护规则、`_exitCode` 模式说明
 - `2026-05-09`：更新 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，补充 `handwritten/` 目录 contract 和覆盖保护规则
 - `2026-05-09`：重写 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，覆盖新验证管线全貌：两阶段托管探测（Probe → Emit）、void entry + Assert ExitCode 模式、7 阶段管线、自定义条目流程。旧 C++ host / checksum / L2 流程已全部删除。

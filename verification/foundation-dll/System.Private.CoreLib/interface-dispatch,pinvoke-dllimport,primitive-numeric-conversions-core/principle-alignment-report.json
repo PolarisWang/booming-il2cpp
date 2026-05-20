@@ -1,7 +1,7 @@
 {
   "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T19:54:05.456575",
+  "generated_at": "2026-05-20T22:47:41.059078",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -40,26 +40,41 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 60 changed source files within expected architecture layers",
-      "details": [],
-      "evidence": {
-        "changed_source_count": 60,
-        "layer_distribution": {
-          "BuildConfig": 1,
-          "TestInfra": 11,
-          "Contracts": 2,
-          "CodeGenRoot": 3,
-          "Emitter": 2,
-          "RuntimeSupport": 1,
-          "Templates": 2,
-          "ManagedContracts": 1,
-          "Bootstrap": 1,
-          "Codegen": 4,
-          "Common": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 26
+      "status": "CONCERN",
+      "summary": "2 of 39 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/06-测试验证/INDEX.md",
+          "reason": "outside expected architecture layers"
         }
+      ],
+      "evidence": {
+        "changed_source_count": 39,
+        "layer_distribution": {
+          "TestInfra": 6,
+          "Emitter": 2,
+          "CodeGenRoot": 1,
+          "RuntimeSupport": 2,
+          "Templates": 1,
+          "Driver": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 19,
+          "Contracts": 4
+        },
+        "violations": [
+          {
+            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/06-测试验证/INDEX.md",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -107,8 +122,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 2,
-    "concern": 0,
+    "aligned": 1,
+    "concern": 1,
     "violation": 3,
     "not_applicable": 7,
     "overall": "VIOLATION"

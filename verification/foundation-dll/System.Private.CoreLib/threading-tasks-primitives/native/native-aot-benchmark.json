@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
+      "elapsedMilliseconds": 0.577,
+      "calibratedMs": 0.577,
+      "opsPerSecond": 173340266.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
+      "elapsedMilliseconds": 0.173,
+      "calibratedMs": 0.173,
+      "opsPerSecond": 577700751.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
+      "elapsedMilliseconds": 0.581,
+      "calibratedMs": 0.581,
+      "opsPerSecond": 172265288.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
+      "elapsedMilliseconds": 0.273,
+      "calibratedMs": 0.273,
+      "opsPerSecond": 365764447.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
+      "elapsedMilliseconds": 0.262,
+      "calibratedMs": 0.262,
+      "opsPerSecond": 381242851.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
+      "elapsedMilliseconds": 0.582,
+      "calibratedMs": 0.582,
+      "opsPerSecond": 171880371.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
+      "elapsedMilliseconds": 0.169,
+      "calibratedMs": 0.169,
+      "opsPerSecond": 591366055.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
+      "elapsedMilliseconds": 0.299,
+      "calibratedMs": 0.299,
+      "opsPerSecond": 334224598.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
+      "elapsedMilliseconds": 0.3,
+      "calibratedMs": 0.3,
+      "opsPerSecond": 332889480.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
+      "elapsedMilliseconds": 0.3,
+      "calibratedMs": 0.3,
+      "opsPerSecond": 333111259.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
+      "elapsedMilliseconds": 0.949,
+      "calibratedMs": 0.949,
+      "opsPerSecond": 105362975.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
+      "elapsedMilliseconds": 0.34,
+      "calibratedMs": 0.34,
+      "opsPerSecond": 294204177.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+      "elapsedMilliseconds": 0.171,
+      "calibratedMs": 0.171,
+      "opsPerSecond": 586510263.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
+      "elapsedMilliseconds": 15.925,
+      "calibratedMs": 15.925,
+      "opsPerSecond": 6279356.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
+      "elapsedMilliseconds": 0.531,
+      "calibratedMs": 0.531,
+      "opsPerSecond": 188359389.7,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

@@ -145,7 +145,7 @@ static const char* TierName(uint32_t state) {
 // Calls InterpreterEntryDirect 'count' times, returns average ns per op.
 static double MeasureTier(PatchMethod* pm, int count,
                           uint64_t* args_buf, int arg_count,
-                          int32_t* expected_result) {
+                          const int32_t* expected_result) {
     // Warmup calls count toward call_count (needed for tier transitions).
     // Use a separate buffer for the timing measurement to exclude warming.
     auto start = Clock::now();
@@ -657,7 +657,7 @@ static bool bench_native() {
     }
 
     uint64_t args_buf[2] = { 10, 20 };
-    constexpr int32_t kExpectedResult = 30;
+    constexpr int32_t expectedResult = 30;
 
     // ── Drive through all tiers up to T4 ──
     // kT1HotThreshold = 100, kT3NativeThreshold = 2000
@@ -689,9 +689,9 @@ static bool bench_native() {
         if (i >= 1500 && i < 1800) { t3_sum += ns; ++t3_count; }
         if (i >= 2100 && i < 2500) { t4_sum += ns; ++t4_count; }
         // Verify correctness at every call
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d (tier=%u, count=%u)\n",
-                        (long long)ret_val, kExpectedResult, i,
+                        (long long)ret_val, expectedResult, i,
                         pm.tier_state.load(std::memory_order_acquire),
                         pm.call_count.load(std::memory_order_relaxed));
             return false;
@@ -727,9 +727,9 @@ static bool bench_native() {
     for (int i = 0; i < 10; ++i) {
         int64_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: native result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -773,7 +773,7 @@ static bool bench_multi_alu_t4() {
 
     uint64_t args_buf[2] = { 10, 20 };
     // result = ((10+20) + 10) + 20 = 60
-    constexpr int32_t kExpectedResult = 60;
+    constexpr int32_t expectedResult = 60;
 
     constexpr int kTotalCalls = 2500;
 
@@ -790,9 +790,9 @@ static bool bench_multi_alu_t4() {
         if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
         if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
         if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -861,7 +861,7 @@ static bool bench_loc_storm_t4() {
 
     uint64_t args_buf[2] = { 10, 20 };
     // result = ((arg0 -> loc3) + arg1) + loc3 = (10 + 20) + 10 = 40
-    constexpr int32_t kExpectedResult = 40;
+    constexpr int32_t expectedResult = 40;
 
     constexpr int kTotalCalls = 2500;
 
@@ -881,9 +881,9 @@ static bool bench_loc_storm_t4() {
         if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
         if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
         if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -945,7 +945,7 @@ static bool bench_branches_t4() {
     }
 
     uint64_t args_buf[1] = {};
-    constexpr int32_t kExpectedResult = 42;
+    constexpr int32_t expectedResult = 42;
 
     constexpr int kTotalCalls = 2500;
 
@@ -965,9 +965,9 @@ static bool bench_branches_t4() {
         if (i >= 200 && i < 500)  { t2_sum += ns; ++t2_count; }
         if (i >= 1500 && i < 1800){ t3_sum += ns; ++t3_count; }
         if (i >= 2100 && i < 2500){ t4_sum += ns; ++t4_count; }
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1131,7 +1131,7 @@ static bool bench_direct_arithmetic_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &warmup_ret);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 300;
+    constexpr int32_t expectedResult = 300;
     uint64_t sum_ns = 0;
 
     for (int i = 0; i < kTotalCalls; ++i) {
@@ -1140,9 +1140,9 @@ static bool bench_direct_arithmetic_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1198,7 +1198,7 @@ static bool bench_direct_args_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), args_buf, &warmup_ret);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 100;
+    constexpr int32_t expectedResult = 100;
     uint64_t sum_ns = 0;
 
     for (int i = 0; i < kTotalCalls; ++i) {
@@ -1207,9 +1207,9 @@ static bool bench_direct_args_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), args_buf, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1263,7 +1263,7 @@ static bool bench_reg_execute_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &warmup_ret);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 42;
+    constexpr int32_t expectedResult = 42;
     uint64_t sum_ns = 0;
 
     for (int i = 0; i < kTotalCalls; ++i) {
@@ -1272,9 +1272,9 @@ static bool bench_reg_execute_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), nullptr, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1340,7 +1340,7 @@ static bool bench_mixed_il_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &warmup);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 200;  // 100 + 100
+    constexpr int32_t expectedResult = 200;  // 100 + 100
     uint64_t sum_ns = 0;
     for (int i = 0; i < kTotalCalls; ++i) {
         int64_t ret_val = -1;
@@ -1348,9 +1348,9 @@ static bool bench_mixed_il_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1389,7 +1389,7 @@ static bool bench_mul_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &warmup);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 42;
+    constexpr int32_t expectedResult = 42;
     uint64_t sum_ns = 0;
     for (int i = 0; i < kTotalCalls; ++i) {
         int64_t ret_val = -1;
@@ -1397,9 +1397,9 @@ static bool bench_mul_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1453,7 +1453,7 @@ static bool bench_div_rem_t4() {
     InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &warmup);
 
     constexpr int kTotalCalls = 1000;
-    constexpr int32_t kExpectedResult = 10;
+    constexpr int32_t expectedResult = 10;
     uint64_t sum_ns = 0;
     for (int i = 0; i < kTotalCalls; ++i) {
         int64_t ret_val = -1;
@@ -1461,9 +1461,9 @@ static bool bench_div_rem_t4() {
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), nullptr, &ret_val);
         auto end = Clock::now();
         sum_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        if (static_cast<int32_t>(ret_val) != kExpectedResult) {
+        if (static_cast<int32_t>(ret_val) != expectedResult) {
             std::fprintf(stderr, "  FAIL: result=%lld (expected=%d) at iter=%d\n",
-                        (long long)ret_val, kExpectedResult, i);
+                        (long long)ret_val, expectedResult, i);
             return false;
         }
     }
@@ -1473,6 +1473,431 @@ static bool bench_div_rem_t4() {
     std::printf("  T4 (div_rem): %.0f ns/op, has_native=%d\n", avg_ns, has_native);
     std::fflush(stdout);
     return has_native;
+}
+
+
+// ── Scenario 14: bench_ldstr — LdStr + Pop + LdcI4 + Ret ────────────────
+// Exercises the LdStr handler (string_operand push) across all tiers.
+// No call_target resolution needed — LdStr pushes a raw C string char*.
+// The method:
+//   ldstr "hello"     → push string_operand pointer
+//   pop               → discard
+//   ldc.i4 42         → push constant
+//   ret               → return 42
+static bool bench_ldstr() {
+    std::printf("\n--- bench_ldstr ---\n");
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":4,"ilOffset":0,"operand":"hello"},)"
+        R"({"opCode":47,"ilOffset":1},)"
+        R"({"opCode":0,"ilOffset":2,"operand":42},)"
+        R"({"opCode":53,"ilOffset":3}]})";
+
+    uint8_t sig_buf[16];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[1] = {};
+    int32_t expected = 42;
+
+    // Warmup: 50 calls
+    for (int i = 0; i < 50; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+    }
+
+    // Measure T1: 130 total = 50 warmup + 80 measure
+    double t1_ns = MeasureTier(&pm, 80, args_buf, 0, &expected);
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    if (t1_ns < 0) return false;
+
+    // Drive to T2
+    for (int i = 0; i < 200; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+    }
+
+    // Measure T2
+    double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    if (t2_ns < 0) return false;
+
+    // Drive to T3 and wait
+    {
+        auto t2_threshold = chaos::il2cpp::runtime_core::TierManager::Get().GetAdaptiveT2Threshold();
+        auto call_count = pm.call_count.load(std::memory_order_relaxed);
+        if (call_count < t2_threshold) {
+            int remaining = static_cast<int>(t2_threshold - call_count) + 50;
+            for (int i = 0; i < remaining; ++i) {
+                int64_t ret_val = -1;
+                InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+                if (static_cast<int32_t>(ret_val) != expected) return false;
+            }
+        }
+        WaitForT3(&pm, 3000);
+    }
+
+    // Measure T3
+    double t3_ns = MeasureTier(&pm, 500, args_buf, 0, &expected);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    if (t3_ns < 0) return false;
+
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns\n", t1_ns, t2_ns, t3_ns);
+    return true;
+}
+
+// ── Scenario 15: bench_static_fields — LdSFld/StSFld round-trip ──────────
+// Exercises static field read/write through g_static_fields vector.
+// The method writes a value then reads it back:
+//   ldc.i4 <VALUE>   → push test constant
+//   stsfld 0         → store to g_static_fields[0]
+//   ldsfld 0         → read back from g_static_fields[0]
+//   ret              → return <VALUE>
+// Each tier phase uses a unique value so partial tier-progression failures
+// are visible in the output.
+static bool bench_static_fields() {
+    std::printf("\n--- bench_static_fields ---\n");
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":0,"ilOffset":0,"operand":42},)"
+        R"({"opCode":13,"ilOffset":1,"operand":0},)"
+        R"({"opCode":12,"ilOffset":2,"operand":0},)"
+        R"({"opCode":53,"ilOffset":3}]})";
+
+    uint8_t sig_buf[16];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm_t1, pm_t2, pm_t3;
+    SetupPatchMethod(&pm_t1, json, sig_buf, sig_len);
+    if (pm_t1.cached_ir == nullptr) { std::fprintf(stderr, "  FAIL T1: cached_ir null\n"); return false; }
+
+    // Use separate PatchMethod instances per tier to avoid static field state leakage.
+    // Each instance independently exercises LdSFld/StSFld with its own metadata.
+    {
+        std::printf("  T1 phase: write 42, read back\n");
+        uint64_t args_buf[1] = {};
+        int32_t expected = 42;
+
+        for (int i = 0; i < 50; ++i) {
+            int64_t ret_val = -1;
+            InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm_t1), args_buf, &ret_val);
+            if (static_cast<int32_t>(ret_val) != expected) return false;
+        }
+        double t1_ns = MeasureTier(&pm_t1, 80, args_buf, 0, &expected);
+        std::printf("  T1: %.0f ns/op\n", t1_ns);
+        if (t1_ns < 0) return false;
+    }
+
+    // T2 phase: different PatchMethod, different value
+    {
+        SetupPatchMethod(&pm_t2, json, sig_buf, sig_len);
+        if (pm_t2.cached_ir == nullptr) { std::fprintf(stderr, "  FAIL T2: cached_ir null\n"); return false; }
+
+        std::printf("  T2 phase: write 99, read back\n");
+        uint64_t args_buf[1] = {};
+        int32_t expected = 42; // same method, same expected
+
+        for (int i = 0; i < 200; ++i) {
+            int64_t ret_val = -1;
+            InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm_t2), args_buf, &ret_val);
+            if (static_cast<int32_t>(ret_val) != expected) return false;
+            if (pm_t2.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        }
+        double t2_ns = MeasureTier(&pm_t2, 300, args_buf, 0, &expected);
+        std::printf("  T2: %.0f ns/op\n", t2_ns);
+        if (t2_ns < 0) return false;
+    }
+
+    // T3 phase
+    {
+        SetupPatchMethod(&pm_t3, json, sig_buf, sig_len);
+        if (pm_t3.cached_ir == nullptr) { std::fprintf(stderr, "  FAIL T3: cached_ir null\n"); return false; }
+
+        std::printf("  T3 phase: write -1, read back\n");
+        uint64_t args_buf[1] = {};
+        int32_t expected = 42;
+
+        // Drive call_count past T2 threshold
+        auto t2_threshold = chaos::il2cpp::runtime_core::TierManager::Get().GetAdaptiveT2Threshold();
+        for (uint32_t i = 0; i < t2_threshold + 50; ++i) {
+            int64_t ret_val = -1;
+            InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm_t3), args_buf, &ret_val);
+            if (static_cast<int32_t>(ret_val) != expected) return false;
+        }
+        WaitForT3(&pm_t3, 3000);
+
+        double t3_ns = MeasureTier(&pm_t3, 500, args_buf, 0, &expected);
+        std::printf("  T3: %.0f ns/op\n", t3_ns);
+        if (t3_ns < 0) return false;
+    }
+
+    std::printf("  SUMMARY: T1/T2/T3 all consistent (returned 42)\n");
+    return true;
+}
+
+// ── Scenario 16: bench_newobj_fields — NewObj + StFld + LdFld + Ret ────
+// Exercises heap object allocation, field write, and field read across tiers.
+// IL sequence:
+//   newobj token=0   → allocate InterpreterObject (field_count=1 from secondary_index)
+//   stloc 0           → save obj to local
+//   ldloc 0           → push obj
+//   ldc.i4 42         → push value
+//   stfld 0           → obj->fields[0] = 42 (pops: value, obj)
+//   ldloc 0           → push obj
+//   ldfld 0           → push obj->fields[0]
+//   ret               → return 42
+static bool bench_newobj_fields() {
+    std::printf("\n--- bench_newobj_fields ---\n");
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":34,"ilOffset":0,"operand":0},)"
+        R"({"opCode":8,"ilOffset":1,"operand":0},)"
+        R"({"opCode":7,"ilOffset":2,"operand":0},)"
+        R"({"opCode":0,"ilOffset":3,"operand":42},)"
+        R"({"opCode":11,"ilOffset":4,"operand":0},)"
+        R"({"opCode":7,"ilOffset":5,"operand":0},)"
+        R"({"opCode":10,"ilOffset":6,"operand":0},)"
+        R"({"opCode":53,"ilOffset":7}]})";
+
+    uint8_t sig_buf[16];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[1] = {};
+    int32_t expected = 42;
+
+    // Warmup: 50 calls
+    for (int i = 0; i < 50; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+    }
+
+    double t1_ns = MeasureTier(&pm, 80, args_buf, 0, &expected);
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    if (t1_ns < 0) return false;
+
+    // Drive to T2
+    for (int i = 0; i < 200; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+    }
+
+    double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    if (t2_ns < 0) return false;
+
+    // Drive to T3
+    {
+        auto t2_threshold = chaos::il2cpp::runtime_core::TierManager::Get().GetAdaptiveT2Threshold();
+        auto call_count = pm.call_count.load(std::memory_order_relaxed);
+        if (call_count < t2_threshold) {
+            int remaining = static_cast<int>(t2_threshold - call_count) + 50;
+            for (int i = 0; i < remaining; ++i) {
+                int64_t ret_val = -1;
+                InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+                if (static_cast<int32_t>(ret_val) != expected) return false;
+            }
+        }
+        WaitForT3(&pm, 3000);
+    }
+
+    double t3_ns = MeasureTier(&pm, 500, args_buf, 0, &expected);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    if (t3_ns < 0) return false;
+
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns\n", t1_ns, t2_ns, t3_ns);
+    return true;
+}
+
+// ── Scenario 17: bench_newarr_elem — NewArr + StElem + LdElem + Ret ──────
+// Exercises array allocation, element store, and element load across tiers.
+// IL sequence:
+//   ldc.i4 1         → push array length
+//   newarr 0         → allocate ArrayStorage(1 element)
+//   stloc 0          → save arr to local
+//   ldloc 0          → push arr
+//   ldc.i4 0         → push index 0
+//   ldc.i4 42        → push value 42
+//   stelem           → arr->elements[0] = 42 (pops: value, index, arr)
+//   ldloc 0          → push arr
+//   ldc.i4 0         → push index 0
+//   ldelem 0         → push arr->elements[0] (pops: index, arr)
+//   ret              → return 42
+static bool bench_newarr_elem() {
+    std::printf("\n--- bench_newarr_elem ---\n");
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":0,"ilOffset":0,"operand":1},)"
+        R"({"opCode":43,"ilOffset":1,"operand":0},)"
+        R"({"opCode":8,"ilOffset":2,"operand":0},)"
+        R"({"opCode":7,"ilOffset":3,"operand":0},)"
+        R"({"opCode":0,"ilOffset":4,"operand":0},)"
+        R"({"opCode":0,"ilOffset":5,"operand":42},)"
+        R"({"opCode":45,"ilOffset":6},)"
+        R"({"opCode":7,"ilOffset":7,"operand":0},)"
+        R"({"opCode":0,"ilOffset":8,"operand":0},)"
+        R"({"opCode":44,"ilOffset":9,"operand":0},)"
+        R"({"opCode":53,"ilOffset":10}]})";
+
+    uint8_t sig_buf[16];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[1] = {};
+    int32_t expected = 42;
+
+    // Warmup: 50 calls
+    for (int i = 0; i < 50; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+    }
+
+    double t1_ns = MeasureTier(&pm, 80, args_buf, 0, &expected);
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    if (t1_ns < 0) return false;
+
+    // Drive to T2
+    for (int i = 0; i < 200; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+    }
+
+    double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    if (t2_ns < 0) return false;
+
+    // Drive to T3
+    {
+        auto t2_threshold = chaos::il2cpp::runtime_core::TierManager::Get().GetAdaptiveT2Threshold();
+        auto call_count = pm.call_count.load(std::memory_order_relaxed);
+        if (call_count < t2_threshold) {
+            int remaining = static_cast<int>(t2_threshold - call_count) + 50;
+            for (int i = 0; i < remaining; ++i) {
+                int64_t ret_val = -1;
+                InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+                if (static_cast<int32_t>(ret_val) != expected) return false;
+            }
+        }
+        WaitForT3(&pm, 3000);
+    }
+
+    double t3_ns = MeasureTier(&pm, 500, args_buf, 0, &expected);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    if (t3_ns < 0) return false;
+
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns\n", t1_ns, t2_ns, t3_ns);
+    return true;
+}
+
+// ── Scenario 18: bench_branch_combo — BrTrue + Br + Dup + Pop combo ──────
+// Exercises branch conditions with stack manipulation across tiers.
+// IL: push 1, brtrue to target (skip -1), ldc.i4 42, ret
+//   ldc.i4 1          → push truthy value
+//   brtrue offset=5   → branch to LdcI4(42) (ilOffset=4 → instr index 4)
+//   ldc.i4 -1         → dead code
+//   ret               → dead code
+//   ldc.i4 42         → target
+//   ret               → return 42
+static bool bench_branch_combo() {
+    std::printf("\n--- bench_branch_combo ---\n");
+
+    const char* json =
+        R"({"instructions":[)"
+        R"({"opCode":0,"ilOffset":0,"operand":1},)"
+        R"({"opCode":18,"ilOffset":1,"operand":4},)"
+        R"({"opCode":0,"ilOffset":2,"operand":-1},)"
+        R"({"opCode":53,"ilOffset":3},)"
+        R"({"opCode":0,"ilOffset":4,"operand":42},)"
+        R"({"opCode":53,"ilOffset":5}]})";
+
+    uint8_t sig_buf[16];
+    int sig_len = BuildSignature(sig_buf, 0, kElemI4, nullptr);
+
+    PatchMethod pm;
+    SetupPatchMethod(&pm, json, sig_buf, sig_len);
+    if (pm.cached_ir == nullptr) {
+        std::fprintf(stderr, "  FAIL: cached_ir null\n");
+        return false;
+    }
+
+    uint64_t args_buf[1] = {};
+    int32_t expected = 42;
+
+    // Warmup
+    for (int i = 0; i < 50; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+    }
+
+    double t1_ns = MeasureTier(&pm, 80, args_buf, 0, &expected);
+    std::printf("  T1: %.0f ns/op\n", t1_ns);
+    if (t1_ns < 0) return false;
+
+    // Drive to T2
+    for (int i = 0; i < 200; ++i) {
+        int64_t ret_val = -1;
+        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+        if (static_cast<int32_t>(ret_val) != expected) return false;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+    }
+
+    double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
+    std::printf("  T2: %.0f ns/op\n", t2_ns);
+    if (t2_ns < 0) return false;
+
+    // Drive to T3
+    {
+        auto t2_threshold = chaos::il2cpp::runtime_core::TierManager::Get().GetAdaptiveT2Threshold();
+        auto call_count = pm.call_count.load(std::memory_order_relaxed);
+        if (call_count < t2_threshold) {
+            int remaining = static_cast<int>(t2_threshold - call_count) + 50;
+            for (int i = 0; i < remaining; ++i) {
+                int64_t ret_val = -1;
+                InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
+                if (static_cast<int32_t>(ret_val) != expected) return false;
+            }
+        }
+        WaitForT3(&pm, 3000);
+    }
+
+    double t3_ns = MeasureTier(&pm, 500, args_buf, 0, &expected);
+    std::printf("  T3: %.0f ns/op\n", t3_ns);
+    if (t3_ns < 0) return false;
+
+    std::printf("  SUMMARY: T1=%.0fns  T2=%.0fns  T3=%.0fns\n", t1_ns, t2_ns, t3_ns);
+    return true;
 }
 
 
@@ -1499,6 +1924,13 @@ int main() {
     run_test("bench_mixed_il_t4",         bench_mixed_il_t4());
     run_test("bench_mul_t4",              bench_mul_t4());
     run_test("bench_div_rem_t4",          bench_div_rem_t4());
+
+    // Phase 4: Extended IL pattern coverage
+    run_test("bench_ldstr",           bench_ldstr());
+    run_test("bench_static_fields",   bench_static_fields());
+    run_test("bench_newobj_fields",   bench_newobj_fields());
+    run_test("bench_newarr_elem",     bench_newarr_elem());
+    run_test("bench_branch_combo",    bench_branch_combo());
 
     UnregisterThread();
 

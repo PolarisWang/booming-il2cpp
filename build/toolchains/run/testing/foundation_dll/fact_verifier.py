@@ -38,10 +38,16 @@ def _locate_entry_exe(family_slug: str, *, assembly: str) -> Path | None:
 
 def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",
                 method_count: int | None = None,
-                verbose: bool = False) -> dict[str, Any]:
-    """Run il2cpp-translated native entry EXE, verify all Assert pass."""
+                verbose: bool = False,
+                exe_path: Path | None = None) -> dict[str, Any]:
+    """Run il2cpp-translated native entry EXE, verify all Assert pass.
+
+    Args:
+        exe_path: Optional explicit path to entry.exe. If None, uses _locate_entry_exe().
+    """
     print(f"=== Fact Verify: {family_slug} ===")
-    exe_path = _locate_entry_exe(family_slug, assembly=assembly)
+    if exe_path is None:
+        exe_path = _locate_entry_exe(family_slug, assembly=assembly)
     if exe_path is None:
         print(f"  [Fact] Entry EXE not found")
         return {"status": "skip", "reason": "entry EXE not found"}
@@ -124,10 +130,16 @@ def verify_benchmark(family_slug: str, *, assembly: str = "System.Private.CoreLi
 
 
 def verify_hotupdate(family_slug: str, *, assembly: str = "System.Private.CoreLib",
-                     verbose: bool = False) -> dict[str, Any]:
-    """Run hotupdate verification via il2cpp-translated entry EXE."""
+                     verbose: bool = False,
+                     exe_path: Path | None = None) -> dict[str, Any]:
+    """Run hotupdate verification via il2cpp-translated entry EXE.
+
+    Args:
+        exe_path: Optional explicit path to entry.exe. If None, uses _locate_entry_exe().
+    """
     print(f"=== Fact HotUpdate: {family_slug} ===")
-    exe_path = _locate_entry_exe(family_slug, assembly=assembly)
+    if exe_path is None:
+        exe_path = _locate_entry_exe(family_slug, assembly=assembly)
     if exe_path is None:
         return {"status": "skip", "reason": "entry EXE not found"}
 

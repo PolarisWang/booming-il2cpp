@@ -1105,245 +1105,54 @@ public sealed partial class NativeAotLoweringPlanner
             case IRExceptionKind.TryCatch:
             {
                 int preTryDepth = _activeStructuredSlotContext?.Depth ?? 0;
-                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                builder.AppendLine(indentation + "try");
-                builder.AppendLine(indentation + "{");
+                builder.AppendLine(indentation + "CHAOS_EH_TRY");
                 EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine(indentation + "catch (const chaos_managed_exception& chaos_exception)");
-                builder.AppendLine(indentation + "{");
-                // Phase 5: ThreadAbort/ThreadInterrupt/COMException sentinel guard.
-                // Sentinel values (object_value < 0) are not valid managed object
-                // pointers — they must propagate to the managed exception dispatch
-                // layer rather than being reinterpret_cast and type-checked.
+                if (er.CatchTypeSubjectId != null)
+                    _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
+                builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
+                // Phase 5 sentinel guard: propagate sentinel values (< 0) through rethrow
                 builder.AppendLine(inner +
-                    "if (chaos_exception.object_value < 0) { throw; }");
+                    "if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }");
                 if (er.CatchTypeSubjectId != null)
                 {
-                    builder.AppendLine(inner +
-                        "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);");
+                    string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
+                    builder.AppendLine(inner + "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);");
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner +
                         "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
-                        GetNativeTypeInfoSymbol(er.CatchTypeSubjectId) + "))");
-                    builder.AppendLine(inner + "    {");
-                    builder.AppendLine(inner + "        throw;");
-                    builder.AppendLine(inner + "    }");
-                    builder.AppendLine(inner + "}");
-                    EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
-                }
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
-                // WIN32_SEH mode: __try/__except with SEH filter.
-                builder.AppendLine(indentation + "__try");
-                builder.AppendLine(indentation + "{");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                if (er.CatchTypeSubjectId != null)
-                {
-                    // WIN32_SEH with typed catch: use CHAOS_SEH_FILTER_ALL to catch all
-                    // managed exceptions into TLS, then check catch type in handler body.
-                    // GetExceptionInformation() is an MSVC intrinsic valid ONLY inside
-                    // __except(filter-expression) at compile time — no lambdas/functions.
-                    // So we do typed filtering manually in the handler, same pattern as
-                    // CPP_THROW mode.
-                    string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
-                    builder.AppendLine(inner + "__except(CHAOS_SEH_FILTER_ALL())");
-                    builder.AppendLine(indentation + "{");
-                    // Phase 5: sentinel guard — re-raise sentinel exceptions
-                    // through WIN32_SEH to the next outer handler.
-                    builder.AppendLine(inner +
-                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner +
-                        "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                    builder.AppendLine(inner +
-                        "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                    builder.AppendLine(inner +
-                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                    builder.AppendLine(inner + "}");
-                    builder.AppendLine(inner + "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
-                    builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::g_chaos_exception_obj);");
-                    builder.AppendLine(inner + "if (chaos_header != nullptr)");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner + "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
                         typeInfoSym + "))");
-                    builder.AppendLine(inner + "    {");
-                    builder.AppendLine(inner + "        chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                    builder.AppendLine(inner + "            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                    builder.AppendLine(inner + "                chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                    builder.AppendLine(inner + "    }");
+                    builder.AppendLine(inner + "    { CHAOS_EH_RETHROW; }");
                     builder.AppendLine(inner + "}");
-                    EmitEvalStackPush(builder, inner,
-                        "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
+                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
                 }
                 else
                 {
-                    // Catch-all: no type filter needed
-                    builder.AppendLine(inner + "__except(CHAOS_SEH_FILTER_ALL())");
-                    builder.AppendLine(indentation + "{");
-                    // Phase 5: sentinel guard — re-raise sentinel exceptions
-                    // through WIN32_SEH to the next outer handler.
-                    builder.AppendLine(inner +
-                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner +
-                        "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                    builder.AppendLine(inner +
-                        "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                    builder.AppendLine(inner +
-                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                    builder.AppendLine(inner + "}");
-                    EmitEvalStackPush(builder, inner,
-                        "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
-                }
-                // __except handler body (shared between typed and catch-all)
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#else");
-                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
-                // SETJMP mode: use setjmp/if-else instead of try/catch.
-                builder.AppendLine(indentation + "{");
-                builder.AppendLine(inner + "auto* _chaos_jmp =");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::push_exception_jmp_buf();");
-                builder.AppendLine(inner + "if (setjmp(*_chaos_jmp) == 0)");
-                builder.AppendLine(inner + "{");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "else");
-                builder.AppendLine(inner + "{");
-                // Phase 5: catch-all sentinel guard — re-raise sentinel
-                // exceptions to the next outer CPP_THROW/WIN32_SEH handler.
-                builder.AppendLine(inner +
-                    "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
-                builder.AppendLine(inner + "{");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                builder.AppendLine(inner +
-                    "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                builder.AppendLine(inner + "}");
-                if (er.CatchTypeSubjectId != null)
-                {
-                    // Phase 5: sentinel guard — re-raise sentinel exceptions
-                    // through SETJMP to the next outer handler.
-                    builder.AppendLine(inner +
-                        "if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                    builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                    builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                    builder.AppendLine(inner +
-                        "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                    builder.AppendLine(inner + "}");
-                    builder.AppendLine(inner +
-                        "auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(");
-                    builder.AppendLine(inner +
-                        "    chaos::il2cpp::runtime_core::g_chaos_exception_obj);");
-                    builder.AppendLine(inner + "if (chaos_header != nullptr)");
-                    builder.AppendLine(inner + "{");
-                    builder.AppendLine(inner +
-                        "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
-                        GetNativeTypeInfoSymbol(er.CatchTypeSubjectId) + "))");
-                    builder.AppendLine(inner + "    {");
-                    builder.AppendLine(inner + "        chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                    builder.AppendLine(inner + "        chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                    builder.AppendLine(inner + "            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                    builder.AppendLine(inner + "                chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                    builder.AppendLine(inner + "    }");
-                    builder.AppendLine(inner + "}");
-                    EmitEvalStackPush(builder, inner,
-                        "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                        "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
+                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
                 }
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#endif");
+                builder.AppendLine(indentation + "CHAOS_EH_END");
                 break;
             }
 
             case IRExceptionKind.TryFinally:
             {
-                // Capture pre-try depth for SETJMP path parallel branches.
-                // CPP_THROW emits HandlerBody→TryBody sequentially (original code);
-                // SETJMP emits TryBody/HandlerBody as parallel branches that must
-                // each start from the same slot state.
-                int preTryDepth = _activeStructuredSlotContext?.Depth ?? 0;
-
-                // WIN32_SEH: __try/__finally maps naturally — no slot depth issues
-                // because __finally is a true finally (runs on both normal and exceptional exit).
-                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                // RAII scope guard: HandlerBody then TryBody in sequence (original path).
-                // NOTE: RestoreDepth disabled for C++ throw mode — TryBody's internal
-                // if-then-else depends on residual slot state from HandlerBody.
-                // Pre-existing bug: some finally shapes (e.g. MarshalUtf8) underflow.
-                builder.AppendLine(indentation + "{");
-                builder.AppendLine(inner + "auto chaos_finally_guard = chaos::il2cpp::common::make_finally_guard([&]()");
+                builder.AppendLine(inner + "auto _chaos_finally = [&]()");
                 builder.AppendLine(inner + "{");
                 EmitStructuredIRNode(builder, er.HandlerBody, method, inner + "    ");
-                builder.AppendLine(inner + "});");
-                EmitStructuredIRNode(builder, er.TryBody, method, inner);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                // WIN32_SEH: __finally runs on both normal exit and unwind.
-                builder.AppendLine(indentation + "__try");
-                builder.AppendLine(indentation + "{");
+                builder.AppendLine(inner + "};");
+                builder.AppendLine(indentation + "CHAOS_EH_TRY_FINALLY");
                 EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine(indentation + "__finally");
-                builder.AppendLine(indentation + "{");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#else");
-                // SETJMP: parallel TryBody/HandlerBody from same depth
-                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
-                builder.AppendLine(indentation + "{");
-                builder.AppendLine(inner + "auto* _chaos_jmp =");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::push_exception_jmp_buf();");
-                builder.AppendLine(inner + "bool _chaos_caught = false;");
-                builder.AppendLine(inner + "if (setjmp(*_chaos_jmp) == 0)");
-                builder.AppendLine(inner + "{");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "else");
-                builder.AppendLine(inner + "{");
-                _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
-                builder.AppendLine(inner + "    _chaos_caught = true;");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                builder.AppendLine(inner + "if (_chaos_caught)");
-                builder.AppendLine(inner + "{");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                builder.AppendLine(inner + "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#endif");
+                builder.AppendLine(indentation + "CHAOS_EH_FINALLY_END");
                 break;
             }
 
             case IRExceptionKind.TryFilter:
             {
-                builder.AppendLine("#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                builder.AppendLine(indentation + "try");
-                builder.AppendLine(indentation + "{");
+                builder.AppendLine(indentation + "CHAOS_EH_TRY");
                 EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine(indentation + "catch (const chaos_managed_exception& chaos_exception)");
-                builder.AppendLine(indentation + "{");
-                EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
+                builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
+                EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
 
                 // Emit structured filter body first, then let endfilter decide rethrow vs accept.
                 if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
@@ -1362,105 +1171,14 @@ public sealed partial class NativeAotLoweringPlanner
                         builder.AppendLine(inner +
                             $"if ({ConsumeEvalStackValueExpression()} == 0)");
                         builder.AppendLine(inner + "{");
-                        builder.AppendLine(inner + "    throw;");
+                        builder.AppendLine(inner + "    CHAOS_EH_RETHROW;");
                         builder.AppendLine(inner + "}");
                     }
                 }
 
-                EmitEvalStackPush(builder, inner, "chaos_exception.object_value");
+                EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
                 EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)");
-                // WIN32_SEH: catch all via seh_filter_all, then run filter logic in handler.
-                // This mirrors the CPP_THROW pattern — catch all, filter in handler, re-raise if no match.
-                builder.AppendLine(indentation + "__try");
-                builder.AppendLine(indentation + "{");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine(inner + "__except(chaos::il2cpp::runtime_core::chaos_seh_filter_all())");
-                builder.AppendLine(indentation + "{");
-                EmitEvalStackPush(builder, inner,
-                    "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
-
-                if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
-                {
-                    var filterInstructions = er.FilterInstructions;
-                    int terminalIndex = filterInstructions.Count - 1;
-                    bool hasTerminalEndFilter = string.Equals(filterInstructions[terminalIndex].Op, "endfilter", StringComparison.Ordinal);
-                    if (terminalIndex > 0)
-                    {
-                        StructuredIRNode filterBody = BuildExceptionPartitionTree(filterInstructions.Take(terminalIndex).ToArray(), offsets: new HashSet<int>(filterInstructions.Take(terminalIndex).Select(GetRequiredIlOffset)));
-                        EmitStructuredIRNode(builder, filterBody, method, inner);
-                    }
-
-                    if (hasTerminalEndFilter)
-                    {
-                        builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
-                        builder.AppendLine(inner + "{");
-                        builder.AppendLine(inner +
-                            "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                        builder.AppendLine(inner +
-                            "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                        builder.AppendLine(inner +
-                            "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                        builder.AppendLine(inner + "}");
-                    }
-                }
-
-                EmitEvalStackPush(builder, inner,
-                    "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#else");
-                // SETJMP mode: use setjmp/if-else instead of try/catch for filter.
-                builder.AppendLine(indentation + "{");
-                builder.AppendLine(inner + "auto* _chaos_jmp =");
-                builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::push_exception_jmp_buf();");
-                builder.AppendLine(inner + "if (setjmp(*_chaos_jmp) == 0)");
-                builder.AppendLine(inner + "{");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "else");
-                builder.AppendLine(inner + "{");
-                EmitEvalStackPush(builder, inner,
-                    "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
-
-                if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
-                {
-                    var filterInstructions = er.FilterInstructions;
-                    int terminalIndex = filterInstructions.Count - 1;
-                    bool hasTerminalEndFilter = string.Equals(filterInstructions[terminalIndex].Op, "endfilter", StringComparison.Ordinal);
-                    if (terminalIndex > 0)
-                    {
-                        StructuredIRNode filterBody = BuildExceptionPartitionTree(filterInstructions.Take(terminalIndex).ToArray(), offsets: new HashSet<int>(filterInstructions.Take(terminalIndex).Select(GetRequiredIlOffset)));
-                        EmitStructuredIRNode(builder, filterBody, method, inner);
-                    }
-
-                    if (hasTerminalEndFilter)
-                    {
-                        builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
-                        builder.AppendLine(inner + "{");
-                        builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                        builder.AppendLine(inner + "    chaos::il2cpp::runtime_core::chaos_raise_exception(");
-                        builder.AppendLine(inner + "        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(");
-                        builder.AppendLine(inner + "            chaos::il2cpp::runtime_core::g_chaos_exception_obj));");
-                        builder.AppendLine(inner + "}");
-                    }
-                }
-
-                EmitEvalStackPush(builder, inner,
-                    "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(" +
-                    "chaos::il2cpp::runtime_core::g_chaos_exception_obj)");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(inner + "}");
-                builder.AppendLine(inner + "chaos::il2cpp::runtime_core::pop_exception_jmp_buf();");
-                builder.AppendLine(indentation + "}");
-                builder.AppendLine("#endif");
+                builder.AppendLine(indentation + "CHAOS_EH_END");
                 break;
             }
 

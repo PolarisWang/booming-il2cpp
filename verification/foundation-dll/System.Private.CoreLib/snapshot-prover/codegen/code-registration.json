@@ -64,6 +64,12 @@
           "slot": 9,
           "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()"
         }
       ]
     },

@@ -6,7 +6,34 @@ static void (*kAotMethods[{{ methods_count }}])() = {
 {{~ end ~}}
 };
 
+// ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
+// Each wrapper supplies default argument values based on parameter types.
+// String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
+extern "C" void (*kBenchmarkWrappers[{{ methods_count }}])() = {
+{{~ for method in methods ~}}
+    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for param in method.params offset:1 ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
+{{~ end ~}}
+};
+
+{{~ if subject_entries.size > 0 ~}}
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = {{ subject_entries.size }};
+extern "C" const int kSubjectEntryIndices[{{ subject_entries.size }}] = {
+{{~ for entry in subject_entries ~}}
+	{{ entry.method_index }},
+{{~ end ~}}
+};
+{{~ end ~}}
+
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
     CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -20,7 +47,59 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
         chaos::il2cpp::runtime_core::InterpreterEntryDirect(
             entry.method_key, __chaos_args, __chaos_ret);
     } else {
-        kAotMethods[chaos_entry_index]();
+        kBenchmarkWrappers[chaos_entry_index]();
     }
     return 0;
+}
+
+// All-methods loop: run every method and return a bitmask of failures.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
+{
+    CHAOS_IL2CPP_INT32 result = 0;
+    for (int i = 0; i < kAotMethodCount; i++) {
+        auto& entry = s_hotpatch_entries[i];
+        if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+            && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+        {
+            uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+            chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+                entry.method_key, __chaos_args, __chaos_ret);
+        } else {
+            // Use kBenchmarkWrappers which supply correct default argument values
+            kBenchmarkWrappers[i]();
+        }
+    }
+    return result;
+}
+
+// Fast benchmark dispatch: no setjmp, inline slot access.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
+    CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1;
+    auto& entry = s_hotpatch_entries[chaos_entry_index];
+    if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+        && !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+    {
+        chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
+            entry.method_key);
+    } else {
+        kBenchmarkWrappers[chaos_entry_index]();
+    }
+    return 0;
+}
+
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
+extern "C" double BenchmarkMethod(
+    int chaos_entry_index, int iterations) {
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1.0;
+    auto start = std::chrono::steady_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        kBenchmarkWrappers[chaos_entry_index]();
+    }
+    auto end = std::chrono::steady_clock::now();
+    return std::chrono::duration<double, std::milli>(
+        end - start).count();
 }

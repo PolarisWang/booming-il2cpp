@@ -36,6 +36,9 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct SnapshotProverSubjects_t {
+        void (*CustomEntryMethod8)(
+                void
+        );
         void (*CustomEntrySubject_8)(
                 void
         );
@@ -727,6 +730,11 @@ extern "C" void* kFunctionsFlat[];
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct SnapshotProverSubjects {
+    static inline void CustomEntryMethod8(
+    ) {
+        return kFunctions.snapshotProverSubjects.CustomEntryMethod8(
+        );
+    }
     static inline void CustomEntrySubject_8(
     ) {
         return kFunctions.snapshotProverSubjects.CustomEntrySubject_8(
@@ -778,7 +786,7 @@ struct SnapshotProverSubjects {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 10;
+    static constexpr int32_t MethodCount = 11;
 };
 
 struct AddressHelper {

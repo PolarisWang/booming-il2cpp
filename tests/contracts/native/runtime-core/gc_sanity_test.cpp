@@ -205,7 +205,7 @@ void TestGcMemoryInfo() {
     // Simulate a managed GCMemoryInfoData object: allocate a buffer
     // where the first sizeof(void*) bytes represent the MethodTable*
     // header, followed by the GcMemoryInfoNative fields.
-    alignas(16) char buf[sizeof(void*) + 96];  // 96B = sizeof(GcMemoryInfoNative)
+    alignas(16) char buf[sizeof(void*) + 256];  // 256B = sizeof(GcMemoryInfoNative)
     memset(buf, 0, sizeof(buf));
     auto obj_ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(buf);
     chaos_gc_get_memory_info(obj_ptr, 0);
