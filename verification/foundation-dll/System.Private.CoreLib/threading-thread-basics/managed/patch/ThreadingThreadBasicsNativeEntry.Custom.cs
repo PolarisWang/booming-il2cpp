@@ -11,7 +11,7 @@ using System.Threading;
 
 public static partial class ThreadingThreadBasicsNativeEntry
 {
-    public static int _exitCode;
+    // _exitCode is provided by the auto-generated partial class.
 
     // [0] System.Threading.Thread::get_ThreadState
     public static void CustomEntryMethod0()

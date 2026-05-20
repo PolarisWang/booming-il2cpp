@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: GarbageCollectionSubjects
-add_library(chaos_gen_GarbageCollectionSubjects STATIC
-    ${CHAOS_GEN_DIR}/GarbageCollectionSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/GarbageCollectionSubjects/generated/chaos_generated_module.cpp
+# Assembly: GarbageCollectionPatchEntry
+add_library(chaos_gen_GarbageCollectionPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/GarbageCollectionPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/GarbageCollectionPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_GarbageCollectionSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_GarbageCollectionSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_GarbageCollectionSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_GarbageCollectionPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_GarbageCollectionPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_GarbageCollectionPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_GarbageCollectionSubjects
+    chaos_gen_GarbageCollectionPatchEntry
     ${NATIVE_LIBS}
 )
 

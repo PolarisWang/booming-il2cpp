@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: PinvokeDllimportSubjects
-add_library(chaos_gen_PinvokeDllimportSubjects STATIC
-    ${CHAOS_GEN_DIR}/PinvokeDllimportSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/PinvokeDllimportSubjects/generated/chaos_generated_module.cpp
+# Assembly: PinvokeDllimportPatchEntry
+add_library(chaos_gen_PinvokeDllimportPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/PinvokeDllimportPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/PinvokeDllimportPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_PinvokeDllimportSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_PinvokeDllimportSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_PinvokeDllimportSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_PinvokeDllimportPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_PinvokeDllimportPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_PinvokeDllimportPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_PinvokeDllimportSubjects
+    chaos_gen_PinvokeDllimportPatchEntry
     ${NATIVE_LIBS}
 )
 

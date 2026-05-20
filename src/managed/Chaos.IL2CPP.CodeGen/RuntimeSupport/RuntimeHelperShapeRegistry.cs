@@ -59,7 +59,11 @@ public sealed partial class NativeAotLoweringPlanner
         public sealed record InlineShapeDescriptor(
             string TypeDisplayNamePrefix,
             string MethodName,
-            Func<string, IReadOnlyList<string>, string?> Resolver);
+            Func<string, IReadOnlyList<string>, string?> Resolver)
+        {
+            /// <summary>True if this method has an implicit `this` parameter on the eval stack (instance method call via callvirt/call).</summary>
+            public bool IsInstanceMethod { get; init; }
+        }
 
         private readonly Dictionary<uint, ShapeEntry> _entriesByShapeId = new();
         private readonly Dictionary<string, ShapeEntry> _entriesByCanonicalKey = new(StringComparer.Ordinal);
@@ -179,9 +183,11 @@ public sealed partial class NativeAotLoweringPlanner
         /// <summary>Try to match a callee SubjectId to an inline shape descriptor.</summary>
         public bool TryMatchInlineShape(
             string callee,
-            [NotNullWhen(true)] out string? cppExpression)
+            [NotNullWhen(true)] out string? cppExpression,
+            [NotNullWhen(true)] out InlineShapeDescriptor? matchedDescriptor)
         {
             cppExpression = null;
+            matchedDescriptor = null;
             if (string.IsNullOrEmpty(callee)) return false;
 
             var typeDisplayName = GetTypeDisplayNameFromSubjectId(callee);
@@ -202,6 +208,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (result != null)
                 {
                     cppExpression = result;
+                    matchedDescriptor = entry;
                     return true;
                 }
             }
@@ -3177,7 +3184,8 @@ public sealed partial class NativeAotLoweringPlanner
                     // Skip paramTypes check for diagnostic — accept any param count
                     // Comma expression: size=0, version++, result ignored (void return)
                     return "(reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->size = 0, reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->version++)";
-                }));
+                })
+            { IsInstanceMethod = true });
 
             // === List<T>::Contains — InlineShapeDescriptor (no function call) ===
             // IILE lambda performs linear scan on the inline field buffer at call site.
@@ -3188,7 +3196,8 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count != 1) return null;
                     return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return 1; } return 0; })()";
-                }));
+                })
+            { IsInstanceMethod = true });
 
             // === List<T>::IndexOf — InlineShapeDescriptor (no function call) ===
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -3198,7 +3207,8 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count != 1) return null;
                     return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return _i; } return -1; })()";
-                }));
+                })
+            { IsInstanceMethod = true });
 
             // === List<T>::Remove — InlineShapeDescriptor (no function call) ===
             // IILE lambda: linear scan + std::memmove shift on inline field buffer.
@@ -3209,7 +3219,8 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count != 1) return null;
                     return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
-                }));
+                })
+            { IsInstanceMethod = true });
 
             // === List<T>::Clear (GenericShapeDescriptor for dispatch table) ===
             // Kept as fallback for hotpatch dispatch / indirect call paths.

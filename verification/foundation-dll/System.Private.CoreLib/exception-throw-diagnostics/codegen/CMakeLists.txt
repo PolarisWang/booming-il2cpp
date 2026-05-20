@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ExceptionThrowDiagnosticsSubjects
-add_library(chaos_gen_ExceptionThrowDiagnosticsSubjects STATIC
-    ${CHAOS_GEN_DIR}/ExceptionThrowDiagnosticsSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/ExceptionThrowDiagnosticsSubjects/generated/chaos_generated_module.cpp
+# Assembly: ExceptionThrowDiagnosticsPatchEntry
+add_library(chaos_gen_ExceptionThrowDiagnosticsPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ExceptionThrowDiagnosticsPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/ExceptionThrowDiagnosticsPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_ExceptionThrowDiagnosticsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ExceptionThrowDiagnosticsSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ExceptionThrowDiagnosticsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ExceptionThrowDiagnosticsPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ExceptionThrowDiagnosticsPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ExceptionThrowDiagnosticsPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ExceptionThrowDiagnosticsSubjects
+    chaos_gen_ExceptionThrowDiagnosticsPatchEntry
     ${NATIVE_LIBS}
 )
 
