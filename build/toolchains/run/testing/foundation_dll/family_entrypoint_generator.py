@@ -807,29 +807,27 @@ def generate_and_build(
 
     # Auto-detect custom entry file
     custom_cs_path = output_dir / f"{class_name}.Custom.cs"
-    has_custom_entry = custom_cs_path.exists()
-
-    # Auto-detect custom method indices: check contract for customEntryIndices,
-    # or fall back to custom per-method contracts with "customEntry": true
+    # Auto-detect custom method indices: check contract for customEntryIndices.
+    # When custom entries exist but no Custom.cs is found, the generator still
+    # emits empty method stubs so the subjects DLL builds (the methods will be
+    # no-ops until handwritten Custom.cs is added later).
     custom_method_indices: set[int] | None = None
-    if has_custom_entry:
-        # Build custom_method_indices from contract if available
-        family_slug = _slug_from_family_id(family_id)
-        contract_path = _REPO_ROOT / "verification" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
-        if contract_path.exists():
-            with open(contract_path, encoding="utf-8") as f:
-                contract = json.load(f)
-            indices = contract.get("customEntryIndices")
-            if indices is not None:
-                custom_method_indices = set(indices)
-            else:
-                # Fallback: look for per-method "customEntry": true in methodContracts
-                custom_mids = set()
-                for mc in contract.get("methodContracts", []):
-                    if mc.get("customEntry") and mc.get("methodSubjectId") in method_subject_ids:
-                        custom_mids.add(method_subject_ids.index(mc["methodSubjectId"]))
-                if custom_mids:
-                    custom_method_indices = custom_mids
+    family_slug = _slug_from_family_id(family_id)
+    contract_path = _REPO_ROOT / "verification" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
+    if contract_path.exists():
+        with open(contract_path, encoding="utf-8") as f:
+            contract = json.load(f)
+        indices = contract.get("customEntryIndices")
+        if indices is not None:
+            custom_method_indices = set(indices)
+        else:
+            # Fallback: look for per-method "customEntry": true in methodContracts
+            custom_mids = set()
+            for mc in contract.get("methodContracts", []):
+                if mc.get("customEntry") and mc.get("methodSubjectId") in method_subject_ids:
+                    custom_mids.add(method_subject_ids.index(mc["methodSubjectId"]))
+            if custom_mids:
+                custom_method_indices = custom_mids
 
     # ── Pass 1: Probe (shared by benchmark and subjects variants) ──
     def _run_probe() -> dict[int, dict]:
