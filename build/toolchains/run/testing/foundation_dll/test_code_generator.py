@@ -211,8 +211,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("ReadOnlySpan", "get_Empty", 0): "ReadOnlySpan<byte>.Empty",
     # Attribute methods need real MemberInfo/Assembly
     ("Attribute", "GetCustomAttribute", 2): "typeof(byte).Assembly.GetCustomAttribute(typeof(AssemblyDescriptionAttribute))",
-    ("Attribute", "GetCustomAttributes", 2): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute))).Count",  # returns IEnumerable -> no .Length
-    ("Attribute", "GetCustomAttributes", 1): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false)).Count",  # returns IEnumerable -> no .Length
+    ("Attribute", "GetCustomAttributes", 2): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(typeof(AssemblyDescriptionAttribute)).Cast<System.Attribute>()).Count",  # returns IEnumerable -> no .Length
+    ("Attribute", "GetCustomAttributes", 1): "new System.Collections.Generic.List<System.Attribute>(typeof(byte).Assembly.GetCustomAttributes(false).Cast<System.Attribute>()).Count",  # returns IEnumerable -> no .Length
     ("Attribute", "IsDefined", 2): "typeof(byte).Assembly.IsDefined(typeof(AssemblyDescriptionAttribute))",
     # Array.Sort with null comparer is ambiguous between IComparer<T> and Comparison<T>
     ("Array", "Sort", 2): "Array.Sort(new byte[1], System.Collections.Generic.Comparer<byte>.Default)",
@@ -410,6 +410,7 @@ _BASE_USINGS = "\n".join([
     "using System.Threading;",
     "using System.Threading.Tasks;",
     "using System.Globalization;",
+    "using System.Linq;",
     "using System.Runtime.CompilerServices;",
     "using System.Runtime.InteropServices;",
     "using System.Collections.Generic;",

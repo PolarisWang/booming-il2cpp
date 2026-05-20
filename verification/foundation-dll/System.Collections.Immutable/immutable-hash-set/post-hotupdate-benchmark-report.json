@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/hash/set",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte,System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 1.15,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 117.39
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 1.15,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 221.74
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>(System.Int32)",
+      "status": "failed",
+      "error": "JSON parse failed"
+    }
+  ],
+  "summary": {
+    "totalMethods": 5,
+    "nonStubMethods": 2,
+    "averageSlowdownPercent": 169.56,
+    "slowdownFactor": 2.6956,
+    "slowdownThresholdX": 50.0
+  }
+}

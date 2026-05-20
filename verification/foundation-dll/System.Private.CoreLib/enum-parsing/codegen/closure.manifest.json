@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "EnumParsingSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "EnumParsingSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d0af99c5-397d-4048-b542-7359e4de2b5f",
+  "inputModuleVersionId": "e384d6ec-f7f9-4785-a54e-86e13eb2e080",
   "artifacts": [
     {
       "kind": "typedIlIr",

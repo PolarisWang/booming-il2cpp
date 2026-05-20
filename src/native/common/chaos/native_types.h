@@ -67,6 +67,7 @@
 
 // ── Containers ──────────────────────────────────────────────
 #define CHAOS_IL2CPP_VECTOR(T)          std::vector<T>
+/// std::array alias for codegen-generated fixed-size stack allocations (no heap).
 #define CHAOS_IL2CPP_ARRAY(T, N)        std::array<T, N>
 #define CHAOS_IL2CPP_STRING             std::string
 #define CHAOS_IL2CPP_STRING_VIEW        std::string_view

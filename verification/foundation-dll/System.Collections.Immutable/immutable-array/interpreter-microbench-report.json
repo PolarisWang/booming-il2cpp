@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/array",
+  "capturedAt": "2026-05-20T08:18:30",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T08:18:30][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T08:18:30][WARN][CRAG] young_collection_no_region\n[2026-05-20T08:18:30][INFO][NUMA] numa_init count=%d\n[2026-05-20T08:18:30][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T08:18:30][INFO][OldGen] init done base=0x2137585418240 pages=2\n[2026-05-20T08:18:30][DEBUG][codegen] T4 VEH handler registered\nPassed: 6/6\n"
+}

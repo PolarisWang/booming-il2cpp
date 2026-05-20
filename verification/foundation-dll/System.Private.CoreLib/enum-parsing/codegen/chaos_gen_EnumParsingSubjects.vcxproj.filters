@@ -4,6 +4,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\EnumParsingSubjects\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\EnumParsingSubjects\generated\chaos_generated_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\CMakeLists.txt" />

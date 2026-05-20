@@ -13,6 +13,8 @@
 
 public static partial class BufferMemoryNativeEntry
 {
+    public static int _exitCode;
+
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy
     // Manual byte-by-byte copy via array indexers
     // NOTE: simple zero-init arrays + individual assignments (no for-loop,

@@ -142,9 +142,38 @@ internal static class EnumMetadataExtractor
             sb.AppendLine("};");
             sb.AppendLine();
 
-            // Compute FNV-1a 32-bit hash
+            // Compute FNV-1a 32-bit hash with collision detection
             uint hash = ComputeFnv1a32(et.SubjectId);
-            hashToIdentifier[hash] = uniqueId;
+            if (hashToIdentifier.TryGetValue(hash, out var existing))
+            {
+                Console.Error.WriteLine($"[WARNING] FNV-1a 32-bit hash collision between " +
+                    $"'{existing}' and '{uniqueId}'. The second type falls back to reflection API.");
+            }
+            else
+            {
+                hashToIdentifier[hash] = uniqueId;
+            }
+        }
+
+        // ── Build 24-bit hash (fnv24) map with collision detection ──────────
+        // 24-bit collisions cause duplicate case labels in the generated
+        // chaos_find_enum_metadata_by_fnv24 switch, so they MUST be resolved.
+        var fnv24ToIdentifier = new Dictionary<uint, string>();
+        int fnv24CollisionCount = 0;
+        foreach (var kv in hashToIdentifier)
+        {
+            uint fnv24 = kv.Key & 0xFFFFFFu;
+            if (fnv24ToIdentifier.TryGetValue(fnv24, out var existing24))
+            {
+                Console.Error.WriteLine($"[ERROR] FNV-1a 24-bit hash collision between " +
+                    $"'{existing24}' (0x{fnv24:X6}) and '{kv.Value}'. " +
+                    $"Generate a build-time #error.");
+                fnv24CollisionCount++;
+            }
+            else
+            {
+                fnv24ToIdentifier[fnv24] = kv.Value;
+            }
         }
 
         // ── Emit lookup function ───────────────────────────────────────────
@@ -171,9 +200,7 @@ internal static class EnumMetadataExtractor
             var subjectId = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value).SubjectId;
             sb.AppendLine($"        case 0x{kv.Key:X8}u: {{");
             sb.AppendLine($"            // Verify: {EscapeCppString(subjectId)}");
-            sb.AppendLine($"            #ifndef CHAOS_IL2CPP_SHIP");
             sb.AppendLine($"            if (std::strcmp(subject_id, \"{EscapeCppString(subjectId)}\") != 0) break;");
-            sb.AppendLine($"            #endif");
             sb.AppendLine($"            return &kEnumTable_{kv.Value};");
             sb.AppendLine($"        }}");
         }
@@ -189,21 +216,34 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("/// and call this function without going through the reflection API.");
         sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to resolve_type_arg +");
         sb.AppendLine("/// chaos_find_enum_metadata).");
+        sb.AppendLine("/// NOTE: 24-bit hash collisions are detected at codegen time and cause a");
+        sb.AppendLine("/// build-time #error. If you see this at runtime, the codegen didn't emit");
+        sb.AppendLine("/// the #error check — file a bug.");
         sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata_by_fnv24(");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept");
         sb.AppendLine("{");
         sb.AppendLine("    switch (fnv24) {");
-        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        foreach (var kv in fnv24ToIdentifier.OrderBy(kv => kv.Key))
         {
             uint fnv24 = kv.Key & 0xFFFFFF;
             sb.AppendLine($"        case 0x{fnv24:X6}u: return &kEnumTable_{kv.Value};");
         }
-        sb.AppendLine("        default:");
-        sb.AppendLine("            return nullptr;");
-        sb.AppendLine("    }");
-        sb.AppendLine("}");
+    sb.AppendLine("        default:");
+    sb.AppendLine("            return nullptr;");
+    sb.AppendLine("    }");
+    sb.AppendLine("}");
+
+    // Emit #error if fnv24 collisions detected (prevents silent wrong-metadata at runtime).
+    if (fnv24CollisionCount > 0)
+    {
         sb.AppendLine();
-        sb.AppendLine("}}}  // namespace chaos::il2cpp::codegen");
+        sb.AppendLine("#error FNV-1a 24-bit hash collision detected in enum metadata. "
+            + "Regenerate or increase hash bits. "
+            + "See codegen warnings above for conflicting subject IDs.");
+    }
+
+    sb.AppendLine();
+    sb.AppendLine("}}}  // namespace chaos::il2cpp::codegen");
         sb.AppendLine();
         // ── Function pointer registration ──────────────────────────────────
         // The C-linkage variable is defined in enum_stubs.cpp (default nullptr).

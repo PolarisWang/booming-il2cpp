@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/sorted/dictionary",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<string,int>:System.Collections.Immutable.ImmutableSortedDictionary<System.String,System.Int32>()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableSortedDictionary<System.Byte,System.Byte>()",
+      "status": "failed",
+      "error": "JSON parse failed"
+    }
+  ],
+  "summary": {
+    "totalMethods": 2,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

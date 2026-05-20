@@ -1,0 +1,179 @@
+{
+  "family": "immutable-list",
+  "assembly": "System.Collections.Immutable",
+  "mode": "standard",
+  "timestamp": "2026-05-20T08:24:13",
+  "duration_ms": 32675,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "6 methods, 6 custom entries",
+      "details": {
+        "methodCount": 6,
+        "customMethodCount": 6,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>()",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte,System.Byte)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>()",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>(System.Int32)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<String>:System.Collections.Immutable.ImmutableList<System.String>(System.String)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 6,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-list\\managed\\subjects\\build-output\\ImmutableListSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 27613
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (6/6)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 6,
+          "total": 6
+        }
+      },
+      "errors": [],
+      "duration_ms": 434
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1454
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 34
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "matchedCount=0/6 below threshold 50%",
+      "details": {
+        "averageSpeedupPercent": 0.0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "matchedCount": 0,
+        "totalMethods": 6,
+        "invalidCount": 6,
+        "benchmarkQuality": "matchedCount=0/6 below threshold 50%"
+      },
+      "errors": [],
+      "duration_ms": 2772
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "6/6 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 6,
+        "realMethods": 6,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 49
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=103.49% (2.0x) over 1 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 103.49,
+        "slowdownFactor": 2.0349,
+        "threshold": 50.0,
+        "nonStubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 312
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
+    "irTranslation": {},
+    "performance": {
+      "averageSpeedupPercent": 0.0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 6,
+      "invalidCount": 6
+    },
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 6
+      },
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 103.49,
+        "slowdownFactor": 2.0349,
+        "nonStubMethods": 1
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 2.0349,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

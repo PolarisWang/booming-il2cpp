@@ -104,9 +104,6 @@ struct Functions {
         void (*.ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
-        CHAOS_IL2CPP_INT32 (*GetValue)(
-                    CHAOS_IL2CPP_INTPTR
-        );
     } implWithDefault;
     struct InterfaceDispatchNativeEntry_t {
         CHAOS_IL2CPP_INT32 (*Run)(
@@ -339,15 +336,8 @@ struct ImplWithDefault {
                     arg_0
         );
     }
-    static inline CHAOS_IL2CPP_INT32 GetValue(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.implWithDefault.GetValue(
-                    arg_0
-        );
-    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr int32_t MethodCount = 1;
 };
 
 struct InterfaceDispatchNativeEntry {

@@ -150,6 +150,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\EnumParsingSubjects\generated\native-aot.generated.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\EnumParsingSubjects\generated\chaos_generated_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\enum-parsing\codegen\build\ZERO_CHECK.vcxproj">

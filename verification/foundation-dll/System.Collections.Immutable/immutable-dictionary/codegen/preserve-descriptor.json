@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

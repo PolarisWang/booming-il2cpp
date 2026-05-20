@@ -230,6 +230,12 @@ void BgcController::ForceComplete() {
     if (p == BgcPhase::IDLE)
         return;
 
+    // Phase 0: Stop concurrent mark workers before draining or sweeping.
+    // Without this, workers may still be processing objects (ScanObjectChildren)
+    // while BgcSweep frees them — a use-after-free race detectable as segfault
+    // in ForceComplete.  Safe to call even if workers weren't spawned yet.
+    StopParallelMarkWorkers();
+
     // Phase 1: Drain remaining SATB + all workers' deques.
     DrainAllTlsSatbBuffers();
     DrainGlobalSatbQueue();

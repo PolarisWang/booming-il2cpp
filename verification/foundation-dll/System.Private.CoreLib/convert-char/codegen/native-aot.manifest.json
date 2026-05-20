@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ConvertCharSubjects",
   "entrySubjectId": "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/convert-char/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

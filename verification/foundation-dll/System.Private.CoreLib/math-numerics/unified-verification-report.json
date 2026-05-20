@@ -2,8 +2,8 @@
   "family": "math-numerics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:36:56",
-  "duration_ms": 20808,
+  "timestamp": "2026-05-20T08:19:19",
+  "duration_ms": 27379,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 2
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\math-numerics\\managed\\subjects\\build-output\\MathNumericsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 19466
+      "duration_ms": 26921
     },
     "fact": {
       "stage": "fact",
@@ -42,30 +42,33 @@
         }
       },
       "errors": [],
-      "duration_ms": 344
+      "duration_ms": 408
     },
-    "audit": {
-      "stage": "audit",
+    "microbench": {
+      "stage": "microbench",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
       "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "ALIGNED",
-        "methodsWithoutLowering": 0
+        "poolSize": 0
       },
       "errors": [],
-      "duration_ms": 996
+      "duration_ms": 43
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 100.0,
+    "testedRate": 0.0,
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
     "irTranslation": {},
     "performance": {},
     "hotupdate": {},

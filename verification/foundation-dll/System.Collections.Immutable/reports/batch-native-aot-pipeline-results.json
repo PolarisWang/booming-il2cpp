@@ -1,0 +1,56 @@
+{
+  "assembly": "System.Collections.Immutable",
+  "mode": "family-entrypoint",
+  "total": 4,
+  "passed": 2,
+  "failed": 2,
+  "results": [
+    {
+      "family": "immutable-queue-stack",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 10,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-queue-stack\\managed\\subjects\\build-output\\ImmutableQueueStackSubjects.dll"
+    },
+    {
+      "family": "immutable-interlocked",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "FAILED"
+      },
+      "success": false,
+      "methodCount": 1,
+      "error": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.cs(9,18): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.cs(9,26): error CS1513: } expected [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.cs(9,18): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.cs(9,26): error CS1513: } expected [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\immutable-interlocked\\managed\\subjects\\ImmutableInterlockedSubjects.csproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.36\n"
+    },
+    {
+      "family": "frozen-collections",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "FAILED"
+      },
+      "success": false,
+      "methodCount": 8,
+      "error": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(7,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(9,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(11,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(13,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(15,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(17,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(19,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(21,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(7,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(9,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(11,38): error CS0117: 'FrozenDictionary' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(13,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(15,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(17,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(19,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.Custom.cs(21,31): error CS0117: 'FrozenSet' does not contain a definition for 'Create' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\frozen-collections\\managed\\subjects\\FrozenCollectionsSubjects.csproj]\n    0 Warning(s)\n    8 Error(s)\n\nTime Elapsed 00:00:01.25\n"
+    },
+    {
+      "family": "extensions-marshal",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 4,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Collections.Immutable\\extensions-marshal\\managed\\subjects\\build-output\\ExtensionsMarshalSubjects.dll"
+    }
+  ],
+  "timestamp": "2026-05-20T08:28:58"
+}

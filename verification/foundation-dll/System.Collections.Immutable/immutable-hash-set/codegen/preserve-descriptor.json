@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

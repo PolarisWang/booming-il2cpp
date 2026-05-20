@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ExtensionsMarshalSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "name": "ExtensionsMarshalSubjects",
+      "displayName": "ExtensionsMarshalSubjects",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::_exitCode",
+      "declaringTypeSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

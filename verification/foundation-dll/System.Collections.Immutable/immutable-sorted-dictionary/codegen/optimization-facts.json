@@ -1,0 +1,55 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections.Immutable/ImmutableSortedDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections.Immutable/ImmutableSortedDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

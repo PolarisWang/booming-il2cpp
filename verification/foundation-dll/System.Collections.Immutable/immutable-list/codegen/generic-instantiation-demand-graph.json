@@ -1,0 +1,184 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.Byte)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Byte\u003E:ImmutableList\u003CSystem.Byte\u003E(System.Byte[])",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0[])",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0[])",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.Int32\u003E:ImmutableList\u003CSystem.Int32\u003E(System.Int32)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList::Create\u003CSystem.String\u003E:ImmutableList\u003CSystem.String\u003E(System.String)",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList::Create:ImmutableList\u003C!!0\u003E(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ImmutableListSubjects",
+      "owningAssemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableList\u003CSystem.String\u003E::get_Count:System.Int32()",
+      "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections.Immutable/ImmutableList\u00601::get_Count:System.Int32()",
+        "typeArguments": [
+          "System.String"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 2,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

@@ -2,8 +2,8 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:35:52",
-  "duration_ms": 20979,
+  "timestamp": "2026-05-20T08:11:02",
+  "duration_ms": 40478,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 19583
+      "duration_ms": 24772
     },
     "fact": {
       "stage": "fact",
@@ -42,21 +42,75 @@
         }
       },
       "errors": [],
-      "duration_ms": 373
+      "duration_ms": 370
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "ALIGNED",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1022
+      "duration_ms": 1081
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/14 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 0,
+        "failedCount": 14,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 13697
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 33
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=54.83% (1.5x) over 14 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 54.83,
+        "slowdownFactor": 1.5482999999999998,
+        "threshold": 50.0,
+        "nonStubMethods": 14
+      },
+      "errors": [],
+      "duration_ms": 519
     }
   },
   "coverage": {
@@ -65,7 +119,14 @@
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
     "irTranslation": {
       "totalMethods": 14,
       "okCount": 0,
@@ -81,11 +142,17 @@
       "topInstructionCategories": {}
     },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 54.83,
+        "slowdownFactor": 1.5482999999999998,
+        "nonStubMethods": 14
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0,
+      "interpreterSlowdownFactor": 1.5482999999999998,
       "asmPassRate": 0.0
     }
   },

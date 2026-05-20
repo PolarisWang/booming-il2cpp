@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

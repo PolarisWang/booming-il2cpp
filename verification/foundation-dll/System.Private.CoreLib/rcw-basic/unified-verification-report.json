@@ -2,9 +2,9 @@
   "family": "rcw-basic",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:38:23",
-  "duration_ms": 4395,
-  "overall_status": "failed",
+  "timestamp": "2026-05-20T08:27:31",
+  "duration_ms": 26201,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,19 +17,18 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(38,39): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwMultipleWrappers' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(38,88): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwMultipleWrappers' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(45,39): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwQiUnknownInterface' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(45,90): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwQiUnknownInterface' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(38,39): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwMultipleWrappers' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(38,88): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwMultipleWrappers' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(45,39): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwQiUnknownInterface' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.cs(45,90): error CS0117: 'RcwBasicNativeEntry' does not contain a definition for 'TestRcwQiUnknownInterface' [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicSubjects.csproj]\n    0 Warning(s)\n    4 Error(s)\n\nTime Elapsed 00:00:01.17\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 7,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\build-output\\RcwBasicSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 3453
+      "duration_ms": 24583
     },
     "fact": {
       "stage": "fact",
@@ -43,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 418
     },
     "audit": {
       "stage": "audit",
@@ -57,7 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 904
+      "duration_ms": 1196
     }
   },
   "coverage": {

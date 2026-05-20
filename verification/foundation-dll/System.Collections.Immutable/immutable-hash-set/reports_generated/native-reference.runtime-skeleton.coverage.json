@@ -1,0 +1,20 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/hash/set",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 5,
+  "emittedMethodCount": 5,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte,System.Byte)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>(System.Int32)"
+  ]
+}

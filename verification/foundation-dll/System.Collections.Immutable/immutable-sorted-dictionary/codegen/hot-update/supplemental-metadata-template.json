@@ -1,0 +1,35 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

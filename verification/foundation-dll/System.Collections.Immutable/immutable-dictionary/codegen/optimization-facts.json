@@ -1,0 +1,71 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Collections.Immutable/ImmutableDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

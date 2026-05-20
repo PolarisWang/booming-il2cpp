@@ -1,0 +1,75 @@
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Reflection;
+using Chaos.TestFramework;
+
+// Benchmark stubs for family/System.Collections.Immutable/immutable/queue/stack
+public static class ImmutableQueueStackBenchmarks
+{
+    // Benchmark ImmutableQueue.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableQueue.Create<Byte>(); }
+    // Benchmark ImmutableQueue.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>(System.Byte)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableQueue.Create<Byte>((byte)42); }
+    // Benchmark ImmutableQueue.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>(System.Byte,System.Byte)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableQueue.Create<Byte>((byte)42, (byte)42); }
+    // Benchmark ImmutableQueue.Create<Int32> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Int32>:System.Collections.Immutable.ImmutableQueue<System.Int32>()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Int32_System_Collections_Immutable_Immut() { _ = ImmutableQueue.Create<Int32>(); }
+    // Benchmark ImmutableQueue.Create<Int32> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Int32>:System.Collections.Immutable.ImmutableQueue<System.Int32>(System.Int32)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Int32_System_Collections_Immutable_Immut() { _ = ImmutableQueue.Create<Int32>(42); }
+    // Benchmark ImmutableStack.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableStack.Create<Byte>(); }
+    // Benchmark ImmutableStack.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>(System.Byte)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableStack.Create<Byte>((byte)42); }
+    // Benchmark ImmutableStack.Create<Byte> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>(System.Byte,System.Byte)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta() { _ = ImmutableStack.Create<Byte>((byte)42, (byte)42); }
+    // Benchmark ImmutableStack.Create<Int32> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Int32>:System.Collections.Immutable.ImmutableStack<System.Int32>()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Int32_System_Collections_Immutable_Immut() { _ = ImmutableStack.Create<Int32>(); }
+    // Benchmark ImmutableStack.Create<Int32> native-runtime throughput
+    [BenchmarkSubjectId("System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Int32>:System.Collections.Immutable.ImmutableStack<System.Int32>(System.Int32)")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemCollectionsImmutable_ImmutableQueueStack)]
+    [BenchmarkRoute(BenchmarkRoute.Native)]
+    [BenchmarkProfile(BenchmarkProfile.Default)]
+    public static void Benchmark_System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Int32_System_Collections_Immutable_Immut() { _ = ImmutableStack.Create<Int32>(42); }}

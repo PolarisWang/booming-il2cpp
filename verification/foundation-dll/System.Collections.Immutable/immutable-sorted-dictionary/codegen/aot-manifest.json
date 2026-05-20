@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedDictionarySubjects",
+      "subjectKind": "field",
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary::Create\u003CSystem.String,System.Int32\u003E:ImmutableSortedDictionary\u003CSystem.String,System.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary::Create\u003CSystem.Byte,System.Byte\u003E:ImmutableSortedDictionary\u003CSystem.Byte,System.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

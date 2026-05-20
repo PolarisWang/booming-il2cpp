@@ -1,14 +1,22 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "AttributesCustomMetadataPatchEntry",
+  "assemblyName": "AttributesCustomMetadataSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "AttributesCustomMetadataPatchEntry",
-      "path": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/patch/build-output/AttributesCustomMetadataPatchEntry.dll"
+      "assemblyName": "AttributesCustomMetadataSubjects",
+      "path": "verification/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Linq.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "93cab466-be74-4b0c-8e00-31909bd2e1ec",
+  "inputModuleVersionId": "01344d36-de6e-4369-866f-0978f60b1988",
   "artifacts": [
     {
       "kind": "typedIlIr",

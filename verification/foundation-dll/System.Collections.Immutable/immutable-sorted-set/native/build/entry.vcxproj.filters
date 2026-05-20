@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\immutable-sorted-set\native\runtime-entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\immutable-sorted-set\native\runtime-patchdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\immutable-sorted-set\codegen\ImmutableSortedSetSubjects\generated\native-aot.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Collections.Immutable\immutable-sorted-set\native\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EF3FED1A-15B0-3E52-AA6E-D2A73B7F9B7D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

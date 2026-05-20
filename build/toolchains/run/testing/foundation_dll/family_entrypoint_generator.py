@@ -42,6 +42,7 @@ def _collect_required_usings(method_subject_ids: list[str]) -> set[str]:
     # Always needed
     usings.add("System")
     usings.add("System.Collections.Generic")
+    usings.add("System.Linq")
 
     for subject_id in method_subject_ids:
         parsed = _parse_method_subject_id(subject_id)
@@ -77,6 +78,8 @@ def _add_type_using(t: str, usings: set[str]) -> None:
     bare = t.rstrip("&*?").strip()
     # Strip CLR generic argument braces: Action{System.Threading.Tasks.Task} -> Action
     bare = re.sub(r"\{.*\}", "", bare)
+    # Strip C# generic argument brackets: ImmutableArray<System.Byte> -> ImmutableArray
+    bare = re.sub(r"<.*>", "", bare)
     # Strip array brackets
     while bare.endswith("[]"):
         bare = bare[:-2].strip()

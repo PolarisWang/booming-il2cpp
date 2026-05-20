@@ -34,15 +34,24 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects = {{nullptr, nullptr, 10022041640107287784ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(10022041640107287784ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(10022041640107287784ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
@@ -1255,24 +1264,271 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	}
 }
 
-// AOT-unreachable stub: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()
+// Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2()
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableFrom_System_Boolean_System_Type_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
-// AOT-unreachable stub: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()
+// Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3()
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_value = _s1;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+	}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsInstanceOfType_System_Boolean_System_Object_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
-// AOT-unreachable stub: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()
+// Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4()
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsSubclassOf_System_Boolean_System_Type_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
-// AOT-unreachable stub: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()
+// Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5()
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+	{
+		const auto chaos_arg_0 = _s1;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Type__IsAssignableTo_System_Boolean_System_Type_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
 // Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6()
@@ -1459,9 +1715,79 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	}
 }
 
-// AOT-unreachable stub: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()
+// Managed method: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10()
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_value = _s0;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_value = _s1;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_boxed->value = chaos_value;
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+	}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		}
+		else
+		{
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		}
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		{
+			if (_s0 != 0)
+			{
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s0;
+					chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
 

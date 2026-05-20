@@ -794,13 +794,17 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     uint64_t result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
 
     // Read ret_tag from CachedCallInfo.
-    // Default Int32 is safe: codegen emits correct Ret-type opcodes so the
-    // tag is only used for FastFrame type tracking, not data interpretation.
+    // ret_tag is pre-computed by the interpreter (not codegen) to match the
+    // return ABI kind. It controls FastFrame stack type tracking (Int32/Int64/
+    // Float32/Float64/Void). When cache misses (0xFF), default Int32 is safe
+    // because generated code always emits correct Ret-type opcodes downstream.
+    // CHECK-build validation: when cache hits, ret_tag must be a valid ValueTag.
     uint8_t ret_tag = static_cast<uint8_t>(interpreter::ValueTag::Int32);
     if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
         const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
         if (cc[frame.pc].ret_tag != 0xFF) {
             ret_tag = cc[frame.pc].ret_tag;
+            CHAOS_IL2CPP_ASSERT(ret_tag <= static_cast<uint8_t>(interpreter::ValueTag::Struct));
         }
     }
 
@@ -959,7 +963,12 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     // ── Route to path-specific handler ──────────────────────────────
     // AotDirectDispatch takes priority: direct_fn is a pre-resolved
     // chaos_external_runtime_* function pointer that always works.
+    // >8 args: fall back to DoRaw (AOT direct uses uniform 8-arg signature).
     if (instr.direct_fn != nullptr) {
+        if (ac > 8) {
+            Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, nullptr);
+            return;
+        }
         Handle_Call_DoAotDirect(frame, instr, pa.args, pa.tags, ac);
         return;
     }

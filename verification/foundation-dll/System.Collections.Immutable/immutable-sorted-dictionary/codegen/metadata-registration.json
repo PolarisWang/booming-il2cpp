@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableSortedDictionarySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "name": "ImmutableSortedDictionarySubjects",
+      "displayName": "ImmutableSortedDictionarySubjects",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::_exitCode",
+      "declaringTypeSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

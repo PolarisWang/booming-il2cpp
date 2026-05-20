@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableQueueStackSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_1",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_2",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_3",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_4",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_5",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_6",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_7",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_8",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_9",
+          "subjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_9:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -71,9 +71,6 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(
 extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplWithDefault_GetValue(
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(
             CHAOS_IL2CPP_INT32
 );
@@ -163,7 +160,6 @@ static const Functions s_functions = {
     },
     {
         &InterfaceDispatchSubjects_ImplWithDefault__ctor,
-        &InterfaceDispatchSubjects_ImplWithDefault_GetValue,
     },
     {
         &InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32,
@@ -187,7 +183,7 @@ static const Functions s_functions = {
         &InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7,
         &InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8,
     },
-    35,
+    34,
 };
 
 const Functions kFunctions = s_functions;

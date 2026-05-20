@@ -155,6 +155,18 @@ public static class RcwBasicNativeEntry
         return 0;
     }
 
+    // [4] Multiple wrappers test (stub — basic RCW does not support this)
+    public static int TestRcwMultipleWrappers()
+    {
+        return -1; // not implemented in basic RCW
+    }
+
+    // [5] QiUnknownInterface test (stub — basic RCW does not support this)
+    public static int TestRcwQiUnknownInterface()
+    {
+        return -1; // not implemented in basic RCW
+    }
+
     // Creates a CCW wrapping a SimpleMath instance and returns its IUnknown*
     static IntPtr CreateCcwForSimpleMath(IntPtr runtimeState)
     {

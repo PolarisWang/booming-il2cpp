@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableHashSetSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_1",
+          "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_2",
+          "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_3",
+          "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_4",
+          "subjectId": "ImmutableHashSetSubjects/ImmutableHashSetSubjects::CustomEntrySubject_4:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

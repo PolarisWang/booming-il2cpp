@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

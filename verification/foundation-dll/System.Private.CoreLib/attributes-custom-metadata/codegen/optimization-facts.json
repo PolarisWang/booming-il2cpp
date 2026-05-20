@@ -4,74 +4,136 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_0:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_1:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_2:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_3:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_4:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_5:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_6:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_7:System.Int32()",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Subject_8:System.Int32()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Void(System.Int32)",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_8:System.Void()",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetCustomAttributes:System.Object[](System.Boolean)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Reflection.Assembly::GetCustomAttributes:System.Object[](System.Boolean)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "devirtualized": false
+    }
+  ],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::_exitCode",
+      "subjectId": "AttributesCustomMetadataSubjects/AttributesCustomMetadataSubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": [
-    {
-      "methodSubjectId": "AttributesCustomMetadataPatchEntry/AttributesCustomMetadataPatchEntry::Run:System.Void(System.Int32)",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    }
-  ]
+  "exceptionFacts": []
 }

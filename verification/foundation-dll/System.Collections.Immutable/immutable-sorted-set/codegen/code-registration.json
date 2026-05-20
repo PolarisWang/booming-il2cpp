@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableSortedSetSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_1",
+          "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_2",
+          "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_3",
+          "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ImmutableSortedSetSubjects_ImmutableSortedSetSubjects_CustomEntrySubject_4",
+          "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

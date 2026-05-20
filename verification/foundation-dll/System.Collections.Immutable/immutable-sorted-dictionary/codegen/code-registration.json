@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableSortedDictionarySubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableSortedDictionarySubjects_ImmutableSortedDictionarySubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableSortedDictionarySubjects_ImmutableSortedDictionarySubjects_CustomEntrySubject_1",
+          "subjectId": "ImmutableSortedDictionarySubjects/ImmutableSortedDictionarySubjects::CustomEntrySubject_1:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

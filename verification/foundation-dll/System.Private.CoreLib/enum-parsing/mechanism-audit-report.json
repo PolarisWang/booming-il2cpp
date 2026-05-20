@@ -1,13 +1,13 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 135,
-  "audited": 135,
+  "total_methods": 116,
+  "audited": 116,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 135,
+  "methods_without_assert": 116,
   "passed": true,
   "method_details": [
     {
@@ -174,177 +174,6 @@
     },
     {
       "method_name": "EnumParsingPatchEntry_EnumParsingPatchEntry_Run_System_Int32",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "ChaosJitRegisterAll",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeSubjects",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeFnTable",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RunNativeAot",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RunNativeAotAll",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RunNativeAotBench",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "BenchmarkMethod",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_1",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_2",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_3",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_4",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_5",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_6",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_7",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_8",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_10",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

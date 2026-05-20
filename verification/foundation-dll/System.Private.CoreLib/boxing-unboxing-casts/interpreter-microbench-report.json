@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-16T15:04:46",
+  "capturedAt": "2026-05-20T08:17:47",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "Passed: 12/12\nGC|alloc|total=21|bytes=840|oversized=0\nGC|region|active=1|total_allocated=262144\n"
+  "rawOutput": "[2026-05-20T08:17:47][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T08:17:47][WARN][CRAG] young_collection_no_region\n[2026-05-20T08:17:47][INFO][NUMA] numa_init count=%d\n[2026-05-20T08:17:47][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T08:17:47][INFO][OldGen] init done base=0x1984376012800 pages=2\n[2026-05-20T08:17:47][DEBUG][codegen] T4 VEH handler registered\nPassed: 11/11\n"
 }

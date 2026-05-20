@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "method",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ImmutableSortedSetSubjects",
+      "subjectKind": "field",
+      "subjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Byte\u003E:ImmutableSortedSet\u003CSystem.Byte\u003E(System.Byte[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "subjectKind": "method",
+      "subjectId": "System.Collections.Immutable/ImmutableSortedSet::Create\u003CSystem.Int32\u003E:ImmutableSortedSet\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

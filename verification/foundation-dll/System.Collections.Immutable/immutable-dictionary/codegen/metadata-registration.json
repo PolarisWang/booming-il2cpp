@@ -1,0 +1,61 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ImmutableDictionarySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "name": "ImmutableDictionarySubjects",
+      "displayName": "ImmutableDictionarySubjects",
+      "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::_exitCode",
+      "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}
