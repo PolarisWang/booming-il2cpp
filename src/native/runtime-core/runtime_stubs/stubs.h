@@ -6,6 +6,10 @@
 
 #include "stub_common.h"
 
+// Include exception helpers before extern "C" so inline stubs
+// (e.g. ChaosConvertToInt32FromDouble) can use RaiseManagedException.
+#include "exception_helpers.h"
+
 extern "C" {
 
 #include "array_stubs.h"

@@ -1,0 +1,330 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E::97CA1592048640A5368B4EC7C6934311567E09D50E7639918EC82C3D2A187CDA",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E::9AC9CF706FBD14D039E0436219C5D852927E5F69295F2EF423AE897345197B2A",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Select\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Select\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SelectMany\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SelectMany\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SelectMany\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SelectMany\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Zip\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Zip\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Zip\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

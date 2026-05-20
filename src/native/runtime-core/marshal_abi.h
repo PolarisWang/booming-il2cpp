@@ -91,6 +91,7 @@ enum class StructFieldKind : uint8_t {
     DateTimeField,   ///< 8-byte System.DateTime ↔ FILETIME / DATE.
     ObjectField,     ///< object marshalled as IUnknown* (IntPtr on non-COM platforms).
     GuidField,       ///< 16-byte System.Guid — effectively blittable.
+    CustomMarshalerField,  ///< [MarshalAs(UnmanagedType.CustomMarshaler)] field — uses ICustomMarshaler.
 };
 
 /// Native type classification for array element marshalling.
@@ -118,6 +119,7 @@ struct StructFieldDescriptorV1 {
     NativeElementType element_type;   ///< Native element type for arrays; otherwise None.
     uint8_t          reserved;        ///< Reserved for future use (padding to 12 bytes).
     const struct StructMarshallingDescriptorV1* nested;  ///< For NestedStruct kind; nullptr otherwise.
+    const char* custom_marshaler_cookie;  ///< Cookie string for CustomMarshalerField; nullptr otherwise.
 };
 
 /// Descriptor-driven struct marshalling plan.

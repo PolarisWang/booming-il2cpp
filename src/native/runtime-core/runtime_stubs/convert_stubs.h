@@ -4,6 +4,9 @@
 #pragma once
 
 #include <chaos/native_types.h>
+#include <chaos/compiler_hints.h>
+#include <cmath>
+#include <limits>
 
 // ── Convert string to primitive ────────────────────────────────────
 // Each takes a managed string pointer (or string_id), parses its UTF-8
@@ -33,6 +36,20 @@ CHAOS_IL2CPP_INT32     ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR dec) noexcept;
 
 // ── Convert from Double ─────────────────────────────────────────────
 // Double→Int32 truncation bridge (cvttsd2si equivalent).
-CHAOS_IL2CPP_INT32     ChaosConvertToInt32FromDouble(double value) noexcept;
+// Force-inline to eliminate the static wrapper→helper call chain
+// in AOT codegen.  JIT inlines this to a single cvttsd2si instruction;
+// inline removes ~3 function calls (StoreFloat64, LoadFloat64, wrapper).
+// RaiseManagedException is [[noreturn]], so the overflow path is cold.
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept {
+    if (std::isnan(value) ||
+        value < static_cast<CHAOS_IL2CPP_FLOAT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::min()) ||
+        value > static_cast<CHAOS_IL2CPP_FLOAT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::max()))
+    {
+        chaos::il2cpp::runtime_core::RaiseManagedException(
+            "System.OverflowException",
+            "Value was either too large or too small for an Int32.");
+    }
+    return static_cast<CHAOS_IL2CPP_INT32>(std::trunc(value));
+}
 // Double→Decimal conversion bridge.
 CHAOS_IL2CPP_INTPTR    ChaosDecimalFromDouble(double value) noexcept;

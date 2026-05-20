@@ -1,0 +1,168 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SetOperationsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_0",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_1",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_2",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_3",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_4",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_5",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_6",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_7",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_8",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_9",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_10",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_11",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_12",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_13",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_14",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_15",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_16",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_17",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_cctor",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c__ctor",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_11\u003Eb__12_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_16\u003Eb__17_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+          "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_17\u003Eb__18_0:System.Int32(System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

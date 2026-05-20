@@ -2453,6 +2453,18 @@ public sealed partial class NativeAotLoweringPlanner
 			return;
 		}
 		builder.AppendLine(indentation + "{");
+		// Fallback: no constructor target found. Consume constructor arguments from
+		// the eval stack to maintain correct slot depth through the newobj + stelem
+		// sequence. Without this, non-blittable value types (Decimal, Nullable<T>)
+		// allocated via C# collection-initializer syntax (new decimal[] { ... })
+		// produce element-by-element stores where the stelem's array-reference slot
+		// is overwritten by constructor argument pushes, causing CHAOS_IL2CPP_FAIL
+		// with nullptr array.
+		int fallbackArgCount = instruction.TargetParameterCount ?? 0;
+		if (fallbackArgCount <= 0 && !string.IsNullOrEmpty(instruction.Callee))
+		    fallbackArgCount = InferParameterCountFromSubjectId(instruction.Callee);
+		for (int _i = 0; _i < fallbackArgCount; _i++)
+		    ConsumeEvalStackValueExpression();
 		builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
 		builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (TypeHasFinalizer(requiredTargetReference.SubjectId))

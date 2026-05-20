@@ -3167,7 +3167,52 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === List<T>::Clear (GenericShapeDescriptor -- calls CollectionListClear) ===
+            // === List<T>::Clear — InlineShapeDescriptor (no function call) ===
+            // Generates direct field assignment at call site, matching JIT inlining.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "Clear",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    // Skip paramTypes check for diagnostic — accept any param count
+                    // Comma expression: size=0, version++, result ignored (void return)
+                    return "(reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->size = 0, reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->version++)";
+                }));
+
+            // === List<T>::Contains — InlineShapeDescriptor (no function call) ===
+            // IILE lambda performs linear scan on the inline field buffer at call site.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "Contains",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return 1; } return 0; })()";
+                }));
+
+            // === List<T>::IndexOf — InlineShapeDescriptor (no function call) ===
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "IndexOf",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return _i; } return -1; })()";
+                }));
+
+            // === List<T>::Remove — InlineShapeDescriptor (no function call) ===
+            // IILE lambda: linear scan + std::memmove shift on inline field buffer.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Collections.Generic.List",
+                MethodName: "Remove",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
+                }));
+
+            // === List<T>::Clear (GenericShapeDescriptor for dispatch table) ===
+            // Kept as fallback for hotpatch dispatch / indirect call paths.
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Clear",
@@ -3177,7 +3222,9 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    CollectionListClear(chaos_arg_0);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    _list->size = 0;",
+                        "    _list->version++;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -3186,7 +3233,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
-            // === List<T>::Add (GenericShapeDescriptor -- calls CollectionListAdd) ===
+            // === List<T>::Add (inline field operations) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Add",
@@ -3196,7 +3243,27 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    CollectionListAdd(chaos_arg_0, chaos_arg_1);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                        "    if (hdr == nullptr || _list->size >= hdr->capacity) {",
+                        "        auto old_cap = (hdr != nullptr) ? hdr->capacity : 0;",
+                        "        auto new_cap = (old_cap == 0) ? 4 : old_cap * 2;",
+                        "        auto* new_buf = static_cast<CHAOS_IL2CPP_INTPTR*>(CHAOS_IL2CPP_MALLOC(sizeof(CHAOS_IL2CPP_INT32) + static_cast<CHAOS_IL2CPP_SIZE>(new_cap) * sizeof(CHAOS_IL2CPP_INTPTR)));",
+                        "        auto* new_hdr = reinterpret_cast<chaos_list_array_header*>(new_buf);",
+                        "        new_hdr->capacity = new_cap;",
+                        "        auto* new_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(new_hdr + 1);",
+                        "        if (hdr != nullptr && _list->size > 0) {",
+                        "            auto* old_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "            std::memcpy(new_elems, old_elems, static_cast<CHAOS_IL2CPP_SIZE>(_list->size) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            CHAOS_IL2CPP_FREE(hdr);",
+                        "        }",
+                        "        _list->items_array = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new_hdr);",
+                        "        hdr = new_hdr;",
+                        "    }",
+                        "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "    elems[_list->size] = chaos_arg_1;",
+                        "    _list->size++;",
+                        "    _list->version++;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -3208,7 +3275,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 });
                 }));
 
-            // === List<T>::Contains (GenericShapeDescriptor -- calls CollectionListContains) ===
+            // === List<T>::Contains (inline field operations) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Contains",
@@ -3218,7 +3285,14 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    return CollectionListContains(chaos_arg_0, chaos_arg_1);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                        "    if (hdr == nullptr || _list->size == 0) return 0;",
+                        "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
+                        "        if (elems[i] == chaos_arg_1) return 1;",
+                        "    }",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -3230,7 +3304,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 });
                 }));
 
-            // === List<T>::IndexOf (GenericShapeDescriptor -- calls CollectionListIndexOf) ===
+            // === List<T>::IndexOf (inline field operations) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "IndexOf",
@@ -3240,7 +3314,14 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    return CollectionListIndexOf(chaos_arg_0, chaos_arg_1);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                        "    if (hdr == nullptr || _list->size == 0) return -1;",
+                        "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
+                        "        if (elems[i] == chaos_arg_1) return i;",
+                        "    }",
+                        "    return -1;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -3252,7 +3333,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 });
                 }));
 
-            // === List<T>::Remove (GenericShapeDescriptor -- calls CollectionListRemove) ===
+            // === List<T>::Remove (inline field operations) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Remove",
@@ -3262,7 +3343,20 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    return CollectionListRemove(chaos_arg_0, chaos_arg_1);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                        "    if (hdr == nullptr || _list->size == 0) return 0;",
+                        "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
+                        "        if (elems[i] == chaos_arg_1) {",
+                        "            auto move_count = _list->size - i - 1;",
+                        "            if (move_count > 0) std::memmove(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            _list->size--;",
+                        "            _list->version++;",
+                        "            return 1;",
+                        "        }",
+                        "    }",
+                        "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -3274,7 +3368,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 });
                 }));
 
-            // === List<T>::RemoveAt (GenericShapeDescriptor -- calls CollectionListRemoveAt) ===
+            // === List<T>::RemoveAt (inline field operations) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "RemoveAt",
@@ -3284,7 +3378,14 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
                     [
-                        "    CollectionListRemoveAt(chaos_arg_0, chaos_arg_1);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                        "    if (hdr == nullptr || chaos_arg_1 < 0 || chaos_arg_1 >= _list->size) return;",
+                        "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                        "    auto move_count = _list->size - chaos_arg_1 - 1;",
+                        "    if (move_count > 0) std::memmove(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "    _list->size--;",
+                        "    _list->version++;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -3499,7 +3600,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // === List<T>::Sort (GenericShapeDescriptor -- calls CollectionListSort) ===
+            // === List<T>::Sort (inline field operations — zero-param overload uses std::sort) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Sort",
@@ -3515,11 +3616,15 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     if (abiSlots.Count == 1)
                     {
-                        // Zero-param overload: Sort() on the list instance
+                        // Zero-param overload: Sort() — inline std::sort on elements
                         var src0 = RenderSimpleExternalRuntimeHelper("void", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    CollectionListSort(chaos_arg_0);",
+                            "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                            "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
+                            "    if (hdr == nullptr || _list->size < 2) return;",
+                            "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
+                            "    std::sort(elems, elems + _list->size);",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(abiSlots[0]),
@@ -3759,7 +3864,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === List<T>::ToArray (GenericShapeDescriptor -- calls CollectionListToArray) ===
+            // === List<T>::ToArray (stub call — uses GC allocation, kept in collection_stubs.cpp) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "ToArray",

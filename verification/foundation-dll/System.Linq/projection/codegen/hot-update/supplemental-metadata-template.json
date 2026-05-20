@@ -1,0 +1,197 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "definitionSubjectId": "ProjectionSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "metadataToken": 33554437
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_2:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_3:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_4:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_6:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_7:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663308,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663309,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663310,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663311,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663312,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663313,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663314,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663315,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ProjectionSubjects",
+      "subjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663316,
+      "parameterCount": 2
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

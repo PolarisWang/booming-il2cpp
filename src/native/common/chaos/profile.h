@@ -140,6 +140,9 @@ inline void UnregisterThread(ThreadProfileData& data) noexcept {
         }
         g_profile_threads[slot].store(nullptr, std::memory_order_release);
         data.registration_slot = -1;
+        // Decrement the global count so RegisterThread's fetch_add does not
+        // drift toward overflow across scenario restarts / thread-pool recycling.
+        g_profile_thread_count.fetch_sub(1, std::memory_order_relaxed);
     }
 }
 inline void RegisterThread(ThreadProfileData& data) noexcept {
@@ -147,6 +150,10 @@ inline void RegisterThread(ThreadProfileData& data) noexcept {
     if (idx < kProfileMaxThreads) {
         data.registration_slot = idx;
         g_profile_threads[idx].store(&data, std::memory_order_release);
+    } else {
+        // Thread exceeded the fixed-size registration table.  Give the count
+        // back so g_profile_thread_count stays bounded to kProfileMaxThreads.
+        g_profile_thread_count.fetch_sub(1, std::memory_order_relaxed);
     }
 }
 

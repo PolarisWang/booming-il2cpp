@@ -3,6 +3,9 @@
 // Type marshalling, Culture, GC, Environment, Console, Delegate.
 #pragma once
 
+#include <chaos/compiler_hints.h>
+#include <cstring>
+
 // Array
 void    ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept;
 CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 dimension) noexcept;
@@ -10,9 +13,25 @@ CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_I
 // Type marshalling
 CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosStoreFloat64(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 CHAOS_IL2CPP_INT64  ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
-CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept;
+
+// ── Float64 bit-cast helpers (force-inline for AOT hot path) ──
+// These eliminate 2 out-of-line function calls per double operation
+// in Convert::ToInt32(Double), Convert::ToDecimal(Double), etc.
+// JIT inlines these to 0 instructions (same-register reuse); AOT
+// codegen stores double bits in GPR via memcpy, requiring explicit
+// store/load.  Inline avoids call/ret overhead (~10-20 cycles each).
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosStoreFloat64(CHAOS_IL2CPP_FLOAT64 value) noexcept {
+    CHAOS_IL2CPP_INT64 bits;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
+}
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept {
+    CHAOS_IL2CPP_INT64 bits = static_cast<CHAOS_IL2CPP_INT64>(value);
+    CHAOS_IL2CPP_FLOAT64 result;
+    std::memcpy(&result, &bits, sizeof(result));
+    return result;
+}
 
 // Buffer
 CHAOS_IL2CPP_INT32  ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept;

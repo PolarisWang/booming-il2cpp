@@ -135,10 +135,6 @@ public static partial class ReflectionAssemblyPatchEntry
     }
 
     // [21] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    public static int Subject_21()
-    {
-        return unchecked((int)(0xB0000000u + 21));
-    }
 
     public static void Run(int entryIndex)
     {
@@ -167,7 +163,7 @@ public static partial class ReflectionAssemblyPatchEntry
                 case 18: Subject_18(); break;
                 case 19: Subject_19(); break;
                 case 20: Subject_20(); break;
-                case 21: Subject_21(); break;
+                case 21: CustomEntryMethod21(); break;
             }
         }
         catch

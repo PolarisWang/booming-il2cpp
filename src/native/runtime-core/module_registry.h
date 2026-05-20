@@ -126,6 +126,10 @@ const ModuleDescriptor* GetModuleByIndex(uint32_t index);
 /// @param[out] out_namespace Optional: receives the namespace string (e.g., "System").
 const char* LookupTypeNameByInfoPtr(const TypeInfoHot* type_info, const char** out_namespace = nullptr);
 
+/// Clear the ICustomMarshaler cache.  Called after module unload (hotupdate)
+/// so stale marshaler instances referencing unloaded types are evicted.
+void ClearMarshalerCache() noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_MODULE_REGISTRY_H_

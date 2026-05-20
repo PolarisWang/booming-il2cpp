@@ -1,0 +1,114 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "FilteringSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_0",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_1",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_2",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_3",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_4",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_5",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_6",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_7",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "FilteringSubjects_FilteringSubjects_CustomEntrySubject_8",
+          "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_cctor",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "FilteringSubjects_FilteringSubjects___c__ctor",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Boolean(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Boolean(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Boolean(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "FilteringSubjects_FilteringSubjects___c_CustomEntrySubject_8_b__9_0_System_Int32_System_Int32",
+          "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32,System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

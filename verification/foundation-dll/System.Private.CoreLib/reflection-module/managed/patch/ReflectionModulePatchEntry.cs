@@ -39,10 +39,6 @@ public static partial class ReflectionModulePatchEntry
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)
-    public static int Subject_5()
-    {
-        return unchecked((int)(0xB0000000u + 5));
-    }
 
     public static void Run(int entryIndex)
     {
@@ -55,7 +51,7 @@ public static partial class ReflectionModulePatchEntry
                 case 2: Subject_2(); break;
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
-                case 5: Subject_5(); break;
+                case 5: CustomEntryMethod5(); break;
             }
         }
         catch

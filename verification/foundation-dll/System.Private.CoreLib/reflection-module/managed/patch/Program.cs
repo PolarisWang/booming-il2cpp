@@ -9,7 +9,7 @@ public class Program
         ReflectionModulePatchEntry._exitCode = 0; ReflectionModulePatchEntry.Method2(); failures += ReflectionModulePatchEntry._exitCode << 2;
         ReflectionModulePatchEntry._exitCode = 0; ReflectionModulePatchEntry.Method3(); failures += ReflectionModulePatchEntry._exitCode << 3;
         ReflectionModulePatchEntry._exitCode = 0; ReflectionModulePatchEntry.Method4(); failures += ReflectionModulePatchEntry._exitCode << 4;
-        ReflectionModulePatchEntry._exitCode = 0; ReflectionModulePatchEntry.Method5(); failures += ReflectionModulePatchEntry._exitCode << 5;
+        ReflectionModulePatchEntry._exitCode = 0; ReflectionModulePatchEntry.CustomEntryMethod5(); failures += ReflectionModulePatchEntry._exitCode << 5;
         return failures;
     }
 }

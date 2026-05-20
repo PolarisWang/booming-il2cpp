@@ -121,7 +121,9 @@ static const char* OpcodeName(IROpCode opc) noexcept {
     HANDLE_OP(LdInd); HANDLE_OP(StInd);
     HANDLE_OP(Div); HANDLE_OP(Rem); HANDLE_OP(DivUn); HANDLE_OP(RemUn);
     HANDLE_OP(ConvI); HANDLE_OP(ConvU); HANDLE_OP(ConvOvfI4);
-    HANDLE_OP(LdcR4); HANDLE_OP(ConvRUn);
+    HANDLE_OP(ConvOvfI); HANDLE_OP(ConvOvfI8); HANDLE_OP(ConvOvfU);
+    HANDLE_OP(ConvOvfU4); HANDLE_OP(ConvOvfU8);
+    HANDLE_OP(LdcR4); HANDLE_OP(LdcR8); HANDLE_OP(ConvRUn);
     HANDLE_OP(Conv_R4); HANDLE_OP(Conv_R8);
     #undef HANDLE_OP
     default: return "???";
@@ -2103,11 +2105,15 @@ static bool Test_Fuzz() {
         {IROpCode::ConvOvfI8, FOpGroup::Unary},
         {IROpCode::ConvOvfU,  FOpGroup::Unary},
         {IROpCode::ConvOvfU4, FOpGroup::Unary},
-        {IROpCode::ConvOvfU8, FOpGroup::Unary},        // V2d: Float → int — LdcR4 + ConvRUn pair.  REMOVED from fuzz because
-        // RegisterExecute (Reg_ConvRUn, ir_reg_alloc.cpp:1138) reads uint32 from GPR
-        // and converts uint32→float, while T4 codegen (code_generator.cpp:1006) reads
-        // double from FPR and converts double→int64.  Semantics are incompatible.
-        // {IROpCode::ConvRUn, FOpGroup::FloatToInt},
+        {IROpCode::ConvOvfU8, FOpGroup::Unary},
+
+        // V4: Float opcodes — fuzz tests crash-safety only.  T4 stores results in
+        // FPR (xmm), RegisterExecute stores in GPR — value comparison is skipped
+        // when any float op appears in the sequence (has_float_op flag).
+        {IROpCode::LdcR4,   FOpGroup::Imm},
+        {IROpCode::LdcR8,   FOpGroup::Imm},
+        {IROpCode::Conv_R4, FOpGroup::Unary},
+        {IROpCode::Conv_R8, FOpGroup::Unary},
     };
     // clang-format on
 
@@ -2133,6 +2139,7 @@ static bool Test_Fuzz() {
         bool reg_written[64] = {false};
         uint8_t written_regs[64];
         uint32_t written_count = 0;
+        bool has_float_op = false;  // true if any float op in sequence
 
         auto mark_written = [&](uint8_t dst_reg) {
             if (!reg_written[dst_reg] && dst_reg < max_reg) {
@@ -2146,7 +2153,7 @@ static bool Test_Fuzz() {
         };
 
         // Force first 1-2 instructions as LdcI4 to initialize written_regs
-        uint32_t init_instrs = 1 + (rng() % std::min(2u, len - 1));
+        uint32_t init_instrs = 1 + (rng() % (std::min)(2u, len - 1));
         for (uint32_t i = 0; i < init_instrs; i++) {
             uint8_t dst = static_cast<uint8_t>(rng() % max_reg);
             int32_t val = static_cast<int32_t>(rng() & 0xFF);
@@ -2185,6 +2192,18 @@ static bool Test_Fuzz() {
                     ri.header = MakeHeader(fop.opc, dst, 0, 0, kRegHasDst | kRegHasImm);
                     ri.imm.i8 = static_cast<int64_t>(rng() & 0xFFFF);
                     instrs.push_back(ri);
+                } else if (fop.opc == IROpCode::LdcR4) {
+                    RegisterInstruction ri;
+                    ri.header = MakeHeader(fop.opc, dst, 0, 0, kRegHasDst | kRegHasImm);
+                    ri.imm.i4 = static_cast<int32_t>(rng());
+                    instrs.push_back(ri);
+                    has_float_op = true;
+                } else if (fop.opc == IROpCode::LdcR8) {
+                    RegisterInstruction ri;
+                    ri.header = MakeHeader(fop.opc, dst, 0, 0, kRegHasDst | kRegHasImm);
+                    ri.imm.i8 = (static_cast<uint64_t>(rng()) << 32) | rng();
+                    instrs.push_back(ri);
+                    has_float_op = true;
                 } else {
                     instrs.push_back(InstrI4(fop.opc, val, dst));
                 }
@@ -2196,6 +2215,7 @@ static bool Test_Fuzz() {
                 uint8_t dst = static_cast<uint8_t>(rng() % max_reg);
                 uint8_t src = pick_written();
                 instrs.push_back(InstrUnary(fop.opc, dst, src));
+                if (fop.opc == IROpCode::Conv_R4 || fop.opc == IROpCode::Conv_R8) has_float_op = true;
                 // Pop is a no-op — does not actually write dst
                 if (fop.opc != IROpCode::Pop) mark_written(dst);
                 break;
@@ -2280,8 +2300,8 @@ static bool Test_Fuzz() {
                 // deoptimize on overflow (return kDeoptMagic), while
                 // RegisterExecute wraps silently.  Accept as valid.
                 if (first_t4_eligible_run == UINT32_MAX) first_t4_eligible_run = run;
-            } else if ((re_ok && rf.has_ret && t4_ret != rf.ret_val) ||
-                (!re_ok && t4_ret != 0xDEADBEEF)) {
+            } else if (!has_float_op && ((re_ok && rf.has_ret && t4_ret != rf.ret_val) ||
+                (!re_ok && t4_ret != 0xDEADBEEF))) {
                 mismatches++;
                 mismatch_runs_seen++;
                 for (const auto& mi : instrs) {

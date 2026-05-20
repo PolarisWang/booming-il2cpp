@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: ReflectionModuleSubjects
 add_library(chaos_gen_ReflectionModuleSubjects STATIC
     ${CHAOS_GEN_DIR}/ReflectionModuleSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/ReflectionModuleSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_ReflectionModuleSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

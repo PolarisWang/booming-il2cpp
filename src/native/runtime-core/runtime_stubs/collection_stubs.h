@@ -4,18 +4,10 @@
 #include <chaos/native_types.h>
 
 // List<T> helpers
-CHAOS_IL2CPP_INT32 CollectionListGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept;
-CHAOS_IL2CPP_INTPTR CollectionListGetItem(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index) noexcept;
-void CollectionListSetItem(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INTPTR value) noexcept;
-void CollectionListAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
-void CollectionListInsert(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INTPTR value) noexcept;
-void CollectionListRemoveAt(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index) noexcept;
-CHAOS_IL2CPP_INT32 CollectionListIndexOf(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
-CHAOS_IL2CPP_INT32 CollectionListContains(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
-CHAOS_IL2CPP_INT32 CollectionListRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
+// Only ToArray remains (needs GC allocation). All other List<T>
+// methods use inline field operations from shape resolvers.
 CHAOS_IL2CPP_INTPTR CollectionListToArray(CHAOS_IL2CPP_INTPTR handle) noexcept;
-void CollectionListClear(CHAOS_IL2CPP_INTPTR handle) noexcept;
-void CollectionListSort(CHAOS_IL2CPP_INTPTR handle) noexcept;
+void CollectionListAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept;
 
 // Dictionary<K,V> helpers
 CHAOS_IL2CPP_INT32 CollectionDictionaryGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept;

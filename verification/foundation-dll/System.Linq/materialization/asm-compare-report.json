@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/materialization",
+  "capturedAt": "2026-05-20T10:48:23",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 17,
+    "okCount": 0,
+    "failedCount": 17,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "aotInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::AsEnumerable{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::AsEnumerable{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToArray{TSource}:TSource{}(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::ToArray{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TKey,TValue}:System.Collections.Generic.Dictionary{TKey,TValue}(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TValue}})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TKey,TValue}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TKey,TValue}:System.Collections.Generic.Dictionary{TKey,TValue}(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TValue}},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TKey,TValue}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TKey,TValue}:System.Collections.Generic.Dictionary{TKey,TValue}(System.Collections.Generic.IEnumerable{System.ValueTuple{TKey,TValue}})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TKey,TValue}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TKey,TValue}:System.Collections.Generic.Dictionary{TKey,TValue}(System.Collections.Generic.IEnumerable{System.ValueTuple{TKey,TValue}},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TKey,TValue}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TSource,TKey}:System.Collections.Generic.Dictionary{TKey,TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TSource,TKey}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TSource,TKey}:System.Collections.Generic.Dictionary{TKey,TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TSource,TKey}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TSource,TKey,TElement}:System.Collections.Generic.Dictionary{TKey,TElement}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TSource,TKey,TElement}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToDictionary{TSource,TKey,TElement}:System.Collections.Generic.Dictionary{TKey,TElement}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToDictionary{TSource,TKey,TElement}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToHashSet{TSource}:System.Collections.Generic.HashSet{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::ToHashSet{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToHashSet{TSource}:System.Collections.Generic.HashSet{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "shortName": "System.Linq.Enumerable::ToHashSet{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToList{TSource}:System.Collections.Generic.List{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::ToList{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToLookup{TSource,TKey}:System.Linq.ILookup{TKey,TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "shortName": "System.Linq.Enumerable::ToLookup{TSource,TKey}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToLookup{TSource,TKey}:System.Linq.ILookup{TKey,TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToLookup{TSource,TKey}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToLookup{TSource,TKey,TElement}:System.Linq.ILookup{TKey,TElement}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement})",
+      "shortName": "System.Linq.Enumerable::ToLookup{TSource,TKey,TElement}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ToLookup{TSource,TKey,TElement}:System.Linq.ILookup{TKey,TElement}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::ToLookup{TSource,TKey,TElement}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 157)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::AsEnumerable{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToArray{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::ToDictionary{TKey\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 31 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-4/33] TValue}... not found in closure\n  [3/3-6/33] TValue}... not found in closure\n  [3/3-5/33] System.Linq.Enumerable::ToDictionary{TKey... not found in closure\n  [3/3-11/33] System.Linq.Enumerable::ToDictionary{TSource...  [3/3-13/33] System.Linq.Enumerable::ToDictionary{TSource... not found in closure\n  [3/3-15/33] System.Linq.Enumerable::ToDictionary{TSource... not f"
+    }
+  ]
+}

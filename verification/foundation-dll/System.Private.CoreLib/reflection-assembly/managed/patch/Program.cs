@@ -25,7 +25,7 @@ public class Program
         ReflectionAssemblyPatchEntry._exitCode = 0; ReflectionAssemblyPatchEntry.Method18(); failures += ReflectionAssemblyPatchEntry._exitCode << 18;
         ReflectionAssemblyPatchEntry._exitCode = 0; ReflectionAssemblyPatchEntry.Method19(); failures += ReflectionAssemblyPatchEntry._exitCode << 19;
         ReflectionAssemblyPatchEntry._exitCode = 0; ReflectionAssemblyPatchEntry.Method20(); failures += ReflectionAssemblyPatchEntry._exitCode << 20;
-        ReflectionAssemblyPatchEntry._exitCode = 0; ReflectionAssemblyPatchEntry.Method21(); failures += ReflectionAssemblyPatchEntry._exitCode << 21;
+        ReflectionAssemblyPatchEntry._exitCode = 0; ReflectionAssemblyPatchEntry.CustomEntryMethod21(); failures += ReflectionAssemblyPatchEntry._exitCode << 21;
         return failures;
     }
 }

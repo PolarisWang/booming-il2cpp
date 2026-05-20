@@ -4,23 +4,37 @@
 // ── T4 SEH VEH Handler ──────────────────────────────────────────────────
 //
 // Registers a Vectored Exception Handler (VEH) at startup that catches
-// hardware exceptions (AV, div-by-zero, etc.) occurring in T4-generated
-// native code and dispatches them through the method's embedded SEH clause
-// table.
+// hardware exceptions (AV, div-by-zero, etc.) and managed throws
+// (via ChaosT4RaiseException) occurring in T4-generated native code and
+// dispatches them through the method's embedded SEH clause table.
 //
-// Flow:
-//   1. T4 code is registered via RegisterT4Code() after successful
-//      GenerateNativeCode() during T3→T4 promotion.
-//   2. VEH handler fires on exception → finds NativeMethod via code range
+// Flow (managed throw):
+//   1. T4 code's Throw/Rethrow instruction calls ChaosT4RaiseException()
+//      with the managed exception object in RCX
+//   2. ChaosT4RaiseException stores the exception object + frame state in
+//      TLS and calls RaiseException(kManagedSehExceptionCode)
+//   3. VEH handler fires on 0xE0000001 → finds NativeMethod via TLS-stored
+//      return address (g_t4_throw_ret_addr)
+//   4. Walks SEH clause table → finds matching try block → writes exception
+//      object into all GPR register file slots → redirects RIP to handler
+//   5. Returns EXCEPTION_CONTINUE_EXECUTION to resume at handler code
+//
+// Flow (hardware exception):
+//   1. CPU fault (AV, div-by-zero, etc.) triggers VEH
+//   2. VEH handler finds NativeMethod via ExceptionAddress
 //   3. Walks SEH clause table → finds matching try block → redirects RIP
 //      to the handler code embedded in the T4-generated instruction stream
 //   4. Returns EXCEPTION_CONTINUE_EXECUTION to resume at handler
 //
 // Limitations (V1):
-//   - Catch variable (exception object) is NOT placed in the register file
-//     — handlers that reference the caught exception will see stale data
-//   - Filter clauses (flags=0x1) are treated as catch-all
-//   - No finally/fault unwinding — those redirect directly to handler code
+//   - Catch variable (exception object) is placed in ALL GPR register file
+//     slots (overwrite-all approach).  Handlers that reference multiple vregs
+//     at entry may see the exception object in non-exception vregs, which is
+//     safe because handler code loads fresh values from args/locals slots.
+//   - No finally/fault unwinding — those redirect directly to handler code.
+//     A rethrow inside finally will re-enter the VEH for the next clause.
+//   - Filter clauses (flags=0x1) are treated as catch-all.
+//   - Only Windows VEH is supported.
 
 #include <cstdint>
 
@@ -49,6 +63,25 @@ void RegisterT4SehHandler() noexcept;
 /// Find the NativeMethod covering a given code address.
 /// Returns nullptr if not found.  Exported for deoptimization trampoline.
 const NativeMethod* FindT4CodeByAddress(const void* address) noexcept;
+
+/// Raise a managed exception from T4-generated code.
+/// Stores the exception object in TLS, captures the T4 frame's stack pointer,
+/// and triggers a VEH exception (kManagedSehExceptionCode).  The registered
+/// VEH handler catches this exception, walks the SEH clause table embedded in
+/// the T4 generated code, and redirects RIP to the matching catch/finally
+/// handler.  If no handler is found, RaiseException returns and this function
+/// returns normally — the caller should emit a safety net (INT3) after the call.
+/// @param exception_obj  Pointer to the managed exception object to throw.
+extern "C" void ChaosT4RaiseException(void* exception_obj) noexcept;
+
+/// T4 throw address (set by ChaosT4RaiseException, read by VEH handler).
+/// Stores the return address in T4 code where the throw originated.
+extern thread_local void* g_t4_throw_ret_addr;
+
+/// T4 frame RSP (set by ChaosT4RaiseException, read by VEH handler).
+/// Stores RSP of the T4 frame at the throw point, used to access the
+/// register file for exception object placement.
+extern thread_local void* g_t4_frame_rsp;
 
 /// Demote all T4 code entries matching the given method_token.
 /// Clears their NativeMethod reference so the VEH handler stops dispatching

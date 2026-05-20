@@ -603,6 +603,7 @@ def _generate_csproj(
 
     if variant == "patch":
         # Patch DLL: Library, no TestFramework, no Program.cs, net8.0
+        custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
         return (
             '<Project Sdk="Microsoft.NET.Sdk">\n'
             "  <PropertyGroup>\n"
@@ -616,6 +617,7 @@ def _generate_csproj(
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'
+            f"{custom_cs}"
             "  </ItemGroup>\n"
             "</Project>\n"
         )
@@ -807,6 +809,7 @@ def generate_and_build(
 
     # Auto-detect custom entry file
     custom_cs_path = output_dir / f"{class_name}.Custom.cs"
+    has_custom_entry = custom_cs_path.exists()
     # Auto-detect custom method indices: check contract for customEntryIndices.
     # When custom entries exist but no Custom.cs is found, the generator still
     # emits empty method stubs so the subjects DLL builds (the methods will be

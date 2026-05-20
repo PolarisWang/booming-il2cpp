@@ -1,0 +1,270 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=24",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/\u003CPrivateImplementationDetails\u003E::EF62E7B5CE38F9364EF49D436683D5D7059D538C2DFC4AC4CE2F24DAA72D6D4F",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__11_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__12_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__17_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__18_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_16:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects::CustomEntrySubject_17:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_11\u003Eb__12_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_16\u003Eb__17_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_17\u003Eb__18_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

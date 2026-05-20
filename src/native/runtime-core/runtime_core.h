@@ -14,6 +14,12 @@
 // ── Finally scope guard (RAII for generated code try/finally in CPP_THROW mode) ──
 #include <chaos/finally.h>
 
+// ── Managed exception helpers for generated code ──
+// ResolveTypeByName, RaiseManagedException, and convenience wrappers.
+// Included early (before stubs.h) so inline stubs like
+// ChaosConvertToInt32FromDouble can use RaiseManagedException directly.
+#include "exception_helpers.h"
+
 // ── Compatibility declarations for older generated .cpp files ──
 // Must be included early (before any namespace) so declarations are at
 // global scope and visible inside anonymous namespaces in generated files.
@@ -396,11 +402,5 @@ inline void chaos_decimal_ctor_int32(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2C
 // File-scope using declaration so older generated code (inside anonymous
 // namespaces) can call chaos_decimal_ctor_int32 as a bare identifier.
 using chaos::il2cpp::runtime_core::chaos_decimal_ctor_int32;
-
-// ── Managed exception helpers for generated code ──
-// ResolveTypeByName, RaiseManagedException, and convenience wrappers
-// (RaiseInvalidCastException, RaiseFormatException, RaiseArgumentNullException).
-// These are visible to all generated code that includes runtime_core.h.
-#include "exception_helpers.h"
 
 #endif  // CHAOS_IL2CPP_RUNTIME_CORE_H_

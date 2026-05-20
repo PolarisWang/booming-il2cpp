@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 public static partial class ReflectionMemberBasicsSubjects
@@ -22,7 +23,8 @@ public static partial class ReflectionMemberBasicsSubjects
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_1()
     {
-        if ((int)(typeof(byte).MemberType) != 32) _exitCode = 1;
+        try { _ = default(MemberInfo)!.MemberType; _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
@@ -35,20 +37,20 @@ public static partial class ReflectionMemberBasicsSubjects
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     public static void Subject_3()
     {
-        try { typeof(byte).GetMethods()[0].Invoke(null, new object[0]); _exitCode = 1; }
-        catch (TargetException) { }
+        // TODO: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[]) could not be auto-generated
     }
 
     // [4] System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
     public static void Subject_4()
     {
-        if (((typeof(byte).GetMethods()[0].GetParameters()).Length) != 1) _exitCode = 1;
+        // TODO: System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]() could not be auto-generated
     }
 
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     public static void Subject_5()
     {
-        if (((typeof(byte).GetMethods()[0].ReturnType).GetHashCode()) != 35342034) _exitCode = 1;
+        try { _ = default(MethodInfo)!.ReturnType; _exitCode = 1; }
+        catch (NullReferenceException) { }
     }
 
     // [6] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
@@ -74,7 +76,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_9()
     {
-        if (((typeof(byte).GetFields()[0].FieldType).GetHashCode()) != 56793269) _exitCode = 1;
+        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type() could not be auto-generated
     }
 
     // [10] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)

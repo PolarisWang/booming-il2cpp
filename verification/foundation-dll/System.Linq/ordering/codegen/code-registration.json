@@ -1,0 +1,180 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "OrderingSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_0",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_1",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_2",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_3",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_4",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_5",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_6",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_7",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_8",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_9",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_10",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_11",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_12",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "OrderingSubjects_OrderingSubjects_CustomEntrySubject_13",
+          "subjectId": "OrderingSubjects/OrderingSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_cctor",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "OrderingSubjects_OrderingSubjects___c__ctor",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_10_b__11_1_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_11\u003Eb__12_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_11_b__12_1_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_11\u003Eb__12_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_12\u003Eb__13_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_12_b__13_1_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_12\u003Eb__13_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_13\u003Eb__14_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "OrderingSubjects_OrderingSubjects___c_CustomEntrySubject_13_b__14_1_System_Int32",
+          "subjectId": "OrderingSubjects/OrderingSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_13\u003Eb__14_1:System.Int32(System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

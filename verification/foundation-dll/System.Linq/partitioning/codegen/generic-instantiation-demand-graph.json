@@ -1,0 +1,287 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Chunk\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32[]\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "definitionSubjectId": "System.Linq/Enumerable::Chunk:System.Collections.Generic.IEnumerable\u003C!!0[]\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Chunk:System.Collections.Generic.IEnumerable\u003C!!0[]\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Skip\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "definitionSubjectId": "System.Linq/Enumerable::Skip:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Skip:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SkipLast\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "definitionSubjectId": "System.Linq/Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SkipWhile\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Boolean\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Boolean\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::SkipWhile\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32,System.Boolean\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32,System.Boolean\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Take\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "definitionSubjectId": "System.Linq/Enumerable::Take:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Take:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Take\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)",
+      "definitionSubjectId": "System.Linq/Enumerable::Take:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Range)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Take:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Range)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::TakeLast\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)",
+      "definitionSubjectId": "System.Linq/Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::TakeWhile\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Boolean\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Boolean\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::TakeWhile\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32,System.Boolean\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32,System.Boolean\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32[]\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32[]\u003E()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Int32[]"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Boolean\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Boolean"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "PartitioningSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00603::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00603::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int32",
+          "System.Boolean"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

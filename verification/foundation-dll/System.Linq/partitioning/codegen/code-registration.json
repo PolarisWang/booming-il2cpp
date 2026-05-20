@@ -1,0 +1,108 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PartitioningSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_0",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_1",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_2",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_3",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_4",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_5",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_6",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_7",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_8",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_9",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c_cctor",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c__ctor",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Boolean(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32_System_Int32",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Boolean(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_8_b__9_0_System_Int32",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_9_b__10_0_System_Int32_System_Int32",
+          "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32,System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

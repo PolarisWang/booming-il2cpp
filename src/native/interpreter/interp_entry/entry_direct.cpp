@@ -15,6 +15,7 @@
 
 #include <chaos/log.h>
 
+#include <stdexcept>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -334,6 +335,7 @@ void InterpreterEntryDirect(
         && "InterpreterEntryDirect: thread not in cooperative mode");
 
     auto* patch_method = reinterpret_cast<PatchMethod*>(method_key);
+    CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterEntryDirect entered");
 
     { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.Step1_LowerIR");
       PatchMethodLowerIR(method_key); }
@@ -381,6 +383,7 @@ void InterpreterEntryDirect(
         }
     }
 
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "method replacement check");
     // ── Check for method replacement BEFORE T4 path ────
     {
         void* replacement = method_replacement::Resolve(patch_method->token);
@@ -393,6 +396,7 @@ void InterpreterEntryDirect(
     }
 
 
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step A (T4) entering");
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
@@ -426,6 +430,7 @@ void InterpreterEntryDirect(
         }
     }
 
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step B (RegisterExecute) entering");
     // ── Step B: RegisterExecute path (Layer R) ─────────────────────────
     auto* reg_method = static_cast<interpreter::RegisterMethod*>(
         patch_method->cached_reg_method);
@@ -558,6 +563,7 @@ void InterpreterEntryDirect(
         }
     }
 
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step C (FastExecute) entering");
     // ── Step C: FastExecute path ──────────────────────────────────────
     if (ir->seh_clauses.empty() && instr_count > 2) {
         GetTierCounters().step_fast.fetch_add(1, std::memory_order_relaxed);
@@ -597,6 +603,7 @@ void InterpreterEntryDirect(
         if (using_pool) tls_frame_pool.Release(ff);
     }
 
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step D (InterpreterVM) entering");
     // ── Step D: InterpreterVM (slow path) ──────────────────────────────
     CHAOS_IL2CPP_UINT32 arg_count = 0;
     bool type_aware_args = false;
@@ -628,7 +635,13 @@ void InterpreterEntryDirect(
     frame.dispatch_context = &dispatch_ctx;
     GetTierCounters().step_vm.fetch_add(1, std::memory_order_relaxed);
     interpreter::ExecutionResult result;
-    { interpreter::InterpreterVM vm; result = vm.Execute(*ir, &frame); }
+    CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterVM::Execute entering");
+    try {
+        interpreter::InterpreterVM vm; result = vm.Execute(*ir, &frame);
+    } catch (...) {
+        CHAOS_IL2CPP_LOG_ERROR("interpreter", "InterpreterVM::Execute threw (unknown exception)");
+        throw;
+    }
     if (ret_buf != nullptr && result.has_return_value) {
         auto ret_tag = (type_aware_args && patch_method->cached_sig_valid)
             ? static_cast<interpreter::ValueTag>(patch_method->cached_ret_tag) : interpreter::ValueTag::Void;

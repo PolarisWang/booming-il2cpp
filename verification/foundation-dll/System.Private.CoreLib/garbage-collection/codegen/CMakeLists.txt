@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: GarbageCollectionSubjects
 add_library(chaos_gen_GarbageCollectionSubjects STATIC
     ${CHAOS_GEN_DIR}/GarbageCollectionSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/GarbageCollectionSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_GarbageCollectionSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

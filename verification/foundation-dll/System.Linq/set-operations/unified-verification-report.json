@@ -1,0 +1,132 @@
+{
+  "family": "set-operations",
+  "assembly": "System.Linq",
+  "mode": "standard",
+  "timestamp": "2026-05-20T13:15:27",
+  "duration_ms": 26990,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "18 methods, 18 custom entries",
+      "details": {
+        "methodCount": 18,
+        "customMethodCount": 18,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Linq/System.Linq.Enumerable::Contains{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},TSource)",
+          "System.Linq/System.Linq.Enumerable::Contains{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},TSource,System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::Distinct{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Distinct{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::Except{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Except{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::ExceptBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey})",
+          "System.Linq/System.Linq.Enumerable::ExceptBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+          "System.Linq/System.Linq.Enumerable::Intersect{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Intersect{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::IntersectBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey})",
+          "System.Linq/System.Linq.Enumerable::IntersectBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+          "System.Linq/System.Linq.Enumerable::SequenceEqual{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::SequenceEqual{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::Union{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+          "System.Linq/System.Linq.Enumerable::Union{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+          "System.Linq/System.Linq.Enumerable::UnionBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+          "System.Linq/System.Linq.Enumerable::UnionBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 18,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Linq\\set-operations\\managed\\subjects\\build-output\\SetOperationsSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 24520
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (26/26)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 26,
+          "total": 26
+        }
+      },
+      "errors": [],
+      "duration_ms": 394
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 2070
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 18,
+      "okCount": 0,
+      "failedCount": 18,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
+    "performance": {},
+    "hotupdate": {},
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 18,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 18,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

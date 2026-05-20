@@ -224,15 +224,7 @@ int main(int argc, char** argv) {
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
 #endif
             try {
-#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-                __try {
-                    RunNativeAot(i);
-                } __except (1) {
-                    ++failed_count;
-                }
-#else
                 RunNativeAot(i);
-#endif
             } catch (const chaos_managed_exception&) {
                 ++failed_count;
             } catch (...) {

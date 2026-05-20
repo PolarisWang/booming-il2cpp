@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: CodegenEdgeCasesSubjects
 add_library(chaos_gen_CodegenEdgeCasesSubjects STATIC
     ${CHAOS_GEN_DIR}/CodegenEdgeCasesSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/CodegenEdgeCasesSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_CodegenEdgeCasesSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

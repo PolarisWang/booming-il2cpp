@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/generation/concat",
+  "capturedAt": "2026-05-20T10:59:22",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T10:59:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T10:59:22][WARN][CRAG] young_collection_no_region\n[2026-05-20T10:59:22][INFO][NUMA] numa_init count=%d\n[2026-05-20T10:59:22][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T10:59:22][INFO][OldGen] init done base=0x2720940294144 pages=2\n[2026-05-20T10:59:22][DEBUG][codegen] T4 VEH handler registered\nPassed: 10/10\n"
+}

@@ -47,6 +47,20 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+{{~ if type_groups.size > 0 ~}}
+extern "C" void* kFunctionsFlat[{{ k_aot_method_count_value }}];
+void* kFunctionsFlat[{{ k_aot_method_count_value }}] = {
+{{~ for type_group in type_groups ~}}
+{{~ for method in type_group.methods ~}}
+    reinterpret_cast<void*>(&{{ method.native_symbol }}),
+{{~ end ~}}
+{{~ end ~}}
+};
+{{~ end ~}}
+
 {{~ end ~}}
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

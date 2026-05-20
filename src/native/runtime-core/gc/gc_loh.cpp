@@ -123,22 +123,24 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
         return nullptr;
     }
 
-    fprintf(stderr, "[DBG_LOH] enter size=%zu this=%p &mutex_=%p\n", size, this, &mutex_);
     std::lock_guard<std::mutex> lock(mutex_);
-    fprintf(stderr, "[DBG_LOH] locked size=%zu\n", size);
 
     // Try free segment list first.
     LohSegment** pp = &free_segment_list_;
     while (*pp != nullptr) {
         LohSegment* seg = *pp;
         if (seg->payload_size >= size) {
-            fprintf(stderr, "[DBG_LOH] reuse seg=%p payload=%zu\n", seg, seg->payload_size);
             // Reuse this segment.
             *pp = seg->next;
             seg->next = segment_list_;
             segment_list_ = seg;
             seg->in_use.store(true, std::memory_order_release);
-            seg->marked.store(false, std::memory_order_relaxed);
+            // Pre-mark the segment so BgcSweep Phase 5 (g_loh.Sweep())
+            // does not free this freshly-reused segment between the
+            // mutex release below and the caller's first write to the
+            // payload.  False-positive survival for one BGC cycle is
+            // harmless — the next cycle properly marks or sweeps it.
+            seg->marked.store(true, std::memory_order_release);
             segment_count_++;
             total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
             void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
@@ -149,21 +151,23 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Allocate new segment.
-    fprintf(stderr, "[DBG_LOH] AllocateSegment size=%zu\n", size);
     auto* seg = AllocateSegment(size);
-    fprintf(stderr, "[DBG_LOH] AllocateSegment done seg=%p\n", seg);
     if (seg == nullptr) return nullptr;
 
-    fprintf(stderr, "[DBG_LOH] link seg=%p next=%p\n", seg, (void*)segment_list_);
+    // Pre-mark the segment before linking it into segment_list_ so
+    // BgcSweep Phase 5 (g_loh.Sweep()) never sees a freshly-allocated
+    // segment with marked=false.  Without this mark, the BGC sweep
+    // can free the segment immediately after this thread releases the
+    // LOH mutex — before the caller writes to the returned payload.
+    seg->marked.store(true, std::memory_order_release);
+
     seg->next = segment_list_;
     segment_list_ = seg;
     segment_count_++;
     total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
 
     void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
-    fprintf(stderr, "[DBG_LOH] memset payload=%p size=%zu\n", payload, seg->payload_size);
     std::memset(payload, 0, seg->payload_size);
-    fprintf(stderr, "[DBG_LOH] return payload=%p\n", payload);
     return payload;
 }
 

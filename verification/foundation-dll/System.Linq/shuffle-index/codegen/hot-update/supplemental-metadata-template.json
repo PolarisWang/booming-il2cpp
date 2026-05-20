@@ -1,0 +1,339 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "definitionSubjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "definitionSubjectId": "ShuffleIndexSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "metadataToken": 33554438
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_2:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_3:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_4:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_6:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_7:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_9:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_10:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_11:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_11:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_12:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_13:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_13:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_14:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_14:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_15:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_15:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_16:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_16:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_17:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_17:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_18:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_18:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_19:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_19:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_20:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_20:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_21:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_21:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_22:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_22:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_23:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects::CustomEntrySubject_23:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663323,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663324,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663325,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.ValueTuple\u003CSystem.Int32,System.Int32\u003E(System.Int32,System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.ValueTuple\u003CSystem.Int32,System.Int32\u003E(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663326,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_12\u003Eb__13_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_12\u003Eb__13_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663327,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_15\u003Eb__16_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_15\u003Eb__16_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663328,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_16\u003Eb__17_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_16\u003Eb__17_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663329,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_17\u003Eb__18_0:System.Int32(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_17\u003Eb__18_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663330,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_19\u003Eb__20_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_19\u003Eb__20_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663331,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_22\u003Eb__23_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_22\u003Eb__23_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663332,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ShuffleIndexSubjects",
+      "subjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_23\u003Eb__24_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_23\u003Eb__24_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "ShuffleIndexSubjects/ShuffleIndexSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663333,
+      "parameterCount": 1
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

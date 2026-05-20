@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/aggregation",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TSource,TSource})",
+      "status": "failed",
+      "error": "JSON parse failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource,TAccumulate}:TAccumulate(System.Collections.Generic.IEnumerable{TSource},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.96,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 93.88
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource,TAccumulate,TResult}:TResult(System.Collections.Generic.IEnumerable{TSource},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate},System.Func{TAccumulate,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.96,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 93.88
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TAccumulate}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.91,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 93.72
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TAccumulate}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,TAccumulate},System.Func{TAccumulate,TSource,TAccumulate},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.94,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 95.88
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Count{TSource}:System.Int32(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 2.36,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 61.02
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Count{TSource}:System.Int32(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.97,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 87.82
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::CountBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,System.Int32}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.87,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 97.86
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LongCount{TSource}:System.Int64(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 2.5,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 52.0
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LongCount{TSource}:System.Int64(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.87,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 87.17
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::TryGetNonEnumeratedCount{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Int32&)",
+      "status": "passed",
+      "prePatchNsPerOp": 1.86,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 98.92
+    }
+  ],
+  "summary": {
+    "totalMethods": 11,
+    "nonStubMethods": 10,
+    "averageSlowdownPercent": 86.22,
+    "slowdownFactor": 1.8622,
+    "slowdownThresholdX": 50.0
+  }
+}

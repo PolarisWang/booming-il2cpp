@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: PrimitiveNumericConversionsSubjects
 add_library(chaos_gen_PrimitiveNumericConversionsSubjects STATIC
     ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/PrimitiveNumericConversionsSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_PrimitiveNumericConversionsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
