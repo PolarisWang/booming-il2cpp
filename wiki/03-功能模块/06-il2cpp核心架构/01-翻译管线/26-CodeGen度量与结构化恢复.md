@@ -16,9 +16,13 @@ Native AOT 主路径使用结构化控制流恢复（StructuredIR），而非 fl
 
 ## 当前状态
 
-所有 33 个有方法的 subject family 的 `structuredRecoveryRate` 为 **1.0 (100%)**。0 个 flat-goto fallback。
+所有 33 个有方法的 subject family 的 `structuredRecoveryRate` 为 **1.0 (100%)**。0 个 flat-goto fallback。0 个 structured slot stack failure。
 
 flat-goto 回退路径已被完全移除 — 任何方法必须通过结构化恢复才能发射。
+
+## Slot Stack Failure 度量
+
+除 flat-goto fallback 外，结构化 IR 发射阶段还可能因 slot 深度不足失败（`InvalidOperationException("structured slot stack underflow.")`）。此状态当前通过 `BuildMethodSourceSafe` 的异常捕获记录，不在 codegen-metrics.json 中暴露（计划加入 `slotStackFailureCount` 字段）。
 
 ## Flat-Fallback 消除模式
 

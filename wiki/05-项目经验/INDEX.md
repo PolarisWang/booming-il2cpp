@@ -13,6 +13,7 @@
 | 文档 | 主题 | 说明 |
 |------|------|------|
 | [`活动计划优先.md`](./%E6%B4%BB%E5%8A%A8%E8%AE%A1%E5%88%92%E4%BC%98%E5%85%88.md) | 活动任务优先 | 说明任何问答前都必须先处理 active 任务 |
+| [`codegen-quality-fixes-2026-05.md`](./codegen-quality-fixes-2026-05.md) | Codegen 代码质量修复 | 记录 2026-05 codegen 风险评估报告的修复实施（COM refcount 原子化、TypeInfo type-id、enum 碰撞检测、ret_tag 验证、DCE 跨 body 保护、>8 参数回退） |
 
 ## 本层规则
 
@@ -20,4 +21,5 @@
 
 ## 最近更新
 
+- `2026-05-20`：新增 codegen 代码质量修复记录。
 - `2026-04-02`：建立项目经验目录。

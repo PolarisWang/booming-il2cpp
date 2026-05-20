@@ -37,3 +37,38 @@ P2-A1 实现了结构化恢复率度量（`codegen-metrics.json`）。P2-A2 识�
 **Why:** 结构化恢复的设计是单通道 CFG → StructuredIR 构建。引入额外转换阶段会破坏 BuiltBlocks → BuildControlFlowGraph → RecoverStructure 的单向管道性质。
 
 **How to apply:** 新 flat-fallback 模式在现有 RecoverStructure/ExceptionShape 阶段内修复。
+
+### D5: 结构化 Slot 栈深度不足为 Blocking Issue
+
+结构化 IR 成功恢复但 C++ 发射阶段因 slot 深度不足失败的，与 flat-fallback 同等对待（blocking）。
+
+**Why:** 4 个 methods（ArithmeticCompareHelper.RunCompare、BranchCompareBHelper.RunBranchCompareB、BranchDupHelper.RunBranchDup、LdftnHelper.GetFnPtr）通过结构化恢复但 `EmitIRIfThenElse` 中 `PopValue()` 抛出 `InvalidOperationException("structured slot stack underflow.")`，退回到 stub 发射。这些方法不会被 `structuredRecoveryRate` 捕获。
+
+**How to apply:** 在 `BuildMethodSourceSafe` 中捕获 `InvalidOperationException` 且消息含 `"slot stack"` 时，记录到新的 `slotStackFailureCount` 度量。
+
+### D6: PreConditionDepth + PostConditionDepth 修复 Slot 深度
+
+EmitIRIfThenElse 的条件指令段（condBlock）需要正确的前驱深度和条件后残余深度来初始化 slot 上下文。
+
+**Why:** 
+- 条件指令以 `stloc` 开头时需要 pop 前驱 CFG 块 push 的值，但深度为 0（前驱的 push 发生在不同 IR 节点）
+- 条件指令可能 push 多于 terminator pop 的值（如 `ldsfld + dup + brtrue`），else/postMerge body 的 `RestoreDepth` 必须使用残余深度而非前驱深度
+
+**How to apply:** `ComputePreConditionDepth` 分析 condBlock 前驱的 net pushes，`postConditionDepth = preConditionDepth + condPushes - condPops - termPops`，else/postMerge body 使用 `postConditionDepth`。
+
+## A1+A2 架构集成
+
+A1（typed dispatch table header）和 A2（proxy wrapper source）是 codegen 输出的补充文件，不参与结构化恢复度量。
+
+| 文件 | 内容 |
+|------|------|
+| `chaos_generated_module.h` | A1: 按类型分组的 typed function pointer 表 + A2: proxy wrapper 静态内联类 |
+| `chaos_generated_module.cpp` | extern "C" 符号接线 + kFunctions 表 + ChaosGeneratedModuleActivate |
+
+**生成方式:** `BuildGeneratedModuleHeader()` / `BuildGeneratedModuleSource()` 通过 Scriban 模板 `NativeAot.GeneratedModule.h.scriban` / `NativeAot.GeneratedModule.cpp.scriban` 渲染。
+
+**触发时机:** 在 `NativeAotLoweringPlanner.Create()` 中调用，内容存入 `NativeAotTemplateModel.GeneratedModuleHeaderContent` / `GeneratedModuleSourceContent`，由 `NativeAotEmitter.BuildGeneratedSources()` 写入文件。
+
+**CMake 接入:** CMakeLists.txt 需通过 `file(GLOB ... chaos_generated_module.cpp)` 将新源文件加入编译。
+
+**运行时:** `ChaosRuntimeHost`（RAII 类，`chaos_runtime_host.h`）提供 `Initialize()` + `RegisterModule()`，`ChaosGeneratedModuleActivate` 将 codegen 符号注册到运行时。

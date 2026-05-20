@@ -366,6 +366,35 @@ public sealed class NativeAotEmitter
             });
         }
 
+        // A1 + A2: Emit typed dispatch table header and dispatch wiring source.
+        // These are always emitted when the planner produced non-empty content.
+        if (!string.IsNullOrEmpty(templateModel.GeneratedModuleHeaderContent))
+        {
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.GeneratedModuleHeader,
+                Contents = templateModel.GeneratedModuleHeaderContent,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "generatedModuleHeader",
+                Path = NativeAotArtifactNames.GeneratedModuleHeader,
+            });
+        }
+        if (!string.IsNullOrEmpty(templateModel.GeneratedModuleSourceContent))
+        {
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.GeneratedModuleSource,
+                Contents = templateModel.GeneratedModuleSourceContent,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "generatedModuleSource",
+                Path = NativeAotArtifactNames.GeneratedModuleSource,
+            });
+        }
+
         return (sources, artifacts);
     }
 

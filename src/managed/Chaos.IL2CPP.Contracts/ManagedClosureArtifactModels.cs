@@ -291,6 +291,8 @@ public static class NativeAotArtifactNames
     public const string ShapeDispatchHeader = "generated/runtime_helper_shapes.h";
     public const string EnumMetadataHeader = "generated/enum_metadata.generated.h";
     public const string ModuleRegistration = "generated/module-registration.inc";
+    public const string GeneratedModuleHeader = "generated/chaos_generated_module.h";
+    public const string GeneratedModuleSource = "generated/chaos_generated_module.cpp";
     public const string CodegenMetrics = "native-aot.codegen-metrics.json";
     public const string LoweringPlan = "native-aot.plan.json";
     public const string Manifest = "native-aot.manifest.json";

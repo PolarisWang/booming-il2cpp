@@ -16,6 +16,7 @@ set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
+file(GLOB CHAOS_MODULE_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp")
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
@@ -26,6 +27,7 @@ set(CHAOS_ENTRY_SOURCES
     "runtime-patchdata.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_CODEGEN_CPP}
+    ${CHAOS_MODULE_CPP}
 )
 
 # Include directories
