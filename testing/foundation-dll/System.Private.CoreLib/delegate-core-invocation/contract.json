@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
+  "displayName": "Delegate Core Invocation",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+    "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+    "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+    "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+    "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+    "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
+    "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+    "System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()",
+    "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
+    "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)"
+  ],
+  "methodSubjectCount": 10,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

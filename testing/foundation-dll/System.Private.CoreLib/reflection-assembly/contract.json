@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/reflection/assembly",
+  "displayName": "Assembly Reflection",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:System.Reflection.Assembly()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetCallingAssembly:System.Reflection.Assembly()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetEntryAssembly:System.Reflection.Assembly()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()",
+    "System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()",
+    "System.Private.CoreLib/System.Reflection.Assembly::get_Location:System.String()",
+    "System.Private.CoreLib/System.Reflection.Assembly::get_ImageRuntimeVersion:System.String()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()",
+    "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name:System.String()",
+    "System.Private.CoreLib/System.Reflection.AssemblyName::get_Version:System.Version()",
+    "System.Private.CoreLib/System.Reflection.AssemblyName::get_CultureInfo:System.Globalization.CultureInfo()",
+    "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+    "System.Private.CoreLib/System.Type::GetType:System.Type(System.String)"
+  ],
+  "methodSubjectCount": 22,
+  "customEntryIndices": [
+    21
+  ],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

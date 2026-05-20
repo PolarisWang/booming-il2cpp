@@ -18,9 +18,7 @@ Migration Phases:
 from __future__ import annotations
 
 import json
-import re
 import shutil
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -34,11 +32,6 @@ if str(_OLD_PIPELINE) not in sys.path:
     sys.path.insert(0, str(_OLD_PIPELINE))
 
 _REPO_ROOT = _OLD_PIPELINE.parents[4]
-
-
-def _slug_to_subjects_class(slug: str) -> str:
-    """Derive subjects class name from family slug (e.g. convert-char → ConvertCharSubjects)."""
-    return slug.title().replace("-", "").replace("_", "").replace(",", "") + "Subjects"
 
 
 def _read_contract(assembly: str, slug: str) -> dict[str, Any] | None:
@@ -99,9 +92,9 @@ def run_il2cpp_codegen(
     Returns {"success": True/False, "methodCount": N, "dllPath": "...", ...}
     """
     from pipeline_native_aot_runner import (
+        _build_subjects_dll,
         _codegen_patch_undefined_labels,
         _generate_coverage_json,
-        _load_method_subject_ids,
         _run_convert_to_cpp,
     )
 
@@ -115,21 +108,39 @@ def run_il2cpp_codegen(
     if not mids:
         return {"success": False, "error": "no method subject IDs"}
 
-    # Derive class name and find the pre-built DLL
-    class_name = _slug_to_subjects_class(slug)
+    # Build subjects DLL — probe step generates a benchmark EXE with Chaos.TestFramework
+    # references, which litters the build-output/ with xunit/testhost/FsCheck DLLs.
+    # These pollute --assembly-dir and cause convert-to-cpp to crash on metadata
+    # resolution (MemberReference.DecodeFieldSignature). Fix: isolate just the subjects
+    # DLL into a clean input directory for convert-to-cpp.
     testing_base = _REPO_ROOT / "testing" / "foundation-dll" / assembly
-    dll_path = testing_base / slug / "managed" / "build-output" / f"{class_name}.dll"
-
-    if not dll_path.exists():
+    build_result = _build_subjects_dll(slug, mids, assembly_name=assembly, verification=testing_base)
+    if not build_result.get("success"):
         return {
             "success": False,
-            "error": f"Pre-built subjects DLL not found at {dll_path} (generate_entrypoint may have failed)",
+            "error": f"subjects DLL build failed: {build_result.get('error', 'unknown')}",
+            "methodCount": len(mids),
         }
 
-    # Run convert-to-cpp → testing/.../codegen/
+    dll_path = Path(build_result["dll_path"])
+    class_name = dll_path.stem  # e.g. ConvertCharSubjects
+
+    # Isolate subjects DLL into a clean directory (free of probe/test DLLs)
+    clean_input_dir = testing_base / slug / "codegen" / "_subjects_input"
+    clean_input_dir.mkdir(parents=True, exist_ok=True)
+    clean_dll = clean_input_dir / dll_path.name
+    shutil.copy2(str(dll_path), str(clean_dll))
+    # Also copy .pdb and .deps.json if they exist (needed for metadata loading)
+    for ext in (".pdb", ".deps.json"):
+        src = dll_path.with_suffix(ext)
+        if src.exists():
+            shutil.copy2(str(src), clean_input_dir / src.name)
+
+    # Run convert-to-cpp → testing/.../codegen/, pointing --assembly-dir at the
+    # clean input directory so only the subjects DLL and its minimal deps are visible.
     if not _run_convert_to_cpp(
         slug,
-        str(dll_path),
+        str(clean_dll),
         verification=testing_base,
         entry_point_subject_id="",  # subjects variant has no entry point override
         codegen_mode=codegen_mode,
