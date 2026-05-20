@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingTasksPrimitivesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingTasksPrimitivesSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-tasks-primitives/managed/subjects/build-output/ThreadingTasksPrimitivesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0d02d7f4-0883-465a-af57-78ae5ae57635",
+  "inputModuleVersionId": "6b9c8825-1c1a-4b6a-95fb-15e2fb8d5b35",
   "artifacts": [
     {
       "kind": "typedIlIr",

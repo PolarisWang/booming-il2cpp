@@ -80,6 +80,8 @@ public static partial class EnumParsingPatchEntry
         return unchecked((int)(0xB0000000u + 11));
     }
 
+    // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
+
     public static void Run(int entryIndex)
     {
         try
@@ -98,6 +100,7 @@ public static partial class EnumParsingPatchEntry
                 case 9: Subject_9(); break;
                 case 10: Subject_10(); break;
                 case 11: Subject_11(); break;
+                case 12: CustomEntryMethod12(); break;
             }
         }
         catch

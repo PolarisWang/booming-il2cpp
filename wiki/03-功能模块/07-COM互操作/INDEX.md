@@ -20,6 +20,11 @@ COM 互操作模块实现了托管代码与原生 COM 组件之间的双向调�
 | RCW 线程安全缓存表 | ✅ 完成 | V1 |
 | RCW 方法分发 | ✅ 完成 | V2 |
 | IDispatch | ✅ 完成 | V2 |
+| ICustomMarshaler | ✅ 完成 | V4 |
+| Variant 互操作 | ✅ 完成 | V3 |
+| IErrorInfo 支持 | ✅ 完成 | V1 |
+| STA/MTA 套间支持 | ✅ 完成 | V1 |
+| SAFEARRAY Marshaling | ✅ 完成 | V1 |
 
 ## 文档目录
 
@@ -28,3 +33,4 @@ COM 互操作模块实现了托管代码与原生 COM 组件之间的双向调�
 - [03-RCW实现](03-RCW实现.md) — Runtime Callable Wrapper 实现细节
 - [04-代码生成](04-代码生成.md) — Codegen 管线与 Scriban 模板
 - [05-测试与验证](05-测试与验证.md) — 测试体系和验证方法
+- [06-扩展互操作](06-扩展互操作.md) — 套间支持、SAFEARRAY、IErrorInfo

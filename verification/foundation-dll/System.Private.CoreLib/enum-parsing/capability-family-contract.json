@@ -16,9 +16,11 @@
     "System.Private.CoreLib/System.Enum::ToString:System.String()",
     "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
     "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
-    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)"
+    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+    "System.Private.CoreLib/System.Enum::BoxToString:System.String()"
   ],
-  "methodSubjectCount": 12,
+  "methodSubjectCount": 13,
+  "customEntryIndices": [12],
   "functionalObligation": {
     "required": true
   },

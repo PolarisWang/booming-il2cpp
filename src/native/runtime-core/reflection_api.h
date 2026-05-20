@@ -68,6 +68,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyLocation(CHAOS_IL2CPP_INTPTR assem
 CHAOS_IL2CPP_INT32 ChaosReflectionGetCallingConvention(CHAOS_IL2CPP_INTPTR method) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetParamPosition(CHAOS_IL2CPP_INTPTR param_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR param_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldType(CHAOS_IL2CPP_INTPTR field_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertyType(CHAOS_IL2CPP_INTPTR property_handle) noexcept;
 CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR param) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept;
@@ -145,6 +147,8 @@ using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyLocation;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetCallingConvention;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetParamPosition;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetParameterType;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetFieldType;
+using chaos::il2cpp::runtime_core::ChaosReflectionGetPropertyType;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetParamAttributes;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetFieldsBindingflags;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetMethodsBindingflags;

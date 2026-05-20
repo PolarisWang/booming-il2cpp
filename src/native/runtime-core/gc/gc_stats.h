@@ -40,6 +40,10 @@ struct GcStats {
     std::atomic<CHAOS_IL2CPP_SIZE> finalization_pending_count{0};
     std::atomic<uint64_t> full_pause_ns{0};
 
+    // ── Last-GC metadata (for GCMemoryInfo) ──────────────────────
+    std::atomic<int32_t> last_compacted{0};
+    std::atomic<int32_t> last_concurrent{0};
+
     // ── Allocation (process-wide aggregate) ───────────────────────
     std::atomic<uint64_t> alloc_total{0};
     std::atomic<uint64_t> alloc_bytes{0};
@@ -138,22 +142,27 @@ GcSnapshot GcGetSnapshot() noexcept;
 
 // ── GCMemoryInfo snapshot (managed GC.GetGCMemoryInfo() data) ──
 
-/// Mirrors the key fields of System.GC.GCMemoryInfo (readonly struct).
-/// Populated by chaos_gc_get_memory_info().  Not ABI-safe for direct return;
-/// the codegen layer translates the fields into the managed struct layout.
+/// Mirrors the framework pack System.GCMemoryInfoData field layout.
+/// Populated by chaos_gc_get_memory_info().  The codegen layer computes
+/// an interior pointer (past the MethodTable*) so the native write goes
+/// directly to the first field at offset 0.
 struct GcMemoryInfoNative {
-    int64_t high_memory_load_threshold_bytes;  ///< Threshold before GC considers memory high
-    int64_t memory_load_bytes;                 ///< Current estimated memory load
-    int64_t total_available_memory_bytes;      ///< Total available to the GC
-    int64_t heap_size_bytes;                   ///< Current total managed heap size
-    int64_t fragmented_bytes;                  ///< Memory lost to fragmentation
-    int64_t total_committed_bytes;             ///< Total committed (not just heap)
-    int64_t promoted_bytes;                    ///< Bytes promoted in last GC
-    int32_t generation;                        ///< 0=young, 1=old, 2=LOH
-    int32_t finalization_pending_count;        ///< Objects awaiting finalization
-    int32_t compacted;                         ///< 1 if last GC was compacting
-    int32_t concurrent;                        ///< 1 if last GC was concurrent (BGC)
-};
+    int64_t high_memory_load_threshold_bytes;  // 0
+    int64_t total_available_memory_bytes;       // 8
+    int64_t memory_load_bytes;                  // 16
+    int64_t heap_size_bytes;                    // 24
+    int64_t fragmented_bytes;                   // 32
+    int64_t total_committed_bytes;              // 40
+    int64_t promoted_bytes;                     // 48
+    int64_t pinned_objects_count;               // 56  — always 0
+    int64_t finalization_pending_count;         // 64
+    int64_t index;                              // 72  — always 0
+    int32_t generation;                         // 80
+    int32_t pause_time_percentage;              // 84  — always 0
+    uint8_t compacted;                          // 88
+    uint8_t concurrent;                         // 89
+    uint8_t _padding[6];                        // 90-95
+};  // 96 bytes
 
 // ── Inline record helpers (hot-path, header for max inlining) ─────
 
@@ -179,7 +188,9 @@ inline void GcRecordFullCollection(
     CHAOS_IL2CPP_SIZE objects_marked,
     CHAOS_IL2CPP_SIZE bytes_reclaimed,
     CHAOS_IL2CPP_SIZE finalizers_run,
-    uint64_t pause_ns) noexcept
+    uint64_t pause_ns,
+    int32_t compacted = 0,
+    int32_t concurrent = 0) noexcept
 {
     g_gc_stats.full_collections.fetch_add(1, std::memory_order_relaxed);
     g_gc_stats.full_pages_collected.fetch_add(pages_collected, std::memory_order_relaxed);
@@ -187,6 +198,8 @@ inline void GcRecordFullCollection(
     g_gc_stats.full_bytes_reclaimed.fetch_add(bytes_reclaimed, std::memory_order_relaxed);
     g_gc_stats.full_finalizers_run.fetch_add(finalizers_run, std::memory_order_relaxed);
     g_gc_stats.full_pause_ns.fetch_add(pause_ns, std::memory_order_relaxed);
+    g_gc_stats.last_compacted.store(compacted, std::memory_order_relaxed);
+    g_gc_stats.last_concurrent.store(concurrent, std::memory_order_relaxed);
     GcRecordPauseHistogram(pause_ns);
     GcRecordEventRing(true, pause_ns, objects_marked, bytes_reclaimed);
 }

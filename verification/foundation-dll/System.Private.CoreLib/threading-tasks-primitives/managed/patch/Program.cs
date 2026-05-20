@@ -17,7 +17,7 @@ public class Program
         ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.CustomEntryMethod10(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 10;
         ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.CustomEntryMethod11(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 11;
         ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.CustomEntryMethod12(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 12;
-        ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.Method13(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 13;
+        ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.CustomEntryMethod13(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 13;
         ThreadingTasksPrimitivesPatchEntry._exitCode = 0; ThreadingTasksPrimitivesPatchEntry.CustomEntryMethod14(); failures += ThreadingTasksPrimitivesPatchEntry._exitCode << 14;
         return failures;
     }

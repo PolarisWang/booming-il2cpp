@@ -72,4 +72,9 @@ public static class EnumParsingHotUpdate
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
-    public static void HotUpdate_System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Object() { }}
+    public static void HotUpdate_System_Private_CoreLib_System_Enum_TryParse_System_Boolean_System_Type_System_String_System_Object() { }
+    // Verify Enum.BoxToString after hot-update (patch side)
+    [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::BoxToString:System.String()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
+    [HotUpdateDirection(HotUpdateDirection.HostToPatch)]
+    public static void HotUpdate_System_Private_CoreLib_System_Enum_BoxToString_System_String() { _ = DayOfWeek.Monday.BoxToString(); }}

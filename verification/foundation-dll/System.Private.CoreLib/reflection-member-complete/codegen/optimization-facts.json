@@ -156,12 +156,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()",
@@ -195,18 +189,6 @@
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_11:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_IsVirtual:System.Boolean()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_12:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -285,6 +267,11 @@
       "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
     },
     {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
@@ -296,6 +283,11 @@
     },
     {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
     },

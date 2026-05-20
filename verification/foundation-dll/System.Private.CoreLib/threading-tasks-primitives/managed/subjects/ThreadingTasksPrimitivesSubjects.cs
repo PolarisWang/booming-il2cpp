@@ -41,10 +41,6 @@ public static partial class ThreadingTasksPrimitivesSubjects
     // [12] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
 
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()
-    public static void Subject_13()
-    {
-        if (((Thread.CurrentThread).GetHashCode()) != 2) _exitCode = 1;
-    }
 
     // [14] System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()
 

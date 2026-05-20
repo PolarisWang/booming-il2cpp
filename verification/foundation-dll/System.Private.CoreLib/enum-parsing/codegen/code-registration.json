@@ -76,6 +76,12 @@
           "slot": 11,
           "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
           "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12",
+          "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()"
         }
       ]
     }

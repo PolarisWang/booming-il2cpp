@@ -15,6 +15,9 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(
+        void
+);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(
         void
 );
@@ -58,6 +61,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(
 
 static const Functions s_functions = {
     {
+        &EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12,
         &EnumParsingSubjects_EnumParsingSubjects_Subject_0,
         &EnumParsingSubjects_EnumParsingSubjects_Subject_10,
         &EnumParsingSubjects_EnumParsingSubjects_Subject_11,
@@ -71,10 +75,30 @@ static const Functions s_functions = {
         &EnumParsingSubjects_EnumParsingSubjects_Subject_8,
         &EnumParsingSubjects_EnumParsingSubjects_Subject_9,
     },
-    12,
+    13,
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[13];
+void* kFunctionsFlat[13] = {
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_3),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_5),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_6),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_7),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8),
+    reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

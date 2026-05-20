@@ -7,128 +7,128 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
       "status": "passed",
-      "prePatchNsPerOp": 5.96,
-      "postPatchNsPerOp": 22.8,
-      "slowdownPercent": 282.55
+      "prePatchNsPerOp": 9.62,
+      "postPatchNsPerOp": 10.3,
+      "slowdownPercent": 7.07
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
       "status": "passed",
-      "prePatchNsPerOp": 1.48,
-      "postPatchNsPerOp": 3.5,
-      "slowdownPercent": 136.49
+      "prePatchNsPerOp": 1.8,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 38.89
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 7.96,
-      "postPatchNsPerOp": 23.3,
-      "slowdownPercent": 192.71
+      "prePatchNsPerOp": 5.44,
+      "postPatchNsPerOp": 7.9,
+      "slowdownPercent": 45.22
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 0.98,
-      "postPatchNsPerOp": 3.6,
-      "slowdownPercent": 267.35
+      "prePatchNsPerOp": 1.59,
+      "postPatchNsPerOp": 1.9,
+      "slowdownPercent": 19.5
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 2.41,
-      "postPatchNsPerOp": 4.7,
-      "slowdownPercent": 95.02
+      "prePatchNsPerOp": 3.11,
+      "postPatchNsPerOp": 7.6,
+      "slowdownPercent": 144.37
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
       "status": "passed",
-      "prePatchNsPerOp": 5.16,
-      "postPatchNsPerOp": 14.3,
-      "slowdownPercent": 177.13
+      "prePatchNsPerOp": 5.33,
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": 10.69
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
       "status": "passed",
-      "prePatchNsPerOp": 1.48,
-      "postPatchNsPerOp": 3.5,
-      "slowdownPercent": 136.49
+      "prePatchNsPerOp": 1.61,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 73.91
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
       "status": "passed",
-      "prePatchNsPerOp": 2.52,
-      "postPatchNsPerOp": 11.3,
-      "slowdownPercent": 348.41
+      "prePatchNsPerOp": 3.59,
+      "postPatchNsPerOp": 8.7,
+      "slowdownPercent": 142.34
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
       "status": "passed",
-      "prePatchNsPerOp": 2.47,
-      "postPatchNsPerOp": 11.4,
-      "slowdownPercent": 361.54
+      "prePatchNsPerOp": 3.55,
+      "postPatchNsPerOp": 7.0,
+      "slowdownPercent": 97.18
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
       "status": "passed",
-      "prePatchNsPerOp": 2.39,
-      "postPatchNsPerOp": 5.3,
-      "slowdownPercent": 121.76
+      "prePatchNsPerOp": 3.1,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 67.74
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
       "status": "passed",
-      "prePatchNsPerOp": 9.97,
-      "postPatchNsPerOp": 21.0,
-      "slowdownPercent": 110.63
+      "prePatchNsPerOp": 17.49,
+      "postPatchNsPerOp": 16.9,
+      "slowdownPercent": -3.37
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 1.81,
-      "postPatchNsPerOp": 4.0,
-      "slowdownPercent": 120.99
+      "prePatchNsPerOp": 1.74,
+      "postPatchNsPerOp": 1.9,
+      "slowdownPercent": 9.2
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 1.5,
-      "postPatchNsPerOp": 3.6,
-      "slowdownPercent": 140.0
+      "prePatchNsPerOp": 2.03,
+      "postPatchNsPerOp": 4.9,
+      "slowdownPercent": 141.38
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 327.4,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 329.04,
+      "postPatchNsPerOp": 185.2,
+      "slowdownPercent": -43.72
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 5.71,
-      "postPatchNsPerOp": 7.4,
-      "slowdownPercent": 29.6
+      "prePatchNsPerOp": 6.87,
+      "postPatchNsPerOp": 16.9,
+      "slowdownPercent": 146.0
     }
   ],
   "summary": {
     "totalMethods": 15,
-    "nonStubMethods": 14,
-    "averageSlowdownPercent": 180.05,
-    "slowdownFactor": 2.8005,
+    "nonStubMethods": 15,
+    "averageSlowdownPercent": 59.76,
+    "slowdownFactor": 1.5976,
     "slowdownThresholdX": 50.0
   }
 }

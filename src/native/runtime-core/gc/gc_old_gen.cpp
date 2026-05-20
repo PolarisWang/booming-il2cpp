@@ -437,14 +437,28 @@ OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
         }
     }
 
-    // Linear fallback: pages allocated since last RebuildPageArray
-    // are not in the binary-search index.  Walk the linked list.
-    auto* page = page_list_;
-    while (page != nullptr) {
-        uintptr_t start = reinterpret_cast<uintptr_t>(page);
-        uintptr_t end = start + page->page_size;
-        if (addr >= start && addr < end) return page;
-        page = page->next;
+    // Retry with a fresh page_array_ snapshot.  A concurrent
+    // RebuildPageArray may have added the page we're looking for.
+    arr = page_array_.load(std::memory_order_acquire);
+    if (arr != nullptr) {
+        pages = arr->pages;
+        count = arr->count;
+        if (count > 0) {
+            for (int lo = 0, hi = count - 1; lo <= hi; ) {
+                int mid = lo + (hi - lo) / 2;
+                auto* page = pages[mid];
+                if (page == nullptr) break;
+                uintptr_t start = reinterpret_cast<uintptr_t>(page);
+                uintptr_t end = start + page->page_size;
+                if (addr < start) {
+                    hi = mid - 1;
+                } else if (addr >= end) {
+                    lo = mid + 1;
+                } else {
+                    return page;
+                }
+            }
+        }
     }
     return nullptr;
 }
@@ -481,14 +495,27 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
             return true;
         }
     }
-    // Linear fallback: pages allocated since last RebuildPageArray
-    // are not in the binary-search index.
-    auto* page = page_list_;
-    while (page != nullptr) {
-        uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
-        uintptr_t end = start + page->payload_size;
-        if (addr >= start && addr < end) return true;
-        page = page->next;
+    // Retry with a fresh page_array_ snapshot.
+    arr = page_array_.load(std::memory_order_acquire);
+    if (arr != nullptr) {
+        pages = arr->pages;
+        count = arr->count;
+        if (count > 0) {
+            for (int lo = 0, hi = count - 1; lo <= hi; ) {
+                int mid = lo + (hi - lo) / 2;
+                auto* page = pages[mid];
+                if (page == nullptr) break;
+                uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
+                uintptr_t end = start + page->payload_size;
+                if (addr < start) {
+                    hi = mid - 1;
+                } else if (addr >= end) {
+                    lo = mid + 1;
+                } else {
+                    return true;
+                }
+            }
+        }
     }
     return false;
 }
@@ -2418,7 +2445,10 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                     }
                 }
                 if (should_pool) {
-                    page_pool_.push_back(p);
+                    // 100%-free normal page at STW safepoint: VirtualFree
+                    // instead of pooling.  All mutators are paused so no
+                    // concurrent free-list access is possible.
+                    VirtualFreePage(p, p->page_size);
                 } else {
                     FreePage(p);
                 }
@@ -2533,7 +2563,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         marked_count,
         total_reclaimed,
         finalizers_run,
-        pause_ns);
+        pause_ns,
+        compact_mode != CompactMode::NONE ? 1 : 0,
+        0);  // concurrent: blocking GC
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
     g_gc_scheduler.RecordFullCollection(total_heap_bytes, pause_ns);

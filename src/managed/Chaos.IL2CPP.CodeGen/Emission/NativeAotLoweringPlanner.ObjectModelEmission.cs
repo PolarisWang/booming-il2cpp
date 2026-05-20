@@ -1041,6 +1041,14 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			List<string> list2 = fieldsByDeclaringType.TryGetValue(typeSubjectId2, out var fields2) ? fields2 : s_emptyFieldList;
 			if (list2.Count == 0)
 			{
+				if (hashSet3.Contains(typeSubjectId2))
+				{
+					// This value type is boxed but has no explicit fields
+					// (e.g. an enum like DayOfWeek). Emit a default backing
+					// field so that codegen boxing (which assigns intptr_t
+					// to .value) compiles without a C2664 conversion error.
+					builder.AppendLine("    CHAOS_IL2CPP_INTPTR _backing = 0;");
+				}
 				builder.AppendLine("};");
 				builder.AppendLine();
 				continue;

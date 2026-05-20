@@ -16,6 +16,7 @@ public class Program
         EnumParsingPatchEntry._exitCode = 0; EnumParsingPatchEntry.Method9(); failures += EnumParsingPatchEntry._exitCode << 9;
         EnumParsingPatchEntry._exitCode = 0; EnumParsingPatchEntry.Method10(); failures += EnumParsingPatchEntry._exitCode << 10;
         EnumParsingPatchEntry._exitCode = 0; EnumParsingPatchEntry.Method11(); failures += EnumParsingPatchEntry._exitCode << 11;
+        EnumParsingPatchEntry._exitCode = 0; EnumParsingPatchEntry.CustomEntryMethod12(); failures += EnumParsingPatchEntry._exitCode << 12;
         return failures;
     }
 }

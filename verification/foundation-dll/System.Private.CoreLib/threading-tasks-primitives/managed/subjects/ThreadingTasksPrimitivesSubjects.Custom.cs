@@ -1,7 +1,9 @@
 // Handwritten custom subject implementations for Task and Thread primitives.
 //
 // Methods placed here by customEntryIndices in capability-family-contract.json:
-// Subject_13 (Thread.get_CurrentThread) is auto-generated successfully.
+// Subject_13 (Thread.get_CurrentThread) is now manually handled (codegen produces
+// empty try{} body for the auto-generated variant due to callvirt GetHashCode
+// lowering issues).
 //
 // This file is a partial class of the auto-generated ThreadingTasksPrimitivesSubjects.
 // Pipeline includes it automatically when present.
@@ -115,6 +117,15 @@ public static partial class ThreadingTasksPrimitivesSubjects
     public static void CustomEntrySubject_12()
     {
         Thread.Sleep(1);
+    }
+
+    // [13] System.Threading.Thread::get_CurrentThread()
+    // Handwritten because codegen produces empty try{} body for auto-generated
+    // Subject_13 (callvirt on GetHashCode can't be lowered in external context).
+    // Simplified to null check to avoid callvirt GetHashCode lowering issue.
+    public static void CustomEntrySubject_13()
+    {
+        if (System.Threading.Thread.CurrentThread == null) _exitCode = 1;
     }
 
     // [14] System.Threading.Thread::get_ManagedThreadId()

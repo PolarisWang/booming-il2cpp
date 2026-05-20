@@ -1,0 +1,155 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ErrorInfoBasicSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "name": "ErrorInfoBasicSubjects",
+      "displayName": "ErrorInfoBasicSubjects",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "name": "ErrorInfoBasicNativeEntry",
+      "displayName": "ErrorInfoBasicNativeEntry",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
+      "name": "TestGetExceptionForHR",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
+      "name": "TestGetHRForException",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
+      "name": "TestThrowExceptionForHR_S_OK",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
+      "name": "TestGetExceptionForHR_Zero",
+      "definitionSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
+      "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 14,
+      "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

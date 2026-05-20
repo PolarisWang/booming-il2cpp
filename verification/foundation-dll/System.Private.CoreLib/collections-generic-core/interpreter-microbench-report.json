@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/collections/generic/core",
+  "capturedAt": "2026-05-20T14:33:03",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T14:33:03][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T14:33:03][WARN][CRAG] young_collection_no_region\n[2026-05-20T14:33:03][INFO][NUMA] numa_init count=%d\n[2026-05-20T14:33:03][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T14:33:03][INFO][OldGen] init done base=0x2508323946496 pages=2\n[2026-05-20T14:33:03][DEBUG][codegen] T4 VEH handler registered\nPassed: 16/16\n"
+}

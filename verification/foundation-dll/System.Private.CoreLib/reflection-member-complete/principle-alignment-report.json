@@ -1,7 +1,7 @@
 {
   "family": "reflection-member-complete",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:18:33.006341",
+  "generated_at": "2026-05-20T15:52:06.319299",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -510,11 +510,41 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "3 of 4 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 4,
+        "layer_distribution": {
+          "RuntimeCore": 1
+        },
+        "violations": [
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -575,9 +605,9 @@
   "summary": {
     "total": 12,
     "aligned": 8,
-    "concern": 0,
-    "violation": 1,
+    "concern": 1,
+    "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

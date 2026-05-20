@@ -5,18 +5,21 @@
   "planKind": "full-assembly-entry",
   "generatedSourcePaths": [
     "generated/runtime_helper_shapes.h",
-    "generated/native-aot.generated.cpp"
+    "generated/enum_metadata.generated.h",
+    "generated/native-aot.generated.cpp",
+    "generated/chaos_generated_module.h",
+    "generated/chaos_generated_module.cpp"
   ],
-  "generatedCppFileCount": 2,
-  "generatedCppTotalBytes": 176968,
-  "largestGeneratedCppBytes": 98126,
-  "generatedSymbolCount": 28,
-  "peakWorkingSetBytes": 504987648,
-  "structuredMethodCount": 21,
-  "structuredExceptionBodyCount": 1,
+  "generatedCppFileCount": 5,
+  "generatedCppTotalBytes": 790703,
+  "largestGeneratedCppBytes": 510077,
+  "generatedSymbolCount": 51,
+  "peakWorkingSetBytes": 504922112,
+  "structuredMethodCount": 44,
+  "structuredExceptionBodyCount": 0,
   "flatFallbackCount": 0,
-  "totalMethodCount": 22,
+  "totalMethodCount": 44,
   "structuredRecoveryRate": 1,
-  "aotReachableMethodCount": 24,
+  "aotReachableMethodCount": 46,
   "aotUnreachableMethodCount": 0
 }
