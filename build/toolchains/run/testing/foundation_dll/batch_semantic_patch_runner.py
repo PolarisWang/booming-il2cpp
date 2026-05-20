@@ -95,7 +95,7 @@ def _run_convert(entrypoint_dir: Path, dll_path: str, entry_point_subject_id: st
 
 
 def _trim_ir(family_slug: str) -> bool:
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}SemanticPatchEntry"
     ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch" / "closure-sp" / "analysis" / "aot-core-ir.json"
     if not ir_path.exists():
         return False
@@ -167,7 +167,7 @@ def run_family(family_slug: str) -> dict:
     print(f"  Methods: {len(mids)}")
 
     entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}SemanticPatchEntry"
 
     print(f"  [1/4] Building semantic-patch entrypoint...")
     build_result = generate_and_build(

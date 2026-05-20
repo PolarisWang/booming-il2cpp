@@ -3,7 +3,7 @@ project(test_crash CXX)
 set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8)
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native-profile")
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"

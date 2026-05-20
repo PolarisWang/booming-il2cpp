@@ -12,16 +12,16 @@
     {
       "methodIndex": 1,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 1.14,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 145.61
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2.3,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 3,
@@ -50,10 +50,8 @@
     {
       "methodIndex": 7,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2.4,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "JSON parse failed"
     },
     {
       "methodIndex": 8,
@@ -64,9 +62,9 @@
   ],
   "summary": {
     "totalMethods": 9,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 1,
+    "averageSlowdownPercent": 145.61,
+    "slowdownFactor": 2.4561,
     "slowdownThresholdX": 50.0
   }
 }

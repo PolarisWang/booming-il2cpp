@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -13,6 +13,67 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
+
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void DispatchBasicSubjects_Calculator__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(
+        void
+);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(
+        void
+);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(
+        void
+);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(
+        void
+);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(
+        void
+);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(
+        void
+);
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INTPTR
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -53,6 +114,31 @@ static const Functions s_functions = {
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[18];
+void* kFunctionsFlat[18] = {
+    reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
+    reinterpret_cast<void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

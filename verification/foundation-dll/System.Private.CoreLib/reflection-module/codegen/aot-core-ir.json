@@ -1006,7 +1006,7 @@
                 "value": "stub:definition=System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32();type=[System.Attribute];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

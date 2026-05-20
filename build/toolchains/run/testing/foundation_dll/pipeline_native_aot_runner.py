@@ -142,7 +142,7 @@ def _build_subjects_dll(
     # Only copy files whose class name matches the subjects variant
     # (e.g. EnumParsingSubjects.Custom.cs, not EnumParsingPatchEntry.Custom.cs).
     handwritten_dir = v / family_slug / "handwritten"
-    subjects_class = f"{family_slug.title().replace('-', '').replace('_', '')}Subjects"
+    subjects_class = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}Subjects"
     if handwritten_dir.exists():
         cs_files = sorted(handwritten_dir.glob("*.cs"))
         if cs_files:
@@ -186,7 +186,7 @@ def _build_entrypoint(
     """
     v = verification or _VERIFICATION
     entrypoint_dir = v / family_slug / "il2cpp_dist" / "entrypoint"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}NativeEntry"
 
     # Check for hand-written entrypoint (partial class files or full project)
     handwritten_dir = v / family_slug / "handwritten"
@@ -219,7 +219,7 @@ def _build_entrypoint(
                 "dll_path": str(dll),
                 "csproj_path": str(csproj),
                 "source_path": str(next(entrypoint_dir.glob("*.cs"), None)),
-                "entry_point_subject_id": f"{class_name}/{class_name}::Run:System.Int32(System.Int32)",
+                "entry_point_subject_id": f"{class_name}/{class_name}::Run:System.Void(System.Int32)",
             }
 
         # Partial class handwritten files (e.g. Custom.cs) — copy .cs files to entrypoint,
@@ -295,6 +295,62 @@ def _run_convert_to_cpp(
     if not cpp_found:
         print(f"    convert-to-cpp OK (no .cpp output found)")
     return True
+
+
+def _codegen_patch_undefined_labels(family_slug: str, *, verification: Path | None = None) -> None:
+    """Post-process generated C++ to fix undefined branch-target labels.
+
+    When the IL reader strips nop instructions, branch targets pointing to those
+    stripped offsets become undefined C++ labels (chaos_label_N referenced in goto
+    but never defined). This function maps them to the nearest following defined label.
+    """
+    v = verification or _VERIFICATION
+    codegen_dir = v / family_slug / "codegen"
+    if not codegen_dir.exists():
+        print(f"    [patch_labels] no codegen dir: {codegen_dir}")
+        return
+
+    for cpp_file in sorted(codegen_dir.rglob("native-aot.generated.cpp")):
+        content = cpp_file.read_text(encoding="utf-8")
+        orig = content
+
+        # Collect all label definitions and goto references
+        defs: set[int] = set()
+        refs: set[int] = set()
+        for m in re.finditer(r'chaos_label_(\d+):', content):
+            defs.add(int(m.group(1)))
+        for m in re.finditer(r'goto\s+chaos_label_(\d+)', content):
+            refs.add(int(m.group(1)))
+
+        undefined = refs - defs
+        if not undefined:
+            continue
+
+        # Build a map: undefined label -> nearest higher-numbered defined label
+        sorted_defs = sorted(defs)
+        fixup = {}
+        for lbl in sorted(undefined):
+            # Binary search for the first defined label > lbl
+            idx = __import__("bisect").bisect_right(sorted_defs, lbl)
+            if idx < len(sorted_defs):
+                fixup[lbl] = sorted_defs[idx]
+            else:
+                # No higher label exists — last resort: use the label itself (still broken)
+                print(f"      WARN: chaos_label_{lbl} has no higher defined label, leaving as-is")
+                fixup[lbl] = lbl
+
+        # Apply replacements (sorted descending to avoid offset shifts)
+        for old_lbl, new_lbl in sorted(fixup.items(), reverse=True):
+            content = content.replace(
+                f"chaos_label_{old_lbl}",
+                f"chaos_label_{new_lbl}",
+            )
+
+        cpp_file.write_text(content, encoding="utf-8")
+        print(f"    [patch_labels] {cpp_file.relative_to(codegen_dir)}: fixed {len(fixup)} undefined labels")
+        for lbl, mapped in sorted(fixup.items()):
+            if lbl != mapped:
+                print(f"      chaos_label_{lbl} → chaos_label_{mapped}")
 
 
 def _patch_generated_files(family_slug: str, *, verification: Path | None = None) -> None:
@@ -445,10 +501,13 @@ def _generate_patch_data(family_slug: str, *,
         return _write_sentinel_patchdata(family_dir)
 
     # Derive class name
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}NativeEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}NativeEntry"
 
     # Build patch-variant entrypoint from managed/patch/
     patch_dir = family_dir / "managed" / "patch"
+
+    # Ensure patch dir exists before copying handwritten files into it.
+    patch_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy handwritten partial class files to patch dir so CustomEntryMethodN()
     # implementations are visible to the patch entry compiler.
@@ -607,6 +666,52 @@ def _inject_seh_define(cmakelists: Path) -> None:
     cmakelists.write_text(text, encoding="utf-8")
 
 
+def _inject_verification_dispatch_source(cmakelists: Path) -> None:
+    """Inject verification_dispatch.generated.cpp into existing CMakeLists.txt if missing.
+
+    Families created before the dispatch generator refactor have CMakeLists.txt
+    files that don't reference verification_dispatch.generated.cpp.  This function
+    adds it to both REMOVE_ITEM (from GLOB) and CHAOS_ENTRY_SOURCES.
+
+    Uses separate markers for REMOVE_ITEM vs CHAOS_ENTRY_SOURCES to handle files
+    that already have the dispatch in REMOVE_ITEM but not in CHAOS_ENTRY_SOURCES.
+    """
+    text = cmakelists.read_text(encoding="utf-8")
+    changed = False
+
+    # Check whether the dispatch file is already in CHAOS_ENTRY_SOURCES.
+    # Look for the dispatch filename specifically after "CHAOS_ENTRY_SOURCES".
+    sources_marker = "# verification dispatch (sources)"
+    in_sources = sources_marker in text
+
+    # Add to CHAOS_ENTRY_SOURCES (after runtime-patchdata.cpp line) if missing
+    if not in_sources:
+        entry_line = '    "runtime-patchdata.cpp"'
+        # Only match within the CHAOS_ENTRY_SOURCES block
+        sources_section = text[text.find("CHAOS_ENTRY_SOURCES"):]
+        if entry_line in sources_section and 'verification_dispatch.generated.cpp"' not in sources_section:
+            text = text.replace(
+                entry_line,
+                f'{entry_line}\n'
+                f'    "verification_dispatch.generated.cpp"  {sources_marker}',
+                1  # only first occurrence
+            )
+            changed = True
+
+    # Add to REMOVE_ITEM block if missing (check with specific pattern)
+    if 'verification_dispatch.generated.cpp"' not in text:
+        remove_item_line = '    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"'
+        if remove_item_line in text:
+            text = text.replace(
+                remove_item_line,
+                f'{remove_item_line}\n'
+                f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/verification_dispatch.generated.cpp"  # verification dispatch',
+            )
+            changed = True
+
+    if changed:
+        cmakelists.write_text(text, encoding="utf-8")
+
 def _inject_eha_directive(cmakelists: Path) -> None:
     """Ensure /EHa is set as compile option for the entry target.
 
@@ -629,14 +734,15 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
     """Auto-generate native/CMakeLists.txt if it doesn't exist.
 
     Uses the same template pattern as convert-char's verified CMakeLists.txt.
-    The generated file references codegen/ and native/runtime-entry.cpp.
+    The generated file references codegen/ and native/runtime-entry.cpp,
+    plus verification_dispatch.generated.cpp (sentinel or real).
     """
     if cmakelists.exists():
         return
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
-    native_build = str((_REPO_ROOT / "build" / "native").resolve()).replace("\\", "/")
+    native_build = str((_REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference").resolve()).replace("\\", "/")
     cmake_content = (
         f'cmake_minimum_required(VERSION 3.20)\n'
         f'project(chaos_entry CXX)\n'
@@ -658,10 +764,12 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'list(REMOVE_ITEM CHAOS_NATIVE_STUBS\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-entry.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-patchdata.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/verification_dispatch.generated.cpp"\n'
         f')\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
         f'    "runtime-patchdata.cpp"\n'
+        f'    "verification_dispatch.generated.cpp"\n'
         f'    ${{CHAOS_NATIVE_STUBS}}\n'
         f'    ${{CHAOS_CODEGEN_CPP}}\n'
         f')\n'
@@ -687,14 +795,14 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'\n'
         f'# Library link directories\n'
         f'set(CHAOS_LIB_DIRS\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/runtime-core/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/bootstrap/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/common/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/interpreter/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/codegen/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update/RelWithDebInfo"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build/RelWithDebInfo"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/runtime-core"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/bootstrap"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/common"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/interpreter"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/codegen"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build"\n'
         f')\n'
         f'\n'
         f'# Runtime libs to link\n'
@@ -829,12 +937,100 @@ def _fix_runtime_entry(path: Path) -> None:
         text = text.replace(old_hot_bitmask, new_hot_counter)
         changed = True
 
+    # Fix 5: Add Marshal.GetExceptionForHR stub returning null to
+    # FillExternalRuntimeStubs. The subject ID pattern
+    # "Marshal::GetExceptionForHR:System.Exception(System.Int32)"
+    # has return type System.Exception which doesn't match any
+    # known return-type pattern, causing the sentinel (non-null) stub
+    # to be used — which crashes when the generated code tries to call
+    # get_Message on it.
+    marshal_stub = (
+        "        // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.\n"
+        "        if (std::strstr(sub, \"System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)\")) {\n"
+        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {\n"
+        "                return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));\n"
+        "            });\n"
+        "            continue;\n"
+        "        }\n"
+        "\n"
+        "        // Marshal.GetExceptionForHR — return null so downstream\n"
+        "        // null-checks (ex == null) work during fact verification.\n"
+        "        if (std::strstr(sub, \"Marshal::GetExceptionForHR:\")) {\n"
+        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });\n"
+        "            continue;\n"
+        "        }\n"
+        "\n"
+        "        // Parse return type from subject ID pattern:\n"
+    )
+    old_after_array = (
+        "        // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.\n"
+        "        if (std::strstr(sub, \"System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)\")) {\n"
+        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {\n"
+        "                return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));\n"
+        "            });\n"
+        "            continue;\n"
+        "        }\n"
+        "\n"
+        "        // Parse return type from subject ID pattern:\n"
+    )
+    if old_after_array in text:
+        text = text.replace(old_after_array, marshal_stub)
+        changed = True
+
+    # Fix 6: Replace BenchmarkMethod with RunBenchmark in extern declarations and calls.
+    # The verification dispatch code has been moved from Scriban templates to
+    # Python-generated verification_dispatch.generated.cpp, which defines
+    # RunBenchmark instead of BenchmarkMethod.
+    old_benchmark_extern = 'extern "C" double BenchmarkMethod(int, int);'
+    new_benchmark_extern = 'extern "C" double RunBenchmark(int, int);'
+    if old_benchmark_extern in text:
+        text = text.replace(old_benchmark_extern, new_benchmark_extern)
+        changed = True
+
+    # Remove RunNativeAotAll and RunNativeAotBench extern declarations — these
+    # no longer exist (verification dispatch moved to Python generator).
+    for decl in ['extern "C" std::int32_t RunNativeAotAll();',
+                 'extern "C" std::int32_t RunNativeAotBench(std::int32_t);']:
+        if decl in text:
+            text = text.replace(decl + "\n", "")
+            changed = True
+
+    # Replace BenchmarkMethod calls in Benchmark case with RunBenchmark
+    if "BenchmarkMethod(entry_index, iterations)" in text:
+        text = text.replace("BenchmarkMethod(entry_index, iterations)",
+                            "RunBenchmark(entry_index, iterations)")
+        changed = True
+
     if changed:
         path.write_text(text, encoding="utf-8")
         print(f"    [build_entry] fixed runtime-entry.cpp bugs")
 
 
-def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK") -> bool:
+def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
+    """Write a sentinel verification_dispatch.generated.cpp for cmake configure.
+
+    The real dispatch file is generated by generate_verification_dispatch.py
+    after codegen runs.  This sentinel ensures cmake configure can find the
+    source file during the initial build.
+    """
+    content = (
+        '// verification_dispatch.generated.cpp — sentinel (pre-codegen)\n'
+        '#include <cstdint>\n'
+        '#include <chaos/native_types.h>\n'
+        '\n'
+        'extern "C" const int kSubjectEntryCount = 0;\n'
+        'extern "C" const int kSubjectEntryIndices[1] = {0};\n'
+        '\n'
+        'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() { return 0; }\n'
+        'extern "C" double RunBenchmark(int, int) { return -1.0; }\n'
+        'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() { return 0; }\n'
+        'extern "C" double RunHotpatchBenchmark(int, int) { return -1.0; }\n'
+    )
+    dispatch_cpp.parent.mkdir(parents=True, exist_ok=True)
+    dispatch_cpp.write_text(content, encoding="utf-8")
+
+
+def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe") -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
@@ -846,6 +1042,10 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
 
     # Inject SEH define (Windows) to avoid MSVC EH table corruption in large TUs
     _inject_seh_define(cmakelists)
+
+    # Inject verification_dispatch.generated.cpp into CMakeLists.txt if missing
+    # (families created before the dispatch generator refactor need this)
+    _inject_verification_dispatch_source(cmakelists)
 
     # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
     patchdata_cpp = native_dir / "runtime-patchdata.cpp"
@@ -880,6 +1080,8 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
             dst = native_dir / subdir.name / "generated"
             dst.mkdir(parents=True, exist_ok=True)
             for f in src.iterdir():
+                if not f.is_file():
+                    continue
                 (dst / f.name).write_bytes(f.read_bytes())
             synced_names.add(subdir.name)
             print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
@@ -919,6 +1121,14 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)
     _ensure_cmakelists(cmakelists, family_slug, v)
+
+    # Ensure verification_dispatch.generated.cpp exists (sentinel or real)
+    # The real file is generated by the orchestrator after codegen; the sentinel
+    # ensures cmake configure can find the source file during initial build.
+    dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
+    if not dispatch_cpp.exists():
+        _write_sentinel_dispatch(dispatch_cpp)
+        print(f"    [build_entry] sentinel verification_dispatch.generated.cpp created")
 
     build_dir = native_dir / "build"
     # Remove stale cmake cache to avoid generator/platform mismatch errors
@@ -982,9 +1192,9 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
 
     # Copy entry.exe to native/ for discovery by orchestrator
     target_dir = native_dir
-    shutil.copy2(str(exe_path), str(target_dir / "entry.exe"))
-    size = (target_dir / "entry.exe").stat().st_size
-    print(f"    [build_entry] entry.exe OK: {size} bytes -> {target_dir / 'entry.exe'}")
+    shutil.copy2(str(exe_path), str(target_dir / output_name))
+    size = (target_dir / output_name).stat().st_size
+    print(f"    [build_entry] {output_name} OK: {size} bytes -> {target_dir / output_name}")
     return True
 
 
@@ -1114,8 +1324,13 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
         return result
     result["steps"]["convert_to_cpp"] = "OK"
 
-    # Step 1c: [removed] No post-processing on generated files.
-    # native-aot.generated.cpp is the pure output of chaos-il2cpp.
+    # Step 1c: Fix up undefined branch target labels in generated C++.
+    # When the IL reader strips nop instructions, some branch targets point
+    # to IL offsets that have no corresponding instruction.  The codegen's
+    # EmitFlatGotoBody only emits labels at real instruction offsets, so
+    # those branch targets become undefined C++ labels.  Map them to the
+    # nearest following real instruction offset so the file compiles.
+    _codegen_patch_undefined_labels(family_slug, verification=verification)
 
     # Step 1d: Generate .patchdata for hotpatch dispatch (before entry.exe build)
     _generate_patch_data(family_slug, verification=verification)

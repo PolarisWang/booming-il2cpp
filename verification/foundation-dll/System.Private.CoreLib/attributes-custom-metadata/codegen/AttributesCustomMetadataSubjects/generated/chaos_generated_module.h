@@ -69,6 +69,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════

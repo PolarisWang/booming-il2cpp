@@ -147,7 +147,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Item:!0\u0026(System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -414,7 +414,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -494,7 +494,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -819,7 +819,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::Slice:System.Span\u003C!0\u003E(System.Int32,System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -899,7 +899,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1167,7 +1167,7 @@
                 "value": "stub:definition=System.Memory/System.MemoryExtensions::AsSpan:System.Span\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1247,7 +1247,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1534,7 +1534,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::CopyTo:System.Void(System.Span\u003C!0\u003E);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1649,7 +1649,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Span\u00601::get_Empty:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1900,7 +1900,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Item:!0\u0026(System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2167,7 +2167,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::Slice:System.ReadOnlySpan\u003C!0\u003E(System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2247,7 +2247,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2521,7 +2521,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.ReadOnlySpan\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2789,7 +2789,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::Slice:System.Memory\u003C!0\u003E(System.Int32);type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -2869,7 +2869,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -3111,7 +3111,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::get_Span:System.Span\u003C!0\u003E();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -3319,7 +3319,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Memory\u00601::ToArray:!0[]();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -3554,7 +3554,7 @@
                 "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -3772,7 +3772,7 @@
                 "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {

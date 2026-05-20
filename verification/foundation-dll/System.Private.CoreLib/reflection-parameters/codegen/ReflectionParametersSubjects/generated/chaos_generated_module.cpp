@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -13,6 +13,38 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
+
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8(
+        void
+);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9(
+        void
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -35,6 +67,23 @@ static const Functions s_functions = {
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[10];
+void* kFunctionsFlat[10] = {
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8),
+    reinterpret_cast<void*>(&ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

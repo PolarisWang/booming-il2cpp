@@ -104,7 +104,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -364,7 +364,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::get_Value:!0();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -597,7 +597,7 @@
                 "value": "stub:definition=System.Private.CoreLib/System.Nullable\u00601::GetValueOrDefault:!0();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

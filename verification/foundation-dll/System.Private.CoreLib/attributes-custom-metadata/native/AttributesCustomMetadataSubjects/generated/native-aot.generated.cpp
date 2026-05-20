@@ -96,6 +96,9 @@ struct chaos_type_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubje
 struct chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR items_array = 0;  // GC array reference
+	CHAOS_IL2CPP_INT32 size = 0;           // element count
+	CHAOS_IL2CPP_INT32 version = 0;        // modification counter
 };
 
 struct chaos_type_System_Private_CoreLib_System_Object
@@ -876,7 +879,7 @@ static void (*kAotMethods[9])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[9])() = {
+extern "C" void (*kBenchmarkWrappers[9])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -886,6 +889,24 @@ static void (*kBenchmarkWrappers[9])() = {
 	[]() {kAotMethods[6]();},
 	[]() {kAotMethods[7]();},
 	[]() {kAotMethods[8]();},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 9;
+extern "C" const int kSubjectEntryIndices[9] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -945,18 +966,98 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: switch-based direct dispatch per method.
+// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
+// the method body into the timing loop — eliminating function pointer indirection.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
+	switch (chaos_entry_index) {
+	case 0: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
 	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
+	case 1: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 2: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 3: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 4: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 5: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 6: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 7: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 8: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	default:
+		return -1.0;
+	}
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1142,7 +1243,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-566245534);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1331916646);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1215,7 +1316,7 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-566245534);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1331916646);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1289,22 +1390,22 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Attribute_.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
-		if (_s2 != 0)
+		if (_s1 != 0)
 		{
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s2;
+				auto chaos_value = _s1;
 				chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 			}
 		}
@@ -1369,22 +1470,22 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Attribute_.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	{
-		if (_s2 != 0)
+		if (_s1 != 0)
 		{
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s2;
+				auto chaos_value = _s1;
 				chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 			}
 		}
@@ -1442,22 +1543,22 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Attribute_.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(22);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(22);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 	{
-		if (_s3 != 0)
+		if (_s2 != 0)
 		{
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s3;
+				auto chaos_value = _s2;
 				chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 			}
 		}
@@ -1515,22 +1616,22 @@ extern "C" void AttributesCustomMetadataSubjects_AttributesCustomMetadataSubject
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Attribute_.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(22);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(22);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 	{
-		if (_s3 != 0)
+		if (_s2 != 0)
 		{
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s3;
+				auto chaos_value = _s2;
 				chaos_static_AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects___exitCode = chaos_value;
 			}
 		}

@@ -33,10 +33,6 @@ extern "C" int32_t kChaosExternalRuntimeCount;
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
 extern "C" void ChaosJitRegisterAll();
 
-// kBenchmarkWrappers defined in native-aot.generated.cpp — flat array of
-// void() wrappers that supply correct default argument values for each method.
-extern "C" void (*kBenchmarkWrappers[])();
-
 extern "C" std::int32_t RunNativeAot(std::int32_t);
 extern "C" std::int32_t RunNativeAotAll();
 extern "C" std::int32_t RunNativeAotBench(std::int32_t);
@@ -58,7 +54,7 @@ extern "C" const int kAotMethodCount;
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
-enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark, TypedBench };
+enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark };
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -109,6 +105,13 @@ static void FillExternalRuntimeStubs() {
             kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {
                 return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));
             });
+            continue;
+        }
+
+        // Marshal.GetExceptionForHR — return null so downstream
+        // null-checks (ex == null) work during fact verification.
+        if (std::strstr(sub, "Marshal::GetExceptionForHR:")) {
+            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
             continue;
         }
 
@@ -209,10 +212,6 @@ int main(int argc, char** argv) {
         mode = RunMode::PatchAndBenchmark;
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
-    } else if (argc >= 3 && std::strcmp(argv[1], "--typed-bench") == 0) {
-        mode = RunMode::TypedBench;
-        entry_index = std::atoi(argv[2]);
-        if (argc >= 4) iterations = std::atoi(argv[3]);
     } else if (argc >= 2) {
         entry_index = std::atoi(argv[1]);  // backward compat: numeric entry index
     }
@@ -225,10 +224,15 @@ int main(int argc, char** argv) {
         // both with /EHa corrupts the /GS stack cookie (0xC0000409).
         int failed_count = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
+            bool caught = false;
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
 #endif
             try {
                 RunNativeAot(i);
@@ -275,12 +279,14 @@ int main(int argc, char** argv) {
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
 #endif
             try {
                 RunNativeAot(i);
-            } catch (const chaos_managed_exception&) {
-                ++hotupdate_failed;
             } catch (...) {
                 ++hotupdate_failed;
             }
@@ -299,7 +305,11 @@ int main(int argc, char** argv) {
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
 #endif
             try {
                 RunNativeAot(i);
@@ -346,34 +356,6 @@ int main(int argc, char** argv) {
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
-        std::fflush(stdout);
-        _exit(0);
-        return 0;
-    }
-    case RunMode::TypedBench: {
-        // Benchmark via flat method_pointers[] from CodeRegistrationV0.
-        // Uses the same flat array as kMethodPointers in the generated code,
-        // avoiding fragile reinterpret_cast<void* const*>(&kFunctions).
-        if (entry_index < 0 || entry_index >= kAotMethodCount) {
-            printf("{\"error\":\"invalid method index %d\"}\n", entry_index);
-            std::fflush(stdout);
-            _exit(-1);
-            return -1;
-        }
-        chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
-        auto* fn = kBenchmarkWrappers[entry_index];
-        auto start = std::chrono::steady_clock::now();
-        for (int i = 0; i < iterations; i++) {
-            fn();
-        }
-        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        auto end = std::chrono::steady_clock::now();
-        auto elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
-        double ns_per_op = (elapsed_ms * 1e6) / iterations;
-        double ops_per_sec = iterations / (elapsed_ms / 1000.0);
-        printf("{\"elapsedMilliseconds\":%.3f,\"nsPerOp\":%.1f,\"opsPerSecond\":%.1f,"
-               "\"iterations\":%d,\"methodIndex\":%d,\"dispatch\":\"flat\"}\n",
-               elapsed_ms, ns_per_op, ops_per_sec, iterations, entry_index);
         std::fflush(stdout);
         _exit(0);
         return 0;

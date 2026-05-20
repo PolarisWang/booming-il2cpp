@@ -173,6 +173,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR typ
     return ChaosReflectionGetFields(type);
 }
 
+// ── GetPropertiesBindingflags ──────────────────────────────────────
+// For now, ignore BindingFlags and delegate to GetProperties.
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertiesBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {
+    return ChaosReflectionGetProperties(type);
+}
+
 // ── GetMethodsBindingflags ──────────────────────────────────────────
 // For now, ignore BindingFlags and delegate to GetMethods.
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {

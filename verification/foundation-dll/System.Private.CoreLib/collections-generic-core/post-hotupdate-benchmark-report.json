@@ -33,9 +33,9 @@
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 158.9,
-      "postPatchNsPerOp": 172.9,
-      "slowdownPercent": 8.81
+      "prePatchNsPerOp": 106.0,
+      "postPatchNsPerOp": 120.7,
+      "slowdownPercent": 13.87
     },
     {
       "methodIndex": 6,
@@ -47,9 +47,9 @@
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
       "status": "passed",
-      "prePatchNsPerOp": 251.68,
-      "postPatchNsPerOp": 269.1,
-      "slowdownPercent": 6.92
+      "prePatchNsPerOp": 174.0,
+      "postPatchNsPerOp": 198.7,
+      "slowdownPercent": 14.2
     },
     {
       "methodIndex": 8,
@@ -59,8 +59,10 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
-      "status": "failed",
-      "error": "JSON parse failed"
+      "status": "passed",
+      "prePatchNsPerOp": 90.68,
+      "postPatchNsPerOp": 97.5,
+      "slowdownPercent": 7.52
     },
     {
       "methodIndex": 10,
@@ -95,9 +97,9 @@
   ],
   "summary": {
     "totalMethods": 16,
-    "nonStubMethods": 2,
-    "averageSlowdownPercent": 7.87,
-    "slowdownFactor": 1.0787,
+    "nonStubMethods": 3,
+    "averageSlowdownPercent": 11.86,
+    "slowdownFactor": 1.1186,
     "slowdownThresholdX": 50.0
   }
 }

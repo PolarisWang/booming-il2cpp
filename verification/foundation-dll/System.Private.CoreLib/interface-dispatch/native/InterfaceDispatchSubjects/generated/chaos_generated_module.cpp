@@ -5,7 +5,7 @@
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
 #include "chaos_runtime_host.h"
-#include "generated/chaos_generated_module.h"
+#include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -13,6 +13,121 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" const int kAotMethodCount;
 
+
+// extern "C" function declarations for all AOT-compiled methods
+extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IWithDefault_GetValue(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplWithDefault_GetValue(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(
+            CHAOS_IL2CPP_INT32
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(
+        void
+);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(
+        void
+);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(
+        void
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -76,6 +191,48 @@ static const Functions s_functions = {
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[35];
+void* kFunctionsFlat[35] = {
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_IWithDefault_GetValue),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_BaseMethod),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond_DerivedMethod),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_BaseMethod),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplSimple_GetValue),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault__ctor),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_ImplWithDefault_GetValue),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7),
+    reinterpret_cast<void*>(&InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

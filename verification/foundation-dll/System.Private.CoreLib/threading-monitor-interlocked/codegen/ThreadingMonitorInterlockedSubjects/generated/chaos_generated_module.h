@@ -39,13 +39,13 @@ struct Functions {
         void (*CustomEntrySubject_0)(
                 void
         );
+        void (*CustomEntrySubject_10)(
+                void
+        );
+        void (*CustomEntrySubject_11)(
+                void
+        );
         void (*CustomEntrySubject_1)(
-                void
-        );
-        void (*Subject_2)(
-                void
-        );
-        void (*Subject_3)(
                 void
         );
         void (*CustomEntrySubject_4)(
@@ -66,16 +66,16 @@ struct Functions {
         void (*CustomEntrySubject_9)(
                 void
         );
-        void (*CustomEntrySubject_10)(
-                void
-        );
-        void (*CustomEntrySubject_11)(
-                void
-        );
         void (*Subject_12)(
                 void
         );
         void (*Subject_13)(
+                void
+        );
+        void (*Subject_2)(
+                void
+        );
+        void (*Subject_3)(
                 void
         );
     } threadingMonitorInterlockedSubjects;
@@ -83,6 +83,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -99,19 +103,19 @@ struct ThreadingMonitorInterlockedSubjects {
         return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_0(
         );
     }
+    static inline void CustomEntrySubject_10(
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_10(
+        );
+    }
+    static inline void CustomEntrySubject_11(
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_11(
+        );
+    }
     static inline void CustomEntrySubject_1(
     ) {
         return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_1(
-        );
-    }
-    static inline void Subject_2(
-    ) {
-        return kFunctions.threadingMonitorInterlockedSubjects.Subject_2(
-        );
-    }
-    static inline void Subject_3(
-    ) {
-        return kFunctions.threadingMonitorInterlockedSubjects.Subject_3(
         );
     }
     static inline void CustomEntrySubject_4(
@@ -144,16 +148,6 @@ struct ThreadingMonitorInterlockedSubjects {
         return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_9(
         );
     }
-    static inline void CustomEntrySubject_10(
-    ) {
-        return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_10(
-        );
-    }
-    static inline void CustomEntrySubject_11(
-    ) {
-        return kFunctions.threadingMonitorInterlockedSubjects.CustomEntrySubject_11(
-        );
-    }
     static inline void Subject_12(
     ) {
         return kFunctions.threadingMonitorInterlockedSubjects.Subject_12(
@@ -162,6 +156,16 @@ struct ThreadingMonitorInterlockedSubjects {
     static inline void Subject_13(
     ) {
         return kFunctions.threadingMonitorInterlockedSubjects.Subject_13(
+        );
+    }
+    static inline void Subject_2(
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects.Subject_2(
+        );
+    }
+    static inline void Subject_3(
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects.Subject_3(
         );
     }
     /// Total number of AOT-compiled methods in this type.

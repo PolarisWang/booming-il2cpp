@@ -268,6 +268,13 @@ CHAOS_IL2CPP_INTPTR CoCreateComInstance(
     const CHAOS_IL2CPP_UINT8* clsid_bytes,
     const CHAOS_IL2CPP_UINT8* iid_bytes) noexcept;
 
+/// Aggregation-aware CoCreateInstance: passes outer_unknown as pUnkOuter.
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR CoCreateComInstanceAggregated(
+    const CHAOS_IL2CPP_UINT8* clsid_bytes,
+    const CHAOS_IL2CPP_UINT8* iid_bytes,
+    CHAOS_IL2CPP_INTPTR outer_unknown) noexcept;
+
 // ── RCW (Runtime Callable Wrapper) ─────────────────────────────────
 /// Wrap a raw IUnknown* COM pointer in an RCW.
 /// Returns an IntPtr pointing to the ComRcwNative.
@@ -322,6 +329,13 @@ CHAOS_IL2CPP_INT32 ChaosGetComFailureHR() noexcept;
 CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
     CHAOS_IL2CPP_INTPTR managed_object,
     CHAOS_IL2CPP_INTPTR runtime_state) noexcept;
+
+/// Create an aggregated CCW with an outer controlling IUnknown.
+/// Defined in marshal_api.cpp.
+CHAOS_IL2CPP_INTPTR MarshalCreateCcwAggregated(
+    CHAOS_IL2CPP_INTPTR managed_object,
+    CHAOS_IL2CPP_INTPTR runtime_state,
+    CHAOS_IL2CPP_INTPTR outer_unknown) noexcept;
 
 // ── ICustomMarshaler (V4 — interpreter dispatch with cleanup support) ────
 /// Resolve ICustomMarshaler type from cookie, call GetInstance to obtain

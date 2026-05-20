@@ -1695,7 +1695,7 @@
         {
           "op": "br",
           "opCode": 17,
-          "operand": 104,
+          "operand": 115,
           "ilOffset": 25,
           "resultType": "System.Void",
           "isPreserveSig": false
@@ -1799,7 +1799,7 @@
         {
           "op": "br",
           "opCode": 17,
-          "operand": 104,
+          "operand": 115,
           "ilOffset": 47,
           "resultType": "System.Void",
           "isPreserveSig": false
@@ -1860,28 +1860,20 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 5,
-          "ilOffset": 62,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 63,
+          "ilOffset": 62,
           "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)"
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1895,8 +1887,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 87,
-          "ilOffset": 68,
+          "operand": 98,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1904,40 +1896,80 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
+          "ilOffset": 69,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "0X80004005",
           "ilOffset": 70,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 75,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 98,
+          "ilOffset": 80,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 82,
           "isPreserveSig": false
         },
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "80004005",
-          "ilOffset": 71,
+          "ilOffset": 83,
           "resultType": "System.String",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 5,
-          "ilOffset": 76,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 77,
+          "ilOffset": 88,
           "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)"
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1952,22 +1984,22 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 82,
+          "ilOffset": 93,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 83,
+          "ilOffset": 94,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 88,
-          "ilOffset": 85,
+          "operand": 99,
+          "ilOffset": 96,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1975,7 +2007,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 87,
+          "ilOffset": 98,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1983,7 +2015,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 6,
-          "ilOffset": 88,
+          "ilOffset": 99,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1991,14 +2023,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 6,
-          "ilOffset": 90,
+          "ilOffset": 101,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 99,
-          "ilOffset": 92,
+          "operand": 110,
+          "ilOffset": 103,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2006,7 +2038,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 3,
-          "ilOffset": 94,
+          "ilOffset": 105,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2014,15 +2046,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 4,
-          "ilOffset": 95,
+          "ilOffset": 106,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 104,
-          "ilOffset": 97,
+          "operand": 115,
+          "ilOffset": 108,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2030,7 +2062,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 99,
+          "ilOffset": 110,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2038,15 +2070,15 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 4,
-          "ilOffset": 100,
+          "ilOffset": 111,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 104,
-          "ilOffset": 102,
+          "operand": 115,
+          "ilOffset": 113,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2054,13 +2086,13 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 4,
-          "ilOffset": 104,
+          "ilOffset": 115,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 106,
+          "ilOffset": 117,
           "isPreserveSig": false
         }
       ],

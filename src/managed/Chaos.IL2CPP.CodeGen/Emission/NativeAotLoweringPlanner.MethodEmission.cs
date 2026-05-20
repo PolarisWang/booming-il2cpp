@@ -167,7 +167,15 @@ public sealed partial class NativeAotLoweringPlanner
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 		HashSet<int> offsets = new HashSet<int>(instructions.Count);
 			for (int idx = 0; idx < instructions.Count; idx++)
+			{
 				offsets.Add(GetRequiredIlOffset(instructions[idx]));
+				if (instructions[idx].Op is "br" or "leave" or "brtrue" or "brfalse"
+					or "beq" or "bne.un" or "bge" or "bge.un" or "bgt" or "bgt.un"
+					or "ble" or "ble.un" or "blt" or "blt.un")
+				{
+					offsets.Add(GetRequiredIntOperand(instructions[idx]));
+				}
+			}
 		bool usesStructuredSlots = TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out int structuredSlotCount);
 		int evalStackSize = usesStructuredSlots ? 0 : Math.Max(ComputeMaxEvalStackDepth(instructions), 1);
 		builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));

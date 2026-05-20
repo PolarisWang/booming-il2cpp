@@ -2583,6 +2583,56 @@
       "declaringAssemblyName": "InterfaceDispatchSubjects"
     },
     {
+      "methodId": "interface-dispatch-subjects.impl-with-default.get-value",
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "signature": "System.Int32 ImplWithDefault::GetValue()",
+      "identity": {
+        "assemblyName": "InterfaceDispatchSubjects",
+        "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+        "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+        "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+        "methodId": "interface-dispatch-subjects.impl-with-default.get-value",
+        "signature": "System.Int32 ImplWithDefault::GetValue()"
+      },
+      "nativeSymbol": "InterfaceDispatchSubjects_ImplWithDefault_GetValue",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "InterfaceDispatchSubjects"
+    },
+    {
       "methodId": "interface-dispatch-subjects.impl-with-default.ctor",
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "signature": "System.Void ImplWithDefault::.ctor()",

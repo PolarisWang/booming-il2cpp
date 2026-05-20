@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/binding",
+  "capturedAt": "2026-05-20T18:04:42",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 12,
+    "okCount": 0,
+    "failedCount": 12,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "aotInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)",
+      "shortName": "System.Type::GetMethod",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)",
+      "shortName": "System.Type::GetMethod",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
+      "shortName": "System.Type::GetMethod",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)",
+      "shortName": "System.Type::GetField",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)",
+      "shortName": "System.Type::GetField",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)",
+      "shortName": "System.Type::GetProperty",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)",
+      "shortName": "System.Type::GetProperty",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])",
+      "shortName": "System.Type::GetProperty",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)",
+      "shortName": "System.Type::GetEvent",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)",
+      "shortName": "System.Type::GetEvent",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])",
+      "shortName": "System.Reflection.MethodBase::Invoke",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "shortName": "System.Reflection.MethodBase::Invoke",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 134)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetMethod\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Type::GetField\",\n    \"status\": \"not_found\",\n    \"erro",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 12 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/12] System.Type::GetMethod...  [3/3-4/12] System.Type::GetField...  [3/3-10/12] System.Type::GetEvent... not found in closure\n  [3/3-3/12] System.Type::GetMethod... not found in closure\n  [3/3-11/12] System.Reflection.MethodBase::Invoke... not found in closure\n  [3/3-5/12] System.Type::GetField... not found in closure\n  [3/3-9/12] System.Type::GetEvent... not found in "
+    }
+  ]
+}

@@ -55,6 +55,14 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
     .type_capability_count   = 0u,
     .vtable_descriptors = {{ if vtable_descriptor_count > 0 }}kChaosVTableDescriptors{{ else }}nullptr{{ end }},
     .vtable_descriptor_count = {{ if vtable_descriptor_count > 0 }}{{ vtable_descriptor_count }}{{ else }}0{{ end }}u,
+{{~ if has_gc_slot_map_section ~}}
+    .slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+    .slot_map_section_end   = reinterpret_cast<const void*>(
+        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
+{{~ else ~}}
+    .slot_map_section_begin = nullptr,
+    .slot_map_section_end   = nullptr,
+{{~ end ~}}
 };
 
 // MetadataRegistrationV0

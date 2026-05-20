@@ -58,8 +58,13 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() noexcept;
 
 /// Populate a GcMemoryInfoNative struct with the current GC memory snapshot.
-/// @param out  Pointer to a GcMemoryInfoNative struct to fill.
-extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexcept;
+/// @param obj  Managed GCMemoryInfoData object reference (pointer with MethodTable* header).
+///             The native function computes the interior pointer past the MethodTable*
+///             to write the GcMemoryInfoNative fields directly into the object.
+/// @param kind GCKind value (Any=0, Gen=1, Full=2, Background=3).  Currently unused
+///             (all requests return the same snapshot).
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
+    CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 kind) noexcept;
 
 /// Check if a pointer resides in the GC-managed heap.
 /// Returns true when @a ptr points at or above the managed heap base

@@ -8,7 +8,7 @@ project(chaos_gen LANGUAGES CXX)
 
 set(REPO_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_GEN_DIR "${CMAKE_CURRENT_LIST_DIR}")
-set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/build/native")
+set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
 set(CFG "RelWithDebInfo")
 
 set(NATIVE_LIBS

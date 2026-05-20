@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SnapshotProverSubjects",
   "entrySubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/snapshot-prover/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/snapshot-prover/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -525,6 +525,30 @@ CHAOS_IL2CPP_INTPTR CoCreateComInstance(
 #endif
 }
 
+CHAOS_IL2CPP_INTPTR CoCreateComInstanceAggregated(
+    const CHAOS_IL2CPP_UINT8* clsid_bytes,
+    const CHAOS_IL2CPP_UINT8* iid_bytes,
+    CHAOS_IL2CPP_INTPTR outer_unknown) noexcept {
+#if defined(_WIN32)
+    if (clsid_bytes == nullptr || iid_bytes == nullptr) return 0;
+    GUID clsid;
+    GUID iid;
+    std::memcpy(&clsid, clsid_bytes, sizeof(GUID));
+    std::memcpy(&iid, iid_bytes, sizeof(GUID));
+    IUnknown* p_unknown = nullptr;
+    HRESULT hr = ::CoCreateInstance(
+        clsid, reinterpret_cast<IUnknown*>(outer_unknown),
+        CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER,
+        iid, reinterpret_cast<void**>(&p_unknown));
+    return SUCCEEDED(hr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(p_unknown) : 0;
+#else
+    (void)clsid_bytes;
+    (void)iid_bytes;
+    (void)outer_unknown;
+    return 0;
+#endif
+}
+
 // ── RCW (Runtime Callable Wrapper) ─────────────────────────────────
 
 CHAOS_IL2CPP_INTPTR MarshalCreateRcw(CHAOS_IL2CPP_INTPTR unknown_ptr) noexcept {
@@ -632,6 +656,16 @@ CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
     return com_ccw::CreateCcw(
         reinterpret_cast<void*>(managed_object),
         reinterpret_cast<void*>(runtime_state));
+}
+
+CHAOS_IL2CPP_INTPTR MarshalCreateCcwAggregated(
+    CHAOS_IL2CPP_INTPTR managed_object,
+    CHAOS_IL2CPP_INTPTR runtime_state,
+    CHAOS_IL2CPP_INTPTR outer_unknown) noexcept {
+    return com_ccw::CreateCcwAggregated(
+        reinterpret_cast<void*>(managed_object),
+        reinterpret_cast<void*>(runtime_state),
+        reinterpret_cast<void*>(outer_unknown));
 }
 
 // ── Variant support ─────────────────────────────────────────────────

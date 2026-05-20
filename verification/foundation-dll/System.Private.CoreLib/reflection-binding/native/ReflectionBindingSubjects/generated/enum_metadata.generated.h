@@ -6,6 +6,25 @@
 #include <cstring>
 
 // Types EnumFieldEntry/EnumMetadataTable defined in generated_code_compat.h.
+// Forward-declare ReflectionQueryTypeDescriptor (defined in reflection_query_model.h
+// in runtime-core). We only need its first fields: metadata_token + subject_id_utf8.
+namespace chaos { namespace il2cpp { namespace runtime_core {
+struct ReflectionQueryTypeDescriptor;
+}}}
+
+// Minimal type descriptor with same initial layout as ReflectionQueryTypeDescriptor.
+// Only metadata_token (offset 0) and subject_id_utf8 (offset 8) need to be valid
+// for enum_resolve_meta to extract the subject_id. Everything else is zero.
+struct EnumTypeDescriptor {
+    CHAOS_IL2CPP_UINT32 metadata_token;
+    CHAOS_IL2CPP_UINT32 _padding;
+    const char* subject_id_utf8;
+};
+
+// Registration function defined in runtime-core/reflection/type_resolve.cpp.
+extern "C" void ChaosRegisterExternalType(
+    CHAOS_IL2CPP_UINT32 fnv24_hash,
+    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* type_desc) noexcept;
 
 namespace chaos { namespace il2cpp { namespace codegen {
 

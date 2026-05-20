@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/time/date/time/timespan",
-  "capturedAt": "2026-05-19T20:19:59",
+  "capturedAt": "2026-05-20T18:03:30",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "[2026-05-19T20:19:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-19T20:19:59][WARN][CRAG] young_collection_no_region\n[2026-05-19T20:19:59][INFO][OldGen] init initial_pages=2\n[2026-05-19T20:19:59][INFO][OldGen] init done base=0x2123862245376 pages=2\n[2026-05-19T20:19:59][DEBUG][codegen] T4 VEH handler registered\nPassed: 16/16\n[2026-05-19T20:19:59][DEBUG][Finalizer] thread_started id={0}\n[2026-05-19T20:19:59][DEBUG][BGC] thread_started\n"
+  "rawOutput": "[2026-05-20T18:03:30][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T18:03:30][WARN][CRAG] young_collection_no_region\n[2026-05-20T18:03:30][INFO][NUMA] numa_init count=%d\n[2026-05-20T18:03:30][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T18:03:30][INFO][OldGen] init done base=0x2142140235776 pages=2\n[2026-05-20T18:03:30][DEBUG][codegen] T4 VEH handler registered\nPassed: 16/16\n"
 }

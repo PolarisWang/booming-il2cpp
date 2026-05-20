@@ -310,6 +310,17 @@
     {
       "registrationKind": "method",
       "slot": 32,
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "name": "GetValue",
+      "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 33,
       "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
@@ -320,7 +331,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 33,
+      "slot": 34,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
       "name": "Add",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
@@ -331,7 +342,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 34,
+      "slot": 35,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
       "name": "Multiply",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -342,7 +353,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 35,
+      "slot": 36,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
@@ -353,7 +364,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 36,
+      "slot": 37,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
       "name": "Add",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
@@ -364,7 +375,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 37,
+      "slot": 38,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
       "name": "Multiply",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -375,7 +386,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 38,
+      "slot": 39,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
@@ -386,7 +397,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 39,
+      "slot": 40,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
       "name": "BaseMethod",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
@@ -397,7 +408,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 40,
+      "slot": 41,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
       "name": "DerivedMethod",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
@@ -408,7 +419,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 41,
+      "slot": 42,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
@@ -419,7 +430,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 42,
+      "slot": 43,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
       "name": "BaseMethod",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
@@ -430,7 +441,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 43,
+      "slot": 44,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
       "name": "DerivedMethod",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
@@ -441,7 +452,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 44,
+      "slot": 45,
       "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
@@ -452,7 +463,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 45,
+      "slot": 46,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
       "name": "Run",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
@@ -463,7 +474,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 46,
+      "slot": 47,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
       "name": "TestSingleImplSimple",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
@@ -474,7 +485,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 47,
+      "slot": 48,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
       "name": "TestSingleImplDefault",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
@@ -485,7 +496,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 48,
+      "slot": 49,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
       "name": "TestMultiImplCalc",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
@@ -496,7 +507,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 49,
+      "slot": 50,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
       "name": "TestIsCheck",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
@@ -507,7 +518,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 50,
+      "slot": 51,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
       "name": "TestAsCheck",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
@@ -518,7 +529,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 51,
+      "slot": 52,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
       "name": "TestDiamondBase",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
@@ -529,7 +540,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 52,
+      "slot": 53,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
       "name": "TestDiamondDerived",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
@@ -540,7 +551,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 53,
+      "slot": 54,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
       "name": "TestDiamondMulti",
       "definitionSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
@@ -551,7 +562,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 54,
+      "slot": 55,
       "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -560,7 +571,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 55,
+      "slot": 56,
       "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
@@ -569,7 +580,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 56,
+      "slot": 57,
       "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -578,7 +589,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 57,
+      "slot": 58,
       "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -587,7 +598,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 58,
+      "slot": 59,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
@@ -596,7 +607,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 59,
+      "slot": 60,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
@@ -605,7 +616,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 60,
+      "slot": 61,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -614,7 +625,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 61,
+      "slot": 62,
       "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -623,7 +634,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 62,
+      "slot": 63,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
@@ -632,7 +643,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 63,
+      "slot": 64,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
@@ -641,7 +652,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 64,
+      "slot": 65,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
       "name": "a",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -650,7 +661,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 65,
+      "slot": 66,
       "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
       "name": "b",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
@@ -659,7 +670,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 66,
+      "slot": 67,
       "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)::parameter[0]:entryIndex",
       "name": "entryIndex",
       "declaringMethodSubjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",

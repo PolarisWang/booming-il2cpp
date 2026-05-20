@@ -393,7 +393,7 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::LdcR8: case IROpCode::Conv_R8:
         SetVregType(dst, kTypeFloat64); break;
     case IROpCode::ConvRUn:
-        SetVregType(dst, kTypeInt64); break;
+        SetVregType(dst, kTypeFloat64); break;
 
     // Object references
     case IROpCode::LdNull: case IROpCode::LdStr:
@@ -414,7 +414,7 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::CallBridge: case IROpCode::Calli: {
         uint8_t tag = kTypeObjectRef;
         if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
-            auto& cached = static_cast<const CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+            auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
             if (cached.ret_tag != 0xFF && cached.ret_tag <= kTypeObjectRef)
                 tag = cached.ret_tag;
         }
@@ -1180,12 +1180,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::ConvRUn: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
-        // float64 → uint64: load double from FPR[src1], truncate to int64 via
-        // CVTTSD2SI, store to GPR[dst].  Matches RegisterExecute semantics:
-        //   uint64_t result = static_cast<uint64_t>(static_cast<int64_t>(val));
-        LoadFpr(0, instr.src1_reg());
-        EmitCvttsd2si(buf_, kRAX, 0);
-        StoreGpr(kRAX, instr.dst_reg());
+        // uint32 → float64: load uint32 from GPR[src1], zero-extend to 64-bit,
+        // convert to double, store to FPR[dst].  Matches interpreter VM:
+        //   double result = static_cast<double>(static_cast<uint32_t>(gpr[src1]));
+        LoadGpr(kRAX, instr.src1_reg());
+        buf_.EmitByte(0x8B); buf_.EmitByte(0xC0);  // mov eax, eax (zero-extend 32→64)
+        EmitCvtsi2sd(buf_, 0, kRAX);               // cvtsi2sd xmm0, rax
+        StoreFpr(0, instr.dst_reg());
         return true;
     }
 
@@ -2907,13 +2908,23 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                 EmitMovUPSMR(buf_, kRSP, save_off, xmm_reg);
             }
 
-            // Jump to instruction 0
-            uint32_t jmp_pos = buf_.pos();
-            EmitJmpRel32(buf_, 0);
-            uint32_t patch_off = jmp_pos + 1;
-            uint32_t target_off = instr_offsets_[0];
-            int32_t disp = static_cast<int32_t>(target_off - (patch_off + 4));
-            buf_.Patch32(patch_off, static_cast<uint32_t>(disp));
+            // Resolve loop header target and jump there.
+            // Since OSR always restarts at the backward branch target
+            // (loop header), we call OsrResolveLoopHeader() which reads
+            // t_deopt_state.osr_resume_pc and resolves it through the
+            // persisted instr_offsets table to an absolute native address.
+            EmitSubRI(buf_, kRSP, 32);                // shadow space for Win64
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::OsrResolveLoopHeader));
+            EmitCallWithSpill(kRAX);
+            EmitAddRI(buf_, kRSP, 32);                // restore shadow space
+
+            // RAX now holds the target native address.
+            // Re-zero caller-colored regs (R8-R11) clobbered by the call.
+            if (caller_colored_mask_) {
+                for (uint32_t x64r = kR8; x64r <= kR11; ++x64r)
+                    EmitXorRR(buf_, x64r, x64r);
+            }
+            EmitJmpReg(buf_, kRAX);
         }
     }
 
@@ -2936,6 +2947,17 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     nm->instr_count = n_instrs;
     nm->seh_table_offset = seh_offset;
     nm->osr_entry_offset = osr_entry;
+
+    // Persist instruction offset table for OSR loop header resolution.
+    if (!instr_offsets_.empty()) {
+        nm->instr_offset_count = static_cast<uint32_t>(instr_offsets_.size());
+        nm->instr_offsets = static_cast<uint32_t*>(
+            CHAOS_IL2CPP_MALLOC(nm->instr_offset_count * sizeof(uint32_t)));
+        if (nm->instr_offsets) {
+            std::memcpy(nm->instr_offsets, instr_offsets_.data(),
+                        nm->instr_offset_count * sizeof(uint32_t));
+        }
+    }
 
     if (!call_sites_.empty()) {
         nm->call_site_count = static_cast<uint32_t>(call_sites_.size());
@@ -2999,6 +3021,7 @@ NativeMethod::~NativeMethod() noexcept {
     CHAOS_IL2CPP_FREE(deopt_values);
     CHAOS_IL2CPP_FREE(gc_points);
     CHAOS_IL2CPP_FREE(slot_map_data);
+    CHAOS_IL2CPP_FREE(instr_offsets);
     // Free GcPoint.slots arrays (each allocated independently by RecordGcPoint)
     for (uint32_t i = 0; i < gc_point_count; ++i) {
         CHAOS_IL2CPP_FREE(gc_points[i].slots);

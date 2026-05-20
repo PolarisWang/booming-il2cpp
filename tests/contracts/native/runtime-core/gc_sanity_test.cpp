@@ -9,7 +9,9 @@
 #include <vector>
 
 #include <chaos/native_types.h>
+#include "gc_api.h"
 #include "gc_region.h"
+#include "gc_stats.h"
 #include "gc_events.h"
 #include "domain_unloader.h"
 
@@ -175,6 +177,66 @@ void TestLockDrainMultiDomain() {
     CHECK(true, "DrainSyncBlocksForDomain × 20 domains — no crash");
 }
 
+// ── Test 8: GCMemoryInfo snapshot ─────────────────────────────────
+void TestGcMemoryInfo() {
+    printf("\n── Test 8: GCMemoryInfo snapshot ──\n");
+
+    // Snapshot before any test-local allocations.
+    auto snap0 = GcGetSnapshot();
+    CHECK(snap0.alloc_total >= 0, "Initial alloc_total >= 0");
+
+    // Allocate objects to generate measurable activity.
+    for (int i = 0; i < 10000; i++) {
+        void* p = NurseryAllocate(128);
+        if (!p) { CHECK(false, "NurseryAllocate during GC stats test"); return; }
+        memset(p, 0xBB, 128);
+    }
+
+    // Snapshot after allocation.
+    auto snap1 = GcGetSnapshot();
+    CHECK(snap1.alloc_total > snap0.alloc_total,
+          "alloc_total increased after nursery allocs");
+
+    // Verify that GcGetSnapshot returns sensible derived fields.
+    CHECK(snap1.young_pause_ns_avg == 0 || snap1.young_pause_ns_avg > 0,
+          "young_pause_ns_avg is valid (0 or positive)");
+
+    // ── Test chaos_gc_get_memory_info with a mock buffer ──────────
+    // Simulate a managed GCMemoryInfoData object: allocate a buffer
+    // where the first sizeof(void*) bytes represent the MethodTable*
+    // header, followed by the GcMemoryInfoNative fields.
+    alignas(16) char buf[sizeof(void*) + 96];  // 96B = sizeof(GcMemoryInfoNative)
+    memset(buf, 0, sizeof(buf));
+    auto obj_ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(buf);
+    chaos_gc_get_memory_info(obj_ptr, 0);
+    auto* info = reinterpret_cast<const GcMemoryInfoNative*>(
+        buf + sizeof(void*));
+
+    CHECK(info->heap_size_bytes > 0,
+          "GCMemoryInfo heap_size_bytes > 0");
+    CHECK(info->total_available_memory_bytes > 0,
+          "GCMemoryInfo total_available_memory_bytes > 0");
+    CHECK(info->generation == 1,
+          "GCMemoryInfo generation == 1");
+
+    // ── Verify pause histogram ────────────────────────────────────
+    bool any_histogram = false;
+    for (int i = 0; i < kGcPauseBucketCount; i++) {
+        if (g_gc_pause_histogram[i].load(std::memory_order_relaxed) > 0) {
+            any_histogram = true;
+            break;
+        }
+    }
+    printf("    (pause histogram: %s)\n", any_histogram ? "has data" : "empty");
+    // No assert on histogram — it may be empty if no GC ran
+    // (the test doesn't trigger full GC, which requires thread registration)
+
+    // ── Verify event ring ─────────────────────────────────────────
+    int ring_head = g_gc_event_ring_head.load(std::memory_order_relaxed);
+    printf("    (GC event ring head=%d)\n", ring_head);
+    // No assert on ring head — it may be 0 if no GC ran
+}
+
 // ── Main ─────────────────────────────────────────────────────────
 int main() {
     puts("CRAG R12/R13 sanity test");
@@ -189,9 +251,10 @@ int main() {
     TestLockDrainWithDomain();
     TestConcurrentPohDomain();
     TestLockDrainMultiDomain();
+    TestGcMemoryInfo();
 
-    printf("\n══ Results: %d / 7 tests passed, %d failures ══\n",
-           7 - (g_failures > 0 ? 1 : 0), g_failures);
+    printf("\n══ Results: %d / %d tests passed, %d failures ══\n",
+           8 - (g_failures > 0 ? 1 : 0), 8, g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

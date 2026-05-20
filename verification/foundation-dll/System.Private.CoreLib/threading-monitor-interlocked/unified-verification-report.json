@@ -2,9 +2,9 @@
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T08:44:22",
-  "duration_ms": 7889,
-  "overall_status": "failed",
+  "timestamp": "2026-05-20T17:57:43",
+  "duration_ms": 633553,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -32,15 +32,14 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(17,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(18,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(25,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(26,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(33,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(34,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(35,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(42,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(43,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(44,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(51,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(52,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(53,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(54,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(61,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(61,50): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(68,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(68,50): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(75,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(75,54): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(76,24): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(83,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(83,65): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(84,24): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(91,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(91,48): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(17,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(18,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(25,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(26,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(33,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(34,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(35,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(42,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(43,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(44,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(51,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(52,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(53,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(54,9): error CS0103: The name 'Monitor' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(61,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(61,50): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(68,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(68,50): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(75,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(75,54): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(76,24): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(83,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(83,65): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(84,24): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(91,13): error CS0103: The name 'Interlocked' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedNativeEntry.Custom.cs(91,48): error CS0103: The name '_exitCode' does not exist in the current context [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\ThreadingMonitorInterlockedSubjects.csproj]\n    0 Warning(s)\n    26 Error(s)\n\nTime Elapsed 00:00:01.80\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 14,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\build-output\\ThreadingMonitorInterlockedSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 6566
+      "duration_ms": 24676
     },
     "fact": {
       "stage": "fact",
@@ -54,7 +53,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 92
+      "duration_ms": 408
     },
     "audit": {
       "stage": "audit",
@@ -68,7 +67,78 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1225
+      "duration_ms": 1541
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/14 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 0,
+        "failedCount": 14,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 3817
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 80
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "Benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\verification\\\\foundation-dll\\\\System.Private.CoreLib\\\\threading-monitor-interlocked\\\\native\\\\entry.exe', '--benchmark', '3', '100000']' timed out after 300 seconds",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "14/14 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 14,
+        "failedMethods": 0,
+        "totalMethods": 14,
+        "realMethods": 14,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 79
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "failed",
+      "summary": "Post-hotupdate benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\verification\\\\foundation-dll\\\\System.Private.CoreLib\\\\threading-monitor-interlocked\\\\native\\\\entry.exe', '--hotupdate-and-benchmark', '3', '10000']' timed out after 300 seconds",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
     }
   },
   "coverage": {
@@ -77,7 +147,14 @@
     "overall": 85.72
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
     "irTranslation": {
       "totalMethods": 14,
       "okCount": 0,
@@ -93,7 +170,13 @@
       "topInstructionCategories": {}
     },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 14,
+        "failedMethods": 0,
+        "totalMethods": 14
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,

@@ -4,26 +4,22 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
-add_compile_options(/utf-8 /GS-)
+add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_EH_WIN32_SEH)  # chaos-il2cpp SEH (Windows)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-member-complete/codegen")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
-file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
-list(REMOVE_ITEM CHAOS_NATIVE_STUBS
-    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
-)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
-    ${CHAOS_NATIVE_STUBS}
+    "verification_dispatch.generated.cpp"  # verification dispatch (sources)
     ${CHAOS_CODEGEN_CPP}
 )
 
@@ -35,15 +31,12 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
-    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"
     "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
-    "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-    "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
 )
 
 # Library link directories

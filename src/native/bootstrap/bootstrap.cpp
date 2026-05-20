@@ -20,6 +20,7 @@
 #include "t4_seh_handler.h"
 
 #include "gc/gc_old_gen.h"
+#include "gc/gc_root_scanner.h"
 
 #include <cstdint>
 #include <cstring>
@@ -82,6 +83,8 @@ constexpr const char* kCoUninitializeIcallSignature =
     "System.Runtime.InteropServices.Marshal::CoUninitialize()";
 constexpr const char* kCoCreateInstanceIcallSignature =
     "System.Runtime.InteropServices.Marshal::CoCreateInstance(";
+constexpr const char* kCoCreateInstanceAggregatedIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CoCreateInstanceAggregated(";
 constexpr const char* kCreateRcwIcallSignature =
     "System.Runtime.InteropServices.Marshal::CreateRcw(";
 constexpr const char* kReleaseRcwIcallSignature =
@@ -92,6 +95,8 @@ constexpr const char* kRcwQueryInterfaceIcallSignature =
     "System.Runtime.InteropServices.Marshal::RcwQueryInterface(";
 constexpr const char* kCreateCcwIcallSignature =
     "System.Runtime.InteropServices.Marshal::CreateCcw(";
+constexpr const char* kCreateCcwAggregatedIcallSignature =
+    "System.Runtime.InteropServices.Marshal::CreateCcwAggregated(";
 constexpr const char* kCustomMarshalerNativeToManagedIcallSignature =
     "System.Runtime.InteropServices.Marshal::CustomMarshalerNativeToManaged(";
 constexpr const char* kCustomMarshalerManagedToNativeIcallSignature =
@@ -377,6 +382,19 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     // The AOT module registers its string table via a static initializer in the
     // generated translation unit.  Nothing to do here — g_aot_entries defaults
     // to nullptr, which makes Resolve() fall through to the dynamic table only.
+
+    // ── Register GC slot maps from the AOT codegen section ─────────────
+    // The generated C++ emits a contiguous kChaosGcSlotMapsSection with
+    // GcSlotMapSectionEntryHdrV0-prefixed entries.  Register them here so
+    // that GcScanFrameHybrid can find precise slot maps for AOT frames.
+    if (g_bootstrap_state.code_registration->slot_map_section_begin != nullptr &&
+        g_bootstrap_state.code_registration->slot_map_section_end != nullptr &&
+        g_bootstrap_state.code_registration->slot_map_section_begin !=
+            g_bootstrap_state.code_registration->slot_map_section_end) {
+        chaos::il2cpp::runtime_core::GcRegisterSlotMapsFromSection(
+            g_bootstrap_state.code_registration->slot_map_section_begin,
+            g_bootstrap_state.code_registration->slot_map_section_end);
+    }
 
     // ── Ensure aot_image_handle is set ─────────────────────────────────
     // Used downstream by ApplyPatchFromMemory → SetAotBridge, and by
@@ -960,6 +978,9 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
         return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoUninitializeApartment);
     }
 
+    if (std::strstr(icall_name_utf8, kCoCreateInstanceAggregatedIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoCreateComInstanceAggregated);
+    }
     if (std::strstr(icall_name_utf8, kCoCreateInstanceIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::CoCreateComInstance);
     }
@@ -982,6 +1003,9 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
     }
 
     // ── CCW icalls ───────────────────────────────────────────────────
+    if (std::strstr(icall_name_utf8, kCreateCcwAggregatedIcallSignature) != nullptr) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalCreateCcwAggregated);
+    }
     if (std::strstr(icall_name_utf8, kCreateCcwIcallSignature) != nullptr) {
         return reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::MarshalCreateCcw);
     }

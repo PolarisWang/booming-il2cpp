@@ -53,6 +53,14 @@ struct ComCcw {
     CHAOS_IL2CPP_UINT64 gc_handle;              // GCHandle keeping the managed object alive
     void* runtime_state;                        // RuntimeState* for GC handle lifecycle
     CHAOS_IL2CPP_SIZE interface_count;           // Number of registered interfaces
+
+    // ── COM aggregation fields ───────────────────────────────────────────
+    // When outer_unknown is non-null, this CCW is aggregated to an outer
+    // IUnknown.  QI/AddRef/Release delegate to the outer, and the COM
+    // identity rule (QI for IUnknown returns outer) applies.
+    void* outer_unknown;                          // Outer controlling IUnknown (or nullptr)
+    bool  is_aggregated;                          // true when outer_unknown is valid
+
     ComCcwInterfaceEntry interfaces[kMaxCcwInterfaces]; // GUID→vtable map (entry 0 = IUnknown)
 };
 
@@ -73,6 +81,20 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CP
 /// Returns the CCW pointer (IUnknown*), or 0 on failure.
 /// The CCW is allocated via std::malloc and freed when refcount reaches 0.
 CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcept;
+
+/// Create an aggregated CCW for a managed object.
+/// When outer_unknown is non-null, the CCW delegates QI/AddRef/Release to
+/// the outer IUnknown (COM aggregation pattern).  The CCW is NOT freed when
+/// refcount reaches 0 — DestroyCcw must be called explicitly.
+/// Returns the CCW pointer (IUnknown*), or 0 on failure.
+CHAOS_IL2CPP_INTPTR CreateCcwAggregated(void* managed_object, void* runtime_state,
+                                         void* outer_unknown) noexcept;
+
+/// Destroy an aggregated CCW explicitly.
+/// Releases the outer_unknown (if aggregated), frees the GCHandle, and
+/// frees the CCW.  Only needed for aggregated CCWs.  Non-aggregated CCWs
+/// are self-destroying when refcount reaches 0.
+void DestroyCcw(void* ccw_ptr) noexcept;
 
 /// Register an additional COM interface on an existing CCW.
 /// @param ccw_ptr      The CCW pointer returned by CreateCcw.

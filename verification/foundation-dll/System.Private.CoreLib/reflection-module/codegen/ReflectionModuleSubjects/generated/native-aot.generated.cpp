@@ -98,6 +98,9 @@ struct chaos_type_ReflectionModuleSubjects_ReflectionModuleSubjects
 struct chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_
 {
 	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR items_array = 0;  // GC array reference
+	CHAOS_IL2CPP_INT32 size = 0;           // element count
+	CHAOS_IL2CPP_INT32 version = 0;        // modification counter
 };
 
 struct chaos_type_System_Private_CoreLib_System_NullReferenceException
@@ -817,13 +820,28 @@ static void (*kAotMethods[6])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[6])() = {
+extern "C" void (*kBenchmarkWrappers[6])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
 	[]() {kAotMethods[3]();},
 	[]() {kAotMethods[4]();},
 	[]() {kAotMethods[5]();},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 6;
+extern "C" const int kSubjectEntryIndices[6] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -883,18 +901,71 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: switch-based direct dispatch per method.
+// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
+// the method body into the timing loop — eliminating function pointer indirection.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
+	switch (chaos_entry_index) {
+	case 0: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
 	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
+	case 1: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 2: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 3: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 4: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 5: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	default:
+		return -1.0;
+	}
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1026,6 +1097,7 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0(void
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1166,6 +1238,7 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1(void
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1306,6 +1379,7 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(void
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1447,6 +1521,7 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(void
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1599,6 +1674,7 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(void
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1777,20 +1853,20 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySub
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Attribute_, {});
 		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Attribute_.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 	{
-		if (_s3 != 0)
+		if (_s2 != 0)
 		{
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s3;
+				auto chaos_value = _s2;
 				chaos_static_ReflectionModuleSubjects_ReflectionModuleSubjects___exitCode = chaos_value;
 			}
 		}

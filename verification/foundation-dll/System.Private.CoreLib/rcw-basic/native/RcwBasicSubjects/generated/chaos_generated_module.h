@@ -36,7 +36,7 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct ConstantFortyTwo_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -130,7 +130,7 @@ struct Functions {
         );
     } runtimeState;
     struct SimpleMath_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -149,6 +149,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -159,18 +163,18 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct ConstantFortyTwo {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.constantFortyTwo._ctor(
-                    p_this
+        return kFunctions.constantFortyTwo.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.constantFortyTwo.GetValue(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -179,82 +183,82 @@ struct ConstantFortyTwo {
 
 struct RcwBasicNativeEntry {
     static inline CHAOS_IL2CPP_INTPTR CreateCcwForSimpleMath(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.rcwBasicNativeEntry.CreateCcwForSimpleMath(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 MarshalCallComMethod(
-                CHAOS_IL2CPP_INTPTR p0, 
-                CHAOS_IL2CPP_INT32 p1, 
-                CHAOS_IL2CPP_INT32 p2, 
-                CHAOS_IL2CPP_INT32 p3
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalCallComMethod(
-                    p0, 
-                    p1, 
-                    p2, 
-                    p3
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
         );
     }
     static inline CHAOS_IL2CPP_INT32 MarshalCallDirectComMethod(
-                CHAOS_IL2CPP_INTPTR p0, 
-                CHAOS_IL2CPP_INT32 p1, 
-                CHAOS_IL2CPP_INT32 p2, 
-                CHAOS_IL2CPP_INT32 p3
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2, 
+                CHAOS_IL2CPP_INT32 arg_3
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalCallDirectComMethod(
-                    p0, 
-                    p1, 
-                    p2, 
-                    p3
+                    arg_0, 
+                    arg_1, 
+                    arg_2, 
+                    arg_3
         );
     }
     static inline CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
-                CHAOS_IL2CPP_INTPTR p0, 
-                CHAOS_IL2CPP_INTPTR p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalCreateCcw(
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1
         );
     }
     static inline CHAOS_IL2CPP_INTPTR MarshalCreateRcw(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalCreateRcw(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR MarshalGetRcwUnknown(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalGetRcwUnknown(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR MarshalRcwQueryInterface(
-                CHAOS_IL2CPP_INTPTR p0, 
-                CHAOS_IL2CPP_INTPTR p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalRcwQueryInterface(
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1
         );
     }
     static inline void MarshalReleaseRcw(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.rcwBasicNativeEntry.MarshalReleaseRcw(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Run(
-                CHAOS_IL2CPP_INT32 p0
+                CHAOS_IL2CPP_INT32 arg_0
     ) {
         return kFunctions.rcwBasicNativeEntry.Run(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwDirectVtable(
@@ -338,10 +342,10 @@ struct RuntimeState {
         );
     }
     static inline void Set(
-                CHAOS_IL2CPP_INTPTR p0
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.runtimeState.Set(
-                    p0
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -349,33 +353,33 @@ struct RuntimeState {
 };
 
 struct SimpleMath {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.simpleMath._ctor(
-                    p_this
+        return kFunctions.simpleMath.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Add(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.simpleMath.Add(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     static inline CHAOS_IL2CPP_INT32 Multiply(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.simpleMath.Multiply(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     /// Total number of AOT-compiled methods in this type.

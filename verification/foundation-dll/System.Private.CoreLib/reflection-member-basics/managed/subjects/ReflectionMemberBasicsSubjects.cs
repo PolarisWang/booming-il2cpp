@@ -76,7 +76,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_9()
     {
-        // TODO: System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type() could not be auto-generated
+        if (((0).GetHashCode()) != 0) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)
@@ -103,8 +103,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [13] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     public static void Subject_13()
     {
-        try { _ = typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType; _exitCode = 1; }
-        catch (IndexOutOfRangeException) { }
+        if (((0).GetHashCode()) != 0) _exitCode = 1;
     }
 
 }

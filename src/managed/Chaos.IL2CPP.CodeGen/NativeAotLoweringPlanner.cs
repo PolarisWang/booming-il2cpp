@@ -70,6 +70,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
+    // Verification dispatch manifest (populated by BuildDispatchEntryCode)
+    private string? _manifestJson;
 
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
@@ -318,7 +320,6 @@ public sealed partial class NativeAotLoweringPlanner
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
-        _enumTypeSubjectIds = CollectEnumTypeSubjectIds(_reflectionMemberSupport, _cachedClosureAssemblyPaths);
         _sealedTypeSubjectIds = CollectSealedTypeSubjectIds(aotCoreIr);
         _interfaceTypeSubjectIds = CollectInterfaceTypeSubjectIds(aotCoreIr);
         _comInterfaceVtableData = CollectComInterfaceVtableData(aotCoreIr, _methodsBySubjectId, metadataRegistration);
@@ -501,6 +502,7 @@ public sealed partial class NativeAotLoweringPlanner
         _assemblyReflectionSupport = assemblyReflectionSupport!;
         _reflectionMemberSupport = reflectionMemberSupport!;
         _staticFieldDataSupport = staticFieldDataSupport!;
+        _enumTypeSubjectIds = CollectEnumTypeSubjectIds(_reflectionMemberSupport, _cachedClosureAssemblyPaths);
         _staticInitializationSupport = BuildStaticInitializationSupportModel(
             methodsForLowering,
             closureManifest);
@@ -592,9 +594,20 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(dispatchEntryCode);
         }
 
+        // Step 1.5: Emit GC slot map section for precise stack root scanning.
+        // Placed BEFORE CodeRegistrationV0 so the slot_map_section_begin/end
+        // symbols are defined before they're referenced.
+        var gcSlotMapCode = BuildGcSlotMapSection(methodsForLowering);
+        if (!string.IsNullOrEmpty(gcSlotMapCode))
+        {
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(gcSlotMapCode);
+        }
+
         // Step 2: Emit CodeRegistrationV0, MetadataRegistrationV0, CodegenRegistrationOptionsV0
         // as extern "C" symbols for RegisterCodegen + BootstrapRuntime path.
-        var codeRegistrationCode = EmitCodeRegistrationStructs(methodsForLowering, metadataRegistration);
+        var codeRegistrationCode = EmitCodeRegistrationStructs(methodsForLowering, metadataRegistration,
+            hasGcSlotMapSection: !string.IsNullOrEmpty(gcSlotMapCode) && !gcSlotMapCode.Contains("(empty)"));
         if (!string.IsNullOrEmpty(codeRegistrationCode))
         {
             moduleRegSb.Append(Environment.NewLine);
@@ -725,6 +738,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
             ModuleRegistrationCode = moduleRegistrationCode,
             WorkloadAbi = loweringPlan.WorkloadAbi,
             GlobalDeclarations = globalDeclarations,
+            ManifestJson = _manifestJson ?? "",
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
             GeneratedModuleHeaderContent = moduleHeader,
             GeneratedModuleSourceContent = moduleSource,
@@ -2758,88 +2772,94 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (methods.Count == 0) return string.Empty;
 
-        ulong defaultStringId = _stringIdMapping is { Count: > 0 }
-            ? _stringIdMapping.First().Value
-            : 0UL;
-
+        // Build simplified method entries for the Scriban template (kAotMethods[] + RunNativeAot() only).
         var methodEntries = new List<ScriptObject>(methods.Count);
         for (int i = 0; i < methods.Count; i++)
         {
-            var method = methods[i];
-            var ac = method.ParameterCount;
-            var isInstance = !method.IsStatic;
-
-            // totalAc includes 'this' for instance methods
-            var totalAc = ac + (isInstance ? 1 : 0);
-
-            // extra_params: array of size (totalAc - 1) for the reinterpret_cast signature
-            var extraParams = new object[Math.Max(0, totalAc - 1)];
-
-            // params: each entry has is_string(bool), is_this(bool)
-            // Instance methods get 'this' as first param (is_this=true), then explicit params
-            var parameterSlots = new List<ScriptObject>(totalAc);
-            if (isInstance)
-            {
-                parameterSlots.Add(new ScriptObject
-                {
-                    ["is_string"] = false,
-                    ["is_this"] = true,
-                });
-            }
-            for (int j = 0; j < ac; j++)
-            {
-                var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
-                var isString = abi != null && IsStringParameterSlot(abi);
-                parameterSlots.Add(new ScriptObject
-                {
-                    ["is_string"] = isString,
-                    ["is_this"] = false,
-                });
-            }
-
             methodEntries.Add(new ScriptObject
             {
                 ["index"] = i,
-                ["native_symbol"] = method.NativeSymbol,
-                ["param_count"] = totalAc,
-                ["extra_params"] = extraParams,
-                ["params"] = parameterSlots,
-                ["is_instance"] = isInstance,
+                ["native_symbol"] = methods[i].NativeSymbol,
             });
-        }
-
-        // ── Build subject → kAotMethod index mapping ─────────────────────
-        // Subject methods have SubjectIds containing "::CustomEntrySubject_N:" or "::Subject_N:".
-        // Extract N to build a mapping: subjectIndex → kAotMethodIndex.
-        var subjectEntryIndices = new List<int>();
-        for (int i = 0; i < methods.Count; i++)
-        {
-            int subjectIdx = ExtractSubjectIndex(methods[i].SubjectId);
-            if (subjectIdx >= 0)
-            {
-                while (subjectEntryIndices.Count <= subjectIdx)
-                    subjectEntryIndices.Add(-1);
-                subjectEntryIndices[subjectIdx] = i;
-            }
-        }
-        // Fill any trailing -1 entries with fallback indices (subject == kAotMethod).
-        for (int i = 0; i < subjectEntryIndices.Count; i++)
-        {
-            if (subjectEntryIndices[i] < 0)
-                subjectEntryIndices[i] = i;
         }
 
         var model = new ScriptObject
         {
             ["methods"] = methodEntries,
             ["methods_count"] = methods.Count,
-            ["default_string_id"] = (long)defaultStringId,
-            ["subject_entry_indices"] = subjectEntryIndices.ToArray(),
-            ["subject_entry_count"] = subjectEntryIndices.Count,
         };
 
         var template = NativeAotTemplateCatalog.GetDispatchEntryCodeTemplate();
-        return ScribanTemplateRenderer.RenderTemplate(template, model);
+        var cppCode = ScribanTemplateRenderer.RenderTemplate(template, model);
+
+        // Build and store methods-manifest.json for Python verification dispatch generator.
+        _manifestJson = BuildMethodsManifestJson(methods);
+
+        return cppCode;
+    }
+
+    private string BuildMethodsManifestJson(IReadOnlyList<AotCoreIrMethodArtifact> methods)
+    {
+        ulong defaultStringId = _stringIdMapping is { Count: > 0 }
+            ? _stringIdMapping.First().Value
+            : 0UL;
+
+        var manifestMethods = new List<Dictionary<string, object>>(methods.Count);
+        for (int i = 0; i < methods.Count; i++)
+        {
+            var method = methods[i];
+            var ac = method.ParameterCount;
+            var isInstance = !method.IsStatic;
+
+            var paramsList = new List<Dictionary<string, object>>(ac + (isInstance ? 1 : 0));
+            if (isInstance)
+            {
+                paramsList.Add(new Dictionary<string, object>
+                {
+                    ["isString"] = false,
+                    ["isThis"] = true,
+                });
+            }
+            for (int j = 0; j < ac; j++)
+            {
+                var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
+                var isString = abi != null && IsStringParameterSlot(abi);
+                paramsList.Add(new Dictionary<string, object>
+                {
+                    ["isString"] = isString,
+                    ["isThis"] = false,
+                });
+            }
+
+            int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+            var manifestMethod = new Dictionary<string, object>
+            {
+                ["index"] = i,
+                ["nativeSymbol"] = method.NativeSymbol,
+                ["paramCount"] = ac + (isInstance ? 1 : 0),
+                ["params"] = paramsList,
+                ["isInstance"] = isInstance,
+            };
+            if (subjectIdx >= 0)
+                manifestMethod["subjectIndex"] = subjectIdx;
+
+            manifestMethods.Add(manifestMethod);
+        }
+
+        var manifest = new Dictionary<string, object>
+        {
+            ["schemaVersion"] = 2,
+            ["assemblyName"] = _assemblyName,
+            ["methodCount"] = methods.Count,
+            ["defaultStringId"] = (long)defaultStringId,
+            ["methods"] = manifestMethods,
+        };
+
+        return System.Text.Json.JsonSerializer.Serialize(manifest, new System.Text.Json.JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase,
+        });
     }
 
     /// <summary>
@@ -2877,7 +2897,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string EmitCodeRegistrationStructs(
     IReadOnlyList<AotCoreIrMethodArtifact> methods,
-    MetadataRegistrationArtifact metadataRegistration)
+    MetadataRegistrationArtifact metadataRegistration,
+    bool hasGcSlotMapSection = false)
 {
     _ = metadataRegistration; // unused — kept to avoid changing callers
     if (methods.Count == 0) return string.Empty;
@@ -2895,6 +2916,7 @@ public sealed partial class NativeAotLoweringPlanner
                 .ToArray()
             : Array.Empty<ScriptObject>(),
         ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
+        ["has_gc_slot_map_section"] = hasGcSlotMapSection,
     };
 
     // ── VTable descriptors for BootstrapRuntime TypeVTable registration ──
@@ -3391,6 +3413,13 @@ public sealed record NativeAotTemplateModel
     /// Empty string when no globals are needed.
     /// </summary>
     public string GlobalDeclarations { get; init; } = "";
+
+/// <summary>
+/// JSON manifest of methods for verification dispatch generation.
+/// Consumed by generate_verification_dispatch.py outside core codegen.
+/// Empty string when no methods are present.
+/// </summary>
+public string ManifestJson { get; init; } = "";
 
     /// <summary>
     /// C++ namespace for the generated translation unit.

@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -33,14 +34,22 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_SnapshotProverPatchEntry_SnapshotProverPatchEntry = {{nullptr, nullptr, 475613706628293222ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverPatchEntry_SnapshotProverPatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(475613706628293222ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverPatchEntry_SnapshotProverPatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(475613706628293222ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -156,8 +165,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_
 extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7(void);
-extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8(void);
 extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9(void);
+extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8(void);
 extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 
@@ -196,7 +205,7 @@ static constexpr struct {
 		CHAOS_ABI_MANIFEST_VERSION,
 		11u,
 		1u,
-		3841240569u,  // FNV-1a over entries+params
+		3897710562u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -208,8 +217,8 @@ static constexpr struct {
 		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5
 		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6
 		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7
-		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8
 		{ 1u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9
+		{ 0u, 0u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8
 		{ 0u, 1u },  // SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32
 	},
 	{
@@ -292,8 +301,8 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[11] = {
 	{ "Subject_5", 0x00000008u, 0u },  // SnapshotProverPatchEntry
 	{ "Subject_6", 0x00000009u, 0u },  // SnapshotProverPatchEntry
 	{ "Subject_7", 0x0000000Au, 0u },  // SnapshotProverPatchEntry
-	{ "Subject_8", 0x0000000Bu, 0u },  // SnapshotProverPatchEntry
 	{ "Subject_9", 0x0000000Cu, 0u },  // SnapshotProverPatchEntry
+	{ "CustomEntryMethod8", 0x0000000Bu, 0u },  // SnapshotProverPatchEntry
 	{ "Run", 0x0000000Du, 1u },  // SnapshotProverPatchEntry
 };
 
@@ -312,8 +321,8 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[11] = {
 	{ 0x00000008u, 5u },
 	{ 0x00000009u, 6u },
 	{ 0x0000000Au, 7u },
-	{ 0x0000000Bu, 8u },
-	{ 0x0000000Cu, 9u },
+	{ 0x0000000Bu, 9u },
+	{ 0x0000000Cu, 8u },
 	{ 0x0000000Du, 10u },
 };
 
@@ -327,8 +336,8 @@ static HotpatchEntryV0 s_hotpatch_entries[11] = {
 	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_5
 	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_6
 	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_7
-	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_8
 	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Subject_9
+	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::CustomEntryMethod8
 	{ reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SnapshotProverPatchEntry::Run
 };
 
@@ -372,8 +381,8 @@ static void (*kAotMethods[11])() = {
 	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5),
 	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6),
 	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7),
-	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8),
 	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9),
+	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8),
 	reinterpret_cast<void(*)()>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32),
 };
 
@@ -382,7 +391,7 @@ static void (*kAotMethods[11])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[11])() = {
+extern "C" void (*kBenchmarkWrappers[11])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -477,8 +486,8 @@ static void* const kMethodPointers[11] = {
 	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_5),
 	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_6),
 	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_7),
-	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8),
 	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9),
+	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8),
 	reinterpret_cast<void*>(&SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int32),
 };
 
@@ -545,8 +554,8 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotProverPatc
 	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()", "Subject_5", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()", "Subject_6", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8:System.Int32()", "Subject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::CustomEntryMethod8:System.Void()", "CustomEntryMethod8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
 };
 
@@ -718,21 +727,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_8()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1342177272);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
 // Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_9(void)
 {
@@ -746,6 +740,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotProverPatchEntry_SnapshotProverPatchEntry_
 	chaos_locals[0] = _s0;
 	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::CustomEntryMethod8()
+extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
 }
 
 // Managed method: SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run(System.Int32)
@@ -907,6 +911,21 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 						}
 					case 8:
 						{
+							auto& _d9 = s_hotpatch_entries[9];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d9.method_key, nullptr, nullptr);
+							}
+							else
+							{
+								SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8();
+							}
+						}
+					case 9:
+					{
+						{
 							auto& _d8 = s_hotpatch_entries[8];
 							CHAOS_IL2CPP_INT32 _d_hpresult{};
 							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
@@ -914,23 +933,6 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 							{
 								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-					{
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
 							}
 							else
 							{
@@ -1103,6 +1105,21 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 						}
 					case 8:
 						{
+							auto& _d9 = s_hotpatch_entries[9];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d9.method_key, nullptr, nullptr);
+							}
+							else
+							{
+								SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8();
+							}
+						}
+					case 9:
+					{
+						{
 							auto& _d8 = s_hotpatch_entries[8];
 							CHAOS_IL2CPP_INT32 _d_hpresult{};
 							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
@@ -1110,23 +1127,6 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 							{
 								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-					{
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
 							}
 							else
 							{
@@ -1310,6 +1310,21 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 						}
 					case 8:
 						{
+							auto& _d9 = s_hotpatch_entries[9];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
+							{
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d9.method_key, nullptr, nullptr);
+							}
+							else
+							{
+								SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8();
+							}
+						}
+					case 9:
+					{
+						{
 							auto& _d8 = s_hotpatch_entries[8];
 							CHAOS_IL2CPP_INT32 _d_hpresult{};
 							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
@@ -1317,23 +1332,6 @@ extern "C" void SnapshotProverPatchEntry_SnapshotProverPatchEntry_Run_System_Int
 							{
 								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = SnapshotProverPatchEntry_SnapshotProverPatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-					{
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
 							}
 							else
 							{

@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingThreadBasicsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingThreadBasicsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d09cf965-eb24-4810-bee9-229fdfe0870b",
+  "inputModuleVersionId": "2beb1c32-b07b-49b9-8174-a8b555b577bd",
   "artifacts": [
     {
       "kind": "typedIlIr",

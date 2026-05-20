@@ -82,12 +82,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_11:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
@@ -152,11 +146,6 @@
       "methodSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
-    },
-    {
-      "methodSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_10:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Reflection.TargetException"
     },
     {
       "methodSubjectId": "ReflectionBindingSubjects/ReflectionBindingSubjects::Subject_11:System.Void()",

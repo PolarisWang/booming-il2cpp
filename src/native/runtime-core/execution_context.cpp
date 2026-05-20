@@ -162,3 +162,21 @@ void ExecutionContextFree(ExecutionContext* ctx) noexcept {
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading
+
+// extern "C" bridges for threading_stubs
+extern "C" chaos::il2cpp::runtime_core::threading::ExecutionContext* chaos_execution_context_capture() noexcept {
+    return chaos::il2cpp::runtime_core::threading::ExecutionContextCapture();
+}
+
+extern "C" void chaos_execution_context_run(
+    chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx,
+    void (*callback)(void*), void* state) noexcept
+{
+    chaos::il2cpp::runtime_core::threading::ExecutionContextRun(ctx, callback, state);
+}
+
+extern "C" void chaos_execution_context_free(
+    chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx) noexcept
+{
+    chaos::il2cpp::runtime_core::threading::ExecutionContextFree(ctx);
+}

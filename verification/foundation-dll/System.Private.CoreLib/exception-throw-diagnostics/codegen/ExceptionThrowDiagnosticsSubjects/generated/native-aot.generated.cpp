@@ -34,21 +34,36 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects = {{nullptr, nullptr, 8016410208713659828ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(8016410208713659828ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_INTPTR>(4429271818216920541ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentNullException = {{nullptr, nullptr, 12400915656331929738ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentNullException = static_cast<CHAOS_IL2CPP_INTPTR>(12400915656331929738ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException = {{nullptr, nullptr, 15763389239383405623ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentOutOfRangeException = static_cast<CHAOS_IL2CPP_INTPTR>(15763389239383405623ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_InvalidOperationException = {{nullptr, nullptr, 5529823529457257812ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_InvalidOperationException = static_cast<CHAOS_IL2CPP_INTPTR>(5529823529457257812ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NotImplementedException = {{nullptr, nullptr, 16853252435633719857ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NotImplementedException = static_cast<CHAOS_IL2CPP_INTPTR>(16853252435633719857ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NotSupportedException = {{nullptr, nullptr, 9608462597425565551ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NotSupportedException = static_cast<CHAOS_IL2CPP_INTPTR>(9608462597425565551ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(8016410208713659828ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_INTPTR>(4429271818216920541ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentNullException = {{nullptr, nullptr, 12400915656331929738ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentNullException = static_cast<CHAOS_IL2CPP_INTPTR>(12400915656331929738ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException = {{nullptr, nullptr, 15763389239383405623ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentOutOfRangeException = static_cast<CHAOS_IL2CPP_INTPTR>(15763389239383405623ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_InvalidOperationException = {{nullptr, nullptr, 5529823529457257812ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_InvalidOperationException = static_cast<CHAOS_IL2CPP_INTPTR>(5529823529457257812ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NotImplementedException = {{nullptr, nullptr, 16853252435633719857ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NotImplementedException = static_cast<CHAOS_IL2CPP_INTPTR>(16853252435633719857ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NotSupportedException = {{nullptr, nullptr, 9608462597425565551ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NotSupportedException = static_cast<CHAOS_IL2CPP_INTPTR>(9608462597425565551ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -636,7 +651,7 @@ static void (*kAotMethods[14])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[14])() = {
+extern "C" void (*kBenchmarkWrappers[14])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -651,6 +666,29 @@ static void (*kBenchmarkWrappers[14])() = {
 	[]() {kAotMethods[11]();},
 	[]() {kAotMethods[12]();},
 	[]() {kAotMethods[13]();},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 14;
+extern "C" const int kSubjectEntryIndices[14] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12,
+	13
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -710,18 +748,143 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: switch-based direct dispatch per method.
+// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
+// the method body into the timing loop — eliminating function pointer indirection.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
+	switch (chaos_entry_index) {
+	case 0: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
 	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
+	case 1: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 2: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 3: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 4: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 5: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 6: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 7: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 8: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 9: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 10: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 11: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 12: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	case 13: {
+		auto start = std::chrono::steady_clock::now();
+		for (int i = 0; i < iterations; i++) {
+			ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13();
+		}
+		auto end = std::chrono::steady_clock::now();
+		return std::chrono::duration<double, std::milli>(
+			end - start).count();
+	}
+	default:
+		return -1.0;
+	}
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -900,7 +1063,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }
@@ -970,6 +1133,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1105,9 +1269,67 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	return;
 }
 
-// AOT-unreachable stub: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()
+// Managed method: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4()
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Exception, {});
+		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Exception.hot;
+		chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			{
+				auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
+				chaos_string->header.type_info = &chaos_mt_System_Private_CoreLib_System_String.hot;
+				chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				chaos_string->utf8_data = "";
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
+			}
+		}
+		{
+			const auto chaos_arg_0 = _s1;
+			if (chaos_arg_0 == 0)
+			{
+				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			}
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s2) ? 1 : 0);
+		{
+			if (_s1 != 0)
+			{
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				{
+					auto chaos_value = _s1;
+					chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+				}
+			}
+			return;
+		}
+	}
 }
 
 // Managed method: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5()
@@ -1286,7 +1508,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_ArgumentException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot;
-		_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }
@@ -1306,7 +1528,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_ArgumentNullException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }
@@ -1326,7 +1548,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }
@@ -1368,7 +1590,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_NotSupportedException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_NotSupportedException.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }
@@ -1388,7 +1610,7 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_NotImplementedException, {});
 		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_NotImplementedException.hot;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	return;
 }

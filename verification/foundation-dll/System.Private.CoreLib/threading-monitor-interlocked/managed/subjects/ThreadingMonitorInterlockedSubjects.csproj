@@ -11,7 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ThreadingMonitorInterlockedSubjects.cs" />
-    <Compile Include="ThreadingMonitorInterlockedNativeEntry.Custom.cs" />
     <Compile Include="ThreadingMonitorInterlockedSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

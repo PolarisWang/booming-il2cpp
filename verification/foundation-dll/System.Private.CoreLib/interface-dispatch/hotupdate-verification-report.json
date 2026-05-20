@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/interface/dispatch",
-  "passedMethods": 26,
+  "passedMethods": 0,
   "failedMethods": 0,
-  "totalMethods": 35,
+  "totalMethods": 0,
   "stubMethods": 0,
   "realMethods": 9,
   "allMethodsRevertVerified": false,
@@ -13,8 +13,8 @@
   "d3PatchedCount": 0,
   "verificationKind": "hotupdate-proof",
   "summary": {
-    "totalMethods": 35,
-    "passedMethods": 26,
+    "totalMethods": 0,
+    "passedMethods": 0,
     "failedMethods": 0,
     "unmatchedMethods": 0
   },

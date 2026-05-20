@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
-  "capturedAt": "2026-05-15T15:07:18",
+  "capturedAt": "2026-05-20T19:04:03",
+  "batchMode": true,
   "summary": {
     "totalMethods": 15,
     "okCount": 0,
@@ -23,139 +24,145 @@
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
-    "overallIrExpansionRatio": 0
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
   },
   "methodResults": [
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
-      "shortName": "Subject_0",
+      "shortName": "System.Threading.Tasks.Task::Run",
       "status": "error",
-      "error": "asm-compare timed out (120s)"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
-      "shortName": "Subject_1",
+      "shortName": "System.Threading.Tasks.Task::Run",
       "status": "error",
-      "error": "asm-compare timed out (120s)"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
-      "shortName": "Subject_2",
+      "shortName": "System.Threading.Tasks.Task::Delay",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
-      "shortName": "Subject_3",
+      "shortName": "System.Threading.Tasks.Task::Wait",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
-      "shortName": "Subject_4",
+      "shortName": "System.Threading.Tasks.Task::Wait",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
-      "shortName": "Subject_5",
+      "shortName": "System.Threading.Tasks.Task::get_IsCompleted",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
-      "shortName": "Subject_6",
+      "shortName": "System.Threading.Tasks.Task::get_Status",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
-      "shortName": "Subject_7",
+      "shortName": "System.Threading.Tasks.Task::ContinueWith",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\nD:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.C",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
-      "shortName": "Subject_8",
+      "shortName": "System.Threading.Tasks.Task::WhenAll",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
-      "shortName": "Subject_9",
+      "shortName": "System.Threading.Tasks.Task::WhenAny",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
-      "shortName": "Subject_10",
+      "shortName": "System.Threading.Tasks.Task::FromResult",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
-      "shortName": "Subject_11",
+      "shortName": "System.Threading.Thread::Start",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\n",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
-      "shortName": "Subject_12",
+      "shortName": "System.Threading.Thread::Sleep",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\RuntimeSupport\\RuntimeHelperShapeRegistry.cs(2075,40): error CS1026: ) expected [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\n",
-      "stderr": "\nThe build failed. Fix the build errors and run again.\n"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
-      "shortName": "Subject_13",
+      "shortName": "System.Threading.Thread::get_CurrentThread",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\NativeAotLoweringPlanner.cs(457,19): warning CS8604: Possible null reference argument for parameter 'source' in 'IEnumerable<string?> Enumerable.Select<ExternalRuntimeHelperDefinition, string?>(IEnumerable<ExternalRuntimeHelperDefinition> source, Func<ExternalRuntimeHelperDefinition, string?> selector)'. [D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\Chaos.IL2CPP.CodeGen.csproj]\n",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
-      "shortName": "Subject_14",
+      "shortName": "System.Threading.Thread::get_ManagedThreadId",
       "status": "error",
-      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
-      "stdout": "",
-      "stderr": "  [1/3] Running IL2CPP pipeline... 16 methods lowered\n  [2/3] Generating C++ (NativeAot)...TRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Run:System.Vo kind=structured instr=38 blocks=18 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_0:Sys kind=structured instr=1 blocks=1 loops=0 exceptions=0\nTRACE:EMIT method=ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::Subject_10:Sy ki"
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 144)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Run\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task::Delay\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Threading.Tasks.Task:",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 44 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-2/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-3/15] System.Threading.Tasks.Task::Delay... not found in closure\n  [3/3-1/15] System.Threading.Tasks.Task::Run... not found in closure\n  [3/3-7/15] System.Threading.Tasks.Task::get_Status... not found in closure\n  [3/3-6/15] System.Threading.Tasks.Task::get_IsCompleted... not found in closure\n  [3/3-11"
     }
   ]
 }

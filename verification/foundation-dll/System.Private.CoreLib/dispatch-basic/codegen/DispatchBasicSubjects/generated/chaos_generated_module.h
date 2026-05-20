@@ -36,7 +36,7 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct BasicImpl_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -44,7 +44,7 @@ struct Functions {
         );
     } basicImpl;
     struct Calculator_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -93,7 +93,7 @@ struct Functions {
         );
     } dispatchBasicSubjects;
     struct StatusProvider_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetStatusCode)(
@@ -101,7 +101,7 @@ struct Functions {
         );
     } statusProvider;
     struct System_Runtime_InteropServices_ComInterfaceTypeAttribute_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
@@ -110,6 +110,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -121,10 +125,10 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct BasicImpl {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.basicImpl..ctor(
+        return kFunctions.basicImpl.ctor(
                     arg_0
         );
     }
@@ -140,10 +144,10 @@ struct BasicImpl {
 };
 
 struct Calculator {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calculator..ctor(
+        return kFunctions.calculator.ctor(
                     arg_0
         );
     }
@@ -236,10 +240,10 @@ struct DispatchBasicSubjects {
 };
 
 struct StatusProvider {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.statusProvider..ctor(
+        return kFunctions.statusProvider.ctor(
                     arg_0
         );
     }
@@ -255,11 +259,11 @@ struct StatusProvider {
 };
 
 struct System_Runtime_InteropServices_ComInterfaceTypeAttribute {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.system_Runtime_InteropServices_ComInterfaceTypeAttribute..ctor(
+        return kFunctions.system_Runtime_InteropServices_ComInterfaceTypeAttribute.ctor(
                     arg_0, 
                     arg_1
         );

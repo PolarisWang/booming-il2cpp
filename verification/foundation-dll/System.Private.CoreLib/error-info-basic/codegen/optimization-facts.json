@@ -79,13 +79,19 @@
     {
       "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+      "targetSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
       "devirtualized": false
     },
     {
       "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+      "targetSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
       "devirtualized": false
     },
     {

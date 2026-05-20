@@ -1,0 +1,234 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ThreadingSyncSubjects",
+      "subjectKind": "field",
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/ManualResetEvent::.ctor:System.Void(System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/AutoResetEvent::.ctor:System.Void(System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SpinLock::.ctor:System.Void(System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SemaphoreSlim::Wait:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SemaphoreSlim::Release:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SemaphoreSlim::get_CurrentCount:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/EventWaitHandle::Reset:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/EventWaitHandle::Set:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Threading.WaitHandle::WaitOne:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SpinLock::Enter:System.Void(System.Boolean\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SpinLock::Exit:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "type",
+      "subjectId": "System.Threading/SpinWait",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "subjectKind": "method",
+      "subjectId": "System.Threading/SpinWait::SpinOnce:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

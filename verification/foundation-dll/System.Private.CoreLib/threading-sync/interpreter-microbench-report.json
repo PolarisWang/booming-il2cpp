@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/sync",
+  "capturedAt": "2026-05-20T19:50:29",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T19:50:29][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T19:50:29][WARN][CRAG] young_collection_no_region\n[2026-05-20T19:50:29][INFO][NUMA] numa_init count=%d\n[2026-05-20T19:50:29][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T19:50:29][INFO][OldGen] init done base=0x2098124816384 pages=2\n[2026-05-20T19:50:29][DEBUG][codegen] T4 VEH handler registered\nPassed: 18/18\n[2026-05-20T19:50:29][DEBUG][BGC] thread_started\n"
+}

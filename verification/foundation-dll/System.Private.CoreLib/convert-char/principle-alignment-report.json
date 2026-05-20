@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:33:13.122949",
+  "generated_at": "2026-05-20T19:09:03.044820",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -431,26 +431,47 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 11 changed source files are outside expected architecture layers",
+      "summary": "3 of 44 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "CMakeLists.txt",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native/compile_hotupdate_boxing.cmd",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 11,
+        "changed_source_count": 44,
         "layer_distribution": {
-          "TestInfra": 1,
-          "Emitter": 4,
+          "TestInfra": 3,
+          "Emitter": 2,
+          "CodeGenRoot": 2,
           "RuntimeSupport": 1,
-          "Codegen": 1,
-          "Interpreter": 1,
-          "RuntimeCore": 2
+          "Templates": 1,
+          "Bootstrap": 1,
+          "Codegen": 4,
+          "Common": 1,
+          "Interpreter": 3,
+          "RuntimeCore": 22,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "CMakeLists.txt",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native/compile_hotupdate_boxing.cmd",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
             "reason": "outside expected architecture layers"
           }
         ]

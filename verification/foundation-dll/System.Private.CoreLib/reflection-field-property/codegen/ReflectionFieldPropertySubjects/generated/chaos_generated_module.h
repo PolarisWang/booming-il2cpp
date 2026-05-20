@@ -39,33 +39,6 @@ struct Functions {
         void (*Subject_0)(
                 void
         );
-        void (*Subject_1)(
-                void
-        );
-        void (*Subject_2)(
-                void
-        );
-        void (*Subject_3)(
-                void
-        );
-        void (*Subject_4)(
-                void
-        );
-        void (*Subject_5)(
-                void
-        );
-        void (*Subject_6)(
-                void
-        );
-        void (*Subject_7)(
-                void
-        );
-        void (*Subject_8)(
-                void
-        );
-        void (*Subject_9)(
-                void
-        );
         void (*Subject_10)(
                 void
         );
@@ -94,6 +67,9 @@ struct Functions {
                 void
         );
         void (*Subject_19)(
+                void
+        );
+        void (*Subject_1)(
                 void
         );
         void (*Subject_20)(
@@ -126,6 +102,9 @@ struct Functions {
         void (*Subject_29)(
                 void
         );
+        void (*Subject_2)(
+                void
+        );
         void (*Subject_30)(
                 void
         );
@@ -138,11 +117,36 @@ struct Functions {
         void (*Subject_33)(
                 void
         );
+        void (*Subject_3)(
+                void
+        );
+        void (*Subject_4)(
+                void
+        );
+        void (*Subject_5)(
+                void
+        );
+        void (*Subject_6)(
+                void
+        );
+        void (*Subject_7)(
+                void
+        );
+        void (*Subject_8)(
+                void
+        );
+        void (*Subject_9)(
+                void
+        );
     } reflectionFieldPropertySubjects;
     int32_t method_count;
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -157,51 +161,6 @@ struct ReflectionFieldPropertySubjects {
     static inline void Subject_0(
     ) {
         return kFunctions.reflectionFieldPropertySubjects.Subject_0(
-        );
-    }
-    static inline void Subject_1(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_1(
-        );
-    }
-    static inline void Subject_2(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_2(
-        );
-    }
-    static inline void Subject_3(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_3(
-        );
-    }
-    static inline void Subject_4(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_4(
-        );
-    }
-    static inline void Subject_5(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_5(
-        );
-    }
-    static inline void Subject_6(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_6(
-        );
-    }
-    static inline void Subject_7(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_7(
-        );
-    }
-    static inline void Subject_8(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_8(
-        );
-    }
-    static inline void Subject_9(
-    ) {
-        return kFunctions.reflectionFieldPropertySubjects.Subject_9(
         );
     }
     static inline void Subject_10(
@@ -254,6 +213,11 @@ struct ReflectionFieldPropertySubjects {
         return kFunctions.reflectionFieldPropertySubjects.Subject_19(
         );
     }
+    static inline void Subject_1(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_1(
+        );
+    }
     static inline void Subject_20(
     ) {
         return kFunctions.reflectionFieldPropertySubjects.Subject_20(
@@ -304,6 +268,11 @@ struct ReflectionFieldPropertySubjects {
         return kFunctions.reflectionFieldPropertySubjects.Subject_29(
         );
     }
+    static inline void Subject_2(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_2(
+        );
+    }
     static inline void Subject_30(
     ) {
         return kFunctions.reflectionFieldPropertySubjects.Subject_30(
@@ -322,6 +291,41 @@ struct ReflectionFieldPropertySubjects {
     static inline void Subject_33(
     ) {
         return kFunctions.reflectionFieldPropertySubjects.Subject_33(
+        );
+    }
+    static inline void Subject_3(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_3(
+        );
+    }
+    static inline void Subject_4(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_4(
+        );
+    }
+    static inline void Subject_5(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_5(
+        );
+    }
+    static inline void Subject_6(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_6(
+        );
+    }
+    static inline void Subject_7(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_7(
+        );
+    }
+    static inline void Subject_8(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_8(
+        );
+    }
+    static inline void Subject_9(
+    ) {
+        return kFunctions.reflectionFieldPropertySubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

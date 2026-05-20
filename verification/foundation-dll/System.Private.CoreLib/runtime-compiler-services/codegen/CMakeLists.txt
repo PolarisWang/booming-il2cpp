@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: RuntimeCompilerServicesPatchEntry
-add_library(chaos_gen_RuntimeCompilerServicesPatchEntry STATIC
-    ${CHAOS_GEN_DIR}/RuntimeCompilerServicesPatchEntry/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/RuntimeCompilerServicesPatchEntry/generated/chaos_generated_module.cpp
+# Assembly: RuntimeCompilerServicesSubjects
+add_library(chaos_gen_RuntimeCompilerServicesSubjects STATIC
+    ${CHAOS_GEN_DIR}/RuntimeCompilerServicesSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/RuntimeCompilerServicesSubjects/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_RuntimeCompilerServicesPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_RuntimeCompilerServicesPatchEntry PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_RuntimeCompilerServicesPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_RuntimeCompilerServicesSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_RuntimeCompilerServicesSubjects PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_RuntimeCompilerServicesSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_RuntimeCompilerServicesPatchEntry
+    chaos_gen_RuntimeCompilerServicesSubjects
     ${NATIVE_LIBS}
 )
 

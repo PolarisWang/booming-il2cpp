@@ -1,13 +1,13 @@
 {
   "family": "reflection-binding",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 78,
-  "audited": 78,
+  "total_methods": 80,
+  "audited": 80,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 0,
+  "skips_found": 4,
   "methods_without_lowering": 0,
-  "methods_without_assert": 78,
+  "methods_without_assert": 80,
   "passed": true,
   "method_details": [
     {
@@ -209,6 +209,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
@@ -560,6 +569,15 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RunNativeAot",
       "subject_id": "",
       "is_stub": false,
@@ -713,6 +731,31 @@
       "audit_status": "PASS"
     }
   ],
-  "skip_details": [],
+  "skip_details": [
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodBase",
+      "method_name": "Invoke",
+      "param_count": 2,
+      "override_value": "skip"
+    }
+  ],
   "errors": []
 }

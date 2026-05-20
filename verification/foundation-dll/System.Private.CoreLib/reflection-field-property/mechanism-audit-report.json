@@ -1,13 +1,13 @@
 {
   "family": "reflection-field-property",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 166,
-  "audited": 166,
+  "total_methods": 168,
+  "audited": 168,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 166,
+  "methods_without_assert": 168,
   "passed": true,
   "method_details": [
     {
@@ -399,6 +399,15 @@
     },
     {
       "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -1146,6 +1155,15 @@
     },
     {
       "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

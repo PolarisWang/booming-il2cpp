@@ -1,13 +1,13 @@
 {
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 62,
-  "audited": 62,
+  "total_methods": 64,
+  "audited": 64,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 62,
+  "methods_without_assert": 64,
   "passed": true,
   "method_details": [
     {
@@ -129,6 +129,15 @@
     },
     {
       "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -408,6 +417,15 @@
     },
     {
       "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

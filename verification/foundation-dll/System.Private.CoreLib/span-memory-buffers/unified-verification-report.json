@@ -2,9 +2,9 @@
   "family": "span-memory-buffers",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:42:27",
-  "duration_ms": 14161,
-  "overall_status": "failed",
+  "timestamp": "2026-05-20T18:01:19",
+  "duration_ms": 33741,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,21 +17,18 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "entry.exe build failed",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
-        }
+        "methodCount": 14,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\subjects\\build-output\\SpanMemoryBuffersSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 12863
+      "duration_ms": 24569
     },
     "fact": {
       "stage": "fact",
@@ -45,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 343
+      "duration_ms": 418
     },
     "audit": {
       "stage": "audit",
@@ -59,7 +56,83 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 953
+      "duration_ms": 1418
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 0/14 methods OK, avg JIT=0 instr, avg AOT IR=0 instr, expansion=0x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 0,
+        "failedCount": 14,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "aotInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
+      },
+      "errors": [],
+      "duration_ms": 3487
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=0.0ns/op | FastExecute=0.0ns/instr | CallVirt dispatch=0.0ns",
+      "details": {
+        "poolSize": 0
+      },
+      "errors": [],
+      "duration_ms": 35
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 14 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 3209
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "14/14 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 14,
+        "failedMethods": 0,
+        "totalMethods": 14,
+        "realMethods": 14,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 41
+    },
+    "post_hotupdate_benchmark": {
+      "stage": "post_hotupdate_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=63.5% (1.6x) over 8 methods (interpreter path — expected)",
+      "details": {
+        "averageSlowdownPercent": 63.5,
+        "slowdownFactor": 1.635,
+        "threshold": 50.0,
+        "nonStubMethods": 8
+      },
+      "errors": [],
+      "duration_ms": 557
     }
   },
   "coverage": {
@@ -68,14 +141,45 @@
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
-    "irTranslation": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 0
+    },
+    "irTranslation": {
+      "totalMethods": 14,
+      "okCount": 0,
+      "failedCount": 14,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "functional": {
+        "passedMethods": 14,
+        "failedMethods": 0,
+        "totalMethods": 14
+      },
+      "interpreterOverhead": {
+        "averageSlowdownPercent": 63.5,
+        "slowdownFactor": 1.635,
+        "nonStubMethods": 8
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0,
+      "interpreterSlowdownFactor": 1.635,
       "asmPassRate": 0.0
     }
   },

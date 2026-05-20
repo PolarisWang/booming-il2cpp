@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PinvokeDllimportSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PinvokeDllimportSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7bf24dc7-ed80-4726-b08e-473464a0869a",
+  "inputModuleVersionId": "a930313c-8e3f-4830-bd05-42a9c598db7c",
   "artifacts": [
     {
       "kind": "typedIlIr",

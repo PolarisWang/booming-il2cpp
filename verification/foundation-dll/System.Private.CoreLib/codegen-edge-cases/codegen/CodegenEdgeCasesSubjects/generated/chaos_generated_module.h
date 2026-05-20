@@ -54,6 +54,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -70,10 +74,10 @@ struct CodegenEdgeCasesSubjects {
         );
     }
     static inline void Subject_1(
-                CHAOS_IL2CPP_INT32 p0
+                CHAOS_IL2CPP_INT32 arg_0
     ) {
         return kFunctions.codegenEdgeCasesSubjects.Subject_1(
-                    p0
+                    arg_0
         );
     }
     static inline void Subject_2(
@@ -82,10 +86,10 @@ struct CodegenEdgeCasesSubjects {
         );
     }
     static inline void Subject_3(
-                CHAOS_IL2CPP_INT32 p0
+                CHAOS_IL2CPP_INT32 arg_0
     ) {
         return kFunctions.codegenEdgeCasesSubjects.Subject_3(
-                    p0
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.

@@ -325,6 +325,18 @@ private:
     mutable PohRangeSlot poh_slots_[kMaxPohSlots]{};
     mutable std::atomic<int> poh_slot_count_{0};
 
+    // Lock-free domain range slots (same design as nursery_slots_).
+    // Used by IsInDomain fast path — avoids mutex_ acquisition for
+    // pointers that are definitely outside the domain's address range.
+    struct DomainRangeSlot {
+        std::atomic<uint32_t> domain_id{0};
+        std::atomic<uintptr_t> begin{0};
+        std::atomic<uintptr_t> end{0};
+    };
+    static constexpr int kMaxDomainSlots = 256;
+    mutable DomainRangeSlot domain_range_slots_[kMaxDomainSlots]{};
+    mutable std::atomic<int> domain_slot_count_{0};
+
     /// Add a nursery range or find a reusable slot.
     void AddNurseryRange(uintptr_t begin, uintptr_t end);
 
@@ -336,6 +348,14 @@ private:
 
     /// Remove a POH range.
     void RemovePohRange(uintptr_t begin, uintptr_t end);
+
+    /// Add a domain range to the lock-free cache.
+    /// Called under mutex_ from AllocateRegion.
+    void AddDomainRange(uint32_t domain_id, uintptr_t begin, uintptr_t end);
+
+    /// Remove a domain range from the lock-free cache.
+    /// Called under mutex_ from FreeRegion / ReleaseDomainRegions.
+    void RemoveDomainRange(uint32_t domain_id);
 
     /// Grow the region table to accommodate a new region.
     /// Returns the index of the new slot, or -1 on OOM.

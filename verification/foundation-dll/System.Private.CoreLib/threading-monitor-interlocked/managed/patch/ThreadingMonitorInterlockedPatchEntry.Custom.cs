@@ -12,7 +12,7 @@ using System.Threading;
 
 public static partial class ThreadingMonitorInterlockedPatchEntry
 {
-    public static int _exitCode;
+    // _exitCode is auto-generated in the entry class for non-probe builds.
 
     // [0] System.Threading.Monitor::Enter(System.Object)
     public static void CustomEntryMethod0()

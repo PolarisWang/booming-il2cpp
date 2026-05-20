@@ -1,0 +1,9 @@
+[2026-05-20T16:38:00][DEBUG][codegen] T4 VEH handler registered
+[2026-05-20T16:38:00][WARN][CRAG] young_collection_no_region
+[2026-05-20T16:38:00][INFO][NUMA] numa_init count=%d
+[2026-05-20T16:38:00][INFO][OldGen] init initial_pages=2 numa_nodes=1
+[2026-05-20T16:38:00][INFO][OldGen] init done base=0x2486669279232 pages=2
+[2026-05-20T16:38:00][DEBUG][codegen] T4 VEH handler registered
+Passed: 21/22
+[2026-05-20T16:38:00][DEBUG][BGC] thread_started
+[2026-05-20T16:38:00][DEBUG][Finalizer] thread_started id={0}

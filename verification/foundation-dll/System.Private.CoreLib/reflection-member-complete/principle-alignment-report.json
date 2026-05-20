@@ -1,7 +1,7 @@
 {
   "family": "reflection-member-complete",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T16:24:20.549861",
+  "generated_at": "2026-05-20T19:45:51.944571",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -510,21 +510,59 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 17 changed source files within expected architecture layers",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "4 of 56 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "CMakeLists.txt",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native/compile_hotupdate_boxing.cmd",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "contracts/native/v0/codegen_bridge.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "changed_source_count": 17,
+        "changed_source_count": 56,
         "layer_distribution": {
-          "TestInfra": 2,
+          "TestInfra": 7,
+          "CodeGenRoot": 3,
           "Emitter": 2,
-          "CodeGenRoot": 1,
           "RuntimeSupport": 1,
           "Templates": 1,
-          "Codegen": 2,
-          "Interpreter": 1,
-          "RuntimeCore": 7
-        }
+          "Bootstrap": 1,
+          "Codegen": 4,
+          "Common": 1,
+          "Interpreter": 5,
+          "RuntimeCore": 26,
+          "Tests": 1
+        },
+        "violations": [
+          {
+            "file": "CMakeLists.txt",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native/compile_hotupdate_boxing.cmd",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "contracts/native/v0/codegen_bridge.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -584,10 +622,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

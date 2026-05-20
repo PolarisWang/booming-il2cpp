@@ -221,7 +221,11 @@ int main(int argc, char** argv) {
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
 #endif
             try {
                 RunNativeAot(i);
@@ -265,7 +269,11 @@ int main(int argc, char** argv) {
         auto* patch_ctx = ApplyHotpatchIfAvailable();
         int hotupdate_failed = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
             try {
                 RunNativeAot(i);
             } catch (...) {
@@ -283,7 +291,11 @@ int main(int argc, char** argv) {
     case RunMode::HotUpdateAndBenchmark: {
         int hot_result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
+#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+#endif
             try {
                 RunNativeAot(i);
             } catch (...) {

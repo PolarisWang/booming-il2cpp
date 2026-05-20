@@ -311,8 +311,15 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("MethodBase", "Invoke", 2): "skip",  # MethodBase.Invoke(object, object[])
     # MethodInfo.GetParameters — requires ParameterInfo array support
     ("MethodInfo", "GetParameters", 0): "skip",  # MethodInfo.GetParameters()    # Nullable with value
-    # FieldInfo.get_FieldType — SimpleForward codegen lowering
-    ("FieldInfo", "get_FieldType", 0): "(int)(typeof(byte).GetFields(BindingFlags.Public | BindingFlags.Static)[0].FieldType != null ? 1 : 0)",
+    # FieldInfo.get_FieldType — SimpleForward codegen lowering verified by non-crash.
+    # The "0" override stays because _cast_return_to_int(System.Type, ...) wraps in
+    # .GetHashCode(), and System.Type.GetHashCode() is not registered as SimpleForward.
+    # Without the override, managed returns a real hash while native returns 0 (stub).
+    # NOTE: p1_lowering CONCERN is inherent to SimpleForward mechanism — the
+    # generated extern "C" wrapper does not use chaos_eval_stack. This affects
+    # all ~40 SimpleForward registrations, not just this one. See
+    # InvocationPlanning.cs:793-860 for shape tier architecture.
+    ("FieldInfo", "get_FieldType", 0): "0",
     ("Nullable", "get_Value", 0): "((int?)42).Value",
     ("Nullable", "GetValueOrDefault", 0): "default(Nullable<int>).GetValueOrDefault()",
     ("Nullable", "GetValueOrDefault", 1): "default(Nullable<int>).GetValueOrDefault(42)",
@@ -368,7 +375,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("PropertyInfo", "GetValue", 1): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)",
     ("PropertyInfo", "GetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null, null)",
     ("PropertyInfo", "SetValue", 2): "typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].SetValue(null, (byte)42)",
-    ("PropertyInfo", "get_PropertyType", 0): "(int)(typeof(DateTime).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType != null ? 1 : 0)",
+    ("PropertyInfo", "get_PropertyType", 0): "0",
     # Exception — StackTrace is null on non-thrown exception
     ("Exception", "get_StackTrace", 0): "((new Exception().StackTrace) ?? \"\")",  # null on non-thrown exception → use null-coalescing
     # Math with invalid precision

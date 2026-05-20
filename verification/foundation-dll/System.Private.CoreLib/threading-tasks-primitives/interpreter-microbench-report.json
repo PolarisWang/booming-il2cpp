@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
-  "capturedAt": "2026-05-20T15:54:12",
+  "capturedAt": "2026-05-20T19:04:03",
   "metrics": {
     "poolSize": 0
   },
-  "rawOutput": "[2026-05-20T15:54:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T15:54:12][WARN][CRAG] young_collection_no_region\n[2026-05-20T15:54:12][INFO][NUMA] numa_init count=%d\n[2026-05-20T15:54:12][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T15:54:12][INFO][OldGen] init done base=0x2462799757312 pages=2\n[2026-05-20T15:54:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T15:54:12][DEBUG][Finalizer] thread_started id={0}\n[2026-05-20T15:54:12][DEBUG][BGC] thread_started\nPassed: 44/44\n"
+  "rawOutput": "[2026-05-20T19:04:03][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T19:04:03][WARN][CRAG] young_collection_no_region\n[2026-05-20T19:04:03][INFO][NUMA] numa_init count=%d\n[2026-05-20T19:04:03][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T19:04:03][INFO][OldGen] init done base=0x1847550083072 pages=2\n[2026-05-20T19:04:03][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T19:04:03][DEBUG][BGC] thread_started\n[2026-05-20T19:04:03][DEBUG][Finalizer] thread_started id={0}\nPassed: 44/44\n"
 }

@@ -36,6 +36,9 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct ReflectionAssemblySubjects_t {
+        void (*CustomEntrySubject_21)(
+                void
+        );
         void (*Subject_0)(
                 void
         );
@@ -75,9 +78,6 @@ struct Functions {
         void (*Subject_20)(
                 void
         );
-        void (*Subject_21)(
-                void
-        );
         void (*Subject_2)(
                 void
         );
@@ -108,6 +108,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -118,6 +122,11 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct ReflectionAssemblySubjects {
+    static inline void CustomEntrySubject_21(
+    ) {
+        return kFunctions.reflectionAssemblySubjects.CustomEntrySubject_21(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.reflectionAssemblySubjects.Subject_0(
@@ -181,11 +190,6 @@ struct ReflectionAssemblySubjects {
     static inline void Subject_20(
     ) {
         return kFunctions.reflectionAssemblySubjects.Subject_20(
-        );
-    }
-    static inline void Subject_21(
-    ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_21(
         );
     }
     static inline void Subject_2(

@@ -19,6 +19,14 @@
       "path": "generated/native-aot.generated.cpp"
     },
     {
+      "kind": "generatedModuleHeader",
+      "path": "generated/chaos_generated_module.h"
+    },
+    {
+      "kind": "generatedModuleSource",
+      "path": "generated/chaos_generated_module.cpp"
+    },
+    {
       "kind": "codegenMetrics",
       "path": "native-aot.codegen-metrics.json"
     }

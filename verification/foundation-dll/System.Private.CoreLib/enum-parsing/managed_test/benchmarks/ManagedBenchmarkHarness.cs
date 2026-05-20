@@ -430,6 +430,16 @@ static bool H_11(int i)
                     IsException = threw,
                 });
             }
+            { // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String() — unsupported type
+                results.Add(new MethodResult {
+                    MethodIndex = 12,
+                    MethodSubjectId = "System.Private.CoreLib/System.Enum::BoxToString:System.String()",
+                    ElapsedMilliseconds = 0.0,
+                    Iterations = 100000,
+                    IsBodyReal = false,
+                    IsException = false,
+                });
+            }
         // Consume accum so JIT cannot elide the computation
         string json = JsonSerializer.Serialize(new { results }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         Console.WriteLine(json);

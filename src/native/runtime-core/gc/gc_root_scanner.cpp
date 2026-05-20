@@ -58,16 +58,44 @@ const GcSlotMapV0* GcLookupSlotMap(const void* code_address) {
     return (it != s_slot_map.end()) ? it->second : nullptr;
 }
 
-void GcRegisterSlotMapsFromSection(const GcSlotMapV0* begin, const GcSlotMapV0* end) {
-    // The section contains flat GcSlotMapV0 instances packed sequentially.
-    // Each instance is followed by its slot data.  We use a heuristic:
-    // each method's slot map occupies sizeof(GcSlotMapV0) + num_gc_slots * 4 bytes.
-    // The section cannot be iterated without per-entry size metadata, so this
-    // function requires the caller (codegen) to register each method individually
-    // via GcRegisterSlotMap().
-    (void)begin;
-    (void)end;
-    // This is a placeholder for future batch-registration optimization.
+void GcRegisterSlotMapsFromSection(const void* begin, const void* end) {
+    // The .gc_slot_maps section contains entries laid out as:
+    //   [GcSlotMapSectionEntryHdrV0][GcSlotMapV0 body][slots data]
+    // Each entry starts with GcSlotMapSectionEntryHdrV0.entry_total_size
+    // giving the total byte count for that entry (including the header),
+    // enabling iteration over variable-length entries.
+    auto* ptr = static_cast<const uint8_t*>(begin);
+    auto* end_ptr = static_cast<const uint8_t*>(end);
+
+    while (ptr + static_cast<ptrdiff_t>(sizeof(uint32_t)) <= end_ptr) {
+        uint32_t entry_total;
+        std::memcpy(&entry_total, ptr, sizeof(entry_total));
+        if (entry_total < sizeof(GcSlotMapSectionEntryHdrV0)) {
+            CHAOS_IL2CPP_LOG_WARN("CRAG", "slot_map_section_entry_too_small: %u", entry_total);
+            break;
+        }
+
+        auto* hdr = reinterpret_cast<const GcSlotMapSectionEntryHdrV0*>(ptr);
+        auto* sm = reinterpret_cast<const GcSlotMapV0*>(hdr + 1);
+
+        // Sanity-check: slot map must fit within the declared entry size.
+        uint32_t expected_min = sizeof(GcSlotMapSectionEntryHdrV0)
+            + static_cast<uint32_t>(sizeof(GcSlotMapV0))
+            + sm->num_gc_slots * static_cast<uint32_t>(sizeof(uint32_t));
+        if (entry_total < expected_min) {
+            CHAOS_IL2CPP_LOG_WARN("CRAG",
+                "slot_map_section_entry_size_mismatch: expected>=%u, got=%u",
+                expected_min, entry_total);
+            break;
+        }
+
+        if (hdr->code_address != nullptr) {
+            GcRegisterSlotMap(hdr->code_address, sm);
+        }
+
+        // Advance by entry_total (includes the header).
+        ptr += entry_total;
+    }
 }
 
 // ======================================================================

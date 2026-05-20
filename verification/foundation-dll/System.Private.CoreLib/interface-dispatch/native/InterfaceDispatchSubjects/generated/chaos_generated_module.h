@@ -36,7 +36,7 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct CalcAdd_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -51,7 +51,7 @@ struct Functions {
         );
     } calcAdd;
     struct CalcMul_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -71,7 +71,7 @@ struct Functions {
         );
     } iWithDefault;
     struct ImplDiamond_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*BaseMethod)(
@@ -82,7 +82,7 @@ struct Functions {
         );
     } implDiamond;
     struct ImplDiamond2_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*BaseMethod)(
@@ -93,7 +93,7 @@ struct Functions {
         );
     } implDiamond2;
     struct ImplSimple_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -101,7 +101,7 @@ struct Functions {
         );
     } implSimple;
     struct ImplWithDefault_t {
-        void (*_ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -171,6 +171,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -181,33 +185,33 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct CalcAdd {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcAdd._ctor(
-                    p_this
+        return kFunctions.calcAdd.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Add(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.calcAdd.Add(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     static inline CHAOS_IL2CPP_INT32 Multiply(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.calcAdd.Multiply(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -215,33 +219,33 @@ struct CalcAdd {
 };
 
 struct CalcMul {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcMul._ctor(
-                    p_this
+        return kFunctions.calcMul.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Add(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.calcMul.Add(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     static inline CHAOS_IL2CPP_INT32 Multiply(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INT32 p0, 
-                CHAOS_IL2CPP_INT32 p1
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1, 
+                CHAOS_IL2CPP_INT32 arg_2
     ) {
         return kFunctions.calcMul.Multiply(
-                    p_this, 
-                    p0, 
-                    p1
+                    arg_0, 
+                    arg_1, 
+                    arg_2
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -250,10 +254,10 @@ struct CalcMul {
 
 struct IWithDefault {
     static inline CHAOS_IL2CPP_INT32 GetValue(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.iWithDefault.GetValue(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -261,25 +265,25 @@ struct IWithDefault {
 };
 
 struct ImplDiamond {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond._ctor(
-                    p_this
+        return kFunctions.implDiamond.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implDiamond.BaseMethod(
-                    p_this
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implDiamond.DerivedMethod(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -287,25 +291,25 @@ struct ImplDiamond {
 };
 
 struct ImplDiamond2 {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond2._ctor(
-                    p_this
+        return kFunctions.implDiamond2.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implDiamond2.BaseMethod(
-                    p_this
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implDiamond2.DerivedMethod(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -313,18 +317,18 @@ struct ImplDiamond2 {
 };
 
 struct ImplSimple {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implSimple._ctor(
-                    p_this
+        return kFunctions.implSimple.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implSimple.GetValue(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -332,18 +336,18 @@ struct ImplSimple {
 };
 
 struct ImplWithDefault {
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implWithDefault._ctor(
-                    p_this
+        return kFunctions.implWithDefault.ctor(
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
-                CHAOS_IL2CPP_INTPTR p_this
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
         return kFunctions.implWithDefault.GetValue(
-                    p_this
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
@@ -352,10 +356,10 @@ struct ImplWithDefault {
 
 struct InterfaceDispatchNativeEntry {
     static inline CHAOS_IL2CPP_INT32 Run(
-                CHAOS_IL2CPP_INT32 p0
+                CHAOS_IL2CPP_INT32 arg_0
     ) {
         return kFunctions.interfaceDispatchNativeEntry.Run(
-                    p0
+                    arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestAsCheck(

@@ -9,6 +9,9 @@
 #include "vtable_registry.h"
 #include "generated_code_compat.h"
 
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_helpers.h>
+
 namespace chaos::il2cpp::interpreter {
 
 namespace {
@@ -732,12 +735,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                         }
                     }
                 } else {
-                    // Object field access (existing behavior).
+                    // Object field access — pre-write barrier (SATB) + post-write barrier (card dirty).
                     auto* object = RequireObject(instance);
                     if (object->fields.size() <= instruction.field_offset) {
                         object->fields.resize(instruction.field_offset + 1u);
                     }
+                    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&object->fields[instruction.field_offset].obj));
                     object->fields[instruction.field_offset] = value;
+                    chaos_gc_dirty_card(object);
                 }
                 break;
             }
@@ -757,7 +763,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (index >= array->elements.size()) {
                     throw CHAOS_IL2CPP_OUT_OF_RANGE("array_index");
                 }
+                using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&array->elements[index].obj));
                 array->elements[index] = value;
+                chaos_gc_dirty_card(array);
                 break;
             }
             case IROpCode::LdLen: {
@@ -1374,7 +1383,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     } else {
                         stind_raw = reinterpret_cast<CHAOS_IL2CPP_INT64>(stind_val.obj);
                     }
+                    // Write barrier for reference stores (immediate_i4 == 10)
+                    if (instruction.immediate_i4 == 10) {
+                        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(stind_dst));
+                    }
                     std::memcpy(stind_dst, &stind_raw, stind_write_size);
+                    if (instruction.immediate_i4 == 10) {
+                        chaos_gc_dirty_card(stind_dst);
+                    }
                 }
                 break;
             }
@@ -1645,7 +1662,11 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 const InterpreterValue stobj_addr = Pop(&frame->stack);
                 // Managed pointer (from LdArgA/LdLocA): write through to InterpreterValue slot.
                 if (stobj_addr.tag == ValueTag::ManagedPtr && stobj_addr.obj != nullptr) {
-                    *static_cast<InterpreterValue*>(stobj_addr.obj) = stobj_val;
+                    auto* iv_slot = static_cast<InterpreterValue*>(stobj_addr.obj);
+                    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv_slot->obj));
+                    *iv_slot = stobj_val;
+                    chaos_gc_dirty_card(stobj_addr.obj);
                 } else {
                     void* stobj_dst = (stobj_addr.tag == ValueTag::Struct || stobj_addr.tag == ValueTag::ObjectRef)
                         ? stobj_addr.obj : nullptr;

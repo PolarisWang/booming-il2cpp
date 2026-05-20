@@ -164,6 +164,42 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[29];
+void* kFunctionsFlat[29] = {
+    reinterpret_cast<void*>(&RcwBasicSubjects_ConstantFortyTwo__ctor),
+    reinterpret_cast<void*>(&RcwBasicSubjects_ConstantFortyTwo_GetValue),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw_System_IntPtr_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripIdentity),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripQi),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_0),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_1),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_2),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_3),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_4),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_5),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RcwBasicSubjects_Subject_6),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RuntimeState_Get),
+    reinterpret_cast<void*>(&RcwBasicSubjects_RuntimeState_Set_System_IntPtr),
+    reinterpret_cast<void*>(&RcwBasicSubjects_SimpleMath__ctor),
+    reinterpret_cast<void*>(&RcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32),
+    reinterpret_cast<void*>(&RcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32),
+};
+
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;

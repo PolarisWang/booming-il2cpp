@@ -68,22 +68,22 @@ struct Functions {
         );
     } delegateCoreInvocationSubjects;
     struct DelegateCoreInvocationSubjects___c_t {
-        void (*_Subject_2_b__3_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Subject_3_b__4_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Subject_4_b__5_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Subject_7_b__8_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_cctor)(
+        void (*cctor)(
                 void
         );
-        void (*_ctor)(
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<Subject_2>b__3_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<Subject_3>b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<Subject_4>b__5_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<Subject_7>b__8_0)(
                     CHAOS_IL2CPP_INTPTR
         );
     } delegateCoreInvocationSubjects___c;
@@ -91,6 +91,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -157,44 +161,44 @@ struct DelegateCoreInvocationSubjects {
 };
 
 struct DelegateCoreInvocationSubjects___c {
-    static inline void _Subject_2_b__3_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void cctor(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_2_b__3_0(
-                    p_this
+        return kFunctions.delegateCoreInvocationSubjects___c.cctor(
         );
     }
-    static inline void _Subject_3_b__4_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_3_b__4_0(
-                    p_this
+        return kFunctions.delegateCoreInvocationSubjects___c.ctor(
+                    arg_0
         );
     }
-    static inline void _Subject_4_b__5_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void <Subject_2>b__3_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_4_b__5_0(
-                    p_this
+        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_2>b__3_0(
+                    arg_0
         );
     }
-    static inline void _Subject_7_b__8_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void <Subject_3>b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_7_b__8_0(
-                    p_this
+        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_3>b__4_0(
+                    arg_0
         );
     }
-    static inline void _cctor(
+    static inline void <Subject_4>b__5_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._cctor(
+        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_4>b__5_0(
+                    arg_0
         );
     }
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void <Subject_7>b__8_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._ctor(
-                    p_this
+        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_7>b__8_0(
+                    arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.

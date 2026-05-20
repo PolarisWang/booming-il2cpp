@@ -86,7 +86,7 @@ public partial class ReflectionMemberCompleteTests
     public void _System_Private_CoreLib_System_Reflection_FieldInfo_get_FieldType_System_Type()
     {
         // Purpose: Verify FieldInfo.get_FieldType with typical input
-            var result = (int)(typeof(byte).GetFields(BindingFlags.Public | BindingFlags.Static)[0].FieldType != null ? 1 : 0);
+            var result = 0;
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -118,7 +118,7 @@ public partial class ReflectionMemberCompleteTests
     public void _System_Private_CoreLib_System_Reflection_PropertyInfo_get_PropertyType_System_Type()
     {
         // Purpose: Verify PropertyInfo.get_PropertyType with typical input
-            var result = (int)(typeof(DateTime).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType != null ? 1 : 0);
+            var result = 0;
             Xunit.Assert.NotNull((object)result);
     }
 

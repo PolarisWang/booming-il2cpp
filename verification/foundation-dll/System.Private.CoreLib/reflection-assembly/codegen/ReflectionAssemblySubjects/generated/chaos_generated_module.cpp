@@ -15,6 +15,9 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
+extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_CustomEntrySubject_21(
+        void
+);
 extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_0(
         void
 );
@@ -54,9 +57,6 @@ extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_1(
 extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_20(
         void
 );
-extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_21(
-        void
-);
 extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_2(
         void
 );
@@ -88,6 +88,7 @@ extern "C" void ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_9(
 
 static const Functions s_functions = {
     {
+        &ReflectionAssemblySubjects_ReflectionAssemblySubjects_CustomEntrySubject_21,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_0,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_10,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_11,
@@ -101,7 +102,6 @@ static const Functions s_functions = {
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_19,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_1,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_20,
-        &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_21,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_2,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_3,
         &ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_4,
@@ -115,6 +115,35 @@ static const Functions s_functions = {
 };
 
 const Functions kFunctions = s_functions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[22];
+void* kFunctionsFlat[22] = {
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_CustomEntrySubject_21),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_0),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_10),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_11),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_12),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_13),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_14),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_15),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_16),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_17),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_18),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_19),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_1),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_20),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_2),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_3),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_4),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_5),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_6),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_7),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_8),
+    reinterpret_cast<void*>(&ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_9),
+};
 
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {

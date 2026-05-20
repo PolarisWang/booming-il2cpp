@@ -123,6 +123,24 @@ def _load_method_subject_ids(family_slug: str) -> list[str]:
     return mids
 
 
+def _copy_handwritten_cs(entrypoint_dir: Path, class_name: str, family_slug: str) -> None:
+    """Copy handwritten partial class .cs files into entrypoint_dir for generate_and_build().
+
+    Checks both managed/patch/ and handwritten/ directories so either location works.
+    Only copies files matching {class_name}.Custom.cs (partial class with custom methods).
+    """
+    custom_name = f"{class_name}.Custom.cs"
+    for source_subdir in ("managed/patch", "handwritten"):
+        source_dir = _VERIFICATION / family_slug / source_subdir
+        src = source_dir / custom_name
+        if src.exists():
+            dest = entrypoint_dir / custom_name
+            entrypoint_dir.mkdir(parents=True, exist_ok=True)
+            dest.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+            print(f"    copied handwritten {custom_name} from {source_subdir}/")
+            return
+
+
 def _build_patch_entrypoint(
     family_slug: str,
     method_subject_ids: list[str],
@@ -132,7 +150,10 @@ def _build_patch_entrypoint(
     The patch variant uses MethodN that returns 0xB0000000+N sentinel values.
     """
     entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-patch"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}PatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}PatchEntry"
+
+    # Copy handwritten Custom.cs before generate_and_build() auto-detects it
+    _copy_handwritten_cs(entrypoint_dir, class_name, family_slug)
 
     result = generate_and_build(
         entrypoint_dir,
@@ -156,7 +177,10 @@ def _build_semantic_patch_entrypoint(
     but valid results for semantic hotupdate verification.
     """
     entrypoint_dir = _VERIFICATION / family_slug / "il2cpp_dist" / "entrypoint-semantic-patch"
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}SemanticPatchEntry"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}SemanticPatchEntry"
+
+    # Copy handwritten Custom.cs before generate_and_build() auto-detects it
+    _copy_handwritten_cs(entrypoint_dir, class_name, family_slug)
 
     result = generate_and_build(
         entrypoint_dir,
@@ -225,7 +249,7 @@ def _trim_ir(family_slug: str, variant: str = "semantic-patch") -> bool:
         "patch": "PatchEntry",
         "semantic-patch": "SemanticPatchEntry",
     }
-    class_name = f"{family_slug.title().replace('-', '').replace('_', '')}{variant_suffix.get(variant, 'SemanticPatchEntry')}"
+    class_name = f"{family_slug.title().replace('-', '').replace('_', '').replace(',', '')}{variant_suffix.get(variant, 'SemanticPatchEntry')}"
     entry_prefix = class_name
     ir_path = _VERIFICATION / family_slug / "il2cpp_dist" / f"entrypoint-{variant}" / "closure-sp" / "analysis" / "aot-core-ir.json"
 
