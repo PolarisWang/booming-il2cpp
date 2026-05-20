@@ -825,13 +825,13 @@ void CHAOS_RUNTIME_ABI_CALL ChaosGetNativeVariantForObject(
 #endif
 }
 
-// ── ICustomMarshaler (V3 — interpreter dispatch) ─────────────────────────
+// ── ICustomMarshaler (V4 — interpreter dispatch with cleanup support) ─────
 //
 // ICustomMarshaler allows user-defined managed types to control parameter
 // marshalling for P/Invoke calls decorated with
 // [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(T), Cookie = "...")].
 //
-// V3 approach:
+// V4 approach:
 //   The cookie encodes the ICustomMarshaler implementor type name.
 //   Native stub resolves the type, calls its static GetInstance(cookie) to
 //   obtain/reuse a marshaler instance, then dispatches to the instance's
@@ -839,6 +839,13 @@ void CHAOS_RUNTIME_ABI_CALL ChaosGetNativeVariantForObject(
 //   method_invoke table.
 //
 //   Results are cached per unique cookie string to avoid repeated resolution.
+//   CleanUpNativeData / CleanUpManagedData method handles are pre-resolved
+//   and cached alongside the marshaler for cleanup-after-use support.
+//
+//   V4 additions:
+//     - CleanUpNativeData / CleanUpManagedData method handle caching
+//     - CustomMarshalerCleanupNativeData / CustomMarshalerCleanupManagedData
+//     - ClearMarshalerCache() for hot-update cache eviction
 
 namespace {
 
@@ -851,6 +858,8 @@ struct MarshalerSlot {
     void* marshaler_instance;    // resolved ICustomMarshaler instance
     MethodInfoHandle method_n2m; // cached MarshalNativeToManaged
     MethodInfoHandle method_m2n; // cached MarshalManagedToNative
+    MethodInfoHandle method_cnn; // cached CleanUpNativeData
+    MethodInfoHandle method_cmm; // cached CleanUpManagedData
 };
 
 constexpr uint32_t kMarshalerCacheSize = 8;
@@ -943,6 +952,13 @@ static void* ResolveOrCreateMarshaler(
     const MethodInfoHandle method_m2n = abi->type_find_method(
         type_handle, "MarshalManagedToNative", 1);
 
+    // Pre-resolve CleanUpNativeData and CleanUpManagedData for cleanup support.
+    // These may be 0 if the marshaler does not implement cleanup.
+    const MethodInfoHandle method_cnn = abi->type_find_method(
+        type_handle, "CleanUpNativeData", 1);
+    const MethodInfoHandle method_cmm = abi->type_find_method(
+        type_handle, "CleanUpManagedData", 1);
+
     // Store in first empty cache slot.
     for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
         if (s_marshaler_cache[i].marshaler_instance == nullptr) {
@@ -952,6 +968,8 @@ static void* ResolveOrCreateMarshaler(
             s_marshaler_cache[i].marshaler_instance = marshaler_instance;
             s_marshaler_cache[i].method_n2m = method_n2m;
             s_marshaler_cache[i].method_m2n = method_m2n;
+            s_marshaler_cache[i].method_cnn = method_cnn;
+            s_marshaler_cache[i].method_cmm = method_cmm;
             break;
         }
     }
@@ -1019,6 +1037,93 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     abi->method_invoke(rs, ts, method_m2n, marshaler, args, 1,
                        &result, sizeof(CHAOS_IL2CPP_INTPTR), &exc);
     return result;
+}
+
+// ── Cache lookup helper ──────────────────────────────────────────────────
+
+/// Find the cache slot containing the given marshaler instance.
+/// Returns the slot index, or kMarshalerCacheSize if not found.
+static uint32_t FindMarshalerSlot(void* marshaler) noexcept {
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
+            return i;
+        }
+    }
+    return kMarshalerCacheSize;
+}
+
+// ── Cleanup support (V4) ─────────────────────────────────────────────────
+
+/// Look up the marshaler by cookie and call its CleanUpNativeData(nativeData).
+/// Safe to call even when the marshaler does not implement cleanup — no-op in that case.
+void CustomMarshalerCleanupNativeData(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR native_data) noexcept {
+    if (cookie_utf8 == nullptr || cookie_utf8[0] == '\0') return;
+
+    auto* abi = GetRuntimeAbiV0();
+    auto* rs = runtime_core::GetCurrentRuntimeState();
+    auto* ts = runtime_core::GetCurrentThreadState();
+    if (abi == nullptr || rs == nullptr || ts == nullptr) return;
+
+    void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
+    if (marshaler == nullptr) return;
+
+    const uint32_t slot = FindMarshalerSlot(marshaler);
+    if (slot >= kMarshalerCacheSize) return;
+    if (s_marshaler_cache[slot].method_cnn == 0) return;
+
+    // Call marshaler.CleanUpNativeData(native_data).
+    void* const args[] = { &native_data };
+    ExceptionHandle exc = nullptr;
+    abi->method_invoke(rs, ts, s_marshaler_cache[slot].method_cnn,
+                       marshaler, args, 1, nullptr, 0, &exc);
+}
+
+/// Look up the marshaler by cookie and call its CleanUpManagedData(managedObj).
+/// Safe to call even when cleanup is not implemented — no-op in that case.
+void CustomMarshalerCleanupManagedData(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR managed_obj) noexcept {
+    if (cookie_utf8 == nullptr || cookie_utf8[0] == '\0') return;
+
+    auto* abi = GetRuntimeAbiV0();
+    auto* rs = runtime_core::GetCurrentRuntimeState();
+    auto* ts = runtime_core::GetCurrentThreadState();
+    if (abi == nullptr || rs == nullptr || ts == nullptr) return;
+
+    void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
+    if (marshaler == nullptr) return;
+
+    const uint32_t slot = FindMarshalerSlot(marshaler);
+    if (slot >= kMarshalerCacheSize) return;
+    if (s_marshaler_cache[slot].method_cmm == 0) return;
+
+    // Call marshaler.CleanUpManagedData(managed_obj).
+    void* const args[] = { &managed_obj };
+    ExceptionHandle exc = nullptr;
+    abi->method_invoke(rs, ts, s_marshaler_cache[slot].method_cmm,
+                       marshaler, args, 1, nullptr, 0, &exc);
+}
+
+// ── Cache eviction (V4 — hotupdate support) ──────────────────────────────
+
+/// Clear the entire marshaler cache. Call after module unload so stale
+/// marshaler instances (which reference types from the unloaded module) are
+/// evicted. Subsequent P/Invoke calls will re-resolve marshalers via GetInstance.
+///
+/// Thread-safety: does NOT synchronise with concurrent ResolveOrCreateMarshaler.
+/// Caller must ensure no P/Invoke dispatch is in-flight during module teardown
+/// (the caller already holds the module-unload safepoint).
+void ClearMarshalerCache() noexcept {
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        s_marshaler_cache[i].cookie[0] = '\0';
+        s_marshaler_cache[i].marshaler_instance = nullptr;
+        s_marshaler_cache[i].method_n2m = 0;
+        s_marshaler_cache[i].method_m2n = 0;
+        s_marshaler_cache[i].method_cnn = 0;
+        s_marshaler_cache[i].method_cmm = 0;
+    }
 }
 
 // ── HRESULT exception helpers (V1) ────────────────────────────────────

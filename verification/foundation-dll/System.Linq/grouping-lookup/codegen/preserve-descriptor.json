@@ -1,0 +1,306 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

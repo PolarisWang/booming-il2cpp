@@ -987,6 +987,26 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				builder.AppendLine("    CHAOS_IL2CPP_INTPTR _stackTrace = 0;");
 				builder.AppendLine("    CHAOS_IL2CPP_INT32 _HResult = 0;");
 			}
+			// Collection types embed their native runtime data directly in the
+			// GC object to eliminate stub call overhead and global map lookups.
+			// List<T> uses inline fields (matching Unity IL2CPP approach);
+			// Dictionary<K,V> and HashSet<T> use an embedded storage pointer.
+			bool isListType =
+				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.List", StringComparison.Ordinal);
+			bool isDictType =
+				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.Dictionary", StringComparison.Ordinal);
+			bool isHashSetType =
+				ns.StartsWith("System.Private.CoreLib/System.Collections.Generic.HashSet", StringComparison.Ordinal);
+			if (isListType)
+			{
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR items_array = 0;  // GC array reference");
+				builder.AppendLine("    CHAOS_IL2CPP_INT32 size = 0;           // element count");
+				builder.AppendLine("    CHAOS_IL2CPP_INT32 version = 0;        // modification counter");
+			}
+			else if (isDictType || isHashSetType)
+			{
+				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_native_storage = 0;  // native runtime storage ptr");
+			}
 			if (list.Count == 0)
 			{
 				builder.AppendLine("};");

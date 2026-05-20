@@ -1,0 +1,336 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/FilteringSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=16",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Boolean(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Boolean(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Boolean(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.ArrayList::Add:System.Int32(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_0:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Boolean(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_2:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Boolean(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_4:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_5:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_7:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Boolean(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "FilteringSubjects/FilteringSubjects::CustomEntrySubject_8:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32,System.Int32)",
+      "devirtualized": true
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/\u003CPrivateImplementationDetails\u003E::EDE8EF26A097F0FD889F9F39F6F5AF921370630B164C4A4FA28EB716B2DF9269",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::\u003C\u003E9__9_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": []
+}

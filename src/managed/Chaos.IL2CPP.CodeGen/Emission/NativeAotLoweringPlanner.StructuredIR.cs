@@ -1933,6 +1933,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         body = null;
         maxDepth = 0;
+        int extraHandlerPushes = 0;
 
         if (TryCreateCatchOnlyExceptionMethodShape(method, out var catchOnly) && catchOnly is not null)
         {
@@ -1944,6 +1945,7 @@ public sealed partial class NativeAotLoweringPlanner
                 IRExceptionKind.TryCatch,
                 offsets,
                 catchTypeSubjectId: catchOnly.ExceptionRegion.CatchTypeSubjectId);
+            extraHandlerPushes = 1;
         }
         else if (TryCreateFilterOnlyExceptionMethodShape(method, out var filterOnly) && filterOnly is not null)
         {
@@ -1956,18 +1958,22 @@ public sealed partial class NativeAotLoweringPlanner
                 offsets,
                 filterInstructions: filterOnly.FilterInstructions,
                 catchTypeSubjectId: filterOnly.FilterRegion.CatchTypeSubjectId);
+            extraHandlerPushes = 2;
         }
         else if (TryCreateFinallyOnlyExceptionMethodShape(method, out var finallyOnly) && finallyOnly is not null)
         {
             body = BuildFinallyOnlyExceptionIRBody(finallyOnly, offsets);
+            // finally-only has no caught-exception push
         }
         else if (TryCreateCatchAndFinallyExceptionMethodShape(method, out var catchAndFinally) && catchAndFinally is not null)
         {
             body = BuildCatchAndFinallyExceptionIRBody(catchAndFinally, offsets);
+            extraHandlerPushes = 1;
         }
         else if (TryCreateFilterAndFinallyExceptionMethodShape(method, out var filterAndFinally) && filterAndFinally is not null)
         {
             body = BuildFilterAndFinallyExceptionIRBody(filterAndFinally, offsets);
+            extraHandlerPushes = 2;
         }
 
         if (body is null)
@@ -1975,7 +1981,15 @@ public sealed partial class NativeAotLoweringPlanner
             return false;
         }
 
-        maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: true);
+        // Exception handlers synthesize pushes of the caught exception value onto
+        // the eval stack (see EmitExceptionRegion at line ~1134 for TryCatch, and
+        // lines ~1346/1382/1412/1428/1456 for TryFilter).  These are NOT present
+        // in the IL instruction stream, so ComputeMaxEvalStackDepth cannot count
+        // them.  Add the extra slot declarations here to match.
+        //   - TryCatch: 1 push (caught exception object_value)
+        //   - TryFilter: 2 pushes (caught exception + filter body re-push)
+        //   - finally-only: 0 pushes
+        maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: true) + extraHandlerPushes;
         return true;
     }
 

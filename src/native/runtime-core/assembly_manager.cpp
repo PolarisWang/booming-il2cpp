@@ -197,6 +197,10 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
     //    type_flags/image/type_info_ptrs are nulled for safety.
     MarkModuleTombstone(module_id);
 
+    // 1a. Evict ICustomMarshaler cache — marshaler instances from the unloaded
+    //     module are now stale.  Re-resolution happens lazily on next P/Invoke.
+    ClearMarshalerCache();
+
     // 2. Unpatch — clear kHotpatchActive flags on all dispatch entries.
     if (alc->patch_context != nullptr) {
         Unpatch(alc->patch_context);

@@ -6,101 +6,63 @@
 #include <algorithm>
 #include <cstring>
 #include <chaos/collection.h>
+#include "generated_code_compat.h"
 #include "gc_helpers.h"
 #include "runtime_stubs/stub_common.h"
+
+#include <vector>
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-// ═══════════════════════════════════════════════════════════════
-// List<T> helpers
-// ═══════════════════════════════════════════════════════════════
+// ── Local storage for List<T> (uses native storage slot) ──
+struct ListRuntimeStorage {
+    std::vector<CHAOS_IL2CPP_INTPTR> items;
+    CHAOS_IL2CPP_INT32 version = 0;
+};
 
-CHAOS_IL2CPP_INT32 CollectionListGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept
-{
-    if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    return static_cast<CHAOS_IL2CPP_INT32>(storage->items.size());
-}
-
-CHAOS_IL2CPP_INTPTR CollectionListGetItem(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index) noexcept
-{
-    if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto idx = static_cast<CHAOS_IL2CPP_SIZE>(index);
-    if (index < 0 || idx >= storage->items.size()) return 0;
-    return storage->items[idx];
-}
-
-void CollectionListSetItem(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto idx = static_cast<CHAOS_IL2CPP_SIZE>(index);
-    if (index >= 0 && idx < storage->items.size())
-        storage->items[idx] = value;
-}
-
-void CollectionListAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    storage->items.push_back(value);
-}
-
-void CollectionListInsert(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto idx = static_cast<CHAOS_IL2CPP_SIZE>(index);
-    if (index >= 0 && idx <= storage->items.size())
-        storage->items.insert(storage->items.begin() + idx, value);
-}
-
-void CollectionListRemoveAt(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INT32 index) noexcept
-{
-    if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto idx = static_cast<CHAOS_IL2CPP_SIZE>(index);
-    if (index >= 0 && idx < storage->items.size())
-        storage->items.erase(storage->items.begin() + idx);
-}
-
-CHAOS_IL2CPP_INT32 CollectionListIndexOf(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    if (handle == 0) return -1;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    for (CHAOS_IL2CPP_SIZE i = 0; i < storage->items.size(); ++i) {
-        if (storage->items[i] == value)
-            return static_cast<CHAOS_IL2CPP_INT32>(i);
+inline ListRuntimeStorage* require_list_storage(CHAOS_IL2CPP_INTPTR handle) {
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0)) {
+        CHAOS_IL2CPP_ABORT();
     }
-    return -1;
-}
-
-CHAOS_IL2CPP_INT32 CollectionListContains(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    return CollectionListIndexOf(handle, value) >= 0 ? 1 : 0;
-}
-
-CHAOS_IL2CPP_INT32 CollectionListRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto& items = storage->items;
-    for (auto it = items.begin(); it != items.end(); ++it) {
-        if (*it == value) {
-            items.erase(it);
-            return 1;
-        }
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot != 0) {
+        return reinterpret_cast<ListRuntimeStorage*>(*slot);
     }
-    return 0;
+    auto* storage = new ListRuntimeStorage();
+    *slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+    return storage;
 }
+
+// ── Local storage for HashSet<T> ──
+struct HashSetRuntimeStorage {
+    std::vector<CHAOS_IL2CPP_INTPTR> items;
+};
+
+inline HashSetRuntimeStorage* require_hashset_storage(CHAOS_IL2CPP_INTPTR handle) {
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0)) {
+        CHAOS_IL2CPP_ABORT();
+    }
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + chaos::il2cpp::common::kNativeStorageSlotOffset);
+    if (*slot != 0) {
+        return reinterpret_cast<HashSetRuntimeStorage*>(*slot);
+    }
+    auto* storage = new HashSetRuntimeStorage();
+    *slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+    return storage;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// List<T> helpers — using native storage slot.
+// ═══════════════════════════════════════════════════════════════
 
 CHAOS_IL2CPP_INTPTR CollectionListToArray(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
     if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    auto count = storage->items.size();
+    auto* storage = require_list_storage(handle);
+    auto count = static_cast<CHAOS_IL2CPP_SIZE>(storage->items.size());
 
     auto* arr = static_cast<StubArrayHeader*>(
         GcAllocateAtomic(sizeof(StubArrayHeader) + count * sizeof(CHAOS_IL2CPP_INTPTR)));
@@ -113,18 +75,12 @@ CHAOS_IL2CPP_INTPTR CollectionListToArray(CHAOS_IL2CPP_INTPTR handle) noexcept
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
-void CollectionListClear(CHAOS_IL2CPP_INTPTR handle) noexcept
+void CollectionListAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    storage->items.clear();
-}
-
-void CollectionListSort(CHAOS_IL2CPP_INTPTR handle) noexcept
-{
-    if (handle == 0) return;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
-    std::sort(storage->items.begin(), storage->items.end());
+    auto* storage = require_list_storage(handle);
+    storage->items.push_back(value);
+    storage->version++;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -206,14 +162,14 @@ void CollectionDictionaryAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR key
 CHAOS_IL2CPP_INT32 CollectionHashSetGetCount(CHAOS_IL2CPP_INTPTR handle) noexcept
 {
     if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
+    auto* storage = require_hashset_storage(handle);
     return static_cast<CHAOS_IL2CPP_INT32>(storage->items.size());
 }
 
 CHAOS_IL2CPP_INT32 CollectionHashSetAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
+    auto* storage = require_hashset_storage(handle);
     for (auto& item : storage->items) {
         if (item == value) return 0;
     }
@@ -224,7 +180,7 @@ CHAOS_IL2CPP_INT32 CollectionHashSetAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP
 CHAOS_IL2CPP_INT32 CollectionHashSetContains(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
+    auto* storage = require_hashset_storage(handle);
     for (auto& item : storage->items) {
         if (item == value) return 1;
     }
@@ -234,7 +190,7 @@ CHAOS_IL2CPP_INT32 CollectionHashSetContains(CHAOS_IL2CPP_INTPTR handle, CHAOS_I
 CHAOS_IL2CPP_INT32 CollectionHashSetRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return 0;
-    auto* storage = chaos::il2cpp::common::require_list_runtime_storage<CHAOS_IL2CPP_INTPTR>(handle);
+    auto* storage = require_hashset_storage(handle);
     auto& items = storage->items;
     for (auto it = items.begin(); it != items.end(); ++it) {
         if (*it == value) {

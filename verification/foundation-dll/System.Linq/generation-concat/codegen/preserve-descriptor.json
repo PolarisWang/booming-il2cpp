@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenerationConcatSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenerationConcatSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenerationConcatSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenerationConcatSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

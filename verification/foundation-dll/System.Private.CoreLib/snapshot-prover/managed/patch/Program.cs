@@ -12,7 +12,7 @@ public class Program
         SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.Method5(); failures += SnapshotProverPatchEntry._exitCode << 5;
         SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.Method6(); failures += SnapshotProverPatchEntry._exitCode << 6;
         SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.Method7(); failures += SnapshotProverPatchEntry._exitCode << 7;
-        SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.Method8(); failures += SnapshotProverPatchEntry._exitCode << 8;
+        SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.CustomEntryMethod8(); failures += SnapshotProverPatchEntry._exitCode << 8;
         SnapshotProverPatchEntry._exitCode = 0; SnapshotProverPatchEntry.Method9(); failures += SnapshotProverPatchEntry._exitCode << 9;
         return failures;
     }

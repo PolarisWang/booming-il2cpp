@@ -1,0 +1,333 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Comparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.Comparer\u003CSystem.Int32\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.Comparer\u00601::get_Default:System.Collections.Generic.Comparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.Comparer\u00601::get_Default:System.Collections.Generic.Comparer\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Order\u003CSystem.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Order:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Order:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Order\u003CSystem.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Order:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Order:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderByDescending\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderByDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderByDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderByDescending\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderByDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderByDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderDescending\u003CSystem.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::OrderDescending\u003CSystem.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::OrderDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::OrderDescending:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::ThenBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::ThenBy:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::ThenBy:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::ThenBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::ThenBy:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::ThenBy:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::ThenByDescending\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::ThenByDescending:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::ThenByDescending:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::ThenByDescending\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::ThenByDescending:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::ThenByDescending:IOrderedEnumerable\u003C!!0\u003E(IOrderedEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "OrderingSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

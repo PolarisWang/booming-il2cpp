@@ -1,0 +1,168 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GroupingLookupSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_0",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_1",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_2",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_3",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_4",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_5",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_6",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_7",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_cctor",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c__ctor",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_4_b__5_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_1_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_1_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+          "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

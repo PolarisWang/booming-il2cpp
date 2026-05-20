@@ -1,0 +1,324 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/AggregationSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=40",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::272BC3456B7CE85DE2CE18D1964316879E840A1201A4664E967EF42BA3F76B96",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_2",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__10_0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.String(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Char(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Char(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Boolean(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Char(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

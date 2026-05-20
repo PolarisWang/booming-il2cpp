@@ -102,12 +102,13 @@ MarkSweepOldGen::~MarkSweepOldGen() {
         std::free(old_array->pages);
         delete old_array;
     }
-    for (int i = 0; i < kRetiredRingSize; i++) {
-        if (retired_ring_[i] != nullptr) {
-            std::free(retired_ring_[i]->pages);
-            delete retired_ring_[i];
+    for (auto* retired : retired_arrays_) {
+        if (retired != nullptr) {
+            std::free(retired->pages);
+            delete retired;
         }
     }
+    retired_arrays_.clear();
 }
 
 // ── OldGenPage helpers ─────────────────────────────────────────────
@@ -290,6 +291,18 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     // Clear mark bitmap.
     GcMarkBitmap(mem->MarkBitmap(), bitmap_bytes).Clear();
 
+    // For freshly-allocated oversized pages, the bitmap must be marked
+    // BEFORE the page is linked into page_list_ (visible to BgcSweep).
+    // BgcSweep snapshots page_list_ under mutex_, then sweeps each page.
+    // If the bitmap is empty at snapshot time, SweepPage marks the page
+    // as !in_use and BgcSweep Phase 4b unlinks it.  Even though VirtualFree
+    // is deferred to BgcCompact (STW safepoint), the mutator's memset
+    // on this page may race with BgcCompact's forced thread suspension.
+    if (mem->is_oversized) {
+        CHAOS_IL2CPP_SIZE num_slots = (payload_size + sizeof(void*) - 1) / sizeof(void*);
+        GcMarkBitmap(mem->MarkBitmap(), bitmap_bytes).MarkRange(0, num_slots);
+    }
+
     // Set poison pattern after the raw bitmap region to detect overflow.
     // In CHECK builds, MarkRange verifies the poison is intact after each
     // marking operation.  Overflow detected �� CHAOS_IL2CPP_ASSERT fires.
@@ -357,17 +370,15 @@ void MarkSweepOldGen::RebuildPageArray() {
     auto* new_array = new PageArray{new_pages, count};
     auto* old_array = page_array_.exchange(new_array, std::memory_order_acq_rel);
 
-    // Ring-buffer based deferred free: retire the old array and free the
-    // array from 2 slots ago.  This gives any in-flight reader that loaded
-    // page_array_ before the exchange at least 2 more rebuilds before the
-    // array is freed — sufficient for microsecond-range lock-free reads.
-    int retire_slot = retired_ring_idx_ % kRetiredRingSize;
-    if (retired_ring_[retire_slot] != nullptr) {
-        std::free(retired_ring_[retire_slot]->pages);
-        delete retired_ring_[retire_slot];
+    // Keep the old array alive forever so that any concurrent reader that
+    // loaded this pointer before the exchange can safely dereference it
+    // without TOCTOU race.  The ring-buffer-with-deferred-free pattern is
+    // unsafe because a reader can be preempted for arbitrarily long by the
+    // scheduler, during which all ring-buffer slots may drain and free the
+    // array.  Memory overhead is negligible: a few KB per GC cycle.
+    if (old_array != nullptr) {
+        retired_arrays_.push_back(old_array);
     }
-    retired_ring_[retire_slot] = old_array;
-    retired_ring_idx_ = (retire_slot + 1) % kRetiredRingSize;
 }
 
 OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
@@ -375,7 +386,7 @@ OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
 
     auto* arr = page_array_.load(std::memory_order_acquire);
-    if (arr == nullptr || arr->count == 0) {
+    if (arr == nullptr) {
         // Fallback: linear scan during initialization.
         auto* page = page_list_;
         while (page != nullptr) {
@@ -387,11 +398,30 @@ OldGenPage* MarkSweepOldGen::FindPage(const void* ptr) const {
         return nullptr;
     }
 
+    // Snapshot pages and count into locals immediately after the atomic load.
+    // Even though the ring buffer keeps freed arrays alive for many rebuilds,
+    // we never re-dereference arr after this point.  This eliminates any
+    // possible TOCTOU race: arr may be freed after the snapshot, but our
+    // local pages/count are already valid copies.
+    auto* pages = arr->pages;
+    int count = arr->count;
+    if (count == 0) {
+        // Linear fallback during initialization.
+        auto* page = page_list_;
+        while (page != nullptr) {
+            uintptr_t start = reinterpret_cast<uintptr_t>(page);
+            uintptr_t end = start + page->page_size;
+            if (addr >= start && addr < end) return page;
+            page = page->next;
+        }
+        return nullptr;
+    }
+
     // Binary search on sorted page addresses.
-    int lo = 0, hi = arr->count - 1;
-    while (lo <= hi) {
+    // pages is the old_gen_page* array snapshot; it is never freed.
+    for (int lo = 0, hi = count - 1; lo <= hi; ) {
         int mid = lo + (hi - lo) / 2;
-        auto* page = arr->pages[mid];
+        auto* page = pages[mid];
         if (page == nullptr) {
             CHAOS_IL2CPP_LOG_WARN("OldGen", "null_page_in_array");
             break;
@@ -424,22 +454,22 @@ bool MarkSweepOldGen::IsInOldGen(const void* ptr) const {
     uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
 
     auto* arr = page_array_.load(std::memory_order_acquire);
-    if (arr == nullptr || arr->count == 0) {
-        // Fallback: linear scan during initialization.
-        auto* page = page_list_;
-        while (page != nullptr) {
-            uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
-            uintptr_t end = start + page->payload_size;
-            if (addr >= start && addr < end) return true;
-            page = page->next;
-        }
+    if (arr == nullptr) {
         return false;
     }
 
-    int lo = 0, hi = arr->count - 1;
-    while (lo <= hi) {
+    // Snapshot pages and count into locals immediately after the atomic load.
+    // See FindPage for the TOCTOU reasoning.
+    auto* pages = arr->pages;
+    int count = arr->count;
+    if (count == 0) {
+        return false;
+    }
+
+    // Binary search on sorted page addresses.
+    for (int lo = 0, hi = count - 1; lo <= hi; ) {
         int mid = lo + (hi - lo) / 2;
-        auto* page = arr->pages[mid];
+        auto* page = pages[mid];
         if (page == nullptr) break;
         uintptr_t start = reinterpret_cast<uintptr_t>(page->Payload());
         uintptr_t end = start + page->payload_size;
@@ -597,9 +627,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     if (size > kOldGenMaxInline) {
         // Route objects > 85 KB to the Large Object Heap (no compaction).
         if (size > kLohThreshold) {
-            fprintf(stderr, "[DBG_ALLOC] LOH path size=%zu\n", size);
             void* loh_ptr = g_loh.Allocate(size);
-            fprintf(stderr, "[DBG_ALLOC] LOH done loh_ptr=%p\n", loh_ptr);
             if (loh_ptr != nullptr) {
                 GcRecordAlloc(size, true);
                 memory_domain::GcTrackDomainAlloc(size);
@@ -614,12 +642,21 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         // penalizes transient oversized allocations with unnecessary STW pauses.
         g_gc_scheduler.RequestFullGc();
 
-        fprintf(stderr, "[DBG_ALLOC] AllocatePage path size=%zu\n", size);
         auto* page = AllocatePage(size, scanning_required);
-        fprintf(stderr, "[DBG_ALLOC] AllocatePage done page=%p\n", page);
         if (page == nullptr) return nullptr;
+
+        // Mark the allocated region in the page bitmap so that SweepPage
+        // does not treat this freshly-allocated oversized page as empty
+        // garbage.  Without this mark, BgcSweep sees an empty bitmap
+        // (AnySet() == false) and marks the page as !in_use, causing a
+        // use-after-free when the mutator memset()s the payload below.
+        // The mark also ensures FindObjectContaining can locate this object.
+        if (page->is_oversized) {
+            CHAOS_IL2CPP_SIZE num_slots = (size + sizeof(void*) - 1) / sizeof(void*);
+            GcMarkBitmap(page->MarkBitmap(), page->bitmap_bytes).MarkRange(0, num_slots);
+        }
+
         auto* result = page->Payload();
-        fprintf(stderr, "[DBG_ALLOC] Payload=%p memset=%zu\n", result, size);
         std::memset(result, 0, size);
         GcRecordAlloc(size, true);
         memory_domain::GcTrackDomainAlloc(size);

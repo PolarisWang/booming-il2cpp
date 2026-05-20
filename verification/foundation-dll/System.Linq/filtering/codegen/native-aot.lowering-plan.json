@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "FilteringSubjects",
+  "entrySubjectId": "FilteringSubjects/FilteringSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "FilteringSubjects_FilteringSubjects___c_cctor",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

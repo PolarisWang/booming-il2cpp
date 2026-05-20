@@ -1032,7 +1032,8 @@ static void FastFrame_PushTagged(FastFrame& frame, uint64_t val, uint8_t tag_byt
     }
 }
 
-static void Handle_Unsupported(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+static void Handle_Unsupported(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_LOG_WARN_M("FastExecute", "unsupported opcode={} at pc={}", static_cast<int>(instr.op_code), frame.pc);
     frame.threw_exception = true;
     frame.pc = 9999; // signal fallback needed
 }

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/aggregation",
+  "capturedAt": "2026-05-20T10:59:01",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 11,
+    "okCount": 0,
+    "failedCount": 11,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "aotInstructionCount": {
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TSource,TSource})",
+      "shortName": "System.Linq.Enumerable::Aggregate{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource,TAccumulate}:TAccumulate(System.Collections.Generic.IEnumerable{TSource},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate})",
+      "shortName": "System.Linq.Enumerable::Aggregate{TSource,TAccumulate}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Aggregate{TSource,TAccumulate,TResult}:TResult(System.Collections.Generic.IEnumerable{TSource},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate},System.Func{TAccumulate,TResult})",
+      "shortName": "System.Linq.Enumerable::Aggregate{TSource,TAccumulate,TResult}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TAccumulate}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},TAccumulate,System.Func{TAccumulate,TSource,TAccumulate},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,TAccumulate}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,TAccumulate},System.Func{TAccumulate,TSource,TAccumulate},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::AggregateBy{TSource,TKey,TAccumulate}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Count{TSource}:System.Int32(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::Count{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Count{TSource}:System.Int32(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "shortName": "System.Linq.Enumerable::Count{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::CountBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TKey,System.Int32}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "shortName": "System.Linq.Enumerable::CountBy{TSource,TKey}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LongCount{TSource}:System.Int64(System.Collections.Generic.IEnumerable{TSource})",
+      "shortName": "System.Linq.Enumerable::LongCount{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LongCount{TSource}:System.Int64(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "shortName": "System.Linq.Enumerable::LongCount{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::TryGetNonEnumeratedCount{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Int32&)",
+      "shortName": "System.Linq.Enumerable::TryGetNonEnumeratedCount{TSource}",
+      "status": "error",
+      "error": "JSON parse failed: Extra data: line 5 column 4 (char 154)",
+      "stdout": "\n[\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggregate{TSource\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"TAccumulate}\",\n    \"status\": \"not_found\",\n    \"error\": \"Method not found in IL2CPP pipeline output\"\n  },\n  {\n    \"methodName\": \"System.Linq.Enumerable::Aggrega",
+      "stderr": "  [1/3] Running IL2CPP pipeline... 11 methods lowered\n  [2/3] Skipping C++ generation (not needed for metrics/analysis)\n  [3/3-5/19] TAccumulate...  [3/3-9/19] TAccumulate}... not found in closure\n  [3/3-6/19] TResult}... not found in closure\n  [3/3-2/19] System.Linq.Enumerable::Aggregate{TSource... not found in closure\n  [3/3-13/19] System.Linq.Enumerable::Count{TSource}... not found in closure\n  [3/3-14/19] System.Linq.Enumerable::Count{TSource}...  [3/3-15/19] System.Linq.Enumerable::CountBy{"
+    }
+  ]
+}

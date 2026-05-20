@@ -1,0 +1,171 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "definitionSubjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=28",
+      "definitionSubjectId": "PartitioningSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=28",
+      "metadataToken": 33554438
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_2:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_3:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_4:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_6:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_7:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_9:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663309,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Boolean(System.Int32,System.Int32)",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Boolean(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663310,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32)",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_8\u003Eb__9_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663311,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "PartitioningSubjects",
+      "subjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32,System.Int32)",
+      "definitionSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "PartitioningSubjects/PartitioningSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663312,
+      "parameterCount": 2
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

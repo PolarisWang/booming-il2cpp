@@ -802,19 +802,30 @@ public sealed partial class NativeAotLoweringPlanner
         // the best performance (no function call at all, matches JIT inlining).
         if (_shapeRegistry.TryMatchInlineShape(callee, out var cppExpr))
         {
-            // Resolve ABI: ToChar returns UInt16, takes one native-int arg.
-            // The caller will substitute {0} with the actual argument expression.
-            var returnAbi = new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType
-            };
-            var paramAbi = CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType);
+            // Compute ABI dynamically from SubjectId instead of hardcoding.
+            // Parse return type and parameter count from the SubjectId format:
+            //   "Assembly/Type::MethodName:ReturnType(Param1,Param2,...)"
+            var returnTypeName = InferReturnTypeFromSubjectId(callee);
+            var returnAbi = returnTypeName != null
+                ? CreateLegacyReturnAbiSlot(returnTypeName)
+                : CreateVoidAbiSlot();
+
+            var paramCount = InferParameterCountFromSubjectId(callee);
+            var paramAbis = new AotCoreIrAbiSlotArtifact[paramCount];
+            for (int i = 0; i < paramCount; i++)
+                paramAbis[i] = CreateNativeIntAbiSlot();
+
+            // All args are raw CHAOS_IL2CPP_INTPTR — consumed directly from eval stack
+            // without coercion. The inline C++ expression template handles casting.
+            var rawArgs = paramCount > 0
+                ? new HashSet<int>(Enumerable.Range(0, paramCount))
+                : EmptyRawArgumentIndices;
+
             return new InvocationTarget(
                 TargetSymbol: callee, // unused for inline, but required for struct identity
-                ParameterAbis: new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(paramAbi),
+                ParameterAbis: paramAbis,
                 ReturnAbi: returnAbi,
-                RawArgumentIndices: new HashSet<int> { 0 },
+                RawArgumentIndices: rawArgs,
                 InlineCppExpression: cppExpr);
         }
 

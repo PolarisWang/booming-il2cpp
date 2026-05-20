@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static partial class TimeDateTimeTimespanSubjects
 {
@@ -50,25 +51,25 @@ public static partial class TimeDateTimeTimespanSubjects
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
     public static void Subject_6()
     {
-        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 444890295) _exitCode = 1;
+        if (((DateTime.UtcNow.AddDays(42.0)).GetHashCode()) != 981201898) _exitCode = 1;
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
     public static void Subject_7()
     {
-        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != 803507288) _exitCode = 1;
+        if (((DateTime.UtcNow.AddHours(42.0)).GetHashCode()) != 1331298698) _exitCode = 1;
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
     public static void Subject_8()
     {
-        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != -204202499) _exitCode = 1;
+        if (((DateTime.UtcNow.AddMinutes(42.0)).GetHashCode()) != 327914812) _exitCode = 1;
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)
     public static void Subject_9()
     {
-        if (DateTime.Compare(DateTime.UtcNow, DateTime.UtcNow) != -1) _exitCode = 1;
+        if (DateTime.Compare(DateTime.UtcNow, DateTime.UtcNow) != 0) _exitCode = 1;
     }
 
     // [10] System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)

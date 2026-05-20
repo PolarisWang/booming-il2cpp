@@ -2,6 +2,7 @@
 #include "x64_encoder.h"
 #include "code_buffer.h"
 #include "codegen_helpers.h"
+#include "t4_seh_handler.h"
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
@@ -1035,14 +1036,20 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::Throw:
     case IROpCode::Rethrow: {
-        // Deoptimize to interpreter for actual exception dispatch.
-        // The interpreter's exception handling walks SEH clauses and
-        // dispatches to managed catch/finally handlers.
-        if (config_.enable_deopt) {
-            EmitDeoptSequence(current_instr_index_);
-            return true;
-        }
-        return false;
+        // Native throw via VEH: load exception object into RCX and call
+        // ChaosT4RaiseException.  The VEH handler walks the SEH clause table
+        // embedded in this method's code, finds a matching catch/finally
+        // handler, writes the exception object into all GPR register file
+        // slots, and redirects RIP to the handler code.
+        // If no handler is found, RaiseException returns and we hit INT3.
+        if (!instr.has_src1()) return false;  // Should not happen
+        LoadGpr(kRCX, instr.src1_reg());  // RCX = exception object
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(ChaosT4RaiseException));
+        EmitCallWithSpill(kRAX);
+        // VEH handler redirects RIP on success — execution never returns here.
+        // INT3 safety net for the case where no handler is found.
+        buf_.EmitByte(0xCC);  // INT3
+        return true;
     }
 
     case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt: {

@@ -1127,21 +1127,13 @@ extern ""C"" void ChaosJitRegisterAll() {}
             entries.Add((typeName, typeNamespace, method.NativeSymbol, token));
         }
 
-        // Same grouping + sort as BuildHotpatchTable: group by (TypeNamespace, TypeName)
-        var grouped = entries
-            .GroupBy(e => (e.TypeNamespace, e.TypeName))
-            .OrderBy(g => g.Key.TypeNamespace, StringComparer.Ordinal)
-            .ThenBy(g => g.Key.TypeName, StringComparer.Ordinal)
-            .ToList();
-
+        // Assign slots in entries iteration order, matching the s_hotpatch_entries[]
+        // array order (also entries iteration order). Both BuildHotpatchTable and this
+        // function iterate entries in reachableMethods order, so indices are identical.
         var result = new Dictionary<string, int>(entries.Count, StringComparer.Ordinal);
-        int slot = 0;
-        foreach (var group in grouped)
+        for (int slot = 0; slot < entries.Count; slot++)
         {
-            foreach (var entry in group)
-            {
-                result[entry.NativeSymbol] = slot++;
-            }
+            result[entries[slot].NativeSymbol] = slot;
         }
 
         return result;

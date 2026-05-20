@@ -45,6 +45,9 @@ class P1LoweringCheck(PrincipleCheck):
 
         per_method = []
         methods_with_lowering = 0
+        # Infrastructure function patterns — compiler-generated scaffolding
+        # that is not a real translatable method (display class type init, cctor).
+        _INFRA_SHORT_NAMES = {"__c", "__c__ctor"}
         for fn in full_names:
             if cls:
                 short = fn
@@ -52,6 +55,9 @@ class P1LoweringCheck(PrincipleCheck):
                     if short.startswith(prefix):
                         short = short[len(prefix):]
                         break
+                # Skip infrastructure (display class scaffolding, etc.)
+                if short in _INFRA_SHORT_NAMES:
+                    continue
                 has = ctx.has_lowering(short)
             else:
                 has = file_has_lowering

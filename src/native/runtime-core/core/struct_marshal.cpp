@@ -147,6 +147,21 @@ static void MarshalFieldManagedToNative(
         }
         break;
 
+    case StructFieldKind::CustomMarshalerField:
+        // Managed object → native IntPtr via ICustomMarshaler.
+        {
+            const void* managed_obj = *reinterpret_cast<const void* const*>(managed_ptr + field.offset);
+            if (managed_obj != nullptr && field.custom_marshaler_cookie != nullptr) {
+                const auto native_result = runtime_core::CustomMarshalerManagedToNative(
+                    field.custom_marshaler_cookie,
+                    reinterpret_cast<CHAOS_IL2CPP_INTPTR>(managed_obj));
+                *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = native_result;
+            } else {
+                *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+            }
+        }
+        break;
+
     case StructFieldKind::LPArray: {
         // Managed array -> CoTaskMem pointer.
         const void* managed_arr = *reinterpret_cast<const void* const*>(managed_ptr + field.offset);
@@ -284,6 +299,27 @@ static void MarshalFieldNativeToManaged(
         }
         break;
 
+    case StructFieldKind::CustomMarshalerField:
+        // Native IntPtr → managed object via ICustomMarshaler.
+        // After conversion, call CleanUpNativeData to free the native resource.
+        {
+            const CHAOS_IL2CPP_INTPTR native_data =
+                *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
+            if (native_data != 0 && field.custom_marshaler_cookie != nullptr) {
+                void* managed_obj = reinterpret_cast<void*>(
+                    runtime_core::CustomMarshalerNativeToManaged(
+                        field.custom_marshaler_cookie, native_data));
+                *reinterpret_cast<void**>(managed_ptr + field.offset) = managed_obj;
+
+                // After the managed object is created, release the native data.
+                runtime_core::CustomMarshalerCleanupNativeData(
+                    field.custom_marshaler_cookie, native_data);
+            } else {
+                *reinterpret_cast<void**>(managed_ptr + field.offset) = nullptr;
+            }
+        }
+        break;
+
     case StructFieldKind::LPArray: {
         // V2: Copy data back from native CoTaskMem buffer into the managed array.
         // The managed array was pre-allocated before the P/Invoke call (forward
@@ -380,6 +416,18 @@ static void DestroyFieldNative(
         const CHAOS_IL2CPP_INTPTR buf = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
         if (buf != 0) {
             runtime_core::MarshalFreeCoTaskMem(runtime, buf);
+            *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
+        }
+        break;
+    }
+
+    case StructFieldKind::CustomMarshalerField: {
+        // Clean up native data allocated by the custom marshaler.
+        const CHAOS_IL2CPP_INTPTR native_data =
+            *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset);
+        if (native_data != 0 && field.custom_marshaler_cookie != nullptr) {
+            runtime_core::CustomMarshalerCleanupNativeData(
+                field.custom_marshaler_cookie, native_data);
             *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(native_ptr + field.offset) = 0;
         }
         break;

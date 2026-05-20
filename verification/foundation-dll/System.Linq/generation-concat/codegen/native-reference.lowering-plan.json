@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "GenerationConcatSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "GenerationConcatSubjects_GenerationConcatSubjects_CustomEntrySubject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_0:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_1:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_2:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_3:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_4:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_5:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_6:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_7:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_8:System.Void()",
+    "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_9:System.Void()"
+  ],
+  "translationUnitMethodCount": 10,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 10,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_0:System.Void()",
+      "lastMethodSubjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_9:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

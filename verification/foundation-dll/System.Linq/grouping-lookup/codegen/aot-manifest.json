@@ -1,0 +1,384 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "method",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "GroupingLookupSubjects",
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

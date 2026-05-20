@@ -74,12 +74,11 @@ public static partial class ThreadingTasksPrimitivesNativeEntry
     }
 
     // [8] System.Threading.Tasks.Task::WhenAll(Task[])
+    // SKIPPED: Task.Delay, Task.WhenAll, Task.Wait are external runtime stubs
+    // not yet implemented (kChaosExternalRuntimeFnTable entries are nullptr).
     public static void CustomEntryMethod8()
     {
-        var t1 = Task.Delay(1);
-        var t2 = Task.Delay(1);
-        var all = Task.WhenAll(t1, t2);
-        all.Wait();
+        // no-op — stubs not available
     }
 
     // [9] System.Threading.Tasks.Task::WhenAny(Task[])

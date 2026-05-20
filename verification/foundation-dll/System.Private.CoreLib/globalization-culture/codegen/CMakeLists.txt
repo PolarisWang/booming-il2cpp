@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: GlobalizationCultureSubjects
 add_library(chaos_gen_GlobalizationCultureSubjects STATIC
     ${CHAOS_GEN_DIR}/GlobalizationCultureSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/GlobalizationCultureSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_GlobalizationCultureSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

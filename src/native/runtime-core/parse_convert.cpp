@@ -219,23 +219,6 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) 
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// Convert::ToInt32(Double)
-// ═══════════════════════════════════════════════════════════════════
-
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
-{
-    if (std::isnan(value) ||
-        value < static_cast<double>(std::numeric_limits<CHAOS_IL2CPP_INT32>::min()) ||
-        value > static_cast<double>(std::numeric_limits<CHAOS_IL2CPP_INT32>::max()))
-    {
-        chaos::il2cpp::runtime_core::RaiseManagedException(
-            "System.OverflowException",
-            "Value was either too large or too small for an Int32.");
-    }
-    return static_cast<CHAOS_IL2CPP_INT32>(std::trunc(value));
-}
-
-// ═══════════════════════════════════════════════════════════════════
 // Convert::ToString(Int32) / ToString(Double)
 // ═══════════════════════════════════════════════════════════════════
 

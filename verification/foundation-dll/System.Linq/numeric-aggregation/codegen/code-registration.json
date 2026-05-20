@@ -1,0 +1,840 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "NumericAggregationSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_37:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_41:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_42:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_43:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_44:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_45:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_46:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_47:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_48:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_49:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_50:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_51:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_52:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_53:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_54:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_55:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_56:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_57:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_58:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_59:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_60:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_61:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_62:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_63:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_64:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_65:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_66:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_67:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_68:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_69:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_70:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_71:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_72:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_73:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_74:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_75:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_76:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_77:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_78:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_79:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_80:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_81:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_82:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_83:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_84:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_85:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_86:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_87:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_88:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects::CustomEntrySubject_89:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_cctor",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c__ctor",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_10\u003Eb__11_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_11\u003Eb__12_0:System.Int64(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_12\u003Eb__13_0:System.Single(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_13\u003Eb__14_0:System.Double(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_14\u003Eb__15_0:System.Decimal(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_15\u003Eb__16_0:System.Nullable\u003CSystem.Int32\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_16\u003Eb__17_0:System.Nullable\u003CSystem.Int64\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_17\u003Eb__18_0:System.Nullable\u003CSystem.Single\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_18\u003Eb__19_0:System.Nullable\u003CSystem.Double\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_19\u003Eb__20_0:System.Nullable\u003CSystem.Decimal\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_32\u003Eb__33_0:System.Int32(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 103,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_33\u003Eb__34_0:System.Nullable\u003CSystem.Int32\u003E(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 104,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_34\u003Eb__35_0:System.Int64(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 105,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_35\u003Eb__36_0:System.Nullable\u003CSystem.Int64\u003E(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 106,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_36\u003Eb__37_0:System.Single(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 107,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_37\u003Eb__38_0:System.Nullable\u003CSystem.Single\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 108,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_38\u003Eb__39_0:System.Double(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 109,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_39\u003Eb__40_0:System.Nullable\u003CSystem.Double\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 110,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_40\u003Eb__41_0:System.Decimal(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 111,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_41\u003Eb__42_0:System.Nullable\u003CSystem.Decimal\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 112,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_42\u003Eb__43_0:System.String(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 113,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_43\u003Eb__44_0:System.Int32(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 114,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_44\u003Eb__45_0:System.String(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 115,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_57\u003Eb__58_0:System.Int32(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 116,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_58\u003Eb__59_0:System.Nullable\u003CSystem.Int32\u003E(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 117,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_59\u003Eb__60_0:System.Int64(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 118,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_60\u003Eb__61_0:System.Nullable\u003CSystem.Int64\u003E(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 119,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_61\u003Eb__62_0:System.Single(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 120,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_62\u003Eb__63_0:System.Nullable\u003CSystem.Single\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 121,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_63\u003Eb__64_0:System.Double(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 122,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_64\u003Eb__65_0:System.Nullable\u003CSystem.Double\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 123,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_65\u003Eb__66_0:System.Decimal(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 124,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_66\u003Eb__67_0:System.Nullable\u003CSystem.Decimal\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 125,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_67\u003Eb__68_0:System.String(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 126,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_68\u003Eb__69_0:System.Int32(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 127,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_69\u003Eb__70_0:System.String(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 128,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_80\u003Eb__81_0:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 129,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_81\u003Eb__82_0:System.Int64(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 130,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_82\u003Eb__83_0:System.Single(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 131,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_83\u003Eb__84_0:System.Double(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 132,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_84\u003Eb__85_0:System.Decimal(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 133,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_85\u003Eb__86_0:System.Nullable\u003CSystem.Int32\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 134,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_86\u003Eb__87_0:System.Nullable\u003CSystem.Int64\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 135,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_87\u003Eb__88_0:System.Nullable\u003CSystem.Single\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 136,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_88\u003Eb__89_0:System.Nullable\u003CSystem.Double\u003E(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 137,
+          "symbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32",
+          "subjectId": "NumericAggregationSubjects/NumericAggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_89\u003Eb__90_0:System.Nullable\u003CSystem.Decimal\u003E(System.Int32)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

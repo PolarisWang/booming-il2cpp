@@ -57,10 +57,6 @@ public static partial class SnapshotProverPatchEntry
     }
 
     // [8] SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
-    public static int Subject_8()
-    {
-        return unchecked((int)(0xB0000000u + 8));
-    }
 
     // [9] SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     public static int Subject_9()
@@ -82,7 +78,7 @@ public static partial class SnapshotProverPatchEntry
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;
                 case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
+                case 8: CustomEntryMethod8(); break;
                 case 9: Subject_9(); break;
             }
         }

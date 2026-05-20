@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: StringCharTextCoreSubjects
 add_library(chaos_gen_StringCharTextCoreSubjects STATIC
     ${CHAOS_GEN_DIR}/StringCharTextCoreSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/StringCharTextCoreSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_StringCharTextCoreSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

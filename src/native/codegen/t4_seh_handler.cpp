@@ -10,6 +10,7 @@
 #if defined(_WIN32) || defined(_WIN64)
   #define NOMINMAX
   #include <windows.h>
+  #include <intrin.h>   // _ReturnAddress(), _AddressOfReturnAddress()
 #endif
 
 namespace chaos::il2cpp::codegen {
@@ -147,6 +148,11 @@ const NativeMethod* FindT4CodeByAddress(const void* address) noexcept {
 
 static constexpr uint32_t kSehClauseEntrySize = 5 * sizeof(uint32_t);
 
+// T4 frame layout constants (mirrored from code_generator.cpp).
+// The T4 frame register file starts at RSP + 32 (after 32-byte shadow space).
+static constexpr uint32_t kT4GprFileOff = 32;  // byte offset from T4 frame RSP to GPR register file
+static constexpr uint32_t kT4GprCount  = 64;   // number of GPR vreg slots
+
 /// Walk SEH clause table and find the first matching handler for a given
 /// code offset.  Returns the handler_start_offset (byte offset from code
 /// entry), or 0xFFFFFFFF if no match.
@@ -174,9 +180,12 @@ static uint32_t FindSehHandlerForOffset(const NativeMethod* nm,
             uint32_t handler_st;
             std::memcpy(&handler_st, entry + 12, sizeof(handler_st));
 
-            // Skip fault handlers (flags=0x4) for V1
-            uint32_t flags_fault = 0x4;
-            if ((clause_flags & flags_fault) != 0) continue;
+            // All handler types (catch, finally, fault, filter) are valid
+            // targets for exception dispatch.  The interpreter-equivalent
+            // behavior for finally/fault is: execute the handler, then
+            // continue unwinding or transfer to catch.  For V1, we redirect
+            // directly to the handler and let it run; the next exception
+            // (from a rethrow inside finally) will re-enter the VEH.
 
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
                 "T4 VEH: clause {} matches offset={} flags=0x{:x} try=[{},{}) handler={}",
@@ -188,9 +197,6 @@ static uint32_t FindSehHandlerForOffset(const NativeMethod* nm,
     return 0xFFFFFFFFu;
 }
 
-
-// ── VEH Handler ─────────────────────────────────────────────────────────
-
 #if defined(_WIN32) || defined(_WIN64)
 
 /// Managed exception code used by CodegenThrow/CodegenRethrow.
@@ -200,12 +206,143 @@ static constexpr uint32_t kManagedSehExceptionCode = 0xE0000001;
 /// read by the VEH handler to restore the exception object for catch blocks).
 thread_local void* g_t4_exception_obj = nullptr;
 
+/// Return address in T4 code where the exception was thrown (set by
+/// ChaosT4RaiseException, read by the VEH handler to locate the NativeMethod
+/// for SEH clause table walk).  Stored separately from ExceptionAddress
+/// because RaiseException sets ExceptionAddress to kernel32.dll internals
+/// rather than the originating T4 code.
+thread_local void* g_t4_throw_ret_addr = nullptr;
+
+/// T4 frame RSP at the throw point (set by ChaosT4RaiseException, read by
+/// VEH handler to locate the register file for exception object placement).
+thread_local void* g_t4_frame_rsp = nullptr;
+
+// ── ChaosT4RaiseException ───────────────────────────────────────────────
+// Called from T4-generated code for Throw/Rethrow instructions.  Stores the
+// managed exception object in TLS, captures the T4 frame's stack pointer for
+// the VEH handler to place the exception object, and triggers a VEH exception.
+// The registered VEH handler catches this, walks the SEH clause table, and
+// redirects RIP to the matching handler.  If no handler is found,
+// RaiseException returns normally (caller should emit INT3 as safety net).
+
+extern "C" void ChaosT4RaiseException(void* exception_obj) noexcept {
+    // Store the managed exception object in TLS for the VEH handler.
+    g_t4_exception_obj = exception_obj;
+
+    // Capture the return address (address in T4 code after the `call`).
+    // Used by the VEH handler to find the NativeMethod and compute the
+    // code offset for SEH clause table lookup.
+#if defined(_MSC_VER)
+    g_t4_throw_ret_addr = _ReturnAddress();
+
+    // Capture T4 frame RSP: the return address is at the current RSP
+    // (no frame pointer for this leaf-like function), so the T4 frame
+    // starts at RSP + 8.
+    g_t4_frame_rsp = reinterpret_cast<void*>(
+        reinterpret_cast<uintptr_t>(_AddressOfReturnAddress()) + 8);
+#else
+    g_t4_throw_ret_addr = __builtin_return_address(0);
+    // GCC/Clang: frame address minus the return address slot offset.
+    g_t4_frame_rsp = reinterpret_cast<void*>(
+        reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + 16);
+#endif
+
+    // Trigger the VEH exception.  The VEH handler (T4VectoredExceptionHandler)
+    // will catch this, find the SEH handler via g_t4_throw_ret_addr, write
+    // the exception object into all register file vreg slots, and redirect
+    // RIP to the handler code.
+    RaiseException(kManagedSehExceptionCode, 0, 0, nullptr);
+
+    // If RaiseException returns, no handler was found in this method.
+    // The caller (T4 generated code) should have an INT3 safety net,
+    // which will crash cleanly.
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+        "ChaosT4RaiseException: no handler found for exception, returning to INT3");
+}
+
 static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
     if (ep == nullptr || ep->ExceptionRecord == nullptr || ep->ContextRecord == nullptr) {
         return EXCEPTION_CONTINUE_SEARCH;
     }
 
-    // Get the exception address
+    // ── Dispatch by exception code ──────────────────────────────────────
+    const uint32_t exc_code = ep->ExceptionRecord->ExceptionCode;
+
+    if (exc_code == kManagedSehExceptionCode) {
+        // Managed throw (ChaosT4RaiseException): use TLS-stored throw
+        // address for lookup instead of ExceptionAddress (which points
+        // into RaiseException/kernel32 internals).
+        if (g_t4_throw_ret_addr == nullptr) {
+            return EXCEPTION_CONTINUE_SEARCH;
+        }
+
+        // Find NativeMethod covering the T4 throw address
+        const NativeMethod* nm = FindT4CodeByAddress(g_t4_throw_ret_addr);
+        if (nm == nullptr) {
+            return EXCEPTION_CONTINUE_SEARCH;
+        }
+
+        // No SEH table → can't dispatch
+        if (nm->seh_table_offset == 0) {
+            return EXCEPTION_CONTINUE_SEARCH;
+        }
+
+        // Compute code offset from the T4 throw return address
+        const uint8_t* code_base = static_cast<const uint8_t*>(nm->code);
+        uint32_t code_offset = static_cast<uint32_t>(
+            static_cast<const uint8_t*>(g_t4_throw_ret_addr) - code_base);
+
+        // Find matching SEH handler
+        uint32_t handler_offset = FindSehHandlerForOffset(nm, code_offset);
+        if (handler_offset == 0xFFFFFFFFu) {
+            // No matching handler in this method — let exception propagate.
+            // Clear throw state for next potential catch in caller frame.
+            g_t4_throw_ret_addr = nullptr;
+            g_t4_frame_rsp = nullptr;
+            return EXCEPTION_CONTINUE_SEARCH;
+        }
+
+        // Write the exception object into ALL GPR register file slots in the
+        // T4 frame so the catch handler code finds it regardless of which vreg
+        // the register allocator assigned.  This is safe because:
+        //   1. The only live value at handler entry is the exception object
+        //   2. Handler code loads other values from args/locals stack slots
+        if (g_t4_frame_rsp != nullptr) {
+            uint64_t* regfile = reinterpret_cast<uint64_t*>(
+                reinterpret_cast<uint8_t*>(g_t4_frame_rsp) + kT4GprFileOff);
+            uint64_t ex_val = reinterpret_cast<uint64_t>(g_t4_exception_obj);
+            for (uint32_t i = 0; i < kT4GprCount; i++) {
+                regfile[i] = ex_val;
+            }
+        }
+
+        // Place exception object pointer in RCX (Win64 first-arg register)
+        // so catch handlers that need to access the exception can read it.
+        ep->ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
+
+        // Restore RSP to the T4 frame's RSP (before ChaotT4RaiseException was
+        // called).  The CONTEXT record's RSP points into RaiseException's
+        // internal stack; the handler code expects the T4 frame's RSP so it
+        // can access the register file, args_buf, and ret_buf correctly.
+        ep->ContextRecord->Rsp = reinterpret_cast<ULONG_PTR>(g_t4_frame_rsp);
+
+        // Redirect RIP to the handler code in the T4 generated method
+        void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_offset;
+        ep->ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
+
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+            "T4 VEH (managed throw): ret_addr={} (offset={}) -> handler at {} (offset={}), ex_obj={}",
+            g_t4_throw_ret_addr, code_offset, handler_addr, handler_offset,
+            reinterpret_cast<void*>(g_t4_exception_obj));
+
+        // Clear throw state for next throw
+        g_t4_throw_ret_addr = nullptr;
+        g_t4_frame_rsp = nullptr;
+
+        return EXCEPTION_CONTINUE_EXECUTION;
+    }
+
+    // ── Hardware exception (AV, div-by-zero, etc.) ──────────────────────
     void* exception_addr = ep->ExceptionRecord->ExceptionAddress;
     if (exception_addr == nullptr) {
         return EXCEPTION_CONTINUE_SEARCH;
@@ -243,7 +380,7 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
     ep->ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "T4 VEH: exception at {} (offset={}) -> handler at {} (offset={}), ex_obj={}",
+        "T4 VEH (hardware exception): exception at {} (offset={}) -> handler at {} (offset={}), ex_obj={}",
         exception_addr, code_offset, handler_addr, handler_offset,
         reinterpret_cast<void*>(ex_obj));
 
@@ -278,6 +415,19 @@ void RegisterT4SehHandler() noexcept {
     // Register T4 demotion callbacks (platform-independent).
     chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(
         DemoteT4ByToken, DemoteT4ByCallSiteToken);
+}
+
+// Non-Windows stub for ChaosT4RaiseException.
+// VEH is Windows-only; on POSIX platforms this should never be called
+// because T4 codegen with SEH is not enabled.  If called, crash with INT3.
+extern "C" void ChaosT4RaiseException(void* /*exception_obj*/) noexcept {
+    #if defined(__GNUC__) || defined(__clang__)
+        __builtin_trap();
+    #else
+        // Fallback: intentional null-deref for crash
+        volatile int* p = nullptr;
+        *p = 0;
+    #endif
 }
 
 #endif  // _WIN32 || _WIN64

@@ -452,18 +452,17 @@ public:
     std::vector<void*> mark_stack_;
 
     // Atomic page array for lock-free FindPage/IsInOldGen.
-    // Written under mutex_, read with atomic load + deferred free.
+    // Written under mutex_, read with atomic load.
     std::atomic<PageArray*> page_array_{nullptr};
 
-    // Ring buffer of retired page arrays.  Each RebuildPageArray call
-    // retires the previous array into buf[i++ % 3] and frees buf[(i-2)%3].
-    // This provides a 2-call grace period: any reader that loaded the
-    // current array before an exchange has at least 2 more rebuilds before
-    // the array is freed — sufficient for the short-lived lock-free reads
-    // performed by FindPage/IsInOldGen (microsecond-range critical sections).
-    static constexpr int kRetiredRingSize = 3;
-    int retired_ring_idx_ = 0;
-    PageArray* retired_ring_[kRetiredRingSize]{};
+    // Retired page arrays kept alive forever (never freed).
+    // RebuildPageArray exchanges the current page_array_ with a new one and
+    // appends the old array to this vector.  Any concurrent reader that loaded
+    // the old array pointer before the exchange can still safely dereference
+    // it because the underlying memory is never freed.
+    // Memory overhead: ~8 bytes per page + 16 bytes per array per rebuild,
+    // amortized over process lifetime (GC collects at most ~1 Hz).
+    std::vector<PageArray*> retired_arrays_;
 
     // Oversized pages freed by Free() but deferred to safepoint for
     // VirtualFree.  BgcSweep snapshots page_list_ under mutex_ and may

@@ -1,0 +1,1425 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int64\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Average\u003CSystem.Int32\u003E:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Average:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.Int32\u003E:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String,System.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:!!1(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:!!1(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int64\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Max\u003CSystem.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Collections.Generic.IComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Max:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Max:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::MaxBy\u003CSystem.String,System.Int32\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::MaxBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::MaxBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::MaxBy\u003CSystem.String,System.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.String\u003E,System.Collections.Generic.IComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::MaxBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::MaxBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.Int32\u003E:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String,System.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:!!1(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:!!1(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int64\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Min\u003CSystem.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Collections.Generic.IComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Min:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Min:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::MinBy\u003CSystem.String,System.Int32\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::MinBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::MinBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::MinBy\u003CSystem.String,System.String\u003E:System.String(System.Collections.Generic.IEnumerable\u003CSystem.String\u003E,System.Func\u003CSystem.String,System.String\u003E,System.Collections.Generic.IComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::MinBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::MinBy:!!0(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IComparer\u003C!!1\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String",
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Decimal(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Decimal\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Decimal(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Decimal\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Double(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Double\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Double(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Double\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Int32(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int32\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Int64(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int64\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Int64(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Int64\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Decimal\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Decimal\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Double\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Double\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int32\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Int64\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Int64\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Nullable\u003CSystem.Single\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Nullable\u003CSystem.Single\u003E\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Sum\u003CSystem.Int32\u003E:System.Single(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Single\u003E)",
+      "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Sum:System.Single(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,System.Single\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Decimal\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Decimal"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Double\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Double"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int64\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int64"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Decimal\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Nullable\u003CSystem.Decimal\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Double\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Nullable\u003CSystem.Double\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int32\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Nullable\u003CSystem.Int32\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Int64\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Nullable\u003CSystem.Int64\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Nullable\u003CSystem.Single\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Nullable\u003CSystem.Single\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Single\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Single"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.String",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.Int64\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.String",
+          "System.Int64"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int32\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.String",
+          "System.Nullable\u003CSystem.Int32\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.Nullable\u003CSystem.Int64\u003E\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.String",
+          "System.Nullable\u003CSystem.Int64\u003E"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.String,System.String\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.String",
+          "System.String"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Decimal\u003E::.ctor:System.Void(System.Decimal)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Decimal"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Double\u003E::.ctor:System.Void(System.Double)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Double"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int64\u003E::.ctor:System.Void(System.Int64)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Int64"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NumericAggregationSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Single\u003E::.ctor:System.Void(System.Single)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Single"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

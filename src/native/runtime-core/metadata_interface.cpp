@@ -235,6 +235,10 @@ void ModuleLifecycleManager::UnregisterModule(uint32_t module_id) noexcept {
     // 2. Mark module as tombstone in ModuleRegistry.
     runtime_core::MarkModuleTombstone(module_id);
 
+    // 3. Evict ICustomMarshaler cache — stale marshaler instances from the
+    //    unloaded module will be re-resolved on next P/Invoke.
+    runtime_core::ClearMarshalerCache();
+
     // Note: HotpatchNameRegistry entries are not removed (they use
     // .rodata pointers from codegen data sections which persist
     // for the lifetime of the process).  Module ID recycling via

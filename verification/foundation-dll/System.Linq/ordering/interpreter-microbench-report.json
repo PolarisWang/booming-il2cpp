@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/ordering",
+  "capturedAt": "2026-05-20T10:51:49",
+  "metrics": {
+    "poolSize": 0
+  },
+  "rawOutput": "[2026-05-20T10:51:49][DEBUG][codegen] T4 VEH handler registered\n[2026-05-20T10:51:49][WARN][CRAG] young_collection_no_region\n[2026-05-20T10:51:49][INFO][NUMA] numa_init count=%d\n[2026-05-20T10:51:49][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-20T10:51:49][INFO][OldGen] init done base=0x1565481500672 pages=2\n[2026-05-20T10:51:49][DEBUG][codegen] T4 VEH handler registered\nPassed: 28/28\n"
+}

@@ -7,42 +7,23 @@
 #include <utility>
 #include <vector>
 
-// Compile-time toggle: define CHAOS_IL2CPP_USE_DENSE_MAP before including
-// collection.h to replace internal std::unordered_map with unordered_dense
-// for runtime storage lookups.  See <chaos/unordered_dense.h> for limitations.
-#if defined(CHAOS_IL2CPP_USE_DENSE_MAP)
-#  include <chaos/unordered_dense.h>
-#  define CHAOS_IL2CPP_COLLECTION_MAP(K, V) CHAOS_IL2CPP_UNORDERED_DENSE_MAP(K, V)
-#else
-#  include <unordered_map>
-#  define CHAOS_IL2CPP_COLLECTION_MAP(K, V) std::unordered_map<K, V>
-#endif
+#include <chaos/native_types.h>
 
 namespace chaos::il2cpp::common {
 
-template <typename TValue>
-struct ListRuntimeStorage
-{
-    CHAOS_IL2CPP_VECTOR(TValue) items;
-};
+// Offset within managed GC objects where collection stubs store their
+// native runtime storage pointer (right after ThinLockableHeader).
+// Must match the codegen field emission in ObjectModelEmission.cs.
+inline constexpr CHAOS_IL2CPP_SIZE kNativeStorageSlotOffset = 16;
 
-template <typename TValue>
-ListRuntimeStorage<TValue>* require_list_runtime_storage(CHAOS_IL2CPP_INTPTR handle)
-{
-    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))
-    {
-        CHAOS_IL2CPP_ABORT();
-    }
-    using StorageMap = CHAOS_IL2CPP_COLLECTION_MAP(CHAOS_IL2CPP_INTPTR, std::unique_ptr<ListRuntimeStorage<TValue>>);
-    static StorageMap storage_by_handle;
-    auto& storage = storage_by_handle[handle];
-    if (storage == nullptr)
-    {
-        storage = std::make_unique<ListRuntimeStorage<TValue>>();
-    }
-    return storage.get();
-}
+// ── List<T> ─────────────────────────────────────────────────────
+// List<T> no longer uses native runtime storage. It uses inline
+// fields (items_array, size, version) in the managed GC object.
+// See chaos_list_fields in generated_code_compat.h.
+// ListRuntimeStorage and require_list_runtime_storage have been
+// removed — List<T> operations are emitted as inline C++ code.
 
+// ── Dictionary<K,V> ─────────────────────────────────────────────
 template <typename TKey, typename TValue>
 struct DictionaryRuntimeStorage
 {
@@ -56,16 +37,21 @@ DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS
     {
         CHAOS_IL2CPP_ABORT();
     }
-    using MapValueT = std::unique_ptr<DictionaryRuntimeStorage<TKey, TValue>>;
-    using StorageMap = CHAOS_IL2CPP_COLLECTION_MAP(CHAOS_IL2CPP_INTPTR, MapValueT);
-    static StorageMap storage_by_handle;
-    auto& storage = storage_by_handle[handle];
-    if (storage == nullptr)
+    // Embedded pointer at known offset — no global map lookup
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + kNativeStorageSlotOffset);
+    if (*slot != 0)
     {
-        storage = std::make_unique<DictionaryRuntimeStorage<TKey, TValue>>();
+        return reinterpret_cast<DictionaryRuntimeStorage<TKey, TValue>*>(*slot);
     }
-    return storage.get();
+    auto* storage = new DictionaryRuntimeStorage<TKey, TValue>();
+    *slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+    return storage;
 }
+
+// ── HashSet<T> ──────────────────────────────────────────────────
+// HashSet<T> reuses ListRuntimeStorage (vector of values with linear scan).
+// For HashSet<T>, the GC object also embeds the native storage pointer.
 
 } // namespace chaos::il2cpp::common
 

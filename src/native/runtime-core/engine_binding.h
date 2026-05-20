@@ -323,7 +323,7 @@ CHAOS_IL2CPP_INTPTR MarshalCreateCcw(
     CHAOS_IL2CPP_INTPTR managed_object,
     CHAOS_IL2CPP_INTPTR runtime_state) noexcept;
 
-// ── ICustomMarshaler (V3 — interpreter dispatch) ─────────────────────────
+// ── ICustomMarshaler (V4 — interpreter dispatch with cleanup support) ────
 /// Resolve ICustomMarshaler type from cookie, call GetInstance to obtain
 /// the marshaler, then dispatch to MarshalNativeToManaged on the instance.
 /// Returns the managed object pointer, or 0 on failure.
@@ -335,6 +335,18 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
 /// the marshaler, then dispatch to MarshalManagedToNative on the instance.
 /// Returns the native IntPtr, or the managed_obj unchanged on failure.
 CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR managed_obj) noexcept;
+
+/// Look up the marshaler by cookie and call its CleanUpNativeData(nativeData).
+/// Safe to call even when cleanup is not implemented — no-op in that case.
+void CustomMarshalerCleanupNativeData(
+    const char* cookie_utf8,
+    CHAOS_IL2CPP_INTPTR native_data) noexcept;
+
+/// Look up the marshaler by cookie and call its CleanUpManagedData(managedObj).
+/// Safe to call even when cleanup is not implemented — no-op in that case.
+void CustomMarshalerCleanupManagedData(
     const char* cookie_utf8,
     CHAOS_IL2CPP_INTPTR managed_obj) noexcept;
 

@@ -1,0 +1,23 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/joins",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 8,
+  "emittedMethodCount": 8,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Linq/System.Linq.Enumerable::GroupJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,System.Collections.Generic.IEnumerable{TInner},TResult})",
+    "System.Linq/System.Linq.Enumerable::GroupJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,System.Collections.Generic.IEnumerable{TInner},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+    "System.Linq/System.Linq.Enumerable::Join{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult})",
+    "System.Linq/System.Linq.Enumerable::Join{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+    "System.Linq/System.Linq.Enumerable::LeftJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult})",
+    "System.Linq/System.Linq.Enumerable::LeftJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+    "System.Linq/System.Linq.Enumerable::RightJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult})",
+    "System.Linq/System.Linq.Enumerable::RightJoin{TOuter,TInner,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TOuter},System.Collections.Generic.IEnumerable{TInner},System.Func{TOuter,TKey},System.Func{TInner,TKey},System.Func{TOuter,TInner,TResult},System.Collections.Generic.IEqualityComparer{TKey})"
+  ]
+}

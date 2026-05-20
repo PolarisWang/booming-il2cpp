@@ -49,6 +49,7 @@ public class ImplSimple : ISimple
 // Single implementation of IWithDefault → devirtualizable
 public class ImplWithDefault : IWithDefault
 {
+    public int GetValue() => 0;
 }
 
 // Multiple implementations of ICalculator → must use virtual dispatch

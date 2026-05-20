@@ -1,0 +1,689 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "GroupingLookupSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "name": "GroupingLookupSubjects",
+      "displayName": "GroupingLookupSubjects",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "name": "\u003C\u003Ec",
+      "displayName": "GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 4,
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "name": "__StaticArrayInitTypeSize=20",
+      "displayName": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "definitionSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 5,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::_exitCode",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 6,
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "name": "4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "definitionSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 7,
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
+      "name": "D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
+      "definitionSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 8,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "name": "\u003C\u003E9",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "GroupingLookupSubjects\u002B\u003C\u003Ec"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 9,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "name": "\u003C\u003E9__1_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 10,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "name": "\u003C\u003E9__2_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 11,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "name": "\u003C\u003E9__3_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 12,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "name": "\u003C\u003E9__3_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 13,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "name": "\u003C\u003E9__4_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 14,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "name": "\u003C\u003E9__4_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 15,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "name": "\u003C\u003E9__5_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 16,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "name": "\u003C\u003E9__5_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 17,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "name": "\u003C\u003E9__6_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 18,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "name": "\u003C\u003E9__6_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 19,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "name": "\u003C\u003E9__7_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 20,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_1",
+      "name": "\u003C\u003E9__7_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 21,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
+      "name": "\u003C\u003E9__7_2",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 22,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "name": "\u003C\u003E9__8_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 23,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "name": "\u003C\u003E9__8_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 24,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
+      "name": "\u003C\u003E9__8_2",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 25,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 26,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 27,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 28,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 29,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_4:System.Void()",
+      "name": "CustomEntrySubject_4",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 30,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_5:System.Void()",
+      "name": "CustomEntrySubject_5",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 31,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
+      "name": "CustomEntrySubject_6",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 32,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
+      "name": "CustomEntrySubject_7",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 33,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "name": ".cctor",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 34,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 35,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_0\u003Eb__1_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 36,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_1\u003Eb__2_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 37,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_2\u003Eb__3_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 38,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_2\u003Eb__3_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 39,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_3\u003Eb__4_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 40,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_3\u003Eb__4_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 41,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_4\u003Eb__5_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 42,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "name": "\u003CCustomEntrySubject_4\u003Eb__5_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 43,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_5\u003Eb__6_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 44,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "name": "\u003CCustomEntrySubject_5\u003Eb__6_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 45,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_6\u003Eb__7_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 46,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_6\u003Eb__7_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 47,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "name": "\u003CCustomEntrySubject_6\u003Eb__7_2",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 48,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_7\u003Eb__8_0",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 49,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
+      "name": "\u003CCustomEntrySubject_7\u003Eb__8_1",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 50,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "name": "\u003CCustomEntrySubject_7\u003Eb__8_2",
+      "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 51,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 52,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 53,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 54,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 55,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 56,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 57,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 58,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[0]:key",
+      "name": "key",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 59,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[1]:group",
+      "name": "group",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 60,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 61,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[0]:key",
+      "name": "key",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 62,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[1]:group",
+      "name": "group",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 63,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 64,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 65,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[0]:key",
+      "name": "key",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 66,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[1]:group",
+      "name": "group",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 67,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 68,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 69,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[0]:key",
+      "name": "key",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 70,
+      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)::parameter[1]:group",
+      "name": "group",
+      "declaringMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "memberType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
+      "parameterIndex": 1
+    }
+  ]
+}

@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: DelegateCoreInvocationSubjects
 add_library(chaos_gen_DelegateCoreInvocationSubjects STATIC
     ${CHAOS_GEN_DIR}/DelegateCoreInvocationSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/DelegateCoreInvocationSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_DelegateCoreInvocationSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

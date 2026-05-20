@@ -444,6 +444,27 @@ def _generate_patch_data(family_slug: str, *,
 
     # Build patch-variant entrypoint from managed/patch/
     patch_dir = family_dir / "managed" / "patch"
+
+    # Copy handwritten partial class files to patch dir so CustomEntryMethodN()
+    # implementations are visible to the patch entry compiler.
+    # Handwritten files use class "XxxNativeEntry" (benchmark/native-entry variant),
+    # but the patch variant uses "XxxPatchEntry".  Rename and fix the class name
+    # inside Custom.cs files to match.
+    handwritten_dir = family_dir / "handwritten"
+    if handwritten_dir.exists():
+        cs_files = sorted(handwritten_dir.glob("*.cs"))
+        if cs_files:
+            for f in cs_files:
+                content = f.read_text(encoding="utf-8")
+                if f.name.endswith(".Custom.cs"):
+                    # Map class name from NativeEntry → PatchEntry
+                    dest_name = f.name.replace("NativeEntry", "PatchEntry")
+                    content = content.replace("NativeEntry", "PatchEntry")
+                else:
+                    dest_name = f.name
+                dest = patch_dir / dest_name
+                dest.write_text(content, encoding="utf-8")
+
     from family_entrypoint_generator import generate_and_build
     build_result = generate_and_build(
         patch_dir,
@@ -624,7 +645,6 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'\n'
         f'# Paths\n'
         f'set(CHAOS_PROJECT_ROOT "{repo_root_str}")\n'
-        f'set(CHAOS_CODEGEN_DIR "{codegen_rel}")\n'
         f'set(CHAOS_NATIVE_BUILD "{native_build}")\n'
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
@@ -657,6 +677,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/unordered_dense/include"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/NumericAggregationSubjects/generated"\n'
         f')\n'
         f'\n'
         f'# Library link directories\n'
@@ -757,70 +778,6 @@ def _fix_runtime_entry(path: Path) -> None:
         text = text.replace(old_bitmask, new_counter)
         changed = True
 
-    # Fix 3: SEH-guarded Fact mode (has #if defined + bool caught) — same counter fix
-    old_seh_bitmask = (
-        "        int result = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                caught = true;\n"
-        "            } catch (...) {\n"
-        "                caught = true;\n"
-        "            }\n"
-        "            if (caught) result |= (1 << i);\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int failed_count = 0;\n"
-        "        int tmp = result;\n"
-        "        while (tmp) { failed_count += tmp & 1; tmp >>= 1; }\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
-        "        std::fflush(stdout);\n"
-        "        _exit(result);\n"
-        "        return result;\n"
-    )
-    new_seh_counter = (
-        "        int failed_count = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "                __try {\n"
-        "                    RunNativeAot(i);\n"
-        "                } __except (1) {\n"
-        "                    ++failed_count;\n"
-        "                }\n"
-        "#else\n"
-        "                RunNativeAot(i);\n"
-        "#endif\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
-        "        std::fflush(stdout);\n"
-        "        _exit(failed_count);\n"
-        "        return failed_count;\n"
-    )
-    if old_seh_bitmask in text:
-        text = text.replace(old_seh_bitmask, new_seh_counter)
-        changed = True
-
     # Fix 4: HotUpdate mode bitmask — replace with counter
     old_hot_bitmask = (
         "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
@@ -867,62 +824,6 @@ def _fix_runtime_entry(path: Path) -> None:
         text = text.replace(old_hot_bitmask, new_hot_counter)
         changed = True
 
-    # Fix 5: Add __try/__except wrapping around RunNativeAot in SEH fact mode.
-    # The C# template generates counter-based code without __try/__except.  When
-    # the interpreter crashes with STATUS_ACCESS_VIOLATION, the SEH exception
-    # propagates through interpreter frames compiled without /EHa, and catch(...)
-    # in main() cannot catch it.  __try/__except at the OS level catches ALL SEH
-    # exceptions regardless of /EHa on intermediate frames.
-    old_seh_no_tryexcept = (
-        "        int failed_count = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-    )
-    new_seh_tryexcept = (
-        "        int failed_count = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "                __try {\n"
-        "                    RunNativeAot(i);\n"
-        "                } __except (1) {\n"
-        "                    ++failed_count;\n"
-        "                }\n"
-        "#else\n"
-        "                RunNativeAot(i);\n"
-        "#endif\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-    )
-    if old_seh_no_tryexcept in text:
-        text = text.replace(old_seh_no_tryexcept, new_seh_tryexcept)
-        changed = True
-
     if changed:
         path.write_text(text, encoding="utf-8")
         print(f"    [build_entry] fixed runtime-entry.cpp bugs")
@@ -967,12 +868,14 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         for subdir in sorted(codegen_dir.iterdir()):
             if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
                 continue
-            src = subdir / "generated" / "native-aot.generated.cpp"
+            # Sync ALL generated files (.cpp, .h) from codegen to native
+            src = subdir / "generated"
             if not src.exists():
                 continue
-            dst = native_dir / subdir.name / "generated" / "native-aot.generated.cpp"
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+            dst = native_dir / subdir.name / "generated"
+            dst.mkdir(parents=True, exist_ok=True)
+            for f in src.iterdir():
+                (dst / f.name).write_bytes(f.read_bytes())
             synced_names.add(subdir.name)
             print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
 

@@ -1,0 +1,707 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "AggregationSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "AggregationSubjects/AggregationSubjects",
+      "name": "AggregationSubjects",
+      "displayName": "AggregationSubjects",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "name": "\u003C\u003Ec",
+      "displayName": "AggregationSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 3,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 4,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "name": "__StaticArrayInitTypeSize=12",
+      "displayName": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 5,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "name": "__StaticArrayInitTypeSize=20",
+      "displayName": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 6,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=40",
+      "name": "__StaticArrayInitTypeSize=40",
+      "displayName": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=40",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=40"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 7,
+      "subjectId": "AggregationSubjects/AggregationSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::_exitCode",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 8,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::272BC3456B7CE85DE2CE18D1964316879E840A1201A4664E967EF42BA3F76B96",
+      "name": "272BC3456B7CE85DE2CE18D1964316879E840A1201A4664E967EF42BA3F76B96",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::272BC3456B7CE85DE2CE18D1964316879E840A1201A4664E967EF42BA3F76B96",
+      "declaringTypeSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=40"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 9,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "name": "4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+      "declaringTypeSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 10,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "name": "4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "declaringTypeSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 11,
+      "subjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
+      "name": "6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
+      "definitionSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
+      "declaringTypeSubjectId": "AggregationSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 12,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "name": "\u003C\u003E9",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "AggregationSubjects\u002B\u003C\u003Ec"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 13,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "name": "\u003C\u003E9__1_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 14,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "name": "\u003C\u003E9__2_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 15,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "name": "\u003C\u003E9__3_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 16,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "name": "\u003C\u003E9__3_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.String\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 17,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "name": "\u003C\u003E9__4_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.String,System.Char\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 18,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
+      "name": "\u003C\u003E9__4_2",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.String,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 19,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "name": "\u003C\u003E9__4_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CIGrouping\u003CSystem.Char,System.String\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 20,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "name": "\u003C\u003E9__5_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.String,System.Char\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 21,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_2",
+      "name": "\u003C\u003E9__5_2",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_2",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.String,System.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 22,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "name": "\u003C\u003E9__5_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CIGrouping\u003CSystem.Char,System.String\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 23,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "name": "\u003C\u003E9__7_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Boolean\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 24,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "name": "\u003C\u003E9__8_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.String,System.Char\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 25,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "name": "\u003C\u003E9__8_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CIGrouping\u003CSystem.Char,System.String\u003E,System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 26,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__10_0",
+      "name": "\u003C\u003E9__10_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__10_0",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32,System.Boolean\u003E"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 27,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_0:System.Void()",
+      "name": "CustomEntrySubject_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 28,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 29,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 30,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 31,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_4:System.Void()",
+      "name": "CustomEntrySubject_4",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 32,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_5:System.Void()",
+      "name": "CustomEntrySubject_5",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 33,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_6:System.Void()",
+      "name": "CustomEntrySubject_6",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 34,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_7:System.Void()",
+      "name": "CustomEntrySubject_7",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 35,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_8:System.Void()",
+      "name": "CustomEntrySubject_8",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 36,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_9:System.Void()",
+      "name": "CustomEntrySubject_9",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 37,
+      "subjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_10:System.Void()",
+      "name": "CustomEntrySubject_10",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 38,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "name": ".cctor",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 39,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 40,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)",
+      "name": "\u003CCustomEntrySubject_0\u003Eb__1_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 41,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "name": "\u003CCustomEntrySubject_1\u003Eb__2_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 42,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)",
+      "name": "\u003CCustomEntrySubject_2\u003Eb__3_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 43,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.String(System.Int32)",
+      "name": "\u003CCustomEntrySubject_2\u003Eb__3_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.String(System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.String",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 44,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Char(System.String)",
+      "name": "\u003CCustomEntrySubject_3\u003Eb__4_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Char(System.String)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Char",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 45,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "name": "\u003CCustomEntrySubject_3\u003Eb__4_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 46,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)",
+      "name": "\u003CCustomEntrySubject_3\u003Eb__4_2",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 47,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Char(System.String)",
+      "name": "\u003CCustomEntrySubject_4\u003Eb__5_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Char(System.String)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Char",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 48,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "name": "\u003CCustomEntrySubject_4\u003Eb__5_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 49,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)",
+      "name": "\u003CCustomEntrySubject_4\u003Eb__5_2",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 2,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 50,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Boolean(System.Int32)",
+      "name": "\u003CCustomEntrySubject_6\u003Eb__7_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Boolean",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 51,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Char(System.String)",
+      "name": "\u003CCustomEntrySubject_7\u003Eb__8_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Char(System.String)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Char",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 52,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "name": "\u003CCustomEntrySubject_7\u003Eb__8_1",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 53,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "name": "\u003CCustomEntrySubject_9\u003Eb__10_0",
+      "definitionSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "declaringTypeSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Boolean",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 54,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)::parameter[0]:a",
+      "name": "a",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 55,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)::parameter[1]:b",
+      "name": "b",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 56,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)::parameter[0]:acc",
+      "name": "acc",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 57,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)::parameter[1]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 58,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)::parameter[0]:acc",
+      "name": "acc",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 59,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)::parameter[1]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32,System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 60,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.String(System.Int32)::parameter[0]:sum",
+      "name": "sum",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.String(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 61,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Char(System.String)::parameter[0]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Char(System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 62,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)::parameter[0]:g",
+      "name": "g",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "memberType": "IGrouping\u003CSystem.Char,System.String\u003E",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 63,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)::parameter[0]:acc",
+      "name": "acc",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 64,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)::parameter[1]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 65,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Char(System.String)::parameter[0]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Char(System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 66,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)::parameter[0]:g",
+      "name": "g",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "memberType": "IGrouping\u003CSystem.Char,System.String\u003E",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 67,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)::parameter[0]:acc",
+      "name": "acc",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 68,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)::parameter[1]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_2:System.Int32(System.Int32,System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 1
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 69,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Boolean(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Boolean(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 70,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Char(System.String)::parameter[0]:s",
+      "name": "s",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Char(System.String)",
+      "memberType": "System.String",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 71,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)::parameter[0]:g",
+      "name": "g",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Collections.Generic.KeyValuePair\u003CSystem.Char,System.Int32\u003E(IGrouping\u003CSystem.Char,System.String\u003E)",
+      "memberType": "IGrouping\u003CSystem.Char,System.String\u003E",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 72,
+      "subjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "AggregationSubjects/AggregationSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_9\u003Eb__10_0:System.Boolean(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    }
+  ]
+}

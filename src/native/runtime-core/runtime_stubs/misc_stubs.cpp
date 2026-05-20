@@ -57,24 +57,9 @@ CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept
     return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosStoreFloat64(CHAOS_IL2CPP_FLOAT64 value) noexcept
-{
-    CHAOS_IL2CPP_INT64 bits;
-    std::memcpy(&bits, &value, sizeof(bits));
-    return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
-}
-
 CHAOS_IL2CPP_INT64 ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return static_cast<CHAOS_IL2CPP_INT64>(value);
-}
-
-CHAOS_IL2CPP_FLOAT64 ChaosLoadFloat64(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    CHAOS_IL2CPP_INT64 bits = static_cast<CHAOS_IL2CPP_INT64>(value);
-    CHAOS_IL2CPP_FLOAT64 result;
-    std::memcpy(&result, &bits, sizeof(result));
-    return result;
 }
 
 // ── Buffer ──

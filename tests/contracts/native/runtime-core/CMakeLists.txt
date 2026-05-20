@@ -441,6 +441,24 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
     endif()
 endif()
 
+# blittable_benchmark — native microbenchmark for blittable struct marshalling throughput
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/blittable_benchmark.cpp")
+    add_executable(chaos_blittable_benchmark blittable_benchmark.cpp)
+    target_compile_features(chaos_blittable_benchmark PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_blittable_benchmark PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_include_directories(
+        chaos_blittable_benchmark
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core")
+    target_link_libraries(
+        chaos_blittable_benchmark
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
 # delegate_stress_test — Delegate subsystem stress (A1, A2, B1, B2, C2, E1, E3, E5)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/delegate_stress_test.cpp")
     add_executable(chaos_delegate_stress_test delegate_stress_test.cpp ${CHAOS_GC_TEST_STUBS})

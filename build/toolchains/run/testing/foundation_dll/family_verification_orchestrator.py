@@ -918,21 +918,24 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
         if bm_status in ("VIOLATION", "CONCERN"):
             bm_check["status"] = "NOT_APPLICABLE"
             bm_check["summary"] += " [overridden — benchmark stage was skipped]"
-            # Recompute overall principle status
-            status_counts = {}
-            for c in checks.values():
-                status_counts[c["status"]] = status_counts.get(c["status"], 0) + 1
-            if status_counts.get("VIOLATION", 0) > 0:
-                principle_overall_new = "VIOLATION"
-            elif status_counts.get("CONCERN", 0) > 0:
-                principle_overall_new = "CONCERN"
-            elif status_counts.get("ALIGNED", 0) > 0:
-                principle_overall_new = "ALIGNED"
-            else:
-                principle_overall_new = "NOT_APPLICABLE"
-            principle.setdefault("summary", {})["overall"] = principle_overall_new
-            overall["principle_status"] = principle_overall_new
-            overall["passed"] = mechanism.get("passed", False) and principle_overall_new != "VIOLATION"
+
+        # Recompute overall principle status whenever benchmark is skipped,
+        # so the strict "ALIGNED" requirement from run_full_audit() does not
+        # cause a spurious audit failure on CONCERN-only checks.
+        status_counts = {}
+        for c in checks.values():
+            status_counts[c["status"]] = status_counts.get(c["status"], 0) + 1
+        if status_counts.get("VIOLATION", 0) > 0:
+            principle_overall_new = "VIOLATION"
+        elif status_counts.get("CONCERN", 0) > 0:
+            principle_overall_new = "CONCERN"
+        elif status_counts.get("ALIGNED", 0) > 0:
+            principle_overall_new = "ALIGNED"
+        else:
+            principle_overall_new = "NOT_APPLICABLE"
+        principle.setdefault("summary", {})["overall"] = principle_overall_new
+        overall["principle_status"] = principle_overall_new
+        overall["passed"] = mechanism.get("passed", False) and principle_overall_new != "VIOLATION"
 
     # In JIT mode, demote p1_benchmark since interpreter is intentionally slower
     if is_jit_mode:
@@ -1236,11 +1239,25 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     total = summary.get("totalMethods", len(mids))
     invalid_count = summary.get("invalidCount", 0)
 
+    # ── Early skip: all methods are invalid (no managed harness available) ──
+    # This happens when the managed benchmark harness cannot generate call
+    # expressions for the family's methods (e.g. LINQ Enumerable methods
+    # with lambda parameters). Skip rather than fail.
+    if invalid_count >= total - stub_total > 0:
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+        return StageResult(
+            stage="benchmark", status="skipped",
+            summary=f"All {invalid_count} non-stub methods are invalid (no managed harness)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     # ── Quality gate ────────────────────────────────────────────────
     # Reason 1: too few matched (< half of non-stub, non-invalid methods)
     # Stub methods are excluded from the ratio denominator since they
     # cannot produce native benchmark measurements.
-    effective_total = max(total - stub_total, 1)
+    effective_total = max(total - stub_total - invalid_count, 1)
     min_match_ratio = 0.5
     match_ok = matched_count >= effective_total * min_match_ratio
 

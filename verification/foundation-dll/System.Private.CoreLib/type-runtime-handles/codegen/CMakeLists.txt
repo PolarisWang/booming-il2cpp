@@ -37,6 +37,7 @@ set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # Assembly: TypeRuntimeHandlesSubjects
 add_library(chaos_gen_TypeRuntimeHandlesSubjects STATIC
     ${CHAOS_GEN_DIR}/TypeRuntimeHandlesSubjects/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/TypeRuntimeHandlesSubjects/generated/chaos_generated_module.cpp
 )
 
 target_include_directories(chaos_gen_TypeRuntimeHandlesSubjects PUBLIC ${COMMON_INCLUDE_DIRS})

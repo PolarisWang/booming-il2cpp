@@ -11,5 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FilteringSubjects.cs" />
+    <Compile Include="FilteringSubjects.Custom.cs" />
   </ItemGroup>
 </Project>
