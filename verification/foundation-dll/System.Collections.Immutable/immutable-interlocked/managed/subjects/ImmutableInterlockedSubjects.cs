@@ -6,13 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Func{System;
+using System.Linq;
 
 public static partial class ImmutableInterlockedSubjects
 {
     // Inlined exit code — avoids SDK method call resolution in codegen
     public static int _exitCode;
 
-    // [0] System.Collections.Immutable/System.Collections.Immutable.ImmutableInterlocked::Update<string>:System.Boolean(System.String&,System.Func{System.String,System.String})
+    // [0] System.Collections.Immutable/System.Collections.Immutable.ImmutableInterlocked::Update<string>(System.String&,System.Func{System.String,System.String})
 
 }

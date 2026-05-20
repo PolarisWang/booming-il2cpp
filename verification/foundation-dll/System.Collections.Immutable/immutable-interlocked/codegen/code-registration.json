@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ImmutableInterlockedSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects_CustomEntrySubject_0",
+          "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_cctor",
+          "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c__ctor",
+          "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_CustomEntrySubject_0_b__1_0_System_String",
+          "subjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.String(System.String)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

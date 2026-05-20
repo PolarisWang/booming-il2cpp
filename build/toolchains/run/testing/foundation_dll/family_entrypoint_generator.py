@@ -77,6 +77,10 @@ def _add_type_using(t: str, usings: set[str]) -> None:
     """Add using directive based on a CLR type string (parameter or return type)."""
     bare = t.rstrip("&*?").strip()
     # Strip CLR generic argument braces: Action{System.Threading.Tasks.Task} -> Action
+    # Handle partial braces from comma-split parameter types (e.g. System.Func{System.String when
+    # the closing } is in a subsequent split part)
+    if '{' in bare and '}' not in bare:
+        bare = bare[:bare.index('{')]
     bare = re.sub(r"\{.*\}", "", bare)
     # Strip C# generic argument brackets: ImmutableArray<System.Byte> -> ImmutableArray
     bare = re.sub(r"<.*>", "", bare)
