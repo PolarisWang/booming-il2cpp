@@ -53,6 +53,10 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_DayOfWeek = {{nullptr, nullptr, 2017024780185438178ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_DayOfWeek = {{nullptr, nullptr, 2017024780185438178ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
@@ -164,6 +168,17 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
 	CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+};
+
+struct chaos_valuetype_System_Private_CoreLib_System_DayOfWeek
+{
+	CHAOS_IL2CPP_INTPTR _backing = 0;
+};
+
+struct chaos_boxed_type_System_Private_CoreLib_System_DayOfWeek
+{
+	PureTypeHeader header{};
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek value{};
 };
 
 struct chaos_boxed_type_System_Private_CoreLib_System_Int32
@@ -396,6 +411,11 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 	switch (chaos_type_handle)
 	{
 		case static_cast<CHAOS_IL2CPP_INTPTR>(40218264u):
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_12") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(103466469u);
+			}
+
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_0") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(100913489u);
@@ -632,6 +652,11 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_E
 	return ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 }
 
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	return ChaosObjectToString(chaos_fn_arg_0);
+}
+
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	if (chaos_arg_0 == 0)
@@ -678,6 +703,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_8(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -691,7 +717,8 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[13] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[14] = {
+	0u,
 	0u,
 	0u,
 	0u,
@@ -709,14 +736,14 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[13] = {
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[12];
+	::ChaosAbiMethodEntryV0 entries[13];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		12u,
+		13u,
 		0u,
-		3803845797u,  // FNV-1a over entries+params
+		1400052141u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -732,6 +759,7 @@ static constexpr struct {
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_9
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_10
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_11
+		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12
 	},
 	{
 	},
@@ -803,7 +831,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("EnumParsingSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[12] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[13] = {
 	{ "Subject_0", 0x00000003u, 0u },  // EnumParsingSubjects
 	{ "Subject_1", 0x00000004u, 0u },  // EnumParsingSubjects
 	{ "Subject_2", 0x00000005u, 0u },  // EnumParsingSubjects
@@ -816,15 +844,16 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[12] = {
 	{ "Subject_9", 0x0000000Cu, 0u },  // EnumParsingSubjects
 	{ "Subject_10", 0x0000000Du, 0u },  // EnumParsingSubjects
 	{ "Subject_11", 0x0000000Eu, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_12", 0x0000000Fu, 0u },  // EnumParsingSubjects
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "EnumParsingSubjects", "", 0u, 12u },
+	{ "EnumParsingSubjects", "", 0u, 13u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[12] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[13] = {
 	{ 0x00000003u, 0u },
 	{ 0x00000004u, 1u },
 	{ 0x00000005u, 2u },
@@ -837,10 +866,11 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[12] = {
 	{ 0x0000000Cu, 9u },
 	{ 0x0000000Du, 10u },
 	{ 0x0000000Eu, 11u },
+	{ 0x0000000Fu, 12u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[12] = {
+static HotpatchEntryV0 s_hotpatch_entries[13] = {
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_0
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_1
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_2
@@ -853,6 +883,7 @@ static HotpatchEntryV0 s_hotpatch_entries[12] = {
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_9
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_10
 	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_11
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::CustomEntrySubject_12
 };
 
 // Module hotpatch bundle
@@ -861,11 +892,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	12u,
+	13u,
 	s_hotpatch_slots,
-	12u,
+	13u,
 	s_hotpatch_entries,
-	12u,
+	13u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -874,7 +905,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
 	"System.Private.CoreLib/System.Int32",
@@ -892,9 +923,10 @@ extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
 	"System.Private.CoreLib/System.Int32::ToString:System.String(System.String)",
 	"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
 	"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+	"System.Private.CoreLib/System.Object::ToString:System.String()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[17] = {
+extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
 	nullptr,
@@ -912,13 +944,14 @@ extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Object__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 17;
+extern "C" int32_t kChaosExternalRuntimeCount = 18;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[12])() = {
+static void (*kAotMethods[13])() = {
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2),
@@ -931,6 +964,7 @@ static void (*kAotMethods[12])() = {
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -938,7 +972,7 @@ static void (*kAotMethods[12])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[12])() = {
+extern "C" void (*kBenchmarkWrappers[13])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -951,6 +985,7 @@ static void (*kBenchmarkWrappers[12])() = {
 	[]() {kAotMethods[9]();},
 	[]() {kAotMethods[10]();},
 	[]() {kAotMethods[11]();},
+	[]() {kAotMethods[12]();},
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -1025,7 +1060,7 @@ extern "C" double BenchmarkMethod(
 }
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[12] = {
+static void* const kMethodPointers[13] = {
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2),
@@ -1038,6 +1073,7 @@ static void* const kMethodPointers[12] = {
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1045,7 +1081,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 12u,
+	.method_pointer_count      = 13u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1094,7 +1130,7 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 static constexpr ReflectionQueryFieldDescriptor kReflFields_EnumParsingSubjects_EnumParsingSubjects[1] = {
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubjects_EnumParsingSubjects[12] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubjects_EnumParsingSubjects[13] = {
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -1107,11 +1143,12 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubject
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
+	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects", "EnumParsingSubjects/EnumParsingSubjects", "", "EnumParsingSubjects", "EnumParsingSubjects", nullptr, kReflFields_EnumParsingSubjects_EnumParsingSubjects, 1u, nullptr, 0u,
-	kReflMethods_EnumParsingSubjects_EnumParsingSubjects, 12u },
+	kReflMethods_EnumParsingSubjects_EnumParsingSubjects, 13u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
@@ -1170,6 +1207,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1485,6 +1523,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1629,6 +1668,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1776,6 +1816,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void)
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -1948,6 +1989,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -2106,6 +2148,7 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -2495,12 +2538,73 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void)
 	}
 }
 
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_value = _s0;
+		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_DayOfWeek, {});
+		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_DayOfWeek.hot;
+		chaos_boxed->value = chaos_value;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+	}
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(6);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
 
 
 }  // namespace chaos::il2cpp::codegen::EnumParsingSubjects
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 12;
+extern "C" const int kAotMethodCount = 13;
 
 extern "C" void ChaosJitRegisterAll() {}

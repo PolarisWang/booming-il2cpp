@@ -36,6 +36,9 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct EnumParsingSubjects_t {
+        void (*CustomEntrySubject_12)(
+                void
+        );
         void (*Subject_0)(
                 void
         );
@@ -78,6 +81,10 @@ struct Functions {
 
 extern const Functions kFunctions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
+
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
 // ═══════════════════════════════════════════════════════════════════════════
@@ -88,6 +95,11 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct EnumParsingSubjects {
+    static inline void CustomEntrySubject_12(
+    ) {
+        return kFunctions.enumParsingSubjects.CustomEntrySubject_12(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.enumParsingSubjects.Subject_0(
@@ -149,7 +161,7 @@ struct EnumParsingSubjects {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr int32_t MethodCount = 13;
 };
 
 

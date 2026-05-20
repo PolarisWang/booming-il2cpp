@@ -90,6 +90,14 @@ public partial class EnumParsingTests
             Xunit.Assert.NotNull((object)result);
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_System_Enum_BoxToString_System_String()
+    {
+        // Purpose: Verify Enum.BoxToString with typical input
+            var result = DayOfWeek.Monday.BoxToString();
+            Xunit.Assert.NotNull((object)result);
+    }
+
     // === mixed (smoke) ===
 
     [Fact]

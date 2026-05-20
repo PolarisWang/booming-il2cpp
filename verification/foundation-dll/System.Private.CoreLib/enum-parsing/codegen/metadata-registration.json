@@ -155,6 +155,17 @@
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "name": "CustomEntrySubject_12",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
     }
   ]
 }

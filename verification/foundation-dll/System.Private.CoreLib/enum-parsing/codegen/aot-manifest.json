@@ -76,6 +76,12 @@
     },
     {
       "assemblyName": "EnumParsingSubjects",
+      "subjectKind": "method",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "EnumParsingSubjects",
       "subjectKind": "field",
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
       "reason": "instance-field-state"

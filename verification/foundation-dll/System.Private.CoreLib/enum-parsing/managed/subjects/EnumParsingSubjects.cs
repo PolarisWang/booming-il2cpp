@@ -90,4 +90,6 @@ public static partial class EnumParsingSubjects
         if (((Enum.TryParse(typeof(DayOfWeek), "Monday", out object _)) ? 1 : 0) != 1) _exitCode = 1;
     }
 
+    // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
+
 }

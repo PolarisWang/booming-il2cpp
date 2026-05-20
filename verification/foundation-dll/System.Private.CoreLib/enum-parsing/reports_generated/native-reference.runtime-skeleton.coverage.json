@@ -5,8 +5,8 @@
   "familyId": "family/System.Private.CoreLib/enum/parsing",
   "planKind": "family-runtime-skeleton",
   "translationUnitMode": "runtime-skeleton",
-  "requestedMethodCount": 12,
-  "emittedMethodCount": 12,
+  "requestedMethodCount": 13,
+  "emittedMethodCount": 13,
   "uncoveredMethodCount": 0,
   "uncoveredReasonCounts": {},
   "uncoveredMethodSubjectIds": [],
@@ -22,6 +22,7 @@
     "System.Private.CoreLib/System.Enum::ToString:System.String()",
     "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
     "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
-    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)"
+    "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+    "System.Private.CoreLib/System.Enum::BoxToString:System.String()"
   ]
 }

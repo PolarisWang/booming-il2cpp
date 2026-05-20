@@ -48,6 +48,7 @@ target_compile_options(chaos_gen_ReflectionMemberBasicsPatchEntry PUBLIC ${COMMO
 # Entry executable — links generated code + native runtime
 add_executable(entry
     ${CHAOS_GEN_DIR}/runtime-entry.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../native/runtime-patchdata.cpp
 )
 
 target_link_libraries(entry PRIVATE

@@ -66,6 +66,11 @@
       "subjectKind": "method",
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
       "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
@@ -95,6 +100,18 @@
     },
     {
       "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false

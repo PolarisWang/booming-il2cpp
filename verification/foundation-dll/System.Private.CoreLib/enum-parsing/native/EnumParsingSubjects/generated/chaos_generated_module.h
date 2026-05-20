@@ -36,7 +36,16 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct EnumParsingSubjects_t {
+        void (*CustomEntrySubject_12)(
+                void
+        );
         void (*Subject_0)(
+                void
+        );
+        void (*Subject_10)(
+                void
+        );
+        void (*Subject_11)(
                 void
         );
         void (*Subject_1)(
@@ -66,17 +75,15 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-        void (*Subject_10)(
-                void
-        );
-        void (*Subject_11)(
-                void
-        );
     } enumParsingSubjects;
     int32_t method_count;
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -88,9 +95,24 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct EnumParsingSubjects {
+    static inline void CustomEntrySubject_12(
+    ) {
+        return kFunctions.enumParsingSubjects.CustomEntrySubject_12(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.enumParsingSubjects.Subject_0(
+        );
+    }
+    static inline void Subject_10(
+    ) {
+        return kFunctions.enumParsingSubjects.Subject_10(
+        );
+    }
+    static inline void Subject_11(
+    ) {
+        return kFunctions.enumParsingSubjects.Subject_11(
         );
     }
     static inline void Subject_1(
@@ -138,18 +160,8 @@ struct EnumParsingSubjects {
         return kFunctions.enumParsingSubjects.Subject_9(
         );
     }
-    static inline void Subject_10(
-    ) {
-        return kFunctions.enumParsingSubjects.Subject_10(
-        );
-    }
-    static inline void Subject_11(
-    ) {
-        return kFunctions.enumParsingSubjects.Subject_11(
-        );
-    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr int32_t MethodCount = 13;
 };
 
 

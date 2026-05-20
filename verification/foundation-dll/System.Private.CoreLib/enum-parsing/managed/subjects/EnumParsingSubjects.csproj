@@ -11,5 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EnumParsingSubjects.cs" />
+    <Compile Include="EnumParsingSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

@@ -21,6 +21,13 @@ CHAOS_IL2CPP_UINT32 g_aot_entry_count = 0u;
 // single compare, avoiding mutex lock + hash map + binary search.
 thread_local struct { StringId id; StringView view; } g_tls_resolve = {};
 
+// 8-entry TLS circular buffer cache for Intern().
+// Benchmarks that cycle through a small set of strings (e.g. Double→string
+// formatting with 256 distinct values repeated ~390x each) avoid 99.6% of
+// the mutex lock + hash-map lookup in Register().
+thread_local struct { StringId id; } g_tls_intern_cache[8] = {};
+thread_local CHAOS_IL2CPP_UINT32 g_tls_intern_cache_pos = 0u;
+
 CHAOS_IL2CPP_MUTEX g_dynamic_mutex;
 CHAOS_IL2CPP_UNORDERED_DENSE_MAP(StringId, StringView) g_dynamic_entries;
 // Intermediate typedef avoids MSVC >> issue with nested macros
@@ -124,7 +131,36 @@ StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_I
 
 StringId Intern(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count)
 {
-    return Register(utf8_data, byte_count, 0u);
+    if (utf8_data == nullptr || byte_count == 0u)
+    {
+        return kStringIdNull;
+    }
+
+    // Compute FNV-1a hash
+    StringId id = 14695981039346656037ULL;
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < byte_count; ++i)
+    {
+        id ^= static_cast<unsigned char>(utf8_data[i]);
+        id *= 1099511628211ULL;
+    }
+    id |= 1u;
+
+    // TLS cache check (lock-free, no mutex)
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < 8u; ++i)
+    {
+        if (g_tls_intern_cache[i].id == id)
+            return id;
+    }
+
+    // Cache miss: Register acquires mutex, inserts if new, returns existing if found
+    // Register recomputes the hash — acceptable on ~0.4% miss path
+    StringId result = Register(utf8_data, byte_count, 0u);
+
+    // Insert into TLS circular buffer
+    g_tls_intern_cache[g_tls_intern_cache_pos].id = result;
+    g_tls_intern_cache_pos = (g_tls_intern_cache_pos + 1u) & 7u;
+
+    return result;
 }
 
 void UnregisterDomain(CHAOS_IL2CPP_UINT32 domain_id)

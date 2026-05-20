@@ -35,8 +35,94 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
+    struct ThreadingTasksPrimitivesNativeEntry_t {
+        void (*CustomEntryMethod0)(
+                void
+        );
+        void (*CustomEntryMethod10)(
+                void
+        );
+        void (*CustomEntryMethod11)(
+                void
+        );
+        void (*CustomEntryMethod12)(
+                void
+        );
+        void (*CustomEntryMethod14)(
+                void
+        );
+        void (*CustomEntryMethod1)(
+                void
+        );
+        void (*CustomEntryMethod2)(
+                void
+        );
+        void (*CustomEntryMethod3)(
+                void
+        );
+        void (*CustomEntryMethod4)(
+                void
+        );
+        void (*CustomEntryMethod5)(
+                void
+        );
+        void (*CustomEntryMethod6)(
+                void
+        );
+        void (*CustomEntryMethod7)(
+                void
+        );
+        void (*CustomEntryMethod8)(
+                void
+        );
+        void (*CustomEntryMethod9)(
+                void
+        );
+    } threadingTasksPrimitivesNativeEntry;
+    struct ThreadingTasksPrimitivesNativeEntry___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntryMethod0>b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntryMethod11>b__13_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*<CustomEntryMethod1>b__3_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntryMethod3>b__5_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntryMethod7>b__9_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntryMethod7>b__9_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } threadingTasksPrimitivesNativeEntry___c;
     struct ThreadingTasksPrimitivesSubjects_t {
         void (*CustomEntrySubject_0)(
+                void
+        );
+        void (*CustomEntrySubject_10)(
+                void
+        );
+        void (*CustomEntrySubject_11)(
+                void
+        );
+        void (*CustomEntrySubject_12)(
+                void
+        );
+        void (*CustomEntrySubject_13)(
+                void
+        );
+        void (*CustomEntrySubject_14)(
                 void
         );
         void (*CustomEntrySubject_1)(
@@ -66,43 +152,28 @@ struct Functions {
         void (*CustomEntrySubject_9)(
                 void
         );
-        void (*CustomEntrySubject_10)(
-                void
-        );
-        void (*CustomEntrySubject_11)(
-                void
-        );
-        void (*CustomEntrySubject_12)(
-                void
-        );
-        void (*Subject_13)(
-                void
-        );
-        void (*CustomEntrySubject_14)(
-                void
-        );
     } threadingTasksPrimitivesSubjects;
     struct ThreadingTasksPrimitivesSubjects___c_t {
-        void (*_CustomEntrySubject_0_b__3_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*_CustomEntrySubject_1_b__4_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_CustomEntrySubject_3_b__6_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_CustomEntrySubject_7_b__10_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_CustomEntrySubject_7_b__10_1)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_cctor)(
+        void (*cctor)(
                 void
         );
-        void (*_ctor)(
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntrySubject_0>b__2_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_1>b__3_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntrySubject_3>b__5_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntrySubject_7>b__9_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        void (*<CustomEntrySubject_7>b__9_1)(
+                    CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
     } threadingTasksPrimitivesSubjects___c;
@@ -110,6 +181,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -120,10 +195,171 @@ extern const Functions kFunctions;
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
+struct ThreadingTasksPrimitivesNativeEntry {
+    static inline void CustomEntryMethod0(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod0(
+        );
+    }
+    static inline void CustomEntryMethod10(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod10(
+        );
+    }
+    static inline void CustomEntryMethod11(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod11(
+        );
+    }
+    static inline void CustomEntryMethod12(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod12(
+        );
+    }
+    static inline void CustomEntryMethod14(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod14(
+        );
+    }
+    static inline void CustomEntryMethod1(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod1(
+        );
+    }
+    static inline void CustomEntryMethod2(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod2(
+        );
+    }
+    static inline void CustomEntryMethod3(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod3(
+        );
+    }
+    static inline void CustomEntryMethod4(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod4(
+        );
+    }
+    static inline void CustomEntryMethod5(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod5(
+        );
+    }
+    static inline void CustomEntryMethod6(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod6(
+        );
+    }
+    static inline void CustomEntryMethod7(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod7(
+        );
+    }
+    static inline void CustomEntryMethod8(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod8(
+        );
+    }
+    static inline void CustomEntryMethod9(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry.CustomEntryMethod9(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 14;
+};
+
+struct ThreadingTasksPrimitivesNativeEntry___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.ctor(
+                    arg_0
+        );
+    }
+    static inline void <CustomEntryMethod0>b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod0>b__2_0(
+                    arg_0
+        );
+    }
+    static inline void <CustomEntryMethod11>b__13_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod11>b__13_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 <CustomEntryMethod1>b__3_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod1>b__3_0(
+                    arg_0
+        );
+    }
+    static inline void <CustomEntryMethod3>b__5_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod3>b__5_0(
+                    arg_0
+        );
+    }
+    static inline void <CustomEntryMethod7>b__9_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod7>b__9_0(
+                    arg_0
+        );
+    }
+    static inline void <CustomEntryMethod7>b__9_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1
+    ) {
+        return kFunctions.threadingTasksPrimitivesNativeEntry___c.<CustomEntryMethod7>b__9_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 8;
+};
+
 struct ThreadingTasksPrimitivesSubjects {
     static inline void CustomEntrySubject_0(
     ) {
         return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_0(
+        );
+    }
+    static inline void CustomEntrySubject_10(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_10(
+        );
+    }
+    static inline void CustomEntrySubject_11(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_11(
+        );
+    }
+    static inline void CustomEntrySubject_12(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_12(
+        );
+    }
+    static inline void CustomEntrySubject_13(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_13(
+        );
+    }
+    static inline void CustomEntrySubject_14(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_14(
         );
     }
     static inline void CustomEntrySubject_1(
@@ -171,83 +407,58 @@ struct ThreadingTasksPrimitivesSubjects {
         return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_9(
         );
     }
-    static inline void CustomEntrySubject_10(
-    ) {
-        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_10(
-        );
-    }
-    static inline void CustomEntrySubject_11(
-    ) {
-        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_11(
-        );
-    }
-    static inline void CustomEntrySubject_12(
-    ) {
-        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_12(
-        );
-    }
-    static inline void Subject_13(
-    ) {
-        return kFunctions.threadingTasksPrimitivesSubjects.Subject_13(
-        );
-    }
-    static inline void CustomEntrySubject_14(
-    ) {
-        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_14(
-        );
-    }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
 };
 
 struct ThreadingTasksPrimitivesSubjects___c {
-    static inline void _CustomEntrySubject_0_b__3_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void cctor(
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._CustomEntrySubject_0_b__3_0(
-                    p_this
+        return kFunctions.threadingTasksPrimitivesSubjects___c.cctor(
         );
     }
-    static inline CHAOS_IL2CPP_INT32 _CustomEntrySubject_1_b__4_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._CustomEntrySubject_1_b__4_0(
-                    p_this
+        return kFunctions.threadingTasksPrimitivesSubjects___c.ctor(
+                    arg_0
         );
     }
-    static inline void _CustomEntrySubject_3_b__6_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void <CustomEntrySubject_0>b__2_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._CustomEntrySubject_3_b__6_0(
-                    p_this
+        return kFunctions.threadingTasksPrimitivesSubjects___c.<CustomEntrySubject_0>b__2_0(
+                    arg_0
         );
     }
-    static inline void _CustomEntrySubject_7_b__10_0(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_1>b__3_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._CustomEntrySubject_7_b__10_0(
-                    p_this
+        return kFunctions.threadingTasksPrimitivesSubjects___c.<CustomEntrySubject_1>b__3_0(
+                    arg_0
         );
     }
-    static inline void _CustomEntrySubject_7_b__10_1(
-                CHAOS_IL2CPP_INTPTR p_this, 
-                CHAOS_IL2CPP_INTPTR p0
+    static inline void <CustomEntrySubject_3>b__5_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._CustomEntrySubject_7_b__10_1(
-                    p_this, 
-                    p0
+        return kFunctions.threadingTasksPrimitivesSubjects___c.<CustomEntrySubject_3>b__5_0(
+                    arg_0
         );
     }
-    static inline void _cctor(
+    static inline void <CustomEntrySubject_7>b__9_0(
+                CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._cctor(
+        return kFunctions.threadingTasksPrimitivesSubjects___c.<CustomEntrySubject_7>b__9_0(
+                    arg_0
         );
     }
-    static inline void _ctor(
-                CHAOS_IL2CPP_INTPTR p_this
+    static inline void <CustomEntrySubject_7>b__9_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.threadingTasksPrimitivesSubjects___c._ctor(
-                    p_this
+        return kFunctions.threadingTasksPrimitivesSubjects___c.<CustomEntrySubject_7>b__9_1(
+                    arg_0, 
+                    arg_1
         );
     }
     /// Total number of AOT-compiled methods in this type.

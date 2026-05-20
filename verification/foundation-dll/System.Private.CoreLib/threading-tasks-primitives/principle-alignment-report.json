@@ -1,7 +1,7 @@
 {
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:46:10.498528",
+  "generated_at": "2026-05-20T15:54:12.605854",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -369,25 +369,37 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 12 changed source files are outside expected architecture layers",
+      "summary": "3 of 7 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 12,
+        "changed_source_count": 7,
         "layer_distribution": {
-          "TestInfra": 2,
-          "Emitter": 4,
-          "Interpreter": 1,
-          "RuntimeCore": 3,
-          "Tests": 1
+          "RuntimeCore": 4
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "file": "wiki/03-功能模块/07-COM互操作/01-架构总览.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]

@@ -226,18 +226,23 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexc
 
     info->high_memory_load_threshold_bytes =
         mem.total_phys / 2;
-    info->memory_load_bytes =
-        mem.total_phys - mem.avail_phys;
     info->total_available_memory_bytes =
         mem.total_phys;
+    info->memory_load_bytes =
+        mem.total_phys - mem.avail_phys;
     info->heap_size_bytes = heap_size;
     info->fragmented_bytes = fragmented;
     info->total_committed_bytes = heap_size;
     info->promoted_bytes = promoted;
+    info->pinned_objects_count = 0;
+    info->finalization_pending_count = static_cast<int64_t>(snap.finalization_pending_count);
+    info->index = 0;
     info->generation = 1;
-    info->finalization_pending_count = snap.finalization_pending_count;
-    info->compacted = 0;
-    info->concurrent = 0;
+    info->pause_time_percentage = 0;
+    info->compacted = static_cast<uint8_t>(
+        g_gc_stats.last_compacted.load(std::memory_order_relaxed));
+    info->concurrent = static_cast<uint8_t>(
+        g_gc_stats.last_concurrent.load(std::memory_order_relaxed));
 }
 
 // ======================================================================
