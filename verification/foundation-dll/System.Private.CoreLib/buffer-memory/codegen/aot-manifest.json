@@ -87,6 +87,12 @@
       "reason": "instance-field-state"
     },
     {
+      "assemblyName": "BufferMemorySubjects",
+      "subjectKind": "field",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "type",
       "subjectId": "System.Private.CoreLib/System.Byte",

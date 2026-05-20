@@ -98,7 +98,7 @@ struct Functions {
         );
     } arrayRefHelper;
     struct BaseClass_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Compute)(
@@ -202,7 +202,7 @@ struct Functions {
         );
     } delegateHelper;
     struct DerivedClass_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Compute)(
@@ -245,12 +245,12 @@ struct Functions {
         );
     } genericsVirtEhDemo;
     struct HasFields_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
     } hasFields;
     struct HasInstanceFields_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -280,7 +280,7 @@ struct Functions {
         );
     } hotUpdateWithTypesDemo;
     struct ImplHelper_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -299,7 +299,7 @@ struct Functions {
         );
     } instanceFieldHelper;
     struct InstanceHelper_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -394,7 +394,7 @@ struct Functions {
         );
     } loopHelper;
     struct MarkedClass_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
     } markedClass;
@@ -431,7 +431,7 @@ struct Functions {
         );
     } multiDispatcher;
     struct MyClass_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -546,7 +546,7 @@ struct Functions {
         );
     } sealedClassVirtualHelper;
     struct SealedHelper_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -682,7 +682,7 @@ struct Functions {
         );
     } voidCaller;
     struct Wrapper__0__t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
@@ -691,7 +691,7 @@ struct Functions {
         );
     } wrapper__0_;
     struct Wrapper_System_Int32__t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -700,7 +700,7 @@ struct Functions {
         );
     } wrapper_System_Int32_;
     struct Wrapper_1_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
@@ -838,10 +838,10 @@ struct ArrayRefHelper {
 };
 
 struct BaseClass {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.baseClass..ctor(
+        return kFunctions.baseClass.ctor(
                     arg_0
         );
     }
@@ -1049,10 +1049,10 @@ struct DelegateHelper {
 };
 
 struct DerivedClass {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.derivedClass..ctor(
+        return kFunctions.derivedClass.ctor(
                     arg_0
         );
     }
@@ -1138,10 +1138,10 @@ struct GenericsVirtEhDemo {
 };
 
 struct HasFields {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.hasFields..ctor(
+        return kFunctions.hasFields.ctor(
                     arg_0
         );
     }
@@ -1150,11 +1150,11 @@ struct HasFields {
 };
 
 struct HasInstanceFields {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.hasInstanceFields..ctor(
+        return kFunctions.hasInstanceFields.ctor(
                     arg_0, 
                     arg_1
         );
@@ -1213,11 +1213,11 @@ struct HotUpdateWithTypesDemo {
 };
 
 struct ImplHelper {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.implHelper..ctor(
+        return kFunctions.implHelper.ctor(
                     arg_0, 
                     arg_1
         );
@@ -1254,11 +1254,11 @@ struct InstanceFieldHelper {
 };
 
 struct InstanceHelper {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.instanceHelper..ctor(
+        return kFunctions.instanceHelper.ctor(
                     arg_0, 
                     arg_1
         );
@@ -1449,10 +1449,10 @@ struct LoopHelper {
 };
 
 struct MarkedClass {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.markedClass..ctor(
+        return kFunctions.markedClass.ctor(
                     arg_0
         );
     }
@@ -1521,11 +1521,11 @@ struct MultiDispatcher {
 };
 
 struct MyClass {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.myClass..ctor(
+        return kFunctions.myClass.ctor(
                     arg_0, 
                     arg_1
         );
@@ -1772,11 +1772,11 @@ struct SealedClassVirtualHelper {
 };
 
 struct SealedHelper {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.sealedHelper..ctor(
+        return kFunctions.sealedHelper.ctor(
                     arg_0, 
                     arg_1
         );
@@ -2050,11 +2050,11 @@ struct VoidCaller {
 };
 
 struct Wrapper__0_ {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.wrapper__0_..ctor(
+        return kFunctions.wrapper__0_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -2071,11 +2071,11 @@ struct Wrapper__0_ {
 };
 
 struct Wrapper_System_Int32_ {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.wrapper_System_Int32_..ctor(
+        return kFunctions.wrapper_System_Int32_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -2092,11 +2092,11 @@ struct Wrapper_System_Int32_ {
 };
 
 struct Wrapper_1 {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.wrapper_1..ctor(
+        return kFunctions.wrapper_1.ctor(
                     arg_0, 
                     arg_1
         );

@@ -2031,13 +2031,22 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}    if (chaos_dt_ti->stable_id == {guardStableIdExpr})");
 				builder.AppendLine($"{indentation}    {{");
 				string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+				string devirtCtxArg = "";
+				if (_sharedContextSymbols.Contains(devirtSymbol))
+				{
+					bool callerIsShared = _currentMethodNativeSymbol != null &&
+					                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+					devirtCtxArg = string.IsNullOrEmpty(devirtArgs)
+						? (callerIsShared ? "chaos_generic_context" : "0")
+						: (callerIsShared ? ", chaos_generic_context" : ", 0");
+				}
 				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
 				{
-					builder.AppendLine($"{indentation}        {devirtSymbol}({devirtArgs});");
+					builder.AppendLine($"{indentation}        {devirtSymbol}({devirtArgs}{devirtCtxArg});");
 				}
 				else
 				{
-					builder.AppendLine($"{indentation}        chaos_dt_result = {devirtSymbol}({devirtArgs});");
+					builder.AppendLine($"{indentation}        chaos_dt_result = {devirtSymbol}({devirtArgs}{devirtCtxArg});");
 				}
 				builder.AppendLine($"{indentation}    }}");
 				builder.AppendLine($"{indentation}    else");
@@ -2053,13 +2062,22 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				// Sealed/monomorphic: unconditional direct call
 				string devirtArgs = FormatAbiInvocationArgumentList(devirtParams);
+				string devirtCtxArg2 = "";
+				if (_sharedContextSymbols.Contains(devirtSymbol))
+				{
+					bool callerIsShared = _currentMethodNativeSymbol != null &&
+					                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+					devirtCtxArg2 = string.IsNullOrEmpty(devirtArgs)
+						? (callerIsShared ? "chaos_generic_context" : "0")
+						: (callerIsShared ? ", chaos_generic_context" : ", 0");
+				}
 				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
 				{
-					builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs});");
+					builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs}{devirtCtxArg2});");
 				}
 				else
 				{
-					builder.AppendLine($"{indentation}    auto chaos_devirt_result = {devirtSymbol}({devirtArgs});");
+					builder.AppendLine($"{indentation}    auto chaos_devirt_result = {devirtSymbol}({devirtArgs}{devirtCtxArg2});");
 					EmitAbiReturnPush(builder, devirtMethod.ReturnAbi, "chaos_devirt_result", $"{indentation}    ");
 				}
 			}
@@ -2377,7 +2395,10 @@ public sealed partial class NativeAotLoweringPlanner
 			var ctorArgs0 = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 			if (ctorArgs0.StartsWith("chaos_arg_0", StringComparison.Ordinal))
 				ctorArgs0 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_value) | chaos_managed_pointer_local_slot_tag" + ctorArgs0.Substring(11);
-			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({ctorArgs0});");
+			string ctorCtxArg0 = _sharedContextSymbols.Contains(invocationTarget.TargetSymbol)
+				? (string.IsNullOrEmpty(ctorArgs0) ? "chaos_generic_context" : ", chaos_generic_context")
+				: "";
+			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({ctorArgs0}{ctorCtxArg0});");
 			EmitEvalStackPush(builder, indentation + "    ", "chaos_value");
 			builder.AppendLine(indentation + "}");
 			return;
@@ -2419,7 +2440,10 @@ public sealed partial class NativeAotLoweringPlanner
 			var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
 			if (ctorArgs2.StartsWith("chaos_arg_0", StringComparison.Ordinal))
 				ctorArgs2 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)" + ctorArgs2.Substring(11);
-			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2});");
+			string ctorCtxArg2 = _sharedContextSymbols.Contains(constructorTarget.TargetSymbol)
+				? (string.IsNullOrEmpty(ctorArgs2) ? "chaos_generic_context" : ", chaos_generic_context")
+				: "";
+			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
 				if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 				{
 				    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
@@ -2477,7 +2501,19 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
 			builder.AppendLine(indentation + "    }");
 		}
-		string value = targetSymbol + "(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
+		string argList = FormatAbiInvocationArgumentList(parameterAbis);
+		// Append hidden chaos_generic_context when calling a shared canonical body.
+		// Shared callers pass their own context parameter; non-shared pass 0.
+		string genericCtxArg = "";
+		if (_sharedContextSymbols.Contains(targetSymbol))
+		{
+			bool callerIsShared = _currentMethodNativeSymbol != null &&
+			                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+			genericCtxArg = string.IsNullOrEmpty(argList)
+				? (callerIsShared ? "chaos_generic_context" : "0")
+				: (callerIsShared ? ", chaos_generic_context" : ", 0");
+		}
+		string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
 		{
 			stringBuilder = builder;
@@ -2532,13 +2568,22 @@ public sealed partial class NativeAotLoweringPlanner
 					: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
 			}
 			string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+			string nativeCtxArg = "";
+			if (_sharedContextSymbols.Contains(nativeSymbol))
+			{
+				bool callerIsShared = _currentMethodNativeSymbol != null &&
+				                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+				nativeCtxArg = string.IsNullOrEmpty(directNativeArgs)
+					? (callerIsShared ? "chaos_generic_context" : "0")
+					: (callerIsShared ? ", chaos_generic_context" : ", 0");
+			}
 			if (string.Equals(returnType, "void", StringComparison.Ordinal))
 			{
-				builder.AppendLine($"{indentation}    {nativeSymbol}({directNativeArgs});");
+				builder.AppendLine($"{indentation}    {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
 			}
 			else
 			{
-				builder.AppendLine($"{indentation}    const auto chaos_result = {nativeSymbol}({directNativeArgs});");
+				builder.AppendLine($"{indentation}    const auto chaos_result = {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
 				EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
 			}
 			builder.AppendLine($"{indentation}}}");
@@ -2730,7 +2775,18 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
-		string callExpr = $"{nativeTarget}({FormatAbiInvocationArgumentList(parameterAbis)})";
+		// Append hidden chaos_generic_context for shared canonical targets.
+		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
+		string hpCtxArg = "";
+		if (_sharedContextSymbols.Contains(nativeTarget))
+		{
+			bool callerIsShared = _currentMethodNativeSymbol != null &&
+			                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+			hpCtxArg = string.IsNullOrEmpty(hpArgList)
+				? (callerIsShared ? "chaos_generic_context" : "0")
+				: (callerIsShared ? ", chaos_generic_context" : ", 0");
+		}
+		string callExpr = $"{nativeTarget}({hpArgList}{hpCtxArg})";
 		if (hasReturn)
 		{
 			builder.AppendLine($"{indentation}        _d_hpresult = {callExpr};");

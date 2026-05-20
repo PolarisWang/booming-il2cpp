@@ -77,10 +77,16 @@ public sealed partial class NativeAotLoweringPlanner
                     };
                 }
 
+                var rawMethodName = GetMethodName(method.SubjectId);
+                // C++ member names cannot start with '.' (e.g. ".ctor", ".cctor").
+                var safeMethodName = rawMethodName.Length > 0 && rawMethodName[0] == '.'
+                    ? rawMethodName.Substring(1)
+                    : rawMethodName;
+
                 methodModels[mi] = new ScriptObject
                 {
                     ["return_type"] = MapAbiSlotReturnType(method.ReturnAbi),
-                    ["method_name"] = GetMethodName(method.SubjectId),
+                    ["method_name"] = safeMethodName,
                     ["native_symbol"] = method.NativeSymbol,
                     ["param_count"] = paramAbis.Count,
                     ["params"] = paramModels,

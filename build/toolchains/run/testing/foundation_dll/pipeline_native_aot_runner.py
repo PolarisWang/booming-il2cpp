@@ -151,6 +151,8 @@ def _build_subjects_dll(
     extra_refs = None
     if family_slug in ("snapshot-prover",):
         extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+    # frozen-collections requires FrozenDictionary.Create which needs net10.0+
+    tfm = "net10.0" if family_slug == "frozen-collections" else None
     result = generate_and_build(
         subjects_dir,
         assembly_name=assembly_name,
@@ -159,6 +161,7 @@ def _build_subjects_dll(
         class_name=None,  # auto-derived: e.g. ConvertCharSubjects
         variant="subjects",
         extra_refs=extra_refs,
+        target_framework=tfm,
     )
     return result
 
@@ -786,14 +789,21 @@ def _fix_runtime_entry(path: Path) -> None:
     new_seh_counter = (
         "        int failed_count = 0;\n"
         "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
         "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
         "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
         "#else\n"
         "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
         "#endif\n"
         "            try {\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "                __try {\n"
+        "                    RunNativeAot(i);\n"
+        "                } __except (1) {\n"
+        "                    ++failed_count;\n"
+        "                }\n"
+        "#else\n"
         "                RunNativeAot(i);\n"
+        "#endif\n"
         "            } catch (const chaos_managed_exception&) {\n"
         "                ++failed_count;\n"
         "            } catch (...) {\n"
@@ -855,6 +865,62 @@ def _fix_runtime_entry(path: Path) -> None:
     )
     if old_hot_bitmask in text:
         text = text.replace(old_hot_bitmask, new_hot_counter)
+        changed = True
+
+    # Fix 5: Add __try/__except wrapping around RunNativeAot in SEH fact mode.
+    # The C# template generates counter-based code without __try/__except.  When
+    # the interpreter crashes with STATUS_ACCESS_VIOLATION, the SEH exception
+    # propagates through interpreter frames compiled without /EHa, and catch(...)
+    # in main() cannot catch it.  __try/__except at the OS level catches ALL SEH
+    # exceptions regardless of /EHa on intermediate frames.
+    old_seh_no_tryexcept = (
+        "        int failed_count = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+    )
+    new_seh_tryexcept = (
+        "        int failed_count = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "                __try {\n"
+        "                    RunNativeAot(i);\n"
+        "                } __except (1) {\n"
+        "                    ++failed_count;\n"
+        "                }\n"
+        "#else\n"
+        "                RunNativeAot(i);\n"
+        "#endif\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+    )
+    if old_seh_no_tryexcept in text:
+        text = text.replace(old_seh_no_tryexcept, new_seh_tryexcept)
         changed = True
 
     if changed:

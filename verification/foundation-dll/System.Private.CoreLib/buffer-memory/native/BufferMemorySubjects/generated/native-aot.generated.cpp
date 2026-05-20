@@ -14,6 +14,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -32,15 +33,25 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
+inline TypeInfoV0 chaos_mt_BufferMemorySubjects_BufferMemoryNativeEntry = {{nullptr, nullptr, 14164923565268767508ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BufferMemorySubjects_BufferMemoryNativeEntry = static_cast<CHAOS_IL2CPP_INTPTR>(14164923565268767508ULL);
 inline TypeInfoV0 chaos_mt_BufferMemorySubjects_BufferMemorySubjects = {{nullptr, nullptr, 2212541280939211958ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BufferMemorySubjects_BufferMemorySubjects = static_cast<CHAOS_IL2CPP_INTPTR>(2212541280939211958ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_BufferMemorySubjects_BufferMemorySubjects = static_cast<CHAOS_IL2CPP_INTPTR>(2212541280939211958ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -74,6 +85,11 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 	return false;
 }
+
+struct chaos_type_BufferMemorySubjects_BufferMemoryNativeEntry
+{
+	ThinLockableHeader header{};
+};
 
 struct chaos_type_BufferMemorySubjects_BufferMemorySubjects
 {
@@ -135,6 +151,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+CHAOS_IL2CPP_INT32 chaos_static_BufferMemorySubjects_BufferMemoryNativeEntry___exitCode = 0;
 CHAOS_IL2CPP_INT32 chaos_static_BufferMemorySubjects_BufferMemorySubjects___exitCode = 0;
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Buffer__ByteLength_System_Int32_System_Array_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -257,7 +274,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
 		&chaos_mt_BufferMemorySubjects_BufferMemorySubjects.hot,
-		nullptr,
+		&chaos_mt_BufferMemorySubjects_BufferMemoryNativeEntry.hot,
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[4] = {
@@ -301,19 +318,19 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[13] = {
-	{ "CustomEntryMethod0", 0x0000000Eu, 0u },  // BufferMemoryNativeEntry
-	{ "CustomEntryMethod3", 0x0000000Fu, 0u },  // BufferMemoryNativeEntry
-	{ "CustomEntryMethod9", 0x00000010u, 0u },  // BufferMemoryNativeEntry
-	{ "Subject_0", 0x00000004u, 0u },  // BufferMemorySubjects
-	{ "Subject_1", 0x00000005u, 0u },  // BufferMemorySubjects
-	{ "Subject_2", 0x00000006u, 0u },  // BufferMemorySubjects
-	{ "Subject_3", 0x00000007u, 0u },  // BufferMemorySubjects
-	{ "Subject_4", 0x00000008u, 0u },  // BufferMemorySubjects
-	{ "Subject_5", 0x00000009u, 0u },  // BufferMemorySubjects
-	{ "Subject_6", 0x0000000Au, 0u },  // BufferMemorySubjects
-	{ "Subject_7", 0x0000000Bu, 0u },  // BufferMemorySubjects
-	{ "Subject_8", 0x0000000Cu, 0u },  // BufferMemorySubjects
-	{ "Subject_9", 0x0000000Du, 0u },  // BufferMemorySubjects
+	{ "CustomEntryMethod0", 0x0000000Fu, 0u },  // BufferMemoryNativeEntry
+	{ "CustomEntryMethod3", 0x00000010u, 0u },  // BufferMemoryNativeEntry
+	{ "CustomEntryMethod9", 0x00000011u, 0u },  // BufferMemoryNativeEntry
+	{ "Subject_0", 0x00000005u, 0u },  // BufferMemorySubjects
+	{ "Subject_1", 0x00000006u, 0u },  // BufferMemorySubjects
+	{ "Subject_2", 0x00000007u, 0u },  // BufferMemorySubjects
+	{ "Subject_3", 0x00000008u, 0u },  // BufferMemorySubjects
+	{ "Subject_4", 0x00000009u, 0u },  // BufferMemorySubjects
+	{ "Subject_5", 0x0000000Au, 0u },  // BufferMemorySubjects
+	{ "Subject_6", 0x0000000Bu, 0u },  // BufferMemorySubjects
+	{ "Subject_7", 0x0000000Cu, 0u },  // BufferMemorySubjects
+	{ "Subject_8", 0x0000000Du, 0u },  // BufferMemorySubjects
+	{ "Subject_9", 0x0000000Eu, 0u },  // BufferMemorySubjects
 };
 
 // Type name index entries (namespace, short_name)
@@ -324,19 +341,19 @@ static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
 
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[13] = {
-	{ 0x00000004u, 0u },
-	{ 0x00000005u, 1u },
-	{ 0x00000006u, 2u },
-	{ 0x00000007u, 3u },
-	{ 0x00000008u, 4u },
-	{ 0x00000009u, 5u },
-	{ 0x0000000Au, 6u },
-	{ 0x0000000Bu, 7u },
-	{ 0x0000000Cu, 8u },
-	{ 0x0000000Du, 9u },
-	{ 0x0000000Eu, 10u },
-	{ 0x0000000Fu, 11u },
-	{ 0x00000010u, 12u },
+	{ 0x00000005u, 0u },
+	{ 0x00000006u, 1u },
+	{ 0x00000007u, 2u },
+	{ 0x00000008u, 3u },
+	{ 0x00000009u, 4u },
+	{ 0x0000000Au, 5u },
+	{ 0x0000000Bu, 6u },
+	{ 0x0000000Cu, 7u },
+	{ 0x0000000Du, 8u },
+	{ 0x0000000Eu, 9u },
+	{ 0x0000000Fu, 10u },
+	{ 0x00000010u, 11u },
+	{ 0x00000011u, 12u },
 };
 
 // Dispatch table (function pointers)
@@ -375,7 +392,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[8] = {
 	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
 	"System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()",
@@ -383,9 +400,10 @@ extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
 	"BufferMemorySubjects/BufferMemorySubjects::_exitCode",
 	"System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
 	"System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
+	"BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[7] = {
+extern "C" void* kChaosExternalRuntimeFnTable[8] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -393,9 +411,10 @@ extern "C" void* kChaosExternalRuntimeFnTable[7] = {
 	nullptr,
 	nullptr,
 	nullptr,
+	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 7;
+extern "C" int32_t kChaosExternalRuntimeCount = 8;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -591,6 +610,9 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjec
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
 };
 
+static constexpr ReflectionQueryFieldDescriptor kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry[1] = {
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
+};
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry[3] = {
 	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u },
@@ -600,7 +622,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjec
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
 	{ 0u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
 	kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u },
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
+	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry, 1u, nullptr, 0u,
 	kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u },
 };
 
@@ -649,7 +671,7 @@ struct ChaosGenericRegistrationInit {
 } g_chaos_reg_init;
 }
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_0()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_0(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_0(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -707,7 +729,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_0(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_1()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_1(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_1(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -717,7 +739,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_1(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_2()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -754,7 +776,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_2(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_3()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_3(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_3(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -806,7 +828,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_3(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_4()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_4(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_4(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -816,7 +838,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_4(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_5()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_5(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_5(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -826,7 +848,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_5(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_6()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_6(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_6(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -836,7 +858,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_6(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_7()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_7(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_7(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -846,7 +868,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_7(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_8()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_8(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_8(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -856,7 +878,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_8(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemorySubjects::Subject_9()
-extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_9(void)
+extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_9(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -893,7 +915,7 @@ extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_9(void)
 }
 
 // Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0()
-extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0(void)
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
@@ -1129,7 +1151,7 @@ extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod0(
 }
 
 // Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3()
-extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(void)
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
@@ -1220,7 +1242,7 @@ extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
-				chaos_static_BufferMemorySubjects_BufferMemorySubjects___exitCode = chaos_value;
+				chaos_static_BufferMemorySubjects_BufferMemoryNativeEntry___exitCode = chaos_value;
 			}
 		}
 		return;
@@ -1228,7 +1250,7 @@ extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod3(
 }
 
 // Managed method: BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9()
-extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9(void)
+extern "C" void BufferMemorySubjects_BufferMemoryNativeEntry_CustomEntryMethod9(void);
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};

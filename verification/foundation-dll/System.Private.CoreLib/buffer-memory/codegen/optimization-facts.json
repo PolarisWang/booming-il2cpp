@@ -85,6 +85,12 @@
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
     }
   ],
   "exceptionFacts": []

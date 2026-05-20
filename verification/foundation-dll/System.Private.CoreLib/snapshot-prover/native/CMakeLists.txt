@@ -46,6 +46,9 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    # Generated code directory — for #include "chaos_generated_module.h"
+    # to access the typed kFunctions dispatch table from runtime-entry.cpp
+    "${CHAOS_CODEGEN_DIR}/SnapshotProverSubjects/generated"
 )
 
 # Library link directories

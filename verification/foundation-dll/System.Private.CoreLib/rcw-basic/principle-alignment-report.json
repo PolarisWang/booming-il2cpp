@@ -1,7 +1,7 @@
 {
   "family": "rcw-basic",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:27:31.244133",
+  "generated_at": "2026-05-20T08:37:25.196271",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -210,86 +210,15 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "8 of 17 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/common/chaos/native_types.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/04-NativeAotLoweringPlanner文件布局.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/26-CodeGen度量与结构化恢复.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/22-结构化恢复度量与FlatFallback消除决策.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/05-项目经验/INDEX.md",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 2 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 17,
+        "changed_source_count": 2,
         "layer_distribution": {
-          "TestInfra": 3,
-          "Emitter": 1,
-          "RuntimeSupport": 1,
           "Interpreter": 1,
-          "RuntimeCore": 2,
-          "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/common/chaos/native_types.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/04-NativeAotLoweringPlanner文件布局.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/26-CodeGen度量与结构化恢复.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/22-结构化恢复度量与FlatFallback消除决策.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/05-项目经验/INDEX.md",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+          "RuntimeCore": 1
+        }
       }
     },
     "p2_no_bare_new": {
@@ -348,8 +277,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 9,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

@@ -36,7 +36,7 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct CalcAdd_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -51,7 +51,7 @@ struct Functions {
         );
     } calcAdd;
     struct CalcMul_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*Add)(
@@ -71,7 +71,7 @@ struct Functions {
         );
     } iWithDefault;
     struct ImplDiamond_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*BaseMethod)(
@@ -82,7 +82,7 @@ struct Functions {
         );
     } implDiamond;
     struct ImplDiamond2_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*BaseMethod)(
@@ -93,7 +93,7 @@ struct Functions {
         );
     } implDiamond2;
     struct ImplSimple_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
@@ -101,7 +101,7 @@ struct Functions {
         );
     } implSimple;
     struct ImplWithDefault_t {
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
     } implWithDefault;
@@ -178,10 +178,10 @@ extern const Functions kFunctions;
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct CalcAdd {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcAdd..ctor(
+        return kFunctions.calcAdd.ctor(
                     arg_0
         );
     }
@@ -212,10 +212,10 @@ struct CalcAdd {
 };
 
 struct CalcMul {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcMul..ctor(
+        return kFunctions.calcMul.ctor(
                     arg_0
         );
     }
@@ -258,10 +258,10 @@ struct IWithDefault {
 };
 
 struct ImplDiamond {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond..ctor(
+        return kFunctions.implDiamond.ctor(
                     arg_0
         );
     }
@@ -284,10 +284,10 @@ struct ImplDiamond {
 };
 
 struct ImplDiamond2 {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond2..ctor(
+        return kFunctions.implDiamond2.ctor(
                     arg_0
         );
     }
@@ -310,10 +310,10 @@ struct ImplDiamond2 {
 };
 
 struct ImplSimple {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implSimple..ctor(
+        return kFunctions.implSimple.ctor(
                     arg_0
         );
     }
@@ -329,10 +329,10 @@ struct ImplSimple {
 };
 
 struct ImplWithDefault {
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implWithDefault..ctor(
+        return kFunctions.implWithDefault.ctor(
                     arg_0
         );
     }

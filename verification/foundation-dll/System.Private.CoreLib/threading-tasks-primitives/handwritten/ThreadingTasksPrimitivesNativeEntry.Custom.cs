@@ -7,8 +7,13 @@
 // This file is a READ-ONLY source for the pipeline. Pipeline copies it into
 // il2cpp_dist/entrypoint/ before invoking generate_and_build().
 
+using System.Threading;
+using System.Threading.Tasks;
+
 public static partial class ThreadingTasksPrimitivesNativeEntry
 {
+    public static int _exitCode;
+
     private static int s_sharedState;
 
     // [0] System.Threading.Tasks.Task::Run(System.Action)

@@ -21,7 +21,7 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-// ── Shared GUID string parser ────────────────────────────────────────
+// ── Hex nibble extraction (scalar fallback) ──────────────────────────
 static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
 {
     if (c >= '0' && c <= '9') return static_cast<CHAOS_IL2CPP_UINT8>(c - '0');
@@ -30,7 +30,41 @@ static CHAOS_IL2CPP_UINT8 HexNibble(char c) noexcept
     return 0xFF;
 }
 
-// ── Shared GUID string parser ────────────────────────────────────────
+// ── SSE4.1 hex-to-nibble converter (x64 only) ────────────────────────
+// Converts 16 ASCII hex characters to 16 nibble values in parallel.
+// Returns (nibbles, valid_mask) where valid_mask has 0xFF for valid hex digits.
+#if defined(_M_AMD64) || defined(__x86_64__)
+#include <smmintrin.h>  // SSE4.1 for _mm_blendv_epi8
+
+struct SimdHexResult {
+    __m128i nibbles;  // 0-15 for valid hex values
+    __m128i valid;    // 0xFF per byte for valid, 0x00 for invalid
+};
+
+static SimdHexResult simd_hex_to_nibble(__m128i chunk) noexcept {
+    // Digit path: c - '0', valid if result <= 9
+    __m128i sub0 = _mm_sub_epi8(chunk, _mm_set1_epi8('0'));
+    __m128i is_digit = _mm_cmplt_epi8(sub0, _mm_set1_epi8(10));
+
+    // Letter path: lowercase, subtract 'a', valid if result < 6
+    __m128i lower = _mm_or_si128(chunk, _mm_set1_epi8(0x20));
+    __m128i sub_a = _mm_sub_epi8(lower, _mm_set1_epi8('a'));
+    __m128i is_letter = _mm_cmplt_epi8(sub_a, _mm_set1_epi8(6));
+
+    // Combined validity mask
+    __m128i valid = _mm_or_si128(is_digit, is_letter);
+
+    // Letter value = sub_a + 10
+    __m128i letter_val = _mm_add_epi8(sub_a, _mm_set1_epi8(10));
+
+    // Select: digit uses sub0, letter uses letter_val
+    __m128i nibbles = _mm_blendv_epi8(letter_val, sub0, is_digit);
+
+    return { nibbles, valid };
+}
+#endif // x86_64
+
+// ── Scalable GUID string parser (SIMD + scalar fallback) ────────────
 // Decodes a "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" format string from
 // `value` (StringId or CHAOS_IL2CPP_STRING_TYPE*) into 16 raw bytes.
 // Returns true on success, false on invalid input.
@@ -57,6 +91,44 @@ static bool parse_guid_string(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_UINT8 out_
     if (data == nullptr || len < 36) return false;
     if (data[8] != '-' || data[13] != '-' || data[18] != '-' || data[23] != '-') return false;
 
+#if defined(_M_AMD64) || defined(__x86_64__)
+    // SIMD fast path: convert 36 bytes (3×16-byte chunks) to nibbles in parallel
+    __m128i c0 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(data));
+    __m128i c1 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(data + 16));
+    __m128i c2 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(data + 32));
+
+    auto r0 = simd_hex_to_nibble(c0);
+    auto r1 = simd_hex_to_nibble(c1);
+    auto r2 = simd_hex_to_nibble(c2);
+
+    // Validate all 36 bytes (first 32 in c0+c1, last 4 in c2 masked by leading 0x00)
+    // Only check positions that are actually hex chars (not hyphens at 8,13,18,23)
+    __m128i all_valid = _mm_and_si128(r0.valid, r1.valid);
+    // c2[0..3] must all be valid; positions 32,33,34,35 are all hex chars
+    int valid_mask = _mm_movemask_epi8(all_valid);
+    if ((valid_mask & 0xB7FF) != 0xB7FF) return false;  // mask out hyphen positions 8,13
+    int valid2 = _mm_movemask_epi8(r2.valid);
+    if ((valid2 & 0x0F) != 0x0F) return false;
+
+    // Store nibbles and pack adjacent pairs into bytes
+    alignas(16) uint8_t n0[16], n1[16], n2[16];
+    _mm_store_si128(reinterpret_cast<__m128i*>(n0), r0.nibbles);
+    _mm_store_si128(reinterpret_cast<__m128i*>(n1), r1.nibbles);
+    _mm_store_si128(reinterpret_cast<__m128i*>(n2), r2.nibbles);
+
+    // Pack adjacent nibble pairs into bytes using kPos table
+    // kPos[i] = first hex char position for GUID byte i
+    // kPos[i]+1 = second hex char position
+    static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
+    for (int i = 0; i < 16; i++) {
+        int p = kPos[i];
+        uint8_t hi = (p < 16) ? n0[p] : ((p < 32) ? n1[p - 16] : n2[p - 32]);
+        uint8_t lo = (p + 1 < 16) ? n0[p + 1] : ((p + 1 < 32) ? n1[p + 1 - 16] : n2[p + 1 - 32]);
+        out_guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
+    }
+    return true;
+#else
+    // Scalar fallback for non-x64 platforms
     static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
     for (int i = 0; i < 16; i++)
     {
@@ -67,6 +139,7 @@ static bool parse_guid_string(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_UINT8 out_
         out_guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
     }
     return true;
+#endif
 }
 
 // ── Managed string allocator ──────────────────────────────────────────

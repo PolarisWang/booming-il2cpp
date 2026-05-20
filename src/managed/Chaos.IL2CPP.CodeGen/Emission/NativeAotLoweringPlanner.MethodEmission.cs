@@ -17,14 +17,25 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-	private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method)
+	private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method,
+        IReadOnlySet<string>? sharedContextSymbols = null)
 	{
-		return FormatMethodDeclaration(method.NativeSymbol, method.ReturnAbi, GetMethodAbiParameterSlots(method));
+		return FormatMethodDeclaration(method.NativeSymbol, method.ReturnAbi, GetMethodAbiParameterSlots(method),
+            sharedContextSymbols?.Contains(method.NativeSymbol) == true);
 	}
 
-	private static string FormatMethodDeclaration(string symbol, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis)
+	private static string FormatMethodDeclaration(string symbol, AotCoreIrAbiSlotArtifact returnAbi,
+        IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis,
+        bool needsGenericContext = false)
 	{
-		return $"extern \"C\" {MapAbiSlotReturnType(returnAbi)} {symbol}({FormatAbiSlotParameterSignature(parameterAbis)});";
+        var paramSig = FormatAbiSlotParameterSignature(parameterAbis);
+        if (needsGenericContext)
+        {
+            paramSig = string.IsNullOrEmpty(paramSig)
+                ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
+                : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
+        }
+		return $"extern \"C\" {MapAbiSlotReturnType(returnAbi)} {symbol}({paramSig});";
 	}
 
 	private static string? TryGetInstantiationStubSymbol(AotCoreIrMethodArtifact method)
@@ -37,30 +48,36 @@ public sealed partial class NativeAotLoweringPlanner
 		return ManagedNaming.CreateInstantiationStubSymbol(method.InstantiationStubId);
 	}
 
-	private static IReadOnlyList<string> BuildMethodDeclarations(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+	private static IReadOnlyList<string> BuildMethodDeclarations(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
+        IReadOnlySet<string>? sharedContextSymbols = null)
 	{
 		var declarations = new List<string>();
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
-			declarations.Add(FormatMethodDeclaration(reachableMethod));
+			declarations.Add(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text))
 			{
-				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
+				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi,
+                    GetMethodAbiParameterSlots(reachableMethod),
+                    sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true));
 			}
 		}
 		return declarations;
 	}
 
-	private static void EmitReachableMethodForwardDeclarations(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+	private static void EmitReachableMethodForwardDeclarations(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
+		IReadOnlySet<string>? sharedContextSymbols = null)
 	{
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
-			builder.AppendLine(FormatMethodDeclaration(reachableMethod));
+			builder.AppendLine(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text))
 			{
-				builder.AppendLine(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
+				builder.AppendLine(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod),
+					sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true));
 			}
 		}
 
@@ -83,6 +100,20 @@ public sealed partial class NativeAotLoweringPlanner
 		string targetSymbol = ResolveStubTargetNativeSymbol(method);
 
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
+
+		// Determine if this stub forwards to a shared canonical body that needs
+		// the chaos_generic_context parameter for runtime type resolution.
+		bool needsContext = _sharedContextSymbols.Count > 0 &&
+		                    _genericSharingCanonicalMap.ContainsKey(method.SubjectId);
+
+		string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
+		if (needsContext)
+		{
+			paramSig = string.IsNullOrEmpty(paramSig)
+				? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
+				: paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
+		}
+
 		builder.AppendLine();
 		builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
 		builder.AppendLine(FormatGenericExecutionAuthorityComment(
@@ -90,19 +121,31 @@ public sealed partial class NativeAotLoweringPlanner
 			method.SharedGenericBodyId,
 			method.InstantiationStubId,
 			method.RuntimeGenericContext));
-		builder.AppendLine($"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {text}({FormatAbiSlotParameterSignature(methodAbiParameterSlots)})");
+		builder.AppendLine($"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {text}({paramSig})");
 		builder.AppendLine("{");
 		var argNames = new string[methodAbiParameterSlots.Count];
 			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 				argNames[i] = "chaos_fn_arg_" + i.ToString();
 			string text2 = string.Join(", ", argNames);
+		// Build forwarding argument list, appending chaos_generic_context if needed.
+		string forwardedArgs = text2;
+		if (needsContext)
+		{
+			forwardedArgs = string.IsNullOrEmpty(text2)
+				? "chaos_generic_context"
+				: text2 + ", chaos_generic_context";
+		}
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
-			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    {targetSymbol}();" : $"    {targetSymbol}({text2});");
+			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+				? $"    {targetSymbol}();"
+				: $"    {targetSymbol}({forwardedArgs});");
 		}
 		else
 		{
-			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    return {targetSymbol}();" : $"    return {targetSymbol}({text2});");
+			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+				? $"    return {targetSymbol}();"
+				: $"    return {targetSymbol}({forwardedArgs});");
 		}
 		builder.AppendLine("}");
 	}
@@ -127,31 +170,17 @@ public sealed partial class NativeAotLoweringPlanner
 				offsets.Add(GetRequiredIlOffset(instructions[idx]));
 		bool usesStructuredSlots = TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out int structuredSlotCount);
 		int evalStackSize = usesStructuredSlots ? 0 : Math.Max(ComputeMaxEvalStackDepth(instructions), 1);
-		StringBuilder stringBuilder = builder;
-		StringBuilder stringBuilder2 = stringBuilder;
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
-		handler.AppendLiteral("// Managed method: ");
-		handler.AppendFormatted(ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
-		stringBuilder2.AppendLine(ref handler);
-		stringBuilder = builder;
-		StringBuilder stringBuilder3 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(14, 3, stringBuilder);
-		handler.AppendLiteral("extern \"C\" ");
-		handler.AppendFormatted(MapAbiSlotReturnType(method.ReturnAbi));
-		handler.AppendLiteral(" ");
-		handler.AppendFormatted(method.NativeSymbol);
-		handler.AppendLiteral("(");
-		handler.AppendFormatted(FormatAbiSlotParameterSignature(methodAbiParameterSlots));
-		handler.AppendLiteral(")");
-		stringBuilder3.AppendLine(ref handler);
+		builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		var fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+		// Strip trailing semicolon from FormatMethodDeclaration for function definition header.
+		builder.AppendLine(fnDecl.Length > 0 && fnDecl[^1] == ";"[0] ? fnDecl[..^1] : fnDecl);
 		builder.AppendLine("{");
-		stringBuilder = builder;
-		StringBuilder stringBuilder4 = stringBuilder;
-		handler = new StringBuilder.AppendInterpolatedStringHandler(45, 1, stringBuilder);
+		StringBuilder stringBuilder = builder;
+		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(45, 1, stringBuilder);
 		handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
 		handler.AppendFormatted(Math.Max(methodAbiParameterSlots.Count, 1));
 		handler.AppendLiteral(") chaos_args{};");
-		stringBuilder4.AppendLine(ref handler);
+		stringBuilder.AppendLine(ref handler);
 		stringBuilder = builder;
 		StringBuilder stringBuilder5 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(47, 1, stringBuilder);

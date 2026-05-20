@@ -1,0 +1,3061 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-0",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-0",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 38,
+          "handlerOffset": 39,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-1",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-1",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 38,
+          "handlerOffset": 39,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.Byte,System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.Byte,System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.Byte,System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.Byte,System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-2",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-2",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 38,
+          "handlerOffset": 39,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.String]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.String]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.String"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.String]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E);type=[];method=[System.String,System.String]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.String",
+                  "System.String"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.String"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u00602::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.String",
+                  "System.String"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-3",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_3:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_3()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_3:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_3:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-3",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_3()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 38,
+          "handlerOffset": 39,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-4",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_4()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-4",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_4()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 43,
+          "handlerOffset": 44,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsflda",
+          "operand": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::684888C0EBB17F374298B65EE2807526C066094C701BCC7EBBE1C1095F494FC1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Byte"
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 8,
+          "resultType": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+          "callee": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 13,
+          "resultType": "System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 41,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 55,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-5",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_5:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_5()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_5:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_5:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-5",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_5()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 43,
+          "handlerOffset": 44,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsflda",
+          "operand": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::2341A9C4270F9019A09041DF3884CAE2426B73C9EE750D73EC0FBCB6C2250F45",
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::2341A9C4270F9019A09041DF3884CAE2426B73C9EE750D73EC0FBCB6C2250F45"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::2341A9C4270F9019A09041DF3884CAE2426B73C9EE750D73EC0FBCB6C2250F45",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int16"
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 8,
+          "resultType": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+          "callee": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 13,
+          "resultType": "System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Byte"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 41,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 55,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-6",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_6:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_6()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_6:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_6:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-6",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_6()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 3,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 38,
+          "handlerOffset": 39,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Int32\u003E",
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Int32\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 37,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 50,
+          "ilOffset": 48,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    },
+    {
+      "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-7",
+      "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_7:System.Void()",
+      "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_7()",
+      "identity": {
+        "assemblyName": "FrozenCollectionsSubjects",
+        "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+        "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_7:System.Void()",
+        "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_7:System.Void()",
+        "methodId": "frozen-collections-subjects.frozen-collections-subjects.custom-entry-subject-7",
+        "signature": "System.Void FrozenCollectionsSubjects::CustomEntrySubject_7()"
+      },
+      "nativeSymbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 42,
+          "handlerOffset": 43,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+          "ilOffset": 2,
+          "resultType": "System.RuntimeFieldHandle",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E::E8A4B2EE7EDE79A3AFB332B5B6CC3D952A65FD8CFFB897F5D18016577C33D7CC4",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=4_Align=4"
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.ReadOnlySpan\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle);type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle);type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle);type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle);type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
+              "displaySubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 12,
+          "resultType": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Int32]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Int32"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Collections.Immutable",
+            "subjectKind": "method",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Collections.Immutable",
+            "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+            "openDefinitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 2,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count:System.Int32()",
+              "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+              "displaySubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::get_Count()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u00601::get_Count:System.Int32()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 40,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 35,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 54,
+          "ilOffset": 41,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 43,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 45,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+          "ilOffset": 46,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "FrozenCollectionsSubjects",
+            "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 54,
+          "ilOffset": 52,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 54,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FrozenCollectionsSubjects"
+    }
+  ]
+}

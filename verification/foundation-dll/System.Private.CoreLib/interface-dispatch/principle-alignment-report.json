@@ -1,7 +1,7 @@
 {
   "family": "interface-dispatch",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T08:31:26.989399",
+  "generated_at": "2026-05-20T08:53:29.768006",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -25,196 +25,80 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 47,
-        "methods_total": 47
+        "methods_with_lowering": 18,
+        "methods_total": 18
       },
       "per_method": [
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Run_System_Int32",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7",
           "has_lowering": true
         },
         {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Run_System_Int32",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "InterfaceDispatchPatchEntry_InterfaceDispatchPatchEntry_Subject_8",
+          "name": "InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8",
           "has_lowering": true
         }
       ]
@@ -251,106 +135,25 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "11 of 23 changed source files are outside expected architecture layers",
+      "summary": "1 of 14 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.CrossAssemblyInstantiation.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericDemandGraph.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericInstantiationProjection.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/common/chaos/native_types.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/04-NativeAotLoweringPlanner文件布局.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/26-CodeGen度量与结构化恢复.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/22-结构化恢复度量与FlatFallback消除决策.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/05-项目经验/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 23,
+        "changed_source_count": 14,
         "layer_distribution": {
-          "TestInfra": 4,
-          "Emitter": 2,
-          "RuntimeSupport": 1,
-          "Interpreter": 2,
-          "RuntimeCore": 2,
+          "TestInfra": 2,
+          "Emitter": 4,
+          "Interpreter": 1,
+          "RuntimeCore": 5,
           "Tests": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.CrossAssemblyInstantiation.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericDemandGraph.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Loader/LoaderStage.GenericInstantiationProjection.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/common/chaos/native_types.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/04-NativeAotLoweringPlanner文件布局.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/26-CodeGen度量与结构化恢复.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/22-结构化恢复度量与FlatFallback消除决策.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/05-项目经验/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -387,11 +190,11 @@
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
       "status": "ALIGNED",
-      "summary": "Dispatch table: 10 entries, all with interrupt_ptr [OK]",
+      "summary": "Dispatch table: 34 entries, all with interrupt_ptr [OK]",
       "details": [],
       "evidence": {
-        "table_size": 10,
-        "entries_with_interrupt_ptr": 10,
+        "table_size": 34,
+        "entries_with_interrupt_ptr": 34,
         "has_hotpatch_module": true
       }
     },

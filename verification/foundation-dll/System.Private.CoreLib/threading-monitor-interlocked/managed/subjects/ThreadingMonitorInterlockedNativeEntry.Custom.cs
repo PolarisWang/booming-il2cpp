@@ -13,6 +13,7 @@ using System.Threading;
 public static partial class ThreadingMonitorInterlockedNativeEntry
 {
     public static int _exitCode;
+
     // [0] System.Threading.Monitor::Enter(System.Object)
     public static void CustomEntryMethod0()
     {

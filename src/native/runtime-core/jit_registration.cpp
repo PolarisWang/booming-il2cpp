@@ -1,4 +1,4 @@
-// ── JIT Mode Method Registration ─────────────────────────────────────────
+// -- JIT Mode Method Registration -------------------------------------------
 //
 // RegisterJitMethods is called once at program startup (from runtime-entry.cpp)
 // when the codegen was run with --mode jit.  It receives an array of
@@ -11,7 +11,7 @@
 //   3. Calls SetPatchedBySlot() to flag the dispatch entry as active
 //
 // After this, all methods execute through the interpreter's tiered pipeline
-// (InterpreterEntryDirect → FastExecute → InterpreterVM) instead of native
+// (InterpreterEntryDirect -> FastExecute -> InterpreterVM) instead of native
 // AOT C++ code.
 
 #include "jit_registration.h"
@@ -31,9 +31,9 @@ extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count
 
     auto& registry = GetHotpatchNameRegistry();
 
-    // ── Create a shared metadata cache for JIT methods ────────────────────
+    // -- Create a shared metadata cache for JIT methods ----------------------
     // PatchMetadataCache normally wraps a .patchdata binary's metadata tables,
-    // but in JIT mode we don't have one — we only need it as a container for
+    // but in JIT mode we don't have one -- we only need it as a container for
     // the AOT bridge + image handle that ResolveSubjectId uses to walk the
     // reflection query model and resolve subject IDs to call_target pointers.
     //
@@ -62,13 +62,16 @@ extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count
         const auto& entry = entries[i];
         if (entry.json == nullptr || entry.json_len == 0) continue;
 
-        // Resolve metadata token → dispatch slot.
+        // Resolve metadata token to dispatch slot.
         uint32_t slot = registry.TokenToSlot(entry.module_id, entry.token);
-        std::fprintf(stderr, "[jit_reg] token=0x%08X module=%u -> slot=%u
-", entry.token, entry.module_id, slot);
+        if (slot == ~0u) {
+            std::fprintf(stderr, "[jit_reg] SKIP token=0x%08X module=%u (no matching slot)\n",
+                static_cast<unsigned>(entry.token), static_cast<unsigned>(entry.module_id));
+            continue;  // skip if no matching dispatch entry
+        }
 
         // Heap-allocate a PatchMethod that lives for the program lifetime.
-        // NOTE: Do NOT use memset/memzero — PatchMethod contains atomics and
+        // NOTE: Do NOT use memset/memzero -- PatchMethod contains atomics and
         // cached pointers that require proper C++ construction (see the
         // tiering-call-count-guard memory rule).
         auto* pm = new (std::nothrow) chaos::il2cpp::runtime_core::PatchMethod();
