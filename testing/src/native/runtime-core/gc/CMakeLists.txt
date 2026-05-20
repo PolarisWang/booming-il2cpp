@@ -7,6 +7,7 @@
 # Two sets of link libraries:
 #   CHAOS_GC_LIBS    — full set (needed by tests that link chaos_runtime_core)
 #   CHAOS_GC_STUBS   — AOT codegen symbol stubs (for tests without real codegen)
+#   CHAOS_GC_BASE    — shared test fixture source (gc_test_base.cpp)
 
 set(CHAOS_GC_LIBS
     chaos_runtime_core
@@ -20,6 +21,7 @@ set(CHAOS_GC_LIBS
 )
 
 set(CHAOS_GC_STUBS gc_test_stubs.cpp)
+set(CHAOS_GC_BASE  gc_test_base.cpp)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch A — Simple unit tests
@@ -93,19 +95,19 @@ add_chaos_test(test_gc_root_scanner
 
 # gc_handle_test — GCHandle strong/weak/pinned/dependent lifecycle
 add_chaos_test(test_gc_handle
-    gc_handle_test.cpp ${CHAOS_GC_STUBS}
+    gc_handle_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
 # gc_poh_test — Pinned Object Heap allocation + handles
 add_chaos_test(test_gc_poh
-    gc_poh_test.cpp ${CHAOS_GC_STUBS}
+    gc_poh_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
 # gc_loh_test — Large Object Heap allocation/sweep/compaction
 add_chaos_test(test_gc_loh
-    gc_loh_test.cpp ${CHAOS_GC_STUBS}
+    gc_loh_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
@@ -124,8 +126,10 @@ add_chaos_test(test_gc_tlab
 # chaos_runtime_core.lib uses GNU ar format which MSVC link.exe cannot
 # search for COMDAT resolution. Include path is set via target_include.
 add_chaos_test(test_gc_young_collector
-    gc_young_collector_test.cpp ${CHAOS_GC_STUBS}
+    gc_young_collector_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
     LIBS ${CHAOS_GC_LIBS}
 )
 target_include_directories(test_gc_young_collector PRIVATE
@@ -137,19 +141,19 @@ target_link_options(test_gc_young_collector PRIVATE /FORCE:MULTIPLE)
 
 # gc_old_gen_unit_test — OldGen allocate/free/reallocate/mark
 add_chaos_test(test_gc_old_gen
-    gc_old_gen_unit_test.cpp ${CHAOS_GC_STUBS}
+    gc_old_gen_unit_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
 # gc_gen1_test — Gen1 collection (empty/single/mixed/fragmentation)
 add_chaos_test(test_gc_gen1
-    gc_gen1_test.cpp ${CHAOS_GC_STUBS}
+    gc_gen1_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
 # gc_finalizer_test — Finalizer registration + execution
 add_chaos_test(test_gc_finalizer
-    gc_finalizer_test.cpp ${CHAOS_GC_STUBS}
+    gc_finalizer_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
 
@@ -173,9 +177,31 @@ add_chaos_test(test_gc_mark_bitmap
 
 # gc_sanity_test — POH, ThinLock, GCMemoryInfo sanity
 add_chaos_test(test_gc_sanity
-    gc_sanity_test.cpp ${CHAOS_GC_STUBS}
+    gc_sanity_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch E — Stress tests (labelled "stress", excluded from default run)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_stress_scenarios — Multi-threaded GC stress tests (Scenario S)
+add_chaos_test(test_gc_stress
+    gc_stress_scenarios.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_stress PROPERTIES LABELS "stress;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch F — Benchmarks (labelled "benchmark", excluded from default run)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_gen1_benchmark — Gen1 collection pause time benchmarks
+add_chaos_test(test_gc_gen1_benchmark
+    gc_gen1_benchmark.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+set_tests_properties(test_gc_gen1_benchmark PROPERTIES LABELS "benchmark;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Original smoke test

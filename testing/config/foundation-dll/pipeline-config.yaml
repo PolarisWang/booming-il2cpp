@@ -1,0 +1,31 @@
+# Foundation DLL Verification Pipeline Configuration
+# Controls which stages run, resource limits, and runtime behavior.
+
+pipeline:
+  defaultMode: standard  # "standard" | "strict"
+  defaultStages: [preflight, codegen, jit_codegen, fact, fact_jit, audit]
+
+  # Timeout per stage in seconds (0 = no timeout)
+  timeouts:
+    codegen: 600
+    fact: 120
+    audit: 300
+    benchmark: 600
+    hotupdate: 300
+
+  # Skip stages not yet migrated (will be removed as migration progresses)
+  migrationSkips:
+    asm_compare: true
+    microbench: true
+    benchmark: true
+    hotupdate: true
+    hotupdate_aot_benchmark: true
+    hotupdate_jit_fact: true
+    hotupdate_jit_benchmark: true
+
+  # Results storage
+  resultsDir: results/foundation-dll
+  historyDir: results/verification-history
+
+  # Logging
+  verbose: false

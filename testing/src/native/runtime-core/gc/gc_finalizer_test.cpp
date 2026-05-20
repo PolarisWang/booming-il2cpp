@@ -14,7 +14,7 @@
 #include "gc_helpers.h"
 #include "gc_young_gen.h"
 #include "thread_state.h"
-#include "thread_state.h"
+#include "gc_test_base.h"
 #include <gtest/gtest.h>
 
 using namespace chaos::il2cpp::runtime_core;
@@ -29,20 +29,11 @@ namespace {
     void NopFinalizer(void*) {}
 }
 
-struct FinalizerTest : ::testing::Test {
-    void SetUp() override {
-        tid = threading::AllocateThreadId();
-        threading::RegisterThread(tid, nullptr);
-        threading::EnterCooperativeMode();
-        InitYoungGeneration();
-    }
-
+struct FinalizerTest : GcUnitTestBase {
     void TearDown() override {
         chaos_gc_wait_for_pending_finalizers();
-        threading::UnregisterThread();
+        GcUnitTestBase::TearDown();
     }
-
-    uint32_t tid;
 };
 
 TEST_F(FinalizerTest, BasicFinalizerExecution) {

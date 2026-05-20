@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0",
+  "description": "Foundation DLL capability family ledger — new framework. Synchronized from capability-family-ledger.json.",
+  "assemblies": [
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "families": [
+        {
+          "familyId": "family/System.Private.CoreLib/convert/char",
+          "slug": "convert-char",
+          "displayName": "Convert.Char Conversions",
+          "methodCount": 18,
+          "obligations": ["functional"],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Linq",
+      "families": []
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "families": []
+    }
+  ]
+}

@@ -11,13 +11,14 @@
 #include "gc_layout.h"
 #include "gc_young_gen.h"
 #include "gc_young_collector.h"
+#include "gc_test_base.h"
 #include <gtest/gtest.h>
 
 using namespace chaos::il2cpp::runtime_core;
 
-struct YoungCollectorTest : ::testing::Test {
+struct YoungCollectorTest : GcUnitTestBase {
     void SetUp() override {
-        InitYoungGeneration();
+        GcUnitTestBase::SetUp();
         tls_tlab = TLAB{};
     }
 };
@@ -118,8 +119,15 @@ TEST_F(YoungCollectorTest, YoungCollectionEmpty) {
     YoungCollectionResult r1 = GcYoungCollection();
     EXPECT_EQ(r1.dirty_cards_scanned, 0u);
 
-    DirtyCard(p);
-    EXPECT_TRUE(IsDirty(p));
+    // DirtyCard intentionally skips nursery objects (young GC scans precisely).
+    // Manually dirty the card to test that young collection clears it.
+    uintptr_t idx = (reinterpret_cast<uintptr_t>(p) - g_heap_base) >> kCardShift;
+    uintptr_t seg_idx = idx / kCardsPerSegment;
+    uintptr_t card_idx = idx % kCardsPerSegment;
+    auto* seg = g_card_l1[seg_idx].load(std::memory_order_relaxed);
+    ASSERT_NE(seg, nullptr);
+    seg->cards[card_idx] = 0xFF;
+    ASSERT_TRUE(IsDirty(p));
 
     YoungCollectionResult r2 = GcYoungCollection();
     EXPECT_EQ(g_young_gen.bump.load(std::memory_order_acquire), nursery->begin);

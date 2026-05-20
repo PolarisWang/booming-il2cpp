@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability Family Contract",
+  "description": "Schema for foundation DLL capability family contract.json",
+  "type": "object",
+  "required": ["schemaVersion", "assemblyName", "familyId", "displayName", "methodSubjectIds"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "assemblyName": { "type": "string" },
+    "ownerSubjectId": { "type": "string" },
+    "familyId": { "type": "string", "pattern": "^family/" },
+    "displayName": { "type": "string" },
+    "methodSubjectIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "methodSubjectCount": { "type": "integer", "minimum": 1 },
+    "functionalObligation": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" }
+      }
+    },
+    "performanceObligation": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" }
+      }
+    },
+    "hotupdateFunctionalObligation": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" }
+      }
+    },
+    "hotupdatePerformanceObligation": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" }
+      }
+    },
+    "reviewBundleRequired": { "type": "boolean" },
+    "customEntryIndices": {
+      "type": "array",
+      "items": { "type": "integer" }
+    }
+  }
+}
