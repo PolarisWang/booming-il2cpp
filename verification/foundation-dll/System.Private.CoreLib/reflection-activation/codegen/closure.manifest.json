@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReflectionActivationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReflectionActivationSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-activation/managed/subjects/build-output/ReflectionActivationSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9160d251-9879-4530-b0ad-0beab5424352",
+  "inputModuleVersionId": "7e0794d6-6dea-48ce-94ca-4c2a8a4a32d8",
   "artifacts": [
     {
       "kind": "typedIlIr",

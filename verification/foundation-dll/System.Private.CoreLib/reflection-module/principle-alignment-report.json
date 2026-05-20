@@ -1,7 +1,7 @@
 {
   "family": "reflection-module",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T23:08:57.379663",
+  "generated_at": "2026-05-20T01:41:09.689025",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -190,28 +190,19 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "1 of 10 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "src/native/common/chaos/common.h",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 20 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 10,
+        "changed_source_count": 20,
         "layer_distribution": {
-          "TestInfra": 2,
-          "Templates": 2,
-          "RuntimeCore": 4,
-          "Tests": 1
-        },
-        "violations": [
-          {
-            "file": "src/native/common/chaos/common.h",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 12
+        }
       }
     },
     "p2_no_bare_new": {
@@ -271,8 +262,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 9,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

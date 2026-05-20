@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <atomic>
 #include <chaos/native_types.h>
 #include "com_abi.h"
 
@@ -48,7 +49,7 @@ struct ComCcwVtbl {
 /// the CCW pointer itself (COM identity rule).
 struct ComCcw {
     ComCcwVtbl* vtable;                         // Points to s_ccw_vtbl
-    CHAOS_IL2CPP_UINT32 refcount;               // External COM reference count
+    std::atomic<CHAOS_IL2CPP_UINT32> refcount{};  // External COM reference count (atomic for thread safety)
     CHAOS_IL2CPP_UINT64 gc_handle;              // GCHandle keeping the managed object alive
     void* runtime_state;                        // RuntimeState* for GC handle lifecycle
     CHAOS_IL2CPP_SIZE interface_count;           // Number of registered interfaces

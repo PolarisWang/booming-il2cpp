@@ -533,6 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
 		}
@@ -551,6 +552,18 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 
 			num++;
+		}
+		// Ensure valuetype struct definitions exist for all boxed structured value types.
+		// A type may appear in hashSet3 (needs a boxed struct) without being in
+		// valueTypeSubjectIds (which drives valuetype struct emission). When the
+		// boxed struct references chaos_valuetype_X value{}, the struct must exist.
+		// This sync MUST happen before the valueTypeSubjectIds emission loop below.
+		foreach (string vt in hashSet3)
+		{
+			if (IsStructuredValueTypeSubjectId(vt) && !valueTypeSubjectIds.Contains(vt))
+			{
+				valueTypeSubjectIds.Add(vt);
+			}
 		}
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{

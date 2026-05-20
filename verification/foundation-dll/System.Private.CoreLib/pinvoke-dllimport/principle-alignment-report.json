@@ -1,7 +1,7 @@
 {
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:19:58.335211",
+  "generated_at": "2026-05-20T01:37:36.555796",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -150,10 +150,20 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "NOT_APPLICABLE",
-      "summary": "No changed source files detected",
+      "status": "ALIGNED",
+      "summary": "All 18 changed source files within expected architecture layers",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "changed_source_count": 18,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 10
+        }
+      }
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
@@ -211,10 +221,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 0,
     "violation": 0,
-    "not_applicable": 4,
+    "not_applicable": 3,
     "overall": "ALIGNED"
   }
 }

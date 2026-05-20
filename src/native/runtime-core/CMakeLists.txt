@@ -106,6 +106,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_card_table.cpp
     gc/gc_root_scanner.h
     gc/gc_root_scanner.cpp
+    gc/gc_static_roots.h
+    gc/gc_static_roots.cpp
     gc/gc_young_collector.h
     gc/gc_young_collector.cpp
     gc/gc_old_gen.h
@@ -114,12 +116,16 @@ add_library(chaos_runtime_core STATIC
     gc/gc_layout.cpp
     gc/gc_loh.h
     gc/gc_loh.cpp
+    gc/gc_numa.h
+    gc/gc_numa.cpp
     gc/gc_parallel_mark.h
     gc/gc_parallel_mark.cpp
     gc/gc_events.h
     gc/gc_events.cpp
     gc/gc_stats.h
     gc/gc_stats.cpp
+    gc/gc_stress.h
+    gc/gc_stress.cpp
     gc/gc_worker_pool.h
     gc/gc_worker_pool.cpp
     gc/gc_bgc.h

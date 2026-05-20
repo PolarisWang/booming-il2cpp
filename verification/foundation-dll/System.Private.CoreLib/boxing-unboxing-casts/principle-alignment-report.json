@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:05:33.973320",
+  "generated_at": "2026-05-20T01:31:35.432316",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -290,11 +290,17 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "status": "ALIGNED",
+      "summary": "All 8 changed source files within expected architecture layers",
       "details": [],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 8,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "RuntimeCore": 2
+        }
       }
     },
     "p2_no_bare_new": {
@@ -354,9 +360,9 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 0,
-    "violation": 1,
+    "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }

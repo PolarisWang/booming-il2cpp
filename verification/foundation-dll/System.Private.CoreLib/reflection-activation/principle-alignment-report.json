@@ -1,7 +1,7 @@
 {
   "family": "reflection-activation",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T19:16:10.401163",
+  "generated_at": "2026-05-20T01:38:45.063270",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -230,11 +230,19 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "VIOLATION",
-      "summary": "Check execution error: 'NoneType' object has no attribute 'strip'",
+      "status": "ALIGNED",
+      "summary": "All 19 changed source files within expected architecture layers",
       "details": [],
       "evidence": {
-        "error": "'NoneType' object has no attribute 'strip'"
+        "changed_source_count": 19,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 11
+        }
       }
     },
     "p2_no_bare_new": {
@@ -294,9 +302,9 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 9,
     "concern": 0,
-    "violation": 1,
+    "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"
   }

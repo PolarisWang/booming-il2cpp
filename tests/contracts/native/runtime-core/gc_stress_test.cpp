@@ -1112,22 +1112,22 @@ static bool RunScenarioG(GcStatsSnapshot* stats_out) {
     printf("\n  ── Scenario G: Oversized objects (30×32, 33KB-256KB, direct old-gen) ──\n");
     GcStatsSnapshot before = SnapshotGcStats();
 
-    // Background GC thread.
-    std::atomic<bool> gc_done{false};
-    std::thread gc_thread([&]() {
-        RegisterWorker();
-        threading::EnterCooperativeMode();
-        SetupTlsNursery();
-        for (int i = 0; i < 3; i++) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            uint32_t gen = threading::RequestGlobalSafepoint();
-            g_old_gen.Collect(nullptr, nullptr);
-            threading::ReleaseGlobalSafepoint(gen);
-        }
-        TeardownTlsNursery();
-        threading::UnregisterThread();
-        gc_done.store(true, std::memory_order_release);
-    });
+    // Background GC thread — DISABLED FOR DIAGNOSTIC.
+    // std::atomic<bool> gc_done{false};
+    // std::thread gc_thread([&]() {
+    //     RegisterWorker();
+    //     threading::EnterCooperativeMode();
+    //     SetupTlsNursery();
+    //     for (int i = 0; i < 3; i++) {
+    //         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    //         uint32_t gen = threading::RequestGlobalSafepoint();
+    //         g_old_gen.Collect(nullptr, nullptr);
+    //         threading::ReleaseGlobalSafepoint(gen);
+    //     }
+    //     TeardownTlsNursery();
+    //     threading::UnregisterThread();
+    //     gc_done.store(true, std::memory_order_release);
+    // });
 
     std::vector<WorkerResult> results(kGWorkers);
     std::vector<std::thread> workers;
@@ -1136,7 +1136,7 @@ static bool RunScenarioG(GcStatsSnapshot* stats_out) {
         workers.emplace_back(worker_g, i, &results[i]);
 
     for (auto& w : workers) { if (w.joinable()) w.join(); }
-    if (gc_thread.joinable()) gc_thread.join();
+    // if (gc_thread.joinable()) gc_thread.join();
 
     *stats_out = SnapshotGcStats();
 

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "IoStreamsBasicsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "IoStreamsBasicsSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/io-streams-basics/managed/subjects/build-output/IoStreamsBasicsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "71dfe9cd-970f-4bb6-8230-99e2275bc1de",
+  "inputModuleVersionId": "93221dbb-a9ea-4f87-992b-3a8c900652cb",
   "artifacts": [
     {
       "kind": "typedIlIr",

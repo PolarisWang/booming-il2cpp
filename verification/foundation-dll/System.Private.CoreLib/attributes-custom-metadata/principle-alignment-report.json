@@ -1,7 +1,7 @@
 {
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-20T01:05:02.983794",
+  "generated_at": "2026-05-20T01:31:11.989846",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -250,35 +250,17 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "CONCERN",
-      "summary": "2 of 7 changed source files are outside expected architecture layers",
-      "details": [
-        {
-          "file": "codegen_diag.txt",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "codegen_ldloc_diag.txt",
-          "reason": "outside expected architecture layers"
-        }
-      ],
+      "status": "ALIGNED",
+      "summary": "All 8 changed source files within expected architecture layers",
+      "details": [],
       "evidence": {
-        "changed_source_count": 7,
+        "changed_source_count": 8,
         "layer_distribution": {
           "TestInfra": 1,
-          "Emitter": 2,
-          "Tests": 2
-        },
-        "violations": [
-          {
-            "file": "codegen_diag.txt",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "codegen_ldloc_diag.txt",
-            "reason": "outside expected architecture layers"
-          }
-        ]
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "RuntimeCore": 2
+        }
       }
     },
     "p2_no_bare_new": {
@@ -338,8 +320,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 9,
+    "concern": 0,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

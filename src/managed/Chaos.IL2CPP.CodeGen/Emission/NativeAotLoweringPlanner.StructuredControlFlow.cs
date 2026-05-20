@@ -594,7 +594,7 @@ public sealed partial class NativeAotLoweringPlanner
                 var elseBody = ite.ElseBody is null ? null : RemoveTrailingBranch(ite.ElseBody, targetOffset);
                 var postMergeBody = ite.PostMergeBody is null ? null : RemoveTrailingBranch(ite.PostMergeBody, targetOffset);
                 if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody) || !ReferenceEquals(postMergeBody, ite.PostMergeBody))
-                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody);
+                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody, ite.PreConditionDepth);
                 return ite;
             }
 
@@ -963,6 +963,59 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
+    /// Computes the maximum expected eval-stack depth at the start of the
+    /// condition block based on predecessor blocks' net stack contributions.
+    /// Values pushed by predecessor CFG blocks are invisible to the structured
+    /// slot tracker when it processes the condition instructions, so this
+    /// computed depth ensures the slot context has adequate capacity.
+    /// </summary>
+    private static int ComputePreConditionDepth(ControlFlowGraph cfg, int condBlockIndex)
+    {
+        var condBlock = cfg.Blocks[condBlockIndex];
+        int condStartOffset = condBlock.StartOffset;
+        int maxDepth = 0;
+
+        for (int i = 0; i < cfg.Blocks.Count; i++)
+        {
+            if (i == condBlockIndex)
+                continue;
+
+            var block = cfg.Blocks[i];
+
+            // Check if this block can reach the condBlock via an edge.
+            bool isPredecessor = false;
+            if (block.BranchTarget.HasValue && block.BranchTarget.Value == condStartOffset)
+                isPredecessor = true;
+            else if (block.ConditionalTarget.HasValue && block.ConditionalTarget.Value == condStartOffset)
+                isPredecessor = true;
+            else if (block.SwitchTargets.Contains(condStartOffset))
+                isPredecessor = true;
+            else if ((block.Terminator == null || !IsBlockTerminatorOpcode(block.Terminator.Op))
+                     && i + 1 < cfg.Blocks.Count
+                     && cfg.Blocks[i + 1].StartOffset == condStartOffset)
+                isPredecessor = true;
+
+            if (!isPredecessor)
+                continue;
+
+            // Compute net stack contribution of this predecessor block.
+            int netPushes = 0;
+            foreach (var instr in block.BodyInstructions)
+            {
+                netPushes += EstimatePushCount(instr.Op);
+                netPushes -= EstimatePopCount(instr.Op);
+            }
+            if (block.Terminator != null)
+                netPushes -= EstimateTerminatorPopCount(block.Terminator.Op);
+
+            if (netPushes > maxDepth)
+                maxDepth = netPushes;
+        }
+
+        return maxDepth;
+    }
+
+    /// <summary>
     /// Build an if-then-else node starting from a conditional branch block.
     /// </summary>
     private static StructuredIRNode BuildIfThenElse(
@@ -973,6 +1026,8 @@ public sealed partial class NativeAotLoweringPlanner
         var condBlock = cfg.Blocks[conditionBlockIndex];
         if (!condBlock.ConditionalTarget.HasValue)
             return new IRBlock(condBlock.BodyInstructions, condBlock.Terminator);
+
+        int preCondDepth = ComputePreConditionDepth(cfg, conditionBlockIndex);
 
         var trueTarget = condBlock.ConditionalTarget.Value;
         if (!cfg.OffsetToBlockIndex.TryGetValue(trueTarget, out var trueBlockIdx))
@@ -1035,7 +1090,8 @@ public sealed partial class NativeAotLoweringPlanner
             condBlock.Terminator ?? throw new InvalidOperationException("Condition block must have a terminator"),
             thenBranch,
             elseBranch,
-            postMergeBody);
+            postMergeBody,
+            PreConditionDepth: preCondDepth);
     }
 
     /// <summary>

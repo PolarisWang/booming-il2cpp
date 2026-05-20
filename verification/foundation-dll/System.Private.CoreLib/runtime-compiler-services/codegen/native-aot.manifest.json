@@ -3,12 +3,16 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "RuntimeCompilerServicesSubjects",
   "entrySubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
       "kind": "shapeDispatchHeader",
       "path": "generated/runtime_helper_shapes.h"
+    },
+    {
+      "kind": "enumMetadataHeader",
+      "path": "generated/enum_metadata.generated.h"
     },
     {
       "kind": "generatedTranslationUnit",

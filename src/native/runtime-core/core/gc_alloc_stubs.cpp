@@ -6,6 +6,7 @@
 
 #include "gc_region.h"
 #include "gc_stats.h"
+#include "gc_stress.h"
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -24,6 +25,14 @@ void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
 
 void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocate");
+
+    // GC Stress mode: force a full GC before allocation.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
     void* ptr = NurseryAllocate(size);
     if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
     return ptr;
@@ -31,6 +40,14 @@ void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
 
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomic");
+
+    // GC Stress mode: force a full GC before allocation.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
     void* ptr = NurseryAllocateAtomic(size);
     if (ptr) GcRecordAlloc(size, size > kMaxTlabAlloc);
     return ptr;

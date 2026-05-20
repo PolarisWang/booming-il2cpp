@@ -281,6 +281,29 @@ void BgcController::ForceComplete() {
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "force_complete");
 }
 
+void BgcController::StopConcurrentMark() {
+    // Called under safepoint from full GC. Stops BGC concurrent mark
+    // without sweeping — the full GC's Collect() handles all sweeping.
+    auto p = phase_.load(std::memory_order_acquire);
+    if (p == BgcPhase::IDLE || p == BgcPhase::ROOT_COLLECT) return;
+
+    // Drain SATB buffers and work deques so no pending mark work remains.
+    DrainAllTlsSatbBuffers();
+    DrainGlobalSatbQueue();
+    for (int i = 0; i < kMaxBgcWorkers; i++) {
+        DrainWorkerDeque(i, 0);
+    }
+
+    // Reset BGC to IDLE without sweeping or compacting.
+    g_bgc_is_marking.store(false, std::memory_order_release);
+    bgc_start_requested_.store(false, std::memory_order_release);
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
+    cycle_complete_.store(true, std::memory_order_release);
+    NotifyBgc();
+
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "stop_concurrent_mark");
+}
+
 // ── Root set population (under safepoint) ────────────────────────────
 
 void BgcController::PopulateRootSet() {

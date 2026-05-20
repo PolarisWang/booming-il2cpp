@@ -11,6 +11,8 @@
 #include "gc_loh.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
+#include "gc_stress.h"
+#include "gc_api.h"
 #include "gc_young_collector.h"
 #include "memory_domain.h"
 #include "thread_state.h"
@@ -57,6 +59,14 @@ static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
 // ======================================================================
 void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateSlow");
+
+    // GC Stress mode: force a full GC every kStressInterval allocations.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
     // Flush TLS allocation counter to scheduler before making any GC decision.
     FlushTlsAllocCounter();
 
@@ -68,8 +78,8 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Phase 2: Young region is exhausted — trigger a young GC.
-    // Rate-limit via scheduler to prevent safepoint storms.
-    if (g_gc_scheduler.TryClaimGcSlot()) {
+    // When in NO_GC_REGION, skip young GC and go straight to old-gen fallback.
+    if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
         uint32_t gen = threading::RequestGlobalSafepoint();
         auto* mt = threading::GetCurrentThread();
         if (mt) {
@@ -105,6 +115,14 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
 void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomicSlow");
+
+    // GC Stress mode: force a full GC.
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
     FlushTlsAllocCounter();
 
     // Phase 1: Try to claim a new TLAB.
@@ -115,7 +133,8 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     }
 
     // Phase 2: Young GC (scanning_required = false for pointer-free).
-    if (g_gc_scheduler.TryClaimGcSlot()) {
+    // When in NO_GC_REGION, skip young GC and go straight to fallback.
+    if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
         uint32_t gen = threading::RequestGlobalSafepoint();
         auto* mt = threading::GetCurrentThread();
         if (mt) {
@@ -764,8 +783,11 @@ extern "C" void chaos_gc_collect() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect requested");
 
     // Step 1: Young collection on the shared young generation (if any).
+    // Uses g_young_gen.bump to determine if there are live nursery objects,
+    // not region->current (which is frozen at begin after each young GC reset).
     Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
-    if (young_region != nullptr && young_region->current > young_region->begin) {
+    void* bump = g_young_gen.bump.load(std::memory_order_acquire);
+    if (young_region != nullptr && bump > young_region->begin) {
         uint32_t gen = threading::RequestGlobalSafepoint();
         GcYoungCollection();
         threading::ReleaseGlobalSafepoint(gen);

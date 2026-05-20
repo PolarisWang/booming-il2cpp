@@ -2,8 +2,8 @@
   "family": "globalization-culture",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-20T01:11:24",
-  "duration_ms": 24941,
+  "timestamp": "2026-05-20T01:35:31",
+  "duration_ms": 20667,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Private.CoreLib\\globalization-culture\\managed\\subjects\\build-output\\GlobalizationCultureSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21018
+      "duration_ms": 19375
     },
     "fact": {
       "stage": "fact",
@@ -42,7 +42,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 345
+      "duration_ms": 359
     },
     "audit": {
       "stage": "audit",
@@ -56,23 +56,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 980
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "failed",
-      "summary": "matchedCount=0/13 below threshold 50%",
-      "details": {
-        "averageSpeedupPercent": 0.0,
-        "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "matchedCount": 0,
-        "totalMethods": 13,
-        "invalidCount": 13,
-        "benchmarkQuality": "matchedCount=0/13 below threshold 50%"
-      },
-      "errors": [],
-      "duration_ms": 2596
+      "duration_ms": 931
     }
   },
   "coverage": {
@@ -83,14 +67,7 @@
   "dashboard": {
     "interpreter": {},
     "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0.0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 13,
-      "invalidCount": 13
-    },
+    "performance": {},
     "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,

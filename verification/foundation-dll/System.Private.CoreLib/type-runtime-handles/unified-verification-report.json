@@ -2,8 +2,8 @@
   "family": "type-runtime-handles",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-19T22:57:05",
-  "duration_ms": 21996,
+  "timestamp": "2026-05-20T01:43:32",
+  "duration_ms": 9244,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -22,16 +22,15 @@
     "codegen": {
       "stage": "codegen",
       "status": "failed",
-      "summary": "entry.exe build failed",
+      "summary": "convert-to-cpp failed",
       "details": {
         "steps": {
           "build_subjects": "OK",
-          "convert_to_cpp": "OK",
-          "build_entry_exe": "FAILED"
+          "convert_to_cpp": "FAILED"
         }
       },
       "errors": [],
-      "duration_ms": 20385
+      "duration_ms": 7337
     },
     "fact": {
       "stage": "fact",
@@ -45,7 +44,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 788
+      "duration_ms": 44
     },
     "audit": {
       "stage": "audit",
@@ -59,7 +58,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 820
+      "duration_ms": 1860
     }
   },
   "coverage": {

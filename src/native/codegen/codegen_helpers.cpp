@@ -9,6 +9,9 @@
 
 #include <chaos/profile.h>
 
+#include <gc/gc_bgc_inline.h>
+#include <gc/gc_helpers.h>
+
 #include <intrin.h>  // _ReturnAddress()
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
@@ -27,18 +30,9 @@ thread_local DeoptTlsState t_deopt_state;
 // Virtual method resolution for CodegenLdVirtFtn.
 #include <vtable_registry.h>
 
-// TLAB (Thread-Local Allocation Buffer) for inline bump-pointer allocation.
-// We avoid including gc/gc_young_gen.h here because it pulls in GcScheduler
-// and other GC internals that the codegen library should not depend on.
-// Instead, we forward-declare the TLAB struct and extern tls_tlab.
+// TLAB access inline — full type definition comes from gc/gc_young_gen.h
+// via the gc headers included above.  Only the extern declaration is needed.
 namespace chaos::il2cpp::runtime_core {
-struct TLAB {
-    char* start{nullptr};
-    char* current{nullptr};
-    char* end{nullptr};
-    char* start_scan{nullptr};
-    char* current_scan{nullptr};
-};
 extern thread_local TLAB tls_tlab;
 }  // namespace chaos::il2cpp::runtime_core
 
@@ -76,14 +70,17 @@ extern "C" uint64_t CodegenLdFld(void* obj, uint32_t field_idx) noexcept {
 extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
+    using namespace chaos::il2cpp::runtime_core;
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
+    } else {
+        // SATB pre-write barrier: record old value before overwriting.
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
     }
-    // Store as Int64 (bit-preserving). The call site may have set Int32 or
-    // ObjectRef bits, but the uint64_t representation is what T4 tracks.
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+    chaos_gc_dirty_card(obj);
 }
 
 extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
@@ -463,9 +460,12 @@ extern "C" void CodegenInitObj(void* ptr) noexcept {
 extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StObj");
     using namespace chaos::il2cpp::interpreter;
+    using namespace chaos::il2cpp::runtime_core;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
+    chaos_gc_dirty_card(ptr);
 }
 
 // ── Cpblk helper ─────────────────────────────────────────────────────────────

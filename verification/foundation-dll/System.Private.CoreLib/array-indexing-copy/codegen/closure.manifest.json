@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ArrayIndexingCopySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ArrayIndexingCopySubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/array-indexing-copy/managed/subjects/build-output/ArrayIndexingCopySubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "fdbec2be-875d-4b56-8738-356368f07da2",
+  "inputModuleVersionId": "05b770fa-57ef-4ae4-ad5d-b5db8e791f81",
   "artifacts": [
     {
       "kind": "typedIlIr",

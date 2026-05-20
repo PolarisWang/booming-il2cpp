@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ThreadingTasksPrimitivesSubjects.cs" />
-    <Compile Include="ThreadingTasksPrimitivesSubjects.Custom.cs" />
+    <Compile Include="ThreadingTasksPrimitivesNativeEntry.Custom.cs" />
     <Compile Include="ThreadingTasksPrimitivesSubjects.Custom.cs" />
   </ItemGroup>
 </Project>

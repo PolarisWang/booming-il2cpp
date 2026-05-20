@@ -1335,7 +1335,18 @@ extern ""C"" void ChaosJitRegisterAll() {}
         catch (InvalidOperationException ex) when (ex.Message.Contains("slot stack"))
         {
             var msg = $"[codegen] WARNING: structured IR slot tracking failed for {method.SubjectId}, emitting stub. Root cause: {ex.Message}";
-            Console.Error.WriteLine(msg);
+            if (method.SubjectId.Contains("LdftnHelper"))
+            {
+                Console.Error.WriteLine(msg);
+                Console.Error.WriteLine($"=== STACK TRACE for {method.SubjectId} ===");
+                Console.Error.WriteLine(ex.StackTrace);
+                Console.Error.WriteLine("=== SOURCE ===");
+                Console.Error.WriteLine(ex.ToString());
+            }
+            else
+            {
+                Console.Error.WriteLine(msg);
+            }
             return BuildAotUnreachableMethodStub(method);
         }
     }

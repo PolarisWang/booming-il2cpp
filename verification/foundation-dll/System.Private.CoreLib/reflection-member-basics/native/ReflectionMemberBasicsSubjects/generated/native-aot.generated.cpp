@@ -188,7 +188,7 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
 struct chaos_boxed_type_System_Private_CoreLib_System_Byte
 {
 	PureTypeHeader header{};
-	chaos_valuetype_System_Private_CoreLib_System_Byte value{};
+	CHAOS_IL2CPP_INTPTR value = 0;
 };
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept

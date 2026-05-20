@@ -240,4 +240,38 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(void* out) noexc
     info->concurrent = 0;
 }
 
+// ======================================================================
+// NO_GC_REGION support
+// ======================================================================
+
+/// TLS nesting counter for NO_GC_REGION.
+/// >0 means the current thread is inside a no-GC region.
+thread_local int tls_no_gc_region_depth = 0;
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enter_no_gc_region() noexcept {
+    ++tls_no_gc_region_depth;
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "enter_no_gc_region depth=%d", tls_no_gc_region_depth);
+}
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept {
+    if (tls_no_gc_region_depth <= 0) {
+        CHAOS_IL2CPP_LOG_WARN("GC_API", "leave_no_gc_region mismatched (depth already 0)");
+        return;
+    }
+    --tls_no_gc_region_depth;
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "leave_no_gc_region depth=%d", tls_no_gc_region_depth);
+
+    // When counter reaches zero, trigger any deferred GC.
+    if (tls_no_gc_region_depth == 0) {
+        auto kind = g_gc_scheduler.DecideCollection();
+        if (kind != GcCollectionKind::NONE) {
+            g_gc_scheduler.RequestFullGc();
+        }
+    }
+}
+
+bool GcIsInNoGcRegion() noexcept {
+    return tls_no_gc_region_depth > 0;
+}
+
 }  // namespace chaos::il2cpp::runtime_core

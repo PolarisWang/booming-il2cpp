@@ -54,7 +54,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
                 // first field dereference yields the interface vtable array.
                 *ppv = &ccw->interfaces[i].vtable;
             }
-            ccw->refcount++;
+            ccw->refcount.fetch_add(1, std::memory_order_relaxed);
             return kS_OK;
         }
     }
@@ -65,13 +65,13 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwAddRef(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
-    return ++ccw->refcount;
+    return ccw->refcount.fetch_add(1, std::memory_order_relaxed) + 1;
 }
 
 CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
-    CHAOS_IL2CPP_UINT32 remaining = --ccw->refcount;
+    CHAOS_IL2CPP_UINT32 remaining = ccw->refcount.fetch_sub(1, std::memory_order_acq_rel) - 1;
     if (remaining == 0) {
         CHAOS_IL2CPP_LOG_DEBUG_M("COM", "CCW {0} refcount reached 0, freeing", static_cast<void*>(ccw));
 

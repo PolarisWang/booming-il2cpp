@@ -5,6 +5,7 @@
 #include <cmath>
 
 #include "gc_bgc.h"
+#include "gc_api.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -134,6 +135,11 @@ void GcScheduler::ResetPageCountGrowth() noexcept {
 // ── Collection decision ──────────────────────────────────────────
 
 GcCollectionKind GcScheduler::DecideCollection() const noexcept {
+    // 0. NO_GC_REGION: no collection allowed.
+    if (GcIsInNoGcRegion()) {
+        return GcCollectionKind::NONE;
+    }
+
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
         return GcCollectionKind::FULL;

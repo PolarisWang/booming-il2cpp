@@ -1,7 +1,7 @@
 {
   "family": "type-runtime-handles",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-19T22:57:05.442486",
+  "generated_at": "2026-05-20T01:43:32.140553",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -330,17 +330,30 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 5 changed source files within expected architecture layers",
-      "details": [],
+      "status": "CONCERN",
+      "summary": "1 of 21 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        }
+      ],
       "evidence": {
-        "changed_source_count": 5,
+        "changed_source_count": 21,
         "layer_distribution": {
           "TestInfra": 1,
-          "Templates": 1,
-          "RuntimeCore": 2,
-          "Tests": 1
-        }
+          "Emitter": 4,
+          "RuntimeSupport": 1,
+          "Codegen": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 12
+        },
+        "violations": [
+          {
+            "file": "src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
@@ -400,8 +413,8 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 9,
-    "concern": 0,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
     "not_applicable": 3,
     "overall": "ALIGNED"

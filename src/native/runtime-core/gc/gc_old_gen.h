@@ -68,6 +68,7 @@ struct OldGenPage {
     bool            scanning;         // true = scanned (contains pointers)
     bool            is_oversized;     // true = single-object oversized page
     int8_t          preferred_sc_idx; // size class index for most blocks on this page (-1 = mixed)
+    int8_t          numa_node;         // NUMA node this page was allocated on (-1 = unknown)
     std::atomic<bool> in_use;         // true = actively used for allocation
     std::atomic<bool> sweep_lock{false}; // spinlock for concurrent sweep
 

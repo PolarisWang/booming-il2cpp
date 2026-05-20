@@ -47,51 +47,90 @@ const void* chaos_vtable_SnapshotTestFixtures_SealedHelper[];
 const void* chaos_vtable_SnapshotTestFixtures_Wrapper__0_[];
 const void* chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_[];
 inline TypeInfoV0 chaos_mt_SnapshotProverSubjects_SnapshotProverSubjects = {{nullptr, nullptr, 17700440604878766952ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverSubjects_SnapshotProverSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(17700440604878766952ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_BaseClass = {{nullptr, chaos_vtable_SnapshotTestFixtures_BaseClass, 16934624807659080947ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_BaseClass = static_cast<CHAOS_IL2CPP_INTPTR>(16934624807659080947ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_DerivedClass = {{&chaos_mt_SnapshotTestFixtures_BaseClass.hot, chaos_vtable_SnapshotTestFixtures_DerivedClass, 5213792135327273735ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_DerivedClass = static_cast<CHAOS_IL2CPP_INTPTR>(5213792135327273735ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_FieldHelper = {{nullptr, nullptr, 14105055411266533488ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_FieldHelper = static_cast<CHAOS_IL2CPP_INTPTR>(14105055411266533488ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasInstanceFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasInstanceFields, 17812473439196761566ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasInstanceFields = static_cast<CHAOS_IL2CPP_INTPTR>(17812473439196761566ULL);static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_ImplHelper[] = {
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotProverSubjects_SnapshotProverSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(17700440604878766952ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_BaseClass = {{nullptr, chaos_vtable_SnapshotTestFixtures_BaseClass, 16934624807659080947ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_BaseClass = static_cast<CHAOS_IL2CPP_INTPTR>(16934624807659080947ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_DerivedClass = {{&chaos_mt_SnapshotTestFixtures_BaseClass.hot, chaos_vtable_SnapshotTestFixtures_DerivedClass, 5213792135327273735ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_DerivedClass = static_cast<CHAOS_IL2CPP_INTPTR>(5213792135327273735ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_FieldHelper = {{nullptr, nullptr, 14105055411266533488ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_FieldHelper = static_cast<CHAOS_IL2CPP_INTPTR>(14105055411266533488ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasFields, 6075661983971539625ULL, 1u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasFields = static_cast<CHAOS_IL2CPP_INTPTR>(6075661983971539625ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_HasInstanceFields = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_HasInstanceFields, 17812473439196761566ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_HasInstanceFields = static_cast<CHAOS_IL2CPP_INTPTR>(17812473439196761566ULL);
+static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_ImplHelper[] = {
 	{ chaos_type_id_SnapshotTestFixtures_IMyInterface, 3, 1 }
 };
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_ImplHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_ImplHelper, 2682382514493266270ULL, 4u, 32, 1, 1}, {chaos_iface_map_SnapshotTestFixtures_ImplHelper, nullptr, 1, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_ImplHelper = static_cast<CHAOS_IL2CPP_INTPTR>(2682382514493266270ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_InstanceHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_InstanceHelper, 7539435265304875683ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_InstanceHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7539435265304875683ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_LdftnHelper___O = {{nullptr, nullptr, 9616880548282383388ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_LdftnHelper___O = static_cast<CHAOS_IL2CPP_INTPTR>(9616880548282383388ULL);static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_MarkedClass[] = {
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_ImplHelper = static_cast<CHAOS_IL2CPP_INTPTR>(2682382514493266270ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_InstanceHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_InstanceHelper, 7539435265304875683ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_InstanceHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7539435265304875683ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_LdftnHelper___O = {{nullptr, nullptr, 9616880548282383388ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_LdftnHelper___O = static_cast<CHAOS_IL2CPP_INTPTR>(9616880548282383388ULL);
+static constexpr InterfaceMapEntry chaos_iface_map_SnapshotTestFixtures_MarkedClass[] = {
 	{ chaos_type_id_SnapshotTestFixtures_IMarker, 0, 0 }
 };
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MarkedClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MarkedClass, 6112983511997078372ULL, 1u, 32, 1, 1}, {chaos_iface_map_SnapshotTestFixtures_MarkedClass, nullptr, 1, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MarkedClass = static_cast<CHAOS_IL2CPP_INTPTR>(6112983511997078372ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MyClass, 17017755788800598734ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyClass = static_cast<CHAOS_IL2CPP_INTPTR>(17017755788800598734ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_SealedHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_SealedHelper, 8545221821474343780ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_SealedHelper = static_cast<CHAOS_IL2CPP_INTPTR>(8545221821474343780ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_StaticFieldWriteHelper = {{nullptr, nullptr, 7187250757378180401ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_StaticFieldWriteHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7187250757378180401ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper__0_ = {{nullptr, chaos_vtable_SnapshotTestFixtures_Wrapper__0_, 15764982902837746946ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(15764982902837746946ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_, 1845517801504066080ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(1845517801504066080ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = {{nullptr, nullptr, 9130424216747936531ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(9130424216747936531ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = {{nullptr, nullptr, 11554060213542038524ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(11554060213542038524ULL);inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_ = {{nullptr, nullptr, 8124737553590710378ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_List_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8124737553590710378ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Double = {{nullptr, nullptr, 1099026126681926114ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_INTPTR>(1099026126681926114ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 143744549824129343ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(143744549824129343ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int16 = {{nullptr, nullptr, 11007710000311077999ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_INTPTR>(11007710000311077999ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int64 = {{nullptr, nullptr, 11012495074916106146ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_INTPTR>(11012495074916106146ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_OverflowException = {{nullptr, nullptr, 531363262308024406ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_OverflowException = static_cast<CHAOS_IL2CPP_INTPTR>(531363262308024406ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_SByte = {{nullptr, nullptr, 13054279835592181566ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_SByte = static_cast<CHAOS_IL2CPP_INTPTR>(13054279835592181566ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Single = {{nullptr, nullptr, 4813876735449938439ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_INTPTR>(4813876735449938439ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt16 = {{nullptr, nullptr, 4060647147365029652ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt16 = static_cast<CHAOS_IL2CPP_INTPTR>(4060647147365029652ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt32 = {{nullptr, nullptr, 4058804365876526466ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt32 = static_cast<CHAOS_IL2CPP_INTPTR>(4058804365876526466ULL);inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMarker = {{nullptr, nullptr, 13604930402668384013ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MarkedClass = static_cast<CHAOS_IL2CPP_INTPTR>(6112983511997078372ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyClass = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_MyClass, 17017755788800598734ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyClass = static_cast<CHAOS_IL2CPP_INTPTR>(17017755788800598734ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_SealedHelper = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_SealedHelper, 8545221821474343780ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_SealedHelper = static_cast<CHAOS_IL2CPP_INTPTR>(8545221821474343780ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_StaticFieldWriteHelper = {{nullptr, nullptr, 7187250757378180401ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_StaticFieldWriteHelper = static_cast<CHAOS_IL2CPP_INTPTR>(7187250757378180401ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper__0_ = {{nullptr, chaos_vtable_SnapshotTestFixtures_Wrapper__0_, 15764982902837746946ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(15764982902837746946ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_Wrapper_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_SnapshotTestFixtures_Wrapper_System_Int32_, 1845517801504066080ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_Wrapper_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(1845517801504066080ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = {{nullptr, nullptr, 9130424216747936531ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(9130424216747936531ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = {{nullptr, nullptr, 11554060213542038524ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_HashSet_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(11554060213542038524ULL);
+inline TypeInfoV0 chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_ = {{nullptr, nullptr, 8124737553590710378ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Collections_System_Collections_Generic_List_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8124737553590710378ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Double = {{nullptr, nullptr, 1099026126681926114ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_INTPTR>(1099026126681926114ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 143744549824129343ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(143744549824129343ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int16 = {{nullptr, nullptr, 11007710000311077999ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_INTPTR>(11007710000311077999ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int64 = {{nullptr, nullptr, 11012495074916106146ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_INTPTR>(11012495074916106146ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_OverflowException = {{nullptr, nullptr, 531363262308024406ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_OverflowException = static_cast<CHAOS_IL2CPP_INTPTR>(531363262308024406ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_SByte = {{nullptr, nullptr, 13054279835592181566ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_SByte = static_cast<CHAOS_IL2CPP_INTPTR>(13054279835592181566ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Single = {{nullptr, nullptr, 4813876735449938439ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_INTPTR>(4813876735449938439ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt16 = {{nullptr, nullptr, 4060647147365029652ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt16 = static_cast<CHAOS_IL2CPP_INTPTR>(4060647147365029652ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_UInt32 = {{nullptr, nullptr, 4058804365876526466ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_UInt32 = static_cast<CHAOS_IL2CPP_INTPTR>(4058804365876526466ULL);
+inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMarker = {{nullptr, nullptr, 13604930402668384013ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_IMyInterface = {{nullptr, nullptr, 3080637198406087848ULL, 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline TypeInfoV0 chaos_mt_SnapshotTestFixtures_MyValueType = {{nullptr, nullptr, 3606843832057080951ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SnapshotTestFixtures_MyValueType = static_cast<CHAOS_IL2CPP_INTPTR>(3606843832057080951ULL);
@@ -3481,7 +3520,7 @@ static void (*kBenchmarkWrappers[157])() = {
 	[]() {kAotMethods[46]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(628919584683901915ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(chaos_make_string_id_value(7201466553693376363ULL));},
 	[]() {kAotMethods[50]();},
 	[]() {kAotMethods[51]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[52])(0);},
@@ -4816,10 +4855,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -4931,10 +4966,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5046,10 +5077,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5161,10 +5188,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5276,10 +5299,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5391,10 +5410,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_5(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5506,10 +5521,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5621,10 +5632,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5735,10 +5742,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
 
 
 	{
@@ -5754,7 +5757,7 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject
 		{
 			_d_hpresult = SnapshotTestFixtures_VoidCaller_DoNothing();
 		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	{
 		auto& _d150 = s_hotpatch_entries[150];
@@ -5769,17 +5772,16 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject
 		{
 			_d_hpresult = SnapshotTestFixtures_VoidCaller_DoNothing();
 		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
-		if (_s0 != 0)
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		if (chaos_left != chaos_right)
 		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
 			{
-				auto chaos_value = _s0;
+				auto chaos_value = _s2;
 				chaos_static_SnapshotProverSubjects_SnapshotProverSubjects___exitCode = chaos_value;
 			}
 		}
@@ -5796,10 +5798,6 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -5906,12 +5904,10 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	{
@@ -5920,14 +5916,10 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void
 		SnapshotTestFixtures_HasFields__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasFields*>(_s0);
 		_s0 = chaos_object->field_SnapshotTestFixtures_HasFields__instanceVal;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -5935,7 +5927,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_AddressHelper_RunAddress(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 9) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -5964,71 +5956,62 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticCompareHelper_RunCo
 	CHAOS_IL2CPP_INTPTR _s25{};
 	CHAOS_IL2CPP_INTPTR _s26{};
 	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosRem(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[3] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[4] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	chaos_locals[0] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+	chaos_locals[1] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosRem(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+	chaos_locals[2] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	chaos_locals[3] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
 	{
-		if (_s0 != 0)
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		if (chaos_left == chaos_right)
 		{
-			_s0 = chaos_locals[4];
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-			chaos_locals[4] = _s0;
+			_s1 = chaos_locals[3];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+			chaos_locals[3] = _s1;
 		}
-		_s0 = chaos_locals[0];
-		_s1 = chaos_locals[1];
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) < static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
+		_s5 = _s4;
+		_s6 = chaos_locals[0];
 		{
-			if (_s0 != 0)
+			const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s6);
+			const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s5);
+			if (chaos_left < chaos_right)
 			{
-				_s0 = chaos_locals[4];
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-				chaos_locals[4] = _s0;
+				_s5 = chaos_locals[3];
+				_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
+				chaos_locals[3] = _s5;
 			}
-			_s0 = chaos_locals[0];
-			_s1 = chaos_locals[1];
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) > static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
+			_s2 = chaos_locals[0];
 			{
-				if (_s0 != 0)
+				const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+				const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				if (chaos_left > chaos_right)
 				{
-					_s0 = chaos_locals[4];
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-					chaos_locals[4] = _s0;
+					_s1 = chaos_locals[3];
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+					chaos_locals[3] = _s1;
 				}
-				_s0 = chaos_locals[2];
-				_s1 = chaos_locals[3];
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-				_s1 = chaos_locals[4];
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-				chaos_locals[8] = _s0;
-				_s0 = chaos_locals[8];
-				return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				_s2 = chaos_locals[1];
+				_s3 = chaos_locals[2];
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+				_s3 = chaos_locals[3];
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+				return static_cast<CHAOS_IL2CPP_INT32>(_s2);
 			}
 		}
 	}
@@ -6050,7 +6033,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArithmeticOps_RunAdd(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayHelper_MakeAndFill(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6058,8 +6041,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayHelper_MakeAndFill(void)
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
@@ -6077,15 +6058,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayHelper_MakeAndFill(void)
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -6096,16 +6076,21 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayHelper_MakeAndFill(void)
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6113,15 +6098,13 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayHelper_MakeAndFill(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayLengthHelper_RunLength(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
@@ -6139,12 +6122,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayLengthHelper_RunLength(v
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6154,12 +6133,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6195,7 +6171,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BaseClass_Compute(CHAOS_IL2CP
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BitwiseHelper_RunBitwise(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6216,38 +6192,32 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BitwiseHelper_RunBitwise(void
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
 	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(165);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(90);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = chaos_store_uint64(chaos_load_uint64(_s0) & chaos_load_uint64(_s1));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = chaos_store_uint64(chaos_load_uint64(_s0) | chaos_load_uint64(_s1));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = chaos_store_uint64(chaos_load_uint64(_s0) ^ chaos_load_uint64(_s1));
-	chaos_locals[4] = _s0;
-	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(90);
+	chaos_locals[0] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
+	_s1 = chaos_store_uint64(chaos_load_uint64(_s1) & chaos_load_uint64(_s2));
+	chaos_locals[1] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
+	_s1 = chaos_store_uint64(chaos_load_uint64(_s1) | chaos_load_uint64(_s2));
+	chaos_locals[2] = _s1;
+	_s1 = _s0;
+	_s2 = chaos_locals[0];
+	_s1 = chaos_store_uint64(chaos_load_uint64(_s1) ^ chaos_load_uint64(_s2));
+	chaos_locals[3] = _s1;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(~static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[5] = _s0;
-	_s0 = chaos_locals[2];
+	chaos_locals[4] = _s0;
+	_s0 = chaos_locals[1];
+	_s1 = chaos_locals[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	_s1 = chaos_locals[3];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	_s1 = chaos_locals[4];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = chaos_locals[5];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[6] = _s0;
-	_s0 = chaos_locals[6];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6255,14 +6225,12 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BitwiseHelper_RunBitwise(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxingHelper_BoxAndUnbox(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -6273,8 +6241,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxingHelper_BoxAndUnbox(void
 		chaos_boxed->value = chaos_value;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_System_Private_CoreLib_System_Int32*>(_s0);
 		if (chaos_boxed == nullptr)
@@ -6283,8 +6249,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxingHelper_BoxAndUnbox(void
 		}
 		_s0 = chaos_boxed->value;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6294,12 +6258,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBox
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(47);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6307,7 +6268,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBox
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 8) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6331,20 +6292,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareBHelper_RunBranc
 	CHAOS_IL2CPP_INTPTR _s20{};
 	CHAOS_IL2CPP_INTPTR _s21{};
 	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
@@ -6352,54 +6299,47 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareBHelper_RunBranc
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
 	chaos_locals[1] = _s0;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[2] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) > static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	chaos_locals[2] = _s1;
+	_s1 = chaos_locals[0];
+	_s2 = chaos_locals[1];
 	{
-		if (_s0 != 0)
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		if (chaos_left <= chaos_right)
 		{
-			_s0 = chaos_locals[3];
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-			chaos_locals[3] = _s0;
+			_s1 = chaos_locals[2];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+			chaos_locals[2] = _s1;
 		}
-		_s0 = chaos_locals[2];
-		_s1 = chaos_locals[0];
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) < static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+		_s2 = chaos_locals[0];
 		{
-			if (_s0 != 0)
+			const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+			const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+			if (chaos_left >= chaos_right)
 			{
-				_s0 = chaos_locals[3];
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-				chaos_locals[3] = _s0;
+				_s1 = chaos_locals[2];
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+				chaos_locals[2] = _s1;
 			}
-			_s0 = chaos_locals[1];
-			_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) < static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s2 = chaos_locals[1];
+			_s2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				if (_s0 != 0)
+				const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+				const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+				if (chaos_left >= chaos_right)
 				{
-					_s0 = chaos_locals[3];
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-					chaos_locals[3] = _s0;
+					_s2 = chaos_locals[2];
+					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+					chaos_locals[2] = _s2;
 				}
-				_s0 = chaos_locals[3];
-				chaos_locals[7] = _s0;
-				_s0 = chaos_locals[7];
-				return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				_s2 = chaos_locals[2];
+				return static_cast<CHAOS_IL2CPP_INT32>(_s2);
 			}
 		}
 	}
@@ -6409,7 +6349,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareBHelper_RunBranc
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 9) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6435,17 +6375,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareHelper_RunBranch
 	CHAOS_IL2CPP_INTPTR _s22{};
 	CHAOS_IL2CPP_INTPTR _s23{};
 	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
@@ -6458,121 +6387,65 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchCompareHelper_RunBranch
 	chaos_locals[3] = _s0;
 	_s0 = chaos_locals[0];
 	_s1 = chaos_locals[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	{
-		if (_s0 != 0)
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		if (chaos_left == chaos_right)
 		{
 			_s0 = chaos_locals[3];
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 			chaos_locals[3] = _s0;
 		}
-		_s0 = chaos_locals[0];
-		_s1 = chaos_locals[1];
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) > static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
+		_s2 = chaos_locals[0];
+		_s3 = chaos_locals[1];
 		{
-			if (_s0 != 0)
+			const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+			const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+			if (chaos_left > chaos_right)
 			{
-				_s0 = chaos_locals[3];
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-				chaos_locals[3] = _s0;
+				_s2 = chaos_locals[3];
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+				chaos_locals[3] = _s2;
 			}
-			_s0 = chaos_locals[1];
-			_s1 = chaos_locals[0];
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) < static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
+			_s2 = chaos_locals[1];
+			_s3 = chaos_locals[0];
 			{
-				if (_s0 != 0)
+				const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+				const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+				if (chaos_left < chaos_right)
 				{
-					_s0 = chaos_locals[3];
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-					chaos_locals[3] = _s0;
+					_s2 = chaos_locals[3];
+					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+					chaos_locals[3] = _s2;
 				}
-				_s0 = chaos_locals[0];
-				_s1 = chaos_locals[1];
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+				_s2 = chaos_locals[0];
+				_s3 = chaos_locals[1];
 				{
-					if (_s0 != 0)
+					const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s3);
+					const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s2);
+					if (chaos_left != chaos_right)
 					{
-						_s0 = chaos_locals[3];
-						_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-						chaos_locals[3] = _s0;
+						_s2 = chaos_locals[3];
+						_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+						_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
+						chaos_locals[3] = _s2;
 					}
-					_s0 = chaos_locals[3];
-					chaos_locals[8] = _s0;
-					_s0 = chaos_locals[8];
-					return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+					_s2 = chaos_locals[3];
+					return static_cast<CHAOS_IL2CPP_INT32>(_s2);
 				}
 			}
 		}
 	}
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()
+// Managed method: SnapshotTestFixtures/BranchDupHelper::RunBranchDup()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchDupHelper_RunBranchDup(void)
 {
-	return {};
-}
-
-// Managed method: SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB(void)
-{
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: SnapshotTestFixtures/CalliHelper::RunCalli(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6580,6 +6453,110 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_I
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+		if (chaos_left == chaos_right)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[0] = _s0;
+		}
+		_s0 = chaos_locals[0];
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		{
+			const auto chaos_right = static_cast<CHAOS_IL2CPP_INTPTR>(_s1);
+			const auto chaos_left = static_cast<CHAOS_IL2CPP_INTPTR>(_s0);
+			if (chaos_left == chaos_right)
+			{
+				_s0 = chaos_locals[0];
+				{
+					const auto chaos_value = _s0;
+					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+					chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+					chaos_boxed->value = chaos_value;
+					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+				}
+			}
+			else
+			{
+				_s0 = 0;
+			}
+			{
+				if (_s1 != 0)
+				{
+					_s1 = chaos_locals[0];
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+					chaos_locals[0] = _s1;
+				}
+				_s2 = chaos_locals[0];
+				return static_cast<CHAOS_IL2CPP_INT32>(_s2);
+			}
+		}
+	}
+}
+
+// Managed method: SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/CalliHelper::RunCalli(System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	_s0 = 0;
@@ -6611,8 +6588,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_I
 		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s1 = chaos_args[0];
 	{
 		auto chaos_raw_arg_0 = _s1;
@@ -6700,8 +6675,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CalliHelper_RunCalli_System_I
 			}
 		}
 	}
-	chaos_locals[1] = _s3;
-	_s3 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
 }
 
@@ -6713,7 +6686,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallVirtHelper_CreateAndUse(v
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -6744,8 +6716,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallVirtHelper_CreateAndUse(v
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6790,90 +6760,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CallvirtHelper_RunCallvirt(vo
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()
+// Managed method: SnapshotTestFixtures/CollectionsHelper::TestDict()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestDict(void)
-{
-	return {};
-}
-
-// Managed method: SnapshotTestFixtures/CollectionsHelper::TestList()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestList(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_List_System_Int32___Add_System_Void_System_Int32_(chaos_arg_0, chaos_arg_1);
-	}
-	_s0 = chaos_locals[0];
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[1] = _s1;
-	_s1 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s1);
-}
-
-// AOT-unreachable stub: SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestSet(void)
-{
-	return {};
-}
-
-// Managed method: SnapshotTestFixtures/ConversionHelper::ConvertToInt()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConversionHelper_ConvertToInt(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
-	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 6) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6895,39 +6786,117 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvSmallIntHelper_RunConvSma
 	CHAOS_IL2CPP_INTPTR _s18{};
 	CHAOS_IL2CPP_INTPTR _s19{};
 	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4660);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(_s0));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(_s0));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(_s0));
-	chaos_locals[4] = _s0;
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_, {});
+		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_Int32_System_Int32_.hot;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	{
+		const auto chaos_arg_2 = _s3;
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Dictionary_System_Int32_System_Int32___Add_System_Void_System_Int32_System_Int32_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_arg_2 = _s3;
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Dictionary_System_Int32_System_Int32___TryGetValue_System_Boolean_System_Int32_System_Int32__(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[1] = _s1;
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Dictionary_System_Int32_System_Int32___ContainsKey_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[2] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_Dictionary_System_Int32_System_Int32___Remove_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
 	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
 	_s1 = chaos_locals[2];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s2) ? 1 : 0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = chaos_locals[3];
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	_s1 = chaos_locals[4];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[5] = _s0;
-	_s0 = chaos_locals[5];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: SnapshotTestFixtures/ConvWideHelper::RunConvWide()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvWideHelper_RunConvWide(void)
+// Managed method: SnapshotTestFixtures/CollectionsHelper::TestList()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestList(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
+		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_List_System_Int32___Add_System_Void_System_Int32_(chaos_arg_0, chaos_arg_1);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return static_cast<CHAOS_IL2CPP_INT32>(_s1);
+}
+
+// Managed method: SnapshotTestFixtures/CollectionsHelper::TestSet()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CollectionsHelper_TestSet(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6942,20 +6911,136 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvWideHelper_RunConvWide(vo
 	CHAOS_IL2CPP_INTPTR _s11{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_locals[0] = _s0;
+	{
+		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_HashSet_System_Int32_, {});
+		chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_HashSet_System_Int32_.hot;
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Add_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_arg_0 = _s1;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Contains_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_HashSet_System_Int32___Remove_System_Boolean_System_Int32_(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
 	_s0 = chaos_locals[0];
-	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[1] = _s0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/ConversionHelper::ConvertToInt()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConversionHelper_ConvertToInt(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
+
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4660);
+	_s1 = _s0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(_s1));
+	chaos_locals[0] = _s1;
+	_s1 = _s0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(_s1));
+	chaos_locals[1] = _s1;
+	_s1 = _s0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(_s1));
+	chaos_locals[2] = _s1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(_s0));
 	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[3];
-	chaos_locals[4] = _s0;
-	_s0 = chaos_locals[4];
+	_s0 = chaos_locals[0];
+	_s1 = chaos_locals[1];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = chaos_locals[2];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = chaos_locals[3];
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/ConvWideHelper::RunConvWide()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ConvWideHelper_RunConvWide(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -6987,13 +7072,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_CpobjHelper_RunCpobj(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DelegateHelper_RunDelegate(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = 0;
@@ -7022,8 +7105,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DelegateHelper_RunDelegate(vo
 		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_delegate_value = _s0;
 		if (chaos_delegate_value == 0)
@@ -7108,8 +7189,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DelegateHelper_RunDelegate(vo
 			}
 		}
 	}
-	chaos_locals[1] = _s3;
-	_s3 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
 }
 
@@ -7159,7 +7238,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_DerivedClass_Compute(CHAOS_IL
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -7167,7 +7246,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -7275,8 +7353,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhHelper_SafeDivide(void)
 	}
 #endif
 	_s0 = chaos_locals[0];
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7301,7 +7377,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FieldHelper_GetAndIncrement(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	_s0 = chaos_static_SnapshotTestFixtures_FieldHelper___counter;
@@ -7312,8 +7387,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FieldHelper_GetAndIncrement(v
 		chaos_static_SnapshotTestFixtures_FieldHelper___counter = chaos_value;
 	}
 	_s0 = chaos_static_SnapshotTestFixtures_FieldHelper___counter;
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7321,7 +7394,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FieldHelper_GetAndIncrement(v
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FloatOpsHelper_RunFloatOps(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -7330,49 +7403,42 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FloatOpsHelper_RunFloatOps(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
 
 
 	_s0 = ChaosStoreFloat32(3.5f);
-	chaos_locals[0] = _s0;
-	_s0 = ChaosStoreFloat64(7.2);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	_s0 = ChaosStoreFloat32(static_cast<float>(_s0));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[0];
-	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[2];
+	_s1 = ChaosStoreFloat64(7.2);
+	_s1 = ChaosStoreFloat32(static_cast<float>(_s1));
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(ChaosLoadFloat64(_s0), ChaosLoadFloat64(_s1)));
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[4] = _s0;
-	_s0 = chaos_locals[4];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()
+// Managed method: SnapshotTestFixtures/FlowControl::IsPositive()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_FlowControl_IsPositive(void)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
 // Managed method: SnapshotTestFixtures/GenericHelper::UseGeneric()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericHelper_UseGeneric(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -7383,8 +7449,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericHelper_UseGeneric(void
 		chaos_stub_definition_SnapshotTestFixtures_Wrapper_1___ctor_System_Void__0__type__System_Int32__method(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
@@ -7395,8 +7459,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericHelper_UseGeneric(void
 		const auto chaos_result = chaos_stub_definition_SnapshotTestFixtures_Wrapper_1__GetValue__0___type__System_Int32__method(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7404,12 +7466,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericHelper_UseGeneric(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
@@ -7420,13 +7481,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 	}
 	catch (const chaos_managed_exception& chaos_exception)
 	{
@@ -7441,7 +7500,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 		}
 		_s1 = chaos_exception.object_value;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 	}
 #elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
 	__try
@@ -7451,13 +7510,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 	}
 		__except(CHAOS_SEH_FILTER_ALL())
 	{
@@ -7480,7 +7537,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 		}
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 	}
 #else
 	{
@@ -7493,13 +7550,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 		}
 		else
 		{
@@ -7531,12 +7586,12 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombin
 		}
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[1] = _s1;
+			chaos_locals[0] = _s1;
 		}
 		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
 	}
 #endif
-	_s1 = chaos_locals[1];
+	_s1 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s1);
 }
 
@@ -7714,20 +7769,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ImplHelper_GetValue(CHAOS_IL2
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IndirectHelper_ReadWriteRef(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	chaos_locals[0] = _s0;
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 	{
 		auto chaos_value_raw = _s1;
@@ -7736,8 +7787,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IndirectHelper_ReadWriteRef(v
 		chaos_store_indirect<CHAOS_IL2CPP_INT32>(chaos_address, chaos_value);
 	}
 	_s0 = chaos_locals[0];
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7745,15 +7794,13 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_IndirectHelper_ReadWriteRef(v
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -7764,27 +7811,23 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_InstanceFieldHelper_CreateAnd
 		SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 	{
-		auto chaos_value = _s1;
+		auto chaos_value = _s2;
 		if (chaos_is_string_id(chaos_value))
 		{
 			chaos_value = chaos_string_materialize(chaos_value);
 		}
-		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s0);
+		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s1);
 		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value));
 		chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value = chaos_value;
 		chaos_gc_dirty_card(chaos_object);
 	}
-	_s0 = chaos_locals[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_HasInstanceFields*>(_s0);
 		_s0 = chaos_object->field_SnapshotTestFixtures_HasInstanceFields__Value;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7914,7 +7957,7 @@ extern "C" CHAOS_IL2CPP_INT64 SnapshotTestFixtures_LdcI8Helper_RunLdcI8(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -7923,9 +7966,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
@@ -7943,12 +7983,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -7957,18 +7996,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void
 		{
 			CHAOS_IL2CPP_FAIL();
 		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		auto chaos_value_raw = _s1;
+		auto chaos_value_raw = _s2;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw);
-		const auto chaos_address = _s0;
+		const auto chaos_address = _s1;
 		chaos_store_indirect<CHAOS_IL2CPP_INT32>(chaos_address, chaos_value);
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
@@ -7984,8 +8020,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -7993,7 +8027,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemaHelper_RunLdelema(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemAllHelper_TestAllElems(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8009,7 +8043,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemAllHelper_TestAllElems(
 	CHAOS_IL2CPP_INTPTR _s12{};
 	CHAOS_IL2CPP_INTPTR _s13{};
 	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
@@ -8089,8 +8122,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdelemAllHelper_TestAllElems(
 		_s1 = chaos_element;
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8104,7 +8135,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdftnHelper_GetFnPtr(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI1Helper_RunLdindI1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8112,8 +8143,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI1Helper_RunLdindI1(void
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8139,18 +8168,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI1Helper_RunLdindI1(void
 		const auto chaos_value = chaos_value_raw;
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
-		if (chaos_array == nullptr)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
@@ -8166,8 +8185,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI1Helper_RunLdindI1(void
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8175,7 +8192,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI1Helper_RunLdindI1(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI8Helper_RunLdindI8(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8185,9 +8202,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI8Helper_RunLdindI8(void
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8205,15 +8219,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI8Helper_RunLdindI8(void
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = ChaosStoreInt64(4294967296LL);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = ChaosStoreInt64(4294967296LL);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -8224,19 +8237,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI8Helper_RunLdindI8(void
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8244,7 +8260,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindI8Helper_RunLdindI8(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8252,8 +8268,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8271,15 +8285,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -8290,16 +8303,21 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8307,7 +8325,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8315,8 +8333,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8334,15 +8350,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -8353,16 +8368,21 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8370,7 +8390,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunLdind
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunStindI(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8378,8 +8398,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunStind
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8397,15 +8415,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunStind
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -8416,16 +8433,21 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunStind
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8433,7 +8455,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindStindGapsHelper_RunStind
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8466,7 +8488,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindUnsignedHelper_RunLdindU
 	CHAOS_IL2CPP_INTPTR _s29{};
 	CHAOS_IL2CPP_INTPTR _s30{};
 	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8616,8 +8637,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindUnsignedHelper_RunLdindU
 	_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[3];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8625,7 +8644,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindUnsignedHelper_RunLdindU
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindWideHelper_RunLdindWide(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8633,8 +8652,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindWideHelper_RunLdindWide(
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -8660,18 +8677,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindWideHelper_RunLdindWide(
 		const auto chaos_value = chaos_value_raw;
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
-		if (chaos_array == nullptr)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
-		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-		{
-			CHAOS_IL2CPP_FAIL();
-		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
@@ -8687,8 +8694,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdindWideHelper_RunLdindWide(
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8740,12 +8745,10 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdtokenHelper_RunLdtoken(void
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -8756,8 +8759,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn(
 		SnapshotTestFixtures_MyClass__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
@@ -8769,8 +8770,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn(
 		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8778,7 +8777,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn(
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LocalAllocHelper_RunAlloc(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -8788,8 +8787,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LocalAllocHelper_RunAlloc(voi
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(256);
@@ -8808,23 +8805,19 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LocalAllocHelper_RunAlloc(voi
 		}
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_block);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	{
-		auto chaos_value_raw = _s1;
+		auto chaos_value_raw = _s2;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw);
-		const auto chaos_address = _s0;
+		const auto chaos_address = _s1;
 		chaos_store_indirect<CHAOS_IL2CPP_INT8>(chaos_address, chaos_value);
 	}
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_address = _s0;
 		const auto chaos_value = chaos_load_indirect<CHAOS_IL2CPP_UINT8>(chaos_address);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -8832,71 +8825,59 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LocalAllocHelper_RunAlloc(voi
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_LoopHelper_SumToFive(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_eval_stack{};
 	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
+chaos_label_0:
+	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 chaos_label_1:
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
 chaos_label_2:
-	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_3:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+chaos_label_3:
+	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
 chaos_label_4:
-	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_5:
-	goto chaos_label_15;
+	goto chaos_label_14;
+chaos_label_6:
+	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
 chaos_label_7:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
+	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
 chaos_label_8:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
+		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
+	}
 chaos_label_9:
-	{
-		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
-	}
-chaos_label_10:
 	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_11:
+chaos_label_10:
 	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-chaos_label_12:
+chaos_label_11:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-chaos_label_13:
+chaos_label_12:
 	{
 		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(chaos_left, chaos_right));
 	}
-chaos_label_14:
+chaos_label_13:
 	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_15:
+chaos_label_14:
 	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-chaos_label_16:
+chaos_label_15:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-chaos_label_17:
+chaos_label_16:
 	{
 		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
-		chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_left < chaos_right ? 1 : 0);
+		if (chaos_left < chaos_right)
+			goto chaos_label_6;
 	}
-chaos_label_19:
-	chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_20:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[2];
-chaos_label_21:
-	if (chaos_eval_stack[--chaos_stack_top] != 0)
-		goto chaos_label_7;
-chaos_label_23:
+chaos_label_18:
 	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-chaos_label_24:
-	chaos_locals[3] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_25:
-	goto chaos_label_27;
-chaos_label_27:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[3];
-chaos_label_28:
+chaos_label_19:
 	return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 }
 
@@ -8920,16 +8901,12 @@ extern "C" void SnapshotTestFixtures_MarkedClass__ctor(CHAOS_IL2CPP_INTPTR chaos
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MathHelper_RunSquare(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_arg_0 = _s0;
 		auto& _d42 = s_hotpatch_entries[42];
@@ -8949,8 +8926,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MathHelper_RunSquare(void)
 		}
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -9092,7 +9067,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_MyClass_GetValue(CHAOS_IL2CPP
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_NegShiftHelper_RunNegShift(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -9100,28 +9075,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_NegShiftHelper_RunNegShift(vo
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_right_int32(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[1];
-	_s1 = chaos_locals[3];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32));
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_right_int32(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[4] = _s0;
-	_s0 = chaos_locals[4];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -9623,7 +9586,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_OverflowUnHelper_RunOverflowS
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single(float chaos_fn_arg_0)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -9633,22 +9596,13 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_RareOpsHelper_TestConvRUn_Sys
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
 	chaos_args[0] = ChaosStoreFloat32(chaos_fn_arg_0);
 
 	_s0 = chaos_args[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(_s0));
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s0 = ChaosStoreFloat32(static_cast<float>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0)));
 	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s0)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -9883,7 +9837,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SealedHelper_GetValueVirtual(
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ShiftHelper_RunShift(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -9893,25 +9847,19 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ShiftHelper_RunShift(void)
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_left_int32(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_left_int32(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+	chaos_locals[0] = _s1;
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_right_int32(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[1];
-	_s1 = chaos_locals[2];
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = chaos_locals[1];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[3] = _s0;
-	_s0 = chaos_locals[3];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -9919,22 +9867,16 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ShiftHelper_RunShift(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunConvI(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10035,24 +9977,28 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUU
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunConvU4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/SimpleGapsHelper::RunLdnull()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunLdnull(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
+	_s0 = 0;
+	_s1 = 0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// AOT-unreachable stub: SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SimpleGapsHelper_RunLdnull(void)
-{
-	return {};
 }
 
 // Managed method: SnapshotTestFixtures/SizeOfHelper::GetSize()
@@ -10061,12 +10007,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SizeOfHelper_GetSize(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10077,7 +10020,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StaticFieldWriteHelper_WriteA
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -10086,8 +10028,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StaticFieldWriteHelper_WriteA
 		chaos_static_SnapshotTestFixtures_StaticFieldWriteHelper___writeTarget = chaos_value;
 	}
 	_s0 = chaos_static_SnapshotTestFixtures_StaticFieldWriteHelper___readTarget;
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10095,7 +10035,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StaticFieldWriteHelper_WriteA
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -10111,7 +10051,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 	CHAOS_IL2CPP_INTPTR _s12{};
 	CHAOS_IL2CPP_INTPTR _s13{};
 	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
@@ -10183,8 +10122,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		_s1 = chaos_element;
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10192,7 +10129,124 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int16.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	chaos_locals[0] = _s1;
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	{
+		auto chaos_value_raw = _s3;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s1 = chaos_locals[0];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	{
+		auto chaos_value_raw = _s3;
+		const auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s0 = chaos_element;
+	}
+	_s1 = chaos_locals[0];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s1 = chaos_element;
+	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+}
+
+// Managed method: SnapshotTestFixtures/StindWideHelper::RunStindWide()
+extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindWideHelper_RunStindWide(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -10211,6 +10265,19 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+	CHAOS_IL2CPP_INTPTR _s27{};
+	CHAOS_IL2CPP_INTPTR _s28{};
+	CHAOS_IL2CPP_INTPTR _s29{};
+	CHAOS_IL2CPP_INTPTR _s30{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -10223,15 +10290,14 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 		chaos_array->element_type_shape = 1;
-		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Single.hot;
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		if (chaos_length < 0)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -10239,20 +10305,36 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 		chaos_array->element_type_shape = 1;
-		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int16.hot;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Double.hot;
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	chaos_locals[0] = _s1;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 	{
-		auto chaos_value_raw = _s2;
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	chaos_locals[1] = _s1;
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = ChaosStoreFloat32(3.5f);
+	{
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL();
@@ -10263,25 +10345,52 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		}
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[1];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+	_s1 = chaos_locals[0];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s3 = ChaosStoreFloat64(7.2);
 	{
-		auto chaos_value_raw = _s2;
+		auto chaos_value_raw = _s3;
 		const auto chaos_value = chaos_value_raw;
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
 		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s0 = chaos_locals[0];
+	_s1 = chaos_locals[1];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{{
+		_s3 = CHAOS_IL2CPP_STRING_ID("hi");
+	}}
+	{
+		auto chaos_value_raw = _s3;
+		if (chaos_is_string_id(chaos_value_raw))
+		{
+			chaos_value_raw = chaos_string_materialize(chaos_value_raw);
+		}
+		auto chaos_value = chaos_value_raw;
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+		GC_END_STUBBORN_CHANGE(chaos_array);
+		chaos_gc_dirty_card(chaos_array);
+	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
 		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+		if (chaos_array == nullptr)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s0 = chaos_element;
 	}
-	_s1 = chaos_locals[1];
+	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
+	_s1 = chaos_locals[0];
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
@@ -10297,16 +10406,20 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindNarrowHelper_RunStindNar
 		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 		_s1 = chaos_element;
 	}
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(ChaosLoadFloat64(_s0), ChaosLoadFloat64(_s1)));
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+	_s1 = chaos_locals[1];
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+		const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		_s1 = chaos_element;
+	}
+	_s2 = 0;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s2) ? 1 : 0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// AOT-unreachable stub: SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StindWideHelper_RunStindWide(void)
-{
-	return {};
 }
 
 // Managed method: SnapshotTestFixtures/StringConcatHelper::TestConcat()
@@ -10316,7 +10429,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringConcatHelper_TestConcat
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
 
 
 	{{
@@ -10340,8 +10452,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringConcatHelper_TestConcat
 		}
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10356,7 +10466,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringFormatHelper_TestFormat
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
 
 
 	{{
@@ -10377,8 +10486,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringFormatHelper_TestFormat
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10389,7 +10496,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
 
 
 	{{
@@ -10413,8 +10519,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void)
 		}
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10422,78 +10526,58 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StringOps_UseString(void)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_SwitchHelper_Classify(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_eval_stack{};
 	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
 
 
-chaos_label_1:
+chaos_label_0:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-chaos_label_2:
+chaos_label_1:
 	chaos_locals[0] = chaos_eval_stack[--chaos_stack_top];
+chaos_label_2:
+	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
 chaos_label_3:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 chaos_label_4:
-	if (chaos_eval_stack[--chaos_stack_top] != 0)
-		goto chaos_label_7;
+	{
+		const auto chaos_right = chaos_eval_stack[--chaos_stack_top];
+		const auto chaos_left = chaos_eval_stack[--chaos_stack_top];
+		if (chaos_left == chaos_right)
+			goto chaos_label_12;
+	}
+chaos_label_6:
+	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
 chaos_label_7:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-chaos_label_8:
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-chaos_label_9:
-	{
-		const auto chaos_right = chaos_eval_stack[--chaos_stack_top];
-		const auto chaos_left = chaos_eval_stack[--chaos_stack_top];
-		if (chaos_left == chaos_right)
-			goto chaos_label_19;
-	}
-chaos_label_11:
-	goto chaos_label_13;
-chaos_label_13:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[0];
-chaos_label_14:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(2);
-chaos_label_15:
+chaos_label_8:
 	{
 		const auto chaos_right = chaos_eval_stack[--chaos_stack_top];
 		const auto chaos_left = chaos_eval_stack[--chaos_stack_top];
 		if (chaos_left == chaos_right)
-			goto chaos_label_24;
+			goto chaos_label_17;
 	}
-chaos_label_17:
-	goto chaos_label_29;
-chaos_label_19:
+chaos_label_10:
+	goto chaos_label_22;
+chaos_label_12:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(10);
-chaos_label_21:
+chaos_label_14:
 	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_22:
-	goto chaos_label_33;
-chaos_label_24:
+chaos_label_15:
+	goto chaos_label_24;
+chaos_label_17:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(20);
-chaos_label_26:
+chaos_label_19:
 	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_27:
-	goto chaos_label_33;
-chaos_label_29:
+chaos_label_20:
+	goto chaos_label_24;
+chaos_label_22:
 	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-chaos_label_30:
+chaos_label_23:
 	chaos_locals[1] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_31:
-	goto chaos_label_33;
-chaos_label_33:
-	chaos_eval_stack[chaos_stack_top++] = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-chaos_label_34:
-	if (chaos_eval_stack[--chaos_stack_top] != 0)
-		goto chaos_label_37;
-chaos_label_37:
+chaos_label_24:
 	chaos_eval_stack[chaos_stack_top++] = chaos_locals[1];
-chaos_label_38:
-	chaos_locals[2] = chaos_eval_stack[--chaos_stack_top];
-chaos_label_39:
-	goto chaos_label_41;
-chaos_label_41:
-	chaos_eval_stack[chaos_stack_top++] = chaos_locals[2];
-chaos_label_42:
+chaos_label_25:
 	return static_cast<CHAOS_IL2CPP_INT32>(chaos_eval_stack[--chaos_stack_top]);
 }
 
@@ -10509,17 +10593,40 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_TargetHelper_GetValue(void)
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)
+// Managed method: SnapshotTestFixtures/ThrowHelper::CheckPositive(System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	{
+		const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_left < chaos_right)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+			return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		}
+		else
+		{
+			_s0 = chaos_args[0];
+			return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		}
+	}
 }
 
 // Managed method: SnapshotTestFixtures/TypeCheckHelper::CheckAndCast()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_TypeCheckHelper_CheckAndCast(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -10528,11 +10635,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_TypeCheckHelper_CheckAndCast(
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	{
@@ -10551,27 +10653,23 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_TypeCheckHelper_CheckAndCast(
 		}
 		_s0 = chaos_matches ? chaos_value : 0;
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	_s1 = 0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
 	{
 		if (_s0 == 0)
 		{
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
-			chaos_locals[3] = _s0;
+			return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		}
 		else
 		{
-			_s0 = chaos_locals[1];
+			_s0 = chaos_locals[0];
 			{
 				auto* chaos_object = reinterpret_cast<chaos_type_SnapshotTestFixtures_MarkedClass*>(_s0);
 				_s0 = chaos_object->field_SnapshotTestFixtures_MarkedClass__Value;
 			}
-			chaos_locals[3] = _s0;
+			return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		}
-		_s0 = chaos_locals[3];
-		return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 	}
 }
 
@@ -10587,34 +10685,53 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnboxHelper_RunUnbox(void)
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)
+// Managed method: SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite(System.Double)
 extern "C" double SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double(double chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	chaos_args[0] = ChaosStoreFloat64(chaos_fn_arg_0);
+
+	_s0 = chaos_args[0];
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s0 != 0)
+		{
+			_s0 = chaos_args[0];
+			return ChaosLoadFloat64(_s0);
+		}
+		else
+		{
+			_s0 = ChaosStoreFloat64(0);
+			return ChaosLoadFloat64(_s0);
+		}
+	}
 }
 
 // Managed method: SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn()
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10622,24 +10739,18 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn(v
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosDiv(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10647,24 +10758,18 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn(v
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[0];
-	_s1 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	chaos_locals[0] = _s1;
+	_s1 = chaos_locals[0];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosRem(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[2] = _s0;
-	_s0 = chaos_locals[2];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10672,7 +10777,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn(v
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ValueTypeHelper_RunValueType(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -10685,7 +10790,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ValueTypeHelper_RunValueType(
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
@@ -10734,8 +10838,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ValueTypeHelper_RunValueType(
 		_s1 = chaos_value->field_SnapshotTestFixtures_MyValueType__Y;
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10743,11 +10845,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ValueTypeHelper_RunValueType(
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	{
@@ -10756,8 +10856,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualDispatchHelper_UseVirt
 		SnapshotTestFixtures_DerivedClass__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
@@ -10769,8 +10867,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualDispatchHelper_UseVirt
 		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10778,11 +10874,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualDispatchHelper_UseVirt
 extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualHelper_UseVirtual(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	{
@@ -10791,8 +10885,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualHelper_UseVirtual(void
 		SnapshotTestFixtures_DerivedClass__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	{
 		const auto chaos_raw_arg_0 = _s0;
 		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
@@ -10804,8 +10896,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VirtualHelper_UseVirtual(void
 		chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 	}
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -10815,7 +10905,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VoidCaller_DoNothing(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 
 
 	{
@@ -10832,8 +10921,6 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_VoidCaller_DoNothing(void)
 		}
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 

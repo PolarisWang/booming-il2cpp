@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "InterfaceDispatchSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "InterfaceDispatchSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "836c38a4-81f6-440a-81eb-9cb758513734",
+  "inputModuleVersionId": "0db2b3a8-8fa1-4752-a418-6c3497e15837",
   "artifacts": [
     {
       "kind": "typedIlIr",

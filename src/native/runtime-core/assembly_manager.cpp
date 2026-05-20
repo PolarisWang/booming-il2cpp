@@ -10,6 +10,8 @@
 #include "memory_domain.h"        // memory_domain::{RegisterMemoryDomain, DomainScope, ...}
 #include "metadata_interface.h"   // ModuleLifecycleManager
 
+#include "gc_static_roots.h"
+
 #include <mutex>
 
 namespace chaos::il2cpp::runtime_core {
@@ -118,6 +120,12 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
         return nullptr;
     }
 
+    // Register static field range as a GC root.
+    {
+        size_t field_bytes = sizeof(interpreter::InterpreterValue) * kDefaultStaticFieldCount;
+        GcRegisterStaticRootRange(static_fields, field_bytes, domain_id);
+    }
+
     // 5. Register generic instantiations — the generic context data
     //    is embedded in the .patchdata's metadata and was already
     //    processed by ApplyPatchFromMemory.  ModuleLifecycleManager
@@ -201,7 +209,12 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
         alc->generics_registered = false;
     }
 
-    // 4. Destroy the memory domain (safe stop-the-world teardown).
+    // 4. Unregister static root ranges before destroying domain memory.
+    if (alc->domain_id != 0) {
+        GcUnregisterDomainStaticRoots(alc->domain_id);
+    }
+
+    // 5. Destroy the memory domain (safe stop-the-world teardown).
     //    UnloadDomain handles:
     //      - Safepoint request
     //      - Cross-domain reference scan + clear
@@ -214,7 +227,7 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
         alc->domain_id = 0;
     }
 
-    // 5. Clear the descriptor.
+    // 6. Clear the descriptor.
     alc->alc_id                 = 0;
     alc->module_id              = 0;
     alc->name.clear();

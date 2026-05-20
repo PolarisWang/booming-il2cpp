@@ -239,7 +239,7 @@ internal static class EnumMetadataExtractor
             sb.AppendLine($"        ChaosRegisterExternalType(");
             sb.AppendLine($"            compute_enum_hash24(\"{EscapeCppString(et.SubjectId)}\"),");
             sb.AppendLine($"            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(");
-            sb.AppendLine($"                &kEnumTypeDesc_{kv.Value}));");
+            sb.AppendLine($"                &chaos::il2cpp::codegen::kEnumTypeDesc_{kv.Value}));");
         }
 
         sb.AppendLine();

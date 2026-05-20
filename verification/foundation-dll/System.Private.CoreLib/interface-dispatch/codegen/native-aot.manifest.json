@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "InterfaceDispatchSubjects",
   "entrySubjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/interface-dispatch/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/interface-dispatch/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
