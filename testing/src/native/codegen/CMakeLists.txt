@@ -26,3 +26,29 @@ target_compile_definitions(test_codegen_native PRIVATE
     CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
 )
 set_tests_properties(test_codegen_native PROPERTIES TIMEOUT 120)
+
+# B-1 — Codegen IL smoke test
+# Tests basic IL opcode sequences through the codegen pipeline.
+# gc_test_stubs.cpp provides stubs for external symbols (aot_hotpatch_module,
+# kChaosExternalRuntime*) normally supplied by codegen output.
+add_chaos_test(test_codegen_il_smoke
+    codegen_il_smoke_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+)
+target_compile_definitions(test_codegen_il_smoke PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
+
+# B-1 — Codegen ABI contract test
+# Verifies codegen_bridge.h struct layouts, constants, and helpers.
+# gc_test_stubs.cpp provides stubs for external symbols normally supplied
+# by codegen output (needed because bootstrap.lib references them).
+add_chaos_test(test_codegen_abi
+    codegen_abi_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+)
+target_compile_definitions(test_codegen_abi PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
