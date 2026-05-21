@@ -1,9 +1,0 @@
-{
-  "BaseMethodsCount": 21,
-  "AppliedMethodsCount": 21,
-  "BloatRatio": 1,
-  "Strategy": "MethodLevel",
-  "AssemblyName": "StringCharTextCoreSubjects",
-  "ExtraMethodsFromVTable": 0,
-  "ExtraMethodsFromTypeLevel": 0
-}
