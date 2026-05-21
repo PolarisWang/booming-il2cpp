@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.PatchDataExtractor">
+<CoverageReport scope="Chaos.IL2CPP.Generator.PatchDataExtractor">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.PatchDataExtractor</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Class>Chaos.IL2CPP.Generator.PatchDataExtractor</Class>
+    <Assembly>Chaos.IL2CPP.Generator</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\PatchDataExtractor.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\PatchDataExtractor.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>499</Uncoveredlines>
@@ -227,7 +227,7 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\PatchDataExtractor.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\PatchDataExtractor.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection.Metadata;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection.Metadata.Ecma335;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection.PortableExecutable;" />
@@ -235,7 +235,7 @@
       <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text;" />
       <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text.Json;" />
       <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
       <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Build-time tool: reads a patch assembly's PE metadata and produces a" />

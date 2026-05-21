@@ -4,7 +4,7 @@ if (-not $xmlFile) { Write-Host "No coverage file found"; exit 1 }
 $xml = [xml](Get-Content $xmlFile.FullName)
 $totalCovered = 0; $totalLines = 0
 foreach($pkg in $xml.coverage.packages.package) {
-    if($pkg.name -like '*Chaos.IL2CPP.CodeGen*' -and $pkg.name -notlike '*Tests*') {
+    if($pkg.name -like '*Chaos.IL2CPP.Generator*' -and $pkg.name -notlike '*Tests*') {
         $pkgCovered = 0; $pkgLines = 0
         foreach($cls in $pkg.classes.class) {
             foreach($line in $cls.lines.line) {

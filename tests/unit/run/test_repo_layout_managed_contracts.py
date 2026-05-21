@@ -103,9 +103,9 @@ class RepoLayoutManagedContractsTests(RepoLayoutTestSupport):
         self.assertGreater(len(list(shard_dir.glob("commands.*.json"))), 0)
 
     def test_managed_codegen_uses_lowering_subdirectory(self) -> None:
-        codegen_root = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+        codegen_root = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator"
         lowering_root = codegen_root / "Lowering"
-        self.assertTrue(lowering_root.is_dir(), msg="CodeGen/Lowering/ subdirectory must exist")
+        self.assertTrue(lowering_root.is_dir(), msg="Generator/Lowering/ subdirectory must exist")
 
     def test_managed_loader_uses_metadata_subdirectory(self) -> None:
         loader_root = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader"

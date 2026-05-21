@@ -9,7 +9,7 @@ class TestInterpreterMixedExecutionIr(InterpreterMixedExecutionTestSupport):
             ["Chaos.IL2CPP.Contracts", "Chaos.IL2CPP.HotUpdate"],
             parse_project_references(INTERPRETER_PROJECT_PATH),
         )
-        self.assertNotIn("Chaos.IL2CPP.CodeGen", parse_project_references(INTERPRETER_PROJECT_PATH))
+        self.assertNotIn("Chaos.IL2CPP.Generator", parse_project_references(INTERPRETER_PROJECT_PATH))
 
     def test_interpreter_ir_surface_defines_methods_blocks_instructions_and_opcode_catalog(self) -> None:
         ir_source = INTERPRETER_IR_PATH.read_text(encoding="utf-8")

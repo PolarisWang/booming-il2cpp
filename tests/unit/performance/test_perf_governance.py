@@ -13,7 +13,7 @@ INTERFACE_DISPATCH_TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Templates"
     / "NativeReferenceProof.InterfaceDispatchMessage.cpp.scriban"
 )

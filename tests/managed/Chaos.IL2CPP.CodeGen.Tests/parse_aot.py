@@ -3,7 +3,7 @@ import sys
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
 
 for cls in pkg.findall('.//class'):
     fn = cls.get('filename', '')

@@ -20,10 +20,10 @@ import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-INVOCATION_ABI_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "RuntimeSupport" / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs"
+INVOCATION_ABI_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "RuntimeSupport" / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs"
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "TypedIlAndAotCoreIrContracts.cs"
 ABI_MANIFEST_H_PATH = REPO_ROOT / "contracts" / "native" / "v0" / "abi_manifest.h"
-MODULE_REGISTRATION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.ModuleRegistration.cs"
+MODULE_REGISTRATION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Emission" / "NativeAotLoweringPlanner.ModuleRegistration.cs"
 
 # All 15 carriers with their expected enum names and values
 EXPECTED_CARRIERS: dict[str, int] = {

@@ -72,6 +72,8 @@ struct Region {
     } gc_state;
 
     Region*         next;           // free-list / GC work-set link
+    Region*         poh_next;       // POH region linked list (O(1) iteration)
+
 };
 
 // ── Forward declarations ──────────────────────────────────────
@@ -375,6 +377,9 @@ private:
 
     Region* free_list_ = nullptr;         // recycled regions
     int free_list_size_ = 0;             // current free list length (for trimming)
+
+    Region* poh_region_list_ = nullptr;  // head of POH singly-linked list (O(1) iteration)
+    int poh_region_count_ = 0;           // number of regions in POH list
 
     std::atomic<CHAOS_IL2CPP_UINT64> total_allocated_bytes_{0};
 

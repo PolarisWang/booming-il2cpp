@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonSemanticRegistry">
+<CoverageReport scope="Chaos.IL2CPP.Generator.RuntimeSkeletonSemanticRegistry">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonSemanticRegistry</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Class>Chaos.IL2CPP.Generator.RuntimeSkeletonSemanticRegistry</Class>
+    <Assembly>Chaos.IL2CPP.Generator</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonSemanticRegistry.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\ReferenceProof\RuntimeSkeletonSemanticRegistry.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>282</Uncoveredlines>
@@ -41,8 +41,8 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonSemanticRegistry.cs">
-      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\ReferenceProof\RuntimeSkeletonSemanticRegistry.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal enum RuntimeSkeletonExecutionBackendKind" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

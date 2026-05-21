@@ -94,7 +94,7 @@ def read_linker_stage_source(repo_root: Path = REPO_ROOT) -> str:
 
 
 def read_native_reference_planner_source(repo_root: Path = REPO_ROOT) -> str:
-    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.Generator"
     reference_root = codegen_root / "ReferenceProof"
     return read_text_bundle(
         codegen_root / "NativeReferenceLoweringPlanner.cs",
@@ -105,7 +105,7 @@ def read_native_reference_planner_source(repo_root: Path = REPO_ROOT) -> str:
 
 
 def read_native_aot_planner_source(repo_root: Path = REPO_ROOT) -> str:
-    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.Generator"
     planner_parts = [
         codegen_root / "NativeAotLoweringPlanner.cs",
         *sorted((codegen_root / "Planning").glob("NativeAotLoweringPlanner*.cs")),

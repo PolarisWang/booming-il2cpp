@@ -442,7 +442,7 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             "Chaos.IL2CPP.Loader",
             "Chaos.IL2CPP.SemanticWorld",
             "Chaos.IL2CPP.MetadataWriter",
-            "Chaos.IL2CPP.CodeGen",
+            "Chaos.IL2CPP.Generator",
             "Chaos.IL2CPP.Linker",
             "Chaos.IL2CPP.Pipeline",
             "Chaos.IL2CPP.Driver",

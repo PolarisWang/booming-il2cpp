@@ -1,9 +1,9 @@
-using Chaos.IL2CPP.CodeGen;
-using Chaos.IL2CPP.CodeGen.BuildSystem;
+using Chaos.IL2CPP.Generator;
+using Chaos.IL2CPP.Generator.BuildSystem;
 using Chaos.IL2CPP.Contracts;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 public sealed class CmakeGeneratorTests
 {

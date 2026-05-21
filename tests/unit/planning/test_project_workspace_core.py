@@ -66,7 +66,7 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
                 "managedSolutionPath": "verification/workspaces/core/windows/chaos-il2cpp-core.sln",
                 "managedProjects": [
                     "src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj",
-                    "src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj",
+                    "src/managed/Chaos.IL2CPP.Generator/Chaos.IL2CPP.Generator.csproj",
                 ],
                 "nativeTargets": [
                     {

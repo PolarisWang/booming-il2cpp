@@ -1,7 +1,7 @@
-using Chaos.IL2CPP.CodeGen.Tests.Infra;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 /// <summary>
 /// Verifies that the test infrastructure itself works: planner accepts minimal

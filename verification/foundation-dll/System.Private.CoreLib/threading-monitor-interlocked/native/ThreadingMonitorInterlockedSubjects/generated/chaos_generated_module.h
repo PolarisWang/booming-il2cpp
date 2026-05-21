@@ -79,6 +79,17 @@ struct Functions {
                 void
         );
     } threadingMonitorInterlockedSubjects;
+    struct ThreadingMonitorInterlockedSubjects___c_t {
+        void (*cctor)(
+                void
+        );
+        void (*ctor)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT32 (*<Subject_13>b__4_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+    } threadingMonitorInterlockedSubjects___c;
     int32_t method_count;
 };
 
@@ -170,6 +181,30 @@ struct ThreadingMonitorInterlockedSubjects {
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 14;
+};
+
+struct ThreadingMonitorInterlockedSubjects___c {
+    static inline void cctor(
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects___c.cctor(
+        );
+    }
+    static inline void ctor(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects___c.ctor(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT32 <Subject_13>b__4_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.threadingMonitorInterlockedSubjects___c.<Subject_13>b__4_0(
+                    arg_0
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 3;
 };
 
 

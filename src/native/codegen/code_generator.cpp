@@ -43,8 +43,9 @@ static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize; // 800
 static constexpr uint32_t kFrameSize    = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);  // 864 bytes
 
 // LocAlloc reserve: bump counter + scratch region
-static constexpr uint32_t kLocAllocReserveSize = 4096;
-static constexpr uint32_t kLocAllocBumpAndReserve = 8 + kLocAllocReserveSize;  // 4008 bytes
+static constexpr uint32_t kLocAllocReserveSize   = 4096;
+static constexpr uint32_t kLocAllocBumpAndReserve = 8 + kLocAllocReserveSize;  // 4104
+static constexpr uint32_t kMaxTlabInlineSize = 2048;  // max bytes per TLAB inline allocation
 
 // Helper: RSP offset for a virtual GPR.
 inline uint32_t GprOff(uint32_t vreg) noexcept {
@@ -204,7 +205,7 @@ private:
     void EmitShift(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept;
     void ResolveBranches() noexcept;
     bool EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept;
-    void EmitDeoptSequence(uint32_t instr_pc) noexcept;
+    void EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
     void DumpCode() noexcept;
     void RecordGcPoint(uint32_t native_offset) noexcept;
 };
@@ -475,26 +476,41 @@ void NativeCodeGenerator::PropagateTypes(
 void NativeCodeGenerator::EmitGprArithmetic(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitGprArithmetic");
-    LoadGpr(kRAX, src1);
-    if (src2 != UINT32_MAX) LoadGpr(kRCX, src2);
+    // Div/Rem have implicit eax/edx/ecx register requirements.
+    bool has_implicit = (opc == IROpCode::Div || opc == IROpCode::Rem ||
+                         opc == IROpCode::DivUn || opc == IROpCode::RemUn);
+    uint8_t op_reg = kRAX;
+    uint8_t src2_reg = kRCX;
+    if (has_graph_coloring_ && !has_implicit) {
+        if (dst < interpreter::kGPRegisters) {
+            uint8_t c = gcr_.gpr_color[dst];
+            if (c != 0xFF) op_reg = c;
+        }
+        if (src2 != UINT32_MAX && src2 < interpreter::kGPRegisters) {
+            uint8_t c = gcr_.gpr_color[src2];
+            if (c != 0xFF) src2_reg = c;
+        }
+    }
+    LoadGpr(op_reg, src1);
+    if (src2 != UINT32_MAX) LoadGpr(src2_reg, src2);
     if (opc == IROpCode::Add) {
-        EmitAdd32RR(buf_, kRAX, kRCX);
+        EmitAdd32RR(buf_, op_reg, src2_reg);
     } else if (opc == IROpCode::Sub) {
-        EmitSub32RR(buf_, kRAX, kRCX);
+        EmitSub32RR(buf_, op_reg, src2_reg);
     } else if (opc == IROpCode::Mul) {
-        EmitImul32RR(buf_, kRAX, kRCX);
+        EmitImul32RR(buf_, op_reg, src2_reg);
     } else if (opc == IROpCode::Neg) {
-        EmitNeg32(buf_, kRAX);
+        EmitNeg32(buf_, op_reg);
     } else if (opc == IROpCode::Div || opc == IROpCode::Rem) {
         EmitREXB(buf_, false, 0); buf_.EmitByte(0x99);  // cdq: sign-extend eax→edx:eax
         EmitREX(buf_, false, 7, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 7, kRCX));  // idiv ecx
-        if (opc == IROpCode::Rem) EmitMovRR(buf_, kRAX, kRDX);
+        if (opc == IROpCode::Rem) EmitMovRR(buf_, op_reg, kRDX);
     } else if (opc == IROpCode::DivUn || opc == IROpCode::RemUn) {
         EmitXor32ZR(buf_, kRDX);  // xor edx, edx
         EmitREX(buf_, false, 6, kRCX); buf_.EmitByte(0xF7); buf_.EmitByte(ModRM(3, 6, kRCX));  // div ecx
-        if (opc == IROpCode::RemUn) EmitMovRR(buf_, kRAX, kRDX);
+        if (opc == IROpCode::RemUn) EmitMovRR(buf_, op_reg, kRDX);
     }
-    StoreGpr(kRAX, dst);
+    StoreGpr(op_reg, dst);
 }
 
 void NativeCodeGenerator::EmitFprArithmetic(
@@ -527,12 +543,24 @@ void NativeCodeGenerator::EmitFprArithmetic(
 void NativeCodeGenerator::EmitBitwise(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitBitwise");
-    LoadGpr(kRAX, src1);
-    if (opc == IROpCode::Not) EmitNot32(buf_, kRAX);
-    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitAnd32RR(buf_, kRAX, kRCX); } }
-    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitOr32RR(buf_, kRAX, kRCX); } }
-    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX) { LoadGpr(kRCX, src2); EmitXor32RR(buf_, kRAX, kRCX); } }
-    StoreGpr(kRAX, dst);
+    uint8_t op_reg = kRAX;
+    uint8_t src2_reg = kRCX;
+    if (has_graph_coloring_) {
+        if (dst < interpreter::kGPRegisters) {
+            uint8_t c = gcr_.gpr_color[dst];
+            if (c != 0xFF) op_reg = c;
+        }
+        if (src2 != UINT32_MAX && src2 < interpreter::kGPRegisters) {
+            uint8_t c = gcr_.gpr_color[src2];
+            if (c != 0xFF) src2_reg = c;
+        }
+    }
+    LoadGpr(op_reg, src1);
+    if (opc == IROpCode::Not) EmitNot32(buf_, op_reg);
+    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); EmitAnd32RR(buf_, op_reg, src2_reg); } }
+    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); EmitOr32RR(buf_, op_reg, src2_reg); } }
+    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); EmitXor32RR(buf_, op_reg, src2_reg); } }
+    StoreGpr(op_reg, dst);
 }
 
 // ── Shift with proper 32-bit semantics ─────────────────────────────────
@@ -543,33 +571,35 @@ void NativeCodeGenerator::EmitBitwise(
 void NativeCodeGenerator::EmitShift(
     IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2, int32_t imm) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitShift");
-    LoadGpr(kRAX, src1);
+    // For variable shifts (src2 present), shift count must be in CL (kRCX),
+    // but the destination can be any register. For immediate shifts, any GPR works.
+    uint8_t op_reg = kRAX;
+    if (has_graph_coloring_ && dst < interpreter::kGPRegisters) {
+        uint8_t c = gcr_.gpr_color[dst];
+        if (c != 0xFF) op_reg = c;
+    }
+    LoadGpr(op_reg, src1);
     if (src2 != UINT32_MAX) {
         LoadGpr(kRCX, src2);
+        EmitREXB(buf_, false, op_reg);  // REX.B for extended destination register
         if (opc == IROpCode::Shl) {
-            // shl eax, cl (32-bit, zero-extends to 64-bit)
-            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 4, kRAX));
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 4, op_reg));
         } else if (opc == IROpCode::Shr) {
-            // sar eax, cl (32-bit arithmetic shift, zero-extends to 64-bit)
-            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 7, kRAX));
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 7, op_reg));
         } else if (opc == IROpCode::ShrUn) {
-            // shr eax, cl (32-bit logical shift, zero-extends to 64-bit)
-            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 5, kRAX));
+            buf_.EmitByte(0xD3); buf_.EmitByte(ModRM(3, 5, op_reg));
         }
     } else {
-        uint8_t shift = static_cast<uint8_t>(imm & 0x1F);  // 32-bit mask (not 64-bit 0x3F)
+        uint8_t shift = static_cast<uint8_t>(imm & 0x1F);
         if (opc == IROpCode::Shl) {
-            // shl eax, imm (32-bit)
-            EmitREX(buf_, false, 4, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 4, kRAX)); buf_.EmitByte(shift);
+            EmitREX(buf_, false, 4, op_reg); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 4, op_reg)); buf_.EmitByte(shift);
         } else if (opc == IROpCode::Shr) {
-            // sar eax, imm (32-bit)
-            EmitREX(buf_, false, 7, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 7, kRAX)); buf_.EmitByte(shift);
+            EmitREX(buf_, false, 7, op_reg); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 7, op_reg)); buf_.EmitByte(shift);
         } else if (opc == IROpCode::ShrUn) {
-            // shr eax, imm (32-bit)
-            EmitREX(buf_, false, 5, kRAX); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 5, kRAX)); buf_.EmitByte(shift);
+            EmitREX(buf_, false, 5, op_reg); buf_.EmitByte(0xC1); buf_.EmitByte(ModRM(3, 5, op_reg)); buf_.EmitByte(shift);
         }
     }
-    StoreGpr(kRAX, dst);
+    StoreGpr(op_reg, dst);
 }
 
 void NativeCodeGenerator::ResolveBranches() noexcept {
@@ -598,7 +628,7 @@ void NativeCodeGenerator::ResolveBranches() noexcept {
     }
 }
 
-void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc) noexcept {
+void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitDeoptSequence");
     uint32_t deopt_pos = buf_.pos();
     if (config_.enable_deopt) {
@@ -629,6 +659,7 @@ void NativeCodeGenerator::EmitDeoptSequence(uint32_t instr_pc) noexcept {
         DeoptEntry entry;
         entry.native_offset = deopt_pos;
         entry.instr_pc      = instr_pc;
+        entry.osr_resume_pc = osr_resume_pc;
         entry.num_values    = n_vals;
         entry.values_offset = val_start;
         deopt_entries_.push_back(entry);
@@ -893,28 +924,57 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::AddOvf: case IROpCode::SubOvf: case IROpCode::MulOvf: {
         if (!instr.has_src1() || !instr.has_dst()) return false;
-        LoadGpr(kRAX, instr.src1_reg());
-        if (instr.has_src2()) LoadGpr(kRCX, instr.src2_reg());
-        // Use 32-bit operations (eax/ecx) so x64 OF flag reflects 32-bit
+        uint8_t op_reg = kRAX;
+        uint8_t src2_reg = kRCX;
+        if (has_graph_coloring_) {
+            if (instr.dst_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.dst_reg()];
+                if (c != 0xFF) op_reg = c;
+            }
+            if (instr.has_src2() && instr.src2_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src2_reg()];
+                if (c != 0xFF) src2_reg = c;
+            }
+        }
+        LoadGpr(op_reg, instr.src1_reg());
+        if (instr.has_src2()) LoadGpr(src2_reg, instr.src2_reg());
+        // Use 32-bit operations so x64 OF flag reflects 32-bit
         // signed overflow, matching IL add.ovf/sub.ovf/mul.ovf semantics.
         if (opc == IROpCode::AddOvf) {
-            buf_.EmitByte(0x03); buf_.EmitByte(0xC1);  // add eax, ecx
+            EmitREX(buf_, false, op_reg, src2_reg);
+            buf_.EmitByte(0x03); buf_.EmitByte(ModRM(3, op_reg, src2_reg));
         } else if (opc == IROpCode::SubOvf) {
-            buf_.EmitByte(0x2B); buf_.EmitByte(0xC1);  // sub eax, ecx
+            EmitREX(buf_, false, op_reg, src2_reg);
+            buf_.EmitByte(0x2B); buf_.EmitByte(ModRM(3, op_reg, src2_reg));
         } else {
-            buf_.EmitByte(0x0F); buf_.EmitByte(0xAF); buf_.EmitByte(0xC1);  // imul eax, ecx
+            EmitREX(buf_, false, op_reg, src2_reg);
+            buf_.EmitByte(0x0F); buf_.EmitByte(0xAF); buf_.EmitByte(ModRM(3, op_reg, src2_reg));
         }
         {
             uint32_t jno_pos = buf_.pos();
             EmitJccRel32(buf_, kCC_NO, 0);
-            EmitDeoptSequence(current_instr_index_);
+            // Find the nearest backward branch target (loop header) for OSR
+            // resume on overflow deoptimization.  Scanning backward from the
+            // current instruction, the first backward branch found is the
+            // nearest back-edge; its target is the loop header to resume at.
+            uint32_t osr_pc = 0;
+            for (uint32_t si = current_instr_index_; si > 0; --si) {
+                uint32_t scan_idx = si - 1;
+                const auto& scan_instr = rm_.instructions[scan_idx];
+                if (scan_instr.is_branch() &&
+                    scan_instr.imm.branch_target < scan_idx) {
+                    osr_pc = scan_instr.imm.branch_target;
+                    break;
+                }
+            }
+            EmitDeoptSequence(current_instr_index_, osr_pc);
             uint32_t no_overflow = buf_.pos();
             // JccRel32 is 6 bytes: 0F 8x + 4-byte offset at jno_pos+2.
             // Displacement is from end of instruction (jno_pos + 6).
             int32_t disp = static_cast<int32_t>(no_overflow - (jno_pos + 6));
             buf_.Patch32(jno_pos + 2, static_cast<uint32_t>(disp));
         }
-        StoreGpr(kRAX, instr.dst_reg());
+        StoreGpr(op_reg, instr.dst_reg());
         return true;
     }
 
@@ -948,8 +1008,20 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::BltUn: case IROpCode::BgtUn:
     case IROpCode::BleUn: case IROpCode::BgeUn: {
         if (!instr.has_src1() || !instr.has_src2()) return false;
-        LoadGpr(kRAX, instr.src1_reg()); LoadGpr(kRCX, instr.src2_reg());
-        EmitCmpRR(buf_, kRAX, kRCX);
+        uint8_t cmp_a = kRAX, cmp_b = kRCX;
+        if (has_graph_coloring_) {
+            if (instr.src1_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src1_reg()];
+                if (c != 0xFF) cmp_a = c;
+            }
+            if (instr.src2_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src2_reg()];
+                if (c != 0xFF) cmp_b = c;
+            }
+            if (cmp_a == cmp_b) cmp_b = (cmp_a == kRAX) ? kRCX : kRAX;
+        }
+        LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
+        EmitCmpRR(buf_, cmp_a, cmp_b);
         uint8_t jcc = CmpToJccSigned(instr.op_code());
         uint32_t patch_off = buf_.pos() + 2;
         EmitJccRel32(buf_, jcc, 0);
@@ -961,8 +1033,13 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (!instr.has_src1()) return false;
         uint32_t target = instr.imm.branch_target;
         if (target < current_instr_index_) EmitSafepointPoll();
-        LoadGpr(kRAX, instr.src1_reg());
-        EmitTestRR(buf_, kRAX, kRAX);
+        uint8_t test_reg = kRAX;
+        if (has_graph_coloring_ && instr.src1_reg() < interpreter::kGPRegisters) {
+            uint8_t c = gcr_.gpr_color[instr.src1_reg()];
+            if (c != 0xFF) test_reg = c;
+        }
+        LoadGpr(test_reg, instr.src1_reg());
+        EmitTestRR(buf_, test_reg, test_reg);
         uint8_t jcc = (instr.op_code() == IROpCode::BrTrue) ? kCC_NE : kCC_E;
         uint32_t patch_off = buf_.pos() + 2;
         EmitJccRel32(buf_, jcc, 0);
@@ -1071,23 +1148,35 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt: {
         if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
-        LoadGpr(kRAX, instr.src1_reg()); LoadGpr(kRCX, instr.src2_reg());
+        uint8_t cmp_a = kRAX, cmp_b = kRCX;
+        if (has_graph_coloring_) {
+            if (instr.src1_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src1_reg()];
+                if (c != 0xFF) cmp_a = c;
+            }
+            if (instr.src2_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src2_reg()];
+                if (c != 0xFF) cmp_b = c;
+            }
+            if (cmp_a == cmp_b) cmp_b = (cmp_a == kRAX) ? kRCX : kRAX;
+        }
+        LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
         // Ceq: 64-bit compare (uint64_t equality, RegisterExecute uses == on uint64_t).
         // Clt/Cgt: 32-bit compare (RegisterExecute casts to int32_t first).
         if (opc == IROpCode::Ceq) {
-            EmitCmpRR(buf_, kRAX, kRCX);
+            EmitCmpRR(buf_, cmp_a, cmp_b);
         } else {
-            uint8_t rex_byte = REX(false, kRAX, 0, kRCX);
+            uint8_t rex_byte = REX(false, cmp_a, 0, cmp_b);
             if (rex_byte != 0x40) buf_.EmitByte(rex_byte);
             buf_.EmitByte(0x3B);
-            buf_.EmitByte(ModRM(3, kRAX, kRCX));
+            buf_.EmitByte(ModRM(3, cmp_a, cmp_b));
         }
         uint8_t cc = (opc == IROpCode::Ceq) ? kCC_E : (opc == IROpCode::Clt) ? kCC_L : kCC_G;
         // IMPORTANT: use mov reg, 0 (NOT xor reg, reg) to preserve CMP flags.
         // xor reg,reg sets ZF=1 (result is zero), clobbering the flags sete reads.
-        EmitMovRIImm32(buf_, kRAX, 0);
-        EmitSetcc(buf_, cc, kRAX);
-        StoreGpr(kRAX, instr.dst_reg());
+        EmitMovRIImm32(buf_, cmp_a, 0);
+        EmitSetcc(buf_, cc, cmp_a);
+        StoreGpr(cmp_a, instr.dst_reg());
         return true;
     }
 
@@ -1256,52 +1345,76 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     case IROpCode::NewObj: {
         if (!instr.has_dst()) return false;
         uint32_t type_token = instr.imm.field_offset;
+        uint32_t field_count = instr.imm.operand_index;
+        if (field_count == 0) field_count = 1;
         // InterpreterObject size (64 bytes: SmallFieldArray 56 + type_token 4 + padding 4)
         static constexpr int32_t kObjSize = static_cast<int32_t>(sizeof(interpreter::InterpreterObject));
 
-        // ═══ TLAB inline allocation path ═══
-        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
-        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+        if (kObjSize <= static_cast<int32_t>(kMaxTlabInlineSize)) {
+            // ═══ TLAB inline allocation path ═══
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
+            EmitCallWithSpill(kRAX);           // rax = &tls_tlab
 
-        EmitMovRM(buf_, kRCX, kRAX, 8);   // rcx = tls_tlab.current
-        EmitLeaRM(buf_, kRBX, kRCX, kObjSize); // rbx = new current
-        EmitMovRM(buf_, kRDX, kRAX, 16);  // rdx = tls_tlab.end
-        EmitCmpRR(buf_, kRBX, kRDX);
-        uint32_t newobj_ja_pos = buf_.pos();
-        EmitJccRel32(buf_, kCC_A, 0);     // ja slow_path (patched later)
+            EmitMovRM(buf_, kRCX, kRAX, 8);   // rcx = tls_tlab.current
+            EmitLeaRM(buf_, kRBX, kRCX, kObjSize); // rbx = new current
+            EmitMovRM(buf_, kRDX, kRAX, 16);  // rdx = tls_tlab.end
+            EmitCmpRR(buf_, kRBX, kRDX);
+            uint32_t newobj_ja_pos = buf_.pos();
+            EmitJccRel32(buf_, kCC_A, 0);     // ja slow_path (patched later)
 
-        // TLAB HIT: bump, zero-init, init struct
-        EmitMovMR(buf_, kRAX, 8, kRBX);   // tls_tlab.current = new_ptr
+            // TLAB HIT: bump, zero-init, init struct
+            EmitMovMR(buf_, kRAX, 8, kRBX);   // tls_tlab.current = new_ptr
 
-        // Zero-init 64 bytes (4 × movups)
-        EmitXorpsRR(buf_, 0, 0);          // xorps xmm0, xmm0
-        EmitMovUPSMR(buf_, kRCX, 0, 0);   // [rcx+0]
-        EmitMovUPSMR(buf_, kRCX, 16, 0);  // [rcx+16]
-        EmitMovUPSMR(buf_, kRCX, 32, 0);  // [rcx+32]
-        EmitMovUPSMR(buf_, kRCX, 48, 0);  // [rcx+48]
+            // Zero-init 64 bytes (4 × movups)
+            EmitXorpsRR(buf_, 0, 0);          // xorps xmm0, xmm0
+            EmitMovUPSMR(buf_, kRCX, 0, 0);   // [rcx+0]
+            EmitMovUPSMR(buf_, kRCX, 16, 0);  // [rcx+16]
+            EmitMovUPSMR(buf_, kRCX, 32, 0);  // [rcx+32]
+            EmitMovUPSMR(buf_, kRCX, 48, 0);  // [rcx+48]
 
-        // Init SmallFieldArray: fields_ptr_ = &inline_[0] (at offset 24)
-        EmitLeaRM(buf_, kRBX, kRCX, 24);
-        EmitMovMR(buf_, kRCX, 0, kRBX);   // fields.fields_ptr_ = &inline_[0]
-        EmitMovRI32(buf_, kRBX, 2);       // rbx = kInlineCapacity
-        EmitMovMR(buf_, kRCX, 16, kRBX);  // fields.field_capacity_ = 2
-        // field_count_ at offset 8 is already 0 from zero-init
+            // Init SmallFieldArray: fields_ptr_ = &inline_[0] (at offset 24)
+            EmitLeaRM(buf_, kRBX, kRCX, 24);
+            EmitMovMR(buf_, kRCX, 0, kRBX);   // fields.fields_ptr_ = &inline_[0]
+            EmitMovRI32(buf_, kRBX, 2);       // rbx = kInlineCapacity
+            EmitMovMR(buf_, kRCX, 16, kRBX);  // fields.field_capacity_ = 2
+            // field_count_ at offset 8 is already 0 from zero-init
 
-        // Set type_token at offset 56 (4 bytes, upper 4 zero from zero-init)
-        EmitMovRIImm32(buf_, kRBX, type_token);
-        EmitMovMR(buf_, kRCX, 56, kRBX);  // obj->type_token = type_token
+            // Set type_token at offset 56 (4 bytes, upper 4 zero from zero-init)
+            EmitMovRIImm32(buf_, kRBX, type_token);
+            EmitMovMR(buf_, kRCX, 56, kRBX);  // obj->type_token = type_token
 
-        StoreGpr(kRCX, instr.dst_reg());  // result = obj pointer
+            StoreGpr(kRCX, instr.dst_reg());  // result = obj pointer
 
-        uint32_t newobj_jmp_done_pos = buf_.pos();
-        EmitJmpRel32(buf_, 0);            // skip slow path
+            uint32_t newobj_jmp_done_pos = buf_.pos();
+            EmitJmpRel32(buf_, 0);            // skip slow path
 
-        // ═══ Slow path (TLAB miss) ═══
-        uint32_t newobj_slow_pos = buf_.pos();
-        buf_.Patch32(newobj_ja_pos + 2, newobj_slow_pos - (newobj_ja_pos + 6));
+            // ═══ Slow path (TLAB miss) ═══
+            uint32_t newobj_slow_pos = buf_.pos();
+            buf_.Patch32(newobj_ja_pos + 2, newobj_slow_pos - (newobj_ja_pos + 6));
 
-        {
-            uint32_t field_count = 8;
+            {
+                EmitMovRIImm32(buf_, kRCX, type_token);
+                EmitMovRIImm32(buf_, kRDX, field_count);
+                EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewObj));
+                uint32_t call_pos = buf_.pos();
+                EmitCallWithSpill(kRAX);
+                {
+                    uint32_t call_token = 0, call_module = 0;
+                    if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                        const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                        call_token = cached.method_token;
+                        call_module = cached.module_id;
+                    }
+                    call_sites_.push_back({current_instr_index_, call_pos, call_token, call_module});
+                }
+                RecordGcPoint(call_pos);
+                StoreGpr(kRAX, instr.dst_reg());
+            }
+
+            uint32_t newobj_done_pos = buf_.pos();
+            buf_.Patch32(newobj_jmp_done_pos + 1, newobj_done_pos - (newobj_jmp_done_pos + 5));
+        } else {
+            // Object too large for TLAB inline — direct GC allocation
             EmitMovRIImm32(buf_, kRCX, type_token);
             EmitMovRIImm32(buf_, kRDX, field_count);
             EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(::CodegenNewObj));
@@ -1319,9 +1432,6 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             RecordGcPoint(call_pos);
             StoreGpr(kRAX, instr.dst_reg());
         }
-
-        uint32_t newobj_done_pos = buf_.pos();
-        buf_.Patch32(newobj_jmp_done_pos + 1, newobj_done_pos - (newobj_jmp_done_pos + 5));
         return true;
     }
 

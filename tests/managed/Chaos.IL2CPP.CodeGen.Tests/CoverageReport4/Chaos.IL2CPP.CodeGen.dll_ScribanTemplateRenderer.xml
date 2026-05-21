@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.ScribanTemplateRenderer">
+<CoverageReport scope="Chaos.IL2CPP.Generator.ScribanTemplateRenderer">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.ScribanTemplateRenderer</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator.ScribanTemplateRenderer</Class>
+    <Assembly>Chaos.IL2CPP.Generator.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Templating\ScribanTemplateRenderer.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\Templating\ScribanTemplateRenderer.cs</File>
     </Files>
     <Coveredlines>29</Coveredlines>
     <Uncoveredlines>3</Uncoveredlines>
@@ -46,14 +46,14 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Templating\ScribanTemplateRenderer.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\Templating\ScribanTemplateRenderer.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Concurrent;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Linq;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text.RegularExpressions;" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban;" />
       <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
       <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal static class ScribanTemplateRenderer" />
       <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

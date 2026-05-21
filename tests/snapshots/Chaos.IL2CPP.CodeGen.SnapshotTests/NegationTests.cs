@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.SnapshotTests;
+namespace Chaos.IL2CPP.Generator.SnapshotTests;
 
 /// <summary>
 /// Negation tests that verify the snapshot test infrastructure
@@ -50,7 +50,7 @@ public sealed class NegationTests : SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.Generator.SnapshotTests");
         var baselineFile = Path.Combine(
             testProjectDir, "Baselines", "01-simple-add", "generated", "native-aot.generated.cpp");
 
@@ -100,7 +100,7 @@ public sealed class NegationTests : SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.Generator.SnapshotTests");
         var fixtureDir = Path.Combine(
             testProjectDir, "Fixtures", "__nonexistent__negation_test");
 

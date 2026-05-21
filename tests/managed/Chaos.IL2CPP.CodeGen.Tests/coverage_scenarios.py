@@ -5,7 +5,7 @@ import sys
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
 target = 'CodeGen'
 
 file_data = defaultdict(lambda: {"c": 0, "t": 0})
@@ -117,5 +117,5 @@ non_rp_sorted = sorted(non_rp, key=lambda x: x[1]["t"] - x[1]["c"], reverse=True
 for fn, d in non_rp_sorted[:15]:
     uncovered = d["t"] - d["c"]
     pct = d["c"] / d["t"] * 100 if d["t"] > 0 else 0
-    short_fn = fn.split('Chaos.IL2CPP.CodeGen/')[-1] if 'Chaos.IL2CPP.CodeGen/' in fn else fn
+    short_fn = fn.split('Chaos.IL2CPP.Generator/')[-1] if 'Chaos.IL2CPP.Generator/' in fn else fn
     print(f"  {uncovered:5d} uncovered ({pct:.1f}%)  {short_fn}")

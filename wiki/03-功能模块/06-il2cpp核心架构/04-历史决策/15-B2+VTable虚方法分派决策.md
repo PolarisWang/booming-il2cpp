@@ -206,7 +206,7 @@ struct InterfaceMapEntry {
 - 供 `EmitVirtualDispatchCall` 判断调用目标是否为接口方法
 
 ### 验证
-- `dotnet build Chaos.IL2CPP.CodeGen.csproj` — 0 errors, 89 warnings (pre-existing)
+- `dotnet build Chaos.IL2CPP.Generator.csproj` — 0 errors, 89 warnings (pre-existing)
 
 ## Phase 4a 实施记录 (2026-05-04)
 
@@ -226,7 +226,7 @@ struct InterfaceMapEntry {
 - 全局 slot 分配算法保持不变（`_vtableSlotMap` 仍用全局 nextSlot，保证接口派发正确性）
 
 ### 验证
-- `dotnet build Chaos.IL2CPP.CodeGen.csproj` -- 0 errors, 90 warnings (pre-existing)
+- `dotnet build Chaos.IL2CPP.Generator.csproj` -- 0 errors, 90 warnings (pre-existing)
 
 ## Phase 4b 实施记录 (2026-05-04)
 
@@ -289,15 +289,15 @@ ChaosTypeAddInterface(&chaos_type_info_MyDynamicType,
 ```
 
 ### 验证
-- `dotnet build Chaos.IL2CPP.CodeGen.csproj` — 0 errors, 96 warnings (pre-existing)
+- `dotnet build Chaos.IL2CPP.Generator.csproj` — 0 errors, 96 warnings (pre-existing)
 - `batch_native_aot_runner.py` — 29/33 PASS (4 pre-existing failures)
 - `interface-dispatch` family — PASS (关键回归测试)
 
 ## 参考
 
 - 架构文档: `01-翻译管线/14-VTable注册表.md`
-- Slot 分配算法: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 534-563)
-- VTable 数组发射: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 566-627)
-- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
-- devirtualization hint: `src/managed/Chaos.IL2CPP.CodeGen/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
+- Slot 分配算法: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 534-563)
+- VTable 数组发射: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 566-627)
+- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
+- devirtualization hint: `src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
 - vtable_registry (旧系统): `src/native/runtime-core/vtable_registry.*`

@@ -5,6 +5,6 @@
     <ProjectReference Include="..\Chaos.IL2CPP.SemanticWorld\Chaos.IL2CPP.SemanticWorld.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Linker\Chaos.IL2CPP.Linker.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
-    <ProjectReference Include="..\Chaos.IL2CPP.CodeGen\Chaos.IL2CPP.CodeGen.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
   </ItemGroup>
 </Project>

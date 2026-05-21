@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeNameResolver">
+<CoverageReport scope="Chaos.IL2CPP.Generator.NativeAotCustomAttributeTypeNameResolver">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeNameResolver</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Class>Chaos.IL2CPP.Generator.NativeAotCustomAttributeTypeNameResolver</Class>
+    <Assembly>Chaos.IL2CPP.Generator</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\NativeAotLoweringPlanner.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\NativeAotLoweringPlanner.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>23</Uncoveredlines>
@@ -35,7 +35,7 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\NativeAotLoweringPlanner.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\NativeAotLoweringPlanner.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Immutable;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Globalization;" />
@@ -51,7 +51,7 @@
       <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
       <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
       <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public sealed partial class NativeAotLoweringPlanner" />
       <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

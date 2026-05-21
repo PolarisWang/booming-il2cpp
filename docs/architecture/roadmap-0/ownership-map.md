@@ -17,7 +17,7 @@
 当前“analysis”是能力名称，不再对应顶层目录。
 
 - 语义分析与装载能力位于 `src/managed/Chaos.IL2CPP.Loader` 与 `src/managed/Chaos.IL2CPP.SemanticWorld`
-- managed closure / metadata / codegen 编排位于 `src/managed/Chaos.IL2CPP.Linker`、`src/managed/Chaos.IL2CPP.MetadataWriter`、`src/managed/Chaos.IL2CPP.CodeGen`、`src/managed/Chaos.IL2CPP.Pipeline`
+- managed closure / metadata / codegen 编排位于 `src/managed/Chaos.IL2CPP.Linker`、`src/managed/Chaos.IL2CPP.MetadataWriter`、`src/managed/Chaos.IL2CPP.Generator`、`src/managed/Chaos.IL2CPP.Pipeline`
 - run 期 analysis 证据位于 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/...`
 
 ## Guidance

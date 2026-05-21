@@ -4,7 +4,7 @@ var path = args.Length > 0 ? args[0] : "coverage_analysis.xml";
 var xml = XDocument.Load(path);
 
 var module = xml.Descendants("module")
-    .FirstOrDefault(m => m.Attribute("name")?.Value == "Chaos.IL2CPP.CodeGen.dll");
+    .FirstOrDefault(m => m.Attribute("name")?.Value == "Chaos.IL2CPP.Generator.dll");
 if (module == null) { Console.Error.WriteLine("Module not found"); return; }
 
 var srcMap = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ foreach (var range in func.Descendants("range"))
     else if (cov == "partial") s.Partial++;
 }
 
-var prefix = "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\";
+var prefix = "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Generator\\";
 int grandTotal = 0, grandCovered = 0;
 double grandPartial = 0;
 int refProofTotal = 0, refProofCovered = 0;

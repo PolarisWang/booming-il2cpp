@@ -3,976 +3,202 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-2",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
-      "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_2()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-2",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_2()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-2",
-        "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_2()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-2",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_2()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_2",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177278,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
-    },
-    {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-3",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
-      "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_3()",
-      "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-3",
-        "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_3()"
-      },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_3",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177277,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
-    },
-    {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-12",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
-      "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_12()",
-      "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-12",
-        "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_12()"
-      },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_12",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177268,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
-    },
-    {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-13",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
-      "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_13()",
-      "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.subject-13",
-        "signature": "System.Int32 ThreadingMonitorInterlockedPatchEntry::Subject_13()"
-      },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_13",
-      "isStatic": true,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": -1342177267,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 6,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 9,
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 9,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 10,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
-    },
-    {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.run",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::Run(System.Int32)",
-      "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.run",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::Run(System.Int32)"
-      },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Run_System_Int32",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
         "carrierKindCode": 0,
         "typeShape": 1
       },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 2,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 184,
-          "handlerOffset": 185,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 2,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 1,
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
           "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 18,
+          "ilOffset": 13,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
+          "op": "ldc.i4",
+          "opCode": 0,
           "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "switch",
-          "opCode": 69,
-          "operand": [
-            70,
-            78,
-            86,
-            94,
-            102,
-            110,
-            118,
-            126,
-            134,
-            142,
-            150,
-            158,
-            166,
-            174
-          ],
-          "ilOffset": 7,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 68,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 70,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod0",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 76,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 78,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod1",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 84,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 86,
+          "ilOffset": 15,
           "resultType": "System.Int32",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_2",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 91,
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 182,
-          "ilOffset": 92,
+          "operand": 19,
+          "ilOffset": 16,
           "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 94,
-          "resultType": "System.Int32",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_3",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 99,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 100,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 102,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod4",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 108,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 110,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod5",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 116,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 118,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod6",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 124,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 126,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod7",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 132,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 134,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod8",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 140,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 142,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod9",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 148,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 150,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod10",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 156,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 158,
-          "resultType": "System.Void",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod11",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Void",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 164,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 166,
-          "resultType": "System.Int32",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_12",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 171,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 172,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 174,
-          "resultType": "System.Int32",
-          "callee": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
-          "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectKind": "method",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_13",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 179,
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 182,
-          "ilOffset": 180,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 196,
-          "ilOffset": 183,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 185,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 187,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 35,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 29,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
-          "ilOffset": 188,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+          "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -980,17 +206,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 196,
-          "ilOffset": 194,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 196,
+          "ilOffset": 35,
           "isPreserveSig": false
         }
       ],
@@ -1002,21 +220,667 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method0",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-3",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_3()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method0",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-3",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_3()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod0",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 8,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 10,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 20,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 21,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 37,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 37,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-12",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-12",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_12()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Threading/Interlocked::MemoryBarrier:System.Void()",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Interlocked::MemoryBarrier:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Interlocked::MemoryBarrier:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-13",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.subject-13",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::Subject_13()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+          "ilOffset": 1,
+          "resultType": "System.Func\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 32,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 10,
+          "resultType": "ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+          "ilOffset": 15,
+          "resultType": "System.IntPtr",
+          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 21,
+          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Func\u00601::Invoke:!0();type=[System.Int32];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Func\u00601::Invoke:!0();type=[System.Int32];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Func\u00601::Invoke:!0();type=[System.Int32];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Func\u00601::Invoke:!0();type=[System.Int32];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+              "displaySubjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+                "typeArguments": [
+                  "System.Int32"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 37,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 39,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 45,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 54,
+          "ilOffset": 46,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 48,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 54,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-0",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-0",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1141,21 +1005,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method1",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-1",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method1",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-1",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod1",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1280,21 +1144,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method4",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-4",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method4",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-4",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod4",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1451,21 +1315,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method5",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-5",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method5",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-5",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod5",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1622,21 +1486,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method6",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-6",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method6",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-6",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod6",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1839,21 +1703,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method7",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-7",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method7",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-7",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod7",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1979,24 +1843,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 21,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2018,21 +1882,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method8",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-8",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method8",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-8",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod8",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2143,24 +2007,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 18,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2182,21 +2046,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method9",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-9",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method9",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-9",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod9",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2330,24 +2194,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2425,24 +2289,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 43,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2464,21 +2328,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method10",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-10",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method10",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-10",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod10",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2620,24 +2484,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 27,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2715,24 +2579,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 45,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2754,21 +2618,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     },
     {
-      "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method11",
-      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
-      "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11()",
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-11",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11()",
       "identity": {
-        "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-        "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
-        "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
-        "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
-        "methodId": "threading-monitor-interlocked-patch-entry.threading-monitor-interlocked-patch-entry.custom-entry-method11",
-        "signature": "System.Void ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11()"
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects.custom-entry-subject-11",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11()"
       },
-      "nativeSymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod11",
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2902,24 +2766,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
           "ilOffset": 24,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
             "subjectKind": "field",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode"
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
-            "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2941,7 +2805,292 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingMonitorInterlockedPatchEntry"
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.cctor",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.cctor",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 0,
+          "resultType": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+          "callee": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingMonitorInterlockedSubjects",
+            "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.ctor",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "signature": "System.Void ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.ctor",
+        "signature": "System.Void ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
+    },
+    {
+      "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.subject-13-b-4-0",
+      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+      "signature": "System.Int32 ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0()",
+      "identity": {
+        "assemblyName": "ThreadingMonitorInterlockedSubjects",
+        "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+        "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()",
+        "methodId": "threading-monitor-interlocked-subjects.threading-monitor-interlocked-subjects-c.subject-13-b-4-0",
+        "signature": "System.Int32 ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0()"
+      },
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 2,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)",
+          "reference": {
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Volatile::Read:System.Int32(System.Int32\u0026)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 15,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingMonitorInterlockedSubjects"
     }
   ]
 }

@@ -16,10 +16,7 @@ FetchContent_Declare(
 if(USE_ASAN)
     set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
 else()
-    # Chaos prebuilt libraries were compiled with /MDd (debug DLL CRT).
-    # Use gtest_force_shared_crt OFF so gtest doesn't override CRT choice,
-    # and set global MSVC runtime to MultiThreadedDebugDLL to match.
-    set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 endif()
 FetchContent_MakeAvailable(googletest)
 
@@ -43,7 +40,9 @@ set(CHAOS_INCLUDE_DIRS
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/tiering"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc"
     "${CHAOS_PROJECT_ROOT}/../src/native/codegen"
+    "${CHAOS_PROJECT_ROOT}/../src/native/engine-bridge"
     "${CHAOS_PROJECT_ROOT}/../contracts/native/v0"
+    "${CHAOS_PROJECT_ROOT}/../contracts/engine/v0"
     "${CHAOS_PROJECT_ROOT}/../third_party/unordered_dense/include"
     "${CHAOS_PROJECT_ROOT}/../third_party/fmt/include"
 )
@@ -87,11 +86,8 @@ endif()
 # Compiler settings
 add_compile_options(/utf-8 /GS- /W1)
 
-# Prebuilt chaos libraries were compiled with /MDd (debug DLL CRT).
-# Set the MSVC runtime library to match (applies to all configurations).
-if(MSVC)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
-endif()
+# Provide stubs for debug CRT symbols referenced by chaos prebuilt libraries
+set(CHAOS_CRT_STUBS "${CMAKE_CURRENT_SOURCE_DIR}/crt_stubs.cpp")
 
 if(USE_ASAN)
     add_compile_options(/fsanitize=address)
@@ -125,9 +121,7 @@ function(add_chaos_test name)
     add_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
     target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
     target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
-    if(USE_ASAN)
-        target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
-    endif()
+    target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
     add_test(NAME ${name} COMMAND ${name})
     if(USE_ASAN AND CHAOS_ASAN_DLL)
         add_custom_command(TARGET ${name} POST_BUILD

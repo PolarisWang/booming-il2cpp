@@ -7,7 +7,7 @@ from tests.support import read_contracts_source
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "AotCoreIrLowering.cs"
+AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "AotCoreIrLowering.cs"
 METADATA_WRITER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.MetadataWriter" / "MetadataWriterStage.cs"
 
 

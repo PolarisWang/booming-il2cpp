@@ -4,8 +4,8 @@ import sys
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
-target = 'Chaos.IL2CPP.CodeGen'
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
+target = 'Chaos.IL2CPP.Generator'
 all_total_l = 0
 all_total_c = 0
 dirs = defaultdict(lambda: {"c": 0, "t": 0})
@@ -24,15 +24,15 @@ for cls in pkg.findall('.//class'):
     # Get subdirectory
     sub = fn
     for sep in ['/']:
-        idx = fn.find('Chaos.IL2CPP.CodeGen' + sep)
+        idx = fn.find('Chaos.IL2CPP.Generator' + sep)
         if idx >= 0:
-            sub = fn[idx + len('Chaos.IL2CPP.CodeGen' + sep):]
+            sub = fn[idx + len('Chaos.IL2CPP.Generator' + sep):]
             break
     if not sub or sub == fn:
         for sep in ['\\']:
-            idx = fn.find('Chaos.IL2CPP.CodeGen' + sep)
+            idx = fn.find('Chaos.IL2CPP.Generator' + sep)
             if idx >= 0:
-                sub = fn[idx + len('Chaos.IL2CPP.CodeGen' + sep):]
+                sub = fn[idx + len('Chaos.IL2CPP.Generator' + sep):]
                 break
     parts = sub.replace('\\', '/').split('/')
     d = parts[0] if len(parts) > 1 and parts[0] else '(root)'

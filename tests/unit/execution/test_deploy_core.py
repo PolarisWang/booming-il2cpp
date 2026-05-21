@@ -52,7 +52,7 @@ class DeployCoreTests(unittest.TestCase):
             "Chaos.IL2CPP.Driver.dll",
             "Chaos.IL2CPP.Driver.deps.json",
             "Chaos.IL2CPP.Driver.runtimeconfig.json",
-            "Chaos.IL2CPP.CodeGen.dll",
+            "Chaos.IL2CPP.Generator.dll",
         ]:
             (driver_output_root / file_name).write_text(file_name + "\n", encoding="utf-8")
 

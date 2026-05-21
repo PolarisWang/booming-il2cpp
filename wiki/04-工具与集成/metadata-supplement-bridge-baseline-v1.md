@@ -14,7 +14,7 @@
 
 ## Managed Surface
 
-- `Chaos.IL2CPP.HotUpdate` 继续只依赖 `Chaos.IL2CPP.Contracts`，不能反向依赖 `Chaos.IL2CPP.CodeGen`。
+- `Chaos.IL2CPP.HotUpdate` 继续只依赖 `Chaos.IL2CPP.Contracts`，不能反向依赖 `Chaos.IL2CPP.Generator`。
 - supplemental metadata baseline surface 包含：
   - `SupplementalMetadataWriter`
   - `SupplementalMetadataLoader`

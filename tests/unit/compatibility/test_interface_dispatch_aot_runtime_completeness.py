@@ -25,13 +25,13 @@ PROFILE_ID = "proof-interface-dispatch"
 MATRIX_ID = "windows-interface-dispatch-check"
 
 SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
-EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
-CATALOG_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "ReferenceProof" / "NativeReferenceProofCatalog.cs"
+EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "ReferenceProof" / "NativeReferenceProofCatalog.cs"
 TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Templates"
     / "NativeReferenceProof.InterfaceDispatchMessage.cpp.scriban"
 )

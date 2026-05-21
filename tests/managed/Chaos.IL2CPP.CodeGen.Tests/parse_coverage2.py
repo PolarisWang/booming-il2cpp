@@ -29,8 +29,8 @@ def get_subdir(fn, target):
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
-target = 'Chaos.IL2CPP.CodeGen'
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
+target = 'Chaos.IL2CPP.Generator'
 
 print(f'Root: lines-covered={root.get("lines-covered")}, lines-valid={root.get("lines-valid")}')
 

@@ -126,7 +126,7 @@ Module prefix mapping:
 
 ## 5. Codegen Validation
 
-Generated C++ code (from `NativeAotEmitter` and `NativeReferenceProofEmitter`) is validated at emission time by `NativeCodegenValidator` (`src/managed/Chaos.IL2CPP.CodeGen/Validation/NativeCodegenValidator.cs`).
+Generated C++ code (from `NativeAotEmitter` and `NativeReferenceProofEmitter`) is validated at emission time by `NativeCodegenValidator` (`src/managed/Chaos.IL2CPP.Generator/Validation/NativeCodegenValidator.cs`).
 
 Validation rules:
 1. No `using namespace std;` or `using namespace chaos;`

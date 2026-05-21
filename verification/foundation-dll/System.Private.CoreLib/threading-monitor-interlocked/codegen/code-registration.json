@@ -3,97 +3,109 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ThreadingMonitorInterlockedPatchEntry.dll",
+      "moduleName": "ThreadingMonitorInterlockedSubjects.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_2",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_3",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_12",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Subject_13",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_Run_System_Int32",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod0",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod1",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod4",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod5",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod6",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod7",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod8",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod9",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod10",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 14,
-          "symbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod11",
-          "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()"
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0",
+          "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__4_0:System.Int32()"
         }
       ]
     }

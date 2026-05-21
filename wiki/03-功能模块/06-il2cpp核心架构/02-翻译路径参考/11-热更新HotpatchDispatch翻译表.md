@@ -347,9 +347,9 @@ Leaf 方法 ~200-290x slowdown 是 interpreter 设计的已知特性（每条指
 
 | 范畴 | 路径 |
 |------|------|
-| Codegen DispatchTable emit | `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
-| Codegen NameIndex/Slot emit | `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
-| PatchDataExtractor | `src/managed/Chaos.IL2CPP.CodeGen/Emission/PatchDataExtractor.cs` |
+| Codegen DispatchTable emit | `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
+| Codegen NameIndex/Slot emit | `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIREmit.cs` |
+| PatchDataExtractor | `src/managed/Chaos.IL2CPP.Generator/Emission/PatchDataExtractor.cs` |
 | HotpatchEntryV0 定义 | `src/native/runtime-core/hotpatch_table.h` |
 | HotpatchNameRegistry | `src/native/runtime-core/hotpatch_table.cpp` |
 | ApplyPatchFromMemory | `src/native/runtime-core/hot-update/patch_loader.cpp` |

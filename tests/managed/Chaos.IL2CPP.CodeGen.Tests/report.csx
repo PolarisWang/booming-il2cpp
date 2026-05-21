@@ -5,7 +5,7 @@ var xml = XDocument.Load(path);
 var ns = xml.Root!.GetDefaultNamespace();
 
 var module = xml.Descendants(ns + "module")
-    .FirstOrDefault(m => m.Attribute("name")?.Value == "Chaos.IL2CPP.CodeGen.dll");
+    .FirstOrDefault(m => m.Attribute("name")?.Value == "Chaos.IL2CPP.Generator.dll");
 if (module == null) { Console.Error.WriteLine("Module not found"); return; }
 
 var srcMap = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ foreach (var range in func.Descendants(ns + "range"))
     stats[path2] = s;
 }
 
-var prefix = "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\";
+var prefix = "D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Generator\\";
 foreach (var kv in stats.OrderBy(k => k.Key))
 {
     var (covered, partial, total) = kv.Value;

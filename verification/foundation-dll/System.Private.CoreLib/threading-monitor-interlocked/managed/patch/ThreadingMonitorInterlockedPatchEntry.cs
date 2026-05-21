@@ -9,9 +9,7 @@ public static partial class ThreadingMonitorInterlockedPatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)
-
     // [1] System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)
-
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     public static int Subject_2()
     {
@@ -25,21 +23,13 @@ public static partial class ThreadingMonitorInterlockedPatchEntry
     }
 
     // [4] System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)
-
     // [5] System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)
-
     // [6] System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)
-
     // [7] System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)
-
     // [8] System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)
-
     // [9] System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)
-
     // [10] System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)
-
     // [11] System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)
-
     // [12] System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()
     public static int Subject_12()
     {

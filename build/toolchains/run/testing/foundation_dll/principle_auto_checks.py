@@ -27,7 +27,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 try:
     from testing.trace import trace
@@ -336,7 +336,7 @@ def check_p2_template_hygiene(assembly: str = "", family_slug: str = "") -> Prin
     Scans all .scriban templates in the codegen Templates directory.
     This is a repo-level check, not family-specific.
     """
-    templates_dir = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates"
+    templates_dir = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates"
     if not templates_dir.exists():
         return PrincipleCheckResult(
             check_id="p2_template_hygiene", principle="P2",

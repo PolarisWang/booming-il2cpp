@@ -31,7 +31,7 @@ Phase 5 的目标不是做完整热更新，而是建立一个可�?desktop 上�
 
 ## 隔离规则
 
-- `Chaos.IL2CPP.HotUpdate` 只允许依�?`Chaos.IL2CPP.Contracts`�?- `Chaos.IL2CPP.HotUpdate` 不允许反向依�?`Chaos.IL2CPP.CodeGen`�?- 当前 proof 使用 subject-id 级方法注册与分发，目的是先证明骨架，不是提前实现完整跨模式调用图�?
+- `Chaos.IL2CPP.HotUpdate` 只允许依�?`Chaos.IL2CPP.Contracts`�?- `Chaos.IL2CPP.HotUpdate` 不允许反向依�?`Chaos.IL2CPP.Generator`�?- 当前 proof 使用 subject-id 级方法注册与分发，目的是先证明骨架，不是提前实现完整跨模式调用图�?
 ## Package 形状
 
 当前最�?package manifest 关注下面这些字段�?

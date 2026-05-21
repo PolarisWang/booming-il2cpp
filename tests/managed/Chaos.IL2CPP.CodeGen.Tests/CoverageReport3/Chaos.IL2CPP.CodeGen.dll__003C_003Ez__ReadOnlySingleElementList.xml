@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlySingleElementList">
+<CoverageReport scope="Chaos.IL2CPP.Generator._003C_003Ez__ReadOnlySingleElementList">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlySingleElementList</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator._003C_003Ez__ReadOnlySingleElementList</Class>
+    <Assembly>Chaos.IL2CPP.Generator.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\RuntimeSupport\NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\RuntimeSupport\NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs</File>
     </Files>
     <Coveredlines>5</Coveredlines>
     <Uncoveredlines>2</Uncoveredlines>
@@ -34,7 +34,7 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\RuntimeSupport\NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\RuntimeSupport\NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
@@ -51,7 +51,7 @@
       <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text.Json;" />
       <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
       <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal sealed class _003C_003Ez__ReadOnlyArray&lt;T&gt;(T[] items) : IReadOnlyList&lt;T&gt;" />
       <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

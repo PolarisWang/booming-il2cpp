@@ -2,7 +2,7 @@ using Chaos.IL2CPP.Contracts;
 using System.Reflection;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 public sealed class CodeGenStageTests
 {

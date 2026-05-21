@@ -2,8 +2,8 @@
 """Check emission source files/scriban templates for bare `new` that should be CHAOS_IL2CPP_NEW_GC.
 
 Scans:
-  - src/managed/Chaos.IL2CPP.CodeGen/Emission/*.cs
-  - src/managed/Chaos.IL2CPP.CodeGen/Templates/*.scriban
+  - src/managed/Chaos.IL2CPP.Generator/Emission/*.cs
+  - src/managed/Chaos.IL2CPP.Generator/Templates/*.scriban
 
 Returns non-zero exit code if any bare new is found.
 Intended for CI / pre-commit use.
@@ -24,8 +24,8 @@ from pathlib import Path
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 
-_EMISSION_DIR = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission"
-_TEMPLATES_DIR = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates"
+_EMISSION_DIR = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Emission"
+_TEMPLATES_DIR = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates"
 
 # Patterns of bare `new` in emission C# files (strings emitted as C++ code).
 # The C# emission generates C++ via AppendLiteral/AppendLine:

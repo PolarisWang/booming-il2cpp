@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeArgShape">
+<CoverageReport scope="Chaos.IL2CPP.Generator.RuntimeSkeletonStringManagedInvokeArgShape">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeArgShape</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Class>Chaos.IL2CPP.Generator.RuntimeSkeletonStringManagedInvokeArgShape</Class>
+    <Assembly>Chaos.IL2CPP.Generator</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonStringManagedInvokeAbi.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\ReferenceProof\RuntimeSkeletonStringManagedInvokeAbi.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>3</Uncoveredlines>
@@ -28,10 +28,10 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonStringManagedInvokeAbi.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\ReferenceProof\RuntimeSkeletonStringManagedInvokeAbi.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="5" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="internal sealed record RuntimeSkeletonStringManagedInvokeArgShape(" />
       <LineAnalysis line="6" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    string FieldDeclaration," />

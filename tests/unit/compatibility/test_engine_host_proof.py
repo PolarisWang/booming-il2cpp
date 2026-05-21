@@ -8,18 +8,18 @@ from tests.support import read_native_reference_planner_source
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
-EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeReferenceLoweringPlanner.cs"
+EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeReferenceProofEmitter.cs"
 CATALOG_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "ReferenceProof"
     / "NativeReferenceProofCatalog.cs"
 )
 SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
-HOST_PROOF_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeReferenceProof.EngineHostProof.cpp.scriban"
+HOST_PROOF_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeReferenceProof.EngineHostProof.cpp.scriban"
 
 ENGINE_HOST_PROOF_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects" / "EngineHostProof"
 ENGINE_HOST_PROOF_MANIFEST_PATH = ENGINE_HOST_PROOF_ROOT / "subject.manifest.json"

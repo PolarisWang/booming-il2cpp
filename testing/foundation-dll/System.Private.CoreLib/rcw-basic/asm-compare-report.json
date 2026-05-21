@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/rcw/basic",
-  "capturedAt": "2026-05-21T20:45:43",
+  "capturedAt": "2026-05-21T21:50:46",
   "batchMode": true,
   "summary": {
     "totalMethods": 7,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 308
+      "max": 96,
+      "avg": 51.4,
+      "total": 360
     },
     "aotInstructionCount": {
       "min": 16,
@@ -25,10 +25,10 @@
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.37,
-    "averageExpansionRatio": 0.37,
+    "overallIrExpansionRatio": 0.32,
+    "averageExpansionRatio": 0.34,
     "maxExpansionRatio": 0.41,
-    "minExpansionRatio": 0.36
+    "minExpansionRatio": 0.17
   },
   "methodResults": [
     {
@@ -109,15 +109,15 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 96,
         "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 96
       },
       "aot": {
         "status": "ok",

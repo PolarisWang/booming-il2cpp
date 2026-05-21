@@ -182,6 +182,12 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
 
     RebuildPageArray();
 
+    // Reset page_count_growth — initial pages allocated during Init should
+    // not count toward the page-growth threshold in DecideCollection().
+    // Without this reset, a large Init (e.g. 64 pages) immediately triggers
+    // a Full GC when DecideCollection() checks page_count_growth >= 16.
+    g_gc_scheduler.ResetPageCountGrowth();
+
     initialized_.store(true, std::memory_order_release);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "init done base=0x{0} pages={1}",

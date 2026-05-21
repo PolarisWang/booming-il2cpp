@@ -1,6 +1,6 @@
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;
@@ -114,7 +114,7 @@ internal static class ConvertToCppHandler
             // Generate CMakeLists.txt
             var repoRoot = ResolveRepoRoot();
             var nativeLibDir = Path.Combine(repoRoot, "build", "native");
-            var cmakeGen = new Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator(repoRoot);
+            var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var singleCmakeContent = cmakeGen.Generate(
                 new[] { emitResult }.ToList(),
                 nativeLibDir: nativeLibDir,
@@ -164,7 +164,7 @@ internal static class ConvertToCppHandler
             // Generate CMakeLists.txt
             var repoRoot = ResolveRepoRoot();
             var nativeLibDir = Path.Combine(repoRoot, "build", "native");
-            var cmakeGen = new Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator(repoRoot);
+            var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var assemblyNames = results.Select(r => r.ClosureManifest?.AssemblyName ?? "unknown").ToList();
             var assemblyInfo = assemblyNames.Select(name => new
             {

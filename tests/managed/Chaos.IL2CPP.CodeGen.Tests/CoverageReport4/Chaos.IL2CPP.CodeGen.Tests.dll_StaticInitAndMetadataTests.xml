@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.Tests.Emission.StaticInitAndMetadataTests">
+<CoverageReport scope="Chaos.IL2CPP.Generator.Tests.Emission.StaticInitAndMetadataTests">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.Tests.Emission.StaticInitAndMetadataTests</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator.Tests.Emission.StaticInitAndMetadataTests</Class>
+    <Assembly>Chaos.IL2CPP.Generator.Tests.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\StaticInitAndMetadataTests.cs</File>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\Emission\StaticInitAndMetadataTests.cs</File>
     </Files>
     <Coveredlines>26</Coveredlines>
     <Uncoveredlines>110</Uncoveredlines>
@@ -70,11 +70,11 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\StaticInitAndMetadataTests.cs">
-      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.CodeGen.Tests.Infra;" />
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\Emission\StaticInitAndMetadataTests.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Generator.Tests.Infra;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Xunit;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Tests.Emission;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator.Tests.Emission;" />
       <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
       <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Tests for static initialization, string ID emission, and metadata" />

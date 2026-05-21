@@ -53,6 +53,7 @@ struct GcPoint {
 struct DeoptEntry {
     uint32_t   native_offset;       // byte offset from code entry (safepoint)
     uint32_t   instr_pc;            // RegisterInstruction index
+    uint32_t   osr_resume_pc = 0;   // OSR resume PC (loop header). 0 = instruction 0.
     uint32_t   num_values;          // number of active values at this point
     uint32_t   values_offset;       // index into DeoptValue[] array for this entry's values
 };

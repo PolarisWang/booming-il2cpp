@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.Tests.NativeAotEmitterTests">
+<CoverageReport scope="Chaos.IL2CPP.Generator.Tests.NativeAotEmitterTests">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.Tests.NativeAotEmitterTests</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator.Tests.NativeAotEmitterTests</Class>
+    <Assembly>Chaos.IL2CPP.Generator.Tests.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\NativeAotEmitterTests.cs</File>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\NativeAotEmitterTests.cs</File>
     </Files>
     <Coveredlines>25</Coveredlines>
     <Uncoveredlines>0</Uncoveredlines>
@@ -42,12 +42,12 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\NativeAotEmitterTests.cs">
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\NativeAotEmitterTests.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection;" />
-      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Xunit;" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Tests;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator.Tests;" />
       <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public sealed class NativeAotEmitterTests" />
       <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

@@ -191,8 +191,8 @@ RegIrSection     ── uint32_t 索引[count] + 寄存器 IR 块（v2+ 预留�
 | 角色 | 路径 |
 |------|------|
 | 格式定义（C 头文件） | `contracts/native/v0/patch_data.h` |
-| C# 序列化器 | `src/managed/Chaos.IL2CPP.CodeGen/PatchDataExtractor.cs` |
-| C# 解析器（dump） | `src/managed/Chaos.IL2CPP.CodeGen/PatchDataDumper.cs` |
+| C# 序列化器 | `src/managed/Chaos.IL2CPP.Generator/PatchDataExtractor.cs` |
+| C# 解析器（dump） | `src/managed/Chaos.IL2CPP.Generator/PatchDataDumper.cs` |
 | CLI 入口点 | `src/managed/Chaos.IL2CPP.Driver/DriverEntry.cs` (`emit-patch-data` 命令) |
 | 运行时加载器（C++） | `src/native/runtime-core/patch_loader.h` / `patch_loader.cpp` |
 | 热更新调度注册表 | `src/native/runtime-core/hotpatch_table.h` / `hotpatch_table.cpp` |

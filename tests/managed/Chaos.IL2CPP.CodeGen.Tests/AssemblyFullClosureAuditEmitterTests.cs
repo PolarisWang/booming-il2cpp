@@ -1,8 +1,8 @@
-using Chaos.IL2CPP.CodeGen.Tests.Infra;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Chaos.IL2CPP.Contracts;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 /// <summary>
 /// Tests for <see cref="AssemblyFullClosureAuditEmitter"/> — plan validation,

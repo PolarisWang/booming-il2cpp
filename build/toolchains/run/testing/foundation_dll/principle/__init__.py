@@ -24,7 +24,7 @@ from .formatter import format_family_report
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 
 # ── Helpers ───────────────────────────────────────────────────────────

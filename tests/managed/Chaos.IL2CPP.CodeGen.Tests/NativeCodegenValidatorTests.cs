@@ -1,7 +1,7 @@
-using Chaos.IL2CPP.CodeGen.Validation;
+using Chaos.IL2CPP.Generator.Validation;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 public sealed class NativeCodegenValidatorTests
 {

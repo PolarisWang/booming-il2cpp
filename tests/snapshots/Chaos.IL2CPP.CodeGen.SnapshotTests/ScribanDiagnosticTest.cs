@@ -5,7 +5,7 @@ using Scriban;
 using Scriban.Runtime;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.SnapshotTests;
+namespace Chaos.IL2CPP.Generator.SnapshotTests;
 
 public sealed class ScribanDiagnosticTest
 {

@@ -284,7 +284,7 @@ Codegen 在每个跨 DLL 模块注册时同时发射 `SetMethodOrigin()` 调用�
 
 | 验证项 | 状态 |
 |--------|------|
-| `dotnet build` (Chaos.IL2CPP.CodeGen) | ✅ 0 Error, 89 Warnings（均为 pre-existing nullable 警告） |
+| `dotnet build` (Chaos.IL2CPP.Generator) | ✅ 0 Error, 89 Warnings（均为 pre-existing nullable 警告） |
 | `batch_native_aot_runner.py --families convert-char` | ✅ PASS (codegen pipeline) |
 | 跨 DLL type comparison | ✅ 代码已生成，严格等价验证待跨 DLL 测试环境 |
 | method_table 基础设施 | ✅ .h/.cpp 创建，CMake 集成，4 个 API |

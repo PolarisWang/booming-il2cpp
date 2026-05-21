@@ -34,8 +34,8 @@
 
 ```
 tests/snapshots/
-├── Chaos.IL2CPP.CodeGen.SnapshotTests/
-│   ├── Chaos.IL2CPP.CodeGen.SnapshotTests.csproj
+├── Chaos.IL2CPP.Generator.SnapshotTests/
+│   ├── Chaos.IL2CPP.Generator.SnapshotTests.csproj
 │   ├── SnapshotTestBase.cs              # 基类：加载夹具 → emitter → 对比基线
 │   ├── SnapshotTheoryData.cs            # 自动发现所有 fixture 目录
 │   ├── Infrastructure/
@@ -99,7 +99,7 @@ chaos-il2cpp convert-to-cpp --assembly TestSubject.dll --output artifacts/test-s
 ### 4.1 运行快照测试
 
 ```powershell
-dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/
 ```
 
 ### 4.2 更新基线
@@ -108,7 +108,7 @@ dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
 
 ```powershell
 $env:SNAPSHOT_UPDATE = "1"
-dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/
 ```
 
 然后通过 `git diff` 审查基线变化，确认无误后提交。

@@ -8,7 +8,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -16,7 +16,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.ConstructorFieldSetterStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -24,7 +24,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.FieldBackedStringReturnStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -66,7 +66,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -74,7 +74,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -82,7 +82,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.FieldGetterStringReturnStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -123,7 +123,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -131,7 +131,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringReturnForwarderStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -139,7 +139,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -165,7 +165,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -173,7 +173,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -181,7 +181,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringProducerConsoleWriteLineStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -223,7 +223,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -231,7 +231,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -259,7 +259,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -292,7 +292,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -300,7 +300,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderConsoleWriteLineStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -332,7 +332,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -340,7 +340,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderConsoleWriteLineStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -374,7 +374,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")

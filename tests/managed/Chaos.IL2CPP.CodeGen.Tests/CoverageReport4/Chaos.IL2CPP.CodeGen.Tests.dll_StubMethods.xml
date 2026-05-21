@@ -2,9 +2,9 @@
 <CoverageReport scope="StubAssembly.StubMethods">
   <Summary>
     <Class>StubAssembly.StubMethods</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Assembly>Chaos.IL2CPP.Generator.Tests.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\StubAssembly\StubMethods.cs</File>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\StubAssembly\StubMethods.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>4</Uncoveredlines>
@@ -38,7 +38,7 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\StubAssembly\StubMethods.cs">
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\StubAssembly\StubMethods.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace StubAssembly;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public static class StubMethods" />

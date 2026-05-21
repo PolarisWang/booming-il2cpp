@@ -11,7 +11,7 @@ from .base import FamilyContext, _family_dir, _generated_cpp, _class_name_from_s
 _HERE = Path(__file__).resolve().parent
 _FOUNDATION_DLL = _HERE.parent
 _REPO_ROOT = _FOUNDATION_DLL.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 
 @dataclass

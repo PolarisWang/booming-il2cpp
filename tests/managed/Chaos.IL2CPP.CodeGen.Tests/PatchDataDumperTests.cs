@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Text;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 /// <summary>
 /// Tests for PatchDataDumper static helper methods.
@@ -10,7 +10,7 @@ namespace Chaos.IL2CPP.CodeGen.Tests;
 /// </summary>
 public sealed class PatchDataDumperTests
 {
-    private static readonly Type s_type = typeof(Chaos.IL2CPP.CodeGen.PatchDataDumper);
+    private static readonly Type s_type = typeof(Chaos.IL2CPP.Generator.PatchDataDumper);
     private const BindingFlags s_flags = BindingFlags.NonPublic | BindingFlags.Static;
 
     private static T? Invoke<T>(string name, Type[] paramTypes, object[] args)

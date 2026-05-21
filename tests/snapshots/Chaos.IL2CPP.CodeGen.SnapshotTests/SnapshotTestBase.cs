@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Chaos.IL2CPP.Contracts;
 
-namespace Chaos.IL2CPP.CodeGen.SnapshotTests;
+namespace Chaos.IL2CPP.Generator.SnapshotTests;
 
 /// <summary>
 /// Base class for snapshot tests. Provides fixture loading,
@@ -17,7 +17,7 @@ public abstract class SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.Generator.SnapshotTests");
         var fixtureDir = Path.Combine(testProjectDir, "Fixtures", fixtureName);
         var baselineDir = Path.Combine(testProjectDir, "Baselines", fixtureName);
 

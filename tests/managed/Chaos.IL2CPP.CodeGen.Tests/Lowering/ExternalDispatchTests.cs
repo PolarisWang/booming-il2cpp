@@ -1,8 +1,8 @@
 using Chaos.IL2CPP.Contracts;
-using Chaos.IL2CPP.CodeGen.Tests.Infra;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.Lowering;
+namespace Chaos.IL2CPP.Generator.Tests.Lowering;
 
 /// <summary>
 /// Tests that verify external runtime call dispatch uses the correct mechanism:

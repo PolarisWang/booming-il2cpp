@@ -38,7 +38,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "CodeGenStage.cs"
         )
         codegen_stage_source = codegen_stage_path.read_text(encoding="utf-8")
@@ -66,7 +66,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.StringIdEmission.cs"
         ).read_text(encoding="utf-8")
@@ -74,7 +74,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.ObjectModelUtilities.cs"
         ).read_text(encoding="utf-8")
@@ -366,7 +366,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         generated_exports_source = NATIVE_REFERENCE_EMITTER_GENERATED_PLUGIN_EXPORTS_PATH.read_text(encoding="utf-8")
         generator_source = CODEGEN_GENERATOR_SOURCE_PATH.read_text(encoding="utf-8")
-        codegen_project_source = (REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Chaos.IL2CPP.CodeGen.csproj").read_text(encoding="utf-8")
+        codegen_project_source = (REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Chaos.IL2CPP.Generator.csproj").read_text(encoding="utf-8")
 
         for required_fragment in [
             "private sealed record RuntimeSkeletonStubBuildContext(",
@@ -382,7 +382,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
 
         self.assertIn("RuntimeSkeletonFamilyPlugin(", generated_exports_source)
         self.assertIn("RuntimeSkeletonFamilyPluginAttribute", generator_source)
-        self.assertIn("Chaos.IL2CPP.CodeGen.Generators.csproj", codegen_project_source)
+        self.assertIn("Chaos.IL2CPP.Generator.Generators.csproj", codegen_project_source)
         self.assertIn('OutputItemType="Analyzer"', codegen_project_source)
         self.assertIn('ReferenceOutputAssembly="false"', codegen_project_source)
         self.assertNotIn("private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =", emitter_source)
@@ -1022,7 +1022,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
@@ -1030,7 +1030,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonConvertRuntimeHelperAbi.cs"
         ).read_text(encoding="utf-8")
@@ -1038,7 +1038,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Templates"
             / "NativeReferenceProof.RuntimeSkeleton.ConvertRuntimeHelperStub.cpp.scriban"
         ).read_text(encoding="utf-8")
@@ -1373,7 +1373,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofEmitter.IdentityStructManagedInvokeFamily.cs"
         )
@@ -1382,7 +1382,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonSemanticRegistry.cs"
         ).read_text(encoding="utf-8")
@@ -1792,7 +1792,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonHalfManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")
@@ -1800,7 +1800,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonNumberManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")
@@ -1808,7 +1808,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonDecimalManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")
@@ -1816,7 +1816,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonCharManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")
@@ -1824,7 +1824,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "RuntimeSkeletonEnumManagedInvokeAbi.cs"
         ).read_text(encoding="utf-8")

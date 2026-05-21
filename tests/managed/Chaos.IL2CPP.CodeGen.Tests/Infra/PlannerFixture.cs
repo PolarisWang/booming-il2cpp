@@ -1,6 +1,6 @@
 using Chaos.IL2CPP.Contracts;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.Infra;
+namespace Chaos.IL2CPP.Generator.Tests.Infra;
 
 /// <summary>
 /// Provides a shared NativeAotLoweringPlanner instance and helper methods
@@ -28,7 +28,7 @@ internal sealed class PlannerFixture
 
         return Path.GetFullPath(Path.Combine(
             repoRoot,
-            "tests", "managed", "Chaos.IL2CPP.CodeGen.Tests",
+            "tests", "managed", "Chaos.IL2CPP.Generator.Tests",
             "StubAssembly", "bin", "Debug", "net8.0",
             "StubAssembly.dll"));
     }

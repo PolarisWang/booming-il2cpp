@@ -144,8 +144,8 @@ TypeInfoHandle handle = MakeTypeHandle(hotfix_id, 0x02000005);
 | `src/native/runtime-core/reflection_metadata_fallback.h` | **新增** — CoreLib 7 类型 fallback |
 | `src/native/runtime-core/reflection_api.cpp` | 重写为 registry 模式 |
 | `src/native/runtime-core/runtime_core.h` | 删除 `SetCurrentAotImage`，保留 `RegisterModule` |
-| `src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs` | 新增 `BuildModuleHeader()` emitter |
-| `src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs` | 新增 `ModuleHeader` 输出 |
+| `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs` | 新增 `BuildModuleHeader()` emitter |
+| `src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs` | 新增 `ModuleHeader` 输出 |
 | `src/managed/Chaos.IL2CPP.Contracts/ManagedClosureArtifactModels.cs` | 新增 `ModuleHeader` artifact name |
 
 ## 相关文档

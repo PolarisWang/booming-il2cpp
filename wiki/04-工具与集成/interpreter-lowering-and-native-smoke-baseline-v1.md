@@ -5,7 +5,7 @@
 - 适用�?Phase 7 interpreter core / mixed execution 的当�?proof-first baseline�?- 目标是把 managed `IL -> IR lowering`、managed mixed execution proof �?native `InterpreterVM` 的最小可执行承载面固定下来�?- 本页只记录长期有效的项目边界、proof 选型与验证入口，不记录单次执行流水�?
 ## Managed Baseline
 
-- `Chaos.IL2CPP.Interpreter` 继续只依�?`Chaos.IL2CPP.Contracts` �?`Chaos.IL2CPP.HotUpdate`，不能反向依�?`Chaos.IL2CPP.CodeGen`�?- `ManagedInstructionModel` 必须保留 `IlOffset`。`LoaderStage` 负责对每�?IL 指令打点 `IlOffset`，并�?`br` / `brtrue` / `brfalse` / `leave` 的操作数统一编码为绝�?IL target offset�?- 为兼容现�?`CodeGen` �?`Body.Blocks.Count == 1` 的假设，loader 继续对外暴露�?block body；IR block 切分�?`ILToIRLowering` 基于 `IlOffset`、branch target 与异常区域边界完成�?- `ILToIRLowering` 当前至少覆盖以下 lowering 面：
+- `Chaos.IL2CPP.Interpreter` 继续只依�?`Chaos.IL2CPP.Contracts` �?`Chaos.IL2CPP.HotUpdate`，不能反向依�?`Chaos.IL2CPP.Generator`�?- `ManagedInstructionModel` 必须保留 `IlOffset`。`LoaderStage` 负责对每�?IL 指令打点 `IlOffset`，并�?`br` / `brtrue` / `brfalse` / `leave` 的操作数统一编码为绝�?IL target offset�?- 为兼容现�?`CodeGen` �?`Body.Blocks.Count == 1` 的假设，loader 继续对外暴露�?block body；IR block 切分�?`ILToIRLowering` 基于 `IlOffset`、branch target 与异常区域边界完成�?- `ILToIRLowering` 当前至少覆盖以下 lowering 面：
   - `ldarg`
   - `ldloc`
   - `stloc`

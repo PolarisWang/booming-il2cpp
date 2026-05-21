@@ -9,7 +9,7 @@
 ## 2. 閫傜敤鑼冨洿
 
 閫傜敤浜庝互涓?managed 椤圭洰锛?
-- `Chaos.IL2CPP.CodeGen`
+- `Chaos.IL2CPP.Generator`
 - `Chaos.IL2CPP.Loader`
 - `Chaos.IL2CPP.Linker`
 - `Chaos.IL2CPP.Contracts`
@@ -17,7 +17,7 @@
 - `Chaos.IL2CPP.SemanticWorld`
 - `Chaos.IL2CPP.EngineBinding`
 
-鍏朵腑 `Chaos.IL2CPP.CodeGen` 鏄瑕佹不鐞嗗璞°€?
+鍏朵腑 `Chaos.IL2CPP.Generator` 鏄瑕佹不鐞嗗璞°€?
 ## 3. 鏍稿績鍘熷垯
 
 ### 3.1 鍏堝垎鑱岃矗锛屽啀鎵╄兘鍔?
@@ -45,7 +45,7 @@
 - capability/category/plan kind/template kind 鍙鑳界敤鏋氫妇鎴栧己绫诲瀷瀵硅薄琛ㄨ揪锛屽氨涓嶈鏂板鑷敱瀛楃涓插崗璁€?- 妯℃澘閫夋嫨搴旂敱寮虹被鍨?plan 鏄犲皠瀹屾垚锛屼笉搴旂敱澶栭儴瀛楃涓茶嚜鐢遍┍鍔ㄣ€?
 ## 4. 鐩綍鍒嗗眰瑙勮寖
 
-`Chaos.IL2CPP.CodeGen` 鐩爣涓婂簲淇濇寔浠ヤ笅鐩綍鍒嗗眰锛?
+`Chaos.IL2CPP.Generator` 鐩爣涓婂簲淇濇寔浠ヤ笅鐩綍鍒嗗眰锛?
 ```text
 CodeGen/
   CoreIr/

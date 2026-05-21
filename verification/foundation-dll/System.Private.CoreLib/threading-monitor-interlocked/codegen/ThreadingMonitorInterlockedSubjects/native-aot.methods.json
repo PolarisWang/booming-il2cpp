@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "assemblyName": "ThreadingMonitorInterlockedSubjects",
-  "methodCount": 14,
+  "methodCount": 17,
   "defaultStringId": 0,
   "methods": [
     {
@@ -115,6 +115,37 @@
       "params": [],
       "isInstance": false,
       "subjectIndex": 13
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
     }
   ]
 }

@@ -9,7 +9,7 @@ METHOD_EMISSION_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Emission"
     / "NativeAotLoweringPlanner.MethodEmission.cs"
 )
@@ -38,7 +38,7 @@ EXCEPTION_EMISSION_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Emission"
     / "NativeAotLoweringPlanner.ExceptionEmission.cs"
 )
@@ -46,7 +46,7 @@ INVOCATION_PLANNING_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Planning"
     / "NativeAotLoweringPlanner.InvocationPlanning.cs"
 )
@@ -54,7 +54,7 @@ LOWERING_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "AotCoreIrLowering.cs"
 )
 NATIVE_LIBRARY_PATH = (

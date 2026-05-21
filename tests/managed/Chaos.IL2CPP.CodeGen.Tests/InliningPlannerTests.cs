@@ -1,7 +1,7 @@
-using Chaos.IL2CPP.CodeGen.Planning;
+using Chaos.IL2CPP.Generator.Planning;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 public sealed class InliningPlannerTests
 {

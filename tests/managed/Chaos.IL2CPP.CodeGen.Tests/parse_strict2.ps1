@@ -2,7 +2,7 @@ Add-Type -AssemblyName System.Xml.Linq
 $doc = [System.Xml.Linq.XDocument]::Load('strict_coverage.xml')
 $sources = @{}
 $doc.Descendants('source') | ForEach-Object { $sources[$_.Attribute('id').Value] = $_.Attribute('path').Value }
-$mod = $doc.Descendants('module') | Where-Object { $_.Attribute('name').Value -eq 'Chaos.IL2CPP.CodeGen.dll' } | Select-Object -First 1
+$mod = $doc.Descendants('module') | Where-Object { $_.Attribute('name').Value -eq 'Chaos.IL2CPP.Generator.dll' } | Select-Object -First 1
 $fileStats = @{}
 foreach ($fn in $mod.Descendants('function')) {
     foreach ($r in $fn.Descendants('range')) {

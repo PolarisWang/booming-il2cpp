@@ -94,7 +94,7 @@ class TestFullAssemblyClosureCodegenContractsValidators(FullAssemblyClosureCodeg
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceLoweringPlanner.ShapeValidation.cs"
         ).read_text(encoding="utf-8")
@@ -147,7 +147,7 @@ class TestFullAssemblyClosureCodegenContractsValidators(FullAssemblyClosureCodeg
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceLoweringPlanner.ShapeValidation.cs"
         ).read_text(encoding="utf-8")
@@ -185,7 +185,7 @@ class TestFullAssemblyClosureCodegenContractsValidators(FullAssemblyClosureCodeg
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceLoweringPlanner.ShapeValidation.cs"
         ).read_text(encoding="utf-8")
