@@ -33,3 +33,9 @@ add_chaos_test(test_threading_benchmark
     LIBS ${CHAOS_THREADING_LIBS}
 )
 set_tests_properties(test_threading_benchmark PROPERTIES LABELS "benchmark")
+
+# async_integration_smoke_test — Task.Run integration with ThreadPool
+add_chaos_test(test_async_integration_smoke
+    async_integration_smoke_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+)

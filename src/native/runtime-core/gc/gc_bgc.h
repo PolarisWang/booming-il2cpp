@@ -269,7 +269,7 @@ public:
 
 private:
     BgcController() = default;
-    ~BgcController() = default;
+    ~BgcController();
 
     /// Populate the initial root set (under safepoint).
     /// Scans pinned roots, thread stacks, TLS nurseries, and GCHandles.
@@ -350,6 +350,13 @@ private:
 
     /// Worker threads spawned during concurrent mark.
     std::vector<std::thread> bgc_parallel_workers_;
+
+    /// Guards StopParallelMarkWorkers against concurrent calls from
+    /// ForceComplete and BgcThreadMain (double-join race).
+    /// Without this, both threads can join the same worker thread; the
+    /// first succeeds and CloseHandle's the handle, the second fails with
+    /// ESRCH ("no such process").
+    std::mutex stop_workers_mutex_;
 
     // ── SATB freeze protocol (CoreCLR-aligned convergence) ─────────
 

@@ -522,7 +522,9 @@ public:
     // MEM_COMMIT'd before reuse.
     struct PoolEntry {
         OldGenPage* page;
-        CHAOS_IL2CPP_SIZE page_size;  // saved before decommit for recommit
+        CHAOS_IL2CPP_SIZE page_size;      // saved before decommit for recommit
+        CHAOS_IL2CPP_SIZE payload_size;   // preserved across decommit (zeroed by OS)
+        CHAOS_IL2CPP_SIZE bitmap_bytes;   // preserved across decommit
     };
     static constexpr int kMaxPoolSize = 16;
     std::vector<PoolEntry> page_pool_;

@@ -1186,13 +1186,13 @@ def _generate_hotupdate_cmake_full(family_slug: str) -> str:
         "    ${REPO_ROOT}/src/native/interpreter/generated\n"
         "    ${REPO_ROOT}/src/native\n"
         "    ${REPO_ROOT}/third_party/fmt/include\n"
-        "    ${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib\n"
+        "    ${REPO_ROOT}/testing/foundation-dll/System.Private.CoreLib\n"
         ")\n"
         "# Force-include hotupdate config so CodeGen-generated code can find\n"
         "# chaos_managed_pointer_local_slot_tag, chaos_is_string_id, etc.\n"
         f"target_compile_options({target} PRIVATE\n"
-        '    $<$<CXX_COMPILER_ID:MSVC>:/FI"${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h">\n'
-        '    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${REPO_ROOT}/verification/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n'
+        '    $<$<CXX_COMPILER_ID:MSVC>:/FI"${REPO_ROOT}/testing/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h">\n'
+        '    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-include${REPO_ROOT}/testing/foundation-dll/System.Private.CoreLib/native_hotupdate_config.h>\n'
         ")\n"
         "# fmt requires /utf-8 on MSVC\n"
         f"target_compile_options({target} PRIVATE\n"
@@ -2629,7 +2629,7 @@ def main() -> None:
     for family_slug in families:
         generate_family(family_slug)
 
-    print(f"\nDone. Hotpatch test and CMake artifacts in verification/foundation-dll/.../il2cpp_dist/hotupdate/")
+    print(f"\nDone. Hotpatch test and CMake artifacts in testing/foundation-dll/.../il2cpp_dist/hotupdate/")
 
 
 if __name__ == "__main__":

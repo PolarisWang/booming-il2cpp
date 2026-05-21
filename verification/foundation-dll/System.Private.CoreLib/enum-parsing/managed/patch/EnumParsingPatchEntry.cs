@@ -81,7 +81,6 @@ public static partial class EnumParsingPatchEntry
     }
 
     // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
-
     public static void Run(int entryIndex)
     {
         try

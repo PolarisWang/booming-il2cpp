@@ -78,10 +78,30 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         return NurseryAllocate(size);
     }
 
-    // Phase 2: Young region is exhausted — trigger a young GC.
-    // When in NO_GC_REGION, skip young GC and go straight to old-gen fallback.
+    // Phase 2: Young region is exhausted — consult the GC scheduler.
+    // When in NO_GC_REGION, skip collection and go straight to old-gen fallback.
     if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
 
+        // Check if scheduler wants a full STW GC before doing a young GC.
+        // DecideCollection() returns FULL when full_gc_requested_ is set or
+        // page growth exceeds the trigger threshold.
+        auto collection_kind = g_gc_scheduler.DecideCollection();
+        if (collection_kind == GcCollectionKind::FULL) {
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto* mt = threading::GetCurrentThread();
+            if (mt) {
+                mt->tlab_start = tls_tlab.start;
+                mt->tlab_current = tls_tlab.current;
+            }
+            chaos_gc_collect();
+            if (mt) {
+                mt->tlab_start = nullptr;
+                mt->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
+        } else {
         // Phase 2a: Check if Gen1 needs independent collection before young GC.
         // If Gen1 is near-full/fragmented, collect it independently — this avoids
         // the cost of Cheney-scavenging the nursery when only Gen1 needs cleanup.
@@ -142,6 +162,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             tls_tlab = TLAB{};
         }
     }
+    }
 
     // Phase 3: Retry from the fresh young region + new TLAB.
     tlab = TlabClaimFromYoungGen();
@@ -179,23 +200,46 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         return NurseryAllocateAtomic(size);
     }
 
-    // Phase 2: Young GC (scanning_required = false for pointer-free).
-    // When in NO_GC_REGION, skip young GC and go straight to fallback.
+    // Phase 2: Young region is exhausted — consult the GC scheduler.
+    // When in NO_GC_REGION, skip collection and go straight to old-gen fallback.
     if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        auto* mt = threading::GetCurrentThread();
-        if (mt) {
-            mt->tlab_start = tls_tlab.start;
-            mt->tlab_current = tls_tlab.current;
+
+        // Check if scheduler wants a full STW GC before doing a young GC.
+        // DecideCollection() returns FULL when full_gc_requested_ is set or
+        // page growth exceeds the trigger threshold.
+        auto collection_kind = g_gc_scheduler.DecideCollection();
+        if (collection_kind == GcCollectionKind::FULL) {
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto* mt = threading::GetCurrentThread();
+            if (mt) {
+                mt->tlab_start = tls_tlab.start;
+                mt->tlab_current = tls_tlab.current;
+            }
+            chaos_gc_collect();
+            if (mt) {
+                mt->tlab_start = nullptr;
+                mt->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
+        } else {
+            // Young GC (scanning_required = false for pointer-free).
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto* mt = threading::GetCurrentThread();
+            if (mt) {
+                mt->tlab_start = tls_tlab.start;
+                mt->tlab_current = tls_tlab.current;
+            }
+            GcYoungCollection();
+            if (mt) {
+                mt->tlab_start = nullptr;
+                mt->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
         }
-        GcYoungCollection();
-        if (mt) {
-            mt->tlab_start = nullptr;
-            mt->tlab_current = nullptr;
-        }
-        threading::ReleaseGlobalSafepoint(gen);
-        GcAdvanceBgcCycle();
-        tls_tlab = TLAB{};
     }
 
     // Phase 3: Retry.

@@ -923,4 +923,235 @@ public sealed class ReferenceProofShapeValidationTests
         var method = GetShapeMethod("LooksLikeInterfaceMethodSubjectId", typeof(string));
         Assert.Equal(expected, InvokeBool(method, subjectId));
     }
+
+    // ════════════════════════════════════════════════════════════════════
+    // Int64 variants of Array shape predicates (TypedIlInstructionArtifact)
+    // ════════════════════════════════════════════════════════════════════
+
+    private static IReadOnlyList<TypedIlInstructionArtifact> ArrayCopyLenOnlyInt64Instrs() => new TypedIlInstructionArtifact[]
+    {
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "dup" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldstr" },
+        new() { Op = "newobj" },
+        new() { Op = "stelem.ref" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "stloc" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "conv.i8" },
+        new() { Op = "call" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldelem.ref" },
+        new() { Op = "callvirt" },
+        new() { Op = "call" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ret" },
+    };
+
+    [Fact]
+    public void IsArrayCopyReferenceArrayLengthOnlyInt64_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyReferenceArrayLengthOnlyInt64EntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyLenOnlyInt64Instrs() }));
+    }
+
+    private static IReadOnlyList<TypedIlInstructionArtifact> ArrayCopyIndexedInt32Instrs() => new TypedIlInstructionArtifact[]
+    {
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "dup" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldstr" },
+        new() { Op = "newobj" },
+        new() { Op = "stelem.ref" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "stloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "call" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldelem.ref" },
+        new() { Op = "callvirt" },
+        new() { Op = "call" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ret" },
+    };
+
+    [Fact]
+    public void IsArrayCopyReferenceArrayIndexedInt32_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyReferenceArrayIndexedInt32EntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyIndexedInt32Instrs() }));
+    }
+
+    private static IReadOnlyList<TypedIlInstructionArtifact> ArrayCopyToInt64Instrs() => new TypedIlInstructionArtifact[]
+    {
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "dup" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldstr" },
+        new() { Op = "newobj" },
+        new() { Op = "stelem.ref" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "newarr" },
+        new() { Op = "stloc" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "conv.i8" },
+        new() { Op = "callvirt" },
+        new() { Op = "ldloc" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ldelem.ref" },
+        new() { Op = "callvirt" },
+        new() { Op = "call" },
+        new() { Op = "ldc.i4" },
+        new() { Op = "ret" },
+    };
+
+    [Fact]
+    public void IsArrayCopyToReferenceArrayTargetOffsetInt64_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyToReferenceArrayTargetOffsetInt64EntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyToInt64Instrs() }));
+    }
+
+    // ── Dispatcher shape predicates ───────────────────────────────
+
+    [Fact]
+    public void IsArrayCopyReferenceArrayLengthOnlyEntryPointShape_Int32_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyReferenceArrayLengthOnlyEntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyLenOnlyInt32Instrs() }));
+    }
+
+    [Fact]
+    public void IsArrayCopyReferenceArrayLengthOnlyEntryPointShape_Int64_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyReferenceArrayLengthOnlyEntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyLenOnlyInt64Instrs() }));
+    }
+
+    [Fact]
+    public void IsArrayCopyReferenceArrayIndexedEntryPointShape_Int32_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyReferenceArrayIndexedEntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyIndexedInt32Instrs() }));
+    }
+
+    [Fact]
+    public void IsArrayCopyToReferenceArrayTargetOffsetEntryPointShape_Int64_ReturnsTrue()
+    {
+        var m = GetShapeMethod("IsArrayCopyToReferenceArrayTargetOffsetEntryPointShape", typeof(IReadOnlyList<TypedIlInstructionArtifact>));
+        Assert.True(InvokeBool(m, new object[] { ArrayCopyToInt64Instrs() }));
+    }
+
+    // ── Helper methods ────────────────────────────────────────────
+
+    [Theory]
+    [InlineData("System.Console/System.Console::WriteLine(System.String)", true)]
+    [InlineData("System.Console/System.Console::WriteLine:System.Void(System.String)", true)]
+    [InlineData("System.Console::WriteLine(System.String)", false)]
+    [InlineData("System.Console::Write(System.String)", false)]
+    [InlineData(null, false)]
+    [InlineData("", false)]
+    public void IsConsoleWriteLineStringTarget_ReturnsExpected(string? callee, bool expected)
+    {
+        var m = GetShapeMethod("IsConsoleWriteLineStringTarget", typeof(string));
+        Assert.Equal(expected, InvokeBool(m, callee));
+    }
+
+    [Theory]
+    [InlineData("System.Private.CoreLib/System.String::Concat(System.String,System.String)", "System.Private.CoreLib/System.String::Concat(System.String,System.String)")]
+    [InlineData("System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)", "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)")]
+    [InlineData("System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)", "System.Private.CoreLib/System.String::Concat(System.String,System.String)")]
+    [InlineData("System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)", "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)")]
+    [InlineData("System.String::Concat(System.String,System.String)", "System.String::Concat(System.String,System.String)")]
+    [InlineData("", "")]
+    [InlineData(null, "System.Private.CoreLib/System.String::Concat(System.String,System.String)")]
+    public void NormalizeStringConcatIcall_ReturnsExpected(string? callee, string? expected)
+    {
+        var m = GetShapeMethod("NormalizeStringConcatIcall", typeof(string));
+        var result = m.Invoke(null, new object?[] { callee });
+        Assert.Equal(expected, (string?)result);
+    }
+
+    [Fact]
+    public void GetRequiredInstructionCallee_Valid_ReturnsCallee()
+    {
+        var m = GetShapeMethod("GetRequiredInstructionCallee", typeof(TypedIlInstructionArtifact), typeof(string), typeof(int));
+        var instr = new TypedIlInstructionArtifact { Op = "call", Callee = "System.Console::WriteLine" };
+        Assert.Equal("System.Console::WriteLine", (string?)m.Invoke(null, new object?[] { instr, "test::method", 0 })!);
+    }
+
+    [Fact]
+    public void GetRequiredInstructionCallee_Null_Throws()
+    {
+        var m = GetShapeMethod("GetRequiredInstructionCallee", typeof(TypedIlInstructionArtifact), typeof(string), typeof(int));
+        Assert.Throws<TargetInvocationException>(() => m.Invoke(null, new object?[] { new TypedIlInstructionArtifact { Op = "call" }, "test::method", 0 }));
+    }
+
+    [Theory]
+    [InlineData("Hello", "Hello")]
+    [InlineData("", "")]
+    public void GetRequiredOperandString_Valid_ReturnsOperand(string operand, string expected)
+    {
+        var m = GetShapeMethod("GetRequiredOperandString", typeof(TypedIlInstructionArtifact));
+        var instr = new TypedIlInstructionArtifact { Op = "ldstr", Operand = operand };
+        Assert.Equal(expected, (string?)m.Invoke(null, new object?[] { instr }));
+    }
+
+    [Fact]
+    public void GetRequiredOperandString_Null_Throws()
+    {
+        var m = GetShapeMethod("GetRequiredOperandString", typeof(TypedIlInstructionArtifact));
+        Assert.Throws<TargetInvocationException>(() => m.Invoke(null, new object?[] { new TypedIlInstructionArtifact { Op = "ldstr" } }));
+    }
+
+    [Theory]
+    [InlineData(42, 42)]
+    [InlineData(99, 99)]
+    public void GetRequiredOperandInt_Int_ReturnsValue(int operand, int expected)
+    {
+        var m = GetShapeMethod("GetRequiredOperandInt", typeof(TypedIlInstructionArtifact));
+        var instr = new TypedIlInstructionArtifact { Op = "ldc.i4", Operand = operand };
+        Assert.Equal(expected, (int)m.Invoke(null, new object?[] { instr })!);
+    }
+
+    [Fact]
+    public void GetRequiredOperandInt_LongOperand_ReturnsInt()
+    {
+        var m = GetShapeMethod("GetRequiredOperandInt", typeof(TypedIlInstructionArtifact));
+        var instr = new TypedIlInstructionArtifact { Op = "ldc.i4", Operand = 42L };
+        Assert.Equal(42, (int)m.Invoke(null, new object?[] { instr })!);
+    }
+
+    [Fact]
+    public void GetRequiredPromotedInt64ConstantAsInt_ValidPair_ReturnsInt()
+    {
+        var m = GetShapeMethod("GetRequiredPromotedInt64ConstantAsInt", typeof(IReadOnlyList<TypedIlInstructionArtifact>), typeof(int), typeof(string));
+        var instrs = new TypedIlInstructionArtifact[]
+        {
+            new() { Op = "ldc.i4", Operand = 42 },
+            new() { Op = "conv.i8" },
+        };
+        Assert.Equal(42, (int)m.Invoke(null, new object?[] { instrs, 0, "test" })!);
+    }
+
+    [Fact]
+    public void GetRequiredPromotedInt64ConstantAsInt_TooFew_Throws()
+    {
+        var m = GetShapeMethod("GetRequiredPromotedInt64ConstantAsInt", typeof(IReadOnlyList<TypedIlInstructionArtifact>), typeof(int), typeof(string));
+        var instrs = new TypedIlInstructionArtifact[] { new() { Op = "ldc.i4", Operand = 42 } };
+        Assert.Throws<TargetInvocationException>(() => m.Invoke(null, new object?[] { instrs, 0, "test" }));
+    }
 }

@@ -125,8 +125,8 @@ def generate_execution_projects(repo_root: Path, *, assembly_name: str, family_i
     # Solution directories for this family's csproj files
     family_solution_dir = solution_base / assembly_name / family_slug
 
-    # Source files are in verification/foundation-dll/<assembly>/<slug>/
-    family_verification_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug
+    # Source files are in testing/foundation-dll/<assembly>/<slug>/
+    family_verification_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug
     src_dir = family_verification_root / "src"
     patch_dir = family_verification_root / "src" / "patch"
     tests_dir = family_verification_root / "managed_test" / "tests"

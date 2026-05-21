@@ -73,6 +73,10 @@ struct BgcSmokeTest : GcStressTestBase {
         }
     }
     void TearDown() override {
+        if (s_bgc_started.load()) {
+            BgcController::Instance().Stop();
+            s_bgc_started.store(false);
+        }
         GcStressTestBase::TearDown();
     }
 

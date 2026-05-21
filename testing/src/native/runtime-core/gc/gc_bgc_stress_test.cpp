@@ -135,7 +135,7 @@ struct BgcStressTest : GcStressTestBase {
         GcStressTestBase::SetUp();
         if (!s_inited.load()) {
             GcSetHeapBase(reinterpret_cast<void*>(uintptr_t(0)));
-            g_old_gen.Init(0, 2);
+            g_old_gen.Init(0, 8);
             InitCrossGen();
             BgcController::Instance().Start();
             std::this_thread::sleep_for(std::chrono::milliseconds(50));

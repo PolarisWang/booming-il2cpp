@@ -61,7 +61,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(tests/perf/unordered-map-bench)
 
     # ── Foundation DLL native family skeletons ────────────────────
-    add_subdirectory(verification/foundation-dll)
+    add_subdirectory(testing/foundation-dll)
 
     # ── Architecture check targets ─────────────────────────────────────
     # Each native module gets a per-module check target.

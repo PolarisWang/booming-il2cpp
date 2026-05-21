@@ -49,7 +49,7 @@ from multi_benchmark_runner import (
 )
 
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 sys.path.insert(0, str(_HERE))
 sys.path.insert(0, str(_HERE.parent.parent))

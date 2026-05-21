@@ -35,7 +35,7 @@ LAYER_RULES: dict[str, re.Pattern] = {
 }
 
 KNOWN_GENERATED_PATTERNS = [
-    re.compile(r"verification/foundation-dll/"),
+    re.compile(r"(?:verification|testing)/foundation-dll/"),
     re.compile(r"\.generated\."),
     re.compile(r"runtime_helper_shapes\."),
     re.compile(r"closure\.manifest\."),

@@ -4,10 +4,12 @@
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
+#include "gc_api.h"
 #include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
 #include "gc_events.h"
+#include "gc_helpers.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
 #include "gc_region.h"
@@ -45,6 +47,12 @@
 static constexpr CHAOS_IL2CPP_SIZE kOldGenBlockHeaderSize = sizeof(void*);
 
 namespace chaos::il2cpp::runtime_core {
+
+// Re-entrancy guard for synchronous full GC inside OldGen::Allocate.
+// OldGen::Allocate is called from young/Gen1 promotion paths (within a GC).
+// This flag prevents recursive chaos_gc_collect() when we detect and trigger
+// a full GC from within an allocation that itself is part of a GC cycle.
+static thread_local bool s_old_gen_gc_active = false;
 
 // ���� Global instance ������������������������������������������������������������������������������������������������
 MarkSweepOldGen g_old_gen;
@@ -174,6 +182,8 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
 
     RebuildPageArray();
 
+    initialized_.store(true, std::memory_order_release);
+
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "init done base=0x{0} pages={1}",
         static_cast<unsigned long long>(heap_base_), page_count_);
     return true;
@@ -247,12 +257,17 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             auto* recycled = entry.page;
 
             // Re-initialize all header fields that were lost during decommit.
+            recycled->page_size = entry.page_size;
+            recycled->payload_size = entry.payload_size;
+            recycled->bitmap_bytes = entry.bitmap_bytes;
             recycled->scanning = scanning;
             recycled->preferred_sc_idx = (preferred_sc_idx >= 0 && preferred_sc_idx < kOldGenNumSizeClasses)
                 ? static_cast<int8_t>(preferred_sc_idx) : static_cast<int8_t>(-1);
             recycled->in_use.store(true, std::memory_order_release);
 
-            // Clear bitmap (permanent fields like page_size/payload_size are unchanged).
+            // Clear bitmap (page_size/payload_size/bitmap_bytes were restored
+            // from PoolEntry after recommit — Windows zeroes the entire page
+            // on MEM_DECOMMIT + MEM_COMMIT).
             GcMarkBitmap(recycled->MarkBitmap(), recycled->bitmap_bytes).Clear();
 
             // Clear free list heads and re-carve.
@@ -656,8 +671,31 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     if (!initialized_.load(std::memory_order_acquire)) {
         std::lock_guard<std::mutex> lock(init_mutex_);
         if (!initialized_.load(std::memory_order_acquire)) {
-            Init(0, 2);
+            Init(0, 8);
             initialized_.store(true, std::memory_order_release);
+        }
+    }
+
+    // ── Full-GC gate: check the scheduler before allocating more pages ──
+    //
+    // When the scheduler indicates a full STW GC is needed (full_gc_requested_
+    // flag or page-growth threshold exceeded), run it synchronously instead of
+    // deferring.  This prevents unbounded page-list growth when the application
+    // allocates heavily into old-gen directly (large arrays, delegate objects)
+    // without going through a nursery allocation slow path.
+    //
+    // Re-entrancy: OldGen::Allocate is called from within GC promotion paths
+    // (young collector, Gen1, BGC).  s_old_gen_gc_active guards against recursive
+    // chaos_gc_collect() invocations — the promotion alloc must proceed without
+    // triggering another GC cycle.
+    if (!GcIsInNoGcRegion() && !s_old_gen_gc_active && g_gc_scheduler.TryClaimGcSlot()) {
+        if (g_gc_scheduler.DecideCollection() == GcCollectionKind::FULL) {
+            s_old_gen_gc_active = true;
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            chaos_gc_collect();
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            s_old_gen_gc_active = false;
         }
     }
 
@@ -728,10 +766,16 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         return ptr;
     }
 
-    // Miss: allocate a new page, hinting the missing size class so the
-    // carve logic fills most of the page with blocks of this size.
+    // Miss: allocate a new page
     auto* page = AllocatePage(kOldGenPageSize, scanning_required, sc_idx);
-    if (page == nullptr) return nullptr;
+    if (page == nullptr) {
+        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "AllocatePage failed sc_idx={0} scanning={1}",
+            sc_idx, static_cast<int>(scanning_required));
+        CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "page_list_ head={0} in_use={1}",
+            static_cast<void*>(page_list_),
+            page_list_ ? static_cast<int>(page_list_->in_use.load()) : -1);
+        return nullptr;
+    }
 
     // Pop from the newly carved page's freelist directly, avoiding a full
     // TryAllocateFromFreeLists walk (which would re-acquire mutex_ and scan
@@ -1517,10 +1561,12 @@ MarkSweepOldGen::CompactMode MarkSweepOldGen::DecideCompactMode() {
 
     // V5: No live data means compaction has nothing to compact.
     if (total_live == 0) return CompactMode::NONE;
-    // Skip compaction when live data is trivially small — the 5-phase
-    // CrossPageCompact overhead exceeds the benefit for a few KB of movement.
-    static constexpr CHAOS_IL2CPP_SIZE kMinCrossCompactBytes = 4096;
-    if (total_live < kMinCrossCompactBytes) return CompactMode::NONE;
+    // Skip compaction when live data is trivially small — the overhead
+    // of planning, relocating pointers, and compacting (even per-page
+    // COMPACT mode runs a multi-phase parallel pipeline) exceeds the
+    // benefit for a few KB of movement.
+    static constexpr CHAOS_IL2CPP_SIZE kMinCompactBytes = 4096;
+    if (total_live < kMinCompactBytes) return CompactMode::NONE;
     if (candidate_pages == 0) return CompactMode::NONE;
 
     // Cross-page compaction if global fragmentation > 40% (most pages
@@ -1844,6 +1890,34 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::ParallelCompactPages() {
         });
     }
 
+    // Phase 4a: Relocate POH region pointers.
+    // POH regions (REGION_POH) are not in the old-gen page_list_, so the
+    // parallel relocation above does NOT scan them.  After compaction, any
+    // POH object containing a pointer to a compacted old-gen object would
+    // hold a stale pointer.  Walk all POH regions and fix up references.
+    if (!addr_map.empty()) {
+        auto& rm = RegionManager::Instance();
+        int poh_count = rm.GetPohRegionCount();
+        if (poh_count > 0) {
+            for (Region* r = rm.GetFirstPohRegion(); r != nullptr;
+                 r = rm.GetNextPohRegion(r)) {
+                char* end = r->current;
+                if (end <= r->begin) continue;
+                for (char* cursor = r->begin; cursor < end; cursor += sizeof(void*)) {
+                    auto* slot = reinterpret_cast<void**>(cursor);
+                    void* val = *slot;
+                    if (val == nullptr) continue;
+                    uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
+                    auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
+                        [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                    if (it != addr_map.end() && it->old_addr == val_addr) {
+                        *slot = reinterpret_cast<void*>(it->new_addr);
+                    }
+                }
+            }
+        }
+    }
+
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "parallel_compact_done pages={0} objects={1} saved={2}",
         total_compact,
         static_cast<unsigned long long>(addr_map.size()),
@@ -1973,6 +2047,32 @@ void MarkSweepOldGen::GlobalRelocate(
                 [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
             if (it != addr_map.end() && it->old_addr == val_addr) {
                 *slot_ptr = reinterpret_cast<void*>(it->new_addr);
+            }
+        }
+    }
+
+    // Also relocate POH region pointers.  POH regions are not in the old-gen
+    // page_list_, so the old-gen page walk above does not scan them.  After
+    // compaction, POH objects may hold stale pointers to moved old-gen objects.
+    if (!addr_map.empty()) {
+        auto& rm = RegionManager::Instance();
+        int poh_count = rm.GetPohRegionCount();
+        if (poh_count > 0) {
+            for (Region* r = rm.GetFirstPohRegion(); r != nullptr;
+                 r = rm.GetNextPohRegion(r)) {
+                char* end = r->current;
+                if (end <= r->begin) continue;
+                for (char* cursor = r->begin; cursor < end; cursor += sizeof(void*)) {
+                    auto* slot = reinterpret_cast<void**>(cursor);
+                    void* val = *slot;
+                    if (val == nullptr) continue;
+                    uintptr_t val_addr = reinterpret_cast<uintptr_t>(val);
+                    auto it = std::lower_bound(addr_map.begin(), addr_map.end(), val_addr,
+                        [](const AddrPair& p, uintptr_t addr) { return p.old_addr < addr; });
+                    if (it != addr_map.end() && it->old_addr == val_addr) {
+                        *slot = reinterpret_cast<void*>(it->new_addr);
+                    }
+                }
             }
         }
     }
@@ -2941,10 +3041,13 @@ void MarkSweepOldGen::BgcSweep() {
                     // Decommit the page to release physical pages while
                     // keeping the VA range reserved for fast recommit.
                     auto pool_page_size = p->page_size;
+                    auto pool_payload_size = p->payload_size;
+                    auto pool_bitmap_bytes = p->bitmap_bytes;
 #if defined(_WIN32) || defined(_WIN64)
                     VirtualFree(p, pool_page_size, MEM_DECOMMIT);
 #endif
-                    page_pool_.push_back(PoolEntry{ p, pool_page_size });
+                    page_pool_.push_back(PoolEntry{
+                        p, pool_page_size, pool_payload_size, pool_bitmap_bytes });
                 } else {
                     // Defer VirtualFree to BgcCompact (STW safepoint).
                     deferred_free_pages_.push_back(p);

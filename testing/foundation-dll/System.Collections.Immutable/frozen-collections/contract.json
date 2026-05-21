@@ -15,16 +15,7 @@
     "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Int32>:System.Collections.Frozen.FrozenSet<System.Int32>(System.Int32)"
   ],
   "methodSubjectCount": 8,
-  "customEntryIndices": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7
-  ],
+  "customEntryIndices": [0, 1, 2, 3, 4, 5, 6, 7],
   "functionalObligation": {
     "required": true,
     "benchmarkRequired": false,

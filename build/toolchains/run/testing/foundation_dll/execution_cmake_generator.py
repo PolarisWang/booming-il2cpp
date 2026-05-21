@@ -58,7 +58,7 @@ def generate_cmake_projects(repo_root: Path, *, assembly_name: str, family_id: s
 
     Each CMakeLists.txt uses add_subdirectory() to forward to the real source
     locations (il2cpp_dist/, native_test/benchmark/, native_test/hotupdate/)
-    under verification/foundation-dll/<assembly>/<slug>/.
+    under testing/foundation-dll/<assembly>/<slug>/.
     """
     family_slug = _family_slug(family_id)
     solution_native_base = repo_root / "solution_native"

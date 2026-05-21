@@ -1,7 +1,7 @@
 """Generate owner.manifest.json for each foundation-dll family.
 
-Scans verification/foundation-dll/<Assembly>/<Family>/capability-family-contract.json
-and creates verification/catalog/owners/foundation-dll-<assembly>-<family>/owner.manifest.json.
+Scans testing/foundation-dll/<Assembly>/<Family>/contract.json
+and creates testing/catalog/owners/foundation-dll-<assembly>-<family>/owner.manifest.json.
 
 Run:  py -3 -m testing.foundation_dll._generate_subject_manifests
 """
@@ -15,8 +15,8 @@ from pathlib import Path
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]  # build/toolchains/run/testing/foundation_dll -> repo root
 
-FOUNDATION_DLL_BASE = _REPO_ROOT / "verification" / "foundation-dll"
-CATALOG_OWNERS = _REPO_ROOT / "verification" / "catalog" / "owners"
+FOUNDATION_DLL_BASE = _REPO_ROOT / "testing" / "foundation-dll"
+CATALOG_OWNERS = _REPO_ROOT / "testing" / "catalog" / "owners"
 
 MANIFEST_TEMPLATE = {
     "subjectId": None,  # filled per family
@@ -129,8 +129,8 @@ def generate_manifests(dry_run: bool = False) -> list[Path]:
             manifest["displayName"] = str(display_name)
             manifest["source"] = {
                 "type": "foundation-dll-family",
-                "path": f"verification/foundation-dll/{assembly}/{family_slug}",
-                "primaryProjectPath": f"verification/foundation-dll/{assembly}/{family_slug}",
+                "path": f"testing/foundation-dll/{assembly}/{family_slug}",
+                "primaryProjectPath": f"testing/foundation-dll/{assembly}/{family_slug}",
                 "familySlug": family_slug,
                 "assembly": assembly,
             }

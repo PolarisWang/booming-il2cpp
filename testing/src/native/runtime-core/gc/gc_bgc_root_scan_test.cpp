@@ -82,26 +82,28 @@ static void RunBgcCycle() {
 }
 
 struct BgcRootScanTest : GcStressTestBase {
-    TestTypeInfo* type_info_64 = nullptr;
+    static TestTypeInfo* type_info_64;
+
+    static bool s_bgc_started;
 
     void SetUp() override {
         GcStressTestBase::SetUp();
-        if (!s_inited.load()) {
+        if (!s_bgc_started) {
             type_info_64 = SetupTestType(64);
-            NurseryAllocate(64);  // warmup
+            NurseryAllocate(64);
             BgcController::Instance().Start();
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            s_inited.store(true);
+            s_bgc_started = true;
         }
     }
     void TearDown() override {
         GcStressTestBase::TearDown();
     }
-
-    static std::atomic<bool> s_inited;
 };
 
-std::atomic<bool> BgcRootScanTest::s_inited{false};
+bool BgcRootScanTest::s_bgc_started = false;
+TestTypeInfo* BgcRootScanTest::type_info_64 = nullptr;
+
 
 } // anonymous namespace
 

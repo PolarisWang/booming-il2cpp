@@ -43,6 +43,7 @@
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
 | [`Foundation-DLL新增验证接入流程.md`](./Foundation-DLL新增验证接入流程.md) | foundation DLL 新增验证接入 | 说明 `derive -> promote -> onboard` 的标准流程 |
 | [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增测试接入 | 说明如何在 subject source 中声明测试，并接入 collection-driven 主线 |
+| [`ASan-内存错误检测指南.md`](./ASan-%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B%E6%8C%87%E5%8D%97.md) | ASan 内存检测 | 说明 ASan 的构建配置、运行方式、假阳性处理策略与常见问题 |
 | [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层 |
 | [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) | Scriban 使用与 codegen 规范 | 说明 IL2CPP / Python codegen 默认优先 Scriban，以及能力不足时的扩展顺序 |
 | [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject 统一入口 | 说明 subject 入口、public command 和结果落点 |

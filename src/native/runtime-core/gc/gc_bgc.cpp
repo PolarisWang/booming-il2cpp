@@ -34,6 +34,10 @@ void BgcFlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
 // BgcController implementation
 // ======================================================================
 
+BgcController::~BgcController() {
+    Stop();
+}
+
 void BgcController::Start() {
     if (bgc_running_.exchange(true, std::memory_order_acq_rel))
         return;
@@ -1203,6 +1207,11 @@ int BgcController::SpawnParallelMarkWorkers() {
 }
 
 void BgcController::StopParallelMarkWorkers() {
+    // Guards against concurrent calls from ForceComplete and BgcThreadMain.
+    // Without this, both can join the same worker — the first succeeds and
+    // CloseHandle's the handle, the second fails with ESRCH ("no such process").
+    std::lock_guard<std::mutex> lock(stop_workers_mutex_);
+
     bgc_parallel_done_.store(true, std::memory_order_release);
     for (auto& w : bgc_parallel_workers_) {
         if (w.joinable()) w.join();

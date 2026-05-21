@@ -47,7 +47,7 @@ def generate_cmake_solution(
         "",
         "# ── Foundation DLL family native targets ──",
         "# Each forwarding CMakeLists.txt delegates to the real source locations",
-        "# under verification/foundation-dll/<assembly>/<slug>/",
+        "# under testing/foundation-dll/<assembly>/<slug>/",
         "",
     ]
 

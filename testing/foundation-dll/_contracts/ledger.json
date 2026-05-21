@@ -775,6 +775,831 @@
           "lastVerified": ""
         }
       ]
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "families": [
+        {
+          "familyId": "family/System.Formats.Asn1/decoder",
+          "slug": "decoder",
+          "displayName": "ASN.1 Decoder",
+          "methodCount": 33,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/encoding-rules",
+          "slug": "encoding-rules",
+          "displayName": "ASN.1 Encoding Rules",
+          "methodCount": 0,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/options-errors",
+          "slug": "options-errors",
+          "displayName": "ASN.1 Options And Errors",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/reader",
+          "slug": "reader",
+          "displayName": "ASN.1 Reader",
+          "methodCount": 40,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/tag-model",
+          "slug": "tag-model",
+          "displayName": "ASN.1 Tag Model",
+          "methodCount": 19,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/writer",
+          "slug": "writer",
+          "displayName": "ASN.1 Writer",
+          "methodCount": 42,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Compression.Brotli",
+      "families": [
+        {
+          "familyId": "family/System.IO.Compression.Brotli/decoder",
+          "slug": "decoder",
+          "displayName": "Brotli Decoder",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/encoder",
+          "slug": "encoder",
+          "displayName": "Brotli Encoder",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/options",
+          "slug": "options",
+          "displayName": "Brotli Options",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/stream",
+          "slug": "stream",
+          "displayName": "Brotli Stream",
+          "methodCount": 31,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "families": [
+        {
+          "familyId": "family/System.IO.Compression.ZipFile/zip-file-apis",
+          "slug": "zip-file-apis",
+          "displayName": "ZipFile APIs",
+          "methodCount": 34,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.ZipFile/zip-file-extensions",
+          "slug": "zip-file-extensions",
+          "displayName": "ZipFile Extensions",
+          "methodCount": 12,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "families": [
+        {
+          "familyId": "family/System.IO.Pipelines/options-scheduler",
+          "slug": "options-scheduler",
+          "displayName": "Options And Scheduler",
+          "methodCount": 23,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/pipe-core",
+          "slug": "pipe-core",
+          "displayName": "Pipe Core",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/read-flush-results",
+          "slug": "read-flush-results",
+          "displayName": "Read And Flush Results",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/reader-writer",
+          "slug": "reader-writer",
+          "displayName": "Pipe Reader Writer",
+          "methodCount": 27,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/stream-adapters",
+          "slug": "stream-adapters",
+          "displayName": "Stream Adapters",
+          "methodCount": 1,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "families": [
+        {
+          "familyId": "family/System.Net.ServerSentEvents/formatter",
+          "slug": "formatter",
+          "displayName": "SSE Formatter",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/item-parser",
+          "slug": "item-parser",
+          "displayName": "SSE Item Parser",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/parser",
+          "slug": "parser",
+          "displayName": "SSE Parser",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/sse-item",
+          "slug": "sse-item",
+          "displayName": "SSE Item Model",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "families": [
+        {
+          "familyId": "family/System.ObjectModel/collection-change-notifications",
+          "slug": "collection-change-notifications",
+          "displayName": "Collection Change Notifications",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/command-type-metadata",
+          "slug": "command-type-metadata",
+          "displayName": "Command And Type Metadata",
+          "methodCount": 15,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/data-errors",
+          "slug": "data-errors",
+          "displayName": "Data Errors",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/object-model-collections",
+          "slug": "object-model-collections",
+          "displayName": "ObjectModel Collections",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/observable-collections",
+          "slug": "observable-collections",
+          "displayName": "Observable Collections",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/property-change-notifications",
+          "slug": "property-change-notifications",
+          "displayName": "Property Change Notifications",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "families": [
+        {
+          "familyId": "family/System.Runtime.InteropServices/com-types",
+          "slug": "com-types",
+          "displayName": "COM Types",
+          "methodCount": 22,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/com-wrappers",
+          "slug": "com-wrappers",
+          "displayName": "COM Wrappers",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/custom-marshaller-contracts",
+          "slug": "custom-marshaller-contracts",
+          "displayName": "Custom Marshaller Contracts",
+          "methodCount": 0,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/exception-errors",
+          "slug": "exception-errors",
+          "displayName": "Interop Exceptions And Errors",
+          "methodCount": 18,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/function-pointers",
+          "slug": "function-pointers",
+          "displayName": "Function Pointers",
+          "methodCount": 1,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/generated-marshalling",
+          "slug": "generated-marshalling",
+          "displayName": "Generated Marshalling",
+          "methodCount": 69,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/handles-safehandle-gchandle",
+          "slug": "handles-safehandle-gchandle",
+          "displayName": "Handles SafeHandle GCHandle",
+          "methodCount": 29,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/marshalling-attributes",
+          "slug": "marshalling-attributes",
+          "displayName": "Marshalling Attributes",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/native-memory-pointers",
+          "slug": "native-memory-pointers",
+          "displayName": "Native Memory And Pointers",
+          "methodCount": 199,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/objective-c-interop",
+          "slug": "objective-c-interop",
+          "displayName": "Objective-C Interop",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/pinvoke-dllimport",
+          "slug": "pinvoke-dllimport",
+          "displayName": "PInvoke DllImport",
+          "methodCount": 12,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/runtime-interop-services",
+          "slug": "runtime-interop-services",
+          "displayName": "Runtime Interop Services",
+          "methodCount": 17,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/secure-string-marshal",
+          "slug": "secure-string-marshal",
+          "displayName": "SecureString Marshal",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.InteropServices/unmanaged-calling-conventions",
+          "slug": "unmanaged-calling-conventions",
+          "displayName": "Unmanaged Calling Conventions",
+          "methodCount": 1,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "families": [
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/binary-formatter",
+          "slug": "binary-formatter",
+          "displayName": "Binary Formatter",
+          "methodCount": 16,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/binder-type-style",
+          "slug": "binder-type-style",
+          "displayName": "Binder And Type Style",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/formatter-base",
+          "slug": "formatter-base",
+          "displayName": "Formatter Base",
+          "methodCount": 16,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/formatter-services-converter",
+          "slug": "formatter-services-converter",
+          "displayName": "Formatter Services And Converter",
+          "methodCount": 34,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/object-manager-id-generator",
+          "slug": "object-manager-id-generator",
+          "displayName": "Object Manager And ID Generator",
+          "methodCount": 16,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Runtime.Serialization.Formatters/surrogate-selection",
+          "slug": "surrogate-selection",
+          "displayName": "Surrogate Selection",
+          "methodCount": 11,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "families": [
+        {
+          "familyId": "family/System.Security.Principal.Windows/identity-reference",
+          "slug": "identity-reference",
+          "displayName": "Identity Reference",
+          "methodCount": 23,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Security.Principal.Windows/nt-account",
+          "slug": "nt-account",
+          "displayName": "NT Account",
+          "methodCount": 10,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Security.Principal.Windows/security-identifier",
+          "slug": "security-identifier",
+          "displayName": "Security Identifier",
+          "methodCount": 20,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Security.Principal.Windows/token-access",
+          "slug": "token-access",
+          "displayName": "Token Access",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Security.Principal.Windows/windows-identity",
+          "slug": "windows-identity",
+          "displayName": "Windows Identity",
+          "methodCount": 31,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+          "slug": "windows-principal-roles",
+          "displayName": "Windows Principal Roles",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "families": [
+        {
+          "familyId": "family/System.Text.Json/attributes",
+          "slug": "attributes",
+          "displayName": "JSON Attributes",
+          "methodCount": 0,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/converter-factory",
+          "slug": "converter-factory",
+          "displayName": "JSON Converter Factory",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/converters",
+          "slug": "converters",
+          "displayName": "JSON Converters",
+          "methodCount": 9,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/document-element",
+          "slug": "document-element",
+          "displayName": "JSON Document Element",
+          "methodCount": 69,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/metadata-typeinfo",
+          "slug": "metadata-typeinfo",
+          "displayName": "JSON Metadata TypeInfo",
+          "methodCount": 39,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/nodes",
+          "slug": "nodes",
+          "displayName": "JSON Nodes",
+          "methodCount": 174,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/polymorphism-reference",
+          "slug": "polymorphism-reference",
+          "displayName": "JSON Polymorphism And Reference",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/reader",
+          "slug": "reader",
+          "displayName": "JSON Reader",
+          "methodCount": 61,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/schema",
+          "slug": "schema",
+          "displayName": "JSON Schema",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/serializer",
+          "slug": "serializer",
+          "displayName": "JSON Serializer",
+          "methodCount": 104,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/serializer-options",
+          "slug": "serializer-options",
+          "displayName": "JSON Serializer Options",
+          "methodCount": 75,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/source-generation-context",
+          "slug": "source-generation-context",
+          "displayName": "JSON Source Generation Context",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Text.Json/writer",
+          "slug": "writer",
+          "displayName": "JSON Writer",
+          "methodCount": 126,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "families": [
+        {
+          "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+          "slug": "loop-result",
+          "displayName": "Parallel Loop Result",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+          "slug": "loop-state",
+          "displayName": "Parallel Loop State",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+          "slug": "parallel-apis",
+          "displayName": "Parallel APIs",
+          "methodCount": 43,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+          "slug": "parallel-options",
+          "displayName": "Parallel Options",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
     }
   ]
 }

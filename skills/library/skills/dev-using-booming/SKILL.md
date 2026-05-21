@@ -86,35 +86,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
   - 如果问题已清零，且已经形成多阶段或多个独立子任务：升级到 `roadmap`
   - 升级必须在原任务目录完成，并在 `STATUS.md` 记录升级原因与下一步入口
 
-### 6. Foundation DLL 验证工作路由
-
-当任务涉及 foundation DLL 能力族验证或测试时，根据具体场景选择对应技能：
-
-| 场景 | 入口技能 | 说明 |
-|------|---------|------|
-| 执行单 family 完整 7 阶段验证 | `dev-foundation-dll-verification-pipeline` | 统一入口：verify_family() 全流程 |
-| 定义原则/约束（AI codegen 参考） | `dev-foundation-dll-family-verification` | P1/P2/P3、skip 规则、handwrite 规范 |
-| 聚合跨 family 结果 + 刷新 dashboard | `dev-foundation-dll-verify-aggregate` | 汇总 + 回归检测 + dashboard 刷新 |
-| 验证前/后检查 dashboard 数据一致性 | `dev-foundation-dll-verify-data-integrity` | claims/ledger/coverage 一致性校验 |
-| 接入一个全新的 capability family | `dev-foundation-dll-onboard-family` | ledger → Phase 1/2 → codegen → verification |
-
-**触发条件**：只要任务涉及以下任一内容，必须先使用上述技能之一：
-
-- `verification/foundation-dll/` 下的任何能力族
-- 运行 `batch_native_aot_runner.py`、`batch_hotupdate_runner.py` 等 batch 管线
-- 对 capability family 执行 Fact / Benchmark / HotUpdate 验证
-- 检查或刷新 foundation-dll dashboard
-- 在 `capability-family-ledger.json` 中新增 family
-- 修复 foundation-dll 验证数据不一致（如 claims 为空、coverage 缺失）
-
-**工作流映射**：
-- "验证这个 family 能否通过"：`verification-pipeline`
-- "dashboard 显示 0/13，查一下为什么"：`verify-data-integrity`
-- "跑一下这个 family 的 benchmark"：`verification-pipeline`（用 `--skip fact,audit`）
-- "刷新 dashboard"：`verify-aggregate`（含 dashboard 刷新）
-- "接一个新 family 到验证体系"：`onboard-family`
-
-### 7. 技能激活前检查健康仪表盘
+### 6. 技能激活前检查健康仪表盘
 
 在选定要激活的技能后、实际调用前，先做一次轻量健康检查：
 
@@ -152,5 +124,4 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 - 上游：无
 - 协作：`project-test-governance`、`test-driven-development`、`project-wiki-maintenance`
-- Foundation DLL 验证系：`verification-pipeline`、`verify-data-integrity`、`family-verification`、`verify-aggregate`、`onboard-family`
 - 下游：`brainstorming`、`roadmap`、`writing-plans`、`executing-plans`、`systematic-debugging`
