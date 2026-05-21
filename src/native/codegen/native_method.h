@@ -93,6 +93,10 @@ struct NativeMethod {
     // Win64 RUNTIME_FUNCTION for .pdata/.xdata unwind info.
     // Allocated by GenerateNativeCode, freed by ~NativeMethod.
     void* runtime_function = nullptr;
+#else
+    // Linux x64 .eh_frame DWARF CFI offset from code start.
+    // 0 = no .eh_frame emitted (no prologue).
+    uint32_t eh_frame_offset = 0;
 #endif
 
     // Precise GC slot map for root scanning during collection.

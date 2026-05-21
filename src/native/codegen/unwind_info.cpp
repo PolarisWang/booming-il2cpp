@@ -133,4 +133,125 @@ RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
 
 #endif  // _WIN64
 
+// ── DWARF .eh_frame (Linux x64) ────────────────────────────────────────────
+
+#if defined(__linux__)
+
+// x64 register number → DWARF register number mapping.
+// First 8 x64 regs have different DWARF numbers; R8-R15 map directly.
+static constexpr uint8_t kX64ToDwarfReg[16] = {
+    0,  // x64 RAX(0) → DWARF 0
+    2,  // x64 RCX(1) → DWARF 2
+    1,  // x64 RDX(2) → DWARF 1
+    3,  // x64 RBX(3) → DWARF 3
+    7,  // x64 RSP(4) → DWARF 7
+    6,  // x64 RBP(5) → DWARF 6
+    4,  // x64 RSI(6) → DWARF 4
+    5,  // x64 RDI(7) → DWARF 5
+    8, 9, 10, 11, 12, 13, 14, 15  // x64 R8-R15 → DWARF 8-15
+};
+
+uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
+    uint32_t start = buf.pos();
+    uint32_t length_off = buf.pos();
+    buf.Emit32(0);           // placeholder: total length (excluding this field)
+
+    buf.Emit32(0);           // cie_id = 0 (CIE marker)
+    buf.Emit8(1);            // version = 1
+    buf.Emit8('z');          // augmentation = "zR\0"
+    buf.Emit8('R');
+    buf.Emit8(0);
+    buf.Emit8(1);            // code_align = ULEB128(1)
+    buf.Emit8(0x78);         // data_align = SLEB128(-8)
+    buf.Emit8(16);           // ret_addr_reg = ULEB128(16)
+    buf.Emit8(1);            // aug_len = ULEB128(1)
+    buf.Emit8(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
+
+    // Initial instructions: CFA = RSP + 8 (after CALL, ret addr on stack)
+    buf.Emit8(0x0C);         // DW_CFA_def_cfa
+    buf.Emit8(7);            // ULEB128: register 7 (RSP in DWARF)
+    buf.Emit8(8);            // ULEB128: offset 8
+
+    // DW_CFA_offset(16, 1): return address at CFA-8
+    buf.Emit8(0x90);         // opcode = 0x80 | 16
+    buf.Emit8(1);            // ULEB128: CFA + 1 * (-8) = CFA - 8
+
+    // Pad to 4-byte boundary
+    uint32_t content = buf.pos() - start - 4;
+    uint32_t pad = (4 - (content % 4)) % 4;
+    for (uint32_t i = 0; i < pad; ++i)
+        buf.Emit8(0);
+
+    // Patch length
+    buf.Patch32(length_off, buf.pos() - start - 4);
+
+    return start;
+}
+
+uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
+                      uint32_t code_body_size,
+                      uint32_t num_push_regs,
+                      const uint8_t* push_reg_nums) noexcept {
+    uint32_t fde_start = buf.pos();
+    uint32_t length_off = buf.pos();
+    buf.Emit32(0);           // placeholder length
+
+    // CIE pointer: relative offset from this field back to CIE start.
+    // cie_ptr = CIE_addr - (FDE_addr + 4)
+    uint32_t cie_ptr_val = cie_offset - (fde_start + 4);
+    buf.Emit32(cie_ptr_val);
+
+    // initial_loc: pcrel|sdata4. Stored value = -(initial_loc_field_offset + 4).
+    // code starts at buffer offset 0, cancellation with runtime base is implicit
+    // since code and eh_frame are in the same allocation.
+    uint32_t initial_loc_off = buf.pos() - fde_start;
+    int32_t pcrel_val = 0 - static_cast<int32_t>(fde_start + initial_loc_off + 4);
+    buf.Emit32(static_cast<uint32_t>(pcrel_val));
+
+    // address_range: code body size (sdata4, absolute)
+    buf.Emit32(code_body_size);
+
+    // Post-prologue frame state:
+    //   CFA = RBP + 16
+    //   Return address at CFA-8
+    //   Each pushed register at CFA-(16+8*i)
+    //
+    // Applied from function start (no DW_CFA_advance_loc), so unwinding during
+    // the prologue itself is incorrect, but all T4 execution is post-prologue.
+
+    // DW_CFA_def_cfa(6, 16): CFA = RBP + 16
+    buf.Emit8(0x0C);         // DW_CFA_def_cfa
+    buf.Emit8(kX64ToDwarfReg[5]);  // RBP → DWARF 6
+    buf.Emit8(16);
+
+    // DW_CFA_offset(16, 1): return address at CFA-8
+    buf.Emit8(0x90);
+    buf.Emit8(1);
+
+    // For each pushed register in prologue order:
+    //   push_reg_nums[0]=RBP at CFA-16 → factored offset 2
+    //   push_reg_nums[1]=RBX at CFA-24 → factored offset 3
+    //   push_reg_nums[2]=RSI at CFA-32 → factored offset 4
+    //   push_reg_nums[i]=cached[i-3] at CFA-(16+8*(i+1)) → factored offset 2+i
+    for (uint32_t i = 0; i < num_push_regs; ++i) {
+        uint8_t dwarf_reg = kX64ToDwarfReg[push_reg_nums[i] & 0x0F];
+        uint8_t factored = static_cast<uint8_t>(2 + i);
+        buf.Emit8(static_cast<uint8_t>(0x80 | dwarf_reg));
+        buf.Emit8(factored);
+    }
+
+    // Pad to 4-byte boundary
+    uint32_t content = buf.pos() - fde_start - 4;
+    uint32_t pad = (4 - (content % 4)) % 4;
+    for (uint32_t i = 0; i < pad; ++i)
+        buf.Emit8(0);
+
+    // Patch length
+    buf.Patch32(length_off, buf.pos() - fde_start - 4);
+
+    return fde_start;
+}
+
+#endif  // __linux__
+
 }  // namespace chaos::il2cpp::codegen

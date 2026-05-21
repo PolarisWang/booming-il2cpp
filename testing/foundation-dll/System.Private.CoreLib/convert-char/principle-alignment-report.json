@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-22T00:16:49.465158",
+  "generated_at": "2026-05-22T00:24:54.767485",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -20,191 +20,24 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found — no lowering exists",
       "details": [],
-      "evidence": {
-        "has_lowering": true,
-        "stub_count": 0,
-        "simple_forward_count": 0,
-        "methods_with_lowering": 36,
-        "methods_total": 36
-      },
-      "per_method": [
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        }
-      ]
+      "evidence": {}
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
-      "status": "ALIGNED",
-      "summary": "No runtime dispatch branches in generated code",
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found",
       "details": [],
-      "evidence": {
-        "checked_patterns": [
-          "if\\s*\\(\\s*family\\s*[=!]=",
-          "switch\\s*\\(\\s*methodIndex\\b",
-          "if\\s*\\(\\s*methodIndex\\b",
-          "CHAOS_FAMILY_SPECIFIC",
-          "if\\s*\\(\\s*__family\\b"
-        ]
-      }
+      "evidence": {}
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "CONCERN",
-      "summary": "1 runtime_stub calls in generated code",
-      "details": [
-        {
-          "function": "ChaosDatetimeGetUtcNow",
-          "call_count": 3
-        }
-      ],
-      "evidence": {
-        "stub_call_count": 3
-      }
+      "status": "VIOLATION",
+      "summary": "Generated C++ not found",
+      "details": [],
+      "evidence": {}
     },
     "p2_abstraction_balance": {
       "check_id": "p2_abstraction_balance",
@@ -216,56 +49,132 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "5 of 20 changed source files are outside expected architecture layers",
+      "summary": "14 of 36 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": ".gitignore",
+          "file": "build/vs2022/cmake_install.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/vs2022/ALL_BUILD.vcxproj",
+          "file": "build/vs2022/fmt_build/cmake_install.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/vs2022/roadmap0_preset_router.sln",
+          "file": "build/vs2022/src/native/benchmark-host/cmake_install.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs",
+          "file": "build/vs2022/src/native/engine-bridge/cmake_install.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/src/native/fuzz/fuzz_gc_test.cpp",
+          "file": "build/vs2022/src/native/proof-host/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/support/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/unordered_dense_build/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Linker/LinkerStage.OutputProjection.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/native-aot.manifest.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry.exe",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 20,
+        "changed_source_count": 36,
         "layer_distribution": {
-          "TestInfra": 4,
-          "Contracts": 5,
+          "Bootstrap": 1,
+          "Codegen": 2,
+          "Common": 1,
+          "HotUpdate": 1,
           "Interpreter": 1,
-          "RuntimeCore": 5
+          "RuntimeCore": 4,
+          "Contracts": 11,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": ".gitignore",
+            "file": "build/vs2022/cmake_install.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/vs2022/ALL_BUILD.vcxproj",
+            "file": "build/vs2022/fmt_build/cmake_install.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/vs2022/roadmap0_preset_router.sln",
+            "file": "build/vs2022/src/native/benchmark-host/cmake_install.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs",
+            "file": "build/vs2022/src/native/engine-bridge/cmake_install.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/src/native/fuzz/fuzz_gc_test.cpp",
+            "file": "build/vs2022/src/native/proof-host/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/support/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/unordered_dense_build/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Linker/LinkerStage.OutputProjection.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/native-aot.manifest.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry.exe",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -273,8 +182,8 @@
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
-      "status": "ALIGNED",
-      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
+      "status": "NOT_APPLICABLE",
+      "summary": "Generated C++ not found",
       "details": [],
       "evidence": {}
     },
@@ -294,21 +203,17 @@
     },
     "p3_no_hardcoded_state": {
       "check_id": "p3_no_hardcoded_state",
-      "status": "ALIGNED",
-      "summary": "No hardcoded static state in generated code",
+      "status": "NOT_APPLICABLE",
+      "summary": "Generated C++ not found",
       "details": [],
       "evidence": {}
     },
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
-      "status": "ALIGNED",
-      "summary": "Dispatch table: 20 entries, all with interrupt_ptr [OK]",
+      "status": "NOT_APPLICABLE",
+      "summary": "Generated C++ not found",
       "details": [],
-      "evidence": {
-        "table_size": 20,
-        "entries_with_interrupt_ptr": 20,
-        "has_hotpatch_module": true
-      }
+      "evidence": {}
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
@@ -323,10 +228,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 6,
-    "concern": 2,
-    "violation": 1,
-    "not_applicable": 3,
+    "aligned": 1,
+    "concern": 1,
+    "violation": 4,
+    "not_applicable": 6,
     "overall": "VIOLATION"
   }
 }

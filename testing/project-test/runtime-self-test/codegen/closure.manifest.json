@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "RuntimeSelfTest",
   "entrySubjectId": "",
-  "inputAssemblyPath": "runtime-self-test/codegen/_jit_patch_input/RuntimeSelfTest.dll",
+  "inputAssemblyPath": "testing/project-test/runtime-self-test/codegen/_jit_patch_input/RuntimeSelfTest.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "RuntimeSelfTest",
-      "path": "runtime-self-test/codegen/_jit_patch_input/RuntimeSelfTest.dll"
+      "path": "testing/project-test/runtime-self-test/codegen/_jit_patch_input/RuntimeSelfTest.dll"
     },
     {
       "assemblyName": "System.Console",
@@ -28,7 +28,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "bee72663-fc3a-4388-8c89-9a5af869e4fe",
+  "inputModuleVersionId": "e9e6b52d-714b-4b35-9fed-7a11d58f0af9",
   "artifacts": [
     {
       "kind": "typedIlIr",
