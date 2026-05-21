@@ -36,6 +36,9 @@ thread_local TLAB tls_tlab;
 // Per-thread allocation counter (TLS-local, flushed to scheduler in slow path).
 thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
 
+// Per-thread adaptive TLAB size (initialized to default, adjusted by UpdateTlabSize).
+thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
+
 // ── TLS POH context ────────────────────────────────────────────
 // Each thread has a fast bump-pointer path for POH allocation.
 // POH regions are shared across threads (mutex-protected for allocation).
@@ -429,10 +432,16 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
 }
 
 TLAB TlabClaimFromYoungGen() noexcept {
-    // Atomically carve kDefaultTlabSize from the shared young region.
+    // Use the per-thread adaptive TLAB size (tuned by UpdateTlabSize).
+    CHAOS_IL2CPP_SIZE tlab_sz = tls_tlab_size;
+    // Clamp to valid range in case UpdateTlabSize produced an extreme value.
+    if (tlab_sz < 16 * 1024) tlab_sz = 16 * 1024;
+    if (tlab_sz > 256 * 1024) tlab_sz = 256 * 1024;
+
+    // Atomically carve tlab_sz from the shared young region.
     char* bump = g_young_gen.bump.load(std::memory_order_acquire);
     while (bump != nullptr) {
-        char* next_bump = bump + kDefaultTlabSize;
+        char* next_bump = bump + tlab_sz;
         const char* region_end = g_young_gen.region_end.load(std::memory_order_acquire);
         if (next_bump > region_end || region_end == nullptr) {
             return TLAB{};  // exhausted

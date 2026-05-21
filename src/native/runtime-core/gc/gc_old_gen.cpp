@@ -2330,6 +2330,9 @@ void MarkSweepOldGen::ClearYoungTenuredFlags() {
 void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data), void* user_data) {
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Collect");
 
+    // Signal full GC approach for registered notification waiters.
+    g_gc_scheduler.SignalFullGcApproach();
+
     auto pause_start = std::chrono::steady_clock::now();
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
@@ -2730,6 +2733,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Fire GC_FULL_DONE event.
     GcFireEvent(GcEvent::GC_FULL_DONE);
+
+    // Signal full GC complete for registered notification waiters.
+    g_gc_scheduler.SignalFullGcComplete();
 }
 
 bool MarkSweepOldGen::CollectFull() {

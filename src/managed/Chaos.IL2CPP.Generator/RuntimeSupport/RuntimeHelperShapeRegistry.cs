@@ -894,6 +894,37 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 EmptyRawArgumentIndices);
 
+            // === Full GC Notification ===
+            registry.Register("System.GC", "RegisterForFullGCNotification", ["System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "chaos_gc_enable_full_gc_notification",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.GC", "CancelFullGCNotification", [],
+                ShapeKind.SimpleForward, "chaos_gc_disable_full_gc_notification",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
+
+            registry.Register("System.GC", "WaitForFullGCApproach", ["System.Int32"],
+                ShapeKind.SimpleForward, "chaos_gc_wait_for_full_gc_approach",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.GC", "WaitForFullGCComplete", ["System.Int32"],
+                ShapeKind.SimpleForward, "chaos_gc_wait_for_full_gc_complete",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
             // === GCMemoryInfo ===
             // Matches the BCL InternalCall signature: GetMemoryInfo(GCMemoryInfoData data, int kind)
             // GCMemoryInfoData is a class; codegen passes the object reference as a native int (pointer),

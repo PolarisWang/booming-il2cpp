@@ -101,6 +101,13 @@ extern YoungGeneration g_young_gen;
 /// This thread's current TLAB.
 extern thread_local TLAB tls_tlab;
 
+/// Per-thread adaptive TLAB size.  Initialized to kDefaultTlabSize and
+/// adjusted after each young GC based on utilization:
+///   >75% utilization → double (up to 256 KB)
+///   <25% utilization → halve (down to 16 KB)
+///   otherwise → keep
+extern thread_local CHAOS_IL2CPP_SIZE tls_tlab_size;
+
 // ── Lifecycle ────────────────────────────────────────────────
 
 /// Initialize the shared young generation.

@@ -45,7 +45,7 @@ run stress import <path>                 # 导入记录
 ## 数据存储
 
 ```text
-.artifact/verification/stress-records/
+artifact/verification/stress-records/
   gc-stress/records.jsonl           # JSONL 格式，append-only
   gc-stress-mode/records.jsonl
   capacity-stress/records.jsonl

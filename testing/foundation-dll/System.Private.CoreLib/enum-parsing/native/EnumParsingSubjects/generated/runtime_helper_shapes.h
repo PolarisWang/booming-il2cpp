@@ -86,14 +86,19 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_GC_COLLECT = 0xBC962311u,
     SHAPE_SYSTEM_GC_COLLECTIONCOUNT_SYSTEM_INT32 = 0x26DF7669u,
     SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE = 0xF2752978u,
+    SHAPE_SYSTEM_GC_ENDNOGCREGION = 0xB1DF0607u,
+    SHAPE_SYSTEM_GC_GETALLOCATEDBYTESFORCURRENTTHREAD = 0x9762D69Bu,
     SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_SYSTEM_INT32 = 0xD47FE725u,
     SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN = 0x6E1AEB6Fu,
+    SHAPE_SYSTEM_GC_GETTOTALPAUSEDURATION = 0xAD15BC8Fu,
     SHAPE_SYSTEM_GC_GET_LATENCYMODE = 0x1F0DE7D9u,
     SHAPE_SYSTEM_GC_KEEPALIVE_SYSTEM_OBJECT = 0x4546B70Fu,
     SHAPE_SYSTEM_GC_REMOVEMEMORYPRESSURE_SYSTEM_INT64 = 0xB65DFCB3u,
     SHAPE_SYSTEM_GC_REREGISTERFORFINALIZE_SYSTEM_OBJECT = 0x5CEB5D12u,
     SHAPE_SYSTEM_GC_SET_LATENCYMODE_SYSTEM_GCLATENCYMODE = 0x194292DDu,
     SHAPE_SYSTEM_GC_SUPPRESSFINALIZE_SYSTEM_OBJECT = 0x69A7EF6Au,
+    SHAPE_SYSTEM_GC_TRYSTARTNOGCREGION_SYSTEM_INT64 = 0x43459F8Du,
+    SHAPE_SYSTEM_GC_TRYSTARTNOGCREGION_SYSTEM_INT64_SYSTEM_BOOLEAN = 0xC5DB3748u,
     SHAPE_SYSTEM_GC_WAITFORPENDINGFINALIZERS = 0x7E101281u,
     SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_COMPARE_SYSTEM_STRING_SYSTEM_STRING = 0x3F9983A0u,
     SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_INDEXOF_SYSTEM_STRING_SYSTEM_STRING = 0x7DA8F6BAu,
@@ -329,7 +334,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 315u,
+    SHAPE_COUNT = 320u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -503,9 +508,17 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionGetExceptionMessage(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GETALLOCATEDBYTESFORCURRENTTHREAD) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            chaos_gc_get_allocated_bytes_for_current_thread(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_gc_get_total_memory(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_GETTOTALPAUSEDURATION) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            chaos_gc_get_total_pause_duration(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CULTUREINFO_GET_COMPAREINFO) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1391,9 +1404,21 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_gc_get_collection_count(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_ENDNOGCREGION) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_gc_end_no_gc_region(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_GET_LATENCYMODE) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_gc_get_latency_mode(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_TRYSTARTNOGCREGION_SYSTEM_INT64) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_gc_try_start_no_gc_region(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GC_TRYSTARTNOGCREGION_SYSTEM_INT64_SYSTEM_BOOLEAN) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_gc_try_start_no_gc_region(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_COMPARE_SYSTEM_STRING_SYSTEM_STRING) {
         return static_cast<CHAOS_IL2CPP_INT32>(
@@ -1566,7 +1591,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 315u,
+static_assert(SHAPE_COUNT == 320u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

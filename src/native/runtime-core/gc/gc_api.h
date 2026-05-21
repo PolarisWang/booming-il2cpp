@@ -131,6 +131,32 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_du
 /// This is a monotonically increasing per-thread counter that is never reset.
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept;
 
+// ── Full GC Notification API (GC.RegisterForFullGCNotification / WaitForFullGC*) ──
+
+/// Enable full GC notifications.  After calling this, the thread can use
+/// WaitForFullGcApproach / WaitForFullGcComplete to synchronize with
+/// full GC cycles.  Threshold parameters are accepted for API compatibility
+/// but are ignored (CRAG always uses default thresholds).
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enable_full_gc_notification(
+    CHAOS_IL2CPP_INT32 max_generation_threshold,
+    CHAOS_IL2CPP_INT32 large_object_heap_threshold) noexcept;
+
+/// Disable full GC notifications previously enabled by
+/// EnableFullGcNotification.
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_disable_full_gc_notification() noexcept;
+
+/// Block until a full GC approach is signaled, or until @a timeout_ms
+/// milliseconds elapse.  Returns 0 on success (approach signaled), 1 on
+/// timeout, or -1 if notifications are not enabled.
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_approach(
+    CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
+/// Block until a full GC completion is signaled, or until @a timeout_ms
+/// milliseconds elapse.  Returns 0 on success (complete signaled), 1 on
+/// timeout, or -1 if notifications are not enabled.
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_complete(
+    CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_API_H_

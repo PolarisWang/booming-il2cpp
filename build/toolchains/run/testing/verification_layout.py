@@ -183,7 +183,7 @@ def core_workspace_manifest_path(repo_root: Path, host_platform: str) -> Path:
 
 
 def raw_benchmark_records_root(repo_root: Path) -> Path:
-    return repo_root / ".artifact" / "verification" / "benchmark-records"
+    return repo_root / "artifact" / "verification" / "benchmark-records"
 
 
 def raw_benchmark_records_path(repo_root: Path, owner_id: str) -> Path:
@@ -191,7 +191,7 @@ def raw_benchmark_records_path(repo_root: Path, owner_id: str) -> Path:
 
 
 def raw_stress_records_root(repo_root: Path) -> Path:
-    return repo_root / ".artifact" / "verification" / "stress-records"
+    return repo_root / "artifact" / "verification" / "stress-records"
 
 
 def raw_stress_records_path(repo_root: Path, test_name: str) -> Path:

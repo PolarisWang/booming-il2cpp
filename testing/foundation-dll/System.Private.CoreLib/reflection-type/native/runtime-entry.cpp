@@ -236,10 +236,8 @@ int main(int argc, char** argv) {
             try {
                 RunNativeAot(i);
             } catch (const chaos_managed_exception&) {
-                printf("  [FAIL] method %d\n", i);
                 ++failed_count;
             } catch (...) {
-                printf("  [FAIL] method %d (unknown exception)\n", i);
                 ++failed_count;
             }
         }
