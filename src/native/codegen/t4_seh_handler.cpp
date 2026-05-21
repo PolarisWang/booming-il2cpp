@@ -67,7 +67,6 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
 
 #if defined(_WIN64)
     // Register .pdata/.xdata unwind info for OS stack unwinding.
-    // This must happen after the code buffer address is finalized.
     if (nm->runtime_function != nullptr) {
         if (!RtlAddFunctionTable(
                 static_cast<PRUNTIME_FUNCTION>(nm->runtime_function),
@@ -76,6 +75,14 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
                 "RtlAddFunctionTable failed for token={}", patch_method_token);
         }
+    }
+#elif defined(__linux__)
+    // Register DWARF .eh_frame for libgcc stack unwinding.
+    if (nm->eh_frame_offset > 0) {
+        const void* eh_frame = static_cast<const uint8_t*>(code_start) + nm->eh_frame_offset;
+        __register_frame(eh_frame);
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+            "RegisterT4Code: registered .eh_frame at offset {}", nm->eh_frame_offset);
     }
 #endif
 }

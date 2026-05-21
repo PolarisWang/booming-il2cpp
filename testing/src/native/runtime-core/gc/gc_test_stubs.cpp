@@ -101,11 +101,10 @@ NativeMethod* GenerateNativeCode(
 //
 // NOTE: Tests that directly compile gc_region.cpp or gc_api.cpp do NOT
 // need these stubs — they get the real definitions from those .cpp files.
-#include <chaos/native_types.h>
 #include "gc_region.h"
 namespace chaos { namespace il2cpp { namespace runtime_core {
 thread_local TLAB tls_tlab;
-thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = 0;
+thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
 thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
 thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 }}}

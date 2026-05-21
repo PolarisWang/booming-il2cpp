@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/exception/throw-diagnostics",
+  "displayName": "Exception Throw Diagnostics",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+    "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+    "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+    "System.Private.CoreLib/System.Exception::get_StackTrace:System.String()",
+    "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+    "System.Private.CoreLib/System.Exception::ToString:System.String()",
+    "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+    "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+    "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)"
+  ],
+  "methodSubjectCount": 14,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

@@ -1,13 +1,21 @@
-# ÒÑÍê³ÉÈÎÎñ
+# å·²å®Œæˆå¼€å‘é˜¶æ®µ
 
-| task_id | task_type | phase | updated_at | summary | active |
-| --- | --- | --- | --- | --- | --- |
-| [20260427-10-dll-capability-verification-phase-5-closeout](20260427-10-dll-capability-verification-phase-5-closeout/STATUS.md) | plan | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É Closeout£º¾É¹æÔòÇåÀí¡¢formal refresh¡¢ÉúÃüÖÜÆÚ¹éµµÓë checklist ÊÕ¿ÚÍê³É¡£ | false |
-| [20260427-09-dll-capability-verification-phase-4-projection-layer](20260427-09-dll-capability-verification-phase-4-projection-layer/STATUS.md) | plan | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É Projection Layer£ºdashboard / detail / tooltip È«²¿ÇĞµ½ formal objects¡£ | false |
-| [20260427-08-dll-capability-verification-phase-3-execution-layer](20260427-08-dll-capability-verification-phase-3-execution-layer/STATUS.md) | plan | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É Execution Layer£ºformal `.sln`¡¢family execution projects¡¢real build Óë execute Èë¿ÚÍê³É¡£ | false |
-| [20260427-07-dll-capability-verification-phase-2-evidence-layer](20260427-07-dll-capability-verification-phase-2-evidence-layer/STATUS.md) | plan | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É Evidence Layer£ºformal annotation¡¢case indexes¡¢review bundle Óë detail/tooltip Ïû·ÑÁ´Â·Íê³É¡£ | false |
-| [20260427-06-dll-capability-verification-phase-1-truth-layer](20260427-06-dll-capability-verification-phase-1-truth-layer/STATUS.md) | plan | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É Truth Layer£ºformal truth contracts¡¢truth loader Óë skeleton Éú³É±Õ»·Íê³É¡£ | false |
-| [20260427-05-dll-capability-verification-phase-0-authority-freeze](20260427-05-dll-capability-verification-phase-0-authority-freeze/STATUS.md) | plan | completed | 2026-04-27 18:50:00 +08:00 | ÒÑÍê³É Phase 0 authority freeze£ºËÄ²ã authority¡¢A2 annotation/scanner ±ß½ç¡¢G2 reviewable-bundle gate¡¢ÕıÊ½Ö÷ `.sln` Óë family ¾Ö²¿¼ÓËÙÈë¿Ú contract ÒÑĞ´ÈëÕıÊ½ authority¡£ | false |
-| [20260427-04-dll-capability-verification-closure-roadmap](20260427-04-dll-capability-verification-closure-roadmap/STATUS.md) | roadmap | completed | 2026-04-28 03:12:00 +08:00 | ÒÑÍê³É DLL capability verification closure roadmap£ºTruth / Evidence / Execution / Projection / Closeout È«²¿ÊÕ¿Ú£¬formal `.sln`¡¢method ¼¶ case index¡¢dashboard formal projection Óë¾ÉÂß¼­ÇåÀí¾ùÒÑÍê³É¡£ | false |
-| [20260427-03-dll-capability-verification-closure-brainstorm](20260427-03-dll-capability-verification-closure-brainstorm/STATUS.md) | brainstorm | completed | 2026-04-27 04:25:00 +08:00 | ÒÑÍê³É DLL capability verification closure brainstorm£ºHybrid Layer¡¢A2 Source-Annotation-First¡¢method ¼¶È«Ó³Éä¡¢G2 reviewable-bundle Óëµ¥Ò»ÕıÊ½ `.sln` Ö÷Èë¿Ú¾ùÒÑÅÄ°å£¬²¢ÒÑ·ÖÁ÷µ½ÕıÊ½ roadmap¡£ | false |
-| [a4-dual-v2-objectheader](a4-dual-v2-objectheader/STATUS.md) | plan | completed | 2026-05-08 | A4-Dual+V2 ObjectHeader ä¼˜åŒ–ï¼šfield_storage åˆ é™¤(56Bâ†’24B)ã€TypeInfo æ‰©å±•(+flags+vtable_array)ã€3 header variant (Pure/ThinLockable/Fat)ã€chaos_object_get_type_info()ã€GetSyncStatePtr åŠ¨æ€åç§»ã€æ‰€æœ‰ sync å‡½æ•°é€‚é… || false |
+æŒ‰é‡Œç¨‹ç¢‘åˆ†ç»„ã€‚æ¯ä¸ªé‡Œç¨‹ç¢‘ç›®å½•åŒ…å« `MILESTONE.md` æ€»è§ˆå’Œå¯¹åº”çš„ phase å­ç›®å½•ã€‚
+
+| é‡Œç¨‹ç¢‘ | é˜¶æ®µæ•° | æ—¥æœŸèŒƒå›´ | ä¸»é¢˜ |
+|--------|--------|---------|------|
+| [01-foundation](01-foundation/MILESTONE.md) | 6 | 03/31â€“04/04 | Roadmap-0 contract freeze, harness, entrypoint, test framework, skills |
+| [02-core-stages](02-core-stages/MILESTONE.md) | 21 | 04/05â€“05/08 | IL2CPP reboot, Stages 1a-5d, baseline, runtime expansion |
+| [03-subject-framework](03-subject-framework/MILESTONE.md) | 13 | 04/06â€“05/05 | Subject framework rollout, stages A-F, test system redesign |
+| [04-pipeline-infrastructure](04-pipeline-infrastructure/MILESTONE.md) | 7 | 04/07â€“04/10 | Pipeline phases 1-4, project generation |
+| [05-mainline-capabilities](05-mainline-capabilities/MILESTONE.md) | 13 | 04/09â€“04/10 | Performance core, capability batches, contract freeze |
+| [06-full-project](06-full-project/MILESTONE.md) | 7 | 04/11 | Full project ingestion, AOT, engine, hotupdate, interpreter |
+| [07-gc-benchmark](07-gc-benchmark/MILESTONE.md) | 4 | 04/12 | GC AOT, benchmark system, hotupdate e2e, mobile |
+| [08-engineering-redesign](08-engineering-redesign/MILESTONE.md) | 8 | 04/12â€“04/13 | Hybrid model, test taxonomy, chaos testing, engineering core |
+| [09-mainline-cutover](09-mainline-cutover/MILESTONE.md) | 15 | 04/13â€“04/14 | Mainline cutover, solution consolidation, registry |
+| [10-verification-closure](10-verification-closure/MILESTONE.md) | 24 | 04/14 | Capability closure, verification, archive, workspace |
+| [11-aot-translation](11-aot-translation/MILESTONE.md) | 28 | 04/15â€“04/16 | AOT core IR, translation expansion, deferred surface |
+| [12-rebirth-corelib](12-rebirth-corelib/MILESTONE.md) | 14 | 04/17â€“04/19 | Full rebirth, corelib nativeization, governance |
+| [13-generic-verification](13-generic-verification/MILESTONE.md) | 14 | 04/21â€“04/24 | Generic runtime, verification v1 |
+| [14-foundation-dll-runtime](14-foundation-dll-runtime/MILESTONE.md) | 32 | 04/25â€“05/17 | Foundation DLL, interpreter, generic runtime, thread/GC |
+| [15-hotupdate-final](15-hotupdate-final/MILESTONE.md) | 4 | 05/04â€“05/19 | Hotupdate dispatch, CRAG GC, misc |

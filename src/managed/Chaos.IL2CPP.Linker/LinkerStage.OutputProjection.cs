@@ -28,7 +28,10 @@ public sealed partial class LinkerStage
             }
         }
 
-        return orderedTypeIds.Select(subjectId => typeMap[subjectId]).ToList();
+        return orderedTypeIds
+            .Where(subjectId => typeMap.ContainsKey(subjectId))
+            .Select(subjectId => typeMap[subjectId])
+            .ToList();
     }
 
     private static IReadOnlyList<LinkedDependencyModel> CollectExternalDependencies(

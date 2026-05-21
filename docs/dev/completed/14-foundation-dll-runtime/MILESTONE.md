@@ -1,0 +1,38 @@
+# 14-foundation-dll-runtime
+
+Runtime skeleton 4C handler framework, foundation DLL capability closure, family verification (kernel, truth, evidence, execution, projection), codegen pipeline benchmark, corelib DLL boundary codegen, corelib supplemental closure, capability family ledger & reporting, generic runtime instantiation, interpreter completion, generic method promotion, managed thread GC, runtime instantiation bridge. 2026-04-25 ~ 2026-05-17.
+
+## Phases
+
+- [20260419-07-corelib-dll-boundary-native-codegen-implementation](20260419-07-corelib-dll-boundary-native-codegen-implementation/)
+- [20260419-20-corelib-supplemental-full-closure-audit-integration](20260419-20-corelib-supplemental-full-closure-audit-integration/)
+- [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/)
+- [20260425-01-runtime-skeleton-4c-handler-framework-roadmap](20260425-01-runtime-skeleton-4c-handler-framework-roadmap/)
+- [20260425-02-runtime-skeleton-4c-framework-foundation-cutover](20260425-02-runtime-skeleton-4c-framework-foundation-cutover/)
+- [20260425-03-foundation-dll-capability-closure-reporting-roadmap](20260425-03-foundation-dll-capability-closure-reporting-roadmap/)
+- [20260425-04-capability-family-denominator-and-authority-freeze](20260425-04-capability-family-denominator-and-authority-freeze/)
+- [20260425-05-workflow-progress-and-completion-rules-freeze](20260425-05-workflow-progress-and-completion-rules-freeze/)
+- [20260425-06-capability-family-ledger-and-report-contract-cutover](20260425-06-capability-family-ledger-and-report-contract-cutover/)
+- [20260425-07-dll-report-pages-source-links-and-artifact-split](20260425-07-dll-report-pages-source-links-and-artifact-split/)
+- [20260425-08-reporting-authority-sync-and-formal-refresh](20260425-08-reporting-authority-sync-and-formal-refresh/)
+- [20260426-01-capability-family-test-code-first-pipeline](20260426-01-capability-family-test-code-first-pipeline/)
+- [20260427-01-family-verification-kernel-hard-cut-roadmap](20260427-01-family-verification-kernel-hard-cut-roadmap/)
+- [20260427-03-dll-capability-verification-closure-brainstorm](20260427-03-dll-capability-verification-closure-brainstorm/)
+- [20260427-04-dll-capability-verification-closure-roadmap](20260427-04-dll-capability-verification-closure-roadmap/)
+- [20260427-05-dll-capability-verification-phase-0-authority-freeze](20260427-05-dll-capability-verification-phase-0-authority-freeze/)
+- [20260427-06-dll-capability-verification-phase-1-truth-layer](20260427-06-dll-capability-verification-phase-1-truth-layer/)
+- [20260427-07-dll-capability-verification-phase-2-evidence-layer](20260427-07-dll-capability-verification-phase-2-evidence-layer/)
+- [20260427-08-dll-capability-verification-phase-3-execution-layer](20260427-08-dll-capability-verification-phase-3-execution-layer/)
+- [20260429-01-codegen-pipeline-benchmark-hotupdate](20260429-01-codegen-pipeline-benchmark-hotupdate/)
+- [20260503-foundation-dll-phase-0-infra](20260503-foundation-dll-phase-0-infra/)
+- [20260504-foundation-dll-restructure](20260504-foundation-dll-restructure/)
+- [20260504-generic-runtime-instantiation-phases-3-5](20260504-generic-runtime-instantiation-phases-3-5/)
+- [20260504-interpreter-opcodes-seh-vtable](20260504-interpreter-opcodes-seh-vtable/)
+- [20260505-generic-method-promotion](20260505-generic-method-promotion/)
+- [20260505-generic-method-promotion-child-contract-runtime](20260505-generic-method-promotion-child-contract-runtime/)
+- [20260505-interpreter-full-completion](20260505-interpreter-full-completion/)
+- [20260505-managed-thread-gc-cooperation](20260505-managed-thread-gc-cooperation/)
+- [20260505-method-instantiation-il-execution](20260505-method-instantiation-il-execution/)
+- [20260505-method-instantiation-metadata](20260505-method-instantiation-metadata/)
+- [20260505-minimal-interpreter](20260505-minimal-interpreter/)
+- [20260505-runtime-instantiation-bridge-v0](20260505-runtime-instantiation-bridge-v0/)

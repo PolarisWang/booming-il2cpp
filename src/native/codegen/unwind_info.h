@@ -109,6 +109,35 @@ static constexpr uint32_t kPersonalityThunkSize = 12;
 
 #endif  // _WIN64
 
+// ── DWARF .eh_frame helpers (Linux x64) ────────────────────────────────────
+//
+// Emit CIE (Common Information Entry) and FDE (Frame Description Entry) for
+// Linux x64 DWARF CFI stack unwinding.  Registered via __register_frame at
+// runtime in RegisterT4Code.
+//
+// Uses "zR" augmentation with DW_EH_PE_pcrel | DW_EH_PE_sdata4 (0x1B) encoding,
+// compatible with libgcc's __register_frame implementation.
+
+/// Emit a DWARF CIE (Common Information Entry) for .eh_frame.
+/// Returns the byte offset of the CIE from the start of the code buffer.
+/// The CIE defines architecture parameters (x64, "zR", pcrel sdata4).
+uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept;
+
+/// Emit a DWARF FDE (Frame Description Entry) for a single T4 method.
+/// Describes post-prologue frame state (CFA=RBP+16, saved regs).
+///
+/// @param buf              Code buffer to emit into.
+/// @param cie_offset       Byte offset of CIE from buffer start.
+/// @param code_body_size   Size of function body in bytes.
+/// @param num_push_regs    Number of push registers (includes RBP, RBX, RSI, cached).
+/// @param push_reg_nums    x64 register numbers in prologue order (first=RBP).
+///
+/// @return The byte offset of the FDE from buffer start.
+uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
+                      uint32_t code_body_size,
+                      uint32_t num_push_regs,
+                      const uint8_t* push_reg_nums) noexcept;
+
 }  // namespace chaos::il2cpp::codegen
 
 #endif  // CHAOS_IL2CPP_CODEGEN_UNWIND_INFO_H_

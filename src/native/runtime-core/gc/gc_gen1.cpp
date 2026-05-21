@@ -281,6 +281,9 @@ Gen1CollectionResult GcGen1Collection() {
             static_cast<unsigned long long>(result.objects_promoted),
             static_cast<unsigned long long>(result.bytes_promoted),
             static_cast<unsigned long long>(result.pause_ns));
+        g_gen1_state.collection_count.fetch_add(1, std::memory_order_relaxed);
+        g_gen1_state.last_survived_bytes = result.bytes_promoted;
+        g_gen1_state.total_allocated.store(0, std::memory_order_release);
         return result;
     }
 
@@ -342,6 +345,9 @@ Gen1CollectionResult GcGen1Collection() {
                 static_cast<unsigned long long>(result.objects_promoted),
                 static_cast<unsigned long long>(result.bytes_promoted),
                 static_cast<unsigned long long>(result.pause_ns));
+            g_gen1_state.collection_count.fetch_add(1, std::memory_order_relaxed);
+            g_gen1_state.last_survived_bytes = result.bytes_promoted;
+            g_gen1_state.total_allocated.store(0, std::memory_order_release);
             return result;
         }
     }

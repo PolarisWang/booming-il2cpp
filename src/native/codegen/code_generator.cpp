@@ -193,6 +193,9 @@ private:
     uint32_t num_push_regs_ = 0;           // Number of push regs (3 + num_cache_regs_)
     uint32_t prologue_sub_rsp_size_ = 0;   // K value in sub rsp, K
 
+    // .eh_frame DWARF CFI offset (Linux x64), 0 = not emitted.
+    uint32_t eh_frame_offset_ = 0;
+
     // Bitmask of vregs colored by allocator but filtered (caller-saved).
     // These vregs fall through to stack I/O, so the prologue zeros
     // their stack slots to prevent garbage reads (e.g. Calli func_ptr).
@@ -2985,6 +2988,15 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             prologue_sub_rsp_offset_, prologue_set_fpreg_offset_,
             has_seh);
     }
+
+    // ── Emit .eh_frame DWARF CFI (Linux x64) ───────────────────────────────
+#if defined(__linux__)
+    if (prologue_total_bytes_ > 0 && num_push_regs_ > 0) {
+        uint32_t cie_off = EmitDwarfCie(buf_);
+        EmitDwarfFde(buf_, cie_off, code_body_size,
+                     num_push_regs_, push_reg_nums_);
+        eh_frame_offset_ = cie_off;
+    }
 #endif
 
     // ── Emit OSR entry stub ─────────────────────────────────────────────
@@ -3165,6 +3177,9 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         nm->runtime_function = AllocRuntimeFunction(
             unwind_data_offset, code_body_size);
     }
+#elif defined(__linux__)
+    // Store .eh_frame DWARF CFI offset for __register_frame in RegisterT4Code.
+    nm->eh_frame_offset = eh_frame_offset_;
 #endif
 
     return nm;
@@ -3200,6 +3215,11 @@ NativeMethod::~NativeMethod() noexcept {
         RtlDeleteFunctionTable(static_cast<PRUNTIME_FUNCTION>(runtime_function));
         CHAOS_IL2CPP_FREE(runtime_function);
         runtime_function = nullptr;
+    }
+#elif defined(__linux__)
+    if (eh_frame_offset > 0 && code != nullptr) {
+        const void* eh_frame = static_cast<const uint8_t*>(code) + eh_frame_offset;
+        __deregister_frame(eh_frame);
     }
 #endif
     code = nullptr;

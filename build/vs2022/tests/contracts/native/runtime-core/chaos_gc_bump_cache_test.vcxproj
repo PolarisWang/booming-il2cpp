@@ -318,6 +318,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\agent\booming-il2cpp\tests\contracts\native\runtime-core\gc_bump_cache_test.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\tests\contracts\native\runtime-core\gc_test_stubs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\ZERO_CHECK.vcxproj">

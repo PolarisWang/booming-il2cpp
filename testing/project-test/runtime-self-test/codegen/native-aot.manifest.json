@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "RuntimeSelfTest",
   "entrySubjectId": "RuntimeSelfTest/ArithmeticProof::Add:System.Int32(System.Int32,System.Int32)",
-  "managedClosureRootPath": "runtime-self-test/codegen",
+  "managedClosureRootPath": "testing/project-test/runtime-self-test/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

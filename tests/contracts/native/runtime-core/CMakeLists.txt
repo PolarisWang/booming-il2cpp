@@ -57,7 +57,7 @@ set(CHAOS_GC_COMMON_LIBS chaos_runtime_core chaos_bootstrap chaos_interpreter ch
 
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
-    add_executable(chaos_gc_bump_cache_test gc_bump_cache_test.cpp)
+    add_executable(chaos_gc_bump_cache_test gc_bump_cache_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_gc_bump_cache_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_gc_bump_cache_test PRIVATE
         _CRT_SECURE_NO_WARNINGS)

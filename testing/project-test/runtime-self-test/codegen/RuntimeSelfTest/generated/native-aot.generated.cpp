@@ -75,7 +75,7 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_Thread = {{nullptr, nullptr, 11502368789179341480ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_Thread = static_cast<CHAOS_IL2CPP_INTPTR>(11502368789179341480ULL);
-inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadStart = {{nullptr, nullptr, 17186843898991579444ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadStart = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 17186843898991579444ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_ThreadStart = static_cast<CHAOS_IL2CPP_INTPTR>(17186843898991579444ULL);
 
 // ── Virtual method table arrays ──
@@ -358,9 +358,8 @@ struct chaos_type_System_Threading_Thread_System_Threading_Thread
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Threading_Thread_System_Threading_ThreadStart
+struct chaos_type_System_Threading_Thread_System_Threading_ThreadStart : public chaos_type_System_Private_CoreLib_System_MulticastDelegate
 {
-	ThinLockableHeader header{};
 };
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
@@ -1102,8 +1101,8 @@ extern "C" void (*kBenchmarkWrappers[28])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[24])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[25])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8397726224804125835ULL),chaos_make_string_id_value(8397726224804125835ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8397726224804125835ULL),0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(6764446324755329143ULL),chaos_make_string_id_value(6764446324755329143ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(6764446324755329143ULL),0);},
 };
 
 
@@ -2950,22 +2949,22 @@ extern "C" CHAOS_IL2CPP_INT32 RuntimeSelfTest_IntegrationProof_GcAndDelegateInvo
 			}
 			else
 			{
+				CHAOS_IL2CPP_INT32 chaos_result{};
 				if (chaos_delegate->chaos_delegate_target == 0)
 				{
 					const auto chaos_open_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)>(chaos_delegate->chaos_delegate_method_ptr);
-					const auto chaos_result = chaos_open_function(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+					chaos_result = chaos_open_function(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 				}
 				else
 				{
 					const auto chaos_closed_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, CHAOS_IL2CPP_INT32 chaos_fn_arg_0)>(chaos_delegate->chaos_delegate_method_ptr);
-					const auto chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
-					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+					chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 				}
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 		}
 	}
-	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s2);
 }
 
 // Managed method: RuntimeSelfTest/IntegrationProof::ThreadedGcAllocation(System.Int32)
@@ -3098,8 +3097,12 @@ extern "C" CHAOS_IL2CPP_INT32 RuntimeSelfTest_IntegrationProof_ThreadedGcAllocat
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
 	}
 	{
+		const auto chaos_method_ptr = _s1;
+		const auto chaos_target = _s0;
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_Thread_System_Threading_ThreadStart, {});
 		chaos_object->header.type_info = &chaos_mt_System_Threading_Thread_System_Threading_ThreadStart.hot;
+		chaos_object->chaos_delegate_target = chaos_target;
+		chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	{
