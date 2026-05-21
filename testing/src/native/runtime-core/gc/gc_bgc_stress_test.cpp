@@ -15,6 +15,7 @@
 #include <chaos/native_types.h>
 #include "gc_bgc.h"
 #include "gc_bgc_inline.h"
+#include "gc_gen1.h"
 #include "gc_region.h"
 #include "gc_scheduler.h"
 #include "gc_old_gen.h"
@@ -344,5 +345,98 @@ TEST_F(BgcStressTest, GraphMutation) {
         ASSERT_TRUE(g_old_gen.IsInOldGen(node)) << "Node lost during BGC graph mutation";
         EXPECT_EQ(node->type_info, reinterpret_cast<GraphTypeInfo*>(&g_fake_type_info));
     }
+    SUCCEED();
+}
+
+// ── Test 6: BGC Gen1 concurrent mark ────────────────────────────
+
+TEST_F(BgcStressTest, Gen1ConcurrentMark) {
+    // Ensure Gen1 survivor area is configured.
+    if (g_young_gen.survivor_begin == nullptr) {
+        // Fallback: InitYoungGeneration should have set this up, but handle
+        // environments where young-gen init leaves survivor_begin null.
+        static char s_survivor_buf[256 * 1024];
+        g_young_gen.survivor_begin = s_survivor_buf;
+        g_young_gen.survivor_end = s_survivor_buf + sizeof(s_survivor_buf);
+        g_young_gen.survivor_bump.store(s_survivor_buf, std::memory_order_release);
+        GcRegisterHeapRange(
+            reinterpret_cast<uintptr_t>(s_survivor_buf),
+            reinterpret_cast<uintptr_t>(s_survivor_buf + sizeof(s_survivor_buf)));
+    }
+
+    // Step 1: Populate Gen1 via TryAllocateInGen1.
+    static GcTestTypeInfo s_gen1_ti{};
+    s_gen1_ti.stable_id = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(128);
+    {
+        uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_gen1_ti);
+        GcLayoutRegistry::Instance().RegisterTypeInfoRange(ti_addr,
+            ti_addr + sizeof(GcTestTypeInfo));
+    }
+
+    std::vector<void*> gen1_objs;
+    void* obj;
+    while ((obj = TryAllocateInGen1(128)) != nullptr) {
+        std::memset(obj, 0, 128);
+        *static_cast<const void**>(obj) = &s_gen1_ti;
+        gen1_objs.push_back(obj);
+    }
+    ASSERT_GT(gen1_objs.size(), 4)
+        << "Need ≥4 Gen1 objects for meaningful stress";
+
+    // Drop references to first 75% — creates dead objects for BGC to
+    // identify via the Gen1 mark bitmap during concurrent sweep.
+    size_t keep = gen1_objs.size() / 4;
+    for (size_t i = keep; i < gen1_objs.size(); i++) {
+        gen1_objs[i] = nullptr;
+    }
+
+    // Step 2: Force GEN1_GEN2 scope and start BGC cycle.
+    g_gc_scheduler.SetBgcScopeForTest(BgcScope::GEN1_GEN2);
+    ASSERT_FALSE(BgcController::Instance().IsBusy());
+
+    uint32_t gen = threading::RequestGlobalSafepoint();
+    BgcController::Instance().StartBgcCycle();
+    threading::ReleaseGlobalSafepoint(gen);
+
+    // Step 3: Verify Gen1 marking is active during concurrent mark.
+    ASSERT_TRUE(WaitForPhase(BgcPhase::CONCURRENT_MARK));
+    EXPECT_TRUE(BgcController::Instance().IsGen1MarkingActive());
+
+    // Step 4: Run young GCs during BGC concurrent mark to exercise the
+    // skip logic in young collector Phase 4.
+    for (int i = 0; i < 5; i++) {
+        // Allocate nursery objects to give young GC something to do.
+        for (int j = 0; j < 50; j++) {
+            volatile void* p = NurseryAllocateSlow(32);
+            (void)p;
+        }
+        gen = threading::RequestGlobalSafepoint();
+        GcYoungCollection();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Step 5: Complete BGC cycle.
+    ASSERT_TRUE(WaitForPhase(BgcPhase::REMARK_NEEDED));
+
+    gen = threading::RequestGlobalSafepoint();
+    BgcController::Instance().StwRemark();
+    BgcController::Instance().StartConcurrentSweep();
+    threading::ReleaseGlobalSafepoint(gen);
+
+    ASSERT_TRUE(WaitForPhase(BgcPhase::COMPACT_NEEDED));
+
+    gen = threading::RequestGlobalSafepoint();
+    BgcController::Instance().StwCompact();
+    threading::ReleaseGlobalSafepoint(gen);
+
+    BgcController::Instance().WaitForCycleComplete();
+    EXPECT_EQ(BgcController::Instance().Phase(), BgcPhase::IDLE);
+    EXPECT_FALSE(BgcController::Instance().IsGen1MarkingActive());
+
+    // Step 6: Verify BGC tracked Gen1 promote or keep.
+    CHAOS_IL2CPP_SIZE promote_sz = g_gc_scheduler.BgcGen1PromoteBytes();
+    CHAOS_IL2CPP_SIZE keep_sz = g_gc_scheduler.BgcGen1KeepBytes();
+    EXPECT_GT(promote_sz + keep_sz, 0)
+        << "BGC should have promoted or kept Gen1 objects";
     SUCCEED();
 }

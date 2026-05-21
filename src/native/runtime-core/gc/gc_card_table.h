@@ -124,9 +124,7 @@ inline void DirtyCard(const void* obj) noexcept {
 /// so the compiler can inline it into generated C++ code (avoiding the
 /// function-call overhead of the out-of-line definition in gc_api.cpp).
 /// The codegen includes this header via <gc/gc_card_table.h>.
-extern "C" inline void chaos_gc_dirty_card(const void* obj) noexcept {
-    DirtyCard(obj);
-}
+extern "C" void chaos_gc_dirty_card(const void* obj) noexcept;
 
 /// Check whether the card covering @a obj is dirty.
 inline bool IsDirty(const void* obj) noexcept {

@@ -1,5 +1,6 @@
 #include "gc_old_gen.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -2338,7 +2339,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 // thread-stack references to LOH objects are invisible to
                 // the full GC; g_loh.Sweep() will free the segment, causing
                 // use-after-free when the worker thread accesses it.
-                auto val = *reinterpret_cast<void**>(root_addr);
+                auto val = static_cast<void*>(
+                    chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
                 if (val != nullptr && g_loh.IsInLOH(val)) {
                     g_loh.MarkObject(val);
                 }
@@ -2694,7 +2696,7 @@ bool MarkSweepOldGen::TryMarkRoot(void* addr) {
     // addr comes from GcScanAllThreadRoots: it is the address of a stack slot.
     // Read the VALUE at that slot �� if it points to old-gen, mark it.
     if (addr == nullptr) return false;
-    auto val = *reinterpret_cast<void**>(addr);
+    auto val = static_cast<void*>(chaos::il2cpp::common::AsanReadPtrNoCheck(addr));
     if (val == nullptr) return false;
 
     // FindPage before IsValidManagedObject: FindPage is safe for arbitrary

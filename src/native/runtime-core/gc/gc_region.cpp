@@ -954,6 +954,8 @@ extern "C" void chaos_gc_collect() noexcept {
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_wait_for_pending_finalizers");
     g_old_gen.RunFinalizers();
+    // Also drain any BGC finalizer thread batches.
+    BgcController::Instance().WaitForFinalizerDrain();
 }
 
 /// GC.KeepAlive — prevents the GC from collecting the object before

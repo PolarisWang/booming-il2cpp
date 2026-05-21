@@ -44,6 +44,19 @@ enum class GcLatencyMode : uint8_t {
 };
 
 // ======================================================================
+// BgcScope — controls which generations BGC collects in the next cycle
+//
+// BGC can collect Gen2 only (default) or Gen1+Gen2 together.  The scope
+// is decided by the scheduler at the start of each BGC cycle based on
+// current heap pressure, Gen1 occupancy, and survival rates.
+// ======================================================================
+
+enum class BgcScope : uint8_t {
+    GEN2_ONLY = 0,  ///< BGC marks/sweeps only Gen2 (default, current behavior)
+    GEN1_GEN2 = 1,  ///< BGC marks/sweeps both Gen1 and Gen2 together
+};
+
+// ======================================================================
 // GcScheduler — adaptive GC scheduling with EMA survival-rate tracking
 //
 // Decides WHEN to run young vs full collections and HOW LARGE the next
@@ -149,6 +162,16 @@ public:
     /// Returns FULL when BGC is already busy or memory pressure is high.
     GcCollectionKind DecideCollection() const noexcept;
 
+    /// Decide the scope for the next BGC cycle based on current heap state.
+    /// Reads Gen1 occupancy, Gen1 survival rate, and Gen2 fragmentation.
+    /// Sets bgc_scope_ and returns it.  Called before starting a BGC cycle.
+    BgcScope DecideBgcScope() noexcept;
+
+    /// Get the scope for the current/next BGC cycle.
+    BgcScope GetBgcScope() const noexcept {
+        return static_cast<BgcScope>(bgc_scope_.load(std::memory_order_acquire));
+    }
+
     /// Check whether a full GC has been requested by any thread.
     bool IsFullGcRequested() const noexcept;
 
@@ -221,6 +244,40 @@ public:
     /// Computed from EMA of promoted bytes per young GC and Gen1 survival rate.
     /// Clamped to [kMinSurvivorSize, kMaxSurvivorSize].
     CHAOS_IL2CPP_SIZE RecommendedSurvivorSize() const noexcept;
+
+    // ── BGC monitoring accessors ──────────────────────────────────
+
+    /// Number of BGC cycles that chose GEN1_GEN2 scope.
+    uint32_t BgcGen1Gen2Count() const noexcept {
+        return bgc_gen1_gen2_count_.load(std::memory_order_relaxed);
+    }
+    /// Number of BGC cycles that chose GEN2_ONLY scope.
+    uint32_t BgcGen2OnlyCount() const noexcept {
+        return bgc_gen2_only_count_.load(std::memory_order_relaxed);
+    }
+    /// Total bytes promoted from Gen1 by BGC StwCompact.
+    CHAOS_IL2CPP_SIZE BgcGen1PromoteBytes() const noexcept {
+        return bgc_gen1_promote_bytes_.load(std::memory_order_relaxed);
+    }
+    /// Total bytes kept in Gen1 by BGC (survival above threshold).
+    CHAOS_IL2CPP_SIZE BgcGen1KeepBytes() const noexcept {
+        return bgc_gen1_keep_bytes_.load(std::memory_order_relaxed);
+    }
+
+    /// Record BGC scope decision.  Increments the corresponding counter.
+    void RecordBgcScopeDecision(BgcScope scope) noexcept;
+
+    /// Record bytes promoted from Gen1 by BGC StwCompact.
+    void RecordBgcGen1Promote(CHAOS_IL2CPP_SIZE bytes) noexcept;
+
+    /// Record bytes kept in Gen1 by BGC (not promoted, left for Young GC).
+    void RecordBgcGen1Keep(CHAOS_IL2CPP_SIZE bytes) noexcept;
+
+    /// Force BGC scope (for testing).  Allows tests to exercise GEN1_GEN2
+    /// paths without setting up precise heap conditions for the heuristic.
+    void SetBgcScopeForTest(BgcScope scope) noexcept {
+        bgc_scope_.store(static_cast<uint8_t>(scope), std::memory_order_release);
+    }
 
     // ── Survivor sizing constants ──────────────────────────────────
     /// Minimum survivor area: 2 MB.  Below this, Gen1 filtering is too
@@ -419,6 +476,23 @@ private:
 
     /// Latency mode (controls GC responsiveness).
     std::atomic<GcLatencyMode> latency_mode_{GcLatencyMode::INTERACTIVE};
+
+    // ── BGC scope state ──────────────────────────────────────────
+
+    /// Cached BGC scope for the current/next BGC cycle.
+    /// Set by DecideBgcScope(), read by StartBgcCycle() and BGC worker paths.
+    std::atomic<uint8_t> bgc_scope_{static_cast<uint8_t>(BgcScope::GEN2_ONLY)};
+
+    // ── BGC monitoring counters ──────────────────────────────────
+
+    /// Number of BGC cycles that chose GEN1_GEN2 scope.
+    std::atomic<uint32_t> bgc_gen1_gen2_count_{0};
+    /// Number of BGC cycles that chose GEN2_ONLY scope.
+    std::atomic<uint32_t> bgc_gen2_only_count_{0};
+    /// Total bytes promoted from Gen1 by BGC StwCompact.
+    std::atomic<CHAOS_IL2CPP_SIZE> bgc_gen1_promote_bytes_{0};
+    /// Total bytes kept in Gen1 by BGC StwCompact.
+    std::atomic<CHAOS_IL2CPP_SIZE> bgc_gen1_keep_bytes_{0};
 };
 
 /// Process-wide GC scheduler instance.

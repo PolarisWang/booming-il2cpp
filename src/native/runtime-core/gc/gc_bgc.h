@@ -218,6 +218,52 @@ public:
     /// Collect dead weak handles into bgc_dead_weak_handles_ (post-BgcSweep).
     void CollectDeadWeakHandlesForBgc();
 
+    /// Wait for any pending BGC finalizer batches to complete.
+    /// Used by chaos_gc_wait_for_pending_finalizers().
+    void WaitForFinalizerDrain() noexcept;
+
+    // ── Test helpers ─────────────────────────────────────────────
+
+    /// Reset BgcController state for test isolation.
+    /// Clears SATB pool, global queue, worker deques, and resets phase to IDLE.
+    void ResetForTest() noexcept;
+
+    /// Get the number of entries in the global SATB queue.
+    CHAOS_IL2CPP_SIZE GetGlobalSatbCount() noexcept {
+        std::lock_guard<std::mutex> lock(global_satb_mutex_);
+        return global_satb_.size();
+    }
+
+    /// Get the number of entries in a worker's deque.
+    CHAOS_IL2CPP_SIZE GetWorkerDequeSize(int idx) noexcept {
+        if (idx < 0 || idx >= kMaxBgcWorkers) return 0;
+        std::lock_guard<std::mutex> lock(bgc_workers_[idx].steal_mutex);
+        return bgc_workers_[idx].deque.size();
+    }
+
+    /// Push a grey-object entry to a worker's deque (for test setup).
+    void PushWorkerDequeEntry(int idx, void* entry) noexcept {
+        if (idx < 0 || idx >= kMaxBgcWorkers) return;
+        std::lock_guard<std::mutex> lock(bgc_workers_[idx].steal_mutex);
+        bgc_workers_[idx].deque.push_back(entry);
+    }
+
+    // ── Gen1 concurrent marking (GEN1_GEN2 scope) ──────────────────
+
+    /// Try to mark a Gen1 object in the BGC Gen1 mark bitmap.
+    /// Returns true if this is the first mark (object was unmarked).
+    /// Thread-safe: uses atomic test-and-set on the bitmap byte.
+    bool BgcTryMarkGen1(void* obj) noexcept;
+
+    /// Check whether Gen1 concurrent marking is active (bitmap allocated).
+    bool IsGen1MarkingActive() const noexcept {
+        return gen1_mark_bitmap_ != nullptr;
+    }
+
+    /// Reset the Gen1 mark bitmap after a young GC has emptied Gen1.
+    /// Called from young GC Phase 4 after GcGen1Collection resets survivor_bump.
+    void ResetGen1MarkBitmap() noexcept;
+
 private:
     BgcController() = default;
     ~BgcController() = default;
@@ -330,6 +376,28 @@ public:
     std::atomic<int> satb_freeze_remaining_{0};
 
 private:
+    // ── Gen1 concurrent mark bitmap ────────────────────────────────
+
+    /// Allocate a Gen1 mark bitmap covering [survivor_begin, survivor_end).
+    /// Returns true on success, false on OOM (GEN1_GEN2 falls back to GEN2_ONLY).
+    bool AllocateGen1MarkBitmap() noexcept;
+
+    /// Free the Gen1 mark bitmap.  Called at BGC cycle completion.
+    void FreeGen1MarkBitmap() noexcept;
+
+    /// Gen1 mark bitmap (pointer-aligned slot coverage).
+    /// Non-nullptr only during a GEN1_GEN2 BGC cycle.
+    uint8_t* gen1_mark_bitmap_{nullptr};
+
+    /// Size of the Gen1 mark bitmap in bytes.
+    CHAOS_IL2CPP_SIZE gen1_bitmap_bytes_{0};
+
+    /// Base address of the Gen1 range covered by the bitmap.
+    uintptr_t gen1_bitmap_base_{0};
+
+    /// Total span covered by the bitmap (bytes, max = survivor_end - survivor_begin).
+    CHAOS_IL2CPP_SIZE gen1_bitmap_span_{0};
+
     // ── BGC finalization support ──────────────────────────────────
 
     /// Dead finalizable entries collected during BgcSweep.
@@ -360,15 +428,8 @@ private:
     /// Background thread that runs finalizers collected by BGC.
     /// Runs in preemptive mode so it can allocate without blocking.
 
-    /// Per-finalizer timeout before marking for retry (2 seconds, matching CoreCLR).
-    static constexpr int kFinalizerTimeoutMs = 2000;
-
     /// Maximum retries before permanently skipping a hung finalizer.
     static constexpr int kFinalizerMaxRetries = 3;
-
-    /// Finalizer thread heartbeat timeout: if CV wait exceeds this without
-    /// work, log a diagnostic (thread may be hung).
-    static constexpr int kFinalizerHeartbeatMs = 10000;
 
     std::thread finalizer_thread_;
     std::condition_variable finalizer_cv_;
@@ -385,6 +446,16 @@ private:
 
     /// Finalizer thread entry point.
     void FinalizerThreadMain() noexcept;
+
+    // ── Finalizer drain sync ──────────────────────────────────────
+
+    /// Incremented by PublishFinalizationWork, decremented by
+    /// FinalizerThreadMain after processing a batch.
+    std::atomic<int> bgc_finalizer_batches_pending_{0};
+
+    /// Condition variable for WaitForFinalizerDrain.
+    std::condition_variable bgc_finalizer_drain_cv_;
+    std::mutex bgc_finalizer_drain_mutex_;
 };
 
 // ======================================================================

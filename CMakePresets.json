@@ -17,6 +17,19 @@
       }
     },
     {
+      "name": "asan",
+      "displayName": "ASan (AddressSanitizer)",
+      "description": "Debug build with AddressSanitizer enabled for memory error detection.",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "artifacts/presets/asan",
+      "cacheVariables": {
+        "CHAOS_IL2CPP_CONFIG_TIER": "debug",
+        "CMAKE_CXX_FLAGS": "/fsanitize=address /Zi /D_DISABLE_VECTOR_ANNOTATION /D_DISABLE_STRING_ANNOTATION",
+        "CMAKE_EXE_LINKER_FLAGS": "/fsanitize=address",
+        "CMAKE_SHARED_LINKER_FLAGS": "/fsanitize=address"
+      }
+    },
+    {
       "name": "profile",
       "displayName": "Profile (PROFILE)",
       "description": "Performance profiling — INFO+ logging, trace, PROFILE_SCOPE enabled.",

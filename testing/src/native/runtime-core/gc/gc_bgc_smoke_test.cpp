@@ -193,3 +193,36 @@ TEST_F(BgcSmokeTest, BgcWithYoungGc) {
 
     SUCCEED();
 }
+
+// ── Test 7: Latency mode enforcement ──────────────────────────────
+
+TEST_F(BgcSmokeTest, SetLowLatencyMode) {
+    // Verify default latency mode is INTERACTIVE.
+    EXPECT_EQ(g_gc_scheduler.GetLatencyMode(), GcLatencyMode::INTERACTIVE);
+
+    // Set LOW_LATENCY and request a full GC.
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::LOW_LATENCY);
+    EXPECT_EQ(g_gc_scheduler.GetLatencyMode(), GcLatencyMode::LOW_LATENCY);
+
+    // Don't start a BGC cycle — BGC should be idle at this point.
+    ASSERT_FALSE(BgcController::Instance().IsBusy());
+
+    // With LOW_LATENCY and full_gc_requested, DecideCollection should
+    // prefer FULL_BGC over STW FULL.
+    g_gc_scheduler.RequestFullGc();
+    auto kind = g_gc_scheduler.DecideCollection();
+    EXPECT_EQ(kind, GcCollectionKind::FULL_BGC)
+        << "LOW_LATENCY should request FULL_BGC when BGC is available";
+
+    // Set BATCH mode — no latency preference, should return STW FULL.
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::BATCH);
+    kind = g_gc_scheduler.DecideCollection();
+    EXPECT_EQ(kind, GcCollectionKind::FULL)
+        << "BATCH should request STW FULL when full_gc_requested";
+
+    // Restore default latency mode.
+    g_gc_scheduler.SetLatencyMode(GcLatencyMode::INTERACTIVE);
+    EXPECT_EQ(g_gc_scheduler.GetLatencyMode(), GcLatencyMode::INTERACTIVE);
+
+    SUCCEED();
+}

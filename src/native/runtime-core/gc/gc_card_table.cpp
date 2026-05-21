@@ -43,6 +43,11 @@ void GcSetCardTableNurseryRange(uintptr_t begin, uintptr_t end) noexcept {
     g_nursery_range_end = end;
 }
 
+// Out-of-line definition for chaos_gc_dirty_card (ABI export).
+extern "C" void chaos_gc_dirty_card(const void* obj) noexcept {
+    DirtyCard(obj);
+}
+
 void GcRegisterHeapRange(uintptr_t start, uintptr_t end) {
     if (start >= end) return;
 
