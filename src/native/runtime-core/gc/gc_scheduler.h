@@ -292,6 +292,32 @@ public:
         bgc_scope_.store(static_cast<uint8_t>(scope), std::memory_order_release);
     }
 
+    // ── Full GC notification (GC.RegisterForFullGCNotification / WaitForFullGC*) ──
+
+    /// Enable full GC notifications for the calling thread.
+    /// After this call, WaitForFullGcApproach / WaitForFullGcComplete
+    /// will block until a full GC cycle starts/completes.
+    void EnableFullGcNotification() noexcept;
+
+    /// Disable full GC notifications.
+    void DisableFullGcNotification() noexcept;
+
+    /// Signal that a full GC is about to start (called from Collect()).
+    /// Wakes any thread blocked in WaitForFullGcApproach.
+    void SignalFullGcApproach() noexcept;
+
+    /// Signal that a full GC has completed (called from Collect()).
+    /// Wakes any thread blocked in WaitForFullGcComplete.
+    void SignalFullGcComplete() noexcept;
+
+    /// Block until a full GC approach is signaled, or timeout_ms elapses.
+    /// Returns true if approach was signaled, false on timeout.
+    bool WaitForFullGcApproach(int32_t timeout_ms) noexcept;
+
+    /// Block until a full GC completion is signaled, or timeout_ms elapses.
+    /// Returns true if complete was signaled, false on timeout.
+    bool WaitForFullGcComplete(int32_t timeout_ms) noexcept;
+
     // ── Survivor sizing constants ──────────────────────────────────
     /// Minimum Gen1 area: 4 MB.  Below this, Gen1 filtering is too
     /// constrained and objects promote to Gen2 too quickly.
@@ -507,6 +533,27 @@ private:
     std::atomic<CHAOS_IL2CPP_SIZE> bgc_gen1_promote_bytes_{0};
     /// Total bytes kept in Gen1 by BGC StwCompact.
     std::atomic<CHAOS_IL2CPP_SIZE> bgc_gen1_keep_bytes_{0};
+
+    // ── Full GC notification state ──────────────────────────────────
+    /// When true, SignalFullGcApproach/Complete will notify waiters.
+    std::atomic<bool> fullgc_notification_enabled_{false};
+
+    /// Signaled by SignalFullGcApproach before the GC cycle starts.
+    /// Sat under notification_mutex_ — use approach_cv_ for blocking wait.
+    bool fullgc_approach_signaled_{false};
+
+    /// Signaled by SignalFullGcComplete after the GC cycle ends.
+    /// Sat under notification_mutex_ — use complete_cv_ for blocking wait.
+    bool fullgc_complete_signaled_{false};
+
+    /// Mutex protecting notification flags and CV wait.
+    mutable std::mutex notification_mutex_;
+
+    /// Condition variable for approach waiters.
+    mutable std::condition_variable approach_cv_;
+
+    /// Condition variable for complete waiters.
+    mutable std::condition_variable complete_cv_;
 };
 
 /// Process-wide GC scheduler instance.

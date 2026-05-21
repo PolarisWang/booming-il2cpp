@@ -1,0 +1,1631 @@
+{
+  "family": "generated-marshalling",
+  "assembly": "System.Runtime.InteropServices",
+  "total_methods": 154,
+  "audited": 154,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 38,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 154,
+  "passed": true,
+  "method_details": [
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_23",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_24",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_25",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_26",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_27",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_28",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_29",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_30",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_31",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_33",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_34",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_35",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_36",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_37",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_38",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_39",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_40",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_41",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_42",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_43",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_44",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_45",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_46",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_47",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_48",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_49",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_50",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_51",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_52",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_53",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_54",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_55",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_56",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_57",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_58",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_59",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_60",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_61",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_62",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_63",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_64",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_65",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_66",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_67",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_68",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_23",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_24",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_25",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_26",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_27",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_28",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_29",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_30",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_31",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_33",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_34",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_35",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_36",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_37",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_38",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_39",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_40",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_41",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_42",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_43",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_44",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_45",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_46",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_47",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_48",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_49",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_50",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_51",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_52",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_53",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_54",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_55",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_56",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_57",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_58",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_59",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_60",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_61",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_62",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_63",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_64",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_65",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_66",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_67",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GeneratedMarshallingSubjects_GeneratedMarshallingSubjects_Subject_68",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    }
+  ],
+  "skip_details": [
+    {
+      "type_name": "ComExposedClassAttribute",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComExposedClassAttribute",
+      "method_name": ".ctor",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComObject",
+      "method_name": "FinalRelease",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "ConvertToManaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "Free",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsDefaultMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsHResultMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsNaNMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IComExposedClass",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IComExposedDetails",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "Clear",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "ConstructTableInfo",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "TryGetTableInfo",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "TrySetTableInfo",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_Implementation",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceDetailsStrategy",
+      "method_name": "GetComExposedTypeDetails",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceDetailsStrategy",
+      "method_name": "GetIUnknownDerivedDetails",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceType",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceType",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "CreateInstancePointer",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "QueryInterface",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "Release",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_Implementation",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": ".ctor",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnmanagedVirtualMethodTableProvider",
+      "method_name": "GetVirtualMethodTableInfoForKey",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "StrategyBasedComWrappers",
+      "method_name": "get_DefaultIUnknownInterfaceDetailsStrategy",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "StrategyBasedComWrappers",
+      "method_name": "get_DefaultIUnknownStrategy",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "UniqueComInterfaceMarshaller",
+      "method_name": "ConvertToManaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "UniqueComInterfaceMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": ".ctor",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "Deconstruct",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "get_ThisPointer",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "get_VirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    }
+  ],
+  "errors": []
+}

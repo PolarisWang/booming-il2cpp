@@ -105,7 +105,7 @@ dotnet run --project subjects/HotUpdateSkeletonProof/source/HotUpdateSkeletonPro
 
 ```powershell
 dotnet build src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj -c Release
-dotnet build testing/verification-catalog/workspaces/core/windows/chaos-il2cpp-core.sln -c Release
+dotnet build artifact/verification-catalog/workspaces/core/windows/chaos-il2cpp-core.sln -c Release
 cmake -S . -B artifacts/.tmp-hot-update-reference -G "Visual Studio 17 2022" -DROADMAP0_PRESET_TARGET=windows-x64-reference
 cmake --build artifacts/.tmp-hot-update-reference --config Release --target chaos_hot_update
 ```

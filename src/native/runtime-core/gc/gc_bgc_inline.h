@@ -55,7 +55,7 @@ inline void BgcSatbPreWriteBarrier(void** slot) noexcept {
     // are generated past this point.  The BGC thread then does a final
     // drain and can safely conclude that all reachable objects are marked.
     auto& ctrl = BgcController::Instance();
-    if (ctrl.satb_freeze_requested_.load(std::memory_order_acquire)) {
+    if (ctrl.satb_freeze_requested_.load(std::memory_order_relaxed)) {
         // Flush the current buffer to the global queue, then ack the freeze.
         int pool_idx2 = tls_satb_buffer_index;
         if (pool_idx2 >= 0) {

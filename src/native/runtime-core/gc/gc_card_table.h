@@ -9,6 +9,7 @@
 #include <cstring>
 #include <memory>
 
+#include "gc_bit_utils.h"
 #include "gc_region.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -206,6 +207,13 @@ inline void ScanDirtyCards(uintptr_t start, uintptr_t end, Fn&& callback) noexce
         uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);
 
+        // SIMD fast-skip for full-segment scan: check all 128 bytes at once.
+        if (seg_first_card == 0 && seg_last_card == (kCardsPerSegment - 1)) {
+            if (!GcSegmentHasDirtyCards(seg->cards)) {
+                continue;  // entire segment clean — skip
+            }
+        }
+
         for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
             if (seg->cards[ci] != 0) {
                 uintptr_t global_card_idx = si * kCardsPerSegment + ci;
@@ -248,6 +256,14 @@ inline void ScanDirtyCardsBatched(uintptr_t start, uintptr_t end,
 
         uintptr_t seg_first_card = (si == first_seg) ? (first % kCardsPerSegment) : 0;
         uintptr_t seg_last_card  = (si == last_seg)  ? (last  % kCardsPerSegment) : (kCardsPerSegment - 1);
+
+        // SIMD fast-skip for full-segment scan: check all 128 bytes at once.
+        if (seg_first_card == 0 && seg_last_card == (kCardsPerSegment - 1)) {
+            if (!GcSegmentHasDirtyCards(seg->cards)) {
+                in_run = false;
+                continue;  // entire segment clean — skip
+            }
+        }
 
         for (uintptr_t ci = seg_first_card; ci <= seg_last_card; ci++) {
             if (seg->cards[ci] != 0) {

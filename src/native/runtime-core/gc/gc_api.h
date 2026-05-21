@@ -101,9 +101,35 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enter_no_gc_region() noexcept;
 /// that was requested during the region will be executed.
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept;
 
+/// Try to start a NO_GC_REGION with a pre-allocated budget.
+/// Returns 1 (true) if the region was started successfully — the calling
+/// thread may allocate up to @a total_size bytes without triggering a
+/// blocking GC.  Returns 0 (false) if insufficient capacity is available.
+/// When @a disallow_full_blocking_gc is non-zero, the region will fail
+/// if a full (blocking) GC would be required to satisfy the budget.
+/// Corresponds to System.GC.TryStartNoGCRegion(totalSize, disallowFullBlockingGC).
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_try_start_no_gc_region(
+    CHAOS_IL2CPP_INT64 total_size, CHAOS_IL2CPP_INT32 disallow_full_blocking_gc) noexcept;
+
+/// End the current NO_GC_REGION.  Returns 0 (Success) if no GC was
+/// triggered during the region, or 1 (GCTriggered) if a GC was deferred
+/// and executed on exit.
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_end_no_gc_region() noexcept;
+
 /// Check whether the current thread is inside a NO_GC_REGION.
 /// Returns true when the TLS nesting counter > 0.
 bool GcIsInNoGcRegion() noexcept;
+
+/// Returns the total accumulated pause time across all GC collections
+/// (young + gen1 + full) in nanoseconds.  Corresponds to
+/// GC.GetTotalPauseDuration() in the BCL.
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_duration() noexcept;
+
+/// Returns the total number of bytes allocated by the current thread
+/// across all generations (nursery, old gen, POH).  Corresponds to
+/// GC.GetAllocatedBytesForCurrentThread() in the BCL.
+/// This is a monotonically increasing per-thread counter that is never reset.
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

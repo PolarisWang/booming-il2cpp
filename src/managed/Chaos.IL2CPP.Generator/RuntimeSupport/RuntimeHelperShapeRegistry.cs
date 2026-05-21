@@ -855,6 +855,45 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
+            // === GC.GetTotalPauseDuration — returns total accumulated pause (ns) as Int64 ===
+            registry.Register("System.GC", "GetTotalPauseDuration", [],
+                ShapeKind.SimpleForward, "chaos_gc_get_total_pause_duration",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                EmptyRawArgumentIndices);
+
+            // === GC.GetAllocatedBytesForCurrentThread — returns per-thread allocated bytes (Int64) ===
+            registry.Register("System.GC", "GetAllocatedBytesForCurrentThread", [],
+                ShapeKind.SimpleForward, "chaos_gc_get_allocated_bytes_for_current_thread",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                EmptyRawArgumentIndices);
+
+            // === GC.TryStartNoGCRegion — two overloads ===
+            registry.Register("System.GC", "TryStartNoGCRegion", ["System.Int64"],
+                ShapeKind.SimpleForward, "chaos_gc_try_start_no_gc_region",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),  // returns bool (0/1)
+                new HashSet<int> { 0 });
+
+            registry.Register("System.GC", "TryStartNoGCRegion", ["System.Int64", "System.Boolean"],
+                ShapeKind.SimpleForward, "chaos_gc_try_start_no_gc_region",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),  // returns bool (0/1)
+                new HashSet<int> { 0, 1 });
+
+            // === GC.EndNoGCRegion — returns Int32 (0=Success, 1=GCTriggered) ===
+            registry.Register("System.GC", "EndNoGCRegion", [],
+                ShapeKind.SimpleForward, "chaos_gc_end_no_gc_region",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
             // === GCMemoryInfo ===
             // Matches the BCL InternalCall signature: GetMemoryInfo(GCMemoryInfoData data, int kind)
             // GCMemoryInfoData is a class; codegen passes the object reference as a native int (pointer),

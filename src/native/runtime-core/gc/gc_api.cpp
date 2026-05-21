@@ -396,6 +396,77 @@ bool GcIsInNoGcRegion() noexcept {
     return tls_no_gc_region_depth > 0;
 }
 
+// ======================================================================
+// chaos_gc_try_start_no_gc_region
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_try_start_no_gc_region(
+    CHAOS_IL2CPP_INT64 total_size, CHAOS_IL2CPP_INT32 disallow_full_blocking_gc) noexcept
+{
+    (void)disallow_full_blocking_gc;  // CRAG always allows full GC as safety net
+
+    if (total_size < 0) return 0;
+
+    // Estimate available capacity: remaining young gen bytes.
+    auto* region = g_young_gen.region.load(std::memory_order_acquire);
+    char* bump = g_young_gen.bump.load(std::memory_order_acquire);
+    char* region_end = g_young_gen.region_end.load(std::memory_order_acquire);
+    CHAOS_IL2CPP_INT64 available = 0;
+    if (region != nullptr && bump != nullptr && region_end != nullptr) {
+        available = static_cast<CHAOS_IL2CPP_INT64>(region_end - bump);
+    }
+
+    // Add Gen1 capacity as additional available space.
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        char* gen1_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (gen1_bump != nullptr && gen1_bump < gen1->end) {
+            available += static_cast<CHAOS_IL2CPP_INT64>(gen1->end - gen1_bump);
+        }
+    }
+
+    // Add old gen free page capacity (estimate: use half of total allocated
+    // as a conservative approximation of free-list capacity).
+    CHAOS_IL2CPP_INT64 old_alloc = static_cast<CHAOS_IL2CPP_INT64>(
+        g_old_gen.TotalAllocated());
+    available += old_alloc / 2;
+
+    // Apply 2x safety margin: require twice the requested budget.
+    if (available < total_size * 2) return 0;
+
+    // Budget sufficient — enter no-GC region.
+    ++tls_no_gc_region_depth;
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "try_start_no_gc_region depth=%d budget=%lld available=%lld",
+        tls_no_gc_region_depth,
+        static_cast<long long>(total_size),
+        static_cast<long long>(available));
+    return 1;
+}
+
+// ======================================================================
+// chaos_gc_end_no_gc_region
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_end_no_gc_region() noexcept {
+    if (tls_no_gc_region_depth <= 0) {
+        CHAOS_IL2CPP_LOG_WARN("GC_API", "end_no_gc_region mismatched (depth already 0)");
+        return 0;  // Success (no GC triggered — nothing to clean up)
+    }
+
+    --tls_no_gc_region_depth;
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "end_no_gc_region depth=%d", tls_no_gc_region_depth);
+
+    if (tls_no_gc_region_depth == 0) {
+        auto kind = g_gc_scheduler.DecideCollection();
+        if (kind != GcCollectionKind::NONE) {
+            g_gc_scheduler.RequestFullGc();
+            return 1;  // GCTriggered
+        }
+    }
+
+    return 0;  // Success
+}
+
 void chaos_gc_register_finalizable(void* obj) noexcept {
     // Minimal stub: records the object for future finalization.
     // The finalizer lookup from type_info is not yet wired — the GC will
@@ -403,6 +474,33 @@ void chaos_gc_register_finalizable(void* obj) noexcept {
     // This is sufficient for testing scenarios that don't exercise the
     // finalization pipeline (e.g. hotupdate emit-patch-data flow).
     (void)obj;
+}
+
+// ======================================================================
+// chaos_gc_get_total_pause_duration
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_duration() noexcept
+{
+    auto snap = GcGetSnapshot();
+    uint64_t total = snap.young_pause_ns_total
+                   + snap.gen1_pause_ns_total
+                   + snap.full_pause_ns_total;
+    return static_cast<CHAOS_IL2CPP_INT64>(total);
+}
+
+// ======================================================================
+// chaos_gc_get_allocated_bytes_for_current_thread
+// ======================================================================
+
+/// Per-thread total allocated bytes counter (monotonically increasing, never reset).
+/// Incremented by all allocation paths: NurseryAllocate, NurseryAllocateAtomic,
+/// PohAllocate, and fallback paths to old gen / LOH.
+thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
+
+extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
+{
+    return tls_total_allocated_bytes;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

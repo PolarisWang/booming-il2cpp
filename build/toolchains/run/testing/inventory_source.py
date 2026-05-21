@@ -1160,7 +1160,7 @@ def _managed_source_refs_for_capability(
         label = str(item.get("sourceEntry") or item.get("workloadEntry") or item.get("stableId") or "").strip()
         if not label:
             continue
-        key = (f"testing/verification-catalog/catalog/owners/{owner_subject_id}", label)
+        key = (f"artifact/verification-catalog/catalog/owners/{owner_subject_id}", label)
         if key in seen:
             continue
         seen.add(key)

@@ -355,14 +355,14 @@ def _hint_source(key: str) -> list[str]:
         return ["inventory_generator.py", "verification-v1/spec.md", "subject-test-framework-v1/INDEX.md", "AOT新Feature接入自测规范.md"]
     if key in {"platformId", "deviceId", "deviceName", "managedStatus", "nativeStatus", "interpreterStatus", "lastRecordedAt", "gitCommit", "isStale"} or key.endswith("MeanDurationMs") or key.endswith("OpsPerSecond") or key.endswith("RelativeToManaged"):
         return [
-            "testing/verification-catalog/archive/master/evidence-claims-master.json",
-            "testing/verification-catalog/archive/master/result-master.json",
+            "artifact/verification-catalog/archive/master/evidence-claims-master.json",
+            "artifact/verification-catalog/archive/master/result-master.json",
             "verification_projection.py",
         ]
     if key in {"defaultGoalId", "defaultMatrixId"}:
         return ["registry.py", "workspace.manifest.json"]
     if key in {"proofRequired", "benchmarkRequired", "supportStates", "supportStateLabels", "ownerSubjectId", "capabilityFamily", "capabilityFamilyLabel", "capabilityItem", "capabilityItemLabel"}:
-        return ["testing/verification-catalog/catalog/owners/*/owner.features.json", "capability_coverage.py"]
+        return ["artifact/verification-catalog/catalog/owners/*/owner.features.json", "capability_coverage.py"]
     return ["compiled_catalog.py", "registry.py", "inventory_source.py"]
 
 
@@ -1102,7 +1102,7 @@ def validate_inventory_outputs(
     codegen_stub_paths = [
         artifact
         for artifact in artifacts
-        if "testing/verification-catalog/evidence/owners/" in _normalized_artifact_path(artifact)
+        if "artifact/verification-catalog/evidence/owners/" in _normalized_artifact_path(artifact)
     ]
     if required_codegen_stub_count > 0 and not codegen_stub_paths:
         raise RuntimeError(
@@ -1111,11 +1111,11 @@ def validate_inventory_outputs(
 
     verification_data = {
         "verificationOutputRoot": str(verification_payload.get("outputRoot") or ""),
-        "latestResultPath": _find_artifact_by_suffix(artifacts, "testing/verification-catalog/archive/latest/result-snapshot.json"),
-        "masterResultPath": _find_artifact_by_suffix(artifacts, "testing/verification-catalog/archive/master/result-master.json"),
+        "latestResultPath": _find_artifact_by_suffix(artifacts, "artifact/verification-catalog/archive/latest/result-snapshot.json"),
+        "masterResultPath": _find_artifact_by_suffix(artifacts, "artifact/verification-catalog/archive/master/result-master.json"),
         "reportSummaryPath": _find_artifact_by_suffix(
             artifacts,
-            "testing/verification-catalog/archive/reports/completed/testing-inventory/summary.md",
+            "artifact/verification-catalog/archive/reports/completed/testing-inventory/summary.md",
         ),
         "codegenStubPaths": codegen_stub_paths,
     }

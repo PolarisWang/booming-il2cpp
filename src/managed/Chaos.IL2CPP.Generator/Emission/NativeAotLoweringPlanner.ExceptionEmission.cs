@@ -2379,6 +2379,10 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}        else");
 		builder.AppendLine($"{indentation}        {{");
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}            {returnType} chaos_result{{}};");
+		}
 		builder.AppendLine($"{indentation}            if (chaos_delegate->chaos_delegate_target == 0)");
 		builder.AppendLine($"{indentation}            {{");
 		builder.AppendLine($"{indentation}                const auto chaos_open_function = reinterpret_cast<{openFnType}>(chaos_delegate->chaos_delegate_method_ptr);");
@@ -2388,8 +2392,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}                const auto chaos_result = {openCall};");
-			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}                ");
+			builder.AppendLine($"{indentation}                chaos_result = {openCall};");
 		}
 		builder.AppendLine($"{indentation}            }}");
 		builder.AppendLine($"{indentation}            else");
@@ -2401,10 +2404,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}                const auto chaos_result = {singleClosedCall};");
-			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}                ");
+			builder.AppendLine($"{indentation}                chaos_result = {singleClosedCall};");
 		}
 		builder.AppendLine($"{indentation}            }}");
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			EmitAbiReturnPush(builder, returnAbi, "chaos_result", $"{indentation}            ");
+		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}}}");

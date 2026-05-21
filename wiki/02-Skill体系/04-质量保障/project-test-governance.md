@@ -30,13 +30,13 @@
 - 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
 - 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
 - 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`testing/**` 等引用只能作为 support refs，不能把项目状态置为通过，也不能混入 primary artifact table
-- foundation-dll-audit 的真实进度主轴是 `Capability Closure`，其分母 authority 是 `testing/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`；不允许再用 verification project 数量、workspace 数量或样例数量代替
+- foundation-dll-audit 的真实进度主轴是 `Capability Closure`，其分母 authority 是 `artifact/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`；不允许再用 verification project 数量、workspace 数量或样例数量代替
 - `Workflow Progress` 只是辅助流程条，用来表示 family 级 required gates 推进到哪一步，不代表 capability 覆盖本身
 - `completion-certification` 是 DLL 级 gate，不进入 capability family 的 workflow denominator
 - `workspace` 只允许作为 proof container / reproducibility container，不能成为 DLL capability progress 的正式分母
 - waiver / exclusion / platform-blocked 三类豁免必须落在 capability-family ledger 中并带正式 authorityRef，不允许只写在 task `STATUS.md`
-- 新测试流程的数据以 `testing/verification-catalog/archive/{latest,master,reports}` 与 `testing/verification-catalog/evidence/owners/*/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
-- 命中 projection / report contract 时，还必须确认对应 `testing/verification-catalog/projections/**` 派生产物已更新
+- 新测试流程的数据以 `artifact/verification-catalog/archive/{latest,master,reports}` 与 `artifact/verification-catalog/evidence/owners/*/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
+- 命中 projection / report contract 时，还必须确认对应 `artifact/verification-catalog/projections/**` 派生产物已更新
 - `run test inventory` 只是内部命令，不作为对外 public entry。
 - `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。需要新的 benchmark archive / projection / merged data 时，必须后续执行 `run verify verification-v1 --json`。
 

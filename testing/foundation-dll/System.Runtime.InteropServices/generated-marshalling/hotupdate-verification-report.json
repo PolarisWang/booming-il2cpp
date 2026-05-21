@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/generated/marshalling",
+  "passedMethods": 69,
+  "failedMethods": 0,
+  "totalMethods": 69,
+  "stubMethods": 52,
+  "realMethods": 17,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 69,
+    "passedMethods": 69,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

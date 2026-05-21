@@ -25,7 +25,7 @@
 - `completed` 只能在“任务全完成 + formal verification gate 通过 + 架构合理性审视通过 + 受影响测试通过 + wiki 更新完成”后自动产生
 - 命中 `ownerSubjectId`、`proofRequired`、`benchmarkRequired`、`hotupdateImpact`、`formalVerificationObjects`、`requiredGates` 等字段时，视�?obligation-driven
 - obligation-driven 任务至少要确�?`requiredGates`、managed proof、native proof、按需 hotupdate proof / benchmark、以及全�?`formalVerificationObjects`
-- 如本轮要求新�?verification 数据，`completed` 前还必须确认 `testing/verification-catalog/archive/{latest,master,reports}` 已刷新；命中 codegen 主线时再确认 `testing/verification-catalog/evidence/owners/*/codegen-stubs/*`
+- 如本轮要求新�?verification 数据，`completed` 前还必须确认 `artifact/verification-catalog/archive/{latest,master,reports}` 已刷新；命中 codegen 主线时再确认 `artifact/verification-catalog/evidence/owners/*/codegen-stubs/*`
 - 测试阶段如果出现 `dotnet` 编译崩溃，必须先查根因并修复，不能绕�?- `docs/dev/in-progress/` 只允许承�?`lifecycle_status: in-progress` 的任务；终态任务必须同步更�?`STATUS.md`、`current_dir`、索引和物理目录
 - 带有 `parent_task_id` �?`source_relation: roadmap-child*` �?child task 完成后，必须先归�?child task，再回写父任务摘要与 child mapping
 

@@ -2863,21 +2863,23 @@ static bool Test_SubSelfIntrinsic() {
 #if defined(_WIN64)
 
 static bool Test_UnwindInfoLayout() {
-    std::printf("  Test_UnwindInfoLayout...\n");
+    std::printf("  Test_UnwindInfoLayout...\n"); std::fflush(stdout);
     CodeBuffer buf;
-    // Prologue: push rbp(1) + mov rbp,rsp(3) + push rbx(1) + push rsi(1)
-    // + nop padding to make total=16
-    // 3 regs: rbp(5), rbx(3), rsi(4)
+    std::printf("    [DEBUG] after CodeBuffer ctor\n"); std::fflush(stdout);
     uint8_t push_reg_nums[] = {5, 3, 4};
-    uint32_t push_offsets[] = {0, 2, 7};    // push rbp@0, push rbx@2, push rsi@7
-    uint32_t sub_offset = 7;                 // sub rsp at 7
-    uint32_t fpreg_offset = 1;              // mov rbp,rsp at 1
+    uint32_t push_offsets[] = {0, 2, 7};
+    uint32_t sub_offset = 7;
+    uint32_t fpreg_offset = 1;
     uint32_t unwind_off = EmitUnwindInfo(buf, 16, 64, 3,
         push_reg_nums, push_offsets, sub_offset, fpreg_offset, false);
+    std::printf("    [DEBUG] after EmitUnwindInfo, unwind_off=%u, pos=%u\n",
+                unwind_off, buf.pos()); std::fflush(stdout);
 
     void* code = buf.Seal();
+    std::printf("    [DEBUG] after Seal, code=%p\n", code); std::fflush(stdout);
     if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
     const uint8_t* d = static_cast<const uint8_t*>(code);
+    std::printf("    [DEBUG] d[0]=0x%02X
 
     // Header: Version=1, Flags=0 → 1 | (0<<3) = 1
     uint8_t vf = d[unwind_off];
@@ -3202,6 +3204,15 @@ int main() {
     // WS4: T4 SEH Support
     TEST(SehTable); TEST(SehCanGenerate);
 
+#if defined(_WIN64)
+    // Unwind Info Tests — early (before benchmarks/OSR to isolate heap corruption)
+    TEST(UnwindInfoLayout); TEST(UnwindInfoSehFlag);
+    TEST(UnwindInfoAllocSmall); TEST(UnwindInfoAllocLarge);
+    TEST(UnwindInfoPadding); TEST(AllocRuntimeFunction);
+    TEST(UnwindInfoInGenerate); TEST(UnwindInfoSehMethods);
+    TEST(RtlAddFunctionTable);
+#endif
+
     // Phase 3d: Branch-to-switch conversion (before OSR tests due to OsrPromote hang)
     TEST(BrToSwitch);
 
@@ -3209,14 +3220,7 @@ int main() {
     TEST(Benchmark);
     TEST(BenchmarkExtended);
 
-#if defined(_WIN64)
-    // Unwind Info Tests — .pdata/.xdata binary layout + V2 personality thunk
-    TEST(UnwindInfoLayout); TEST(UnwindInfoSehFlag);
-    TEST(UnwindInfoAllocSmall); TEST(UnwindInfoAllocLarge);
-    TEST(UnwindInfoPadding); TEST(AllocRuntimeFunction);
-    TEST(UnwindInfoInGenerate); TEST(UnwindInfoSehMethods);
-    TEST(RtlAddFunctionTable);
-#endif
+    // Unwind Info Tests — were here, moved up for isolation
 
     // WS6: OSR — hot loop promotes to T4
     TEST(OsrPromote);
@@ -3254,3 +3258,4 @@ int main() {
                 g_tests_passed, g_tests_failed, g_tests_passed + g_tests_failed);
     return g_tests_failed > 0 ? 1 : 0;
 }
+                                                                                                                                                      

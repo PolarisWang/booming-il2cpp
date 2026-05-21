@@ -129,7 +129,7 @@
 - Phase 7 定向入口：`python -m pytest tests/unit/run/test_phase7_interpreter_mixed_execution.py -v`
 - Phase 6 回归入口：`python -m pytest tests/unit/run/test_phase6_capability_batch_b.py -v`
 - managed interpreter 项目构建：`dotnet build src/managed/Chaos.IL2CPP.Interpreter/Chaos.IL2CPP.Interpreter.csproj -c Release`
-- managed 侧综合构建：`dotnet build testing/verification-catalog/workspaces/core/windows/chaos-il2cpp-core.sln -c Release`
+- managed 侧综合构建：`dotnet build artifact/verification-catalog/workspaces/core/windows/chaos-il2cpp-core.sln -c Release`
 - native 侧构建：
   - `cmake -S . -B artifacts/.tmp-interpreter-native -G "Visual Studio 17 2022" -DROADMAP0_PRESET_TARGET=windows-x64-reference`
   - `cmake --build artifacts/.tmp-interpreter-native --config Release --target chaos_interpreter`

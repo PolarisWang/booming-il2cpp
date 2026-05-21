@@ -1,0 +1,138 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,CreateComInterfaceFlags)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags,System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags,System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags,System.Object,System.IntPtr)",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ComWrappersSubjects/ComWrappersSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+    },
+    {
+      "methodSubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+    }
+  ]
+}

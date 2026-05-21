@@ -42,9 +42,8 @@ il2cpp_dist/
 # Auto-generated verification evidence (regenerated on every pipeline run)
 docs/verification/foundation-dll-audit/
 
-# Runtime-generated verification catalog/history (under testing/ to keep root clean)
-testing/verification-catalog/
-testing/verification-history/
+# Runtime-generated verification catalog/history (under artifact/ to keep root clean)
+artifact/
 
 # .NET outputs
 bin/
