@@ -24,7 +24,7 @@
 - `run test inventory` 只保留为内部实现命令，不是 public entry。
 - `benchmark --record` 只写原始 benchmark records，不会直接刷新 formal archive / projection。需要新的正式报告、dashboard 和合并数据时，仍然走 `run verify verification-v1 --json`。
 - 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、页面矩阵列或证据链接规则，也必须通过 `run verify verification-v1 --json` 刷新正式数据；不允许只改 schema、模板或页面读取逻辑而不刷新 archive / reports / projections。
-- 对于 DLL-first reporting 这类 evidence-driven projection，`artifacts/**` 下的真实产物才算 primary evidence；`docs/**`、`subjects/**`、`verification/**` 只允许作为 support refs 展示，不能直接驱动项目变绿或混入 artifact index。
+- 对于 DLL-first reporting 这类 evidence-driven projection，`artifacts/**` 下的真实产物才算 primary evidence；`docs/**`、`subjects/**`、`testing/verification-catalog/**` 只允许作为 support refs 展示，不能直接驱动项目变绿或混入 artifact index。
 - 主线定义：`managed solution -> dotnet 8 collection analysis -> collection files -> managed test project -> native project -> native test project -> hotupdate patch project + hotupdate test host project`
 - 测试声明：由 `Chaos.TestFramework.Sdk` 中的 attribute 在 managed solution 中声明。
 - collection 产生：由 `.NET 8` collector 分析 managed project 中的 `Sdk` 声明并输出 collection file。
@@ -87,7 +87,7 @@
 - `2026-05-09`：更新 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，补充 `handwritten/` 目录 contract 和覆盖保护规则
 - `2026-05-09`：重写 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，覆盖新验证管线全貌：两阶段托管探测（Probe → Emit）、void entry + Assert ExitCode 模式、7 阶段管线、自定义条目流程。旧 C++ host / checksum / L2 流程已全部删除。
 - `2026-04-26`：新增 Capability Closure 双轴报告治理框架；capability-family ledger 成为 foundation DLL 进度报告的正式分母 authority；completion-certification 改为 DLL 级 gate，不再混入 family workflow denominator；waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef，不再允许引用 task STATUS.md。
-- `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`verification/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
+- `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`testing/verification-catalog/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
 - `2026-04-26`：新增 DLL 详情页的信息架构规范；DLL 页头显示双轴进度条 + source links，正文显示 capability families 表格 + waiver records 表格 + verification projects 精简摘要。Dashboard 页头显示三轴进度条（DLL Completion / Capability Closure / Workflow Progress），DLL Matrix 新增 Closure/Progress 列和筛选器。Artifact Index 拆分到独立 artifact-index.html 次级入口。
 - `2026-04-23`：新增 [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)，将 `Verification V1` 固定为新的长期 canonical 测试流程入口，并明确 formal source、覆盖模型、投影视图与旧流程退役规则。
 - `2026-04-17`：新增 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，固定 AOT 主线 feature 的 owner subject、自测顺序与 collector/registry/workspace 三层闸门。

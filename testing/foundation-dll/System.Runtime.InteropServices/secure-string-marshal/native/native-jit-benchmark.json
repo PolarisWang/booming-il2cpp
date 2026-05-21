@@ -8,36 +8,36 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
-      "elapsedMilliseconds": 1261.932,
-      "calibratedMs": 1261.932,
-      "opsPerSecond": 79243.6,
+      "elapsedMilliseconds": 1914.093,
+      "calibratedMs": 1914.093,
+      "opsPerSecond": 52244.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
-      "elapsedMilliseconds": 1153.862,
-      "calibratedMs": 1153.862,
-      "opsPerSecond": 86665.5,
+      "elapsedMilliseconds": 2594.813,
+      "calibratedMs": 2594.813,
+      "opsPerSecond": 38538.4,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
-      "elapsedMilliseconds": 1047.987,
-      "calibratedMs": 1047.987,
-      "opsPerSecond": 95421.0,
+      "elapsedMilliseconds": 1593.175,
+      "calibratedMs": 1593.175,
+      "opsPerSecond": 62767.8,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
-      "elapsedMilliseconds": 1124.019,
-      "calibratedMs": 1124.019,
-      "opsPerSecond": 88966.5,
+      "elapsedMilliseconds": 1882.801,
+      "calibratedMs": 1882.801,
+      "opsPerSecond": 53112.4,
       "iterations": 100000,
       "status": "completed"
     }

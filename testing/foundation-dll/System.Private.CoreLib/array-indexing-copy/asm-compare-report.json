@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/array/indexing/copy",
-  "capturedAt": "2026-05-21T22:25:50",
+  "capturedAt": "2026-05-21T23:43:38",
   "batchMode": true,
   "summary": {
     "totalMethods": 13,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 572
+      "max": 1518,
+      "avg": 157.4,
+      "total": 2046
     },
     "aotInstructionCount": {
       "min": 8,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 24
     },
-    "overallIrExpansionRatio": 0.38,
-    "averageExpansionRatio": 0.38,
+    "overallIrExpansionRatio": 0.11,
+    "averageExpansionRatio": 0.34,
     "maxExpansionRatio": 0.59,
-    "minExpansionRatio": 0.18
+    "minExpansionRatio": 0.01
   },
   "methodResults": [
     {
@@ -315,15 +315,15 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 1518,
         "aotInstructionCount": 22,
-        "ratio": 0.5,
-        "jitCodeSize": 256
+        "ratio": 0.01,
+        "jitCodeSize": 4082
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 4082,
+        "instructions": 1518
       },
       "aot": {
         "status": "ok",

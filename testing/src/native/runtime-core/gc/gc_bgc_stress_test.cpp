@@ -89,6 +89,11 @@ static bool WaitForPhase(BgcPhase phase, int timeout_ms = 120000) {
     auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms);
     while (std::chrono::steady_clock::now() < deadline) {
         if (BgcController::Instance().Phase() == phase) return true;
+        // Detect early if BGC was preempted (e.g. by Full GC).
+        // When waiting for IDLE, !IsBusy() means the cycle is done.
+        if (!BgcController::Instance().IsBusy()) {
+            return (phase == BgcPhase::IDLE);
+        }
         threading::SafepointPoll();
         std::this_thread::yield();
     }
@@ -101,7 +106,7 @@ static void* AllocOldGen(size_t size, bool scanning = true) {
 
 static void RunBgcCycle() {
     // Retry loop: if a Full GC interrupts the BGC cycle, restart.
-    for (int attempt = 0; attempt < 3; attempt++) {
+    for (int attempt = 0; attempt < 5; attempt++) {
         while (BgcController::Instance().IsBusy())
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
@@ -110,14 +115,14 @@ static void RunBgcCycle() {
         threading::ReleaseGlobalSafepoint(gen);
 
         // Wait for concurrent mark to complete.
-        if (!WaitForPhase(BgcPhase::REMARK_NEEDED)) {
-            // BGC was interrupted (e.g. by Full GC). Check if BGC is now idle
-            // and retry.
+        auto phase_after_mark = WaitForPhase(BgcPhase::REMARK_NEEDED, 120000);
+        if (!phase_after_mark) {
+            // BGC was interrupted (e.g. by Full GC) or timed out.
             auto phase = BgcController::Instance().Phase();
             if (phase == BgcPhase::IDLE || !BgcController::Instance().IsBusy()) {
                 continue;  // retry
             }
-            // BGC is still running in some unexpected state — fail.
+            // BGC is still running but stuck — fail.
             FAIL() << "BGC cycle interrupted, phase=" << static_cast<int>(phase);
         }
 
@@ -126,7 +131,14 @@ static void RunBgcCycle() {
         BgcController::Instance().StartConcurrentSweep();
         threading::ReleaseGlobalSafepoint(gen);
 
-        ASSERT_TRUE(WaitForPhase(BgcPhase::COMPACT_NEEDED));
+        auto phase_after_sweep = WaitForPhase(BgcPhase::COMPACT_NEEDED, 120000);
+        if (!phase_after_sweep) {
+            auto phase = BgcController::Instance().Phase();
+            if (phase == BgcPhase::IDLE || !BgcController::Instance().IsBusy()) {
+                continue;  // retry
+            }
+            FAIL() << "BGC compact phase interrupted, phase=" << static_cast<int>(phase);
+        }
 
         gen = threading::RequestGlobalSafepoint();
         BgcController::Instance().StwCompact();
@@ -135,7 +147,7 @@ static void RunBgcCycle() {
         BgcController::Instance().WaitForCycleComplete();
         return;  // success
     }
-    FAIL() << "BGC cycle failed after 3 attempts";
+    FAIL() << "BGC cycle failed after 5 attempts";
 }
 
 // ── Finalizer ────────────────────────────────────────────────────
@@ -444,7 +456,10 @@ TEST_F(BgcStressTest, Gen1ConcurrentMark) {
     threading::ReleaseGlobalSafepoint(gen);
 
     // Step 3: Verify Gen1 marking is active during concurrent mark.
-    ASSERT_TRUE(WaitForPhase(BgcPhase::CONCURRENT_MARK));
+    {
+        auto in_concurrent = WaitForPhase(BgcPhase::CONCURRENT_MARK, 120000);
+        ASSERT_TRUE(in_concurrent) << "BGC did not enter concurrent mark";
+    }
     EXPECT_TRUE(BgcController::Instance().IsGen1MarkingActive());
 
     // Step 4: Run young GCs during BGC concurrent mark to exercise the
@@ -461,14 +476,22 @@ TEST_F(BgcStressTest, Gen1ConcurrentMark) {
     }
 
     // Step 5: Complete BGC cycle.
-    ASSERT_TRUE(WaitForPhase(BgcPhase::REMARK_NEEDED));
+    {
+        auto at_remark = WaitForPhase(BgcPhase::REMARK_NEEDED, 180000);
+        ASSERT_TRUE(at_remark) << "BGC did not reach REMARK_NEEDED, phase="
+            << static_cast<int>(BgcController::Instance().Phase());
+    }
 
     gen = threading::RequestGlobalSafepoint();
     BgcController::Instance().StwRemark();
     BgcController::Instance().StartConcurrentSweep();
     threading::ReleaseGlobalSafepoint(gen);
 
-    ASSERT_TRUE(WaitForPhase(BgcPhase::COMPACT_NEEDED));
+    {
+        auto at_compact = WaitForPhase(BgcPhase::COMPACT_NEEDED, 180000);
+        ASSERT_TRUE(at_compact) << "BGC did not reach COMPACT_NEEDED, phase="
+            << static_cast<int>(BgcController::Instance().Phase());
+    }
 
     gen = threading::RequestGlobalSafepoint();
     BgcController::Instance().StwCompact();

@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: D:/agent/booming-il2cpp/testing/src/native/engine-bridge
+# Build directory: D:/agent/booming-il2cpp/build/testing/engine-bridge
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test([=[test_engine_bridge_smoke]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/Debug/test_engine_bridge_smoke.exe")
+  set_tests_properties([=[test_engine_bridge_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;15;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test([=[test_engine_bridge_smoke]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/Release/test_engine_bridge_smoke.exe")
+  set_tests_properties([=[test_engine_bridge_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;15;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test([=[test_engine_bridge_smoke]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/MinSizeRel/test_engine_bridge_smoke.exe")
+  set_tests_properties([=[test_engine_bridge_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;15;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test([=[test_engine_bridge_smoke]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/RelWithDebInfo/test_engine_bridge_smoke.exe")
+  set_tests_properties([=[test_engine_bridge_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;15;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+else()
+  add_test([=[test_engine_bridge_smoke]=] NOT_AVAILABLE)
+endif()
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test([=[test_engine_bridge_stress]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/Debug/test_engine_bridge_stress.exe")
+  set_tests_properties([=[test_engine_bridge_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;20;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test([=[test_engine_bridge_stress]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/Release/test_engine_bridge_stress.exe")
+  set_tests_properties([=[test_engine_bridge_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;20;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test([=[test_engine_bridge_stress]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/MinSizeRel/test_engine_bridge_stress.exe")
+  set_tests_properties([=[test_engine_bridge_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;20;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test([=[test_engine_bridge_stress]=] "D:/agent/booming-il2cpp/build/testing/engine-bridge/RelWithDebInfo/test_engine_bridge_stress.exe")
+  set_tests_properties([=[test_engine_bridge_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;20;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/engine-bridge/CMakeLists.txt;0;")
+else()
+  add_test([=[test_engine_bridge_stress]=] NOT_AVAILABLE)
+endif()

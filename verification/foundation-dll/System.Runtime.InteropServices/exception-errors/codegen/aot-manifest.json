@@ -1,0 +1,210 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionErrorsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/COMException::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/COMException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/COMException::.ctor:System.Void(System.String,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/SEHException::CanResume:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/SEHException::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/SEHException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/SEHException::.ctor:System.Void(System.String,System.Exception)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)",
+      "reason": "external-call"
+    }
+  ]
+}

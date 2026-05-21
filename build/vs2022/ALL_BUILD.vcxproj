@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{99ED2729-D6B9-365A-BA39-C812D96265F9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/agent/booming-il2cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython3.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeSystem.cmake;D:\agent\booming-il2cpp\cmake\config-tier.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/agent/booming-il2cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython3.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeSystem.cmake;D:\agent\booming-il2cpp\cmake\config-tier.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/agent/booming-il2cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython3.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeSystem.cmake;D:\agent\booming-il2cpp\cmake\config-tier.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/agent/booming-il2cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\FindPython3.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\3.25.3\CMakeSystem.cmake;D:\agent\booming-il2cpp\cmake\config-tier.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\ZERO_CHECK.vcxproj">
+      <Project>{6F87BB35-D72A-3554-81D6-B174B77587EC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\benchmark-host\chaos_benchmark_host.vcxproj">
+      <Project>{79F62DAD-8845-39B9-9664-1065C650440E}</Project>
+      <Name>chaos_benchmark_host</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_blittable_benchmark.vcxproj">
+      <Project>{A1DA452A-A815-365C-B2C4-50733265031A}</Project>
+      <Name>chaos_blittable_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_capacity_stress_test.vcxproj">
+      <Project>{DC3CA5AD-91E4-3D55-AD74-1323330181D8}</Project>
+      <Name>chaos_capacity_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_codegen_native_test.vcxproj">
+      <Project>{23D3C4C8-88D1-3E11-A67E-ACC248281EED}</Project>
+      <Name>chaos_codegen_native_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\common\chaos_common.vcxproj">
+      <Project>{9E8CE054-3831-387A-88CD-8D4B9D09F82D}</Project>
+      <Name>chaos_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_delegate_stress_test.vcxproj">
+      <Project>{24EDA71B-F6E3-321D-B533-C7568B70F0DD}</Project>
+      <Name>chaos_delegate_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_domain_unload_test.vcxproj">
+      <Project>{D29D40E7-5D5E-3607-A90A-55E2C43ECDED}</Project>
+      <Name>chaos_domain_unload_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\engine-binding\chaos_engine_binding_compile_only_smoke.vcxproj">
+      <Project>{3D4EA538-2845-3565-97FC-B5A05F890F9A}</Project>
+      <Name>chaos_engine_binding_compile_only_smoke</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\engine-bridge\chaos_engine_bridge.vcxproj">
+      <Project>{D97DA6F2-A492-3B4C-8D5F-1D128178CA73}</Project>
+      <Name>chaos_engine_bridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_exception_sentinel_test.vcxproj">
+      <Project>{F8ED9319-9B32-3328-AEF6-DFDF79004125}</Project>
+      <Name>chaos_exception_sentinel_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\fmt_build\chaos_fmt.vcxproj">
+      <Project>{F792CCB2-420D-30D2-87DC-8524F6551F98}</Project>
+      <Name>chaos_fmt</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_root_scan_test.vcxproj">
+      <Project>{3E0513A5-3029-32B9-A180-EEE41EF1F993}</Project>
+      <Name>chaos_gc_bgc_root_scan_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_smoke.vcxproj">
+      <Project>{15F27721-936D-35D5-8D3D-642AE08D226E}</Project>
+      <Name>chaos_gc_bgc_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_stress_test.vcxproj">
+      <Project>{4B519E34-5637-38F8-A768-1F2D52F4E9E5}</Project>
+      <Name>chaos_gc_bgc_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bit_utils_test.vcxproj">
+      <Project>{5116C096-A772-360C-9648-3EB6CBE0AD13}</Project>
+      <Name>chaos_gc_bit_utils_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bump_cache_test.vcxproj">
+      <Project>{BCE1D0F6-CF2D-3E2D-ABB6-1D19620BBE98}</Project>
+      <Name>chaos_gc_bump_cache_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_card_table_ext_test.vcxproj">
+      <Project>{6F03A0D3-EB57-3938-8802-608F7DA259B6}</Project>
+      <Name>chaos_gc_card_table_ext_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_events_test.vcxproj">
+      <Project>{62CE771E-C81B-3DCE-AA88-388E01904C1B}</Project>
+      <Name>chaos_gc_events_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_finalizer_stress_test.vcxproj">
+      <Project>{580F3C7B-69DE-3CED-8DA6-8C3D3DDDDA8D}</Project>
+      <Name>chaos_gc_finalizer_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_finalizer_test.vcxproj">
+      <Project>{CDF2D9AA-56E5-347A-86A5-A18800C87133}</Project>
+      <Name>chaos_gc_finalizer_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_gen1_benchmark.vcxproj">
+      <Project>{277B8E73-5C55-321F-905F-A92BF35FCF06}</Project>
+      <Name>chaos_gc_gen1_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_gen1_test.vcxproj">
+      <Project>{C02D3D0C-8B34-36C5-95AA-F5EA9CAF9EB2}</Project>
+      <Name>chaos_gc_gen1_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_handle_test.vcxproj">
+      <Project>{9009E3C0-ECEC-3F54-9EE0-C2636305DC9D}</Project>
+      <Name>chaos_gc_handle_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_layout_test.vcxproj">
+      <Project>{D597ED31-21E7-3B37-B390-D47A8CE4CB68}</Project>
+      <Name>chaos_gc_layout_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_loh_stress_test.vcxproj">
+      <Project>{00883A2A-0C3A-3060-995F-5821F32A37BA}</Project>
+      <Name>chaos_gc_loh_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_loh_test.vcxproj">
+      <Project>{3C67A7FA-DD3D-3440-94DA-FA2DAB19A4C8}</Project>
+      <Name>chaos_gc_loh_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_mark_bitmap_test.vcxproj">
+      <Project>{94C14EA0-DCA6-3D6B-937C-0C1263DF7A90}</Project>
+      <Name>chaos_gc_mark_bitmap_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_old_gen_unit_test.vcxproj">
+      <Project>{1C69D37E-FF4D-3B64-9C8A-B840077D16DF}</Project>
+      <Name>chaos_gc_old_gen_unit_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_oversized_stress_test.vcxproj">
+      <Project>{E2F4FAD2-40F4-3937-9F94-DB0BA06A11D7}</Project>
+      <Name>chaos_gc_oversized_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_parallel_mark_test.vcxproj">
+      <Project>{36F28DD0-18AA-3AA8-8656-128EB1D0BC85}</Project>
+      <Name>chaos_gc_parallel_mark_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_poh_test.vcxproj">
+      <Project>{1C81FAE3-30E6-332A-B467-C25479385AED}</Project>
+      <Name>chaos_gc_poh_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_region_test.vcxproj">
+      <Project>{D05082F3-1AD7-3E28-895B-ED3F4753AE65}</Project>
+      <Name>chaos_gc_region_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_root_scanner_test.vcxproj">
+      <Project>{4EB5DD9F-A0D1-3FE5-90D4-90BFF8B62FBC}</Project>
+      <Name>chaos_gc_root_scanner_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_safepoint_test.vcxproj">
+      <Project>{5E530F56-7EFC-3525-AA56-6D80BB3E43F7}</Project>
+      <Name>chaos_gc_safepoint_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_sanity_test.vcxproj">
+      <Project>{124D2FF0-F81F-3588-9A33-B07002DE9D63}</Project>
+      <Name>chaos_gc_sanity_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_scheduler_test.vcxproj">
+      <Project>{3C233281-DE01-374C-91C4-FBAEF738F047}</Project>
+      <Name>chaos_gc_scheduler_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_stats_test.vcxproj">
+      <Project>{DCBF3DEB-A634-32A9-B54A-BA79896DC630}</Project>
+      <Name>chaos_gc_stats_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_stress_test.vcxproj">
+      <Project>{3E5B08D6-2ECC-3678-ADFA-1EA9162DDEBB}</Project>
+      <Name>chaos_gc_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_tlab_test.vcxproj">
+      <Project>{2DCCBB36-0402-3843-AC7E-76B02C793D63}</Project>
+      <Name>chaos_gc_tlab_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_worker_pool_smoke.vcxproj">
+      <Project>{F8A70A4A-BFFC-33A0-8739-529B14BD7DE9}</Project>
+      <Name>chaos_gc_worker_pool_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_young_collector_test.vcxproj">
+      <Project>{9FA04D3C-053B-3B42-9F09-B3854CC675E2}</Project>
+      <Name>chaos_gc_young_collector_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\hot-update\chaos_hot_update.vcxproj">
+      <Project>{E26E10BE-6C96-3B99-BF6F-E5BFB695006A}</Project>
+      <Name>chaos_hot_update</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\hot-update\chaos_hotupdate_verification_test.vcxproj">
+      <Project>{54404C5B-6710-3D6E-B08E-CBE4EAE89005}</Project>
+      <Name>chaos_hotupdate_verification_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\interpreter\chaos_interpreter.vcxproj">
+      <Project>{284E8D3F-2827-3BDE-AD17-E3519A24045E}</Project>
+      <Name>chaos_interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_bridge_test.vcxproj">
+      <Project>{E392A779-3587-367B-8EFC-5FFD5690A04D}</Project>
+      <Name>chaos_interpreter_bridge_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_entry_test.vcxproj">
+      <Project>{2E2ACC90-60ED-3312-A3E0-C0729CC6468E}</Project>
+      <Name>chaos_interpreter_entry_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_integration.vcxproj">
+      <Project>{378E1B43-2E48-361D-AF08-08007465AD67}</Project>
+      <Name>chaos_interpreter_integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_new_features_test.vcxproj">
+      <Project>{D8BC9C67-5E31-3DD8-B053-AA95FBF6DE7A}</Project>
+      <Name>chaos_interpreter_new_features_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_profile_test.vcxproj">
+      <Project>{D3EF6977-E48A-3620-A0EB-35F4CED1D8A3}</Project>
+      <Name>chaos_interpreter_profile_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_interpreter_smoke.vcxproj">
+      <Project>{B6191DC8-EA7A-3068-B8A1-4202A6A6C6B8}</Project>
+      <Name>chaos_interpreter_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\common\chaos_log_system_test.vcxproj">
+      <Project>{82A69DBB-EE52-3EFA-9322-BD116DD50473}</Project>
+      <Name>chaos_log_system_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_memory_domain_test.vcxproj">
+      <Project>{382B808D-15E2-3B7C-9A8E-B98962EA824F}</Project>
+      <Name>chaos_memory_domain_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_method_aot_map_test.vcxproj">
+      <Project>{6D24746A-7E33-3EBF-BA08-F88B12961B3B}</Project>
+      <Name>chaos_method_aot_map_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\hot-update\chaos_method_replacement_smoke.vcxproj">
+      <Project>{A994B5F0-B0F0-34D1-BE83-F85D184B90AE}</Project>
+      <Name>chaos_method_replacement_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\abi\chaos_method_table_abi_test.vcxproj">
+      <Project>{11532B29-6374-3F1E-AFE4-A22703592A9E}</Project>
+      <Name>chaos_method_table_abi_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_monitor_stress_test.vcxproj">
+      <Project>{439B34E2-EA9B-3600-94A8-FAC72718DD38}</Project>
+      <Name>chaos_monitor_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\proof-host\chaos_proof_host.vcxproj">
+      <Project>{E2893A23-BEE6-3F65-BB92-5852F2C3D85C}</Project>
+      <Name>chaos_proof_host</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\runtime-core\chaos_runtime_core.vcxproj">
+      <Project>{96DB3B83-11B7-3D1C-AAE1-977B305BB8CB}</Project>
+      <Name>chaos_runtime_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\support\chaos_support.vcxproj">
+      <Project>{237C1DB5-5B7C-390D-BEC9-8857B17B932B}</Project>
+      <Name>chaos_support</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_synchronization_smoke.vcxproj">
+      <Project>{50F16B58-B82F-3119-B1B6-228E50EB962B}</Project>
+      <Name>chaos_synchronization_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_threading_benchmark.vcxproj">
+      <Project>{A78D83CA-74A9-30FF-BCDF-1D443D6D3CFE}</Project>
+      <Name>chaos_threading_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_threading_smoke.vcxproj">
+      <Project>{98970DC5-F87C-3316-A447-C9857AB3C99B}</Project>
+      <Name>chaos_threading_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\interpreter\chaos_tiering_benchmark.vcxproj">
+      <Project>{158DBB16-8852-398B-9A00-C7286E13DC00}</Project>
+      <Name>chaos_tiering_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\perf\unordered-map-bench\chaos_unordered_map_bench.vcxproj">
+      <Project>{0414932E-DDED-3AC0-A01C-ABAC274F93E3}</Project>
+      <Name>chaos_unordered_map_bench</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\abi\runtime_abi_compile_only.vcxproj">
+      <Project>{968E6BB7-F2FF-3336-B926-2FF7AD568DAE}</Project>
+      <Name>runtime_abi_compile_only</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/marshalling/attributes",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()",
+      "elapsedMilliseconds": 0.442,
+      "calibratedMs": 0.442,
+      "opsPerSecond": 226039783.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Runtime.InteropServices.LayoutKind)",
+      "elapsedMilliseconds": 10.834,
+      "calibratedMs": 10.834,
+      "opsPerSecond": 9230116.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Int16)",
+      "elapsedMilliseconds": 10.056,
+      "calibratedMs": 10.056,
+      "opsPerSecond": 9944311.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()",
+      "elapsedMilliseconds": 0.439,
+      "calibratedMs": 0.439,
+      "opsPerSecond": 227634873.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Runtime.InteropServices.UnmanagedType)",
+      "elapsedMilliseconds": 9.841,
+      "calibratedMs": 9.841,
+      "opsPerSecond": 10161052.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Int16)",
+      "elapsedMilliseconds": 11.003,
+      "calibratedMs": 11.003,
+      "opsPerSecond": 9088513.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.InAttribute::.ctor:System.Void()",
+      "elapsedMilliseconds": 10.084,
+      "calibratedMs": 10.084,
+      "opsPerSecond": 9916896.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OutAttribute::.ctor:System.Void()",
+      "elapsedMilliseconds": 9.184,
+      "calibratedMs": 9.184,
+      "opsPerSecond": 10888738.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OptionalAttribute::.ctor:System.Void()",
+      "elapsedMilliseconds": 11.059,
+      "calibratedMs": 11.059,
+      "opsPerSecond": 9042081.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.PreserveSigAttribute::.ctor:System.Void()",
+      "elapsedMilliseconds": 10.726,
+      "calibratedMs": 10.726,
+      "opsPerSecond": 9322705.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

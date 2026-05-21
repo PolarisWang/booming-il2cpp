@@ -21,6 +21,7 @@ add_chaos_test(test_codegen_native
     codegen_native_test.cpp
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
 )
 target_compile_definitions(test_codegen_native PRIVATE
     CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
@@ -35,6 +36,7 @@ add_chaos_test(test_codegen_il_smoke
     codegen_il_smoke_test.cpp
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
 )
 target_compile_definitions(test_codegen_il_smoke PRIVATE
     CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
@@ -48,6 +50,7 @@ add_chaos_test(test_codegen_abi
     codegen_abi_test.cpp
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
 )
 target_compile_definitions(test_codegen_abi PRIVATE
     CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1

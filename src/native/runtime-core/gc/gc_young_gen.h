@@ -86,7 +86,7 @@ struct YoungGeneration {
     ///   2+ = objects survive N cycles in survivor before promotion
     ///   - Low survival rate → higher threshold (filter more aggressively)
     ///   - High survival rate → lower threshold (promote faster)
-    std::atomic<int> promotion_age_threshold_{1};
+    std::atomic<int> promotion_age_threshold_{2};
 
     /// Young GC counter, incremented each young GC cycle.
     /// Used by the dynamic promotion threshold to decide drain intervals.

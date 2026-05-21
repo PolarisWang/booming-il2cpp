@@ -1,0 +1,33 @@
+struct {{ stub_name }}_ManagedArgs
+{
+    void* arg0;
+    void* arg1;
+    void** return_value;
+};
+
+// managed_result_type: System.String
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    if (managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->arg0 == nullptr || request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    *request->return_value = request->arg0;
+    return CHAOS_BRIDGE_STATUS_OK;
+}

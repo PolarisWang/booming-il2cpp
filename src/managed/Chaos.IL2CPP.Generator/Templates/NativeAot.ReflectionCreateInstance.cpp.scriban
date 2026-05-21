@@ -1,0 +1,23 @@
+{{ indentation }}CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_type_value)
+{{ indentation }}{
+{{ indentation }}{{ tab }}auto* chaos_type = reinterpret_cast<{{ type_native_symbol }}*>(chaos_type_value);
+{{ indentation }}{{ tab }}if (chaos_type == nullptr)
+{{ indentation }}{{ tab }}{
+{{ indentation }}{{ tab }}{{ tab }}return 0;
+{{ indentation }}{{ tab }}}
+{{ indentation }}{{ tab }}
+{{ indentation }}{{ tab }}switch (chaos_type->runtime_type_handle)
+{{ indentation }}{{ tab }}{
+{{~ for ctor in ctor_entries ~}}
+{{ indentation }}{{ tab }}{{ tab }}case {{ ctor.type_handle_literal }}:
+{{ indentation }}{{ tab }}{{ tab }}{
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}auto* chaos_object = CHAOS_IL2CPP_NEW_GC({{ ctor.native_type_symbol }});
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}chaos_object->header.type_info = &{{ ctor.type_info_symbol }};
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}{{ ctor.ctor_symbol }}(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+{{ indentation }}{{ tab }}{{ tab }}}
+{{~ end ~}}
+{{ indentation }}{{ tab }}{{ tab }}default:
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}return 0;
+{{ indentation }}{{ tab }}}
+{{ indentation }}}

@@ -8,9 +8,9 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()",
-      "elapsedMilliseconds": 887.399,
-      "calibratedMs": 887.399,
-      "opsPerSecond": 112688.9,
+      "elapsedMilliseconds": 1857.481,
+      "calibratedMs": 1857.481,
+      "opsPerSecond": 53836.3,
       "iterations": 100000,
       "status": "completed"
     }

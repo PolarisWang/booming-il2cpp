@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "projectId": "virtual-dispatch",
+  "displayName": "Virtual Dispatch",
+  "description": "Tests virtual method dispatch through base class references and interface dispatch through interface references",
+  "entryPoint": "VirtualDispatch",
+  "assemblies": ["VirtualDispatch"],
+  "expectedOutputFile": "expected/fact-output.txt",
+  "subjects": [
+    "VirtualDispatch/Program::Main(System.String[])",
+    "VirtualDispatch/DispatchSubjects::TestVirtualCall(VirtualDispatch.Shape)",
+    "VirtualDispatch/DispatchSubjects::TestInterfaceCall(VirtualDispatch.IShape)",
+    "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall(VirtualDispatch.IColoredShape)"
+  ]
+}

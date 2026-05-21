@@ -27,9 +27,11 @@ set(CHAOS_HOTUPDATE_SMOKE_LIBS
 add_chaos_test(test_method_replacement_smoke
     method_replacement_smoke_test.cpp
     LIBS ${CHAOS_HOTUPDATE_SMOKE_LIBS}
+    LABELS "unit;hotupdate"
 )
 
 add_chaos_test(test_hotupdate_verification
     hotupdate_verification_test.cpp
     LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate"
 )

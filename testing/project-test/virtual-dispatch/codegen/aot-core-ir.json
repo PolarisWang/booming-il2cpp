@@ -1,0 +1,2258 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "virtual-dispatch.program.main",
+      "subjectId": "VirtualDispatch/Program::\u003CMain\u003E$:System.Void(System.String[])",
+      "signature": "System.Void Program::\u003CMain\u003E$(System.String[])",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Program",
+        "definitionSubjectId": "VirtualDispatch/Program::\u003CMain\u003E$:System.Void(System.String[])",
+        "subjectId": "VirtualDispatch/Program::\u003CMain\u003E$:System.Void(System.String[])",
+        "methodId": "virtual-dispatch.program.main",
+        "signature": "System.Void Program::\u003CMain\u003E$(System.String[])"
+      },
+      "nativeSymbol": "VirtualDispatch_Program_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 5,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 5,
+          "ilOffset": 0,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 9,
+          "resultType": "VirtualDispatch/Circle",
+          "callee": "VirtualDispatch/Circle::.ctor:System.Void(System.Double)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/Circle::.ctor:System.Void(System.Double)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Circle",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "VirtualDispatch/Shape",
+            "implementedInterfaceSubjectIds": [
+              "VirtualDispatch/IColoredShape",
+              "VirtualDispatch/IShape"
+            ],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 3,
+          "ilOffset": 15,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 4,
+          "ilOffset": 24,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 33,
+          "resultType": "VirtualDispatch/Rectangle",
+          "callee": "VirtualDispatch/Rectangle::.ctor:System.Void(System.Double,System.Double)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/Rectangle::.ctor:System.Void(System.Double,System.Double)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Rectangle",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "VirtualDispatch/Shape",
+            "implementedInterfaceSubjectIds": [
+              "VirtualDispatch/IShape"
+            ],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_VIRT_CIRCLE=",
+          "ilOffset": 39,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 45,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_DispatchSubjects_TestVirtualCall_Shape",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 50,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 55,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_VIRT_RECT=",
+          "ilOffset": 60,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 66,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_DispatchSubjects_TestVirtualCall_Shape",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 71,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 76,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 81,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 82,
+          "resultType": "System.Double",
+          "callee": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_DispatchSubjects_TestInterfaceCall_IShape",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.Double",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 87,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 88,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Double",
+          "callee": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_DispatchSubjects_TestInterfaceCall_IShape",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.Double",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 3,
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_IFACE_CIRCLE_AREA=",
+          "ilOffset": 95,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 100,
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 101,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 4,
+          "ilOffset": 102,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 4,
+          "ilOffset": 104,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 106,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 111,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 116,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_IFACE_RECT_AREA=",
+          "ilOffset": 121,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 3,
+          "ilOffset": 126,
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 127,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 4,
+          "ilOffset": 128,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 4,
+          "ilOffset": 130,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 132,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 137,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 142,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_IFACE_COLOR=",
+          "ilOffset": 147,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 152,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 153,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_DispatchSubjects_TestDerivedInterfaceCall_IColoredShape",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 158,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 163,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_IFACE_GETNAME=",
+          "ilOffset": 168,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 173,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 174,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/IShape::GetName:System.String()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/IShape::GetName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/IShape::GetName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_IShape_GetName",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 179,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 184,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_DONE=ok",
+          "ilOffset": 189,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 194,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 199,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.program.ctor",
+      "subjectId": "VirtualDispatch/Program::.ctor:System.Void()",
+      "signature": "System.Void Program::.ctor()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Program",
+        "definitionSubjectId": "VirtualDispatch/Program::.ctor:System.Void()",
+        "subjectId": "VirtualDispatch/Program::.ctor:System.Void()",
+        "methodId": "virtual-dispatch.program.ctor",
+        "signature": "System.Void Program::.ctor()"
+      },
+      "nativeSymbol": "VirtualDispatch_Program__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/Program",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.auto-generated-program.main",
+      "subjectId": "VirtualDispatch/AutoGeneratedProgram::Main:System.Void(System.String[])",
+      "signature": "System.Void AutoGeneratedProgram::Main(System.String[])",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/AutoGeneratedProgram",
+        "definitionSubjectId": "VirtualDispatch/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "subjectId": "VirtualDispatch/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "methodId": "virtual-dispatch.auto-generated-program.main",
+        "signature": "System.Void AutoGeneratedProgram::Main(System.String[])"
+      },
+      "nativeSymbol": "VirtualDispatch_AutoGeneratedProgram_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 0,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.auto-generated-program.ctor",
+      "subjectId": "VirtualDispatch/AutoGeneratedProgram::.ctor:System.Void()",
+      "signature": "System.Void AutoGeneratedProgram::.ctor()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/AutoGeneratedProgram",
+        "definitionSubjectId": "VirtualDispatch/AutoGeneratedProgram::.ctor:System.Void()",
+        "subjectId": "VirtualDispatch/AutoGeneratedProgram::.ctor:System.Void()",
+        "methodId": "virtual-dispatch.auto-generated-program.ctor",
+        "signature": "System.Void AutoGeneratedProgram::.ctor()"
+      },
+      "nativeSymbol": "VirtualDispatch_AutoGeneratedProgram__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/AutoGeneratedProgram",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.i-shape.get-name",
+      "subjectId": "VirtualDispatch/IShape::GetName:System.String()",
+      "signature": "System.String IShape::GetName()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/IShape",
+        "definitionSubjectId": "VirtualDispatch/IShape::GetName:System.String()",
+        "subjectId": "VirtualDispatch/IShape::GetName:System.String()",
+        "methodId": "virtual-dispatch.i-shape.get-name",
+        "signature": "System.String IShape::GetName()"
+      },
+      "nativeSymbol": "VirtualDispatch_IShape_GetName",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.i-shape.area",
+      "subjectId": "VirtualDispatch/IShape::Area:System.Double()",
+      "signature": "System.Double IShape::Area()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/IShape",
+        "definitionSubjectId": "VirtualDispatch/IShape::Area:System.Double()",
+        "subjectId": "VirtualDispatch/IShape::Area:System.Double()",
+        "methodId": "virtual-dispatch.i-shape.area",
+        "signature": "System.Double IShape::Area()"
+      },
+      "nativeSymbol": "VirtualDispatch_IShape_Area",
+      "isStatic": false,
+      "returnType": "System.Double",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.i-colored-shape.get-color",
+      "subjectId": "VirtualDispatch/IColoredShape::GetColor:System.String()",
+      "signature": "System.String IColoredShape::GetColor()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/IColoredShape",
+        "definitionSubjectId": "VirtualDispatch/IColoredShape::GetColor:System.String()",
+        "subjectId": "VirtualDispatch/IColoredShape::GetColor:System.String()",
+        "methodId": "virtual-dispatch.i-colored-shape.get-color",
+        "signature": "System.String IColoredShape::GetColor()"
+      },
+      "nativeSymbol": "VirtualDispatch_IColoredShape_GetColor",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.shape.get-name",
+      "subjectId": "VirtualDispatch/Shape::GetName:System.String()",
+      "signature": "System.String Shape::GetName()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Shape",
+        "definitionSubjectId": "VirtualDispatch/Shape::GetName:System.String()",
+        "subjectId": "VirtualDispatch/Shape::GetName:System.String()",
+        "methodId": "virtual-dispatch.shape.get-name",
+        "signature": "System.String Shape::GetName()"
+      },
+      "nativeSymbol": "VirtualDispatch_Shape_GetName",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Shape",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.shape.ctor",
+      "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()",
+      "signature": "System.Void Shape::.ctor()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Shape",
+        "definitionSubjectId": "VirtualDispatch/Shape::.ctor:System.Void()",
+        "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()",
+        "methodId": "virtual-dispatch.shape.ctor",
+        "signature": "System.Void Shape::.ctor()"
+      },
+      "nativeSymbol": "VirtualDispatch_Shape__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/Shape",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.circle.ctor",
+      "subjectId": "VirtualDispatch/Circle::.ctor:System.Void(System.Double)",
+      "signature": "System.Void Circle::.ctor(System.Double)",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Circle",
+        "definitionSubjectId": "VirtualDispatch/Circle::.ctor:System.Void(System.Double)",
+        "subjectId": "VirtualDispatch/Circle::.ctor:System.Void(System.Double)",
+        "methodId": "virtual-dispatch.circle.ctor",
+        "signature": "System.Void Circle::.ctor(System.Double)"
+      },
+      "nativeSymbol": "VirtualDispatch_Circle__ctor_System_Double",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 9,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/Circle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "VirtualDispatch/Shape::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_Shape__ctor",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "VirtualDispatch/Circle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "VirtualDispatch/Circle::_radius",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Circle::_radius"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Circle::_radius",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Circle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.circle.get-name",
+      "subjectId": "VirtualDispatch/Circle::GetName:System.String()",
+      "signature": "System.String Circle::GetName()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Circle",
+        "definitionSubjectId": "VirtualDispatch/Circle::GetName:System.String()",
+        "subjectId": "VirtualDispatch/Circle::GetName:System.String()",
+        "methodId": "virtual-dispatch.circle.get-name",
+        "signature": "System.String Circle::GetName()"
+      },
+      "nativeSymbol": "VirtualDispatch_Circle_GetName",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Circle",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.circle.area",
+      "subjectId": "VirtualDispatch/Circle::Area:System.Double()",
+      "signature": "System.Double Circle::Area()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Circle",
+        "definitionSubjectId": "VirtualDispatch/Circle::Area:System.Double()",
+        "subjectId": "VirtualDispatch/Circle::Area:System.Double()",
+        "methodId": "virtual-dispatch.circle.area",
+        "signature": "System.Double Circle::Area()"
+      },
+      "nativeSymbol": "VirtualDispatch_Circle_Area",
+      "isStatic": false,
+      "returnType": "System.Double",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 3.14159,
+          "ilOffset": 0,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 9,
+          "resultType": "VirtualDispatch/Circle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "VirtualDispatch/Circle::_radius",
+          "ilOffset": 10,
+          "resultType": "System.Double",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Circle::_radius"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Circle::_radius",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Circle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 16,
+          "resultType": "VirtualDispatch/Circle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "VirtualDispatch/Circle::_radius",
+          "ilOffset": 17,
+          "resultType": "System.Double",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Circle::_radius"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Circle::_radius",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Circle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.circle.get-color",
+      "subjectId": "VirtualDispatch/Circle::GetColor:System.String()",
+      "signature": "System.String Circle::GetColor()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Circle",
+        "definitionSubjectId": "VirtualDispatch/Circle::GetColor:System.String()",
+        "subjectId": "VirtualDispatch/Circle::GetColor:System.String()",
+        "methodId": "virtual-dispatch.circle.get-color",
+        "signature": "System.String Circle::GetColor()"
+      },
+      "nativeSymbol": "VirtualDispatch_Circle_GetColor",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Red",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.rectangle.ctor",
+      "subjectId": "VirtualDispatch/Rectangle::.ctor:System.Void(System.Double,System.Double)",
+      "signature": "System.Void Rectangle::.ctor(System.Double,System.Double)",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+        "definitionSubjectId": "VirtualDispatch/Rectangle::.ctor:System.Void(System.Double,System.Double)",
+        "subjectId": "VirtualDispatch/Rectangle::.ctor:System.Void(System.Double,System.Double)",
+        "methodId": "virtual-dispatch.rectangle.ctor",
+        "signature": "System.Void Rectangle::.ctor(System.Double,System.Double)"
+      },
+      "nativeSymbol": "VirtualDispatch_Rectangle__ctor_System_Double_System_Double",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 9,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 9,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/Rectangle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "VirtualDispatch/Shape::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Shape::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_Shape__ctor",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "VirtualDispatch/Rectangle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "VirtualDispatch/Rectangle::_w",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Rectangle::_w"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Rectangle::_w",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "VirtualDispatch/Rectangle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 2,
+          "ilOffset": 14,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "VirtualDispatch/Rectangle::_h",
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Rectangle::_h"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Rectangle::_h",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.rectangle.get-name",
+      "subjectId": "VirtualDispatch/Rectangle::GetName:System.String()",
+      "signature": "System.String Rectangle::GetName()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+        "definitionSubjectId": "VirtualDispatch/Rectangle::GetName:System.String()",
+        "subjectId": "VirtualDispatch/Rectangle::GetName:System.String()",
+        "methodId": "virtual-dispatch.rectangle.get-name",
+        "signature": "System.String Rectangle::GetName()"
+      },
+      "nativeSymbol": "VirtualDispatch_Rectangle_GetName",
+      "isStatic": false,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Rectangle",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.rectangle.area",
+      "subjectId": "VirtualDispatch/Rectangle::Area:System.Double()",
+      "signature": "System.Double Rectangle::Area()",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+        "definitionSubjectId": "VirtualDispatch/Rectangle::Area:System.Double()",
+        "subjectId": "VirtualDispatch/Rectangle::Area:System.Double()",
+        "methodId": "virtual-dispatch.rectangle.area",
+        "signature": "System.Double Rectangle::Area()"
+      },
+      "nativeSymbol": "VirtualDispatch_Rectangle_Area",
+      "isStatic": false,
+      "returnType": "System.Double",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "VirtualDispatch/Rectangle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "VirtualDispatch/Rectangle::_w",
+          "ilOffset": 1,
+          "resultType": "System.Double",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Rectangle::_w"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Rectangle::_w",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "VirtualDispatch/Rectangle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "VirtualDispatch/Rectangle::_h",
+          "ilOffset": 7,
+          "resultType": "System.Double",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "field",
+            "subjectId": "VirtualDispatch/Rectangle::_h"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Rectangle::_h",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "VirtualDispatch/Rectangle",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Double"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.dispatch-subjects.test-virtual-call",
+      "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+      "signature": "System.String DispatchSubjects::TestVirtualCall(Shape)",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/DispatchSubjects",
+        "definitionSubjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+        "subjectId": "VirtualDispatch/DispatchSubjects::TestVirtualCall:System.String(Shape)",
+        "methodId": "virtual-dispatch.dispatch-subjects.test-virtual-call",
+        "signature": "System.String DispatchSubjects::TestVirtualCall(Shape)"
+      },
+      "nativeSymbol": "VirtualDispatch_DispatchSubjects_TestVirtualCall_Shape",
+      "isStatic": true,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeSubjectId": "VirtualDispatch/Shape",
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "Shape",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/Shape::GetName:System.String()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/Shape::GetName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/Shape::GetName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_Shape_GetName",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.dispatch-subjects.test-interface-call",
+      "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+      "signature": "System.Double DispatchSubjects::TestInterfaceCall(IShape)",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/DispatchSubjects",
+        "definitionSubjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+        "subjectId": "VirtualDispatch/DispatchSubjects::TestInterfaceCall:System.Double(IShape)",
+        "methodId": "virtual-dispatch.dispatch-subjects.test-interface-call",
+        "signature": "System.Double DispatchSubjects::TestInterfaceCall(IShape)"
+      },
+      "nativeSymbol": "VirtualDispatch_DispatchSubjects_TestInterfaceCall_IShape",
+      "isStatic": true,
+      "returnType": "System.Double",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeSubjectId": "VirtualDispatch/IShape",
+          "typeShape": 3
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "IShape",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 1,
+          "resultType": "System.Double",
+          "callee": "VirtualDispatch/IShape::Area:System.Double()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/IShape::Area:System.Double()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/IShape::Area:System.Double()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_IShape_Area",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Double",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    },
+    {
+      "methodId": "virtual-dispatch.dispatch-subjects.test-derived-interface-call",
+      "subjectId": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)",
+      "signature": "System.String DispatchSubjects::TestDerivedInterfaceCall(IColoredShape)",
+      "identity": {
+        "assemblyName": "VirtualDispatch",
+        "declaringTypeSubjectId": "VirtualDispatch/DispatchSubjects",
+        "definitionSubjectId": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)",
+        "subjectId": "VirtualDispatch/DispatchSubjects::TestDerivedInterfaceCall:System.String(IColoredShape)",
+        "methodId": "virtual-dispatch.dispatch-subjects.test-derived-interface-call",
+        "signature": "System.String DispatchSubjects::TestDerivedInterfaceCall(IColoredShape)"
+      },
+      "nativeSymbol": "VirtualDispatch_DispatchSubjects_TestDerivedInterfaceCall_IColoredShape",
+      "isStatic": true,
+      "returnType": "System.String",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeSubjectId": "System.Private.CoreLib/System.String",
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeSubjectId": "VirtualDispatch/IColoredShape",
+          "typeShape": 3
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "IColoredShape",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "callee": "VirtualDispatch/IColoredShape::GetColor:System.String()",
+          "reference": {
+            "assemblyName": "VirtualDispatch",
+            "subjectKind": "method",
+            "subjectId": "VirtualDispatch/IColoredShape::GetColor:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "VirtualDispatch",
+            "subjectId": "VirtualDispatch/IColoredShape::GetColor:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "VirtualDispatch_IColoredShape_GetColor",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "VirtualDispatch"
+    }
+  ]
+}

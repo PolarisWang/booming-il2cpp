@@ -4,6 +4,8 @@
 #include <chaos/native_types.h>
 #include <runtime_abi.h>
 
+#include "gc_card_table.h"
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── Platform memory status (abstracted from GlobalMemoryStatusEx) ──
@@ -72,10 +74,21 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_collection_cou
     CHAOS_IL2CPP_INT32 generation) noexcept;
 
 /// Check if a pointer resides in the GC-managed heap.
-/// Returns true when @a ptr points at or above the managed heap base
-/// (i.e., within the card-table-covered address range).  Stack-allocated
-/// value types return false, allowing callers to skip the write barrier.
-extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept;
+/// Inline definition for zero-overhead calls from C++ codegen.
+/// Stack-allocated value types return false, so callers can skip
+/// the write barrier for nested value-type fields.
+static inline bool chaos_is_gc_pointer(const void* ptr) noexcept {
+    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+    // Fast path: g_heap_base is the minimum address registered with the
+    // card table, covering old-gen and nursery.  Stack-allocated value
+    // types live far below this address.
+    if (addr >= g_heap_base) [[likely]] return true;
+    // POH regions are independently VirtualAlloc'd and may be below
+    // g_heap_base (the card table does not cover POH).  Check via the
+    // lock-free POH slot array.
+    if (RegionManager::Instance().IsPohPointer(ptr)) return true;
+    return false;
+}
 
 // ── NO_GC_REGION API ─────────────────────────────────────────────────────
 

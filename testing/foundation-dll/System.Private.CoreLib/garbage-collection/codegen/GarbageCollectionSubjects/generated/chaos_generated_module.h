@@ -62,6 +62,9 @@ struct Functions {
         void (*Subject_5)(
                 void
         );
+        void (*Subject_6)(
+                void
+        );
     } garbageCollectionSubjects;
     int32_t method_count;
 };
@@ -131,8 +134,13 @@ struct GarbageCollectionSubjects {
         return kFunctions.garbageCollectionSubjects.Subject_5(
         );
     }
+    static inline void Subject_6(
+    ) {
+        return kFunctions.garbageCollectionSubjects.Subject_6(
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr int32_t MethodCount = 7;
 };
 
 

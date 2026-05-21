@@ -61,6 +61,16 @@ static void* AllocOldGen(size_t payload_size, bool scanning = true) {
 static bool WaitForPhase(BgcPhase phase, int timeout_ms = 120000) {
     auto start = std::chrono::steady_clock::now();
     while (BgcController::Instance().Phase() != phase) {
+        // Detect early if BGC was preempted (e.g. by Full GC).
+        // When waiting for IDLE, !IsBusy() means the cycle is done.
+        if (!BgcController::Instance().IsBusy()) {
+            if (phase == BgcPhase::IDLE) {
+                return true;  // BGC is idle, which is what we're waiting for
+            }
+            printf("  BGC became idle while waiting for phase %d\n",
+                   static_cast<int>(phase));
+            return false;
+        }
         threading::SafepointPoll();
         std::this_thread::yield();
         auto now = std::chrono::steady_clock::now();
@@ -76,52 +86,75 @@ static bool WaitForPhase(BgcPhase phase, int timeout_ms = 120000) {
 
 /// Run a complete BGC cycle from start to finish.
 static bool RunBgcCycle() {
-    // Wait for any in-flight BGC cycle to finish first.
-    if (!WaitForPhase(BgcPhase::IDLE, 120000)) {
-        printf("  ERROR: BGC not idle before starting cycle (phase=%d)\n",
-               static_cast<int>(BgcController::Instance().Phase()));
-        return false;
+    // Retry loop: if a Full GC interrupts the BGC cycle, restart.
+    for (int attempt = 0; attempt < 5; attempt++) {
+        // Wait for any in-flight BGC cycle to finish first.
+        if (!WaitForPhase(BgcPhase::IDLE, 120000)) {
+            if (attempt < 4) {
+                printf("  Retry %d: BGC not idle, waiting...\n", attempt + 1);
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                continue;
+            }
+            printf("  ERROR: BGC not idle before starting cycle (phase=%d)\n",
+                   static_cast<int>(BgcController::Instance().Phase()));
+            return false;
+        }
+
+        printf("  RunBgcCycle[%d]: requesting safepoint...\n", attempt); fflush(stdout);
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        printf("  RunBgcCycle[%d]: safepoint acquired gen=%u, starting BGC cycle...\n", attempt, gen); fflush(stdout);
+        BgcController::Instance().StartBgcCycle();
+        printf("  RunBgcCycle[%d]: BGC cycle started, releasing safepoint...\n", attempt); fflush(stdout);
+        threading::ReleaseGlobalSafepoint(gen);
+
+        printf("  RunBgcCycle[%d]: waiting for REMARK_NEEDED...\n", attempt); fflush(stdout);
+        if (!WaitForPhase(BgcPhase::REMARK_NEEDED, 120000)) {
+            auto phase = BgcController::Instance().Phase();
+            if (phase == BgcPhase::IDLE || !BgcController::Instance().IsBusy()) {
+                printf("  BGC preempted (phase=%d), retrying...\n", static_cast<int>(phase));
+                continue;
+            }
+            printf("  ERROR: concurrent mark did not complete (phase=%d)\n",
+                   static_cast<int>(phase));
+            return false;
+        }
+
+        gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwRemark();
+        BgcController::Instance().StartConcurrentSweep();
+        threading::ReleaseGlobalSafepoint(gen);
+
+        printf("  RunBgcCycle[%d]: waiting for COMPACT_NEEDED...\n", attempt); fflush(stdout);
+        if (!WaitForPhase(BgcPhase::COMPACT_NEEDED, 120000)) {
+            auto phase = BgcController::Instance().Phase();
+            if (phase == BgcPhase::IDLE || !BgcController::Instance().IsBusy()) {
+                printf("  BGC preempted during sweep (phase=%d), retrying...\n",
+                       static_cast<int>(phase));
+                continue;
+            }
+            printf("  ERROR: concurrent sweep did not complete (phase=%d)\n",
+                   static_cast<int>(phase));
+            return false;
+        }
+
+        printf("  BGC compact_needed detected, requesting safepoint...\n");
+        fflush(stdout);
+        gen = threading::RequestGlobalSafepoint();
+        printf("  Safepoint acquired, calling StwCompact...\n");
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
+
+        if (!WaitForPhase(BgcPhase::IDLE, 120000)) {
+            printf("  ERROR: BGC cycle did not complete (phase=%d)\n",
+                   static_cast<int>(BgcController::Instance().Phase()));
+            return false;
+        }
+
+        printf("  BGC cycle complete.\n");
+        return true;
     }
-
-    printf("  RunBgcCycle: requesting safepoint...\n"); fflush(stdout);
-    uint32_t gen = threading::RequestGlobalSafepoint();
-    printf("  RunBgcCycle: safepoint acquired gen=%u, starting BGC cycle...\n", gen); fflush(stdout);
-    BgcController::Instance().StartBgcCycle();
-    printf("  RunBgcCycle: BGC cycle started, releasing safepoint...\n"); fflush(stdout);
-    threading::ReleaseGlobalSafepoint(gen);
-
-    printf("  RunBgcCycle: waiting for REMARK_NEEDED...\n"); fflush(stdout);
-    if (!WaitForPhase(BgcPhase::REMARK_NEEDED, 120000)) {
-        printf("  ERROR: concurrent mark did not complete\n");
-        return false;
-    }
-
-    gen = threading::RequestGlobalSafepoint();
-    BgcController::Instance().StwRemark();
-    BgcController::Instance().StartConcurrentSweep();
-    threading::ReleaseGlobalSafepoint(gen);
-
-    printf("  RunBgcCycle: waiting for COMPACT_NEEDED...\n"); fflush(stdout);
-    if (!WaitForPhase(BgcPhase::COMPACT_NEEDED, 120000)) {
-        printf("  ERROR: concurrent sweep did not complete (phase=%d)\n",
-               static_cast<int>(BgcController::Instance().Phase()));
-        return false;
-    }
-
-    printf("  BGC compact_needed detected, requesting safepoint...\n");
-    fflush(stdout);
-    gen = threading::RequestGlobalSafepoint();
-    printf("  Safepoint acquired, calling StwCompact...\n");
-    BgcController::Instance().StwCompact();
-    threading::ReleaseGlobalSafepoint(gen);
-
-    if (!WaitForPhase(BgcPhase::IDLE, 120000)) {
-        printf("  ERROR: BGC cycle did not complete\n");
-        return false;
-    }
-
-    printf("  BGC cycle complete.\n");
-    return true;
+    printf("  ERROR: BGC cycle failed after 5 attempts\n");
+    return false;
 }
 
 // ── Fake TypeInfo for managed-object validation ──────────────────────

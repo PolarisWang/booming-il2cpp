@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>patch</AssemblyName>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <NoWarn>1701;1702;CS0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="D:\agent\booming-il2cpp\testing\project-test\runtime-self-test\patch\ArithmeticPatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="RuntimeSelfTest" HintPath="D:\agent\booming-il2cpp\testing\project-test\runtime-self-test\codegen\_input\RuntimeSelfTest.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+</Project>

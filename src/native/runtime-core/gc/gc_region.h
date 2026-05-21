@@ -300,8 +300,18 @@ public:
 
     /// Check if @a ptr falls within any REGION_POH region.
     /// Lock-free (reads poh_slots_ array with atomic loads).
-    /// Used by IsPohPointer to detect pinned-object-heap membership.
-    bool IsPohPointer(const void* ptr) const;
+    /// Inline for zero-overhead calls from write barrier guard.
+    bool IsPohPointer(const void* ptr) const {
+        if (ptr == nullptr) return false;
+        uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+        int count = poh_slot_count_.load(std::memory_order_acquire);
+        for (int i = 0; i < count; i++) {
+            uintptr_t b = poh_slots_[i].begin.load(std::memory_order_acquire);
+            uintptr_t e = poh_slots_[i].end.load(std::memory_order_acquire);
+            if (b < e && addr >= b && addr < e) return true;
+        }
+        return false;
+    }
 
 private:
     RegionManager() = default;

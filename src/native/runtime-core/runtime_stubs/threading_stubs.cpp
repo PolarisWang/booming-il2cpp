@@ -258,6 +258,20 @@ void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT3
     });
 }
 
+void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) noexcept
+{
+    // Minimal monitor enter: always succeeds, marks lock as taken.
+    // codegen passes ref bool as intptr_t (pointer-sized), cast back.
+    if (lockTaken != 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lockTaken) = 1;
+    }
+}
+
+void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    // Minimal monitor exit: no-op for now.
+}
+
 CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
 {
     using threading::ManagedThread;

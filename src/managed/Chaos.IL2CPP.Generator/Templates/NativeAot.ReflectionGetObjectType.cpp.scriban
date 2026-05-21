@@ -1,0 +1,18 @@
+{{ indentation }}CHAOS_IL2CPP_INTPTR chaos_reflection_get_object_type(CHAOS_IL2CPP_INTPTR chaos_object_value)
+{{ indentation }}{
+{{ indentation }}{{ tab }}if (chaos_object_value == 0)
+{{ indentation }}{{ tab }}{
+{{ indentation }}{{ tab }}{{ tab }}return 0;
+{{ indentation }}{{ tab }}}
+{{ indentation }}{{ tab }}
+{{ indentation }}{{ tab }}const auto* chaos_ti = chaos_object_get_type_info(reinterpret_cast<const void*>(chaos_object_value));
+{{ indentation }}{{ tab }}switch (chaos_ti->stable_id)
+{{ indentation }}{{ tab }}{
+{{~ for entry in type_entries ~}}
+{{ indentation }}{{ tab }}{{ tab }}case {{ entry.type_id_symbol }}:
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}return chaos_reflection_create_type_value({{ entry.type_handle_literal }});
+{{~ end ~}}
+{{ indentation }}{{ tab }}{{ tab }}default:
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}return 0;
+{{ indentation }}{{ tab }}}
+{{ indentation }}}

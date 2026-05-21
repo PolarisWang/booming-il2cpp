@@ -3,6 +3,7 @@
 #include "code_buffer.h"
 #include "codegen_helpers.h"
 #include "t4_seh_handler.h"
+#include "unwind_info.h"
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
@@ -16,6 +17,10 @@
 #include <cstdint>
 #include <cstring>
 #include <vector>
+
+#if defined(_WIN64)
+ #include <windows.h>
+#endif
 
 namespace chaos::il2cpp::codegen {
 
@@ -176,6 +181,18 @@ private:
     uint8_t callee_xmm_fi_[10];    // FPR vreg index (fi) for each callee_xmm_regs_[slot]
     uint32_t num_fpr_callee_ = 0;
     int32_t xmm_save_size_ = 0;
+
+    // ── Prologue tracking (for .pdata/.xdata unwind info) ──────────────────
+    // Byte offsets from function entry for each prologue instruction.
+    // Set during prologue emission (lines ~2825-2833).
+    uint32_t prologue_push_offsets_[6]{};  // Offsets of push rbp/rbx/rsi up to 5 cached regs
+    uint32_t prologue_sub_rsp_offset_ = 0; // Offset of sub rsp, K
+    uint32_t prologue_set_fpreg_offset_ = 0; // Offset of mov rbp, rsp
+    uint32_t prologue_total_bytes_ = 0;    // Total prologue size in bytes
+    uint8_t push_reg_nums_[6]{};           // x64 register numbers in push order
+    uint32_t num_push_regs_ = 0;           // Number of push regs (3 + num_cache_regs_)
+    uint32_t prologue_sub_rsp_size_ = 0;   // K value in sub rsp, K
+
     // Bitmask of vregs colored by allocator but filtered (caller-saved).
     // These vregs fall through to stack I/O, so the prologue zeros
     // their stack slots to prevent garbage reads (e.g. Calli func_ptr).
@@ -2823,14 +2840,31 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     frame_align_adj_ = (num_cache_regs_ % 2) * 8;  // 16-byte alignment for Win64 ABI
 
     // Prologue — push callee-saved regs, establish frame pointer
+    prologue_push_offsets_[0] = buf_.pos();
     EmitPush(buf_, kRBP);
+    prologue_set_fpreg_offset_ = buf_.pos();
     EmitMovRR(buf_, kRBP, kRSP);  // frame pointer chain for GC stack walking
-    EmitPush(buf_, kRBX); EmitPush(buf_, kRSI);
+    prologue_push_offsets_[1] = buf_.pos();
+    EmitPush(buf_, kRBX);
+    prologue_push_offsets_[2] = buf_.pos();
+    EmitPush(buf_, kRSI);
     // Push additional callee-saved regs used for register caching
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
+        prologue_push_offsets_[3 + slot] = buf_.pos(),
         EmitPush(buf_, callee_saved_regs_[slot]);
     EmitMovRR(buf_, kRBX, kRCX); EmitMovRR(buf_, kRSI, kRDX);
-    EmitSubRI(buf_, kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
+    prologue_sub_rsp_offset_ = buf_.pos();
+    prologue_sub_rsp_size_ = static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
+    EmitSubRI(buf_, kRSP, static_cast<int32_t>(prologue_sub_rsp_size_));
+    prologue_total_bytes_ = buf_.pos() - prologue_push_offsets_[0];
+
+    // Build push register list for unwind info: rbp, rbx, rsi, cached regs
+    push_reg_nums_[0] = kRBP;
+    push_reg_nums_[1] = kRBX;
+    push_reg_nums_[2] = kRSI;
+    for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
+        push_reg_nums_[3 + slot] = callee_saved_regs_[slot];
+    num_push_regs_ = 3 + num_cache_regs_;
 
     // Save callee-saved XMM registers (used by graph coloring)
     // Stored in the area just below the regular frame (at RSP + kFrameSize + frame_align_adj_).
@@ -2935,6 +2969,23 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             buf_.Emit32(clause.class_token);
         }
     }
+
+    // ── Emit .pdata/.xdata unwind info ──────────────────────────────────
+    // Win64 RUNTIME_FUNCTION for OS stack unwinding (debugger, backtrace).
+    // V1: no UNW_FLAG_EHANDLER (exception dispatch still via VEH handler).
+    // OSR entry stub gets a separate RUNTIME_FUNCTION (V2).
+    uint32_t unwind_data_offset = 0;
+    uint32_t code_body_size = buf_.pos();  // Function body ends before metadata
+    bool has_seh = !rm_.seh_clauses.empty();
+#if defined(_WIN64)
+    if (prologue_total_bytes_ > 0 && num_push_regs_ > 0) {
+        unwind_data_offset = EmitUnwindInfo(
+            buf_, prologue_total_bytes_, prologue_sub_rsp_size_,
+            num_push_regs_, push_reg_nums_, prologue_push_offsets_,
+            prologue_sub_rsp_offset_, prologue_set_fpreg_offset_,
+            has_seh);
+    }
+#endif
 
     // ── Emit OSR entry stub ─────────────────────────────────────────────
     // Enables true mid-execution OSR: copies the current RegisterFile to
@@ -3108,6 +3159,14 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     nm->rbp_to_rsp_offset = 16 + num_cache_regs_ * 8 +
                             static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
 
+    // ── Allocate Win64 RUNTIME_FUNCTION for .pdata registration ─────────
+#if defined(_WIN64)
+    if (unwind_data_offset > 0) {
+        nm->runtime_function = AllocRuntimeFunction(
+            unwind_data_offset, code_body_size);
+    }
+#endif
+
     return nm;
 }
 
@@ -3136,6 +3195,13 @@ NativeMethod::~NativeMethod() noexcept {
     for (uint32_t i = 0; i < gc_point_count; ++i) {
         CHAOS_IL2CPP_FREE(gc_points[i].slots);
     }
+#if defined(_WIN64)
+    if (runtime_function != nullptr) {
+        RtlDeleteFunctionTable(static_cast<PRUNTIME_FUNCTION>(runtime_function));
+        CHAOS_IL2CPP_FREE(runtime_function);
+        runtime_function = nullptr;
+    }
+#endif
     code = nullptr;
 }
 

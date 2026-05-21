@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/handles/safehandle/gchandle",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::Close:System.Void()",
+      "elapsedMilliseconds": 1490.484,
+      "calibratedMs": 1490.484,
+      "opsPerSecond": 67092.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousAddRef:System.Void(System.Boolean&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousGetHandle:System.IntPtr()",
+      "elapsedMilliseconds": 1746.558,
+      "calibratedMs": 1746.558,
+      "opsPerSecond": 57255.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousRelease:System.Void()",
+      "elapsedMilliseconds": 1583.399,
+      "calibratedMs": 1583.399,
+      "opsPerSecond": 63155.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::Dispose:System.Void()",
+      "elapsedMilliseconds": 1642.822,
+      "calibratedMs": 1642.822,
+      "opsPerSecond": 60870.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::get_IsClosed:System.Boolean()",
+      "elapsedMilliseconds": 1642.174,
+      "calibratedMs": 1642.174,
+      "opsPerSecond": 60894.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
+      "elapsedMilliseconds": 1611.086,
+      "calibratedMs": 1611.086,
+      "opsPerSecond": 62069.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::SetHandleAsInvalid:System.Void()",
+      "elapsedMilliseconds": 1335.697,
+      "calibratedMs": 1335.697,
+      "opsPerSecond": 74867.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.CriticalHandle::Close:System.Void()",
+      "elapsedMilliseconds": 1428.744,
+      "calibratedMs": 1428.744,
+      "opsPerSecond": 69991.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.CriticalHandle::Dispose:System.Void()",
+      "elapsedMilliseconds": 1672.968,
+      "calibratedMs": 1672.968,
+      "opsPerSecond": 59774.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.CriticalHandle::get_IsClosed:System.Boolean()",
+      "elapsedMilliseconds": 1691.234,
+      "calibratedMs": 1691.234,
+      "opsPerSecond": 59128.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.CriticalHandle::get_IsInvalid:System.Boolean()",
+      "elapsedMilliseconds": 2213.623,
+      "calibratedMs": 2213.623,
+      "opsPerSecond": 45174.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.CriticalHandle::SetHandleAsInvalid:System.Void()",
+      "elapsedMilliseconds": 1874.157,
+      "calibratedMs": 1874.157,
+      "opsPerSecond": 53357.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::AddrOfPinnedObject:System.IntPtr()",
+      "elapsedMilliseconds": 6005.422,
+      "calibratedMs": 6005.422,
+      "opsPerSecond": 16651.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Alloc:System.Runtime.InteropServices.GCHandle(System.Object)",
+      "elapsedMilliseconds": 1707.889,
+      "calibratedMs": 1707.889,
+      "opsPerSecond": 58551.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Alloc:System.Runtime.InteropServices.GCHandle(System.Object,System.Runtime.InteropServices.GCHandleType)",
+      "elapsedMilliseconds": 3920.012,
+      "calibratedMs": 3920.012,
+      "opsPerSecond": 25510.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Equals:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 1820.37,
+      "calibratedMs": 1820.37,
+      "opsPerSecond": 54933.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Equals:System.Boolean(System.Runtime.InteropServices.GCHandle)",
+      "elapsedMilliseconds": 3317.317,
+      "calibratedMs": 3317.317,
+      "opsPerSecond": 30144.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Free:System.Void()",
+      "elapsedMilliseconds": 2230.761,
+      "calibratedMs": 2230.761,
+      "opsPerSecond": 44827.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::FromIntPtr:System.Runtime.InteropServices.GCHandle(System.IntPtr)",
+      "elapsedMilliseconds": 2166.998,
+      "calibratedMs": 2166.998,
+      "opsPerSecond": 46146.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::get_IsAllocated:System.Boolean()",
+      "elapsedMilliseconds": 6277.866,
+      "calibratedMs": 6277.866,
+      "opsPerSecond": 15929.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::get_Target:System.Object()",
+      "elapsedMilliseconds": 1843.05,
+      "calibratedMs": 1843.05,
+      "opsPerSecond": 54257.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::GetHashCode:System.Int32()",
+      "elapsedMilliseconds": 2447.185,
+      "calibratedMs": 2447.185,
+      "opsPerSecond": 40863.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Equality:System.Boolean(System.Runtime.InteropServices.GCHandle,System.Runtime.InteropServices.GCHandle)",
+      "elapsedMilliseconds": 1702.651,
+      "calibratedMs": 1702.651,
+      "opsPerSecond": 58731.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.Runtime.InteropServices.GCHandle(System.IntPtr)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.IntPtr(System.Runtime.InteropServices.GCHandle)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Inequality:System.Boolean(System.Runtime.InteropServices.GCHandle,System.Runtime.InteropServices.GCHandle)",
+      "elapsedMilliseconds": 4505.494,
+      "calibratedMs": 4505.494,
+      "opsPerSecond": 22195.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::set_Target:System.Void(System.Object)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::ToIntPtr:System.IntPtr(System.Runtime.InteropServices.GCHandle)",
+      "elapsedMilliseconds": 1801.247,
+      "calibratedMs": 1801.247,
+      "opsPerSecond": 55517.1,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

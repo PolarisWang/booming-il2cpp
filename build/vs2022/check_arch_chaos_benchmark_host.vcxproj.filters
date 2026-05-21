@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\0b38623c8d26ad01ba068b1aa0ccf76c\check_arch_chaos_benchmark_host.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\agent\booming-il2cpp\build\vs2022\CMakeFiles\check_arch_chaos_benchmark_host" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3EDEF1A8-06F2-376C-A446-64404D7A81BA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -313,7 +313,7 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 - 命中 hotupdate 触发条件时，对应 hotupdate smoke / proof 已通过
 - `formalVerificationObjects` 已全部通过；如果原本缺失，已补齐正式对象或 case 并通过
 - 受影响回归已通过
-- 如果本轮同时改动 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、projection 页面字段或证据链接规则，则 formal object 与回归通过后还必须执行 `run verify verification-v1 --json` 刷新正式数据，并确认对应 `verification/projections/**` 派生产物已更新
+- 如果本轮同时改动 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、projection 页面字段或证据链接规则，则 formal object 与回归通过后还必须执行 `run verify verification-v1 --json` 刷新正式数据，并确认对应 `testing/verification-catalog/projections/**` 派生产物已更新
 
 ## 6. 反模式
 
@@ -374,15 +374,15 @@ Annotations should prefer enum-backed attributes. String should be kept only for
 
 Per family, fixed directories are:
 
-- `verification/foundation-dll/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
-- `verification/foundation-dll/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
-- `verification/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
-- `verification/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
-- `verification/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
-- `verification/foundation-dll/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
-- `verification/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
-- `verification/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
-- `verification/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
+- `testing/foundation-dll/<assembly>/<family>/handwritten/` — **READ ONLY** handwrite partial class `.cs` 源（管线只读不写）
+- `testing/foundation-dll/<assembly>/<family>/src/` — handwrite managed source（legacy，已弃用，新 family 用 handwritten/）
+- `testing/foundation-dll/<assembly>/<family>/src/patch/` — handwrite patch source
+- `testing/foundation-dll/<assembly>/<family>/managed_test/tests/` — managed xunit tests
+- `testing/foundation-dll/<assembly>/<family>/managed_test/benchmarks/` — managed benchmarks
+- `testing/foundation-dll/<assembly>/<family>/il2cpp_dist/` — generated il2cpp output (not committed)
+- `testing/foundation-dll/<assembly>/<family>/native_test/benchmark/` — native benchmark entry (committed)
+- `testing/foundation-dll/<assembly>/<family>/native_test/hotupdate/` — native hotupdate skeleton (committed)
+- `testing/foundation-dll/<assembly>/<family>/reports/` — test reports (not committed)
 
 **`handwritten/` 保护规则**：
 - 管线只从该目录读 `.cs` 文件，从不写入

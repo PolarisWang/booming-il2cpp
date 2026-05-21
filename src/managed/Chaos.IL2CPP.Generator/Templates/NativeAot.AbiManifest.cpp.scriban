@@ -1,0 +1,38 @@
+// ── ABI manifest ──────────────────────────────────────────────
+// Single contiguous struct: header + entries + params in same object
+// so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
+
+// Param offset prefix-sum: [i] = cumulative parameter count before method i
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[{{ method_count_plus_one }}] = {
+{{~ for prefix in prefix_sums ~}}
+    {{ prefix }}u,
+{{~ end ~}}
+};
+
+static constexpr struct {
+    ::ChaosAbiManifestV0 header;
+    ::ChaosAbiMethodEntryV0 entries[{{ methods_count }}];
+    CHAOS_IL2CPP_UINT8 params[{{ total_params_actual }}];
+} s_abi_manifest_storage = {
+    {
+        CHAOS_ABI_MANIFEST_VERSION,
+        {{ methods_count }}u,
+        {{ total_params }}u,
+        {{ checksum }}u,  // FNV-1a over entries+params
+        s_abi_manifest_prefix_sum  // O(1) prefix-sum
+    },
+    {
+{{~ for method in methods ~}}
+        { {{ method.return_carrier }}u, {{ method.param_count }}u },  // {{ method.native_symbol }}
+{{~ end ~}}
+    },
+    {
+{{~ if total_params > 0 ~}}
+{{~ for carrier in param_carriers ~}}
+        {{ carrier }}u,
+{{~ end ~}}
+{{~ end ~}}
+    },
+};
+static const ::ChaosAbiManifestV0* const s_abi_manifest =
+    reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);

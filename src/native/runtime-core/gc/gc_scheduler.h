@@ -293,13 +293,13 @@ public:
     }
 
     // ── Survivor sizing constants ──────────────────────────────────
-    /// Minimum Gen1 area: 2 MB.  Below this, Gen1 filtering is too
+    /// Minimum Gen1 area: 4 MB.  Below this, Gen1 filtering is too
     /// constrained and objects promote to Gen2 too quickly.
-    static constexpr CHAOS_IL2CPP_SIZE kMinGen1Size = 2 * 1024 * 1024;   // 2 MB
-    /// Maximum Gen1 area: 16 MB (matches kDefaultYoungRegionSize).  Above
-    /// this, the virtual address space consumed by the independent Gen1
-    /// region becomes excessive relative to its filtering benefit.
-    static constexpr CHAOS_IL2CPP_SIZE kMaxGen1Size = 16 * 1024 * 1024;  // 16 MB
+    static constexpr CHAOS_IL2CPP_SIZE kMinGen1Size = 4 * 1024 * 1024;   // 4 MB
+    /// Maximum Gen1 area: 32 MB.  Above this, the virtual address space
+    /// consumed by the independent Gen1 region becomes excessive relative
+    /// to its filtering benefit.
+    static constexpr CHAOS_IL2CPP_SIZE kMaxGen1Size = 32 * 1024 * 1024;  // 32 MB
     /// Default Gen1 area (current fixed size at init time).
     static constexpr CHAOS_IL2CPP_SIZE kDefaultGen1Size = 8 * 1024 * 1024; // 8 MB
 

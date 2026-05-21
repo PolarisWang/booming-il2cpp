@@ -105,7 +105,7 @@ inline void DirtyCard(const void* obj) noexcept {
     }
     uintptr_t idx = (addr - g_heap_base) >> kCardShift;
     uintptr_t seg_idx = idx / kCardsPerSegment;
-    if (seg_idx >= g_card_l1_size.load(std::memory_order_acquire)) [[unlikely]] {
+    if (seg_idx >= g_card_l1_size.load(std::memory_order_relaxed)) [[unlikely]] {
         return;  // beyond card table coverage — not managed
     }
     uintptr_t card_idx = idx % kCardsPerSegment;

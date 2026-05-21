@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/runtime/interop/services",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::get_FrameworkDescription:System.String()",
+      "elapsedMilliseconds": 0.605,
+      "calibratedMs": 0.605,
+      "opsPerSecond": 165398610.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::get_OSArchitecture:System.Runtime.InteropServices.Architecture()",
+      "elapsedMilliseconds": 0.567,
+      "calibratedMs": 0.567,
+      "opsPerSecond": 176491351.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::get_OSDescription:System.String()",
+      "elapsedMilliseconds": 0.611,
+      "calibratedMs": 0.611,
+      "opsPerSecond": 163639338.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::get_ProcessArchitecture:System.Runtime.InteropServices.Architecture()",
+      "elapsedMilliseconds": 0.523,
+      "calibratedMs": 0.523,
+      "opsPerSecond": 191314329.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::get_RuntimeIdentifier:System.String()",
+      "elapsedMilliseconds": 0.57,
+      "calibratedMs": 0.57,
+      "opsPerSecond": 175346309.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.RuntimeInformation::IsOSPlatform:System.Boolean(System.Runtime.InteropServices.OSPlatform)",
+      "elapsedMilliseconds": 0.521,
+      "calibratedMs": 0.521,
+      "opsPerSecond": 191901746.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::Create:System.Runtime.InteropServices.OSPlatform(System.String)",
+      "elapsedMilliseconds": 0.556,
+      "calibratedMs": 0.556,
+      "opsPerSecond": 179726815.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Runtime.InteropServices.OSPlatform)",
+      "elapsedMilliseconds": 0.539,
+      "calibratedMs": 0.539,
+      "opsPerSecond": 185632077.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 11.511,
+      "calibratedMs": 11.511,
+      "opsPerSecond": 8687569.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::get_FreeBSD:System.Runtime.InteropServices.OSPlatform()",
+      "elapsedMilliseconds": 0.529,
+      "calibratedMs": 0.529,
+      "opsPerSecond": 189178963.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::get_Linux:System.Runtime.InteropServices.OSPlatform()",
+      "elapsedMilliseconds": 0.553,
+      "calibratedMs": 0.553,
+      "opsPerSecond": 180929980.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::get_OSX:System.Runtime.InteropServices.OSPlatform()",
+      "elapsedMilliseconds": 0.529,
+      "calibratedMs": 0.529,
+      "opsPerSecond": 188893086.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::get_Windows:System.Runtime.InteropServices.OSPlatform()",
+      "elapsedMilliseconds": 0.523,
+      "calibratedMs": 0.523,
+      "opsPerSecond": 191350937.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::GetHashCode:System.Int32()",
+      "elapsedMilliseconds": 0.443,
+      "calibratedMs": 0.443,
+      "opsPerSecond": 225529995.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::op_Equality:System.Boolean(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)",
+      "elapsedMilliseconds": 0.491,
+      "calibratedMs": 0.491,
+      "opsPerSecond": 203748981.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::op_Inequality:System.Boolean(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)",
+      "elapsedMilliseconds": 0.511,
+      "calibratedMs": 0.511,
+      "opsPerSecond": 195694716.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::ToString:System.String()",
+      "elapsedMilliseconds": 0.579,
+      "calibratedMs": 0.579,
+      "opsPerSecond": 172830971.3,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

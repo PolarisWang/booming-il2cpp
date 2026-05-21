@@ -31,18 +31,21 @@ set(CHAOS_GC_BASE  gc_test_base.cpp)
 add_chaos_test(test_gc_bit_utils
     gc_bit_utils_test.cpp
     LIBS chaos_fmt chaos_common
+    LABELS "unit;gc"
 )
 
 # gc_bump_cache_test — GcBumpCache size-class allocator unit tests
 add_chaos_test(test_gc_bump_cache
     gc_bump_cache_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_layout_test — GcLayoutRegistry unit tests
 add_chaos_test(test_gc_layout
     gc_layout_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -53,6 +56,7 @@ add_chaos_test(test_gc_layout
 add_chaos_test(test_gc_region
     gc_region_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 target_link_options(test_gc_region PRIVATE /FORCE:MULTIPLE)
 
@@ -60,12 +64,14 @@ target_link_options(test_gc_region PRIVATE /FORCE:MULTIPLE)
 add_chaos_test(test_gc_card_table_ext
     gc_card_table_ext_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_events_test — GC events unit tests
 add_chaos_test(test_gc_events
     gc_events_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_stats_test — GC stats unit tests
@@ -76,18 +82,21 @@ add_chaos_test(test_gc_events
 add_chaos_test(test_gc_stats
     gc_stats_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_scheduler_test — GcScheduler unit tests
 add_chaos_test(test_gc_scheduler
     gc_scheduler_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_memory_domain_test — MemoryDomain lifecycle, tagged allocation, usage limits
 add_chaos_test(test_gc_memory_domain
     memory_domain_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -98,30 +107,35 @@ add_chaos_test(test_gc_memory_domain
 add_chaos_test(test_gc_root_scanner
     gc_root_scanner_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_handle_test — GCHandle strong/weak/pinned/dependent lifecycle
 add_chaos_test(test_gc_handle
     gc_handle_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_poh_test — Pinned Object Heap allocation + handles
 add_chaos_test(test_gc_poh
     gc_poh_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_loh_test — Large Object Heap allocation/sweep/compaction
 add_chaos_test(test_gc_loh
     gc_loh_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_tlab_test — Thread-Local Allocation Buffer unit tests
 add_chaos_test(test_gc_tlab
     gc_tlab_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -138,6 +152,7 @@ add_chaos_test(test_gc_young_collector
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 target_include_directories(test_gc_young_collector PRIVATE
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
@@ -150,24 +165,28 @@ target_link_options(test_gc_young_collector PRIVATE /FORCE:MULTIPLE)
 add_chaos_test(test_gc_old_gen
     gc_old_gen_unit_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_gen1_test — Gen1 collection (empty/single/mixed/fragmentation)
 add_chaos_test(test_gc_gen1
     gc_gen1_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_finalizer_test — Finalizer registration + execution
 add_chaos_test(test_gc_finalizer
     gc_finalizer_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_full_gc_test — Full GC collection channel tests
 add_chaos_test(test_gc_full_gc
     gc_full_gc_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_managed_api_test — Managed GC API native verification tests
@@ -182,6 +201,7 @@ add_chaos_test(test_gc_managed_api
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_stats.cpp
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 target_include_directories(test_gc_managed_api PRIVATE
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
@@ -191,30 +211,35 @@ target_link_options(test_gc_managed_api PRIVATE /FORCE:MULTIPLE)
 add_chaos_test(test_gc_safepoint
     gc_safepoint_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_parallel_mark_test — ParallelMark work-stealing unit tests
 add_chaos_test(test_gc_parallel_mark
     gc_parallel_mark_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_mark_bitmap_test — GcMarkBitmap unit tests
 add_chaos_test(test_gc_mark_bitmap
     gc_mark_bitmap_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_sanity_test — POH, ThinLock, GCMemoryInfo sanity
 add_chaos_test(test_gc_sanity
     gc_sanity_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_domain_unload_test — Domain unloader orchestration (C4)
 add_chaos_test(test_gc_domain_unload
     domain_unload_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -256,6 +281,7 @@ set_tests_properties(test_gc_throughput_benchmark PROPERTIES LABELS "benchmark;g
 add_chaos_test(test_gc_worker_pool
     gc_worker_pool_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
 )
 
 # gc_mini_stress_test — Minimal multi-threaded nursery stress
@@ -340,6 +366,7 @@ add_chaos_test(test_gc_bgc_unit
     gc_bgc_unit_test.cpp ${CHAOS_GC_STUBS}
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_bgc.cpp
     LIBS ${CHAOS_GC_LIBS}
+    LABELS "stress;gc"
 )
 target_include_directories(test_gc_bgc_unit PRIVATE
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)

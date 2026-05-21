@@ -32,52 +32,61 @@ set(CHAOS_CORE_LIBS
 add_chaos_test(test_interpreter_smoke
     interpreter_smoke_test.cpp
     LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_mini_smoke
     interpreter_mini_smoke_test.cpp
     LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_smoke_isolated
     interpreter_smoke_isolated_test.cpp
     LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_integration
     interpreter_integration_test.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_bridge
     interpreter_bridge_test.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_entry
     interpreter_entry_test.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_new_features
     interpreter_new_features_test.cpp
     LIBS ${CHAOS_CORE_LIBS}
+    LABELS "unit;interpreter"
 )
 
 add_chaos_test(test_interpreter_profile
     interpreter_profile_test.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "unit;interpreter"
 )
 
 # Tiering benchmark (non-gtest, standalone performance measurement)
 add_chaos_test(test_tiering_benchmark
     tiering_benchmark.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "benchmark;interpreter"
 )
 
 # Tiering benchmark with extended scenarios (arithmetic, register, array, etc.)
 add_chaos_test(test_interpreter_tiering_benchmark
     interpreter_tiering_benchmark_test.cpp
     LIBS ${CHAOS_FULL_LIBS}
+    LABELS "benchmark;interpreter"
 )
-set_tests_properties(test_interpreter_tiering_benchmark PROPERTIES LABELS "benchmark")

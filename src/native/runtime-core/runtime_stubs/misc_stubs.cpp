@@ -74,6 +74,8 @@ CHAOS_IL2CPP_INT32 ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept
 static constexpr CHAOS_IL2CPP_SIZE kStubObjectSize = 128;
 static CHAOS_IL2CPP_UINT8 s_stub_culture[kStubObjectSize]{};
 static CHAOS_IL2CPP_UINT8 s_stub_subsystem[kStubObjectSize]{};
+static CHAOS_IL2CPP_UINT8 s_stub_invariant_name[sizeof(StubStringHeader) + 10]{};  // "invariant\0"
+static CHAOS_IL2CPP_UINT8 s_stub_invariant_display[sizeof(StubStringHeader) + 36]{};  // "Invariant Language (Invariant Country)\0"
 static CHAOS_IL2CPP_UINT8 s_stub_empty_string[sizeof(StubStringHeader) + 1]{};
 
 CHAOS_IL2CPP_INTPTR ChaosCultureGetCurrent(void) noexcept
@@ -130,14 +132,16 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetTextInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noe
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 /*c*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
 {
-    return 0;
+    if (c >= 0x41 && c <= 0x5A) return static_cast<CHAOS_IL2CPP_INTPTR>(c + 0x20);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 /*c*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
 {
-    return 0;
+    if (c >= 0x61 && c <= 0x7A) return static_cast<CHAOS_IL2CPP_INTPTR>(c - 0x20);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(c);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*/) noexcept

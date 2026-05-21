@@ -1,0 +1,17 @@
+{{ indentation }}// AOT-baked string table: sorted by StringId for binary search at runtime.
+{{ indentation }}constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
+{{~ for entry in string_entries ~}}
+{{ indentation }}{{ tab }}{ {{ entry.id }}U, {{ entry.cpp_literal }}, {{ entry.byte_count }}u },
+{{~ end ~}}
+{{ indentation }}};
+
+{{ indentation }}constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);
+
+{{ indentation }}// Register the AOT-baked string table with the runtime before any code uses it.
+{{ indentation }}static const CHAOS_IL2CPP_UINT32 s_aot_string_table_registered = []()
+{{ indentation }}{
+{{ indentation }}{{ tab }}::chaos::il2cpp::string_table::InitializeFromAot(
+{{ indentation }}{{ tab }}{{ tab }}chaos_aot_string_entries,
+{{ indentation }}{{ tab }}{{ tab }}chaos_aot_string_entry_count);
+{{ indentation }}{{ tab }}return 0u;
+{{ indentation }}}();

@@ -1,0 +1,2166 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectKind": "field",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AddRef:System.Int32(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AllocCoTaskMem:System.IntPtr(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AreComObjectsAvailableForCleanup:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::BindToMoniker:System.Object(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ChangeWrapperHandleStrength:System.Void(System.Object,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::CleanupUnusedObjectsInCurrentContext:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::CreateAggregatedObject\u003CSystem.Int32\u003E:System.IntPtr(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::CreateWrapperOfType:System.Object(System.Object,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::DestroyStructure:System.Void(System.IntPtr,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::FinalReleaseComObject:System.Int32(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::FreeBSTR:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::FreeCoTaskMem:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::FreeHGlobal:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GenerateGuidForType:System.Guid(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GenerateProgIdForType:System.String(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type,CustomQueryInterfaceMode)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetComObjectData:System.Object(System.Object,System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetDelegateForFunctionPointer:System.Delegate(System.IntPtr,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetEndComSlot:System.Int32(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetExceptionCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetExceptionForHR:System.Exception(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetExceptionForHR:System.Exception(System.Int32,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Guid",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetExceptionForHR:System.Exception(System.Int32,System.Guid\u0026,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetExceptionPointers:System.IntPtr()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetFunctionPointerForDelegate:System.IntPtr(System.Delegate)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetHINSTANCE:System.IntPtr(System.Reflection.Module)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetHRForException:System.Int32(System.Exception)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetHRForLastWin32Error:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetIDispatchForObject:System.IntPtr(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetIUnknownForObject:System.IntPtr(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetLastPInvokeError:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetLastPInvokeErrorMessage:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetLastSystemError:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetLastWin32Error:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetNativeVariantForObject\u003CSystem.Int32\u003E:System.Void(System.Int32,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetObjectForIUnknown:System.Object(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetObjectForNativeVariant:System.Object(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetObjectsForNativeVariants:System.Object[](System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetPInvokeErrorMessage:System.String(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetStartComSlot:System.Int32(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetTypedObjectForIUnknown:System.Object(System.IntPtr,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.Guid::Empty",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetTypeFromCLSID:System.Type(System.Guid)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetTypeInfoName:System.String(System.Runtime.InteropServices.ComTypes.ITypeInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetUniqueObjectForIUnknown:System.Object(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::InitHandle:System.Void(System.Runtime.InteropServices.SafeHandle,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::IsComObject:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::IsTypeVisibleFromCom:System.Boolean(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::OffsetOf:System.IntPtr(System.Type,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::Prelink:System.Void(System.Reflection.MethodInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PrelinkAll:System.Void(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringAnsi:System.String(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringAnsi:System.String(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringAuto:System.String(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringAuto:System.String(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringBSTR:System.String(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringUni:System.String(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringUni:System.String(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringUTF8:System.String(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStringUTF8:System.String(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStructure:System.Object(System.IntPtr,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStructure\u003CSystem.Int32\u003E:System.Void(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadByte:System.Byte(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadByte:System.Byte(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt16:System.Int16(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt16:System.Int16(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt32:System.Int32(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt32:System.Int32(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt64:System.Int64(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt64:System.Int64(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadIntPtr:System.IntPtr(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadIntPtr:System.IntPtr(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReAllocCoTaskMem:System.IntPtr(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReAllocHGlobal:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::Release:System.Int32(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReleaseComObject:System.Int32(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SecureStringToBSTR:System.IntPtr(System.Security.SecureString)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SetComObjectData:System.Boolean(System.Object,System.Object,System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SetLastPInvokeError:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SetLastSystemError:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SizeOf\u003CSystem.Int32\u003E:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::SizeOf:System.Int32(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToBSTR:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToCoTaskMemAnsi:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToCoTaskMemAuto:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUni:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUTF8:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToHGlobalAnsi:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToHGlobalAuto:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StringToHGlobalUni:System.IntPtr(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StructureToPtr\u003CSystem.Int32\u003E:System.Void(System.Int32,System.IntPtr,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ThrowExceptionForHR:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ThrowExceptionForHR:System.Void(System.Int32,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::UnsafeAddrOfPinnedArrayElement\u003CSystem.Byte\u003E:System.IntPtr(System.Byte[],System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteByte:System.Void(System.IntPtr,System.Int32,System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteByte:System.Void(System.IntPtr,System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.IntPtr,System.Int32,System.Int16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.IntPtr,System.Int16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.IntPtr,System.Int32,System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.IntPtr,System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt32:System.Void(System.IntPtr,System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt32:System.Void(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt64:System.Void(System.IntPtr,System.Int32,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt64:System.Void(System.IntPtr,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteIntPtr:System.Void(System.IntPtr,System.Int32,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteIntPtr:System.Void(System.IntPtr,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeBSTR:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeCoTaskMemAnsi:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeCoTaskMemUnicode:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeCoTaskMemUTF8:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeGlobalAllocAnsi:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ZeroFreeGlobalAllocUnicode:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Dispose:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanRead:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanWrite:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_Capacity:System.Int64()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadBoolean:System.Boolean(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt64:System.Int64(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSByte:System.SByte(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSingle:System.Single(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt16:System.UInt16(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt32:System.UInt32(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt64:System.UInt64(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Decimal::.ctor:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Decimal)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Single)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Double)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.SByte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::.ctor:System.Void(System.Runtime.InteropServices.SafeBuffer,System.Int64,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::.ctor:System.Void(System.Runtime.InteropServices.SafeBuffer,System.Int64,System.Int64,System.IO.FileAccess)",
+      "reason": "external-call"
+    }
+  ]
+}

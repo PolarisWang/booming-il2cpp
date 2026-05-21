@@ -1,0 +1,229 @@
+#include "{{ include_header }}"
+
+#include "runtime_core.h"
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const void* string_object);
+
+constexpr CHAOS_IL2CPP_UINT32 kReferenceTypeToken = {{ reference_type_token }};
+constexpr const char* kDefaultImageName = "{{ assembly_name }}";
+constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
+constexpr const char* kExpectedOutput = {{ expected_output_literal }};
+constexpr const char* kInnerFinallyLiteral = "Nested EH inner finally.";
+constexpr const char* kOuterFinallyLiteral = "Nested EH outer finally.";
+
+struct NativeReferenceContext {
+    const RuntimeAbiV0* abi;
+    const CodegenBridgeV0* bridge;
+    ImageHandle image;
+    TypeInfoHandle reference_type;
+    WriteLineStringFn write_line_string;
+};
+
+NativeReferenceContext g_native_reference_context = {};
+
+ImageHandle GetNativeReferenceImage(const CodegenRegistrationOptionsV0* options) {
+    const char* image_name = options != nullptr && options->image_name_utf8 != nullptr
+        ? options->image_name_utf8
+        : kDefaultImageName;
+    return reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+}
+
+void ResetNativeReferenceContext() {
+    g_native_reference_context = {};
+}
+
+bool InitializeNativeReferenceContext(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options) {
+    if (bridge == nullptr) {
+        return false;
+    }
+
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return false;
+    }
+
+    g_native_reference_context.abi = abi;
+    g_native_reference_context.bridge = bridge;
+    g_native_reference_context.image = GetNativeReferenceImage(options);
+    g_native_reference_context.reference_type = bridge->resolve_type_by_token(g_native_reference_context.image, kReferenceTypeToken);
+    g_native_reference_context.write_line_string = reinterpret_cast<WriteLineStringFn>(bridge->resolve_icall(kConsoleWriteLineStringIcall));
+
+    return g_native_reference_context.reference_type != nullptr && g_native_reference_context.write_line_string != nullptr;
+}
+
+bool EnsureNativeReferenceContextReady(
+    RuntimeState* runtime,
+    ThreadState* thread) {
+    return runtime != nullptr
+        && thread != nullptr
+        && g_native_reference_context.abi != nullptr
+        && g_native_reference_context.bridge != nullptr
+        && g_native_reference_context.reference_type != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
+}
+
+void* CreateManagedString(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* utf8_bytes,
+    CHAOS_IL2CPP_UINT32 byte_count) {
+    return g_native_reference_context.abi->string_new_utf8(runtime, thread, utf8_bytes, byte_count);
+}
+
+void WriteLiteral(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* utf8_bytes,
+    CHAOS_IL2CPP_UINT32 byte_count) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
+        return;
+    }
+
+    void* message = CreateManagedString(runtime, thread, utf8_bytes, byte_count);
+    if (message != nullptr) {
+        (void)g_native_reference_context.write_line_string(runtime, thread, message);
+    }
+}
+
+struct InnerFinallyScope {
+    RuntimeState* runtime;
+    ThreadState* thread;
+    ~InnerFinallyScope() {
+        WriteLiteral(runtime, thread, kInnerFinallyLiteral, 24u);
+    }
+};
+
+struct OuterFinallyScope {
+    RuntimeState* runtime;
+    ThreadState* thread;
+    ~OuterFinallyScope() {
+        WriteLiteral(runtime, thread, kOuterFinallyLiteral, 24u);
+    }
+};
+
+}  // namespace
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL {{ constructor_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* __this) {
+    (void)runtime;
+    (void)thread;
+    (void)__this;
+}
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL {{ throw_method_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
+        return;
+    }
+
+    g_native_reference_context.abi->raise_managed_exception(
+        runtime,
+        thread,
+        reinterpret_cast<ExceptionHandle>(const_cast<char*>("nested-phase2-proof")));
+}
+
+extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* __this) {
+    (void)__this;
+
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
+        return nullptr;
+    }
+
+    OuterFinallyScope outer_scope = { runtime, thread };
+
+    try {
+        InnerFinallyScope inner_scope = { runtime, thread };
+
+        try {
+            {{ throw_method_symbol }}(runtime, thread);
+            return CreateManagedString(runtime, thread, "unreachable-inner", 17u);
+        } catch (const chaos_managed_exception&) {
+            return CreateManagedString(
+                runtime,
+                thread,
+                kExpectedOutput,
+                {{ expected_output_byte_count }}u);
+        }
+    } catch (const chaos_managed_exception&) {
+        return CreateManagedString(runtime, thread, "unreachable-outer", 17u);
+    }
+}
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)managed_args;
+
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
+        return 1;
+    }
+
+    if (g_native_reference_context.abi->class_init(runtime, g_native_reference_context.reference_type) != CHAOS_RUNTIME_STATUS_OK) {
+        return 1;
+    }
+
+    void* harness = g_native_reference_context.abi->object_new(runtime, thread, g_native_reference_context.reference_type);
+    if (harness == nullptr) {
+        return 1;
+    }
+
+    {{ constructor_symbol }}(runtime, thread, harness);
+    void* message = {{ instance_method_symbol }}(runtime, thread, harness);
+    if (message == nullptr) {
+        return 1;
+    }
+
+    return g_native_reference_context.write_line_string(runtime, thread, message);
+}
+
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    ResetNativeReferenceContext();
+
+    if (bridge == nullptr
+        || code_registration == nullptr
+        || metadata_registration == nullptr
+        || options == nullptr
+        || runtime == nullptr
+        || thread == nullptr) {
+        return 1;
+    }
+
+    if (bridge->register_codegen(code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (bridge->bootstrap_runtime() != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (!InitializeNativeReferenceContext(bridge, options)) {
+        return 1;
+    }
+
+    return {{ entry_symbol }}(runtime, thread, managed_args);
+}
+
+}  // namespace chaos::il2cpp::generated

@@ -8,9 +8,9 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute::.ctor:System.Void()",
-      "elapsedMilliseconds": 1268.646,
-      "calibratedMs": 1268.646,
-      "opsPerSecond": 78824.2,
+      "elapsedMilliseconds": 1071.983,
+      "calibratedMs": 1071.983,
+      "opsPerSecond": 93285.1,
       "iterations": 100000,
       "status": "completed"
     }

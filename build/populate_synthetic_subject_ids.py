@@ -16,8 +16,8 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-LEDGER_PATH = REPO_ROOT / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
-CANDIDATE_LEDGER_PATH = REPO_ROOT / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.candidate.json"
+LEDGER_PATH = REPO_ROOT / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+CANDIDATE_LEDGER_PATH = REPO_ROOT / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.candidate.json"
 
 # Known method patterns to generate per public type
 SYNTHETIC_METHOD_PATTERNS: list[tuple[str, int]] = [

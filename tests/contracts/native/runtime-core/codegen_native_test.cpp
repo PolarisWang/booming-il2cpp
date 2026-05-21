@@ -15,6 +15,8 @@
 #include "native_method.h"
 #include "codegen_helpers.h"
 #include "t4_seh_handler.h"
+#include "unwind_info.h"
+#include "code_buffer.h"
 #include "ir_reg_alloc.h"
 #include "gc_root_scanner.h"
 #include "patch_loader.h"
@@ -55,7 +57,13 @@ using chaos::il2cpp::codegen::CodeGenConfig;
 using chaos::il2cpp::codegen::kDeoptMagic;
 using chaos::il2cpp::codegen::t_deopt_state;
 using chaos::il2cpp::codegen::RegisterT4Code;
+using chaos::il2cpp::codegen::UnregisterT4Code;
 using chaos::il2cpp::codegen::FindT4CodeByAddress;
+using chaos::il2cpp::codegen::CodeBuffer;
+using chaos::il2cpp::codegen::EmitUnwindInfo;
+using chaos::il2cpp::codegen::AllocRuntimeFunction;
+using chaos::il2cpp::codegen::RuntimeFunction;
+using chaos::il2cpp::codegen::kPersonalityThunkSize;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
 using chaos::il2cpp::interpreter::RegisterExecute;
@@ -2850,6 +2858,318 @@ static bool Test_SubSelfIntrinsic() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
+// Unwind Info Tests — .pdata/.xdata binary layout verification
+// ═══════════════════════════════════════════════════════════════════════
+#if defined(_WIN64)
+
+static bool Test_UnwindInfoLayout() {
+    std::printf("  Test_UnwindInfoLayout...\n");
+    CodeBuffer buf;
+    // Prologue: push rbp(1) + mov rbp,rsp(3) + push rbx(1) + push rsi(1)
+    // + nop padding to make total=16
+    // 3 regs: rbp(5), rbx(3), rsi(4)
+    uint8_t push_reg_nums[] = {5, 3, 4};
+    uint32_t push_offsets[] = {0, 2, 7};    // push rbp@0, push rbx@2, push rsi@7
+    uint32_t sub_offset = 7;                 // sub rsp at 7
+    uint32_t fpreg_offset = 1;              // mov rbp,rsp at 1
+    uint32_t unwind_off = EmitUnwindInfo(buf, 16, 64, 3,
+        push_reg_nums, push_offsets, sub_offset, fpreg_offset, false);
+
+    void* code = buf.Seal();
+    if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
+    const uint8_t* d = static_cast<const uint8_t*>(code);
+
+    // Header: Version=1, Flags=0 → 1 | (0<<3) = 1
+    uint8_t vf = d[unwind_off];
+    if (vf != 1) {
+        std::printf("    FAIL: expected version_flags=1, got %u\n", vf); return false;
+    }
+    // SizeOfProlog = ceil(16/16) = 1
+    if (d[unwind_off + 1] != 1) {
+        std::printf("    FAIL: expected SizeOfProlog=1, got %u\n", d[unwind_off + 1]); return false;
+    }
+    // CountOfCodes = 3 push + 1 SET_FPREG + 1 ALLOC_SMALL = 5
+    if (d[unwind_off + 2] != 5) {
+        std::printf("    FAIL: expected CountOfCodes=5, got %u\n", d[unwind_off + 2]); return false;
+    }
+    // FrameRegister=RBP(5), FrameOffset=0 → 5
+    if (d[unwind_off + 3] != 5) {
+        std::printf("    FAIL: expected FrameRegister=5, got %u\n", d[unwind_off + 3]); return false;
+    }
+
+    VirtualFree(code, 0, MEM_RELEASE);
+    std::printf("    Header OK (vf=%u, sop=%u, coc=%u, fr=%u)\n",
+                vf, d[unwind_off+1], d[unwind_off+2], d[unwind_off+3]);
+    return true;
+}
+
+static bool Test_UnwindInfoSehFlag() {
+    std::printf("  Test_UnwindInfoSehFlag...\n");
+    CodeBuffer buf;
+    uint8_t push_reg_nums[] = {5, 3, 4};
+    uint32_t push_offsets[] = {0, 1, 2};
+    uint32_t unwind_off = EmitUnwindInfo(buf, 16, 64, 3,
+        push_reg_nums, push_offsets, 2, 1, true);
+
+    void* code = buf.Seal();
+    if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
+    const uint8_t* d = static_cast<const uint8_t*>(code);
+
+    // Version=1, Flags=UNW_FLAG_EHANDLER(1) → 1 | (1<<3) = 9
+    uint8_t vf = d[unwind_off];
+    if (vf != 9) {
+        std::printf("    FAIL: expected version_flags=9 (V1|EHANDLER), got %u\n", vf); return false;
+    }
+
+    // Verify JMP thunk exists at the end of UNWIND_INFO
+    // Need to compute total unwind info size from byte 2 (CountOfCodes)
+    uint8_t code_count = d[unwind_off + 2];
+    uint32_t header_size = 4;
+    uint32_t code_bytes = code_count * 2;
+    uint32_t pad = (4 - (code_bytes % 4)) % 4;
+    uint32_t thunk_off = unwind_off + header_size + code_bytes + pad;
+    // Thunk: REX.W(0x48) MOV RAX,imm64(0xB8) + 8-byte addr + JMP RAX(0xFF 0xE0)
+    if (d[thunk_off] != 0x48 || d[thunk_off + 1] != 0xB8) {
+        std::printf("    FAIL: expected thunk start 0x48 0xB8, got 0x%02X 0x%02X\n",
+                    d[thunk_off], d[thunk_off + 1]); return false;
+    }
+    if (d[thunk_off + 10] != 0xFF || d[thunk_off + 11] != 0xE0) {
+        std::printf("    FAIL: expected thunk end 0xFF 0xE0, got 0x%02X 0x%02X\n",
+                    d[thunk_off + 10], d[thunk_off + 11]); return false;
+    }
+    std::printf("    EHANDLER flag OK (vf=%u), thunk at +%u\n", vf, thunk_off);
+    VirtualFree(code, 0, MEM_RELEASE);
+    return true;
+}
+
+static bool Test_UnwindInfoAllocSmall() {
+    std::printf("  Test_UnwindInfoAllocSmall...\n");
+    CodeBuffer buf;
+    uint8_t push_reg_nums[] = {5};  // just rbp
+    uint32_t push_offsets[] = {0};
+    // frame_sub_size=128 (small: ≤128KB and 8-aligned)
+    uint32_t unwind_off = EmitUnwindInfo(buf, 16, 128, 1,
+        push_reg_nums, push_offsets, 1, 0, false);
+
+    void* code = buf.Seal();
+    if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
+    const uint8_t* d = static_cast<const uint8_t*>(code);
+
+    uint8_t code_count = d[unwind_off + 2];
+    if (code_count != 3) {  // 1 push + 1 SET_FPREG + 1 ALLOC_SMALL
+        std::printf("    FAIL: expected 3 codes (ALLOC_SMALL), got %u\n", code_count); return false;
+    }
+
+    // First UNWIND_CODE: UWOP_ALLOC_SMALL
+    // sub_offset=1, op_info = (128/8 - 1) = 15 → (2<<4)|15 = 47
+    uint32_t code_start = unwind_off + 4;
+    uint8_t op_byte = d[code_start + 1];
+    uint8_t expected_op = (2 << 4) | 15;  // UWOP_ALLOC_SMALL=2, op_info=15
+    if (d[code_start] != 1 || op_byte != expected_op) {
+        std::printf("    FAIL: ALLOC_SMALL code mismatch: offset=%u op=0x%02X (expected 0x%02X)\n",
+                    d[code_start], op_byte, expected_op); return false;
+    }
+    std::printf("    ALLOC_SMALL OK (sub_scale=15)\n");
+    VirtualFree(code, 0, MEM_RELEASE);
+    return true;
+}
+
+static bool Test_UnwindInfoAllocLarge() {
+    std::printf("  Test_UnwindInfoAllocLarge...\n");
+    CodeBuffer buf;
+    uint8_t push_reg_nums[] = {5};  // just rbp
+    uint32_t push_offsets[] = {0};
+    // frame_sub_size=128*1024+8 (large: >128KB)
+    uint32_t frame_sub = 128u * 1024u + 8;
+    uint32_t unwind_off = EmitUnwindInfo(buf, 16, frame_sub, 1,
+        push_reg_nums, push_offsets, 1, 0, false);
+
+    void* code = buf.Seal();
+    if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
+    const uint8_t* d = static_cast<const uint8_t*>(code);
+
+    // ALLOC_LARGE takes 2 UNWIND_CODE slots (4 bytes total)
+    uint8_t code_count = d[unwind_off + 2];
+    if (code_count != 4) {  // 1 push + 1 SET_FPREG + 2 ALLOC_LARGE
+        std::printf("    FAIL: expected 4 codes (ALLOC_LARGE), got %u\n", code_count); return false;
+    }
+
+    // First UNWIND_CODE: UWOP_ALLOC_LARGE, op_info=0
+    uint32_t code_start = unwind_off + 4;
+    if (d[code_start] != 1 || d[code_start + 1] != ((2 << 4) | 0)) {
+        std::printf("    FAIL: ALLOC_LARGE opcode mismatch\n"); return false;
+    }
+    // Next 2 bytes: scaled size
+    uint32_t scaled = frame_sub / 8;
+    uint32_t read_scaled = d[code_start + 2] | (d[code_start + 3] << 8);
+    if (read_scaled != scaled) {
+        std::printf("    FAIL: ALLOC_LARGE scaled=%u, expected %u\n", read_scaled, scaled);
+        return false;
+    }
+    std::printf("    ALLOC_LARGE OK (scaled=%u)\n", scaled);
+    VirtualFree(code, 0, MEM_RELEASE);
+    return true;
+}
+
+static bool Test_UnwindInfoPadding() {
+    std::printf("  Test_UnwindInfoPadding...\n");
+    CodeBuffer buf;
+    uint8_t push_reg_nums[] = {5, 3, 4, 6, 7, 8};  // 6 regs = 6 push codes
+    uint32_t push_offsets[] = {0, 1, 2, 3, 4, 5};
+    // 6 push + 1 SET_FPREG + 1 ALLOC_SMALL = 8 codes = 16 bytes (already 4-aligned)
+    uint32_t unwind_off = EmitUnwindInfo(buf, 16, 64, 6,
+        push_reg_nums, push_offsets, 5, 1, false);
+
+    void* code = buf.Seal();
+    if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
+    const uint8_t* d = static_cast<const uint8_t*>(code);
+
+    uint8_t cc = d[unwind_off + 2];
+    uint32_t code_bytes = cc * 2;
+    uint32_t pad = (4 - (code_bytes % 4)) % 4;
+    // Verify padding bytes are 0 (skip if no padding)
+    if (pad > 0) {
+        for (uint32_t i = 0; i < pad; ++i) {
+            uint32_t pad_off = unwind_off + 4 + code_bytes + i;
+            if (d[pad_off] != 0) {
+                std::printf("    FAIL: padding byte %u at offset %u is non-zero\n", i, pad_off);
+                return false;
+            }
+        }
+    }
+    std::printf("    Padding OK (codes=%u, pad=%u, code_bytes=%u)\n", cc, pad, code_bytes);
+    VirtualFree(code, 0, MEM_RELEASE);
+    return true;
+}
+
+static bool Test_AllocRuntimeFunction() {
+    std::printf("  Test_AllocRuntimeFunction...\n");
+    uint32_t unwind_off = 42;
+    uint32_t code_size = 4096;
+    auto* rf = AllocRuntimeFunction(unwind_off, code_size);
+    if (rf == nullptr) {
+        std::printf("    FAIL: AllocRuntimeFunction returned null\n"); return false;
+    }
+    if (rf->begin_address != 0) {
+        std::printf("    FAIL: expected begin_address=0, got %u\n", rf->begin_address); return false;
+    }
+    if (rf->end_address != code_size) {
+        std::printf("    FAIL: expected end_address=%u, got %u\n", code_size, rf->end_address); return false;
+    }
+    if (rf->unwind_info_address != unwind_off) {
+        std::printf("    FAIL: expected unwind_info_address=%u, got %u\n", unwind_off, rf->unwind_info_address);
+        return false;
+    }
+    std::printf("    RUNTIME_FUNCTION OK (begin=0, end=%u, unwind=%u)\n",
+                rf->end_address, rf->unwind_info_address);
+    std::free(rf);
+    return true;
+}
+
+static bool Test_UnwindInfoInGenerate() {
+    std::printf("  Test_UnwindInfoInGenerate...\n");
+    RegisterMethod rm;
+    rm.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrRet(0) };
+    rm.max_regs = 1;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode returned null\n"); return false; }
+
+    // Verify runtime_function is set (V1/V2)
+    // This is Win64 only — skip on other platforms
+#if defined(_WIN64)
+    if (nm->runtime_function == nullptr) {
+        std::printf("    FAIL: runtime_function is null\n"); return false;
+    }
+    auto* rf = static_cast<RuntimeFunction*>(nm->runtime_function);
+    std::printf("    runtime_function: begin=0x%X end=0x%X unwind=0x%X\n",
+                rf->begin_address, rf->end_address, rf->unwind_info_address);
+    if (rf->end_address == 0) {
+        std::printf("    FAIL: end_address is 0\n"); return false;
+    }
+#endif
+    std::printf("    nm->code_size=%u\n", nm->code_size);
+    CHAOS_IL2CPP_FREE(nm);
+    return true;
+}
+
+static bool Test_UnwindInfoSehMethods() {
+    std::printf("  Test_UnwindInfoSehMethods...\n");
+    RegisterMethod rm;
+    rm.instructions = { InstrI4(IROpCode::LdcI4, 1, 0), InstrRet(0) };
+    rm.max_regs = 1;
+    rm.seh_clauses = { SEHClause{ SEHFlags::Exception, 0, 2, 0, 0 } };
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode returned null\n"); return false; }
+
+    if (nm->seh_table_offset == 0) {
+        std::printf("    FAIL: seh_table_offset is 0\n"); return false;
+    }
+#if defined(_WIN64)
+    if (nm->runtime_function == nullptr) {
+        std::printf("    FAIL: runtime_function is null for SEH method\n"); return false;
+    }
+    auto* rf = static_cast<RuntimeFunction*>(nm->runtime_function);
+    std::printf("    SEH method: runtime_function begin=0x%X end=0x%X unwind=0x%X seh_off=%u\n",
+                rf->begin_address, rf->end_address, rf->unwind_info_address, nm->seh_table_offset);
+#endif
+    CHAOS_IL2CPP_FREE(nm);
+    return true;
+}
+
+static bool Test_RtlAddFunctionTable() {
+    std::printf("  Test_RtlAddFunctionTable...\n");
+    RegisterMethod rm;
+    rm.instructions = { InstrI4(IROpCode::LdcI4, 99, 0), InstrRet(0) };
+    rm.max_regs = 1;
+    if (!CanGenerateNativeCode(rm)) return false;
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode returned null\n"); return false; }
+
+#if defined(_WIN64)
+    if (nm->runtime_function == nullptr) {
+        std::printf("    FAIL: runtime_function is null, can't test RtlAddFunctionTable\n");
+        CHAOS_IL2CPP_FREE(nm);
+        return false;
+    }
+
+    // RegisterT4Code internally calls RtlAddFunctionTable with nm->runtime_function
+    RegisterT4Code(nm->code, nm->code_size, nm, 0);
+
+    // Verify registration by looking up the function table entry
+    DWORD64 base = reinterpret_cast<DWORD64>(nm->code);
+    DWORD64 image_base = 0;
+    auto* found = RtlLookupFunctionEntry(
+        base,         // ControlPc = start of our code
+        &image_base,
+        nullptr);     // HistoryTable (optional, can be null)
+
+    if (found == nullptr) {
+        std::printf("    FAIL: RtlLookupFunctionEntry returned null (registration failed)\n");
+        CHAOS_IL2CPP_FREE(nm);
+        return false;
+    }
+    if (found != static_cast<PRUNTIME_FUNCTION>(nm->runtime_function)) {
+        std::printf("    FAIL: RtlLookupFunctionEntry returned different pointer\n");
+        CHAOS_IL2CPP_FREE(nm);
+        return false;
+    }
+
+    std::printf("    RtlAddFunctionTable OK (lookup matched, image_base=0x%llX)\n",
+                (unsigned long long)image_base);
+
+    // Unregister and clean up
+    UnregisterT4Code(nm->code);
+#endif
+
+    CHAOS_IL2CPP_FREE(nm);
+    return true;
+}
+
+#endif // _WIN64
+
+// ═══════════════════════════════════════════════════════════════════════
 int main() {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
     std::printf("Starting codegen test...\n");
@@ -2888,6 +3208,15 @@ int main() {
     // Performance benchmarks (before OSR tests due to OsrPromote hang)
     TEST(Benchmark);
     TEST(BenchmarkExtended);
+
+#if defined(_WIN64)
+    // Unwind Info Tests — .pdata/.xdata binary layout + V2 personality thunk
+    TEST(UnwindInfoLayout); TEST(UnwindInfoSehFlag);
+    TEST(UnwindInfoAllocSmall); TEST(UnwindInfoAllocLarge);
+    TEST(UnwindInfoPadding); TEST(AllocRuntimeFunction);
+    TEST(UnwindInfoInGenerate); TEST(UnwindInfoSehMethods);
+    TEST(RtlAddFunctionTable);
+#endif
 
     // WS6: OSR — hot loop promotes to T4
     TEST(OsrPromote);

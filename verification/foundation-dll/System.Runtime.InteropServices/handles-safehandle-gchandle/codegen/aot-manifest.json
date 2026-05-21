@@ -1,0 +1,354 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "method",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "HandlesSafehandleGchandleSubjects",
+      "subjectKind": "field",
+      "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::Close:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::DangerousGetHandle:System.IntPtr()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::DangerousRelease:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::Dispose:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsClosed:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::SetHandleAsInvalid:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.CriticalHandle::Close:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.CriticalHandle::Dispose:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.CriticalHandle::get_IsClosed:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.CriticalHandle::get_IsInvalid:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.CriticalHandle::SetHandleAsInvalid:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::AddrOfPinnedObject:System.IntPtr()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Alloc:System.Runtime.InteropServices.GCHandle(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Alloc:System.Runtime.InteropServices.GCHandle(System.Object,System.Runtime.InteropServices.GCHandleType)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Equals:System.Boolean(System.Runtime.InteropServices.GCHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Free:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::FromIntPtr:System.Runtime.InteropServices.GCHandle(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::get_IsAllocated:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::get_Target:System.Object()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::op_Equality:System.Boolean(System.Runtime.InteropServices.GCHandle,System.Runtime.InteropServices.GCHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::op_Inequality:System.Boolean(System.Runtime.InteropServices.GCHandle,System.Runtime.InteropServices.GCHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::ToIntPtr:System.IntPtr(System.Runtime.InteropServices.GCHandle)",
+      "reason": "external-call"
+    }
+  ]
+}

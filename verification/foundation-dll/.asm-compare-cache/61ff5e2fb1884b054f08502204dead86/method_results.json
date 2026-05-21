@@ -1,0 +1,466 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_0",
+      "instructions": 9
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 3,
+      "ratio": 0.07,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_1",
+      "instructions": 3
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 4,
+      "ratio": 0.09,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_2",
+      "instructions": 4
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_3",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_4",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_5",
+      "instructions": 9
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_6",
+      "instructions": 9
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 3,
+      "ratio": 0.07,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_7",
+      "instructions": 3
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 4,
+      "ratio": 0.09,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_8",
+      "instructions": 4
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_9",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 10,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+    "shortName": "Subject_10",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_10",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 11,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()",
+    "shortName": "Subject_11",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_11",
+      "instructions": 9
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Runtime.InteropServices/SEHException::CanResume:System.Boolean()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 12,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()",
+    "shortName": "Subject_12",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 3,
+      "ratio": 0.07,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_12",
+      "instructions": 3
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 13,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_13",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 4,
+      "ratio": 0.09,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_13",
+      "instructions": 4
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 14,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)",
+    "shortName": "Subject_14",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_14",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 15,
+    "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+    "shortName": "Subject_15",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 3,
+      "ratio": 0.07,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_15",
+      "instructions": 3
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 16,
+    "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_16",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 4,
+      "ratio": 0.09,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_16",
+      "instructions": 4
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 17,
+    "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)",
+    "shortName": "Subject_17",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 5,
+      "ratio": 0.11,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_17",
+      "instructions": 5
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

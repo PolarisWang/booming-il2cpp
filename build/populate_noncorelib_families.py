@@ -19,8 +19,8 @@ SURFACE_MANIFEST_PATH = (
     REPO_ROOT / "docs" / "dev" / "completed" / "20260418-03-phase-1-contract-facade-and-shim-certification-lane"
     / "public-surface-manifest-v1-01.json"
 )
-FORMAL_LEDGER_PATH = REPO_ROOT / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
-CANDIDATE_LEDGER_PATH = REPO_ROOT / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.candidate.json"
+FORMAL_LEDGER_PATH = REPO_ROOT / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+CANDIDATE_LEDGER_PATH = REPO_ROOT / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.candidate.json"
 
 
 # Assemblies tracked in the foundation-dll audit that are NOT System.Private.CoreLib

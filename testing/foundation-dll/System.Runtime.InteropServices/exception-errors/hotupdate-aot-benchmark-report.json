@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/exception/errors",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.79,
+      "postPatchNsPerOp": 6.1,
+      "slowdownPercent": 118.64
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 131.0,
+      "postPatchNsPerOp": 146.3,
+      "slowdownPercent": 11.68
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 127.01,
+      "postPatchNsPerOp": 135.9,
+      "slowdownPercent": 7.0
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 116.34,
+      "postPatchNsPerOp": 131.7,
+      "slowdownPercent": 13.2
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 130.72,
+      "postPatchNsPerOp": 114.3,
+      "slowdownPercent": -12.56
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.67,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": -1.5
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.95,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": -30.94
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 133.08,
+      "postPatchNsPerOp": 146.0,
+      "slowdownPercent": 9.71
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 142.88,
+      "postPatchNsPerOp": 142.6,
+      "slowdownPercent": -0.2
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 158.91,
+      "postPatchNsPerOp": 130.7,
+      "slowdownPercent": -17.75
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 138.54,
+      "postPatchNsPerOp": 141.1,
+      "slowdownPercent": 1.85
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.49,
+      "postPatchNsPerOp": 4.5,
+      "slowdownPercent": 0.22
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 132.27,
+      "postPatchNsPerOp": 118.0,
+      "slowdownPercent": -10.79
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 136.41,
+      "postPatchNsPerOp": 143.8,
+      "slowdownPercent": 5.42
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 136.09,
+      "postPatchNsPerOp": 135.4,
+      "slowdownPercent": -0.51
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 143.91,
+      "postPatchNsPerOp": 146.4,
+      "slowdownPercent": 1.73
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 134.5,
+      "postPatchNsPerOp": 137.6,
+      "slowdownPercent": 2.3
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 134.72,
+      "postPatchNsPerOp": 125.5,
+      "slowdownPercent": -6.84
+    }
+  ],
+  "summary": {
+    "totalMethods": 18,
+    "nonStubMethods": 18,
+    "averageSlowdownPercent": 5.04,
+    "slowdownFactor": 1.0504,
+    "slowdownThresholdX": 50.0
+  }
+}

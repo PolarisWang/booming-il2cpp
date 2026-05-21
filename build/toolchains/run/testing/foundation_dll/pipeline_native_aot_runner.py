@@ -155,7 +155,7 @@ def _build_subjects_dll(
     from family_entrypoint_generator import generate_and_build
     extra_refs = None
     if family_slug in ("snapshot-prover",):
-        extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+        extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
     # frozen-collections requires FrozenDictionary.Create which needs net10.0+
     tfm = "net10.0"
     result = generate_and_build(

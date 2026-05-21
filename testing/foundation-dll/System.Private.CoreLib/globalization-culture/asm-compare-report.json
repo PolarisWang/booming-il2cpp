@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/globalization/culture",
-  "capturedAt": "2026-05-21T22:42:00",
+  "capturedAt": "2026-05-21T23:27:19",
   "batchMode": true,
   "summary": {
     "totalMethods": 13,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 48,
-      "avg": 44.3,
-      "total": 576
+      "max": 44,
+      "avg": 44.0,
+      "total": 572
     },
     "aotInstructionCount": {
       "min": 18,
@@ -646,15 +646,15 @@
       "shortName": "Subject_11",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 48,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 24,
-        "ratio": 0.5,
+        "ratio": 0.55,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 48
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

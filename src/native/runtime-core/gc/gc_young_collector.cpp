@@ -581,7 +581,7 @@ phase3:
                 CHAOS_IL2CPP_SIZE diff = (recommended > current_size)
                     ? (recommended - current_size)
                     : (current_size - recommended);
-                if (diff > current_size / 4 && recommended > 0) {
+                if (diff > current_size / 6 && recommended > 0) {
                     ResizeGen1Region(recommended);
                     CHAOS_IL2CPP_LOG_DEBUG("CRAG",
                         "gen1_resize: {0} -> {1} bytes",

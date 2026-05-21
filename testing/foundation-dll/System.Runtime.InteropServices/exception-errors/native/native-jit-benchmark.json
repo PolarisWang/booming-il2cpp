@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/exception/errors",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()",
+      "elapsedMilliseconds": 1527.705,
+      "calibratedMs": 1527.705,
+      "opsPerSecond": 65457.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()",
+      "elapsedMilliseconds": 2087.722,
+      "calibratedMs": 2087.722,
+      "opsPerSecond": 47899.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)",
+      "elapsedMilliseconds": 2335.301,
+      "calibratedMs": 2335.301,
+      "opsPerSecond": 42821.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)",
+      "elapsedMilliseconds": 3586.472,
+      "calibratedMs": 3586.472,
+      "opsPerSecond": 27882.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)",
+      "elapsedMilliseconds": 1685.055,
+      "calibratedMs": 1685.055,
+      "opsPerSecond": 59345.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+      "elapsedMilliseconds": 6019.073,
+      "calibratedMs": 6019.073,
+      "opsPerSecond": 16613.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()",
+      "elapsedMilliseconds": 1557.209,
+      "calibratedMs": 1557.209,
+      "opsPerSecond": 64217.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+      "elapsedMilliseconds": 3424.813,
+      "calibratedMs": 3424.813,
+      "opsPerSecond": 29198.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+      "elapsedMilliseconds": 1472.594,
+      "calibratedMs": 1472.594,
+      "opsPerSecond": 67907.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)",
+      "elapsedMilliseconds": 1882.852,
+      "calibratedMs": 1882.852,
+      "opsPerSecond": 53110.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+      "elapsedMilliseconds": 1342.317,
+      "calibratedMs": 1342.317,
+      "opsPerSecond": 74498.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()",
+      "elapsedMilliseconds": 2287.677,
+      "calibratedMs": 2287.677,
+      "opsPerSecond": 43712.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()",
+      "elapsedMilliseconds": 1443.385,
+      "calibratedMs": 1443.385,
+      "opsPerSecond": 69281.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)",
+      "elapsedMilliseconds": 1314.931,
+      "calibratedMs": 1314.931,
+      "opsPerSecond": 76049.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)",
+      "elapsedMilliseconds": 2324.212,
+      "calibratedMs": 2324.212,
+      "opsPerSecond": 43025.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+      "elapsedMilliseconds": 1501.863,
+      "calibratedMs": 1501.863,
+      "opsPerSecond": 66584.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+      "elapsedMilliseconds": 1457.802,
+      "calibratedMs": 1457.802,
+      "opsPerSecond": 68596.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)",
+      "elapsedMilliseconds": 1410.702,
+      "calibratedMs": 1410.702,
+      "opsPerSecond": 70886.7,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

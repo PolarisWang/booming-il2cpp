@@ -63,6 +63,11 @@ inline void GcEndStubbornChange(const void* /*obj*/) noexcept {
 /// Returns nullptr on OOM or null input.
 char* DomainStrDup(const char* src);
 
+/// Register a newly allocated object as needing finalization.
+/// Called from generated AOT code when creating an object whose type has a finalizer.
+/// The object's type_info provides the finalizer callback at finalization time.
+void chaos_gc_register_finalizable(void* obj) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 // GC collection declarations (extern "C" at file scope for codegen call sites).
