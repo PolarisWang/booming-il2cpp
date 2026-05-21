@@ -412,6 +412,49 @@ void BgcController::CollectDeadWeakHandlesForBgc() {
     }
 }
 
+void BgcController::ResetForTest() noexcept {
+    // Stop parallel workers if any are running.
+    StopParallelMarkWorkers();
+
+    // Clear SATB pool.
+    for (int i = 0; i < satb_pool_alloc_.load(std::memory_order_acquire); i++) {
+        satb_pool_[i].count.store(0, std::memory_order_release);
+    }
+    satb_pool_alloc_.store(0, std::memory_order_release);
+
+    // Clear global SATB queue.
+    {
+        std::lock_guard<std::mutex> lock(global_satb_mutex_);
+        global_satb_.clear();
+    }
+
+    // Clear worker deques.
+    for (int i = 0; i < kMaxBgcWorkers; i++) {
+        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
+        bgc_workers_[i].deque.clear();
+    }
+
+    // Clear SATB thread registry.
+    for (int i = 0; i < kMaxSatbThreads; i++) {
+        registered_satb_buffers_[i] = nullptr;
+    }
+    registered_satb_count_ = 0;
+
+    // Reset SATB freeze protocol.
+    satb_freeze_requested_.store(false, std::memory_order_release);
+    satb_freeze_remaining_.store(0, std::memory_order_release);
+
+    // Free Gen1 mark bitmap if allocated.
+    if (gen1_mark_bitmap_) {
+        FreeGen1MarkBitmap();
+    }
+
+    // Reset phase.
+    phase_.store(BgcPhase::IDLE, std::memory_order_release);
+    cycle_complete_.store(false, std::memory_order_release);
+    bgc_parallel_done_.store(false, std::memory_order_release);
+}
+
 void BgcController::ForceComplete() {
     // Called under safepoint.  Complete marking and sweep inline.
     auto p = phase_.load(std::memory_order_acquire);
