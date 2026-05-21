@@ -1,0 +1,630 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "ReaderSubjects/ReaderSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_10:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_12:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_13:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_14:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_15:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_16:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_18:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_19:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_20:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_21:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_22:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_23:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_24:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_25:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_26:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_27:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_28:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_29:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_30:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_31:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_32:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_33:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_34:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_35:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_36:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_37:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_38:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::Subject_39:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::Clone:AsnReader()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::get_HasData:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::get_RuleSet:AsnEncodingRules()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::PeekContentBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::PeekEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::PeekTag:Asn1Tag()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadBitString:System.Byte[](System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadBoolean:System.Boolean(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadCharacterString:System.String(UniversalTagNumber,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadIntegerBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadNamedBitList:BitArray(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadNull:System.Void(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadObjectIdentifier:System.String(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadOctetString:System.Byte[](System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_22:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadSequence:AsnReader(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_23:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_24:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Boolean,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_25:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_27:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::ThrowIfNotEmpty:System.Void()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_28:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadBitString:System.Boolean(System.Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_29:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadCharacterString:System.Boolean(System.Span\u003CSystem.Char\u003E,UniversalTagNumber,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_30:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadCharacterStringBytes:System.Boolean(System.Span\u003CSystem.Byte\u003E,Asn1Tag,System.Int32\u0026)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_31:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadInt32:System.Boolean(System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_32:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadInt64:System.Boolean(System.Int64\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_33:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadOctetString:System.Boolean(System.Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32\u0026,System.ReadOnlyMemory\u003CSystem.Byte\u003E\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(Asn1Tag,System.ReadOnlyMemory\u003CSystem.Byte\u003E\u0026)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_36:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory\u003CSystem.Byte\u003E\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_37:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadUInt32:System.Boolean(System.UInt32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_38:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Formats.Asn1/AsnReader::TryReadUInt64:System.Boolean(System.UInt64\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "ReaderSubjects/ReaderSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_10:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_13:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_14:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_15:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_16:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_18:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_19:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_20:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_21:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_22:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_23:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_24:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_25:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_26:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_27:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_28:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_29:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_30:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_31:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_32:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_33:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_34:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_35:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_36:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_37:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "ReaderSubjects/ReaderSubjects::Subject_38:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    }
+  ]
+}

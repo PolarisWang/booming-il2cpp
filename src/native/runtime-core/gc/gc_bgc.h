@@ -264,7 +264,7 @@ public:
     }
 
     /// Reset the Gen1 mark bitmap after a young GC has emptied Gen1.
-    /// Called from young GC Phase 4 after GcGen1Collection resets survivor_bump.
+    /// Called from young GC Phase 4 after GcGen1Collection resets gen1_bump.
     void ResetGen1MarkBitmap() noexcept;
 
 private:
@@ -374,7 +374,7 @@ public:
 private:
     // ── Gen1 concurrent mark bitmap ────────────────────────────────
 
-    /// Allocate a Gen1 mark bitmap covering [survivor_begin, survivor_end).
+    /// Allocate a Gen1 mark bitmap covering [gen1->begin, g_young_gen.gen1_end).
     /// Returns true on success, false on OOM (GEN1_GEN2 falls back to GEN2_ONLY).
     bool AllocateGen1MarkBitmap() noexcept;
 
@@ -391,7 +391,7 @@ private:
     /// Base address of the Gen1 range covered by the bitmap.
     uintptr_t gen1_bitmap_base_{0};
 
-    /// Total span covered by the bitmap (bytes, max = survivor_end - survivor_begin).
+    /// Total span covered by the bitmap (bytes, max = g_young_gen.gen1_end - gen1->begin).
     CHAOS_IL2CPP_SIZE gen1_bitmap_span_{0};
 
     // ── BGC finalization support ──────────────────────────────────

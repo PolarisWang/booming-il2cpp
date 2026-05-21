@@ -351,17 +351,20 @@ TEST_F(BgcStressTest, GraphMutation) {
 // ── Test 6: BGC Gen1 concurrent mark ────────────────────────────
 
 TEST_F(BgcStressTest, Gen1ConcurrentMark) {
-    // Ensure Gen1 survivor area is configured.
-    if (g_young_gen.survivor_begin == nullptr) {
+    // Ensure Gen1 area is configured.
+    if (g_young_gen.gen1_region.load(std::memory_order_acquire) == nullptr) {
         // Fallback: InitYoungGeneration should have set this up, but handle
-        // environments where young-gen init leaves survivor_begin null.
-        static char s_survivor_buf[256 * 1024];
-        g_young_gen.survivor_begin = s_survivor_buf;
-        g_young_gen.survivor_end = s_survivor_buf + sizeof(s_survivor_buf);
-        g_young_gen.survivor_bump.store(s_survivor_buf, std::memory_order_release);
+        // environments where young-gen init leaves gen1_region null.
+        static char s_gen1_buf[256 * 1024];
+        static Region s_fake_gen1_region{};
+        s_fake_gen1_region.begin = s_gen1_buf;
+        s_fake_gen1_region.end = s_gen1_buf + sizeof(s_gen1_buf);
+        g_young_gen.gen1_region.store(&s_fake_gen1_region, std::memory_order_release);
+        g_young_gen.gen1_end = s_gen1_buf + sizeof(s_gen1_buf);
+        g_young_gen.gen1_bump.store(s_gen1_buf, std::memory_order_release);
         GcRegisterHeapRange(
-            reinterpret_cast<uintptr_t>(s_survivor_buf),
-            reinterpret_cast<uintptr_t>(s_survivor_buf + sizeof(s_survivor_buf)));
+            reinterpret_cast<uintptr_t>(s_gen1_buf),
+            reinterpret_cast<uintptr_t>(s_gen1_buf + sizeof(s_gen1_buf)));
     }
 
     // Step 1: Populate Gen1 via TryAllocateInGen1.

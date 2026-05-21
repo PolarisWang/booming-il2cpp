@@ -23,7 +23,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_1()
     {
-        try { if ((int)(default(MemberInfo)!.MemberType) != (int)(default(MemberInfo)!.MemberType)) _exitCode = 1; }
+        try { if (((default(MemberInfo)!.MemberType).GetHashCode()) != ((default(MemberInfo)!.MemberType).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

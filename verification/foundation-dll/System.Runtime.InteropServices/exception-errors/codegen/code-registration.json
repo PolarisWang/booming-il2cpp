@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ExceptionErrorsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_0",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_1",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_2",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_3",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_4",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_5",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_6",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_7",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_8",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_9",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_10",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_11",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_12",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_13",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_14",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_15",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_16",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ExceptionErrorsSubjects_ExceptionErrorsSubjects_Subject_17",
+          "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_17:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

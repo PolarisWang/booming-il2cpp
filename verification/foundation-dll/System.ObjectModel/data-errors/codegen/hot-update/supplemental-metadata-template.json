@@ -1,0 +1,67 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DataErrorsSubjects",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

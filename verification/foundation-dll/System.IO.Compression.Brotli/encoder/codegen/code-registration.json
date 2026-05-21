@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "EncoderSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_0",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_1",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_2",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_3",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_4",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_5",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "EncoderSubjects_EncoderSubjects_Subject_6",
+          "subjectId": "EncoderSubjects/EncoderSubjects::Subject_6:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

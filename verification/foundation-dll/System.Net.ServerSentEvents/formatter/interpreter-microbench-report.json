@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "familyId": "family/System.Net.ServerSentEvents/formatter",
+  "capturedAt": "2026-05-21T16:09:31",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 2.9,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 73.2
+    },
+    "callVirt": {
+      "handlerDispatchNs": 71.0,
+      "emptyStackNs": 78.1
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-21T16:09:31][DEBUG][codegen] T4 VEH handler registered\n[2026-05-21T16:09:31][WARN][CRAG] young_collection_no_region\n[2026-05-21T16:09:31][INFO][NUMA] numa_init count=%d\n[2026-05-21T16:09:31][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-21T16:09:31][INFO][OldGen] init done base=0x2251394646016 pages=2\n[2026-05-21T16:09:31][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\n[2026-05-21T16:09:31][DEBUG][BGC] thread_started\n[2026-05-21T16:09:31][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 73.2 ns/op\nHandler dispatch overhead (LdcI4): 71.0 ns/call\nCallVirt empty-stack: 78.1 ns/call\n"
+}

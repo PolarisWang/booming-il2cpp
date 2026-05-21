@@ -1,0 +1,204 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "BinaryFormatterSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "name": "BinaryFormatterSubjects",
+      "displayName": "BinaryFormatterSubjects",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::_exitCode",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

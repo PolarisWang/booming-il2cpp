@@ -1,0 +1,22 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/read/flush/results",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 7,
+  "emittedMethodCount": 7,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_Buffer:System.Buffers.ReadOnlySequence{System.Byte}()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Boolean)"
+  ]
+}

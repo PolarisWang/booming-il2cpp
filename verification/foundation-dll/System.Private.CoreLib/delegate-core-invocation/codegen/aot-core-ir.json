@@ -903,7 +903,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1176259652,
+          "operand": -1227720105,
           "ilOffset": 42,
           "resultType": "System.Int32",
           "isPreserveSig": false

@@ -23,7 +23,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_1()
     {
-        try { if ((int)(default(MemberInfo)!.MemberType) != (int)(default(MemberInfo)!.MemberType)) _exitCode = 1; }
+        try { if (((default(MemberInfo)!.MemberType).GetHashCode()) != ((default(MemberInfo)!.MemberType).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -72,7 +72,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [8] System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()
     public static void Subject_8()
     {
-        try { if ((int)(default(MethodInfo)!.CallingConvention) != (int)(default(MethodInfo)!.CallingConvention)) _exitCode = 1; }
+        try { if (((default(MethodInfo)!.CallingConvention).GetHashCode()) != ((default(MethodInfo)!.CallingConvention).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -163,7 +163,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [21] System.Private.CoreLib/System.Reflection.ConstructorInfo::get_CallingConvention:System.Reflection.CallingConventions()
     public static void Subject_21()
     {
-        try { if ((int)(default(ConstructorInfo)!.CallingConvention) != (int)(default(ConstructorInfo)!.CallingConvention)) _exitCode = 1; }
+        try { if (((default(ConstructorInfo)!.CallingConvention).GetHashCode()) != ((default(ConstructorInfo)!.CallingConvention).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

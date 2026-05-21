@@ -1,7 +1,7 @@
 {
   "demands": [
     {
-      "requestingAssemblyName": "ReflectionModuleSubjects",
+      "requestingAssemblyName": "ReflectionModulePatchEntry",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E)",
@@ -21,7 +21,7 @@
       "isCrossAssembly": true
     },
     {
-      "requestingAssemblyName": "ReflectionModuleSubjects",
+      "requestingAssemblyName": "ReflectionModulePatchEntry",
       "owningAssemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::get_Count:System.Int32()",

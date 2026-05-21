@@ -1,0 +1,216 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "FormatterServicesConverterSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_0",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_1",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_2",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_3",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_4",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_5",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_6",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_7",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_8",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_9",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_10",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_11",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_12",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_13",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_14",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_15",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_16",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_17",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_18",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_19",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_20",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_21",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_22",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_23",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_24",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_25",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_26",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_27",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_28",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_29",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_30",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_31",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_32",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "FormatterServicesConverterSubjects_FormatterServicesConverterSubjects_Subject_33",
+          "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_33:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

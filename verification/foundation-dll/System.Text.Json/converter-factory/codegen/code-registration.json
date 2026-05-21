@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ConverterFactorySubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ConverterFactorySubjects_ConverterFactorySubjects_Subject_0",
+          "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ConverterFactorySubjects_ConverterFactorySubjects_Subject_1",
+          "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

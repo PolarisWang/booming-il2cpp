@@ -1,0 +1,78 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SurrogateSelectionSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_0",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_1",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_2",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_3",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_4",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_5",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_6",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_7",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_8",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_9",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SurrogateSelectionSubjects_SurrogateSelectionSubjects_Subject_10",
+          "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_10:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

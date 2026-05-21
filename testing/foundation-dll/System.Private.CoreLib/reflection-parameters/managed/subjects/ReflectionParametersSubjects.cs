@@ -51,7 +51,7 @@ public static partial class ReflectionParametersSubjects
     // [5] System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()
     public static void Subject_5()
     {
-        try { if ((int)(default(ParameterInfo)!.Attributes) != (int)(default(ParameterInfo)!.Attributes)) _exitCode = 1; }
+        try { if (((default(ParameterInfo)!.Attributes).GetHashCode()) != ((default(ParameterInfo)!.Attributes).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

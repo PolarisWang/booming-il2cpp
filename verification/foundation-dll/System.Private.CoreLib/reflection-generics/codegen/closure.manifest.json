@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ReflectionGenericsSubjects",
+  "assemblyName": "ReflectionGenericsPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/patch/build-output/ReflectionGenericsPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "ReflectionGenericsSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/subjects/build-output/ReflectionGenericsSubjects.dll"
+      "assemblyName": "ReflectionGenericsPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/reflection-generics/managed/patch/build-output/ReflectionGenericsPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "4e0771d1-4891-4399-931b-84c3f7fe1a19",
+  "inputModuleVersionId": "16e3caa0-9003-4880-883a-1d4ceefc38ab",
   "artifacts": [
     {
       "kind": "typedIlIr",

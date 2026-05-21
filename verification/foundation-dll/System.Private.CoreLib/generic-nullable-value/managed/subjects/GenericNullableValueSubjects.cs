@@ -21,13 +21,13 @@ public static partial class GenericNullableValueSubjects
     // [1] System.Private.CoreLib/System.Nullable`1::get_Value:T()
     public static void Subject_1()
     {
-        if ((int)(((int?)42).Value) != 42) _exitCode = 1;
+        if (((((int?)42).Value).GetHashCode()) != 42) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()
     public static void Subject_2()
     {
-        if ((int)(default(Nullable<int>).GetValueOrDefault()) != 0) _exitCode = 1;
+        if (((default(Nullable<int>).GetValueOrDefault()).GetHashCode()) != 0) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)

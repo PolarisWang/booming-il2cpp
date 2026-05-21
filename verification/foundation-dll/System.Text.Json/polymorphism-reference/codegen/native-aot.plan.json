@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "PolymorphismReferenceSubjects",
+  "entrySubjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

@@ -16,14 +16,14 @@ public static partial class DelegateCoreInvocationSubjects
     // [0] System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_0()
     {
-        try { if (((Delegate.Combine(null!, null!)).GetHashCode()) != ((Delegate.Combine(null!, null!)).GetHashCode())) _exitCode = 1; }
+        try { if (((Delegate.Combine(default, default)).GetHashCode()) != ((Delegate.Combine(default, default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_1()
     {
-        try { if (((Delegate.Remove(null!, null!)).GetHashCode()) != ((Delegate.Remove(null!, null!)).GetHashCode())) _exitCode = 1; }
+        try { if (((Delegate.Remove(default, default)).GetHashCode()) != ((Delegate.Remove(default, default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

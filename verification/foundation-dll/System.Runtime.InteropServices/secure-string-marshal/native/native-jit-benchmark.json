@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/secure/string/marshal",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
+      "elapsedMilliseconds": 1261.932,
+      "calibratedMs": 1261.932,
+      "opsPerSecond": 79243.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
+      "elapsedMilliseconds": 1153.862,
+      "calibratedMs": 1153.862,
+      "opsPerSecond": 86665.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
+      "elapsedMilliseconds": 1047.987,
+      "calibratedMs": 1047.987,
+      "opsPerSecond": 95421.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
+      "elapsedMilliseconds": 1124.019,
+      "calibratedMs": 1124.019,
+      "opsPerSecond": 88966.5,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

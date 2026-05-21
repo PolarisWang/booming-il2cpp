@@ -43,8 +43,12 @@ TEST_F(Gen1Test, EmptyGen1) {
     EXPECT_EQ(r.objects_promoted, 0u);
     EXPECT_EQ(r.bytes_reclaimed, 0u);
     EXPECT_GE(r.pause_ns, 0);
-    EXPECT_EQ(g_young_gen.survivor_bump.load(std::memory_order_acquire),
-              g_young_gen.survivor_begin);
+    {
+        auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        ASSERT_NE(gen1, nullptr);
+        EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire),
+                  gen1->begin);
+    }
 }
 
 TEST_F(Gen1Test, SingleLiveObject) {
@@ -69,8 +73,12 @@ TEST_F(Gen1Test, SingleLiveObject) {
     EXPECT_EQ(r.bytes_reclaimed, 0u);
     EXPECT_GE(r.bytes_promoted, 64u);
 
-    EXPECT_EQ(g_young_gen.survivor_bump.load(std::memory_order_acquire),
-              g_young_gen.survivor_begin);
+    {
+        auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        ASSERT_NE(gen1, nullptr);
+        EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire),
+                  gen1->begin);
+    }
     EXPECT_FALSE(r.promotion_failed);
 }
 
@@ -105,8 +113,12 @@ TEST_F(Gen1Test, MixedLiveAndDead) {
     // bytes_reclaimed may be 0 if objB is conservatively kept alive
     EXPECT_FALSE(r.promotion_failed);
 
-    EXPECT_EQ(g_young_gen.survivor_bump.load(std::memory_order_acquire),
-              g_young_gen.survivor_begin);
+    {
+        auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        ASSERT_NE(gen1, nullptr);
+        EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire),
+                  gen1->begin);
+    }
 }
 
 TEST_F(Gen1Test, IsInGen1Boundaries) {
@@ -124,10 +136,12 @@ TEST_F(Gen1Test, IsInGen1Boundaries) {
     ASSERT_NE(old_obj, nullptr);
     EXPECT_FALSE(IsInGen1(old_obj));
 
-    char* past_end = g_young_gen.survivor_end + 1;
+    char* past_end = g_young_gen.gen1_end + 1;
     EXPECT_FALSE(IsInGen1(past_end));
 
-    char* before_begin = g_young_gen.survivor_begin - 1;
+    auto* gen1_for_before = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1_for_before, nullptr);
+    char* before_begin = gen1_for_before->begin - 1;
     EXPECT_FALSE(IsInGen1(before_begin));
 
     volatile void* keep_alive = gen1_obj;
@@ -194,4 +208,147 @@ TEST_F(Gen1Test, PromotionAgeThresholdTrigger) {
     }
 
     g_young_gen.promotion_age_threshold_.store(2, std::memory_order_release);
+}
+
+// ======================================================================
+// Phase B: Independent Gen1 collection tests (B4)
+// ======================================================================
+
+TEST_F(Gen1Test, Gen1IndependentCollection_Empty) {
+    // Ensure Gen1 is empty first.
+    GcGen1Collection();
+
+    // GcGen1ShouldCollect should return false when Gen1 is empty.
+    EXPECT_FALSE(GcGen1ShouldCollect());
+
+    // Calling GcGen1Collection on empty Gen1 shouldn't crash.
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_EQ(r.objects_in_gen1, 0u);
+    EXPECT_EQ(r.objects_promoted, 0u);
+    EXPECT_FALSE(r.promotion_failed);
+
+    // Verify Gen1 state is clean.
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+}
+
+TEST_F(Gen1Test, Gen1IndependentCollection_FillsGen1) {
+    // Reset Gen1.
+    GcGen1Collection();
+
+    // Allocate enough objects to fill >80% of Gen1.
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    CHAOS_IL2CPP_SIZE gen1_capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1->begin);
+    CHAOS_IL2CPP_SIZE target_alloc = static_cast<CHAOS_IL2CPP_SIZE>(
+        static_cast<float>(gen1_capacity) * 0.85f);
+    CHAOS_IL2CPP_SIZE obj_size = 4096;  // 4 KB objects
+    CHAOS_IL2CPP_SIZE count = target_alloc / obj_size;
+    ASSERT_GT(count, 0u);
+
+    uint32_t pattern = 0xFF000001;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < count; i++) {
+        void* obj = TryAllocateInGen1(obj_size);
+        ASSERT_NE(obj, nullptr) << "Failed at object " << i;
+        InitGen1Object(obj, pattern++);
+    }
+
+    // GcGen1ShouldCollect should return true (high occupancy >80%).
+    EXPECT_TRUE(GcGen1ShouldCollect());
+
+    // Collect independently.
+    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_GT(r.objects_in_gen1, 0u);
+    EXPECT_GT(r.objects_promoted, 0u);
+    EXPECT_FALSE(r.promotion_failed);
+
+    // Gen1 should be reset (bump at begin).
+    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+
+    // Nursery should still accept allocations.
+    void* nursery_obj = NurseryAllocate(64);
+    ASSERT_NE(nursery_obj, nullptr);
+}
+
+TEST_F(Gen1Test, Gen1IndependentCollection_ThenNurseryAlloc) {
+    // Reset Gen1.
+    GcGen1Collection();
+
+    // Allocate a moderate amount in Gen1.
+    void* gen1_obj = TryAllocateInGen1(64);
+    ASSERT_NE(gen1_obj, nullptr);
+    InitGen1Object(gen1_obj, 0xBEEF0001);
+
+    // Add a root so the object stays alive.
+    void* gen0_ref = NurseryAllocate(64);
+    ASSERT_NE(gen0_ref, nullptr);
+    std::memset(gen0_ref, 0, 64);
+    std::memcpy(static_cast<char*>(gen0_ref) + 8, &gen1_obj, sizeof(void*));
+
+    // Force interval-based trigger: young_gc_since_last_gen1 >= 8.
+    g_gen1_state.young_gc_since_last_gen1.store(8, std::memory_order_relaxed);
+    EXPECT_TRUE(GcGen1ShouldCollect());
+
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_EQ(r.objects_in_gen1, 1u);
+    EXPECT_EQ(r.objects_promoted, 1u);
+    EXPECT_GE(r.bytes_promoted, 64u);
+    EXPECT_FALSE(r.promotion_failed);
+
+    // After Gen1 collection, nursery allocation should still work.
+    void* after = NurseryAllocate(128);
+    ASSERT_NE(after, nullptr);
+    std::memset(after, 0, 128);
+
+    // Gen1 should be reusable for new allocations.
+    void* new_gen1 = TryAllocateInGen1(64);
+    ASSERT_NE(new_gen1, nullptr);
+    EXPECT_TRUE(IsInGen1(new_gen1));
+    volatile void* keep = new_gen1;
+    (void)keep;
+    volatile void* keep2 = after;
+    (void)keep2;
+    volatile void* keep3 = gen0_ref;
+    (void)keep3;
+}
+
+TEST_F(Gen1Test, Gen1ShouldCollect_AfterThreshold) {
+    // Reset Gen1 state.
+    GcGen1Collection();
+    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
+
+    // Gen1 needs data for the function to consider collection.
+    void* gen1_obj = TryAllocateInGen1(64);
+    ASSERT_NE(gen1_obj, nullptr);
+    InitGen1Object(gen1_obj, 0xCAFE0001);
+    volatile void* keep = gen1_obj;
+    (void)keep;
+
+    // GcGen1ShouldCollect should return false with 0 young GCs since last Gen1.
+    EXPECT_FALSE(GcGen1ShouldCollect());
+
+    // Simulate N-1 young GCs — should still return false.
+    for (int i = 1; i < 8; i++) {
+        g_gen1_state.young_gc_since_last_gen1.store(i, std::memory_order_relaxed);
+        EXPECT_FALSE(GcGen1ShouldCollect())
+            << "Should not collect at count=" << i;
+    }
+
+    // At threshold (8), should return true.
+    g_gen1_state.young_gc_since_last_gen1.store(8, std::memory_order_relaxed);
+    EXPECT_TRUE(GcGen1ShouldCollect());
+
+    // Values above threshold should also return true.
+    g_gen1_state.young_gc_since_last_gen1.store(9, std::memory_order_relaxed);
+    EXPECT_TRUE(GcGen1ShouldCollect());
+
+    // Reset counter.
+    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
+
+    // After reset, interval is reset — should return false again
+    // (occupancy is very low, well below 80%).
+    EXPECT_FALSE(GcGen1ShouldCollect());
 }

@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CollectionChangeNotificationsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CollectionChangeNotificationsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

@@ -4,93 +4,79 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_0:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_1:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_2:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_3:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_4:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_5:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_6:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_7:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_8:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_9:System.Void()",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Subject_9:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "RuntimeCompilerServicesSubjects/RuntimeCompilerServicesSubjects::_exitCode",
+      "subjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "RuntimeCompilerServicesPatchEntry/RuntimeCompilerServicesPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

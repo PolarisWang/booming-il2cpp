@@ -16,7 +16,7 @@ public static partial class SpanMemoryBuffersSubjects
     // [0] System.Private.CoreLib/System.Span`1::get_Item:T&(System.Int32)
     public static void Subject_0()
     {
-        try { if ((int)(new Span<byte>(new byte[4])[0]) != (int)(new Span<byte>(new byte[4])[0])) _exitCode = 1; }
+        try { if (((new Span<byte>(new byte[4])[0]).GetHashCode()) != ((new Span<byte>(new byte[4])[0]).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -58,7 +58,7 @@ public static partial class SpanMemoryBuffersSubjects
     // [6] System.Private.CoreLib/System.ReadOnlySpan`1::get_Item:T&(System.Int32)
     public static void Subject_6()
     {
-        try { if ((int)(new ReadOnlySpan<byte>(new byte[4])[0]) != (int)(new ReadOnlySpan<byte>(new byte[4])[0])) _exitCode = 1; }
+        try { if (((new ReadOnlySpan<byte>(new byte[4])[0]).GetHashCode()) != ((new ReadOnlySpan<byte>(new byte[4])[0]).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -79,7 +79,7 @@ public static partial class SpanMemoryBuffersSubjects
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
     public static void Subject_9()
     {
-        try { if ((int)(new Memory<byte>(new byte[4]).Slice(1).Length) != (int)(new Memory<byte>(new byte[4]).Slice(1).Length)) _exitCode = 1; }
+        try { if (((new Memory<byte>(new byte[4]).Slice(1).Length).GetHashCode()) != ((new Memory<byte>(new byte[4]).Slice(1).Length).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -100,14 +100,14 @@ public static partial class SpanMemoryBuffersSubjects
     // [12] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)
     public static void Subject_12()
     {
-        try { if ((int)(MemoryMarshal.GetReference(default(ReadOnlySpan<byte>))) != (int)(MemoryMarshal.GetReference(default(ReadOnlySpan<byte>)))) _exitCode = 1; }
+        try { if (((MemoryMarshal.GetReference(default(ReadOnlySpan<byte>))).GetHashCode()) != ((MemoryMarshal.GetReference(default(ReadOnlySpan<byte>))).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [13] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)
     public static void Subject_13()
     {
-        try { if ((int)(MemoryMarshal.GetReference(default(Span<byte>))) != (int)(MemoryMarshal.GetReference(default(Span<byte>)))) _exitCode = 1; }
+        try { if (((MemoryMarshal.GetReference(default(Span<byte>))).GetHashCode()) != ((MemoryMarshal.GetReference(default(Span<byte>))).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

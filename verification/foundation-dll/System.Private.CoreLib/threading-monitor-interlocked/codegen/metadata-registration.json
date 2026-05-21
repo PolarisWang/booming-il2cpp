@@ -5,87 +5,87 @@
     {
       "registrationKind": "assembly",
       "slot": 0,
-      "subjectId": "ThreadingMonitorInterlockedSubjects"
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry"
     },
     {
       "registrationKind": "type",
       "slot": 1,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-      "name": "ThreadingMonitorInterlockedSubjects",
-      "displayName": "ThreadingMonitorInterlockedSubjects",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects"
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "name": "ThreadingMonitorInterlockedPatchEntry",
+      "displayName": "ThreadingMonitorInterlockedPatchEntry",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry"
     },
     {
       "registrationKind": "field",
       "slot": 2,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
       "name": "_exitCode",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::_exitCode",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Int32"
     },
     {
       "registrationKind": "method",
       "slot": 3,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
       "name": "Subject_2",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_2:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 4,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
       "name": "Subject_3",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_3:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 5,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
       "name": "Subject_12",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_12:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
       "name": "Subject_13",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
-      "memberType": "System.Void",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Subject_13:System.Int32()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "memberType": "System.Int32",
       "parameterCount": 0,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
-      "name": "CustomEntrySubject_0",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
+      "name": "Run",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
-      "parameterCount": 0,
+      "parameterCount": 1,
       "isImported": false
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
-      "name": "CustomEntrySubject_1",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
+      "name": "CustomEntryMethod0",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -93,10 +93,10 @@
     {
       "registrationKind": "method",
       "slot": 9,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
-      "name": "CustomEntrySubject_4",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
+      "name": "CustomEntryMethod1",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod1:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -104,10 +104,10 @@
     {
       "registrationKind": "method",
       "slot": 10,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
-      "name": "CustomEntrySubject_5",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
+      "name": "CustomEntryMethod4",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod4:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -115,10 +115,10 @@
     {
       "registrationKind": "method",
       "slot": 11,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
-      "name": "CustomEntrySubject_6",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
+      "name": "CustomEntryMethod5",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod5:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -126,10 +126,10 @@
     {
       "registrationKind": "method",
       "slot": 12,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
-      "name": "CustomEntrySubject_7",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
+      "name": "CustomEntryMethod6",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod6:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -137,10 +137,10 @@
     {
       "registrationKind": "method",
       "slot": 13,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
-      "name": "CustomEntrySubject_8",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
+      "name": "CustomEntryMethod7",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod7:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -148,10 +148,10 @@
     {
       "registrationKind": "method",
       "slot": 14,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
-      "name": "CustomEntrySubject_9",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
+      "name": "CustomEntryMethod8",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod8:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -159,10 +159,10 @@
     {
       "registrationKind": "method",
       "slot": 15,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
-      "name": "CustomEntrySubject_10",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
+      "name": "CustomEntryMethod9",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod9:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
@@ -170,13 +170,33 @@
     {
       "registrationKind": "method",
       "slot": 16,
-      "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
-      "name": "CustomEntrySubject_11",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
-      "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
+      "name": "CustomEntryMethod10",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod10:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
       "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
+      "name": "CustomEntryMethod11",
+      "definitionSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod11:System.Void()",
+      "declaringTypeSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 18,
+      "subjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)::parameter[0]:entryIndex",
+      "name": "entryIndex",
+      "declaringMethodSubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::Run:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
     }
   ]
 }

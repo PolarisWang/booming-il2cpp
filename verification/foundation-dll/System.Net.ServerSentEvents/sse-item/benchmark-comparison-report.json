@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "familyId": "family/System.Net.ServerSentEvents/sse/item",
+  "summary": {
+    "totalMethods": 7,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 7,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_Data:T()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_EventId:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_EventType:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_ReconnectionInterval:System.Nullable{System.TimeSpan}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::set_EventId:System.Void(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::set_ReconnectionInterval:System.Void(System.Nullable{System.TimeSpan})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::.ctor:System.Void(T,System.String)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

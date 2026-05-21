@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ThreadingThreadBasicsSubjects",
-  "entrySubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen",
+  "assemblyName": "ThreadingThreadBasicsPatchEntry",
+  "entrySubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod0:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

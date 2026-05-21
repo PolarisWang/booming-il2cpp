@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/codegen/edge/cases",
+  "capturedAt": "2026-05-21T19:21:36",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 4,
+    "okCount": 4,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 176
+    },
+    "aotInstructionCount": {
+      "min": 6,
+      "max": 11,
+      "avg": 7.2,
+      "total": 29
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0.16,
+    "averageExpansionRatio": 0.17,
+    "maxExpansionRatio": 0.25,
+    "minExpansionRatio": 0.14
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 6,
+        "ratio": 0.14,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+        "instructions": 6
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 6,
+        "ratio": 0.14,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+        "instructions": 6
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 6,
+        "ratio": 0.14,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
+        "instructions": 6
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
+        "instructions": 11
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    }
+  ]
+}

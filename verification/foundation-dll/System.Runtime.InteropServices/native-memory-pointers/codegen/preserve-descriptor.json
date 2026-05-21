@@ -1,0 +1,1092 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_16:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_17:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_18:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_19:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_20:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_21:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_22:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_23:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

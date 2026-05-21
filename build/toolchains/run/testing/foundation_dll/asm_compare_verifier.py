@@ -37,24 +37,32 @@ _CACHE_DIR = _VERIFICATION_BASE / ".asm-compare-cache"
 _DRIVER_BUILT = False
 
 
-def verify_family_asm_compare(family_slug: str, assembly: str) -> dict[str, Any]:
+def verify_family_asm_compare(family_slug: str, assembly: str,
+                              verification: str | Path | None = None) -> dict[str, Any]:
     """Run asm-compare for all subject methods in a single batch call.
 
     Phase 1: Batch mode — pipeline runs once for all methods.
     Phase 2: Build once.
 
+    Args:
+        family_slug: Family directory name (e.g. "convert-char").
+        assembly: Assembly name (e.g. "System.Private.CoreLib").
+        verification: Optional override for verification base directory.
+            Used by the new (testing/) pipeline to point at testing/foundation-dll.
+
     Returns dict with keys: status, summary, details, reportPath.
     Writes asm-compare-report.json to the family directory.
     """
-    report_path = _VERIFICATION_BASE / assembly / family_slug / "asm-compare-report.json"
+    v_base = Path(verification) if verification else _VERIFICATION_BASE
+    report_path = v_base / assembly / family_slug / "asm-compare-report.json"
 
     # 1. Discover DLL
-    dll_path = _discover_subjects_dll(family_slug, assembly)
+    dll_path = _discover_subjects_dll(family_slug, assembly, verification=v_base)
     if dll_path is None:
         return _error_result("Subjects DLL not found — run codegen stage first", report_path)
 
     # 2. Load contract methods
-    mids = _load_contract_methods(family_slug, assembly)
+    mids = _load_contract_methods(family_slug, assembly, verification=v_base)
     if not mids:
         return _error_result("No methods in contract", report_path)
 
@@ -80,8 +88,8 @@ def verify_family_asm_compare(family_slug: str, assembly: str) -> dict[str, Any]
     aot_counts = []
     for entry in method_results:
         m = entry.get("metrics", {})
-        jc = m.get("jitInstructionCount", 0)
-        ac = m.get("aotInstructionCount", 0)
+        jc = m.get("jitInstructionCount") or 0
+        ac = m.get("aotInstructionCount") or 0
         if jc > 0:
             jit_counts.append(jc)
         if ac > 0:
@@ -138,10 +146,15 @@ def _ensure_driver_built() -> None:
         print(f"    [driver build] warning: build failed ({e.stderr[:200]})")
 
 
-def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
+def _load_contract_methods(family_slug: str, assembly: str,
+                           verification: Path | None = None) -> list[str]:
     """Load method subject IDs from capability-family-contract.json."""
-    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    v_base = verification if verification else _VERIFICATION_BASE
+    family_dir = v_base / assembly / family_slug
     contract_path = family_dir / "capability-family-contract.json"
+    if not contract_path.exists():
+        # Fall back to contract.json (used by the new testing/ pipeline)
+        contract_path = family_dir / "contract.json"
     if not contract_path.exists():
         return []
     try:
@@ -169,11 +182,13 @@ def _short_method_name(full_id: str) -> str:
     return full_id
 
 
-def _discover_subjects_dll(family_slug: str, assembly: str) -> Path | None:
+def _discover_subjects_dll(family_slug: str, assembly: str,
+                           verification: Path | None = None) -> Path | None:
     """Find the subjects DLL for asm-compare analysis."""
     import glob as _glob
 
-    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    v_base = verification if verification else _VERIFICATION_BASE
+    family_dir = v_base / assembly / family_slug
     candidates = [
         family_dir / "managed" / "subjects" / "build-output",
         family_dir / "managed" / "subjects" / "obj" / "Debug" / "net8.0",
@@ -335,10 +350,10 @@ def _extract_metrics(
         "shortName": short_name,
         "status": "ok" if data.get("status") == "ok" else "warning",
         "metrics": {
-            "jitInstructionCount": metrics.get("jitInstructionCount", 0),
-            "aotInstructionCount": metrics.get("aotInstructionCount", 0),
-            "ratio": metrics.get("ratio", 0),
-            "jitCodeSize": metrics.get("jitCodeSize", 0),
+            "jitInstructionCount": metrics.get("jitInstructionCount") or 0,
+            "aotInstructionCount": metrics.get("aotInstructionCount") or 0,
+            "ratio": metrics.get("ratio") or 0,
+            "jitCodeSize": metrics.get("jitCodeSize") or 0,
         },
         "jit": {
             "status": jit_status,
@@ -437,7 +452,7 @@ def _compute_summary(
 
     ratios = []
     for entry in method_results:
-        r = entry.get("metrics", {}).get("ratio", 0)
+        r = entry.get("metrics", {}).get("ratio") or 0
         if r > 0:
             ratios.append(r)
     if ratios:

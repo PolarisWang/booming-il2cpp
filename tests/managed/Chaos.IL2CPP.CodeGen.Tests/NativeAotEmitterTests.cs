@@ -192,4 +192,324 @@ public sealed class NativeAotEmitterTests
         var result = (string)method.Invoke(null, new object[] { model })!;
         Assert.False(string.IsNullOrEmpty(result));
     }
+
+    // ── LoadRequiredJson ─────────────────────────────────────────────────
+    // LoadRequiredJson<T> is a generic method. We use MakeGenericMethod
+    // to bind T to NativeAotLoweringPlanArtifact for the test.
+
+    [Fact]
+    public void LoadRequiredJson_ValidFile_ReturnsArtifact()
+    {
+        var tempFile = Path.GetTempFileName();
+        try
+        {
+            File.WriteAllText(tempFile, """{"PlanKind":"test","AssemblyName":"Test","EntrySubjectId":"Test/Prog::Main()","NativeEntryFunctionName":"Run","EntrySymbol":"Test_Prog_Main","EntryMethodToken":"0x06000001","WorkloadAbi":"int()"}""");
+            var openMethod = s_t.GetMethod("LoadRequiredJson", s_flags)!;
+            var closedMethod = openMethod.MakeGenericMethod(typeof(NativeAotLoweringPlanArtifact));
+            var result = closedMethod.Invoke(null, new object[] { tempFile })!;
+            Assert.NotNull(result);
+        }
+        finally
+        {
+            File.Delete(tempFile);
+        }
+    }
+
+    // ── BuildObjectModelSection ─────────────────────────────────────────
+
+    [Fact]
+    public void BuildObjectModelSection_ReturnsRenderedTemplate()
+    {
+        var method = s_t.GetMethod("BuildObjectModelSection", s_flags, new[] { typeof(NativeAotTemplateModel) })!;
+        var model = MakeMinimalTemplateModel(objectModelCode: "int dummy = 0;");
+        var result = (string)method.Invoke(null, new object[] { model })!;
+        Assert.Contains("dummy", result);
+    }
+
+    // ── BuildSharedHeader ───────────────────────────────────────────────
+
+    [Fact]
+    public void BuildSharedHeader_ReturnsTypeDeclarationsCode()
+    {
+        var method = s_t.GetMethod("BuildSharedHeader", s_flags, new[] { typeof(NativeAotTemplateModel) })!;
+        var model = MakeMinimalTemplateModel(typeDeclarationsCode: "extern int g_value;");
+        var result = (string)method.Invoke(null, new object[] { model })!;
+        Assert.Equal("extern int g_value;", result);
+    }
+
+    // ── BuildGeneratedPage ──────────────────────────────────────────────
+
+    [Fact]
+    public void BuildGeneratedPage_WithRegistrationAndObjectModel_ReturnsRendered()
+    {
+        var method = s_t.GetMethod("BuildGeneratedPage", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            genericRegistrationCode: "// GENERIC",
+            moduleRegistrationCode: "// MODULE",
+            objectModelCode: "// OBJECT_MODEL",
+            methodDeclarations: new[] { "void Foo();" },
+            methods: new[] { new NativeAotMethodTemplateModel { SubjectId = "Test::Foo()", MethodSource = "// foo body" } },
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "Run",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            shapeDispatchHeaderContent: "// header",
+            codegenNamespace: "chaos::il2cpp::codegen::test",
+            generatedModuleHeaderContent: "",
+            generatedModuleSourceContent: "",
+            manifestJson: "",
+            typeDeclarationsCode: "",
+            enumMetadataHeaderContent: "");
+        var pageMethods = new[]
+        {
+            new NativeAotMethodTemplateModel { SubjectId = "Test::Foo()", MethodSource = "// foo body" },
+        };
+        var result = (string)method.Invoke(null, new object[] { model, pageMethods, true, true })!;
+        Assert.False(string.IsNullOrEmpty(result));
+    }
+
+    [Fact]
+    public void BuildGeneratedPage_WithoutObjectModel_AddsHeaderInclude()
+    {
+        var method = s_t.GetMethod("BuildGeneratedPage", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            typeDeclarationsCode: "extern int g_val;",
+            objectModelCode: "// OBJECT_MODEL",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            shapeDispatchHeaderContent: "// header",
+            codegenNamespace: "",
+            genericRegistrationCode: "",
+            moduleRegistrationCode: "",
+            generatedModuleHeaderContent: "",
+            generatedModuleSourceContent: "",
+            manifestJson: "",
+            methodDeclarations: Array.Empty<string>(),
+            methods: Array.Empty<NativeAotMethodTemplateModel>(),
+            enumMetadataHeaderContent: "");
+        var result = (string)method.Invoke(null, new object[] { model, Array.Empty<NativeAotMethodTemplateModel>(), false, false })!;
+        Assert.False(string.IsNullOrEmpty(result));
+    }
+
+    // ── BuildGeneratedSources (single TU, no pages) ─────────────────────
+
+    [Fact]
+    public void BuildGeneratedSources_SingleTranslationUnit_ReturnsExpectedSources()
+    {
+        var method = s_t.GetMethod("BuildGeneratedSources", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            shapeDispatchHeaderContent: "// dispatch",
+            objectModelCode: "// OBJECT_MODEL",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            codegenNamespace: "",
+            genericRegistrationCode: "",
+            moduleRegistrationCode: "",
+            generatedModuleHeaderContent: "",
+            generatedModuleSourceContent: "",
+            manifestJson: "",
+            methodDeclarations: Array.Empty<string>(),
+            methods: Array.Empty<NativeAotMethodTemplateModel>(),
+            typeDeclarationsCode: "",
+            enumMetadataHeaderContent: "#define ENUM_HEADER");
+        var plan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "generic-managed-entry", AssemblyName = "Test",
+            EntrySubjectId = "Test::Foo()", EntrySymbol = "Test_Foo",
+            EntryMethodToken = "0x01", WorkloadAbi = "void()",
+            NativeEntryFunctionName = "",
+        };
+        var raw = method.Invoke(null, new object[] { model, plan })!;
+        var sources = (IReadOnlyList<NativeAotGeneratedSource>)raw.GetType().GetField("Item1")!.GetValue(raw)!;
+        var artifacts = (IReadOnlyList<NativeAotGeneratedArtifactRef>)raw.GetType().GetField("Item2")!.GetValue(raw)!;
+        Assert.NotNull(sources);
+        Assert.NotNull(artifacts);
+        Assert.Contains(sources, s => s.RelativePath.EndsWith("runtime_helper_shapes.h"));
+        Assert.Contains(sources, s => s.RelativePath.Contains("enum_metadata"));
+    }
+
+    [Fact]
+    public void BuildGeneratedSources_PagedOutput_ReturnsMultiplePages()
+    {
+        var method = s_t.GetMethod("BuildGeneratedSources", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            shapeDispatchHeaderContent: "// dispatch",
+            objectModelCode: "// OBJECT_MODEL",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            codegenNamespace: "",
+            genericRegistrationCode: "",
+            moduleRegistrationCode: "",
+            generatedModuleHeaderContent: "",
+            generatedModuleSourceContent: "",
+            manifestJson: "",
+            methodDeclarations: new[] { "void Foo();", "void Bar();" },
+            methods: new[]
+            {
+                new NativeAotMethodTemplateModel { SubjectId = "Test::Foo()", MethodSource = "// foo" },
+                new NativeAotMethodTemplateModel { SubjectId = "Test::Bar()", MethodSource = "// bar" },
+            },
+            typeDeclarationsCode: "extern int g_val;",
+            enumMetadataHeaderContent: "");
+        var plan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "generic-managed-entry", AssemblyName = "Test",
+            EntrySubjectId = "Test::Foo()", EntrySymbol = "Test_Foo",
+            EntryMethodToken = "0x01", WorkloadAbi = "void()",
+            NativeEntryFunctionName = "",
+            TranslationUnitPageSize = 1,
+            TranslationUnitPages = new List<AuditTranslationUnitPageArtifact>
+            {
+                new() { Path = "page-0001.cpp", PageNumber = 1, MethodCount = 1 },
+                new() { Path = "page-0002.cpp", PageNumber = 2, MethodCount = 1 },
+            },
+        };
+        var raw = method.Invoke(null, new object[] { model, plan })!;
+        var sources = (IReadOnlyList<NativeAotGeneratedSource>)raw.GetType().GetField("Item1")!.GetValue(raw)!;
+        // Should have: shape_dispatch.h + enum_metadata header + generated header + 2 pages
+        Assert.True(sources.Count >= 4);
+    }
+
+    [Fact]
+    public void BuildGeneratedSources_WithModuleContent_AddsModuleSources()
+    {
+        var method = s_t.GetMethod("BuildGeneratedSources", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            shapeDispatchHeaderContent: "// dispatch",
+            generatedModuleHeaderContent: "// module header",
+            generatedModuleSourceContent: "// module source",
+            objectModelCode: "// OBJECT_MODEL",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            codegenNamespace: "",
+            genericRegistrationCode: "",
+            moduleRegistrationCode: "",
+            manifestJson: "",
+            methodDeclarations: Array.Empty<string>(),
+            methods: Array.Empty<NativeAotMethodTemplateModel>(),
+            typeDeclarationsCode: "",
+            enumMetadataHeaderContent: "");
+        var plan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "generic-managed-entry", AssemblyName = "Test",
+            EntrySubjectId = "Test::Foo()", EntrySymbol = "Test_Foo",
+            EntryMethodToken = "0x01", WorkloadAbi = "void()",
+            NativeEntryFunctionName = "",
+        };
+        var raw = method.Invoke(null, new object[] { model, plan })!;
+        var sources = (IReadOnlyList<NativeAotGeneratedSource>)raw.GetType().GetField("Item1")!.GetValue(raw)!;
+        Assert.Contains(sources, s => s.RelativePath.Contains("chaos_generated_module"));
+    }
+
+    [Fact]
+    public void BuildGeneratedSources_WithManifestJson_AddsManifest()
+    {
+        var method = s_t.GetMethod("BuildGeneratedSources", s_flags)!;
+        var model = MakeMinimalTemplateModel(
+            manifestJson: """{"version":1}""",
+            shapeDispatchHeaderContent: "// dispatch",
+            objectModelCode: "// OBJ",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            nativeEntryFunctionName: "",
+            entryBridgeArguments: "",
+            workloadAbi: "void()",
+            includes: new[] { "<cstdint>" },
+            globalDeclarations: "",
+            codegenNamespace: "",
+            genericRegistrationCode: "",
+            moduleRegistrationCode: "",
+            generatedModuleHeaderContent: "",
+            generatedModuleSourceContent: "",
+            methodDeclarations: Array.Empty<string>(),
+            methods: Array.Empty<NativeAotMethodTemplateModel>(),
+            typeDeclarationsCode: "",
+            enumMetadataHeaderContent: "");
+        var plan = new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "generic-managed-entry", AssemblyName = "Test",
+            EntrySubjectId = "Test::Foo()", EntrySymbol = "Test_Foo",
+            EntryMethodToken = "0x01", WorkloadAbi = "void()",
+            NativeEntryFunctionName = "",
+        };
+        var raw = method.Invoke(null, new object[] { model, plan })!;
+        var sources = (IReadOnlyList<NativeAotGeneratedSource>)raw.GetType().GetField("Item1")!.GetValue(raw)!;
+        Assert.Contains(sources, s => s.RelativePath.Contains("native-aot.methods.json"));
+    }
+
+    // ── Helpers ─────────────────────────────────────────────────────────
+
+    private static NativeAotTemplateModel MakeMinimalTemplateModel(
+        string objectModelCode = "",
+        string typeDeclarationsCode = "",
+        string genericRegistrationCode = "",
+        string moduleRegistrationCode = "",
+        string shapeDispatchHeaderContent = "",
+        string entrySubjectId = "",
+        string entrySymbol = "",
+        string entryNativeSymbol = "",
+        string nativeEntryFunctionName = "",
+        string entryBridgeArguments = "",
+        string workloadAbi = "",
+        string codegenNamespace = "",
+        string globalDeclarations = "",
+        string generatedModuleHeaderContent = "",
+        string generatedModuleSourceContent = "",
+        string manifestJson = "",
+        string enumMetadataHeaderContent = "",
+        IReadOnlyList<string>? includes = null,
+        IReadOnlyList<string>? methodDeclarations = null,
+        IReadOnlyList<NativeAotMethodTemplateModel>? methods = null) =>
+        new()
+        {
+            Includes = includes ?? Array.Empty<string>(),
+            ObjectModelCode = objectModelCode,
+            MethodDeclarations = methodDeclarations ?? Array.Empty<string>(),
+            Methods = methods ?? Array.Empty<NativeAotMethodTemplateModel>(),
+            EntrySubjectId = entrySubjectId,
+            EntrySymbol = entrySymbol,
+            EntryNativeSymbol = entryNativeSymbol,
+            NativeEntryFunctionName = nativeEntryFunctionName,
+            EntryBridgeArguments = entryBridgeArguments,
+            ShapeDispatchHeaderContent = shapeDispatchHeaderContent,
+            EnumMetadataHeaderContent = enumMetadataHeaderContent,
+            TypeDeclarationsCode = typeDeclarationsCode,
+            WorkloadAbi = workloadAbi,
+            GenericRegistrationCode = genericRegistrationCode,
+            ModuleRegistrationCode = moduleRegistrationCode,
+            GlobalDeclarations = globalDeclarations,
+            ManifestJson = manifestJson,
+            CodegenNamespace = codegenNamespace,
+            GeneratedModuleHeaderContent = generatedModuleHeaderContent,
+            GeneratedModuleSourceContent = generatedModuleSourceContent,
+        };
 }

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ReflectionModuleSubjects",
-  "entrySubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::CustomEntrySubject_5:System.Void()",
+  "assemblyName": "ReflectionModulePatchEntry",
+  "entrySubjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::CustomEntryMethod5:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5",
+  "entrySymbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_CustomEntryMethod5",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

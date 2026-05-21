@@ -1,0 +1,82 @@
+{
+  "assembly": "System.Formats.Asn1",
+  "mode": "family-entrypoint",
+  "total": 6,
+  "passed": 5,
+  "failed": 1,
+  "results": [
+    {
+      "family": "decoder",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 33,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\decoder\\managed\\subjects\\build-output\\DecoderSubjects.dll"
+    },
+    {
+      "family": "encoding-rules",
+      "config_tier": "CHECK",
+      "steps": {},
+      "success": false,
+      "error": "no method subject IDs"
+    },
+    {
+      "family": "options-errors",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 7,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\options-errors\\managed\\subjects\\build-output\\OptionsErrorsSubjects.dll"
+    },
+    {
+      "family": "reader",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 40,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\reader\\managed\\subjects\\build-output\\ReaderSubjects.dll"
+    },
+    {
+      "family": "tag-model",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 19,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\tag-model\\managed\\subjects\\build-output\\TagModelSubjects.dll"
+    },
+    {
+      "family": "writer",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 42,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Formats.Asn1\\writer\\managed\\subjects\\build-output\\WriterSubjects.dll"
+    }
+  ],
+  "timestamp": "2026-05-21T18:09:06"
+}

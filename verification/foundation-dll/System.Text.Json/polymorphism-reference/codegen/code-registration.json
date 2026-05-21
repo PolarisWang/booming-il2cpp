@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PolymorphismReferenceSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_0",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_1",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_2",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_3",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_4",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_5",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_6",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PolymorphismReferenceSubjects_PolymorphismReferenceSubjects_CustomEntrySubject_7",
+          "subjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_7:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

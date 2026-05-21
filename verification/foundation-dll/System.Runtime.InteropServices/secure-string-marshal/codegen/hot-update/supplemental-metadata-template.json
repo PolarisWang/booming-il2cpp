@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SecureStringMarshalSubjects",
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SecureStringMarshalSubjects",
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SecureStringMarshalSubjects",
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SecureStringMarshalSubjects",
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SecureStringMarshalSubjects",
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

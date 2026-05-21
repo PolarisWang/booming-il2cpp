@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/secure/string/marshal",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 6.0,
+      "slowdownPercent": 123.05
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.71,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 21.77
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.1,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": -19.51
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.8,
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 39.29
+    }
+  ],
+  "summary": {
+    "totalMethods": 4,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": 41.15,
+    "slowdownFactor": 1.4115,
+    "slowdownThresholdX": 50.0
+  }
+}

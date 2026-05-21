@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "PrimitiveNumericConversionsSubjects",
   "entrySubjectId": "PrimitiveNumericConversionsSubjects/PrimitiveNumericConversionsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

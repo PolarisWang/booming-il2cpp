@@ -6,6 +6,7 @@
 
 #include "gc_bgc.h"
 #include "gc_api.h"
+#include "gc_gen1.h"
 #include "gc_young_gen.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -128,6 +129,9 @@ void GcScheduler::RecordYoungCollection(CHAOS_IL2CPP_SIZE nursery_used,
         new_threshold = 1;
     }
     g_young_gen.promotion_age_threshold_.store(new_threshold, std::memory_order_release);
+
+    // Increment young-GC count since last independent Gen1 collection.
+    g_gen1_state.young_gc_since_last_gen1.fetch_add(1, std::memory_order_relaxed);
 }
 
 void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t /*pause_ns*/) noexcept {
@@ -220,6 +224,9 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
     }
 
     scheduler_recommended_threshold_.store(threshold, std::memory_order_release);
+
+    // Reset young-GC interval counter for independent Gen1 collection triggering.
+    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
 }
 
 void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
@@ -231,13 +238,14 @@ void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
 BgcScope GcScheduler::DecideBgcScope() noexcept {
     BgcScope scope = BgcScope::GEN2_ONLY;
 
-    if (g_young_gen.survivor_begin != nullptr) {
-        auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        auto* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
         CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
-            (s_bump ? s_bump : g_young_gen.survivor_begin) -
-            g_young_gen.survivor_begin);
+            (s_bump ? s_bump : gen1->begin) -
+            gen1->begin);
         CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
-            g_young_gen.survivor_end - g_young_gen.survivor_begin);
+            g_young_gen.gen1_end - gen1->begin);
 
         if (s_capacity > 0) {
             float occupancy = static_cast<float>(s_used) /
@@ -458,16 +466,14 @@ CHAOS_IL2CPP_SIZE GcScheduler::TotalAllocatedSinceLastGC() const noexcept {
     return alloc_since_last_gc_.load(std::memory_order_relaxed);
 }
 
-// ── Survivor sizing ────────────────────────────────────────────────
+// ── Gen1 sizing ───────────────────────────────────────────────────
 
-CHAOS_IL2CPP_SIZE GcScheduler::RecommendedSurvivorSize() const noexcept {
-    // Base size: enough to hold at least 2 young-GC promotion cycles.
-    // avg_promoted_bytes_ is the EMA of bytes promoted from nursery to
-    // survivor per young GC.  Multiply by 2 for headroom (the Gen1
-    // collection trigger is at threshold N, which can be up to 12, but
-    // in practice the near-full occupancy check triggers earlier).
+CHAOS_IL2CPP_SIZE GcScheduler::RecommendedGen1Size() const noexcept {
+    // Base: enough to hold at least 2 young-GC promotion cycles.
+    // Use the EMA average of nursery→Gen1 promotion bytes (avg_promoted_bytes_).
+    // Multiply by 2 for headroom.
     CHAOS_IL2CPP_SIZE avg = avg_promoted_bytes_.load(std::memory_order_relaxed);
-    double base = static_cast<double>(avg > 0 ? avg : kDefaultSurvivorSize / 4);
+    double base = static_cast<double>(avg > 0 ? avg : kDefaultGen1Size / 4);
     base = base * 2.0;  // two cycles of headroom
 
     // Adjust by Gen1 survival rate:
@@ -483,14 +489,14 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedSurvivorSize() const noexcept {
         base *= 1.50;
     }
 
-    // Round to page size (64 KB).
-    constexpr CHAOS_IL2CPP_SIZE kSurvivorAlign = 64 * 1024;
+    // Round to Gen1 region alignment (64 KB).
+    constexpr CHAOS_IL2CPP_SIZE kGen1Align = 64 * 1024;
     CHAOS_IL2CPP_SIZE size = static_cast<CHAOS_IL2CPP_SIZE>(base);
-    size = (size + kSurvivorAlign - 1) & ~(kSurvivorAlign - 1);
+    size = (size + kGen1Align - 1) & ~(kGen1Align - 1);
 
-    // Clamp to [kMinSurvivorSize, kMaxSurvivorSize].
-    if (size < kMinSurvivorSize) size = kMinSurvivorSize;
-    if (size > kMaxSurvivorSize) size = kMaxSurvivorSize;
+    // Clamp to [kMinGen1Size, kMaxGen1Size].
+    if (size < kMinGen1Size) size = kMinGen1Size;
+    if (size > kMaxGen1Size) size = kMaxGen1Size;
 
     return size;
 }

@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ReflectionMemberBasicsSubjects
-add_library(chaos_gen_ReflectionMemberBasicsSubjects STATIC
-    ${CHAOS_GEN_DIR}/ReflectionMemberBasicsSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/ReflectionMemberBasicsSubjects/generated/chaos_generated_module.cpp
+# Assembly: ReflectionMemberBasicsPatchEntry
+add_library(chaos_gen_ReflectionMemberBasicsPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ReflectionMemberBasicsPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/ReflectionMemberBasicsPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ReflectionMemberBasicsSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ReflectionMemberBasicsPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ReflectionMemberBasicsPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ReflectionMemberBasicsPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ReflectionMemberBasicsSubjects
+    chaos_gen_ReflectionMemberBasicsPatchEntry
     ${NATIVE_LIBS}
 )
 

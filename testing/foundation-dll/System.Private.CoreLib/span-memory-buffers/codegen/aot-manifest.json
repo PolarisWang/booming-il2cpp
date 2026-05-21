@@ -125,6 +125,12 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::Slice:System.Span\u003CSystem.Byte\u003E(System.Int32)",
       "reason": "external-call"
     },
@@ -255,15 +261,15 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Memory",
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Memory",
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
       "reason": "external-call"
     },
     {

@@ -101,6 +101,9 @@ static constexpr DWORD kChaosManagedExceptionCode = 0xE0000001;
         (g_chaos_exception_obj = reinterpret_cast<void*>(                   \
             GetExceptionInformation()->ExceptionRecord->ExceptionInformation[0]), \
          EXCEPTION_EXECUTE_HANDLER) :                                       \
+        GetExceptionCode() == EXCEPTION_INT_DIVIDE_BY_ZERO ?                \
+        (g_chaos_exception_obj = nullptr,                                   \
+         EXCEPTION_EXECUTE_HANDLER) :                                       \
         EXCEPTION_CONTINUE_SEARCH)
 
 // ── raise ─────────────────────────────────────────────────

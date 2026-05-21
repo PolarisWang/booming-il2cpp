@@ -941,6 +941,25 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
                                summary="JIT codegen failed",
                                duration_ms=int((time.perf_counter() - start) * 1000))
 
+        # Regenerate verification dispatch from JIT codegen manifest to avoid
+        # stale dispatch files that define kSubjectEntryCount (causing LNK2005).
+        try:
+            from generate_verification_dispatch import generate_verification_dispatch
+            codegen_dir = family_dir / "codegen"
+            manifest_path = None
+            for d in codegen_dir.iterdir():
+                if d.is_dir() and d.name.endswith("Subjects"):
+                    candidate = d / "native-aot.methods.json"
+                    if candidate.exists():
+                        manifest_path = candidate
+                        break
+            if manifest_path is not None:
+                dispatch_output = family_dir / "native" / "verification_dispatch.generated.cpp"
+                generate_verification_dispatch(str(manifest_path), str(dispatch_output))
+                print(f"  [jit_codegen] regenerated verification_dispatch.generated.cpp")
+        except ImportError:
+            print(f"  [jit_codegen] generate_verification_dispatch not available (skip)")
+
         build_ok = _build_entry_exe(family_slug, verification=family_dir.parent,
                                     output_name="entry-jit.exe")
         if not build_ok:

@@ -2,33 +2,33 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/ccw/basic",
-  "capturedAt": "2026-05-21T09:24:17",
+  "capturedAt": "2026-05-21T19:21:01",
   "batchMode": true,
   "summary": {
     "totalMethods": 5,
-    "okCount": 1,
-    "failedCount": 4,
+    "okCount": 5,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 44
+      "total": 220
     },
     "aotInstructionCount": {
-      "min": 18,
+      "min": 16,
       "max": 18,
-      "avg": 18.0,
-      "total": 18
+      "avg": 16.4,
+      "total": 82
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.41,
-    "averageExpansionRatio": 0.41,
+    "overallIrExpansionRatio": 0.37,
+    "averageExpansionRatio": 0.37,
     "maxExpansionRatio": 0.41,
-    "minExpansionRatio": 0.41
+    "minExpansionRatio": 0.36
   },
   "methodResults": [
     {
@@ -59,29 +59,97 @@
       "methodIndex": 1,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
       "shortName": "Subject_1",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
+        "instructions": 16
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
       "shortName": "Subject_2",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
+        "instructions": 16
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
       "shortName": "Subject_3",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
+        "instructions": 16
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
       "shortName": "Subject_4",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
+        "instructions": 16
+      },
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

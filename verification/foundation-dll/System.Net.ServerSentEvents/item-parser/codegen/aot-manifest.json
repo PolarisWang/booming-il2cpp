@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectKind": "method",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectKind": "method",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectKind": "method",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectKind": "method",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectKind": "field",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

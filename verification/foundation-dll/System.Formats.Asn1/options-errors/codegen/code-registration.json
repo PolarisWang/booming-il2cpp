@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "OptionsErrorsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_0",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_1",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_2",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_3",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_4",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_5",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_6",
+          "subjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_6:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

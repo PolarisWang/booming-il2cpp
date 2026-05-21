@@ -4,145 +4,151 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

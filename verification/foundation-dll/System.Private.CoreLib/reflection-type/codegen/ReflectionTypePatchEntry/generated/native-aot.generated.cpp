@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -14,6 +15,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -33,14 +35,22 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_ReflectionTypePatchEntry_ReflectionTypePatchEntry = {{nullptr, nullptr, 650025962648516220ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ReflectionTypePatchEntry_ReflectionTypePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(650025962648516220ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ReflectionTypePatchEntry_ReflectionTypePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(650025962648516220ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -613,7 +623,7 @@ static void (*kAotMethods[44])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[44])() = {
+extern "C" void (*kBenchmarkWrappers[44])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -660,7 +670,61 @@ static void (*kBenchmarkWrappers[44])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[43])(0);},
 };
 
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 43;
+extern "C" const int kSubjectEntryIndices[43] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
+	16,
+	17,
+	18,
+	19,
+	20,
+	21,
+	22,
+	23,
+	24,
+	25,
+	26,
+	27,
+	28,
+	29,
+	30,
+	31,
+	32,
+	33,
+	34,
+	35,
+	36,
+	37,
+	38,
+	39,
+	40,
+	41,
+	42,
+};
+
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -717,7 +781,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
@@ -730,6 +794,732 @@ extern "C" double BenchmarkMethod(
 	return std::chrono::duration<double, std::milli>(
 		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry0;
+	/* ── Entry 1: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry1;
+	/* ── Entry 2: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry2;
+	/* ── Entry 3: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry3;
+	/* ── Entry 4: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry4;
+	/* ── Entry 5: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry5;
+	/* ── Entry 6: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry6;
+	/* ── Entry 7: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry7;
+	/* ── Entry 8: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry8;
+	/* ── Entry 9: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry9;
+	/* ── Entry 10: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry10;
+	/* ── Entry 11: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry11;
+	/* ── Entry 12: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry12;
+	/* ── Entry 13: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_13 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry13;
+	/* ── Entry 14: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_14 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry14;
+	/* ── Entry 15: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_15 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry15;
+	/* ── Entry 16: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_16 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry16;
+	/* ── Entry 17: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_17 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry17;
+	/* ── Entry 18: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_18 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry18;
+	/* ── Entry 19: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_19 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry19;
+	/* ── Entry 20: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_20 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry20;
+	/* ── Entry 21: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_21 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry21;
+	/* ── Entry 22: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_22 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry22;
+	/* ── Entry 23: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_23 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry23;
+	/* ── Entry 24: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_24 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry24;
+	/* ── Entry 25: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_25 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry25;
+	/* ── Entry 26: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_26 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry26;
+	/* ── Entry 27: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_27 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry27;
+	/* ── Entry 28: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_28 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry28;
+	/* ── Entry 29: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_29 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry29;
+	/* ── Entry 30: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_30 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry30;
+	/* ── Entry 31: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_31 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry31;
+	/* ── Entry 32: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry32;
+	/* ── Entry 33: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_33 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry33;
+	/* ── Entry 34: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_34 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry34;
+	/* ── Entry 35: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_35 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry35;
+	/* ── Entry 36: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_36 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry36;
+	/* ── Entry 37: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_37 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry37;
+	/* ── Entry 38: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_38 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry38;
+	/* ── Entry 39: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_39 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry39;
+	/* ── Entry 40: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_40 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry40;
+	/* ── Entry 41: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_41 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry41;
+	/* ── Entry 42: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_42 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry42;
+	/* ── Entry 43: ReflectionTypePatchEntry_ReflectionTypePatchEntry_Run_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry43;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_0),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry1 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_1),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry2 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_2),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry3 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_3),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry4 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_4),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry5 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_5),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry6 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_6),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry7 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_7),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry8 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_8),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry9 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_9),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry10 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_10 */
+	.entry10 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_10),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry11 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_11 */
+	.entry11 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_11),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry12 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_12 */
+	.entry12 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_12),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry13 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_13 */
+	.entry13 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_13),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry14 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_14 */
+	.entry14 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_14),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry15 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_15 */
+	.entry15 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_15),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry16 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_16 */
+	.entry16 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_16),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry17 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_17 */
+	.entry17 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_17),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry18 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_18 */
+	.entry18 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_18),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry19 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_19 */
+	.entry19 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_19),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry20 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_20 */
+	.entry20 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_20),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry21 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_21 */
+	.entry21 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_21),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry22 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_22 */
+	.entry22 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_22),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry23 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_23 */
+	.entry23 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_23),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry24 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_24 */
+	.entry24 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_24),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry25 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_25 */
+	.entry25 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_25),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry26 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_26 */
+	.entry26 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_26),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry27 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_27 */
+	.entry27 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_27),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry28 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_28 */
+	.entry28 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_28),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry29 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_29 */
+	.entry29 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_29),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry30 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_30 */
+	.entry30 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_30),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry31 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_31 */
+	.entry31 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_31),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry32 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_32 */
+	.entry32 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_32),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry33 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_33 */
+	.entry33 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_33),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry34 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_34 */
+	.entry34 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_34),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry35 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_35 */
+	.entry35 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_35),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry36 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_36 */
+	.entry36 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_36),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry37 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_37 */
+	.entry37 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_37),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry38 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_38 */
+	.entry38 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_38),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry39 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_39 */
+	.entry39 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_39),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry40 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_40 */
+	.entry40 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_40),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry41 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_41 */
+	.entry41 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_41),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry42 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_42 */
+	.entry42 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_42),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry43 = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Run_System_Int32 */
+	.entry43 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&ReflectionTypePatchEntry_ReflectionTypePatchEntry_Run_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 1236u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[44] = {
@@ -795,6 +1585,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = nullptr,
 	.vtable_descriptor_count = 0u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -1625,11 +2418,10 @@ extern "C" void ReflectionTypePatchEntry_ReflectionTypePatchEntry_Run_System_Int
 	CHAOS_IL2CPP_INTPTR _s44{};
 	CHAOS_IL2CPP_INTPTR _s45{};
 	CHAOS_IL2CPP_INTPTR _s46{};
+	CHAOS_IL2CPP_INTPTR _s47{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = chaos_args[0];
 			{
 				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
@@ -2332,1504 +3124,21 @@ extern "C" void ReflectionTypePatchEntry_ReflectionTypePatchEntry_Run_System_Int
 					}
 				}
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_ReflectionTypePatchEntry_ReflectionTypePatchEntry___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				switch (chaos_switch_value)
-				{
-					case 0:
-						{
-							auto& _d0 = s_hotpatch_entries[0];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d0.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_0();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 1:
-						{
-							auto& _d1 = s_hotpatch_entries[1];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d1.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_1();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 2:
-						{
-							auto& _d2 = s_hotpatch_entries[2];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d2.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_2();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 3:
-						{
-							auto& _d3 = s_hotpatch_entries[3];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d3.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_3();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 4:
-						{
-							auto& _d4 = s_hotpatch_entries[4];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d4.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_4();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 5:
-						{
-							auto& _d5 = s_hotpatch_entries[5];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d5.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_5();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 6:
-						{
-							auto& _d6 = s_hotpatch_entries[6];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d6.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_6();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 7:
-						{
-							auto& _d7 = s_hotpatch_entries[7];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d7.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_7();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 8:
-						{
-							auto& _d8 = s_hotpatch_entries[8];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_9();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 10:
-						{
-							auto& _d10 = s_hotpatch_entries[10];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d10.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_10();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 11:
-						{
-							auto& _d11 = s_hotpatch_entries[11];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d11.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_11();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 12:
-						{
-							auto& _d12 = s_hotpatch_entries[12];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d12.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_12();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 13:
-						{
-							auto& _d13 = s_hotpatch_entries[13];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d13.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_13();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 14:
-						{
-							auto& _d14 = s_hotpatch_entries[14];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d14.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_14();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 15:
-						{
-							auto& _d15 = s_hotpatch_entries[15];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d15.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_15();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 16:
-						{
-							auto& _d16 = s_hotpatch_entries[16];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d16.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_16();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 17:
-						{
-							auto& _d17 = s_hotpatch_entries[17];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d17.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_17();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 18:
-						{
-							auto& _d18 = s_hotpatch_entries[18];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d18.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_18();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 19:
-						{
-							auto& _d19 = s_hotpatch_entries[19];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d19)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d19))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d19.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_19();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 20:
-						{
-							auto& _d20 = s_hotpatch_entries[20];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d20.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_20();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 21:
-						{
-							auto& _d21 = s_hotpatch_entries[21];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d21.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_21();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 22:
-						{
-							auto& _d22 = s_hotpatch_entries[22];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d22.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_22();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 23:
-						{
-							auto& _d23 = s_hotpatch_entries[23];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d23.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_23();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 24:
-						{
-							auto& _d24 = s_hotpatch_entries[24];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d24)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d24))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d24.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_24();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 25:
-						{
-							auto& _d25 = s_hotpatch_entries[25];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d25)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d25))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d25.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_25();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 26:
-						{
-							auto& _d26 = s_hotpatch_entries[26];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d26)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d26))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d26.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_26();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 27:
-						{
-							auto& _d27 = s_hotpatch_entries[27];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d27.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_27();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 28:
-						{
-							auto& _d28 = s_hotpatch_entries[28];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d28.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_28();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 29:
-						{
-							auto& _d29 = s_hotpatch_entries[29];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d29.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_29();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 30:
-						{
-							auto& _d30 = s_hotpatch_entries[30];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d30.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_30();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 31:
-						{
-							auto& _d31 = s_hotpatch_entries[31];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d31.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_31();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 32:
-						{
-							auto& _d32 = s_hotpatch_entries[32];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d32.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_32();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 33:
-						{
-							auto& _d33 = s_hotpatch_entries[33];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d33)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d33))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d33.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_33();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 34:
-						{
-							auto& _d34 = s_hotpatch_entries[34];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d34)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d34))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d34.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_34();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 35:
-						{
-							auto& _d35 = s_hotpatch_entries[35];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d35)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d35))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d35.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_35();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 36:
-						{
-							auto& _d36 = s_hotpatch_entries[36];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d36)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d36))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d36.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_36();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 37:
-						{
-							auto& _d37 = s_hotpatch_entries[37];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d37)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d37))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d37.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_37();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 38:
-						{
-							auto& _d38 = s_hotpatch_entries[38];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d38)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d38))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d38.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_38();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 39:
-						{
-							auto& _d39 = s_hotpatch_entries[39];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d39)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d39))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d39.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_39();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 40:
-						{
-							auto& _d40 = s_hotpatch_entries[40];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d40)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d40))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d40.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_40();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 41:
-						{
-							auto& _d41 = s_hotpatch_entries[41];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d41)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d41))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d41.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_41();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 42:
-					{
-						{
-							auto& _d42 = s_hotpatch_entries[42];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d42)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d42))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d42.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_42();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ReflectionTypePatchEntry_ReflectionTypePatchEntry___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				switch (chaos_switch_value)
-				{
-					case 0:
-						{
-							auto& _d0 = s_hotpatch_entries[0];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d0.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_0();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 1:
-						{
-							auto& _d1 = s_hotpatch_entries[1];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d1.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_1();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 2:
-						{
-							auto& _d2 = s_hotpatch_entries[2];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d2.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_2();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 3:
-						{
-							auto& _d3 = s_hotpatch_entries[3];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d3.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_3();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 4:
-						{
-							auto& _d4 = s_hotpatch_entries[4];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d4.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_4();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 5:
-						{
-							auto& _d5 = s_hotpatch_entries[5];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d5.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_5();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 6:
-						{
-							auto& _d6 = s_hotpatch_entries[6];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d6.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_6();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 7:
-						{
-							auto& _d7 = s_hotpatch_entries[7];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d7.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_7();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 8:
-						{
-							auto& _d8 = s_hotpatch_entries[8];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_9();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 10:
-						{
-							auto& _d10 = s_hotpatch_entries[10];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d10.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_10();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 11:
-						{
-							auto& _d11 = s_hotpatch_entries[11];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d11.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_11();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 12:
-						{
-							auto& _d12 = s_hotpatch_entries[12];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d12.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_12();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 13:
-						{
-							auto& _d13 = s_hotpatch_entries[13];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d13.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_13();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 14:
-						{
-							auto& _d14 = s_hotpatch_entries[14];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d14.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_14();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 15:
-						{
-							auto& _d15 = s_hotpatch_entries[15];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d15)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d15))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d15.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_15();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 16:
-						{
-							auto& _d16 = s_hotpatch_entries[16];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d16)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d16))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d16.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_16();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 17:
-						{
-							auto& _d17 = s_hotpatch_entries[17];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d17)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d17))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d17.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_17();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 18:
-						{
-							auto& _d18 = s_hotpatch_entries[18];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d18)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d18))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d18.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_18();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 19:
-						{
-							auto& _d19 = s_hotpatch_entries[19];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d19)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d19))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d19.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_19();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 20:
-						{
-							auto& _d20 = s_hotpatch_entries[20];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d20)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d20))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d20.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_20();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 21:
-						{
-							auto& _d21 = s_hotpatch_entries[21];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d21)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d21))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d21.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_21();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 22:
-						{
-							auto& _d22 = s_hotpatch_entries[22];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d22)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d22))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d22.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_22();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 23:
-						{
-							auto& _d23 = s_hotpatch_entries[23];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d23)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d23))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d23.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_23();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 24:
-						{
-							auto& _d24 = s_hotpatch_entries[24];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d24)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d24))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d24.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_24();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 25:
-						{
-							auto& _d25 = s_hotpatch_entries[25];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d25)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d25))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d25.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_25();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 26:
-						{
-							auto& _d26 = s_hotpatch_entries[26];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d26)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d26))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d26.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_26();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 27:
-						{
-							auto& _d27 = s_hotpatch_entries[27];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d27.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_27();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 28:
-						{
-							auto& _d28 = s_hotpatch_entries[28];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d28.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_28();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 29:
-						{
-							auto& _d29 = s_hotpatch_entries[29];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d29.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_29();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 30:
-						{
-							auto& _d30 = s_hotpatch_entries[30];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d30.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_30();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 31:
-						{
-							auto& _d31 = s_hotpatch_entries[31];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d31.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_31();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 32:
-						{
-							auto& _d32 = s_hotpatch_entries[32];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d32.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_32();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 33:
-						{
-							auto& _d33 = s_hotpatch_entries[33];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d33)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d33))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d33.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_33();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 34:
-						{
-							auto& _d34 = s_hotpatch_entries[34];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d34)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d34))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d34.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_34();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 35:
-						{
-							auto& _d35 = s_hotpatch_entries[35];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d35)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d35))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d35.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_35();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 36:
-						{
-							auto& _d36 = s_hotpatch_entries[36];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d36)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d36))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d36.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_36();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 37:
-						{
-							auto& _d37 = s_hotpatch_entries[37];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d37)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d37))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d37.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_37();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 38:
-						{
-							auto& _d38 = s_hotpatch_entries[38];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d38)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d38))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d38.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_38();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 39:
-						{
-							auto& _d39 = s_hotpatch_entries[39];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d39)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d39))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d39.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_39();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 40:
-						{
-							auto& _d40 = s_hotpatch_entries[40];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d40)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d40))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d40.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_40();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 41:
-						{
-							auto& _d41 = s_hotpatch_entries[41];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d41)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d41))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d41.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_41();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 42:
-					{
-						{
-							auto& _d42 = s_hotpatch_entries[42];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d42)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d42))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d42.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = ReflectionTypePatchEntry_ReflectionTypePatchEntry_Subject_42();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ReflectionTypePatchEntry_ReflectionTypePatchEntry___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 

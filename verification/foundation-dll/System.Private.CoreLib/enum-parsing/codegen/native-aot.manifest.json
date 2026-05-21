@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "EnumParsingSubjects",
-  "entrySubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/enum-parsing/codegen",
+  "assemblyName": "EnumParsingPatchEntry",
+  "entrySubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::CustomEntryMethod12:System.Void()",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/enum-parsing/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

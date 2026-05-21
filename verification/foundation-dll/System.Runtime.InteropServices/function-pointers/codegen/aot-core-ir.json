@@ -1,0 +1,79 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "function-pointers-subjects.function-pointers-subjects.subject-0",
+      "subjectId": "FunctionPointersSubjects/FunctionPointersSubjects::Subject_0:System.Void()",
+      "signature": "System.Void FunctionPointersSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "FunctionPointersSubjects",
+        "declaringTypeSubjectId": "FunctionPointersSubjects/FunctionPointersSubjects",
+        "definitionSubjectId": "FunctionPointersSubjects/FunctionPointersSubjects::Subject_0:System.Void()",
+        "subjectId": "FunctionPointersSubjects/FunctionPointersSubjects::Subject_0:System.Void()",
+        "methodId": "function-pointers-subjects.function-pointers-subjects.subject-0",
+        "signature": "System.Void FunctionPointersSubjects::Subject_0()"
+      },
+      "nativeSymbol": "FunctionPointersSubjects_FunctionPointersSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute",
+          "callee": "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "FunctionPointersSubjects"
+    }
+  ]
+}

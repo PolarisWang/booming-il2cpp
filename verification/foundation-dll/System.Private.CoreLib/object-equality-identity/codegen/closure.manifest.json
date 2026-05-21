@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ObjectEqualityIdentitySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ObjectEqualityIdentitySubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/object-equality-identity/managed/subjects/build-output/ObjectEqualityIdentitySubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "a2946fbb-3f15-4bf0-8c9d-c4af4886b8be",
+  "inputModuleVersionId": "9ae05200-996c-49c3-ae38-231209369f3d",
   "artifacts": [
     {
       "kind": "typedIlIr",

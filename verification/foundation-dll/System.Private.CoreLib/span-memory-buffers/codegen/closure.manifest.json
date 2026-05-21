@@ -1,18 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "SpanMemoryBuffersSubjects",
+  "assemblyName": "SpanMemoryBuffersPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/patch/build-output/SpanMemoryBuffersPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "SpanMemoryBuffersSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll"
-    },
-    {
-      "assemblyName": "System.Memory",
-      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Memory.dll"
+      "assemblyName": "SpanMemoryBuffersPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/patch/build-output/SpanMemoryBuffersPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "ef3de607-5be7-4926-b2d6-7712e967fb01",
+  "inputModuleVersionId": "aca83b8c-84e3-4458-9a3c-89e6b7ecdebf",
   "artifacts": [
     {
       "kind": "typedIlIr",

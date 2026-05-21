@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ConverterFactorySubjects",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactorySubjects",
+      "subjectKind": "method",
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ConverterFactorySubjects",
+      "subjectKind": "field",
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,JsonSerializerOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+      "reason": "external-call"
+    }
+  ]
+}

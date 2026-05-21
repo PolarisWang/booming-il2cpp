@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/runtime/compiler/services",
-  "capturedAt": "2026-05-21T10:02:36",
+  "capturedAt": "2026-05-21T18:58:33",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -10,27 +10,27 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 576,
-      "max": 612,
-      "avg": 594.0,
-      "total": 5940
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 440
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 19,
-      "avg": 8.8,
-      "total": 88
+      "max": 32,
+      "avg": 14.3,
+      "total": 143
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 12
+      "external_runtime_call": 21
     },
-    "overallIrExpansionRatio": 0.01,
-    "averageExpansionRatio": 0.02,
-    "maxExpansionRatio": 0.03,
-    "minExpansionRatio": 0.01
+    "overallIrExpansionRatio": 0.33,
+    "averageExpansionRatio": 0.33,
+    "maxExpansionRatio": 0.73,
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -39,22 +39,27 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 612,
-        "aotInstructionCount": 13,
-        "ratio": 0.02,
-        "jitCodeSize": 3578
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3578,
-        "instructions": 612
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_0",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -62,7 +67,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -71,22 +76,27 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 608,
-        "aotInstructionCount": 19,
-        "ratio": 0.03,
-        "jitCodeSize": 3554
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 32,
+        "ratio": 0.73,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3554,
-        "instructions": 608
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_1",
-        "instructions": 19
+        "instructions": 32
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -94,7 +104,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -103,22 +113,32 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 604,
-        "aotInstructionCount": 14,
-        "ratio": 0.02,
-        "jitCodeSize": 3530
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3530,
-        "instructions": 604
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_2",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -131,7 +151,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     },
     {
@@ -140,20 +160,20 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 600,
-        "aotInstructionCount": 5,
-        "ratio": 0.01,
-        "jitCodeSize": 3506
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3506,
-        "instructions": 600
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_3",
-        "instructions": 5
+        "instructions": 10
       },
       "analysis": [
         {
@@ -182,15 +202,15 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 596,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
-        "ratio": 0,
-        "jitCodeSize": 3482
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3482,
-        "instructions": 596
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -206,15 +226,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 592,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
-        "ratio": 0,
-        "jitCodeSize": 3458
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3458,
-        "instructions": 592
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -230,15 +250,15 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 588,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
-        "ratio": 0,
-        "jitCodeSize": 3434
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3434,
-        "instructions": 588
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -254,22 +274,37 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 584,
-        "aotInstructionCount": 14,
-        "ratio": 0.02,
-        "jitCodeSize": 3410
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3410,
-        "instructions": 584
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_7",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.FormattableString(System.String,System.Object[])' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -287,7 +322,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 3
+        "external_runtime_call": 6
       }
     },
     {
@@ -296,20 +331,20 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 580,
-        "aotInstructionCount": 5,
-        "ratio": 0.01,
-        "jitCodeSize": 3386
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3386,
-        "instructions": 580
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_8",
-        "instructions": 5
+        "instructions": 10
       },
       "analysis": [],
       "instructionCategories": {}
@@ -320,22 +355,32 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 576,
-        "aotInstructionCount": 15,
-        "ratio": 0.03,
-        "jitCodeSize": 3362
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 24,
+        "ratio": 0.55,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3362,
-        "instructions": 576
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_9",
-        "instructions": 15
+        "instructions": 24
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -348,7 +393,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     }
   ]

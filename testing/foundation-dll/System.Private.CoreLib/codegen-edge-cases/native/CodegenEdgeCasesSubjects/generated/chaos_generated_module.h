@@ -53,7 +53,7 @@ struct Functions {
         void (*Subject_2)(
                 void
         );
-        void (*Subject_3)(
+        CHAOS_IL2CPP_INT32 (*Subject_3)(
                     CHAOS_IL2CPP_INT32
         );
     } codegenEdgeCasesSubjects;
@@ -112,7 +112,7 @@ struct CodegenEdgeCasesSubjects {
         return kFunctions.codegenEdgeCasesSubjects.Subject_2(
         );
     }
-    static inline void Subject_3(
+    static inline CHAOS_IL2CPP_INT32 Subject_3(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
         return kFunctions.codegenEdgeCasesSubjects.Subject_3(

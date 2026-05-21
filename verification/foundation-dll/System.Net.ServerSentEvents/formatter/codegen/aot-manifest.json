@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "FormatterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterSubjects/FormatterSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterSubjects/FormatterSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterSubjects",
+      "subjectKind": "field",
+      "subjectId": "FormatterSubjects/FormatterSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.String\u003E\u003E,System.IO.Stream,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    }
+  ]
+}

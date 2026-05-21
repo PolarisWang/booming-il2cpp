@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ThreadingSyncSubjects",
-  "entrySubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
+  "assemblyName": "ThreadingSyncPatchEntry",
+  "entrySubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_cctor",
+  "entrySymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_cctor",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

@@ -1,0 +1,116 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ParserSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ParserSubjects/ParserSubjects",
+      "name": "ParserSubjects",
+      "displayName": "ParserSubjects",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::_exitCode",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+      "name": "CustomEntrySubject_1",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

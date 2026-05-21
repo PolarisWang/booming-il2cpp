@@ -68,6 +68,12 @@ def generate_entrypoint(slug: str, assembly: str, output_dir: Path) -> dict[str,
     if not method_subject_ids:
         method_subject_ids = [m["methodSubjectId"] for m in contract.get("methodContracts", [])]
 
+    # Some families need extra project references (e.g. snapshot-prover needs
+    # SnapshotTestFixtures for its subject types).
+    extra_refs = None
+    if slug in ("snapshot-prover",):
+        extra_refs = ["../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+
     result = generate_and_build(
         output_dir,
         assembly_name=assembly,
@@ -75,6 +81,7 @@ def generate_entrypoint(slug: str, assembly: str, output_dir: Path) -> dict[str,
         method_subject_ids=method_subject_ids,
         class_name=None,  # auto-derived
         variant="subjects",
+        extra_refs=extra_refs,
     )
     return result
 

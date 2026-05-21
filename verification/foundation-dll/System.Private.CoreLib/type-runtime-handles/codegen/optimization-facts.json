@@ -4,138 +4,94 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_0:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_1:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_2:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_3:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_4:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_5:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_6:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_7:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_8:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_9:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_10:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_11:System.Int32()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Subject_12:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
-  "dispatchFacts": [
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_IsEnum:System.Boolean()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_FullName:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Type::get_BaseType:System.Type()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    }
-  ],
+  "dispatchFacts": [],
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::_exitCode",
+      "subjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()",
+      "methodSubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Void(System.Int32)",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

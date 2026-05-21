@@ -1,0 +1,294 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "method",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "IdentityReferenceSubjects",
+      "subjectKind": "field",
+      "subjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference[],System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Security.Principal.IdentityReference\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "subjectKind": "method",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "EncoderSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "EncoderSubjects/EncoderSubjects",
+      "name": "EncoderSubjects",
+      "displayName": "EncoderSubjects",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "EncoderSubjects/EncoderSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::_exitCode",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "EncoderSubjects/EncoderSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "EncoderSubjects/EncoderSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "EncoderSubjects/EncoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

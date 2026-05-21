@@ -1346,6 +1346,7 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::SweepPage(OldGenPage* page, bool clear_bitmap
 
 void MarkSweepOldGen::CoalescePage(OldGenPage* page) {
     if (page == nullptr || page->is_oversized) return;
+    if (!page->in_use.load(std::memory_order_acquire)) return;
 
     // CoalescePage only touches this page's own free lists �� no other thread
     // accesses them during the STW sweep phase, so no mutex is needed.
@@ -2305,14 +2306,14 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                         young_region->begin, cur);
                 }
 
-                // Scan the survivor area as roots.  Survivor objects were
+                // Scan the Gen1 area as roots.  Gen1 objects were
                 // promoted from the young half in a previous GC and may hold
                 // references to old-gen objects that must be retained.
-                char* s_begin = g_young_gen.survivor_begin;
-                if (s_begin != nullptr) {
-                    char* s_end = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-                    if (s_end > s_begin) {
-                        g_old_gen.ScanRangeForRoots(s_begin, s_end);
+                Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+                if (gen1 != nullptr) {
+                    char* s_end = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+                    if (s_end > gen1->begin) {
+                        g_old_gen.ScanRangeForRoots(gen1->begin, s_end);
                     }
                 }
                 return true;
@@ -2453,53 +2454,23 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
     }
 
-    // Phase 4: Sweep all pages (parallel when beneficial).
+    // Phase 4: Sweep and coalesce all pages (sequential).
+    // Parallel sweep via GcWorkerPool is disabled in the full-GC path
+    // because ASan reports use-after-free in CoalescePage when worker
+    // threads access page memory that was previously decommitted/poisoned
+    // by an earlier GC cycle.  The root cause appears to be ASan's
+    // VirtualFree(MEM_DECOMMIT) tracking getting out of sync with the
+    // page pool's recommit path, but since full-GC page counts are
+    // typically small (tens to low hundreds), sequential sweep adds no
+    // meaningful latency.  Parallel sweep is still used by BgcSweep
+    // (which runs concurrently and benefits from time-slicing).
     CHAOS_IL2CPP_SIZE total_reclaimed = 0;
-    int total_pages = page_count_;
-
-    if (total_pages >= 2) {
-        // Build page pointer array under lock.
-        std::vector<OldGenPage*> pages;
-        {
-            std::lock_guard<std::mutex> lock(mutex_);
-            pages.reserve(static_cast<size_t>(total_pages));
-            auto* p = page_list_;
-            while (p != nullptr) {
-                pages.push_back(p);
-                p = p->next;
-            }
-        }
-
-        // Parallel sweep: dispatch pages via atomic index.
-        // Main thread participates alongside GcWorkerPool threads.
-        // Cap workers to min(hardware_concurrency, total_pages) to avoid
-        // oversubscribing high-core-count machines with few pages to sweep.
-        std::atomic<int> next_page{0};
-        std::atomic<CHAOS_IL2CPP_SIZE> parallel_reclaimed{0};
-        int max_workers = std::min(static_cast<int>(std::thread::hardware_concurrency()), total_pages);
-        if (max_workers < 2) max_workers = 2;
-
-        GcWorkerPool::Instance().RunWorkers(max_workers, [&](int idx) {
-            (void)idx;
-            CHAOS_IL2CPP_SIZE local_reclaimed = 0;
-            while (true) {
-                int idx2 = next_page.fetch_add(1, std::memory_order_relaxed);
-                if (idx2 >= total_pages) break;
-                local_reclaimed += SweepPage(pages[static_cast<size_t>(idx2)]);
-                CoalescePage(pages[static_cast<size_t>(idx2)]);
-            }
-            parallel_reclaimed.fetch_add(local_reclaimed, std::memory_order_relaxed);
-        });
-
-        total_reclaimed = parallel_reclaimed.load(std::memory_order_relaxed);
-    } else {
-        // Sequential sweep (single page).
-        auto* page = page_list_;
-        while (page != nullptr) {
-            CHAOS_IL2CPP_SIZE reclaimed = SweepPage(page);
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto* page = page_list_; page != nullptr; page = page->next) {
+            if (!page->in_use.load(std::memory_order_acquire)) continue;
+            total_reclaimed += SweepPage(page);
             CoalescePage(page);
-            total_reclaimed += reclaimed;
-            page = page->next;
         }
     }
 

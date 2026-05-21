@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "ItemParserSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "ItemParserSubjects_ItemParserSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+    "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+    "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+    "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()"
+  ],
+  "translationUnitMethodCount": 4,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 4,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

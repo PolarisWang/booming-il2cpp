@@ -4,61 +4,67 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::_exitCode",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_7:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

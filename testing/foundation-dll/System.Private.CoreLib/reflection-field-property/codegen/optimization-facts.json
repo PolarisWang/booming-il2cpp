@@ -203,10 +203,22 @@
     {
       "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()",
@@ -215,7 +227,19 @@
     {
       "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -425,7 +449,19 @@
     {
       "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {

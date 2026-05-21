@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectModelCollectionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -22,7 +22,7 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [1] System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_1()
     {
-        try { new Exception("hello", null!); }
+        try { new Exception("hello", default); }
         catch { _exitCode = 1; }
     }
 

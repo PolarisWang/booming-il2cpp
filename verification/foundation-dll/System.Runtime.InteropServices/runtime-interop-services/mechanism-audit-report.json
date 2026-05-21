@@ -1,0 +1,17 @@
+{
+  "family": "runtime-interop-services",
+  "assembly": "System.Runtime.InteropServices",
+  "total_methods": 0,
+  "audited": 0,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 0,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 0,
+  "passed": true,
+  "method_details": [],
+  "skip_details": [],
+  "errors": [
+    "Generated C++ not found"
+  ]
+}

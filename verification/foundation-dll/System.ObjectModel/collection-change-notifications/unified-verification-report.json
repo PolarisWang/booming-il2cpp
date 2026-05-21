@@ -1,0 +1,185 @@
+{
+  "family": "collection-change-notifications",
+  "assembly": "System.ObjectModel",
+  "mode": "standard",
+  "timestamp": "2026-05-21T14:45:57",
+  "duration_ms": 9150,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "2 methods, 0 custom entries",
+      "details": {
+        "methodCount": 2,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.cs(19,40): error CS0571: 'INotifyCollectionChanged.CollectionChanged.add': cannot explicitly call operator or accessor [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.cs(26,40): error CS0571: 'INotifyCollectionChanged.CollectionChanged.remove': cannot explicitly call operator or accessor [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.cs(19,40): error CS0571: 'INotifyCollectionChanged.CollectionChanged.add': cannot explicitly call operator or accessor [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.csproj]\nD:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.cs(26,40): error CS0571: 'INotifyCollectionChanged.CollectionChanged.remove': cannot explicitly call operator or accessor [D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.ObjectModel\\collection-change-notifications\\managed\\subjects\\CollectionChangeNotificationsSubjects.csproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.18\n",
+      "details": {
+        "steps": {
+          "build_subjects": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 3664
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "failed",
+      "summary": "JIT codegen failed",
+      "details": {},
+      "errors": [],
+      "duration_ms": 3071
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=skip (0/0)",
+      "details": {
+        "fact": {
+          "status": "skip",
+          "passed": 0,
+          "total": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 461
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 31
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "entry.exe not found — cannot run microbenchmark",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 2 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1911
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "failed",
+      "summary": "HotUpdate returned 0 total — no verification performed",
+      "details": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0,
+        "realMethods": 0,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "entry-aot.exe not found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "methodCoverage": 0.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {},
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 2,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 2,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

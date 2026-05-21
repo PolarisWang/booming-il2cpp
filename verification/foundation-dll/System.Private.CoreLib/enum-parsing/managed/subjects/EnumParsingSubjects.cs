@@ -91,5 +91,8 @@ public static partial class EnumParsingSubjects
     }
 
     // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
+    public static void CustomEntrySubject_12()
+    {
+    }
 
 }

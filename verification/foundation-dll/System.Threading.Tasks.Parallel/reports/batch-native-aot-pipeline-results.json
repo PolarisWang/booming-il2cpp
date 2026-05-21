@@ -1,0 +1,62 @@
+{
+  "assembly": "System.Threading.Tasks.Parallel",
+  "mode": "family-entrypoint",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "family": "loop-result",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 2,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\loop-result\\managed\\subjects\\build-output\\LoopResultSubjects.dll"
+    },
+    {
+      "family": "loop-state",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 6,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\loop-state\\managed\\subjects\\build-output\\LoopStateSubjects.dll"
+    },
+    {
+      "family": "parallel-apis",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 43,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-apis\\managed\\subjects\\build-output\\ParallelApisSubjects.dll"
+    },
+    {
+      "family": "parallel-options",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 7,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-options\\managed\\subjects\\build-output\\ParallelOptionsSubjects.dll"
+    }
+  ],
+  "timestamp": "2026-05-21T18:25:09"
+}

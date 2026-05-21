@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "DataErrorsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_0",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_1",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_2",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_3",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_4",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_5",
+          "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

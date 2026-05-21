@@ -68,11 +68,11 @@
     {
       "registrationKind": "method",
       "slot": 7,
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "name": "Subject_3",
-      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-      "memberType": "System.Void",
+      "memberType": "System.Int32",
       "parameterCount": 1,
       "isImported": false
     },
@@ -110,9 +110,9 @@
     {
       "registrationKind": "parameter",
       "slot": 11,
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)::parameter[0]:p0",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)::parameter[0]:p0",
       "name": "p0",
-      "declaringMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "declaringMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "memberType": "System.Int32",
       "parameterIndex": 0
     },

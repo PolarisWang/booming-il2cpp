@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/math/numerics",
-  "capturedAt": "2026-05-21T09:41:01",
+  "capturedAt": "2026-05-21T18:41:27",
   "batchMode": true,
   "summary": {
     "totalMethods": 18,
@@ -16,21 +16,21 @@
       "total": 792
     },
     "aotInstructionCount": {
-      "min": 11,
-      "max": 14,
-      "avg": 12.9,
-      "total": 233
+      "min": 18,
+      "max": 24,
+      "avg": 20.8,
+      "total": 374
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 18
+      "external_runtime_call": 36
     },
-    "overallIrExpansionRatio": 0.29,
-    "averageExpansionRatio": 0.3,
-    "maxExpansionRatio": 0.32,
-    "minExpansionRatio": 0.25
+    "overallIrExpansionRatio": 0.47,
+    "averageExpansionRatio": 0.47,
+    "maxExpansionRatio": 0.55,
+    "minExpansionRatio": 0.41
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,9 +52,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
-        "instructions": 12
+        "instructions": 18
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -62,7 +67,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -72,8 +77,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -84,9 +89,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -94,7 +104,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -104,8 +114,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -116,9 +126,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -126,7 +141,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -136,8 +151,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -148,9 +163,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -158,7 +178,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -168,8 +188,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -180,9 +200,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Round:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -190,7 +215,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -200,8 +225,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -212,9 +237,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Round:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -222,7 +252,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -232,8 +262,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -244,9 +274,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_6",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -254,7 +289,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -264,8 +299,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -276,9 +311,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -286,7 +326,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -296,8 +336,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -308,9 +348,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_8",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -318,7 +363,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -328,8 +373,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -340,9 +385,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -350,7 +400,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -360,8 +410,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -372,9 +422,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -382,7 +437,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -392,8 +447,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -404,9 +459,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
-        "instructions": 11
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -414,7 +474,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -424,8 +484,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -436,9 +496,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
-        "instructions": 11
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -446,7 +511,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -456,8 +521,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -468,9 +533,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -478,7 +548,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -488,8 +558,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -500,9 +570,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_14",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -510,7 +585,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -520,8 +595,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -532,9 +607,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_15",
-        "instructions": 14
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -542,7 +622,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -552,8 +632,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -564,9 +644,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_16",
-        "instructions": 12
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -574,7 +659,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -584,8 +669,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 24,
+        "ratio": 0.55,
         "jitCodeSize": 256
       },
       "jit": {
@@ -596,9 +681,14 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
-        "instructions": 13
+        "instructions": 24
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -606,7 +696,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     }
   ]

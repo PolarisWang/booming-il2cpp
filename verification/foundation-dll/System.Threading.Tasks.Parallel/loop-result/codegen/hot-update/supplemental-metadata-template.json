@@ -1,0 +1,35 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "LoopResultSubjects",
+      "subjectId": "LoopResultSubjects/LoopResultSubjects",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "LoopResultSubjects",
+      "subjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopResultSubjects",
+      "subjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -104,6 +104,7 @@ StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_I
         id *= 1099511628211ULL;
     }
     id |= 1u;
+    id &= ~(1ULL << 63);
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_dynamic_mutex);
 
@@ -149,6 +150,7 @@ StringId Intern(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count)
         id *= 1099511628211ULL;
     }
     id |= 1u;
+    id &= ~(1ULL << 63);
 
     // TLS cache check (lock-free, no mutex)
     for (CHAOS_IL2CPP_UINT32 i = 0u; i < 8u; ++i)

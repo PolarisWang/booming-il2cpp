@@ -4,218 +4,115 @@
   "closedWorldSpecializations": [
     {
       "subjectKind": "type",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
-      "reason": "closed-world-type"
-    },
-    {
-      "subjectKind": "type",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry",
       "reason": "closed-world-type"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod0:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod1:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod2:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod3:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod4:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod5:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod6:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod7:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod8:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod9:System.Void()",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod1:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod2:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod3:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod4:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod5:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod8:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod9:System.Void()",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod10:System.Void()",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod10:System.Void()",
       "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod0:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod4:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Abort:System.Void()",
       "devirtualized": false
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_ThreadState:System.Threading.ThreadState()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_Priority:System.Threading.ThreadPriority()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_Priority:System.Void(System.Threading.ThreadPriority)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsBackground:System.Boolean()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::set_IsBackground:System.Void(System.Boolean)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod5:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::get_IsThreadPoolThread:System.Boolean()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Abort:System.Void()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod7:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Thread/System.Threading.Thread::Interrupt:System.Void()",
       "devirtualized": false
@@ -224,39 +121,29 @@
   "layoutFacts": [
     {
       "subjectKind": "field",
-      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::_exitCode",
+      "subjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::_exitCode",
       "dataKind": "value",
       "requiresBoxing": true
     }
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::Run:System.Void(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod6:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod7:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Threading.Thread/System.Threading.ThreadInterruptedException"
     },
     {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Threading.Thread/System.Threading.ThreadInterruptedException"
-    },
-    {
-      "methodSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod8:System.Void()",
+      "methodSubjectId": "ThreadingThreadBasicsPatchEntry/ThreadingThreadBasicsPatchEntry::CustomEntryMethod8:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
     }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "assemblyName": "SnapshotProverSubjects",
-  "methodCount": 158,
-  "defaultStringId": 803950926144638187,
+  "methodCount": 159,
+  "defaultStringId": 628919584683901915,
   "methods": [
     {
       "index": 0,
@@ -86,55 +86,62 @@
     },
     {
       "index": 10,
-      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8",
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverNativeEntry_CustomEntryMethod8",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 11,
-      "nativeSymbol": "SnapshotTestFixtures_AddressHelper_RunAddress",
+      "nativeSymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 12,
-      "nativeSymbol": "SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare",
+      "nativeSymbol": "SnapshotTestFixtures_AddressHelper_RunAddress",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 13,
-      "nativeSymbol": "SnapshotTestFixtures_ArithmeticOps_RunAdd",
+      "nativeSymbol": "SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 14,
-      "nativeSymbol": "SnapshotTestFixtures_ArrayHelper_MakeAndFill",
+      "nativeSymbol": "SnapshotTestFixtures_ArithmeticOps_RunAdd",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 15,
-      "nativeSymbol": "SnapshotTestFixtures_ArrayLengthHelper_RunLength",
+      "nativeSymbol": "SnapshotTestFixtures_ArrayHelper_MakeAndFill",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 16,
-      "nativeSymbol": "SnapshotTestFixtures_ArrayRefHelper_RunArrayRef",
+      "nativeSymbol": "SnapshotTestFixtures_ArrayLengthHelper_RunLength",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
       "index": 17,
+      "nativeSymbol": "SnapshotTestFixtures_ArrayRefHelper_RunArrayRef",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 18,
       "nativeSymbol": "SnapshotTestFixtures_BaseClass__ctor",
       "paramCount": 1,
       "params": [
@@ -146,7 +153,7 @@
       "isInstance": true
     },
     {
-      "index": 18,
+      "index": 19,
       "nativeSymbol": "SnapshotTestFixtures_BaseClass_Compute",
       "paramCount": 1,
       "params": [
@@ -158,63 +165,63 @@
       "isInstance": true
     },
     {
-      "index": 19,
+      "index": 20,
       "nativeSymbol": "SnapshotTestFixtures_BitwiseHelper_RunBitwise",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 20,
+      "index": 21,
       "nativeSymbol": "SnapshotTestFixtures_BoxingHelper_BoxAndUnbox",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 21,
+      "index": 22,
       "nativeSymbol": "SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 22,
+      "index": 23,
       "nativeSymbol": "SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 23,
+      "index": 24,
       "nativeSymbol": "SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 24,
+      "index": 25,
       "nativeSymbol": "SnapshotTestFixtures_BranchDupHelper_RunBranchDup",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 25,
+      "index": 26,
       "nativeSymbol": "SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 26,
+      "index": 27,
       "nativeSymbol": "SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 27,
+      "index": 28,
       "nativeSymbol": "SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32",
       "paramCount": 1,
       "params": [
@@ -226,84 +233,84 @@
       "isInstance": false
     },
     {
-      "index": 28,
+      "index": 29,
       "nativeSymbol": "SnapshotTestFixtures_CallVirtHelper_CreateAndUse",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 29,
+      "index": 30,
       "nativeSymbol": "SnapshotTestFixtures_CallvirtHelper_RunCallvirt",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 30,
+      "index": 31,
       "nativeSymbol": "SnapshotTestFixtures_CollectionsHelper_TestDict",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 31,
+      "index": 32,
       "nativeSymbol": "SnapshotTestFixtures_CollectionsHelper_TestList",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 32,
+      "index": 33,
       "nativeSymbol": "SnapshotTestFixtures_CollectionsHelper_TestSet",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 33,
+      "index": 34,
       "nativeSymbol": "SnapshotTestFixtures_ConversionHelper_ConvertToInt",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 34,
+      "index": 35,
       "nativeSymbol": "SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 35,
+      "index": 36,
       "nativeSymbol": "SnapshotTestFixtures_ConvWideHelper_RunConvWide",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 36,
+      "index": 37,
       "nativeSymbol": "SnapshotTestFixtures_CpblkHelper_RunCpblk",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 37,
+      "index": 38,
       "nativeSymbol": "SnapshotTestFixtures_CpobjHelper_RunCpobj",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 38,
+      "index": 39,
       "nativeSymbol": "SnapshotTestFixtures_DelegateHelper_RunDelegate",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 39,
+      "index": 40,
       "nativeSymbol": "SnapshotTestFixtures_DerivedClass__ctor",
       "paramCount": 1,
       "params": [
@@ -315,7 +322,7 @@
       "isInstance": true
     },
     {
-      "index": 40,
+      "index": 41,
       "nativeSymbol": "SnapshotTestFixtures_DerivedClass_Compute",
       "paramCount": 1,
       "params": [
@@ -327,56 +334,56 @@
       "isInstance": true
     },
     {
-      "index": 41,
+      "index": 42,
       "nativeSymbol": "SnapshotTestFixtures_EhHelper_SafeDivide",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 42,
+      "index": 43,
       "nativeSymbol": "SnapshotTestFixtures_ExternalCaller_CallExternal",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 43,
+      "index": 44,
       "nativeSymbol": "SnapshotTestFixtures_FieldHelper_GetAndIncrement",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 44,
+      "index": 45,
       "nativeSymbol": "SnapshotTestFixtures_FloatOpsHelper_RunFloatOps",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 45,
+      "index": 46,
       "nativeSymbol": "SnapshotTestFixtures_FlowControl_IsPositive",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 46,
+      "index": 47,
       "nativeSymbol": "SnapshotTestFixtures_GenericHelper_UseGeneric",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 47,
+      "index": 48,
       "nativeSymbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 48,
+      "index": 49,
       "nativeSymbol": "SnapshotTestFixtures_HasFields__ctor",
       "paramCount": 1,
       "params": [
@@ -388,7 +395,7 @@
       "isInstance": true
     },
     {
-      "index": 49,
+      "index": 50,
       "nativeSymbol": "SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -404,7 +411,7 @@
       "isInstance": true
     },
     {
-      "index": 50,
+      "index": 51,
       "nativeSymbol": "SnapshotTestFixtures_Helper_ConsumeString_System_String",
       "paramCount": 1,
       "params": [
@@ -416,21 +423,21 @@
       "isInstance": false
     },
     {
-      "index": 51,
+      "index": 52,
       "nativeSymbol": "SnapshotTestFixtures_Helper_GetValue",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 52,
+      "index": 53,
       "nativeSymbol": "SnapshotTestFixtures_Helper_Nop",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 53,
+      "index": 54,
       "nativeSymbol": "SnapshotTestFixtures_Helper_Square_System_Int32",
       "paramCount": 1,
       "params": [
@@ -442,21 +449,21 @@
       "isInstance": false
     },
     {
-      "index": 54,
+      "index": 55,
       "nativeSymbol": "SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 55,
+      "index": 56,
       "nativeSymbol": "SnapshotTestFixtures_HotUpdateWithTypesDemo_Run",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 56,
+      "index": 57,
       "nativeSymbol": "SnapshotTestFixtures_ImplHelper__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -472,7 +479,7 @@
       "isInstance": true
     },
     {
-      "index": 57,
+      "index": 58,
       "nativeSymbol": "SnapshotTestFixtures_ImplHelper_GetValue",
       "paramCount": 1,
       "params": [
@@ -484,21 +491,21 @@
       "isInstance": true
     },
     {
-      "index": 58,
+      "index": 59,
       "nativeSymbol": "SnapshotTestFixtures_IndirectHelper_ReadWriteRef",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 59,
+      "index": 60,
       "nativeSymbol": "SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 60,
+      "index": 61,
       "nativeSymbol": "SnapshotTestFixtures_InstanceHelper__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -514,7 +521,7 @@
       "isInstance": true
     },
     {
-      "index": 61,
+      "index": 62,
       "nativeSymbol": "SnapshotTestFixtures_InstanceHelper_GetValue",
       "paramCount": 1,
       "params": [
@@ -526,14 +533,14 @@
       "isInstance": true
     },
     {
-      "index": 62,
+      "index": 63,
       "nativeSymbol": "SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 63,
+      "index": 64,
       "nativeSymbol": "SnapshotTestFixtures_InternalHelper_Double_System_Int32",
       "paramCount": 1,
       "params": [
@@ -545,7 +552,7 @@
       "isInstance": false
     },
     {
-      "index": 64,
+      "index": 65,
       "nativeSymbol": "SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32",
       "paramCount": 1,
       "params": [
@@ -557,112 +564,112 @@
       "isInstance": false
     },
     {
-      "index": 65,
+      "index": 66,
       "nativeSymbol": "SnapshotTestFixtures_LdcI8Helper_RunLdcI8",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 66,
+      "index": 67,
       "nativeSymbol": "SnapshotTestFixtures_LdelemaHelper_RunLdelema",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 67,
+      "index": 68,
       "nativeSymbol": "SnapshotTestFixtures_LdelemAllHelper_TestAllElems",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 68,
+      "index": 69,
       "nativeSymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 69,
+      "index": 70,
       "nativeSymbol": "SnapshotTestFixtures_LdindI1Helper_RunLdindI1",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 70,
+      "index": 71,
       "nativeSymbol": "SnapshotTestFixtures_LdindI8Helper_RunLdindI8",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 71,
+      "index": 72,
       "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 72,
+      "index": 73,
       "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 73,
+      "index": 74,
       "nativeSymbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunStindI",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 74,
+      "index": 75,
       "nativeSymbol": "SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 75,
+      "index": 76,
       "nativeSymbol": "SnapshotTestFixtures_LdindWideHelper_RunLdindWide",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 76,
+      "index": 77,
       "nativeSymbol": "SnapshotTestFixtures_LdtokenHelper_RunLdtoken",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 77,
+      "index": 78,
       "nativeSymbol": "SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 78,
+      "index": 79,
       "nativeSymbol": "SnapshotTestFixtures_LocalAllocHelper_RunAlloc",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 79,
+      "index": 80,
       "nativeSymbol": "SnapshotTestFixtures_LoopHelper_SumToFive",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 80,
+      "index": 81,
       "nativeSymbol": "SnapshotTestFixtures_MarkedClass__ctor",
       "paramCount": 1,
       "params": [
@@ -674,63 +681,63 @@
       "isInstance": true
     },
     {
-      "index": 81,
+      "index": 82,
       "nativeSymbol": "SnapshotTestFixtures_MathHelper_RunSquare",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 82,
+      "index": 83,
       "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunArglist",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 83,
+      "index": 84,
       "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunJmp",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 84,
+      "index": 85,
       "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 85,
+      "index": 86,
       "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 86,
+      "index": 87,
       "nativeSymbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 87,
+      "index": 88,
       "nativeSymbol": "SnapshotTestFixtures_MulDivHelper_RunMulDiv",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 88,
+      "index": 89,
       "nativeSymbol": "SnapshotTestFixtures_MultiDispatcher_DispatchBoth",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 89,
+      "index": 90,
       "nativeSymbol": "SnapshotTestFixtures_MyClass__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -746,7 +753,7 @@
       "isInstance": true
     },
     {
-      "index": 90,
+      "index": 91,
       "nativeSymbol": "SnapshotTestFixtures_MyClass_GetValue",
       "paramCount": 1,
       "params": [
@@ -758,14 +765,14 @@
       "isInstance": true
     },
     {
-      "index": 91,
+      "index": 92,
       "nativeSymbol": "SnapshotTestFixtures_NegShiftHelper_RunNegShift",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 92,
+      "index": 93,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32",
       "paramCount": 1,
       "params": [
@@ -777,7 +784,7 @@
       "isInstance": false
     },
     {
-      "index": 93,
+      "index": 94,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32",
       "paramCount": 1,
       "params": [
@@ -789,7 +796,7 @@
       "isInstance": false
     },
     {
-      "index": 94,
+      "index": 95,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32",
       "paramCount": 1,
       "params": [
@@ -801,7 +808,7 @@
       "isInstance": false
     },
     {
-      "index": 95,
+      "index": 96,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64",
       "paramCount": 1,
       "params": [
@@ -813,7 +820,7 @@
       "isInstance": false
     },
     {
-      "index": 96,
+      "index": 97,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single",
       "paramCount": 1,
       "params": [
@@ -825,7 +832,7 @@
       "isInstance": false
     },
     {
-      "index": 97,
+      "index": 98,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32",
       "paramCount": 1,
       "params": [
@@ -837,7 +844,7 @@
       "isInstance": false
     },
     {
-      "index": 98,
+      "index": 99,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32",
       "paramCount": 1,
       "params": [
@@ -849,7 +856,7 @@
       "isInstance": false
     },
     {
-      "index": 99,
+      "index": 100,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32",
       "paramCount": 1,
       "params": [
@@ -861,7 +868,7 @@
       "isInstance": false
     },
     {
-      "index": 100,
+      "index": 101,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64",
       "paramCount": 1,
       "params": [
@@ -873,7 +880,7 @@
       "isInstance": false
     },
     {
-      "index": 101,
+      "index": 102,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double",
       "paramCount": 1,
       "params": [
@@ -885,7 +892,7 @@
       "isInstance": false
     },
     {
-      "index": 102,
+      "index": 103,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32",
       "paramCount": 1,
       "params": [
@@ -897,7 +904,7 @@
       "isInstance": false
     },
     {
-      "index": 103,
+      "index": 104,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32",
       "paramCount": 1,
       "params": [
@@ -909,14 +916,14 @@
       "isInstance": false
     },
     {
-      "index": 104,
+      "index": 105,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 105,
+      "index": 106,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single",
       "paramCount": 1,
       "params": [
@@ -928,7 +935,7 @@
       "isInstance": false
     },
     {
-      "index": 106,
+      "index": 107,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32",
       "paramCount": 1,
       "params": [
@@ -940,7 +947,7 @@
       "isInstance": false
     },
     {
-      "index": 107,
+      "index": 108,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32",
       "paramCount": 1,
       "params": [
@@ -952,7 +959,7 @@
       "isInstance": false
     },
     {
-      "index": 108,
+      "index": 109,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64",
       "paramCount": 1,
       "params": [
@@ -964,7 +971,7 @@
       "isInstance": false
     },
     {
-      "index": 109,
+      "index": 110,
       "nativeSymbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double",
       "paramCount": 1,
       "params": [
@@ -976,49 +983,49 @@
       "isInstance": false
     },
     {
-      "index": 110,
+      "index": 111,
       "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowAdd",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 111,
+      "index": 112,
       "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowMul",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 112,
+      "index": 113,
       "nativeSymbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowSub",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 113,
+      "index": 114,
       "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 114,
+      "index": 115,
       "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 115,
+      "index": 116,
       "nativeSymbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 116,
+      "index": 117,
       "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single",
       "paramCount": 1,
       "params": [
@@ -1030,7 +1037,7 @@
       "isInstance": false
     },
     {
-      "index": 117,
+      "index": 118,
       "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1042,7 +1049,7 @@
       "isInstance": false
     },
     {
-      "index": 118,
+      "index": 119,
       "nativeSymbol": "SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1054,21 +1061,21 @@
       "isInstance": false
     },
     {
-      "index": 119,
+      "index": 120,
       "nativeSymbol": "SnapshotTestFixtures_RethrowHelper_RunRethrow",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 120,
+      "index": 121,
       "nativeSymbol": "SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 121,
+      "index": 122,
       "nativeSymbol": "SnapshotTestFixtures_SealedHelper__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -1084,7 +1091,7 @@
       "isInstance": true
     },
     {
-      "index": 122,
+      "index": 123,
       "nativeSymbol": "SnapshotTestFixtures_SealedHelper_GetValueVirtual",
       "paramCount": 1,
       "params": [
@@ -1096,21 +1103,21 @@
       "isInstance": true
     },
     {
-      "index": 123,
+      "index": 124,
       "nativeSymbol": "SnapshotTestFixtures_ShiftHelper_RunShift",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 124,
+      "index": 125,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvI",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 125,
+      "index": 126,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1122,7 +1129,7 @@
       "isInstance": false
     },
     {
-      "index": 126,
+      "index": 127,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1134,7 +1141,7 @@
       "isInstance": false
     },
     {
-      "index": 127,
+      "index": 128,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1146,7 +1153,7 @@
       "isInstance": false
     },
     {
-      "index": 128,
+      "index": 129,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1158,91 +1165,91 @@
       "isInstance": false
     },
     {
-      "index": 129,
+      "index": 130,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvU4",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 130,
+      "index": 131,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunLdnull",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 131,
+      "index": 132,
       "nativeSymbol": "SnapshotTestFixtures_SizeOfHelper_GetSize",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 132,
+      "index": 133,
       "nativeSymbol": "SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 133,
+      "index": 134,
       "nativeSymbol": "SnapshotTestFixtures_StelemAllHelper_TestAllElems",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 134,
+      "index": 135,
       "nativeSymbol": "SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 135,
+      "index": 136,
       "nativeSymbol": "SnapshotTestFixtures_StindWideHelper_RunStindWide",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 136,
+      "index": 137,
       "nativeSymbol": "SnapshotTestFixtures_StringConcatHelper_TestConcat",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 137,
+      "index": 138,
       "nativeSymbol": "SnapshotTestFixtures_StringFormatHelper_TestFormatOne",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 138,
+      "index": 139,
       "nativeSymbol": "SnapshotTestFixtures_StringOps_UseString",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 139,
+      "index": 140,
       "nativeSymbol": "SnapshotTestFixtures_SwitchHelper_Classify",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 140,
+      "index": 141,
       "nativeSymbol": "SnapshotTestFixtures_TargetHelper_GetValue",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 141,
+      "index": 142,
       "nativeSymbol": "SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32",
       "paramCount": 1,
       "params": [
@@ -1254,21 +1261,21 @@
       "isInstance": false
     },
     {
-      "index": 142,
+      "index": 143,
       "nativeSymbol": "SnapshotTestFixtures_TypeCheckHelper_CheckAndCast",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 143,
+      "index": 144,
       "nativeSymbol": "SnapshotTestFixtures_UnboxHelper_RunUnbox",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 144,
+      "index": 145,
       "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double",
       "paramCount": 1,
       "params": [
@@ -1280,56 +1287,56 @@
       "isInstance": false
     },
     {
-      "index": 145,
+      "index": 146,
       "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 146,
+      "index": 147,
       "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 147,
+      "index": 148,
       "nativeSymbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 148,
+      "index": 149,
       "nativeSymbol": "SnapshotTestFixtures_ValueTypeHelper_RunValueType",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 149,
+      "index": 150,
       "nativeSymbol": "SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 150,
+      "index": 151,
       "nativeSymbol": "SnapshotTestFixtures_VirtualHelper_UseVirtual",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 151,
+      "index": 152,
       "nativeSymbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 152,
+      "index": 153,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper_1__ctor_0",
       "paramCount": 2,
       "params": [
@@ -1345,7 +1352,7 @@
       "isInstance": true
     },
     {
-      "index": 153,
+      "index": 154,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper_1_GetValue",
       "paramCount": 1,
       "params": [
@@ -1357,7 +1364,7 @@
       "isInstance": true
     },
     {
-      "index": 154,
+      "index": 155,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper__0__ctor_0",
       "paramCount": 2,
       "params": [
@@ -1373,7 +1380,7 @@
       "isInstance": true
     },
     {
-      "index": 155,
+      "index": 156,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper__0_GetValue",
       "paramCount": 1,
       "params": [
@@ -1385,7 +1392,7 @@
       "isInstance": true
     },
     {
-      "index": 156,
+      "index": 157,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -1401,7 +1408,7 @@
       "isInstance": true
     },
     {
-      "index": 157,
+      "index": 158,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper_System_Int32_GetValue",
       "paramCount": 1,
       "params": [

@@ -8,9 +8,13 @@
     <RootNamespace>SnapshotProverSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SnapshotProverSubjects.cs" />
     <Compile Include="SnapshotProverNativeEntry.Custom.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj" />
   </ItemGroup>
 </Project>

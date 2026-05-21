@@ -1,0 +1,150 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "OptionsSchedulerSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_0",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_1",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_2",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_3",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_4",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_5",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_6",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_7",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_8",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_9",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_10",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_11",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_12",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_13",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_14",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_15",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_16",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_17",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_18",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_CustomEntrySubject_19",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_20",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_21",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_22",
+          "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_22:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

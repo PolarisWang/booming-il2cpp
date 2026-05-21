@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "TimeDateTimeTimespanSubjects",
-  "entrySubjectId": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()",
+  "assemblyName": "TimeDateTimeTimespanPatchEntry",
+  "entrySubjectId": "TimeDateTimeTimespanPatchEntry/TimeDateTimeTimespanPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0",
+  "entrySymbol": "TimeDateTimeTimespanPatchEntry_TimeDateTimeTimespanPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

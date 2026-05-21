@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "ParserSubjects",
+  "entrySubjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "ParserSubjects_ParserSubjects_CustomEntrySubject_1",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

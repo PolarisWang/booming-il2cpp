@@ -1,0 +1,186 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "HandlesSafehandleGchandleSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_0",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_1",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_2",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_3",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_4",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_5",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_6",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_7",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_8",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_9",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_10",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_11",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_12",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_13",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_14",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_15",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_16",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_17",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_18",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_19",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_20",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_21",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_22",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_23",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_24",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_25",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_26",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_27",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_28",
+          "subjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_28:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

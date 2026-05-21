@@ -1,0 +1,174 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReaderWriterSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_0",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_1",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_2",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_3",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_4",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_5",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_6",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_7",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_8",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_9",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_CustomEntrySubject_10",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_11",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_12",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_13",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_14",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_15",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_16",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_17",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_18",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_19",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_20",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_21",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_22",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_23",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_24",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_CustomEntrySubject_25",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "ReaderWriterSubjects_ReaderWriterSubjects_Subject_26",
+          "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_26:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

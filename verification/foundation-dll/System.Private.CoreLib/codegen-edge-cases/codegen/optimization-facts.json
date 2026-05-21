@@ -24,7 +24,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     }
   ],
@@ -54,7 +54,7 @@
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
-      "methodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "methodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }

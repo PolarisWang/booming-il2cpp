@@ -1,0 +1,378 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReaderSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_0",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_1",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_2",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_3",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_4",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_5",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_6",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_7",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_8",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_9",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_10",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_11",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_12",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_13",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_14",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_15",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_16",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_17",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_18",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_19",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_20",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_21",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_22",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_23",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_24",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_25",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_26",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_27",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_28",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_29",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_30",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_31",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_32",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_33",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_34",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_35",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_36",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_37",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_37:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_38",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_39",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_40",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_41",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_41:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_42",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_42:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_43",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_43:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_44",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_44:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_45",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_45:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_46",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_46:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_47",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_47:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_48",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_48:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_49",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_49:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_50",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_50:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_51",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_51:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_52",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_52:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_53",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_53:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_54",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_54:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_55",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_55:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_56",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_56:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_57",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_57:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_58",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_58:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_59",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_59:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_60",
+          "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_60:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

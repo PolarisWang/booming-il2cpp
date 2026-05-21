@@ -1,0 +1,94 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "DataErrorsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "name": "DataErrorsSubjects",
+      "displayName": "DataErrorsSubjects",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

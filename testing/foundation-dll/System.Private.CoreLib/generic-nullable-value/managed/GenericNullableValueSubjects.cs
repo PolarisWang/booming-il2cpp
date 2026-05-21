@@ -22,14 +22,14 @@ public static partial class GenericNullableValueSubjects
     // [1] System.Private.CoreLib/System.Nullable`1::get_Value:T()
     public static void Subject_1()
     {
-        try { if ((int)(((int?)42).Value) != (int)(((int?)42).Value)) _exitCode = 1; }
+        try { if (((((int?)42).Value).GetHashCode()) != ((((int?)42).Value).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()
     public static void Subject_2()
     {
-        try { if ((int)(default(Nullable<int>).GetValueOrDefault()) != (int)(default(Nullable<int>).GetValueOrDefault())) _exitCode = 1; }
+        try { if (((default(Nullable<int>).GetValueOrDefault()).GetHashCode()) != ((default(Nullable<int>).GetValueOrDefault()).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

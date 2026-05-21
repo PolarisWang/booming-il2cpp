@@ -1,0 +1,444 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "method",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FormatterServicesConverterSubjects",
+      "subjectKind": "field",
+      "subjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToString:System.String(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/IFieldInfo::get_FieldNames:System.String[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/IFieldInfo::get_FieldTypes:System.Type[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/IFieldInfo::set_FieldNames:System.Void(System.String[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/IFieldInfo::set_FieldTypes:System.Void(System.Type[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,TypeFilterLevel)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetObjectData:System.Object[](System.Object,System.Reflection.MemberInfo[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type,System.Runtime.Serialization.StreamingContext)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::.ctor:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "reason": "external-call"
+    }
+  ]
+}

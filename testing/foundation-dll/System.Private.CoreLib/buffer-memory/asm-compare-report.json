@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/buffer/memory",
-  "capturedAt": "2026-05-21T09:18:16",
+  "capturedAt": "2026-05-21T19:20:48",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -17,19 +17,19 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 12,
-      "avg": 4.3,
-      "total": 43
+      "max": 22,
+      "avg": 7.1,
+      "total": 71
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 5
+      "external_runtime_call": 8
     },
-    "overallIrExpansionRatio": 0.1,
-    "averageExpansionRatio": 0.1,
-    "maxExpansionRatio": 0.27,
+    "overallIrExpansionRatio": 0.16,
+    "averageExpansionRatio": 0.16,
+    "maxExpansionRatio": 0.5,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
-        "instructions": 9
+        "instructions": 14
       },
       "analysis": [
         {
@@ -96,8 +96,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
@@ -108,9 +108,19 @@
       "aot": {
         "status": "ok",
         "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
-        "instructions": 10
+        "instructions": 18
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -123,7 +133,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     },
     {
@@ -133,8 +143,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
         "jitCodeSize": 256
       },
       "jit": {
@@ -145,9 +155,14 @@
       "aot": {
         "status": "ok",
         "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
-        "instructions": 12
+        "instructions": 22
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -155,7 +170,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -285,8 +300,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 6,
-        "ratio": 0.14,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -297,7 +312,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
-        "instructions": 6
+        "instructions": 11
       },
       "analysis": [
         {

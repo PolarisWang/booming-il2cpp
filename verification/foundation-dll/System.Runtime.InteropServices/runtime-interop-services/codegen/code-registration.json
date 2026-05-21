@@ -1,0 +1,114 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "RuntimeInteropServicesSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_0",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_1",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_2",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_3",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_4",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_5",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_6",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_7",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_8",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_9",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_10",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_11",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_12",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_13",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_14",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_15",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_16",
+          "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_16:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

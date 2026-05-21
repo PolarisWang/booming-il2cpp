@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Runtime.InteropServices/marshalling-attributes",
+  "displayName": "Marshalling Attributes",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Runtime.InteropServices.LayoutKind)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Int16)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Runtime.InteropServices.UnmanagedType)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Int16)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.InAttribute::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.OutAttribute::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.OptionalAttribute::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.PreserveSigAttribute::.ctor:System.Void()"
+  ],
+  "methodSubjectCount": 10,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

@@ -95,6 +95,12 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Int32\u003E::GetValueOrDefault:System.Int32()",
       "reason": "external-call"
     },

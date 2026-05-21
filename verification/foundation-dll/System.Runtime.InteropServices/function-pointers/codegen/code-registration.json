@@ -1,0 +1,18 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "FunctionPointersSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "FunctionPointersSubjects_FunctionPointersSubjects_Subject_0",
+          "subjectId": "FunctionPointersSubjects/FunctionPointersSubjects::Subject_0:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

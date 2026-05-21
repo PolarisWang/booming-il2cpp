@@ -15,6 +15,9 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
+extern "C" void SnapshotProverSubjects_SnapshotProverNativeEntry_CustomEntryMethod8(
+        void
+);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8(
         void
 );
@@ -504,6 +507,9 @@ extern "C" CHAOS_IL2CPP_INTPTR SnapshotTestFixtures_Wrapper_1_GetValue(
 
 static const Functions s_functions = {
     {
+        &SnapshotProverSubjects_SnapshotProverNativeEntry_CustomEntryMethod8,
+    },
+    {
         &SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8,
         &SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8,
         &SnapshotProverSubjects_SnapshotProverSubjects_Subject_0,
@@ -855,7 +861,7 @@ static const Functions s_functions = {
         &SnapshotTestFixtures_Wrapper_1__ctor_0,
         &SnapshotTestFixtures_Wrapper_1_GetValue,
     },
-    158,
+    159,
 };
 
 const Functions kFunctions = s_functions;
@@ -863,8 +869,9 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[158];
-void* kFunctionsFlat[158] = {
+extern "C" void* kFunctionsFlat[159];
+void* kFunctionsFlat[159] = {
+    reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverNativeEntry_CustomEntryMethod8),
     reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8),
     reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8),
     reinterpret_cast<void*>(&SnapshotProverSubjects_SnapshotProverSubjects_Subject_0),

@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "StreamSubjects",
+  "methodCount": 31,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_10",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 10
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_11",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 11
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_12",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 12
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_13",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 13
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_14",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 14
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_15",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 15
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_16",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 16
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_17",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 17
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_18",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 18
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_19",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 19
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_20",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 20
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_21",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 21
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_22",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 22
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_23",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 23
+    },
+    {
+      "index": 24,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_24",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 24
+    },
+    {
+      "index": 25,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_25",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 25
+    },
+    {
+      "index": 26,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_26",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 26
+    },
+    {
+      "index": 27,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_27",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 27
+    },
+    {
+      "index": 28,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_28",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 28
+    },
+    {
+      "index": 29,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_29",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 29
+    },
+    {
+      "index": 30,
+      "nativeSymbol": "StreamSubjects_StreamSubjects_Subject_30",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 30
+    }
+  ]
+}

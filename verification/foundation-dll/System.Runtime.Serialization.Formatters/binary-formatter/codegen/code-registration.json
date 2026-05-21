@@ -1,0 +1,108 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "BinaryFormatterSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_0",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_1",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_2",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_3",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_4",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_5",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_6",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_7",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_8",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_9",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_10",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_11",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_12",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_13",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_14",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_15",
+          "subjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_15:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

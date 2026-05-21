@@ -21,7 +21,7 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [1] System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_1()
     {
-        new Exception("hello", null!);
+        new Exception("hello", default);
     }
 
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()

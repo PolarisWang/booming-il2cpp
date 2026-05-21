@@ -1,0 +1,168 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SurrogateSelectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISerializationSurrogate::GetObjectData:System.Void(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISerializationSurrogate::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

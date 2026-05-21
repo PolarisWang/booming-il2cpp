@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "BinaryFormatterSubjects",
+  "entrySubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "BinaryFormatterSubjects_BinaryFormatterSubjects_Subject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

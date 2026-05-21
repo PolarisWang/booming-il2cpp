@@ -1,0 +1,420 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_39:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_40:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_42:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__42_0",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Action",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

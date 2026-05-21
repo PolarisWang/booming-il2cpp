@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ReflectionFieldPropertySubjects",
-  "entrySubjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()",
+  "assemblyName": "ReflectionFieldPropertyPatchEntry",
+  "entrySubjectId": "ReflectionFieldPropertyPatchEntry/ReflectionFieldPropertyPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0",
+  "entrySymbol": "ReflectionFieldPropertyPatchEntry_ReflectionFieldPropertyPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

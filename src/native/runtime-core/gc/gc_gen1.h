@@ -19,7 +19,7 @@ namespace chaos::il2cpp::runtime_core {
 //
 // When Gen1 collection triggers (budget exhausted / interval exceeded),
 // GcGen1Collection() performs a STW mark-sweep on the survivor range
-// [survivor_begin, survivor_bump), then promotes ALL live objects to
+// [gen1->begin, gen1_bump), then promotes ALL live objects to
 // Gen2 (old gen) via g_old_gen.Allocate() + memcpy.  The survivor area
 // is fully reset after collection.
 //
@@ -48,7 +48,7 @@ struct Gen1CollectionResult {
     CHAOS_IL2CPP_SIZE bytes_reclaimed{0};    // Bytes freed from Gen1 (dead objects)
     CHAOS_IL2CPP_SIZE objects_in_gen1{0};    // Total objects in Gen1 before collection
     uint64_t           pause_ns{0};           // STW pause duration
-    bool               promotion_failed{false}; // True if any Gen2 alloc failed (survivor_bump NOT reset)
+    bool               promotion_failed{false}; // True if any Gen2 alloc failed (gen1_bump NOT reset)
 };
 
 /// Process-wide Gen1 state (defined in gc_gen1.cpp).
@@ -62,18 +62,30 @@ struct Gen1State {
 
     /// Bytes that survived the last Gen1 collection (promoted to Gen2).
     CHAOS_IL2CPP_SIZE last_survived_bytes{0};
+
+    /// Young GCs since last Gen1 collection (for interval-based triggering).
+    std::atomic<int> young_gc_since_last_gen1{0};
 };
 
 extern Gen1State g_gen1_state;
 
-/// Perform a Gen1 collection: mark-sweep the survivor area [survivor_begin,
-/// survivor_bump), then promote marked (live) objects to Gen2.
-/// Called at a STW safepoint.  Resets survivor_bump to survivor_begin
+/// Perform a Gen1 collection: mark-sweep the Gen1 area [gen1->begin,
+/// gen1_bump), then promote marked (live) objects to Gen2.
+/// Called at a STW safepoint.  Resets gen1_bump to gen1->begin
 /// after collection so the entire 8 MB Gen1 space is reusable.
 Gen1CollectionResult GcGen1Collection();
 
-/// Check whether @a ptr falls within the Gen1 (survivor) area.
+/// Check whether @a ptr falls within the allocated portion of Gen1
+/// ([begin, gen1_bump)).  Returns false for unallocated Gen1 space.
 bool IsInGen1(const void* ptr);
+
+/// Check whether @a ptr falls within the full Gen1 region range
+/// ([begin, end)), including unallocated space.
+/// Unlike IsInGen1(), this checks against gen1_end (the region boundary)
+/// rather than gen1_bump (the allocation frontier), making it suitable
+/// for card table filtering where unallocated pages have no objects
+/// but still belong to the Gen1 address range.
+bool IsInGen1Range(const void* ptr);
 
 /// Allocate @a size bytes in Gen1.  Same as TryAllocateInSurvivor;
 /// the alias exists for semantic clarity (Gen0→Gen1 promotion).
@@ -82,6 +94,16 @@ void* TryAllocateInGen1(CHAOS_IL2CPP_SIZE size);
 /// Estimate Gen1 fragmentation: 1 - (live_bytes / total_bytes).
 /// Used by the scheduler to trigger Gen1 collection at high fragmentation.
 float Gen1Fragmentation();
+
+/// Check whether an independent Gen1 collection should be triggered.
+/// Returns true when:
+///   1. Gen1 has data (gen1_bump > gen1->begin)
+///   2. BGC is NOT actively marking Gen1 (IsGen1MarkingActive() == false)
+///   3. Any of:
+///      a. Gen1 occupancy > 80%
+///      b. Gen1 fragmentation > 50%
+///      c. young_gc_since_last_gen1 >= kGen1MaxInterval (8)
+bool GcGen1ShouldCollect();
 
 }  // namespace chaos::il2cpp::runtime_core
 

@@ -89,6 +89,119 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "Thread": "Thread.CurrentThread",
     "Module": "default(Module)!",
     "AssemblyName": "default(AssemblyName)!",
+    # New types from 11 additional DLLs (auto-generated)
+    "Asn1Tag": "default(Asn1Tag)",
+    "AsnReader": "default(AsnReader)!",
+    "AsnReaderOptions": "default(AsnReaderOptions)",
+    "AsnWriter": "default(AsnWriter)!",
+    "BinaryFormatter": "default(BinaryFormatter)!",
+    "BrotliCompressionOptions": "default(BrotliCompressionOptions)!",
+    "BrotliDecoder": "default(BrotliDecoder)",
+    "BrotliStream": "default(BrotliStream)!",
+    "CriticalHandle": "default(CriticalHandle)!",
+    "CustomMarshallerAttribute": "default(CustomMarshallerAttribute)!",
+    "DataErrorsChangedEventArgs": "default(DataErrorsChangedEventArgs)!",
+    "DllImportAttribute": "default(DllImportAttribute)!",
+    "ExternalException": "default(ExternalException)!",
+    "FlushResult": "default(FlushResult)",
+    "Formatter": "default(Formatter)!",
+    "GCHandle": "default(GCHandle)",
+    "GeneratedComInterfaceAttribute": "default(GeneratedComInterfaceAttribute)!",
+    "IDuplexPipe": "default(IDuplexPipe)!",
+    "IFieldInfo": "default(IFieldInfo)!",
+    "IFormatter": "default(IFormatter)!",
+    "IIUnknownCacheStrategy": "default(IIUnknownCacheStrategy)!",
+    "IIUnknownDerivedDetails": "default(IIUnknownDerivedDetails)!",
+    "IIUnknownInterfaceType": "default(IIUnknownInterfaceType)!",
+    "INotifyDataErrorInfo": "default(INotifyDataErrorInfo)!",
+    "IUnknownDerivedAttribute": "default(IUnknownDerivedAttribute)!",
+    "IdentityReference": "default(IdentityReference)!",
+    "IdentityReferenceCollection": "default(IdentityReferenceCollection)!",
+    "JsonArray": "default(JsonArray)!",
+    "JsonConverter": "default(JsonConverter)!",
+    "JsonConverterFactory": "default(JsonConverterFactory)!",
+    "JsonDocument": "default(JsonDocument)!",
+    "JsonElement": "default(JsonElement)",
+    "JsonNamingPolicy": "default(JsonNamingPolicy)!",
+    "JsonNode": "default(JsonNode)!",
+    "JsonObject": "default(JsonObject)!",
+    "JsonSerializer": "default(JsonSerializer)!",
+    "JsonSerializerContext": "default(JsonSerializerContext)!",
+    "JsonSerializerOptions": "default(JsonSerializerOptions)!",
+    "JsonTypeInfo": "default(JsonTypeInfo)!",
+    "KeyedCollection": "default(KeyedCollection)!",
+    "LibraryImportAttribute": "default(LibraryImportAttribute)!",
+    "MarshalAsAttribute": "default(MarshalAsAttribute)!",
+    "NTAccount": "default(NTAccount)!",
+    "OSPlatform": "default(OSPlatform)",
+    "ParallelLoopResult": "default(ParallelLoopResult)",
+    "ParallelLoopState": "default(ParallelLoopState)!",
+    "ParallelOptions": "default(ParallelOptions)!",
+    "Pipe": "default(Pipe)!",
+    "PipeOptions": "default(PipeOptions)!",
+    "PipeScheduler": "default(PipeScheduler)!",
+    "PipeWriter": "default(PipeWriter)!",
+    "ReadOnlyObservableCollection": "default(ReadOnlyObservableCollection<byte>)!",
+    "ObservableCollection": "default(ObservableCollection<byte>)!",
+    "KeyedCollection": "default(KeyedCollection<byte, byte>)!",
+    "ICustomTypeProvider": "default(ICustomTypeProvider)!",
+    "ISerializationSurrogate": "default(ISerializationSurrogate)!",
+    "ReadResult": "default(ReadResult)",
+    "ReferenceHandler": "default(ReferenceHandler)!",
+    "RuntimeInformation": "default(RuntimeInformation)",
+    "SafeAccessTokenHandle": "default(SafeAccessTokenHandle)!",
+    "SafeHandle": "default(SafeHandle)!",
+    "SecurityIdentifier": "default(SecurityIdentifier)!",
+    "SseItem": "default(SseItem<byte>)",
+    "SseParser": "default(SseParser<byte>)!",
+    "StrategyBasedComWrappers": "default(StrategyBasedComWrappers)!",
+    "StreamPipeReaderOptions": "default(StreamPipeReaderOptions)!",
+    "StreamPipeWriterOptions": "default(StreamPipeWriterOptions)!",
+    "StructLayoutAttribute": "default(StructLayoutAttribute)!",
+    "TypeConverterAttribute": "default(TypeConverterAttribute)!",
+    "UnmanagedMemoryAccessor": "default(UnmanagedMemoryAccessor)!",
+    "Utf8JsonReader": "default(Utf8JsonReader)",
+    "Utf8JsonWriter": "default(Utf8JsonWriter)!",
+    "ValueSerializerAttribute": "default(ValueSerializerAttribute)!",
+    "VirtualMethodTableInfo": "default(VirtualMethodTableInfo)",
+    "WindowsIdentity": "default(WindowsIdentity)!",
+    "WindowsPrincipal": "default(WindowsPrincipal)!",
+    # Additional instance types (no properties, but have instance methods)
+    "BrotliEncoder": "default(BrotliEncoder)",
+    "SseItem`1": "default(SseItem<byte>)",
+    "SseParser`1": "default(SseParser<byte>)!",
+    "PipeReader": "default(PipeReader)!",
+    "PipeWriter": "default(PipeWriter)!",
+    "ComWrappers": "default(ComWrappers)!",
+    "SurrogateSelector": "default(SurrogateSelector)!",
+    "ObjectManager": "default(ObjectManager)!",
+    "FormatterConverter": "default(FormatterConverter)!",
+    "SerializationBinder": "default(SerializationBinder)!",
+    "ObjectIDGenerator": "default(ObjectIDGenerator)!",
+    "JsonConverter`1": "default(JsonConverter`1)!",
+    "JsonSchemaExporter": "default(JsonSchemaExporter)!",
+    "ReferenceResolver": "default(ReferenceResolver)!",
+    "ReferenceHandler`1": "default(ReferenceHandler`1)!",
+    "KeyedCollection`2": "default(KeyedCollection`2)!",
+    "ReadOnlyObservableCollection`1": "default(ReadOnlyObservableCollection`1)!",
+    "ObservableCollection`1": "default(ObservableCollection`1)!",
+    "INotifyCollectionChanged": "default(INotifyCollectionChanged)!",
+    "INotifyPropertyChanged": "default(INotifyPropertyChanged)!",
+    "INotifyPropertyChanging": "default(INotifyPropertyChanging)!",
+    "ICommand": "default(ICommand)!",
+    "ISurrogateSelector": "default(ISurrogateSelector)!",
+    "SerializationObjectManager": "default(SerializationObjectManager)!",
+    "IFormatter": "default(IFormatter)!",
+    # COM interface types from System.Runtime.InteropServices.ComTypes
+    "IAdviseSink": "default(IAdviseSink)!",
+    "IDataObject": "default(IDataObject)!",
+    "IEnumFORMATETC": "default(IEnumFORMATETC)!",
+    "IEnumSTATDATA": "default(IEnumSTATDATA)!",
+    # Exception types
+    "COMException": "default(COMException)!",
+    "SEHException": "default(SEHException)!",
+    # Generated-marshalling types
+    "ComObject": "default(ComObject)!",
 }
 
 INSTANCE_ALTERNATIVE_EXPR_MAP: dict[str, str] = {
@@ -141,6 +254,7 @@ INSTANCE_ALTERNATIVE_EXPR_MAP: dict[str, str] = {
 STATIC_TYPES = frozenset({
     "Convert", "Math", "MemoryMarshal", "RuntimeHelpers",
     "BitConverter", "Buffer", "Activator", "Interlocked", "Monitor",
+    "ZipFileExtensions", "RuntimeInformation", "JsonSerializer",
 })
 
 # Per-type known static methods — these should NOT use the instance expression.
@@ -175,6 +289,7 @@ STATIC_METHODS_BY_TYPE: dict[str, frozenset[str]] = {
     "Type": frozenset({"GetType", "GetTypeFromHandle"}),
     "Thread": frozenset({"Sleep", "get_CurrentThread", "ResetAbort", "Yield"}),
     "CultureInfo": frozenset({"GetCultureInfo", "get_CurrentCulture", "get_InvariantCulture", "get_CurrentUICulture"}),
+    "ReadOnlyObservableCollection": frozenset({"get_Empty"}),
     "MulticastDelegate": frozenset({"Combine", "Remove", "RemoveAll", "CreateDelegate"}),
     "Guid": frozenset({"NewGuid", "Parse", "TryParse", "ParseExact", "TryParseExact", "Empty"}),
     "HashCode": frozenset({"Combine"}),
@@ -187,6 +302,68 @@ STATIC_METHODS_BY_TYPE: dict[str, frozenset[str]] = {
         "Sort", "BinarySearch", "IndexOf", "LastIndexOf", "Reverse", "Clear",
         "Copy", "Resize", "Find", "FindAll", "Exists", "ConvertAll",
         "TrueForAll", "Empty", "AsReadOnly", "CreateInstance",
+    }),
+    "GCHandle": frozenset({"Alloc", "FromIntPtr", "ToIntPtr"}),
+    # RuntimeInformation static properties (checked in _try_property_access before STATIC_TYPES)
+    "RuntimeInformation": frozenset({
+        "get_FrameworkDescription", "get_OSArchitecture", "get_OSDescription",
+        "get_ProcessArchitecture", "get_RuntimeIdentifier",
+    }),
+    # OSPlatform static properties and methods
+    "OSPlatform": frozenset({
+        "get_Linux", "get_OSX", "get_Windows", "get_FreeBSD",
+        "Create",
+    }),
+    # JsonSerializer static class — all methods are static
+    "JsonSerializer": frozenset({
+        "Deserialize", "Serialize", "SerializeAsync", "SerializeToDocument",
+        "SerializeToElement", "SerializeToNode", "SerializeToUtf8Bytes",
+        "DeserializeAsync", "get_IsReflectionEnabledByDefault",
+    }),
+    # JsonDocument static methods (Parse, ParseAsync, ParseValue, TryParseValue)
+    "JsonDocument": frozenset({
+        "Parse", "ParseAsync", "ParseValue", "TryParseValue",
+    }),
+    # JsonElement static methods (Parse, ParseValue, TryParseValue, DeepEquals)
+    "JsonElement": frozenset({
+        "Parse", "ParseValue", "TryParseValue", "DeepEquals",
+    }),
+    # JsonNode static methods (Parse, ParseAsync, DeepEquals)
+    "JsonNode": frozenset({
+        "Parse", "ParseAsync", "DeepEquals",
+    }),
+    # JsonValue static method (Create)
+    "JsonValue": frozenset({
+        "Create",
+    }),
+    # JsonObject static method (Create)
+    "JsonObject": frozenset({
+        "Create",
+    }),
+    # JsonArray static method (Create)
+    "JsonArray": frozenset({
+        "Create",
+    }),
+    # JsonNamingPolicy static properties (CamelCase, KebabCaseLower, etc.)
+    "JsonNamingPolicy": frozenset({
+        "get_CamelCase", "get_KebabCaseLower", "get_KebabCaseUpper",
+        "get_SnakeCaseLower", "get_SnakeCaseUpper",
+    }),
+    # JsonSerializerOptions static properties (Default, Strict, Web)
+    "JsonSerializerOptions": frozenset({
+        "get_Default", "get_Strict", "get_Web",
+    }),
+    # ReferenceHandler static properties (IgnoreCycles, Preserve)
+    "ReferenceHandler": frozenset({
+        "get_IgnoreCycles", "get_Preserve",
+    }),
+    # JsonSchemaExporter static methods
+    "JsonSchemaExporter": frozenset({
+        "GetJsonSchemaAsNode",
+    }),
+    # JsonTypeInfo static methods
+    "JsonTypeInfo": frozenset({
+        "CreateJsonTypeInfo",
     }),
 }
 
@@ -202,6 +379,8 @@ _NEEDS_MANUAL_METHODS: set[tuple[str, str]] = {
     ("Object", "MemberwiseClone"),   # protected — cannot access via qualifier
     ("Delegate", "op_Equality"),     # operator — cannot call explicitly (CS0571)
     ("Delegate", "op_Inequality"),   # operator — cannot call explicitly (CS0571)
+    ("JsonNode", "op_Explicit"),     # operator — cannot call explicitly (CS0571)
+    ("JsonNode", "op_Implicit"),     # operator — cannot call explicitly (CS0571)
 }
 
 # Method overrides keyed by (type_name, method_name, param_count) → "skip" or custom expression
@@ -284,6 +463,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Monitor", "Pulse", 1): "skip",  # Requires held lock; can't express in single expression
     ("Monitor", "PulseAll", 1): "skip",  # Requires held lock
     ("Monitor", "Wait", 1): "skip",  # Requires held lock
+    # Volatile.Read has ref parameter, not out — use local with a lambda
+    ("Volatile", "Read", 1): "((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))()",
     # Delegate operations — use lambda-created delegates
     ("Delegate", "DynamicInvoke", 1): "new System.Action(() => {}).DynamicInvoke()",
     ("Delegate", "get_Method", 0): "new System.Action(() => {}).Method",
@@ -396,6 +577,343 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # Wait(bool, int) - fine
     # IsCompleted - fine
     # Status - fine
+    # Event accessors — cannot call add_/remove_ explicitly (CS0571)
+    ("ICommand", "add_CanExecuteChanged", 1): "skip",
+    ("ICommand", "remove_CanExecuteChanged", 1): "skip",
+    ("INotifyCollectionChanged", "add_CollectionChanged", 1): "skip",
+    ("INotifyCollectionChanged", "remove_CollectionChanged", 1): "skip",
+    ("INotifyDataErrorInfo", "add_ErrorsChanged", 1): "skip",
+    ("INotifyDataErrorInfo", "remove_ErrorsChanged", 1): "skip",
+    ("INotifyPropertyChanged", "add_PropertyChanged", 1): "skip",
+    ("INotifyPropertyChanged", "remove_PropertyChanged", 1): "skip",
+    ("INotifyPropertyChanging", "add_PropertyChanging", 1): "skip",
+    ("INotifyPropertyChanging", "remove_PropertyChanging", 1): "skip",
+    ("ObservableCollection", "add_CollectionChanged", 1): "skip",
+    ("ObservableCollection", "remove_CollectionChanged", 1): "skip",
+    # AsnReaderOptions struct property setters (CS0131 — can't set property on temporary value)
+    ("AsnReaderOptions", "set_SkipSetSortOrderVerification", 1): "skip",
+    # KeyedCollection 0-param get_Item (generic param stripped)
+    ("KeyedCollection", "get_Item", 0): "skip",
+    # ReadOnlyObservableCollection.Empty is static, needs generic type arg
+    ("ReadOnlyObservableCollection", "get_Empty", 0): "ReadOnlyObservableCollection<byte>.Empty",
+    # FormatterServices.Convert overload ambiguity (Type vs TypeCode)
+    ("FormatterConverter", "Convert", 2): "skip",
+    # ObjectManager.RecordArrayElementFixup overload ambiguity (int vs int[])
+    ("ObjectManager", "RecordArrayElementFixup", 3): "skip",
+    # ZipFile ExtractToDirectory/T disambiguation (bool vs Encoding?)
+    ("ZipFile", "ExtractToDirectory", 3): "skip",
+    ("ZipFile", "ExtractToDirectoryAsync", 4): "skip",
+    ("AsnReaderOptions", "set_UtcTimeTwoDigitYearMax", 1): "skip",
+    # Asn1Tag static methods called via instance (CS0176)
+    ("Asn1Tag", "Decode", 2): "Asn1Tag.Decode(default, out _)",
+    ("Asn1Tag", "TryDecode", 3): "Asn1Tag.TryDecode(default, out _, out _)",
+    # Asn1Tag operator calls (CS0571 — cannot explicitly call operator or accessor)
+    ("Asn1Tag", "op_Equality", 2): "default(Asn1Tag) == default(Asn1Tag)",
+    ("Asn1Tag", "op_Inequality", 2): "default(Asn1Tag) != default(Asn1Tag)",
+    # AsnWriter ambiguous overloads (CS0121 — default is ambiguous between overloads)
+    ("AsnWriter", "EncodedValueEquals", 1): "default(AsnWriter)!.EncodedValueEquals(default(AsnWriter)!)",
+    ("AsnWriter", "WriteInteger", 2): "default(AsnWriter)!.WriteInteger(42L, default)",
+    ("AsnWriter", "WriteNamedBitList", 2): "default(AsnWriter)!.WriteNamedBitList(DayOfWeek.Monday, default)",
+    # BrotliDecoder instance methods (CS0120 — called as static but are instance)
+    ("BrotliDecoder", "TryDecompress", 3): "BrotliDecoder.TryDecompress(default, default, out _)",  # static method override
+    # BrotliEncoder static methods (CS0176 — called via instance but are static)
+    ("BrotliEncoder", "GetMaxCompressedLength", 1): "BrotliEncoder.GetMaxCompressedLength(42)",
+    ("BrotliEncoder", "TryCompress", 3): "BrotliEncoder.TryCompress(default, default, out _)",
+    ("BrotliEncoder", "TryCompress", 5): "BrotliEncoder.TryCompress(default, default, out _, 42, 42)",
+    # PipeOptions/PipeScheduler static property accessors (CS0176 — called via instance but are static)
+    ("PipeOptions", "get_Default", 0): "PipeOptions.Default",
+    ("PipeScheduler", "get_Inline", 0): "PipeScheduler.Inline",
+    ("PipeScheduler", "get_ThreadPool", 0): "PipeScheduler.ThreadPool",
+    # PipeReader static factory methods (CS0176 — called via instance but are static)
+    ("PipeReader", "Create", 1): "PipeReader.Create(default(ReadOnlySequence<byte>))",
+    ("PipeReader", "Create", 2): "PipeReader.Create(new MemoryStream(), default(StreamPipeReaderOptions)!)",
+    # PipeReader ambiguous overloads (CS0121 — PipeWriter vs Stream for first param)
+    ("PipeReader", "CopyToAsync", 2): "default(PipeReader)!.CopyToAsync(default(PipeWriter)!, default)",
+    # PipeWriter static factory method (CS0176 — called via instance but are static)
+    ("PipeWriter", "Create", 2): "PipeWriter.Create(new MemoryStream(), default(StreamPipeWriterOptions)!)",
+    # BrotliStream ambiguous constructors (CS0121 — default ambiguous between CompressionLevel/CompressionMode)
+    ("BrotliStream", ".ctor", 2): "new BrotliStream(new MemoryStream(), CompressionLevel.Optimal)",
+    ("BrotliStream", ".ctor", 3): "new BrotliStream(new MemoryStream(), CompressionLevel.Optimal, true)",
+    # SseItemParser delegate methods — skip (delegate infrastructure, PNSE in .NET 6+)
+    ("SseItemParser", "BeginInvoke", 4): "skip",
+    ("SseItemParser", "EndInvoke", 1): "skip",
+    ("SseItemParser", "Invoke", 2): "skip",
+    ("SseItemParser", ".ctor", 2): "skip",
+    # SseParser static Create method (CS0176 — called via instance but is static)
+    ("SseParser", "Create", 1): "SseParser.Create(new MemoryStream())",
+    # SseFormatter static WriteAsync method (CS0176 — called via instance but is static)
+    ("SseFormatter", "WriteAsync", 3): "SseFormatter.WriteAsync(null!, new MemoryStream(), default)",
+    # SseItem init-only properties — can't assign on struct value (CS8852)
+    ("SseItem", "set_EventId", 1): "skip",
+    ("SseItem", "set_ReconnectionInterval", 1): "skip",
+    # SseParser read-only properties — can't assign (CS0200)
+    ("SseParser", "set_LastEventId", 1): "skip",
+    ("SseParser", "set_ReconnectionInterval", 1): "skip",
+    # IdentityReference operators (CS0571 — cannot explicitly call operator)
+    ("IdentityReference", "op_Equality", 2): "default(IdentityReference)! == default(IdentityReference)!",
+    ("IdentityReference", "op_Inequality", 2): "default(IdentityReference)! != default(IdentityReference)!",
+    # IdentityReferenceCollection 0-param get_Item (CS0443 — empty brackets) and set_Item
+    ("IdentityReferenceCollection", "get_Item", 0): "default(IdentityReferenceCollection)![0]",
+    ("IdentityReferenceCollection", "set_Item", 1): "skip",
+    # NTAccount operators (CS0571)
+    ("NTAccount", "op_Equality", 2): "default(NTAccount)! == default(NTAccount)!",
+    ("NTAccount", "op_Inequality", 2): "default(NTAccount)! != default(NTAccount)!",
+    # SecurityIdentifier operators (CS0571)
+    ("SecurityIdentifier", "op_Equality", 2): "default(SecurityIdentifier)! == default(SecurityIdentifier)!",
+    ("SecurityIdentifier", "op_Inequality", 2): "default(SecurityIdentifier)! != default(SecurityIdentifier)!",
+    # SecurityIdentifier constructor ambiguous between (byte[], int) and (WellKnownSidType, SecurityIdentifier?) (CS0121)
+    ("SecurityIdentifier", ".ctor", 2): "new SecurityIdentifier(System.Security.Principal.WellKnownSidType.WorldSid, null)",
+    # SafeAccessTokenHandle.InvalidHandle is a static property (CS0176)
+    ("SafeAccessTokenHandle", "get_InvalidHandle", 0): "SafeAccessTokenHandle.InvalidHandle",
+    # WindowsIdentity static methods (CS0176 — called via instance but are static)
+    ("WindowsIdentity", "GetAnonymous", 0): "WindowsIdentity.GetAnonymous()",
+    ("WindowsIdentity", "GetCurrent", 0): "WindowsIdentity.GetCurrent()",
+    ("WindowsIdentity", "GetCurrent", 1): "WindowsIdentity.GetCurrent(true)",
+
+    # === System.Runtime.InteropServices ===
+
+    # Com types — ref parameters (CLR & is ref not out in C#)
+    ("IAdviseSink", "OnDataChange", 2): "skip",
+    ("IDataObject", "DAdvise", 4): "skip",
+    ("IDataObject", "EnumDAdvise", 1): "skip",
+    ("IDataObject", "GetCanonicalFormatEtc", 2): "skip",
+    ("IDataObject", "GetData", 2): "skip",
+    ("IDataObject", "GetDataHere", 2): "skip",
+    ("IDataObject", "QueryGetData", 1): "skip",
+    ("IDataObject", "SetData", 3): "skip",
+    ("IEnumFORMATETC", "Clone", 1): "skip",
+    ("IEnumSTATDATA", "Clone", 1): "skip",
+
+    # ComWrappers static methods
+    ("ComWrappers", "GetIUnknownImpl", 3): "ComWrappers.GetIUnknownImpl(out _, out _, out _)",
+    ("ComWrappers", "RegisterForMarshalling", 1): "ComWrappers.RegisterForMarshalling(default(ComWrappers)!)",
+    ("ComWrappers", "RegisterForTrackerSupport", 1): "ComWrappers.RegisterForTrackerSupport(default(ComWrappers)!)",
+    ("ComWrappers", "TryGetComInstance", 2): "ComWrappers.TryGetComInstance(42, out _)",
+    ("ComWrappers", "TryGetObject", 2): "ComWrappers.TryGetObject(IntPtr.Zero, out _)",
+
+    # GCHandle static methods (struct — can't call static on default(GCHandle))
+    ("GCHandle", "Alloc", 1): "GCHandle.Alloc(42)",
+    ("GCHandle", "Alloc", 2): "GCHandle.Alloc(42, GCHandleType.Normal)",
+    ("GCHandle", "FromIntPtr", 1): "GCHandle.FromIntPtr(IntPtr.Zero)",
+    ("GCHandle", "ToIntPtr", 1): "GCHandle.ToIntPtr(default(GCHandle))",
+    # GCHandle operators (CS0571)
+    ("GCHandle", "op_Equality", 2): "default(GCHandle) == default(GCHandle)",
+    ("GCHandle", "op_Inequality", 2): "default(GCHandle) != default(GCHandle)",
+    ("GCHandle", "op_Explicit", 1): "skip",
+    # GCHandle set_Target on struct value (CS0131 — can't assign to value type temporary)
+    ("GCHandle", "set_Target", 1): "skip",
+
+    # SafeHandle.DangerousAddRef uses ref bool, not out bool (CS1620)
+    ("SafeHandle", "DangerousAddRef", 1): "skip",
+
+    # COMException/ExternalException constructors — disambiguate string+Exception vs string+int
+    ("COMException", ".ctor", 2): "new COMException(null, default(int))",
+    ("ExternalException", ".ctor", 2): "new ExternalException(null, default(int))",
+
+    # StructLayoutAttribute — disambiguate short vs LayoutKind
+    ("StructLayoutAttribute", ".ctor", 1): "new StructLayoutAttribute(LayoutKind.Auto)",
+    # MarshalAsAttribute — disambiguate short vs UnmanagedType
+    ("MarshalAsAttribute", ".ctor", 1): "new MarshalAsAttribute(UnmanagedType.Bool)",
+
+    # Marshal.Copy — overload ambiguity between byte[]/char[]/short[]/int[]
+    ("Marshal", "Copy", 4): "skip",
+
+    # Marshal.GetExceptionForHR with Guid& (CLR by-ref, C# by-value) — CS1615
+    ("Marshal", "GetExceptionForHR", 3): "Marshal.GetExceptionForHR(42, default(Guid), IntPtr.Zero)",
+    # Marshal.QueryInterface with ref Guid/out IntPtr
+    ("Marshal", "QueryInterface", 3): "skip",
+    # Marshal.ThrowExceptionForHR with Guid& (CLR by-ref, C# by-value)
+    ("Marshal", "ThrowExceptionForHR", 3): "skip",
+
+    # ObjectiveCMarshal.Initialize needs function pointers — can't auto-gen
+    ("ObjectiveCMarshal", "Initialize", 1): "skip",
+    ("ObjectiveCMarshal", "Initialize", 4): "skip",
+
+    # === Generated-marshalling — complex types with pointer/generic constraint issues ===
+
+    # ComExposedClassAttribute<T>: generic constraint IComExposedClass not satisfied by byte
+    ("ComExposedClassAttribute", "GetComInterfaceEntries", 1): "skip",
+    ("ComExposedClassAttribute", ".ctor", 0): "skip",
+
+    # ComObject instance method called as static
+    ("ComObject", "FinalRelease", 0): "skip",
+
+    # ComVariantMarshaller — type used as expression
+    ("ComVariantMarshaller", "ConvertToManaged", 1): "skip",
+    ("ComVariantMarshaller", "ConvertToUnmanaged", 1): "skip",
+    ("ComVariantMarshaller", "Free", 1): "skip",
+
+    # ComVariantMarshaller.RefPropagate — nested type, skipping
+    ("ComVariantMarshaller.RefPropagate", "Free", 0): "skip",
+    ("ComVariantMarshaller.RefPropagate", "FromManaged", 1): "skip",
+    ("ComVariantMarshaller.RefPropagate", "FromUnmanaged", 1): "skip",
+    ("ComVariantMarshaller.RefPropagate", "ToManaged", 0): "skip",
+    ("ComVariantMarshaller.RefPropagate", "ToUnmanaged", 0): "skip",
+
+    # ExceptionAs*Marshaller<T> — generic constraint issues
+    ("ExceptionAsDefaultMarshaller", "ConvertToUnmanaged", 1): "skip",
+    ("ExceptionAsHResultMarshaller", "ConvertToUnmanaged", 1): "skip",
+    ("ExceptionAsNaNMarshaller", "ConvertToUnmanaged", 1): "skip",
+
+    # IComExposedClass/Details — instance on interface + pointer return
+    ("IComExposedClass", "GetComInterfaceEntries", 1): "skip",
+    ("IComExposedDetails", "GetComInterfaceEntries", 1): "skip",
+
+    # IIUnknownCacheStrategy — pointer types + nested TableInfo
+    ("IIUnknownCacheStrategy", "Clear", 2): "skip",
+    ("IIUnknownCacheStrategy", "ConstructTableInfo", 3): "skip",
+    ("IIUnknownCacheStrategy", "TryGetTableInfo", 2): "skip",
+    ("IIUnknownCacheStrategy", "TrySetTableInfo", 2): "skip",
+
+    # IIUnknownCacheStrategy+TableInfo — nested type, pointer getters/setters
+    ("IIUnknownCacheStrategy.TableInfo", "get_ManagedType", 0): "skip",
+    ("IIUnknownCacheStrategy.TableInfo", "get_Table", 0): "skip",
+    ("IIUnknownCacheStrategy.TableInfo", "get_ThisPtr", 0): "skip",
+    ("IIUnknownCacheStrategy.TableInfo", "set_ManagedType", 1): "skip",
+    ("IIUnknownCacheStrategy.TableInfo", "set_Table", 1): "skip",
+    ("IIUnknownCacheStrategy.TableInfo", "set_ThisPtr", 1): "skip",
+
+    # IIUnknownDerivedDetails — interface instance methods
+    ("IIUnknownDerivedDetails", "get_Iid", 0): "skip",
+    ("IIUnknownDerivedDetails", "get_Implementation", 0): "skip",
+    ("IIUnknownDerivedDetails", "get_ManagedVirtualMethodTable", 0): "skip",
+
+    # IIUnknownInterfaceDetailsStrategy — interface instance methods
+    ("IIUnknownInterfaceDetailsStrategy", "GetComExposedTypeDetails", 1): "skip",
+    ("IIUnknownInterfaceDetailsStrategy", "GetIUnknownDerivedDetails", 1): "skip",
+
+    # IIUnknownInterfaceType — static abstract interface members
+    ("IIUnknownInterfaceType", "get_Iid", 0): "skip",
+    ("IIUnknownInterfaceType", "get_ManagedVirtualMethodTable", 0): "skip",
+
+    # IIUnknownStrategy — pointer params
+    ("IIUnknownStrategy", "CreateInstancePointer", 1): "skip",
+    ("IIUnknownStrategy", "QueryInterface", 3): "skip",
+    ("IIUnknownStrategy", "Release", 1): "skip",
+
+    # IUnknownDerivedAttribute<T,TImpl> — generic constraint + arity 2
+    ("IUnknownDerivedAttribute", "get_Iid", 0): "skip",
+    ("IUnknownDerivedAttribute", "get_Implementation", 0): "skip",
+    ("IUnknownDerivedAttribute", "get_ManagedVirtualMethodTable", 0): "skip",
+    ("IUnknownDerivedAttribute", ".ctor", 0): "skip",
+
+    # IUnmanagedVirtualMethodTableProvider — interface instance method
+    ("IUnmanagedVirtualMethodTableProvider", "GetVirtualMethodTableInfoForKey", 1): "skip",
+
+    # StrategyBasedComWrappers — static property accessors called via instance
+    ("StrategyBasedComWrappers", "get_DefaultIUnknownInterfaceDetailsStrategy", 0): "skip",
+    ("StrategyBasedComWrappers", "get_DefaultIUnknownStrategy", 0): "skip",
+
+    # UniqueComInterfaceMarshaller<T> — generic + pointer params
+    ("UniqueComInterfaceMarshaller", "ConvertToManaged", 1): "skip",
+    ("UniqueComInterfaceMarshaller", "ConvertToUnmanaged", 1): "skip",
+
+    # OSPlatform static properties (struct — can't call static on instance)
+    ("OSPlatform", "get_Linux", 0): "OSPlatform.Linux",
+    ("OSPlatform", "get_OSX", 0): "OSPlatform.OSX",
+    ("OSPlatform", "get_Windows", 0): "OSPlatform.Windows",
+    # OSPlatform operators (CS0571)
+
+    # VirtualMethodTableInfo — void*/void** pointers need unsafe context
+    ("VirtualMethodTableInfo", ".ctor", 2): "skip",
+    ("VirtualMethodTableInfo", "Deconstruct", 2): "skip",
+    ("VirtualMethodTableInfo", "get_ThisPointer", 0): "skip",
+    ("VirtualMethodTableInfo", "get_VirtualMethodTable", 0): "skip",
+    ("OSPlatform", "op_Equality", 2): "default(OSPlatform) == default(OSPlatform)",
+    ("OSPlatform", "op_Inequality", 2): "default(OSPlatform) != default(OSPlatform)",
+
+    # System.Threading.Tasks.Parallel — all methods involve delegate params, skip
+    # System.Threading.Tasks.Parallel — generic methods with delegate params, skip
+    ("Parallel", "For", 3): "Parallel.For(0, 42, (int x) => { })",
+    ("Parallel", "For", 4): "Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })",
+    ("Parallel", "For", 5): "skip",          # For{TLocal} — generic type param
+    ("Parallel", "ForAsync", 3): "skip",     # ForAsync{T} — generic type param
+    ("Parallel", "ForEach", 2): "skip",      # ForEach{TSource} — generic type param
+    ("Parallel", "ForEach", 3): "skip",
+    ("Parallel", "ForEach", 4): "skip",
+    ("Parallel", "ForEach", 5): "skip",
+    ("Parallel", "ForEachAsync", 2): "skip", # ForEachAsync{TSource} — generic type param
+    ("Parallel", "ForEachAsync", 3): "skip",
+    ("Parallel", "Invoke", 1): "Parallel.Invoke(() => { })",
+    ("Parallel", "Invoke", 2): "skip",       # Invoke(ParallelOptions, Action[]) — array init
+
+    # === System.Text.Json families ===
+
+    # JsonSerializer static class — Deserialize ambiguity (CS0121) and Serialize ambiguity
+    ("JsonSerializer", "Deserialize", 2): "JsonSerializer.Deserialize(default(JsonDocument), default(JsonTypeInfo))",
+    ("JsonSerializer", "Deserialize", 3): "JsonSerializer.Deserialize(default(JsonDocument), default(Type), default(JsonSerializerOptions))",
+    # Serialize with 2 params — TValue overloads; only (Object, JsonTypeInfo) is non-generic
+    ("JsonSerializer", "Serialize", 2): "JsonSerializer.Serialize(42, default(JsonTypeInfo)!)",
+    ("JsonSerializer", "Serialize", 3): "JsonSerializer.Serialize(42, typeof(byte), default(JsonSerializerOptions)!)",
+    ("JsonSerializer", "Serialize", 4): "JsonSerializer.Serialize(new MemoryStream(), 42, typeof(byte), default(JsonSerializerOptions)!)",
+    # SerializeAsync ambiguity
+    ("JsonSerializer", "SerializeAsync", 4): "JsonSerializer.SerializeAsync(new MemoryStream(), 42, default(JsonTypeInfo)!, default)",
+    ("JsonSerializer", "SerializeAsync", 5): "JsonSerializer.SerializeAsync(new MemoryStream(), 42, typeof(byte), default(JsonSerializerOptions)!, default)",
+
+    # JsonElement empty-bracket indexer (CS0443): get_Item with 0 params
+    ("JsonElement", "get_Item", 0): "skip",
+
+    # JsonDocument ParseValue/TryParseValue — ref Utf8JsonReader param (CS1620: out _ vs ref)
+    ("JsonDocument", "ParseValue", 1): "skip",
+    ("JsonDocument", "TryParseValue", 2): "skip",
+    # JsonElement ParseValue/TryParseValue — ref Utf8JsonReader param (CS1620)
+    ("JsonElement", "ParseValue", 1): "skip",
+    ("JsonElement", "TryParseValue", 2): "skip",
+
+    # JsonNode static methods ref Utf8JsonReader (CS1615: can't use out _ for ref param)
+    ("JsonNode", "Parse", 2): "skip",
+    # JsonNode.Parse with 3 params — ReadOnlySpan<byte> vs Stream ambiguity (CS0121)
+    ("JsonNode", "Parse", 3): "skip",
+    # JsonNode empty-bracket indexer + setter (CS0443): get_Item/set_Item with 0/1 params
+    ("JsonNode", "get_Item", 0): "skip",
+    ("JsonNode", "set_Item", 1): "skip",
+    # JsonNode generic method (GetValue{T}) — can't resolve type parameter
+    ("JsonNode", "GetValue{T}", 0): "skip",
+    # JsonNode.set_Parent — assign to read-only property
+    ("JsonNode", "set_Parent", 1): "skip",
+
+    # Utf8JsonReader readonly property setters (CS0200)
+    ("Utf8JsonReader", "set_ValueSpan", 1): "skip",
+    ("Utf8JsonReader", "set_TokenStartIndex", 1): "skip",
+    ("Utf8JsonReader", "set_HasValueSequence", 1): "skip",
+    ("Utf8JsonReader", "set_ValueIsEscaped", 1): "skip",
+    ("Utf8JsonReader", "set_ValueSequence", 1): "skip",
+    # Utf8JsonReader.CopyString — Span<byte> vs Span<char> ambiguity (CS0121)
+    ("Utf8JsonReader", "CopyString", 1): "skip",
+
+    # Utf8JsonWriter readonly property setters (CS0200) and Reset ambiguity (CS0121)
+    ("Utf8JsonWriter", "set_BytesPending", 1): "skip",
+    ("Utf8JsonWriter", "set_BytesCommitted", 1): "skip",
+
+    # JsonArray constructors — ambiguity between (JsonNodeOptions?, ReadOnlySpan) and params array (CS0121)
+    ("JsonArray", ".ctor", 1): "skip",
+    ("JsonArray", ".ctor", 2): "skip",
+
+    # JsonObject constructor — param parsing splits inner comma in KeyValuePair (CS1729)
+    ("JsonObject", ".ctor", 3): "skip",
+
+    # JsonSerializerOptions constructor — default ambiguity (CS0121)
+    ("JsonSerializerOptions", ".ctor", 1): "new JsonSerializerOptions(default(JsonSerializerDefaults))",
+
+    # JsonConverter`1 methods called on non-generic JsonConverter (CS1061)
+    # HandleNull, Read, ReadAsPropertyName exist only on JsonConverter<T>
+    # Read/ReadAsPropertyName have ref Utf8JsonReader param — can't use out _ (CS1620)
+    ("JsonConverter", "get_HandleNull", 0): "default(JsonConverter<byte>)!.HandleNull",
+    ("JsonConverter", "Read", 3): "skip",
+    ("JsonConverter", "ReadAsPropertyName", 3): "skip",
+
+    # ReferenceHandler`1::CreateResolver called on non-generic ReferenceHandler (CS1061)
+    # byte doesn't satisfy 'where T : ReferenceResolver, new()' constraint (CS0315)
+    ("ReferenceHandler", "CreateResolver", 0): "skip",
+    # ReferenceHandler`1::.ctor — byte doesn't satisfy constraint (CS0315)
+    ("ReferenceHandler", ".ctor", 0): "skip",
+
+    # JsonSerializerOptions.AddContext{TContext} — generic constraint can't satisfy with byte
+    ("JsonSerializerOptions", "AddContext{TContext}", 0): "skip",
+
+    # JsonTypeInfo readonly property setters (CS0200)
+    ("JsonTypeInfo", "set_IsReadOnly", 1): "skip",
+    ("JsonTypeInfo", "set_ConstructorAttributeProvider", 1): "skip",
 }
 
 # Generic arity → concrete type arguments for generated code.
@@ -464,6 +982,35 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.RuntimeFieldHandle": "default(System.RuntimeFieldHandle)",
     "System.IFormatProvider": "null",
     "System.Threading.ThreadPriority": "System.Threading.ThreadPriority.Normal",
+    # --- System.Text.Json families: type default expressions ---
+    "System.Buffers.ReadOnlySequence{System.Byte}": "default(ReadOnlySequence<byte>)",
+    "System.ReadOnlyMemory{System.Byte}": "default(ReadOnlyMemory<byte>)",
+    "System.ReadOnlyMemory{System.Char}": "default(ReadOnlyMemory<char>)",
+    "System.Span{System.Byte}": "default(Span<byte>)",
+    "System.Span{System.Char}": "default(Span<char>)",
+    "System.ReadOnlySpan{System.Byte}": "default(ReadOnlySpan<byte>)",
+    "System.ReadOnlySpan{System.Char}": "default(ReadOnlySpan<char>)",
+    "System.Buffers.IBufferWriter{System.Byte}": "default(IBufferWriter<byte>)",
+    "System.Text.Json.JsonEncodedText": "default(JsonEncodedText)",
+    "System.Action": "null!",
+    "System.AsyncCallback": "null!",
+    "System.IAsyncResult": "null!",
+    "System.IO.Stream": "new MemoryStream()",
+    "System.Reflection.Assembly": "typeof(byte).Assembly",
+    "System.Reflection.MemberInfo": "null!",
+    "System.Reflection.MethodInfo": "null!",
+    "System.Reflection.Module": "null!",
+    "System.Runtime.Serialization.ISurrogateSelector": "null!",
+    "System.Runtime.Serialization.SerializationBinder": "null!",
+    "System.Runtime.Serialization.SerializationInfo": "null!",
+    "System.Runtime.Serialization.StreamingContext": "default",
+    "System.Runtime.Serialization.Formatters.FormatterAssemblyStyle": "default",
+    "System.Runtime.Serialization.Formatters.TypeFilterLevel": "default",
+    "System.Security.Principal.WindowsIdentity": "null!",
+    "System.Security.SecureString": "null!",
+    "System.Text.Json.JsonSerializerOptions": "null!",
+    "System.Text.Json.Serialization.Metadata.JsonTypeInfo": "null!",
+    "System.Threading.CancellationToken": "default",
 }
 
 TYPE_ALTERNATIVE_MAP: dict[str, str] = {
@@ -519,7 +1066,16 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
 
     # Extract type short name: "System.Convert" -> "Convert"
     raw_type = type_path.split("/", 1)[1] if "/" in type_path else type_path
-    type_name = raw_type.rsplit(".", 1)[-1]
+    # CLR nested type separator (+) → C# dot (.) for valid C# syntax.
+    # For nested types, keep parent class in short name:
+    #   "ComVariantMarshaller+RefPropagate" → "ComVariantMarshaller.RefPropagate"
+    has_nested = "+" in raw_type
+    raw_type = raw_type.replace("+", ".")
+    if has_nested:
+        parts = raw_type.rsplit(".", 2)
+        type_name = ".".join(parts[-2:]) if len(parts) >= 2 else raw_type
+    else:
+        type_name = raw_type.rsplit(".", 1)[-1]
 
     # Strip CLR backtick suffix: "Nullable`1" -> "Nullable", but record arity
     arity = 0
@@ -673,14 +1229,27 @@ def _has_ref_param(param_types: list[str]) -> bool:
 
 
 def _default_expr_for_type(csharp_type: str, type_map: dict[str, str] | None = None) -> str:
-    """Generate default expression using an alternative type map."""
+    """Generate default expression using an alternative type map.
+
+    Handles out/ref parameters (types ending with &) by prepending 'out '.
+    The actual parameter is passed as a discard target for out params,
+    or as the default value for non-ref types.
+    """
     tm = type_map or TYPE_DEFAULT_MAP
-    bare = csharp_type.rstrip("&*?").strip()
+
+    # Handle out/ref parameters — strip trailing & and prepend "out "
+    prefix = ""
+    ct = csharp_type.strip()
+    if ct.endswith("&"):
+        prefix = "out "
+        ct = ct[:-1].strip()
+
+    bare = ct.rstrip("*?").strip()
     if bare in tm:
-        return tm[bare]
+        return prefix + tm[bare]
     if bare.endswith("[]"):
-        return f"Array.Empty<{bare[:-2]}>()"
-    return "null!"
+        return prefix + f"Array.Empty<{bare[:-2]}>()"
+    return prefix + "default"
 
 
 def _build_call_expr_with_args(parsed: dict[str, Any], args: str, instance_map: dict[str, str] | None = None) -> str:
@@ -745,11 +1314,10 @@ def _build_call_expr_with_refs(
     for i, pt in enumerate(param_types):
         pt = pt.strip()
         if pt.endswith("&"):
-            bare = pt.rstrip("&").strip()
-            default_val = _default_expr_for_type(bare, tm)
-            local_name = f"refLocal_{i}"
-            prelude_lines.append(f"    var {local_name} = {default_val};")
-            call_args.append(f"ref {local_name}")
+            # Use out _ (discard) for all & params.
+            # The CLR signature doesn't distinguish out from ref, but most & params
+            # are out in practice. Methods with true ref params get _METHOD_OVERRIDES.
+            call_args.append("out _")
         else:
             call_args.append(_default_expr_for_type(pt, tm))
 
@@ -771,11 +1339,37 @@ def _ref_return_expr(parsed: dict[str, Any]) -> str:
     return " ^ ".join(ref_locals)
 
 
+def _normalize_clr_type(ret: str) -> str:
+    """Normalize a CLR type string to a canonical form for matching.
+
+    Strips generic/array curly braces to match against the type maps:
+      'System.ReadOnlySpan{System.Byte}' -> 'System.ReadOnlySpan'
+      'System.Nullable{System.Int32}'    -> 'System.Nullable'
+      'System.Byte{}'                    -> 'System.Byte[]'
+    """
+    if ret.endswith("{}"):
+        return ret[:-2] + "[]"
+    brace = ret.find("{")
+    if brace >= 0:
+        return ret[:brace]
+    return ret
+
+
+def _is_generic_task(ret: str) -> bool:
+    """Check if the return type is System.Threading.Tasks.Task<T> in CLR format."""
+    return (
+        ret == "System.Threading.Tasks.Task"
+        or ret.startswith("System.Threading.Tasks.Task{")
+    )
+
+
 def _cast_return_to_int(ret: str, call_expr: str) -> str:
     """Cast a method's return value to int for checksum return."""
     ret = ret.strip()
     if ret == "System.Void" or not ret:
         return call_expr
+
+    # Exact matches for primitive types
     if ret == "System.Int32":
         return call_expr
     if ret in ("System.Int64", "System.UInt64", "System.UInt32"):
@@ -791,40 +1385,48 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
         return f"(int)({call_expr})"
     if ret == "System.String":
         return f"(({call_expr}).Length)"
-    if ret in ("System.Object", "System.DateTime", "System.TimeSpan",
-               "System.Exception", "System.Attribute",
-               "System.RuntimeTypeHandle", "System.RuntimeMethodHandle",
-               "System.RuntimeFieldHandle", "System.Version",
-               "System.Reflection.Module", "System.IO.Stream",
-               "System.Runtime.CompilerServices.FormattableString",
-               "System.Runtime.CompilerServices.RuntimeWrappedException",
-               "System.Globalization.DateTimeFormatInfo",
-               "System.Globalization.NumberFormatInfo",
-               "System.Globalization.CultureInfo",
-               "System.Globalization.CompareInfo",
-               "System.Globalization.TextInfo"):
+
+    # Types that use .GetHashCode() for checksum
+    _HASHCODE_TYPES = frozenset({
+        "System.Object", "System.DateTime", "System.TimeSpan",
+        "System.Exception", "System.Attribute", "System.Enum",
+        "System.DateTimeOffset", "System.Collections.BitArray",
+        "System.RuntimeTypeHandle", "System.RuntimeMethodHandle",
+        "System.RuntimeFieldHandle", "System.Version",
+        "System.Reflection.Module", "System.IO.Stream",
+        "System.Runtime.CompilerServices.FormattableString",
+        "System.Runtime.CompilerServices.RuntimeWrappedException",
+        "System.Globalization.DateTimeFormatInfo",
+        "System.Globalization.NumberFormatInfo",
+        "System.Globalization.CultureInfo",
+        "System.Globalization.CompareInfo",
+        "System.Globalization.TextInfo",
+        "System.Type", "System.Guid", "System.Reflection.MethodInfo",
+        "System.Reflection.AssemblyName", "System.Reflection.Assembly",
+        "System.Reflection.MemberInfo", "System.Reflection.FieldInfo",
+        "System.Reflection.PropertyInfo", "System.Reflection.EventInfo",
+        "System.Reflection.ParameterInfo", "System.Reflection.ConstructorInfo",
+        "System.Array", "System.Delegate", "System.MulticastDelegate",
+        "System.Threading.Tasks.Task", "System.Threading.Thread",
+    })
+    normal = _normalize_clr_type(ret)
+    if normal in _HASHCODE_TYPES:
         return f"(({call_expr}).GetHashCode())"
-    if ret in ("System.Type", "System.Guid", "System.Reflection.MethodInfo",
-               "System.Reflection.AssemblyName", "System.Reflection.Assembly",
-               "System.Reflection.MemberInfo", "System.Reflection.FieldInfo",
-               "System.Reflection.PropertyInfo", "System.Reflection.EventInfo",
-               "System.Reflection.ParameterInfo", "System.Reflection.ConstructorInfo",
-               "System.Reflection.Module", "System.Array",
-               "System.Delegate", "System.MulticastDelegate",
-               "System.Threading.Tasks.Task", "System.Threading.Thread"):
+
+    # Generic/complex type handling by normalization prefix
+    if normal.startswith("System.Span") or normal.startswith("System.ReadOnlySpan"):
         return f"(({call_expr}).GetHashCode())"
-    if ret == "System.Span" or ret.startswith("System.Span`") or ret == "System.ReadOnlySpan" or ret.startswith("System.ReadOnlySpan`"):
+    if _is_generic_task(ret):
         return f"(({call_expr}).GetHashCode())"
-    if ret.startswith("System.Threading.Tasks.Task"):
-        return f"(({call_expr}).GetHashCode())"
-    if ret.endswith("[]"):
-        # Override expressions may already return int (e.g., List<T>(...).Count)
-        # instead of an array. Detect int-returning patterns to avoid adding
-        # .Length to something that already produces an int.
+
+    # Array types in both CLR format (System.Byte{}) and C# format (byte[])
+    if normal.endswith("[]") or ret.endswith("[]"):
         if re.search(r'\.(Count|Length|GetHashCode)\s*\)?\s*$', call_expr.strip()):
             return f"({call_expr})"
         return f"(({call_expr}).Length)"
-    return f"(int)({call_expr})"
+
+    # Fallback: use .GetHashCode() which works for all types
+    return f"(({call_expr}).GetHashCode())"
 
 
 def _is_auto_callable(parsed: dict[str, Any]) -> bool:
@@ -899,9 +1501,19 @@ def _build_call_expr(
         else:
             return override
 
+    # WindowsPrincipal.IsInRole with WindowsBuiltInRole — disambiguate from int overload
+    if (
+        param_count == 1
+        and type_name == "WindowsPrincipal"
+        and method_name == "IsInRole"
+        and parsed["param_types"][0] != "System.String"
+        and parsed["param_types"][0] != "System.Int32"
+    ):
+        return "default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier))"
+
     # Constructor: Type..ctor(...) → new Type(...)
     if method_name in (".ctor", ".cctor"):
-        return _build_ctor_expr(type_name, args)
+        return _build_ctor_expr(type_name, args, parsed.get("type_arity", 0))
 
     # Property accessor (get_Xxx / set_Xxx) → use property/indexer syntax
     expr = _try_property_access(type_name, method_name, args)
@@ -931,12 +1543,22 @@ def _build_call_expr(
     return f"{type_name}.{method_name}({args})"
 
 
+# Map generic arity → C# type arguments for constructor/instance expressions
+_GENERIC_ARGS_MAP: dict[int, str] = {
+    1: "<byte>",
+    2: "<byte, byte>",
+    3: "<byte, byte, byte>",
+}
 
-def _build_ctor_expr(type_name: str, args: str) -> str:
+
+def _build_ctor_expr(type_name: str, args: str, type_arity: int = 0) -> str:
     """Build constructor expression, handling generic types.
 
     e.g. ``Span`1`` → ``new Span<byte>(42)``
     """
+    if type_arity > 0:
+        targs = _GENERIC_ARGS_MAP.get(type_arity, "")
+        return f"new {type_name}{targs}({args})"
     m = re.match(r"(\w+)`(\d+)", type_name)
     if m:
         bare = m.group(1)
@@ -992,6 +1614,10 @@ def _try_property_access(type_name: str, method_name: str, args: str) -> str | N
             return f"{type_name}.{prop} = {args}"
         if prop == "Item":
             inst = INSTANCE_EXPR_MAP.get(type_name, type_name)
+            if method_name.startswith("set_"):
+                # set_Item(idx, val) → inst[idx] = val
+                idx, val = args.rsplit(", ", 1) if ", " in args else ("", args)
+                return f"{inst}[{idx}] = {val}"
             return f"{inst}[{args}]"
         inst = INSTANCE_EXPR_MAP.get(type_name)
         if inst is not None:
@@ -1141,6 +1767,28 @@ def _fix_acronyms(s: str) -> str:
     return s
 
 
+def _namespace_from_type_path(type_path: str) -> str | None:
+    """Extract the C# namespace from a CLR type_path (format: AssemblyName/Namespace.TypeName).
+
+    Example: "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder" -> "System.Formats.Asn1"
+    """
+    if "/" not in type_path:
+        return None
+    full_type = type_path.split("/", 1)[1]  # "System.Formats.Asn1.AsnDecoder"
+    last_dot = full_type.rfind(".")
+    if last_dot < 0:
+        return None
+    return full_type[:last_dot]
+
+
+_BASE_USING_NAMESPACES = frozenset({
+    "System", "System.IO", "System.Threading", "System.Threading.Tasks",
+    "System.Globalization", "System.Linq", "System.Runtime.CompilerServices",
+    "System.Runtime.InteropServices", "System.Collections.Generic",
+    "System.Reflection",
+})
+
+
 def _member_name(prefix: str, method_subject_id: str) -> str:
     sanitized = re.sub(r"[^A-Za-z0-9]+", "_", method_subject_id).strip("_")
     sanitized = sanitized[:120] if sanitized else "Placeholder"
@@ -1178,6 +1826,7 @@ def _generated_source(
     No xunit dependency — this file is compiled into the src Library project.
     """
     prod_name = class_name.replace("Tests", "")
+    extra_usings = ""
     if not method_subject_ids:
         members = (
             "    // No methods to auto-generate for this family.\n"
@@ -1245,8 +1894,21 @@ def _generated_source(
             block = f"    // {type_name}.{method_name}\n{test_code}\n\n{bench_code}\n\n{hu_code}"
             parts.append(block)
         members = "\n\n".join(parts)
+
+        # Collect per-DLL namespaces from method subject IDs, minus already-covered base usings
+        extra_ns: set[str] = set()
+        for method_subject_id in method_subject_ids:
+            parsed = _parse_method_subject_id(method_subject_id)
+            ns = _namespace_from_type_path(parsed["type_path"])
+            if ns and ns not in _BASE_USING_NAMESPACES:
+                extra_ns.add(ns)
+        extra_usings = "\n".join(f"using {ns};" for ns in sorted(extra_ns))
+        if extra_usings:
+            extra_usings += "\n"
+
     return (
         f"{_BASE_USINGS}\n"
+        f"{extra_usings}"
         "using Chaos.TestFramework;\n"
         "\n"
         f"// Auto-generated skeleton for {display_name} ({family_id}).\n"

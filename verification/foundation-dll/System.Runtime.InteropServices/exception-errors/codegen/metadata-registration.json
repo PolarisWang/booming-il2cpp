@@ -1,0 +1,226 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ExceptionErrorsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "name": "ExceptionErrorsSubjects",
+      "displayName": "ExceptionErrorsSubjects",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::_exitCode",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_17:System.Void()",
+      "name": "Subject_17",
+      "definitionSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "ExceptionErrorsSubjects/ExceptionErrorsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

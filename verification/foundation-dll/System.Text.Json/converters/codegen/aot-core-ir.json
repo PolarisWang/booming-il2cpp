@@ -1,0 +1,1041 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-0",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_0:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_0:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-0",
+        "signature": "System.Void ConvertersSubjects::Subject_0()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 27,
+          "handlerOffset": 28,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Boolean",
+          "callee": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ConvertersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ConvertersSubjects",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-1",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_1:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_1:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_1:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-1",
+        "signature": "System.Void ConvertersSubjects::Subject_1()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Type",
+          "callee": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ConvertersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ConvertersSubjects",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-2",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_2:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_2:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-2",
+        "signature": "System.Void ConvertersSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 27,
+          "handlerOffset": 28,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Boolean",
+          "callee": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ConvertersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ConvertersSubjects",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-3",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_3:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_3:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-3",
+        "signature": "System.Void ConvertersSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull:System.Boolean()",
+            "openDefinitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull:System.Boolean()",
+              "definitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+              "displaySubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ConvertersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ConvertersSubjects",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-4",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_4:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_4:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-4",
+        "signature": "System.Void ConvertersSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Type",
+          "callee": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ConvertersSubjects",
+            "subjectKind": "field",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ConvertersSubjects",
+            "subjectId": "ConvertersSubjects/ConvertersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-5",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_5:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_5:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-5",
+        "signature": "System.Void ConvertersSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-6",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_6:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_6:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-6",
+        "signature": "System.Void ConvertersSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-7",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_7:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_7:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-7",
+        "signature": "System.Void ConvertersSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    },
+    {
+      "methodId": "converters-subjects.converters-subjects.subject-8",
+      "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_8:System.Void()",
+      "signature": "System.Void ConvertersSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "ConvertersSubjects",
+        "declaringTypeSubjectId": "ConvertersSubjects/ConvertersSubjects",
+        "definitionSubjectId": "ConvertersSubjects/ConvertersSubjects::Subject_8:System.Void()",
+        "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_8:System.Void()",
+        "methodId": "converters-subjects.converters-subjects.subject-8",
+        "signature": "System.Void ConvertersSubjects::Subject_8()"
+      },
+      "nativeSymbol": "ConvertersSubjects_ConvertersSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ConvertersSubjects"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NtAccountSubjects",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReadFlushResultsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "name": "ReadFlushResultsSubjects",
+      "displayName": "ReadFlushResultsSubjects",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::_exitCode",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

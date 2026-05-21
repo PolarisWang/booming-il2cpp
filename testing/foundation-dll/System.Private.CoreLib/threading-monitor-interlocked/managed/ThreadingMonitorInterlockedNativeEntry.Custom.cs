@@ -12,7 +12,8 @@ using System.Threading;
 
 public static partial class ThreadingMonitorInterlockedNativeEntry
 {
-    // _exitCode is auto-generated in the entry class for non-probe builds.
+    // Inlined exit code — same pattern as the auto-generated subjects class
+    public static int _exitCode;
 
     // [0] System.Threading.Monitor::Enter(System.Object)
     public static void CustomEntryMethod0()

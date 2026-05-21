@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CcwBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CcwBasicSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "55761a44-41ae-4870-94ec-f25e225b1041",
+  "inputModuleVersionId": "9a6a5170-53e3-45dc-b4c4-7f2be397b183",
   "artifacts": [
     {
       "kind": "typedIlIr",

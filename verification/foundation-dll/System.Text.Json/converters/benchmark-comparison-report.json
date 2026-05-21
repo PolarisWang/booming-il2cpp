@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/converters",
+  "summary": {
+    "totalMethods": 9,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 9,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::CanConvert:System.Boolean(System.Type)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_HandleNull:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_Type:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Read:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::ReadAsPropertyName:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Write:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::WriteAsPropertyName:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

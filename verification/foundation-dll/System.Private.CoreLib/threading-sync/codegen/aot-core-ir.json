@@ -3,163 +3,66 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.subject-0",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::Subject_0()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-0",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
+      "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_0()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.subject-0",
-        "signature": "System.Void ThreadingSyncSubjects::Subject_0()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-0",
+        "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_0()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_0",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": -1342177280,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 3,
-          "resultType": "System.Threading/SemaphoreSlim",
-          "callee": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/SemaphoreSlim",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 8,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
           "ilOffset": 9,
           "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
-    },
-    {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.subject-1",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::Subject_1()",
-      "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.subject-1",
-        "signature": "System.Void ThreadingSyncSubjects::Subject_1()"
-      },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1",
-      "isStatic": true,
-      "returnType": "System.Void",
-      "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
-      },
-      "parameterCount": 0,
-      "parameterAbis": [],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 3,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 5,
-          "resultType": "System.Threading/SemaphoreSlim",
-          "callee": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/SemaphoreSlim",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
+          "op": "ret",
+          "opCode": 53,
           "ilOffset": 10,
           "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 11,
-          "isPreserveSig": false
         }
       ],
       "isPInvoke": false,
@@ -170,76 +73,68 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.subject-5",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::Subject_5()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-1",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
+      "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_1()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.subject-5",
-        "signature": "System.Void ThreadingSyncSubjects::Subject_5()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-1",
+        "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_1()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_1",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": -1342177279,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 2,
-          "resultType": "System.Threading/ManualResetEvent",
-          "callee": "System.Threading/ManualResetEvent::.ctor:System.Void(System.Boolean)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/ManualResetEvent::.ctor:System.Void(System.Boolean)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/ManualResetEvent",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
           "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 8,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -251,76 +146,68 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.subject-9",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::Subject_9()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-5",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
+      "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_5()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.subject-9",
-        "signature": "System.Void ThreadingSyncSubjects::Subject_9()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-5",
+        "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_5()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_5",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": -1342177275,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 2,
-          "resultType": "System.Threading/AutoResetEvent",
-          "callee": "System.Threading/AutoResetEvent::.ctor:System.Void(System.Boolean)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/AutoResetEvent::.ctor:System.Void(System.Boolean)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/AutoResetEvent",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
           "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 8,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -332,76 +219,68 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.subject-13",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::Subject_13()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-9",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
+      "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_9()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.subject-13",
-        "signature": "System.Void ThreadingSyncSubjects::Subject_13()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-9",
+        "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_9()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_9",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 0,
       "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": -1342177271,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 2,
-          "resultType": "System.Threading/SpinLock",
-          "callee": "System.Threading/SpinLock::.ctor:System.Void(System.Boolean)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/SpinLock::.ctor:System.Void(System.Boolean)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/SpinLock",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
           "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 8,
+          "ilOffset": 10,
           "isPreserveSig": false
         }
       ],
@@ -413,21 +292,921 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-2",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_2()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-13",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
+      "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_13()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-2",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_2()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.subject-13",
+        "signature": "System.Int32 ThreadingSyncPatchEntry::Subject_13()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_2",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": -1342177267,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 9,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
+    },
+    {
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.run",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Run:System.Void(System.Int32)",
+      "signature": "System.Void ThreadingSyncPatchEntry::Run(System.Int32)",
+      "identity": {
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Run:System.Void(System.Int32)",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Run:System.Void(System.Int32)",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.run",
+        "signature": "System.Void ThreadingSyncPatchEntry::Run(System.Int32)"
+      },
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Run_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 2,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 226,
+          "handlerOffset": 227,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            85,
+            96,
+            104,
+            112,
+            120,
+            128,
+            136,
+            144,
+            152,
+            160,
+            168,
+            176,
+            184,
+            192,
+            200,
+            208,
+            216
+          ],
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 80,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 85,
+          "resultType": "System.Int32",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_0:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_0",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 90,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 91,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 96,
+          "resultType": "System.Int32",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_1:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_1",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 101,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 102,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 104,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod2",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 110,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 112,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod3",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 118,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 120,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod4",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 126,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 128,
+          "resultType": "System.Int32",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_5:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_5",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 133,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 134,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 136,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod6",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 142,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 144,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod7",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 150,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 152,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod8",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 158,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 160,
+          "resultType": "System.Int32",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_9:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_9",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 165,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 166,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 168,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod10",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 174,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 176,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod11",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 182,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 184,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod12",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 190,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 192,
+          "resultType": "System.Int32",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::Subject_13:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_Subject_13",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 197,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 198,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 200,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod14",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 206,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 208,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod15",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 214,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 216,
+          "resultType": "System.Void",
+          "callee": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "method",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod16",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 224,
+          "ilOffset": 222,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 238,
+          "ilOffset": 225,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 227,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 229,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
+          "ilOffset": 230,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectKind": "field",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 238,
+          "ilOffset": 236,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 238,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
+    },
+    {
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method2",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod2()",
+      "identity": {
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod2:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method2",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod2()"
+      },
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod2",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -443,24 +1222,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 1,
           "resultType": "SemaphoreSlim",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -495,24 +1274,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 12,
           "resultType": "SemaphoreSlim",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -565,21 +1344,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-3",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_3()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method3",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod3()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-3",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_3()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod3:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method3",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod3()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_3",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod3",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -595,24 +1374,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 1,
           "resultType": "SemaphoreSlim",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -647,24 +1426,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 12,
           "resultType": "SemaphoreSlim",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -760,24 +1539,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -799,21 +1578,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-4",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_4()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method4",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod4()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-4",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_4()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod4:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method4",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod4()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_4",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod4",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -829,24 +1608,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 1,
           "resultType": "SemaphoreSlim",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -942,24 +1721,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 21,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -981,21 +1760,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-6",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_6()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method6",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod6()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-6",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_6()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod6:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method6",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod6()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_6",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod6",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1011,24 +1790,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 1,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1069,24 +1848,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 12,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1167,24 +1946,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1206,21 +1985,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-7",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_7()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method7",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod7()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-7",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_7()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod7:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method7",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod7()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_7",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod7",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1236,24 +2015,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 1,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1294,24 +2073,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 12,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1392,24 +2171,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1431,21 +2210,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-8",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_8()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method8",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod8()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-8",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_8()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod8:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method8",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod8()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_8",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod8",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1461,24 +2240,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 1,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1519,24 +2298,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 12,
           "resultType": "ManualResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -1625,24 +2404,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 31,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1664,21 +2443,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-10",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_10()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method10",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod10()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-10",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_10()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod10:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method10",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod10()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_10",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod10",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1694,24 +2473,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 1,
           "resultType": "AutoResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -1792,24 +2571,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -1831,21 +2610,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-11",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_11()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method11",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod11()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-11",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_11()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod11:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method11",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod11()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_11",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod11",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -1861,24 +2640,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 1,
           "resultType": "AutoResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -1919,24 +2698,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 12,
           "resultType": "AutoResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -2017,24 +2796,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 30,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2056,21 +2835,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-12",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_12()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method12",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod12()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-12",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_12()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod12:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method12",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod12()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_12",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod12",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2086,24 +2865,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 1,
           "resultType": "AutoResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -2144,24 +2923,24 @@
         {
           "op": "ldsfld",
           "opCode": 12,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 12,
           "resultType": "AutoResetEvent",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -2250,24 +3029,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 31,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2289,21 +3068,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-14",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_14()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method14",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod14()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-14",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_14()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod14:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method14",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod14()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_14",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod14",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2334,24 +3113,24 @@
         },
         {
           "op": "ldsflda",
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
           "ilOffset": 3,
           "resultType": "System.IntPtr",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SpinLock"
           },
@@ -2446,24 +3225,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
           "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::_exitCode",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "System.Int32"
           },
@@ -2472,24 +3251,24 @@
         },
         {
           "op": "ldsflda",
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
           "ilOffset": 30,
           "resultType": "System.IntPtr",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SpinLock"
           },
@@ -2535,21 +3314,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-15",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_15()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method15",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod15()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-15",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_15()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod15:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method15",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod15()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_15",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod15",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2708,21 +3487,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-16",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_16()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method16",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod16()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.custom-entry-subject-16",
-        "signature": "System.Void ThreadingSyncSubjects::CustomEntrySubject_16()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::CustomEntryMethod16:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.custom-entry-method16",
+        "signature": "System.Void ThreadingSyncPatchEntry::CustomEntryMethod16()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_16",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_CustomEntryMethod16",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2816,21 +3595,21 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     },
     {
-      "methodId": "threading-sync-subjects.threading-sync-subjects.cctor",
-      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
-      "signature": "System.Void ThreadingSyncSubjects::.cctor()",
+      "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.cctor",
+      "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
+      "signature": "System.Void ThreadingSyncPatchEntry::.cctor()",
       "identity": {
-        "assemblyName": "ThreadingSyncSubjects",
-        "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
-        "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
-        "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
-        "methodId": "threading-sync-subjects.threading-sync-subjects.cctor",
-        "signature": "System.Void ThreadingSyncSubjects::.cctor()"
+        "assemblyName": "ThreadingSyncPatchEntry",
+        "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
+        "definitionSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
+        "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
+        "methodId": "threading-sync-patch-entry.threading-sync-patch-entry.cctor",
+        "signature": "System.Void ThreadingSyncPatchEntry::.cctor()"
       },
-      "nativeSymbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_cctor",
+      "nativeSymbol": "ThreadingSyncPatchEntry_ThreadingSyncPatchEntry_cctor",
       "isStatic": true,
       "returnType": "System.Void",
       "returnAbi": {
@@ -2887,24 +3666,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
           "ilOffset": 7,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_sem",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_sem",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SemaphoreSlim"
           },
@@ -2947,24 +3726,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
           "ilOffset": 18,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_mre",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_mre",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "ManualResetEvent"
           },
@@ -3007,24 +3786,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
           "ilOffset": 29,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_are",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_are",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "AutoResetEvent"
           },
@@ -3067,24 +3846,24 @@
         {
           "op": "stsfld",
           "opCode": 13,
-          "operand": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+          "operand": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
           "ilOffset": 40,
           "resultType": "System.Void",
           "reference": {
-            "assemblyName": "ThreadingSyncSubjects",
+            "assemblyName": "ThreadingSyncPatchEntry",
             "subjectKind": "field",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock"
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock"
           },
           "targetReference": {
             "kind": 2,
-            "assemblyName": "ThreadingSyncSubjects",
-            "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::s_slock",
+            "assemblyName": "ThreadingSyncPatchEntry",
+            "subjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::s_slock",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+            "declaringTypeSubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry",
             "declaringTypeShape": 1,
             "fieldTypeSubjectId": "SpinLock"
           },
@@ -3106,7 +3885,7 @@
       "isInternalLink": false,
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "ThreadingSyncSubjects"
+      "declaringAssemblyName": "ThreadingSyncPatchEntry"
     }
   ]
 }

@@ -368,7 +368,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (!targetOffset.HasValue) return;
             if (!offsetToBlockIndex.TryGetValue(targetOffset.Value, out var h)) return;
-            if (h >= sourceIdx) return;
+            if (h > sourceIdx) return;
             if (!dominators[sourceIdx][h]) return;
 
             if (!loopHeaders.ContainsKey(h))
@@ -707,13 +707,23 @@ public sealed partial class NativeAotLoweringPlanner
         var firstBlock = cfg.Blocks[startIndex];
         if (firstBlock.ConditionalTarget.HasValue && IsConditionalBranchOpcode(firstBlock.Terminator?.Op ?? ""))
         {
-            var ite = BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffset);
-            if (ite is IRIfThenElse)
+            // Self-loop guard: conditional branch targets its own block.
+            // BuildIfThenElse would call RecoverStructure for the true branch which
+            // hits the same block with the same conditional branch -> infinite recursion.
+            if (cfg.OffsetToBlockIndex.TryGetValue(firstBlock.ConditionalTarget.Value, out var selfIdx) &&
+                selfIdx == startIndex)
             {
-                // Determine merge point from CFG
-                int trueBlockIdx = cfg.OffsetToBlockIndex[firstBlock.ConditionalTarget.Value];
-                int falseBlockIdx = startIndex + 1;
-                int? mergeOffset = FindMergePoint(cfg, startIndex, trueBlockIdx, falseBlockIdx);
+                // Fall through to sequential block handling below; block will be emitted as flat IRBlock.
+            }
+            else
+            {
+                var ite = BuildIfThenElse(cfg, startIndex, endIndex, loopHeaderOffset, loopExitOffset);
+                if (ite is IRIfThenElse)
+                {
+                    // Determine merge point from CFG
+                    int trueBlockIdx = cfg.OffsetToBlockIndex[firstBlock.ConditionalTarget.Value];
+                    int falseBlockIdx = startIndex + 1;
+                    int? mergeOffset = FindMergePoint(cfg, startIndex, trueBlockIdx, falseBlockIdx);
 
                     int afterMergeIdx;
                     if (ite is IRIfThenElse iteResult && iteResult.PostMergeBody != null)
@@ -731,12 +741,13 @@ public sealed partial class NativeAotLoweringPlanner
                         afterMergeIdx = endIndex + 1;
                     }
 
-                var nodes = new List<StructuredIRNode> { ite };
-                if (afterMergeIdx <= endIndex)
-                {
-                    nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffset));
+                    var nodes = new List<StructuredIRNode> { ite };
+                    if (afterMergeIdx <= endIndex)
+                    {
+                        nodes.Add(RecoverStructure(cfg, afterMergeIdx, endIndex, loopHeaderOffset, loopExitOffset));
+                    }
+                    return new IRSequence(nodes);
                 }
-                return new IRSequence(nodes);
             }
         }
 
@@ -791,6 +802,14 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else if (block.ConditionalTarget.HasValue && IsConditionalBranchOpcode(block.Terminator?.Op ?? ""))
             {
+                // Self-loop guard: conditional branch targets its own block.
+                if (cfg.OffsetToBlockIndex.TryGetValue(block.ConditionalTarget.Value, out var seqSelfIdx) &&
+                    seqSelfIdx == idx)
+                {
+                    seqNodes.Add(new IRBlock(block.BodyInstructions, block.Terminator));
+                    idx++;
+                    continue;
+                }
                 var ite = BuildIfThenElse(cfg, idx, endIndex, loopHeaderOffset, loopExitOffset);
                 seqNodes.Add(ite);
                 if (ite is IRIfThenElse iteNode && iteNode.PostMergeBody != null)
@@ -899,7 +918,15 @@ public sealed partial class NativeAotLoweringPlanner
         bool isWhile;
         BasicBlock? latchBlock = null;
 
-        if (header.ConditionalTarget.HasValue && IsConditionalBranchOpcode(header.Terminator?.Op ?? ""))
+        if (loopInfo.LatchIndices.Contains(headerIndex))
+        {
+            // Self-loop: header is also a latch (e.g., do-while pattern
+            // where the conditional branch targets its own block).
+            // Always treat as do-while.
+            isWhile = false;
+            latchBlock = header;
+        }
+        else if (header.ConditionalTarget.HasValue && IsConditionalBranchOpcode(header.Terminator?.Op ?? ""))
         {
             isWhile = true;
             var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();

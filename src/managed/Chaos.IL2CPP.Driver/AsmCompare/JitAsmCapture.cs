@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using System.Text;
 
 namespace Chaos.IL2CPP.Driver;
@@ -112,6 +113,56 @@ internal static class JitAsmCapture
         }
     }
 
+    /// <summary>
+    /// Load an assembly into a custom ALC that redirects v10+ framework
+    /// assembly references to the versions already loaded in the default
+    /// context.  This allows .NET 10 subjects DLLs to be loaded into a
+    /// .NET 8 host for JIT capture.
+    /// </summary>
+    private static Assembly LoadAssemblyWithVersionRedirect(string assemblyPath)
+    {
+        var fullPath = Path.GetFullPath(assemblyPath);
+
+        // Use a deterministic name so the runtime can deduplicate
+        var alc = new AssemblyLoadContext(
+            "asm-cmp-" + Path.GetFileNameWithoutExtension(fullPath),
+            isCollectible: false);
+
+        alc.Resolving += static (context, assemblyName) =>
+        {
+            var name = assemblyName.Name;
+            if (name is null) return null;
+
+            // Framework / runtime assemblies — redirect any version to
+            // whatever the default ALC already provides.
+            if (name.StartsWith("System.") ||
+                name.StartsWith("Microsoft.") ||
+                name is "mscorlib" or "netstandard" or "System.Private.CoreLib")
+            {
+                try
+                {
+                    return Assembly.Load(name);
+                }
+                catch
+                {
+                    return typeof(object).Assembly;
+                }
+            }
+
+            // Everything else: let the default binder try
+            try
+            {
+                return Assembly.Load(name);
+            }
+            catch
+            {
+                return null;
+            }
+        };
+
+        return alc.LoadFromAssemblyPath(fullPath);
+    }
+
     public static JitCaptureResult Capture(string assemblyPath, string methodName)
     {
         try
@@ -123,7 +174,7 @@ internal static class JitAsmCapture
             Assembly assembly;
             try
             {
-                assembly = Assembly.LoadFrom(assemblyPath);
+                assembly = LoadAssemblyWithVersionRedirect(assemblyPath);
             }
             catch (Exception ex)
             {

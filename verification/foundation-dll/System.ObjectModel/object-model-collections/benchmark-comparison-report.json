@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/object/model/collections",
+  "summary": {
+    "totalMethods": 6,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 6,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

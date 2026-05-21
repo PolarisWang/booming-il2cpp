@@ -1010,6 +1010,51 @@ public sealed partial class NativeAotLoweringPlanner
 
                 builder.AppendLine(bodyIndent + "if (!(" + _condition + ")) break;");
             }
+            else if (terminator.Op is "beq" or "bne.un" or "bge" or "bge.un" or "bgt" or "ble" or "blt")
+            {
+                string cmpOp = terminator.Op switch
+                {
+                    "beq" => "==",
+                    "bne.un" => "!=",
+                    "bge" => ">=",
+                    "bge.un" => ">=",
+                    "bgt" => ">",
+                    "ble" => "<=",
+                    "blt" => "<",
+                    _ => throw new NotSupportedException(
+                        "StructuredIR: unsupported do-while latch '" + terminator.Op + "'")
+                };
+
+                bool isUnsigned = terminator.Op == "bge.un";
+                string valueType = isUnsigned
+                    ? "CHAOS_IL2CPP_UINT32"
+                    : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
+
+                SlotType cmpRType = PeekSlotType();
+                string cmpRExpr = ConsumeEvalStackValueExpression();
+                ConsumeSlotType();
+                SlotType cmpLType = PeekSlotType();
+                string cmpLExpr = ConsumeEvalStackValueExpression();
+                ConsumeSlotType();
+                string cmpRight = cmpRType switch
+                {
+                    SlotType.Float32 => $"chaos_load_float32({cmpRExpr})",
+                    SlotType.Float64 => $"ChaosLoadFloat64({cmpRExpr})",
+                    _ => isUnsigned
+                        ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({cmpRExpr}))"
+                        : $"static_cast<{valueType}>({cmpRExpr})",
+                };
+                string cmpLeft = cmpLType switch
+                {
+                    SlotType.Float32 => $"chaos_load_float32({cmpLExpr})",
+                    SlotType.Float64 => $"ChaosLoadFloat64({cmpLExpr})",
+                    _ => isUnsigned
+                        ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({cmpLExpr}))"
+                        : $"static_cast<{valueType}>({cmpLExpr})",
+                };
+
+                builder.AppendLine($"{bodyIndent}if (!({cmpLeft} {cmpOp} {cmpRight})) break;");
+            }
             else if (terminator.Op == "br")
             {
                 // Infinite loop latch 鈥?no condition to check
@@ -1538,6 +1583,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         var cfg = BuildControlFlowGraph(instructions, offsets);
+        Console.WriteLine($"TRYBUILD: {method.SubjectId}, blocks={cfg.Blocks.Count}, loops={cfg.LoopHeaders.Count}, reducible={cfg.IsReducible}");
         if (!cfg.IsReducible)
         {
             var splitCfg = ApplyNodeSplitting(cfg);
@@ -1866,12 +1912,52 @@ public sealed partial class NativeAotLoweringPlanner
         if (instructions.Count == 0)
             return new IRSequence(Array.Empty<StructuredIRNode>());
 
+        // Include the full offset set so branch targets that point to
+        // locations outside the current partition (e.g., after trailing
+        // leave stripping removed the block-exit terminator) are recognized
+        // as valid block boundaries by BuildControlFlowGraph.
         var subOffsets = new HashSet<int>(instructions.Select(GetRequiredIlOffset));
+        subOffsets.UnionWith(offsets);
+
         var cfg = BuildControlFlowGraph(instructions, subOffsets);
         if (!cfg.IsReducible)
-            return new IRSequence(Array.Empty<StructuredIRNode>());
+        {
+            // The CFG can become irreducible when a branch target falls
+            // between partition boundaries (the target instruction is in
+            // a different partition).  Emit the instructions as a flat
+            // sequence instead of dropping them silently.
+            Console.Error.WriteLine(
+                $"TRACE:EMIT exception-partition-fallback " +
+                $"instructions={instructions.Count} blocks={cfg.Blocks.Count} " +
+                $"firstOp={instructions[0].Op} lastOp={instructions[^1].Op}");
+            if (instructions.Count >= 3)
+                Console.Error.WriteLine(
+                    $"TRACE:EMIT   ops={instructions[0].Op},{instructions[1].Op},{instructions[2].Op},...");
+            return EmitExceptionPartitionFallback(instructions);
+        }
 
         return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
+    }
+
+    /// <summary>
+    /// Fallback emission for an exception partition whose CFG is irreducible
+    /// (typically because branch targets cross partition boundaries).  Produces
+    /// a single IRBlock containing all instructions without structured control
+    /// flow, preserving correctness at the cost of flat linear emission.
+    /// </summary>
+    private static StructuredIRNode EmitExceptionPartitionFallback(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        // Separate trailing terminator from body instructions.
+        // Only opcodes handled by EmitIRBlockTerminator need separation.
+        int last = instructions.Count - 1;
+        if (last >= 0)
+        {
+            var op = instructions[last].Op;
+            if (op is "ret" or "throw" or "rethrow" or "leave" or "br" or "endfinally" or "endfilter")
+                return new IRBlock(instructions.Take(last).ToList(), instructions[last]);
+        }
+        return new IRBlock(instructions, null);
     }
 
     // ════════════════════════════════════════════════════════════════════════════

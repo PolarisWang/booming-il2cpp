@@ -1,0 +1,168 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:ZipArchiveEntry(ZipArchive,System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:ZipArchiveEntry(ZipArchive,System.String,System.String,CompressionLevel)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFileAsync:System.Threading.Tasks.Task\u003CZipArchiveEntry\u003E(ZipArchive,System.String,System.String,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFileAsync:System.Threading.Tasks.Task\u003CZipArchiveEntry\u003E(ZipArchive,System.String,System.String,CompressionLevel,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(ZipArchive,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(ZipArchive,System.String,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectoryAsync:System.Threading.Tasks.Task(ZipArchive,System.String,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectoryAsync:System.Threading.Tasks.Task(ZipArchive,System.String,System.Boolean,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(ZipArchiveEntry,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(ZipArchiveEntry,System.String,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFileAsync:System.Threading.Tasks.Task(ZipArchiveEntry,System.String,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFileAsync:System.Threading.Tasks.Task(ZipArchiveEntry,System.String,System.Boolean,System.Threading.CancellationToken)",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+
+public class Program
+{
+    static int Main()
+    {
+        int failures = 0;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method0(); failures += SerializerOptionsNativeEntry._exitCode << 0;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method1(); failures += SerializerOptionsNativeEntry._exitCode << 1;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method2(); failures += SerializerOptionsNativeEntry._exitCode << 2;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method3(); failures += SerializerOptionsNativeEntry._exitCode << 3;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method4(); failures += SerializerOptionsNativeEntry._exitCode << 4;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method5(); failures += SerializerOptionsNativeEntry._exitCode << 5;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method6(); failures += SerializerOptionsNativeEntry._exitCode << 6;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method7(); failures += SerializerOptionsNativeEntry._exitCode << 7;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method8(); failures += SerializerOptionsNativeEntry._exitCode << 8;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method9(); failures += SerializerOptionsNativeEntry._exitCode << 9;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method10(); failures += SerializerOptionsNativeEntry._exitCode << 10;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.CustomEntryMethod11(); failures += SerializerOptionsNativeEntry._exitCode << 11;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method12(); failures += SerializerOptionsNativeEntry._exitCode << 12;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method13(); failures += SerializerOptionsNativeEntry._exitCode << 13;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method14(); failures += SerializerOptionsNativeEntry._exitCode << 14;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method15(); failures += SerializerOptionsNativeEntry._exitCode << 15;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method16(); failures += SerializerOptionsNativeEntry._exitCode << 16;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method17(); failures += SerializerOptionsNativeEntry._exitCode << 17;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method18(); failures += SerializerOptionsNativeEntry._exitCode << 18;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method19(); failures += SerializerOptionsNativeEntry._exitCode << 19;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method20(); failures += SerializerOptionsNativeEntry._exitCode << 20;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method21(); failures += SerializerOptionsNativeEntry._exitCode << 21;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method22(); failures += SerializerOptionsNativeEntry._exitCode << 22;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method23(); failures += SerializerOptionsNativeEntry._exitCode << 23;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method24(); failures += SerializerOptionsNativeEntry._exitCode << 24;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method25(); failures += SerializerOptionsNativeEntry._exitCode << 25;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method26(); failures += SerializerOptionsNativeEntry._exitCode << 26;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method27(); failures += SerializerOptionsNativeEntry._exitCode << 27;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method28(); failures += SerializerOptionsNativeEntry._exitCode << 28;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method29(); failures += SerializerOptionsNativeEntry._exitCode << 29;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method30(); failures += SerializerOptionsNativeEntry._exitCode << 30;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method31(); failures += SerializerOptionsNativeEntry._exitCode << 31;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method32(); failures += SerializerOptionsNativeEntry._exitCode << 32;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method33(); failures += SerializerOptionsNativeEntry._exitCode << 33;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method34(); failures += SerializerOptionsNativeEntry._exitCode << 34;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method35(); failures += SerializerOptionsNativeEntry._exitCode << 35;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method36(); failures += SerializerOptionsNativeEntry._exitCode << 36;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method37(); failures += SerializerOptionsNativeEntry._exitCode << 37;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method38(); failures += SerializerOptionsNativeEntry._exitCode << 38;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method39(); failures += SerializerOptionsNativeEntry._exitCode << 39;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method40(); failures += SerializerOptionsNativeEntry._exitCode << 40;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method41(); failures += SerializerOptionsNativeEntry._exitCode << 41;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method42(); failures += SerializerOptionsNativeEntry._exitCode << 42;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method43(); failures += SerializerOptionsNativeEntry._exitCode << 43;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method44(); failures += SerializerOptionsNativeEntry._exitCode << 44;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method45(); failures += SerializerOptionsNativeEntry._exitCode << 45;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method46(); failures += SerializerOptionsNativeEntry._exitCode << 46;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method47(); failures += SerializerOptionsNativeEntry._exitCode << 47;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method48(); failures += SerializerOptionsNativeEntry._exitCode << 48;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method49(); failures += SerializerOptionsNativeEntry._exitCode << 49;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method50(); failures += SerializerOptionsNativeEntry._exitCode << 50;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method51(); failures += SerializerOptionsNativeEntry._exitCode << 51;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method52(); failures += SerializerOptionsNativeEntry._exitCode << 52;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method53(); failures += SerializerOptionsNativeEntry._exitCode << 53;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method54(); failures += SerializerOptionsNativeEntry._exitCode << 54;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method55(); failures += SerializerOptionsNativeEntry._exitCode << 55;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method56(); failures += SerializerOptionsNativeEntry._exitCode << 56;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method57(); failures += SerializerOptionsNativeEntry._exitCode << 57;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method58(); failures += SerializerOptionsNativeEntry._exitCode << 58;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method59(); failures += SerializerOptionsNativeEntry._exitCode << 59;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method60(); failures += SerializerOptionsNativeEntry._exitCode << 60;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method61(); failures += SerializerOptionsNativeEntry._exitCode << 61;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method62(); failures += SerializerOptionsNativeEntry._exitCode << 62;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method63(); failures += SerializerOptionsNativeEntry._exitCode << 63;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method64(); failures += SerializerOptionsNativeEntry._exitCode << 64;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method65(); failures += SerializerOptionsNativeEntry._exitCode << 65;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method66(); failures += SerializerOptionsNativeEntry._exitCode << 66;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method67(); failures += SerializerOptionsNativeEntry._exitCode << 67;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method68(); failures += SerializerOptionsNativeEntry._exitCode << 68;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method69(); failures += SerializerOptionsNativeEntry._exitCode << 69;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method70(); failures += SerializerOptionsNativeEntry._exitCode << 70;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method71(); failures += SerializerOptionsNativeEntry._exitCode << 71;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method72(); failures += SerializerOptionsNativeEntry._exitCode << 72;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method73(); failures += SerializerOptionsNativeEntry._exitCode << 73;
+        SerializerOptionsNativeEntry._exitCode = 0; SerializerOptionsNativeEntry.Method74(); failures += SerializerOptionsNativeEntry._exitCode << 74;
+        return failures;
+    }
+}

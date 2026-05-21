@@ -27,7 +27,7 @@
           "registrationKind": "methodPointer",
           "slot": 3,
           "symbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
-          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
+          "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)"
         }
       ]
     }

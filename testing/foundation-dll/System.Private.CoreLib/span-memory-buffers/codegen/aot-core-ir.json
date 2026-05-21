@@ -29,8 +29,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 61,
-          "handlerOffset": 62,
+          "tryLength": 69,
+          "handlerOffset": 70,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -183,16 +183,35 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 22,
-          "resultType": "System.Byte",
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 4,
-          "ilOffset": 23,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -200,7 +219,7 @@
           "op": "newarr",
           "opCode": 43,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 24,
+          "ilOffset": 28,
           "resultType": "System.Byte[]",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -224,7 +243,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 29,
+          "ilOffset": 33,
           "resultType": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
           "callee": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
           "reference": {
@@ -250,7 +269,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 34,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -258,7 +277,7 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 35,
+          "ilOffset": 39,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -266,14 +285,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 41,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 38,
+          "ilOffset": 42,
           "resultType": "System.Byte\u0026",
           "callee": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E::get_Item:System.Byte\u0026(System.Int32)",
           "reference": {
@@ -335,15 +354,34 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
-          "ilOffset": 43,
-          "resultType": "System.Byte",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 47,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 44,
+          "ilOffset": 52,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -351,14 +389,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 46,
+          "ilOffset": 54,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 47,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -366,7 +404,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 49,
+          "ilOffset": 57,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -374,14 +412,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 50,
+          "ilOffset": 58,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 59,
-          "ilOffset": 51,
+          "operand": 67,
+          "ilOffset": 59,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -389,7 +427,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 53,
+          "ilOffset": 61,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -397,7 +435,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 54,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -423,22 +461,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 73,
-          "ilOffset": 60,
+          "operand": 81,
+          "ilOffset": 68,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 62,
+          "ilOffset": 70,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 64,
+          "ilOffset": 72,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -446,7 +484,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 65,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -472,15 +510,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 73,
-          "ilOffset": 71,
+          "operand": 81,
+          "ilOffset": 79,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 73,
+          "ilOffset": 81,
           "isPreserveSig": false
         }
       ],
@@ -3202,8 +3240,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 61,
-          "handlerOffset": 62,
+          "tryLength": 69,
+          "handlerOffset": 70,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -3356,16 +3394,35 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 22,
-          "resultType": "System.Byte",
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 4,
-          "ilOffset": 23,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3373,7 +3430,7 @@
           "op": "newarr",
           "opCode": 43,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 24,
+          "ilOffset": 28,
           "resultType": "System.Byte[]",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -3397,7 +3454,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 29,
+          "ilOffset": 33,
           "resultType": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
           "callee": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
           "reference": {
@@ -3423,7 +3480,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 34,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3431,7 +3488,7 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 35,
+          "ilOffset": 39,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -3439,14 +3496,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 41,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 38,
+          "ilOffset": 42,
           "resultType": "System.Byte\u0026",
           "callee": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::get_Item:System.Byte\u0026(System.Int32)",
           "reference": {
@@ -3508,15 +3565,34 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
-          "ilOffset": 43,
-          "resultType": "System.Byte",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 47,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 44,
+          "ilOffset": 52,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3524,14 +3600,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 46,
+          "ilOffset": 54,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 47,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3539,7 +3615,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 49,
+          "ilOffset": 57,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3547,14 +3623,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 50,
+          "ilOffset": 58,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 59,
-          "ilOffset": 51,
+          "operand": 67,
+          "ilOffset": 59,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3562,7 +3638,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 53,
+          "ilOffset": 61,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3570,7 +3646,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 54,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -3596,22 +3672,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 73,
-          "ilOffset": 60,
+          "operand": 81,
+          "ilOffset": 68,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 62,
+          "ilOffset": 70,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 64,
+          "ilOffset": 72,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3619,7 +3695,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 65,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -3645,15 +3721,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 73,
-          "ilOffset": 71,
+          "operand": 81,
+          "ilOffset": 79,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 73,
+          "ilOffset": 81,
           "isPreserveSig": false
         }
       ],
@@ -4832,14 +4908,14 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 2,
+      "localCount": 3,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 75,
-          "handlerOffset": 76,
+          "tryLength": 91,
+          "handlerOffset": 92,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -5072,10 +5148,51 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 31,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 4,
-          "ilOffset": 30,
+          "ilOffset": 38,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5083,7 +5200,7 @@
           "op": "newarr",
           "opCode": 43,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 31,
+          "ilOffset": 39,
           "resultType": "System.Byte[]",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -5107,7 +5224,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 36,
+          "ilOffset": 44,
           "resultType": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E",
           "callee": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
           "reference": {
@@ -5133,7 +5250,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 49,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5141,7 +5258,7 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 42,
+          "ilOffset": 50,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -5149,14 +5266,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 44,
+          "ilOffset": 52,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 45,
+          "ilOffset": 53,
           "resultType": "System.Memory\u003CSystem.Byte\u003E",
           "callee": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::Slice:System.Memory\u003CSystem.Byte\u003E(System.Int32)",
           "reference": {
@@ -5221,7 +5338,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 50,
+          "ilOffset": 58,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5229,14 +5346,14 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 51,
+          "ilOffset": 59,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 53,
+          "ilOffset": 61,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::get_Length:System.Int32()",
           "reference": {
@@ -5298,9 +5415,50 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 67,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 58,
+          "ilOffset": 74,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5308,14 +5466,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 60,
+          "ilOffset": 76,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 61,
+          "ilOffset": 77,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5323,7 +5481,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 63,
+          "ilOffset": 79,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5331,14 +5489,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 80,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 73,
-          "ilOffset": 65,
+          "operand": 89,
+          "ilOffset": 81,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5346,7 +5504,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 83,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5354,7 +5512,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 68,
+          "ilOffset": 84,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -5380,22 +5538,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 74,
+          "operand": 103,
+          "ilOffset": 90,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 76,
+          "ilOffset": 92,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 78,
+          "ilOffset": 94,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5403,7 +5561,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 79,
+          "ilOffset": 95,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -5429,15 +5587,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 85,
+          "operand": 103,
+          "ilOffset": 101,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 87,
+          "ilOffset": 103,
           "isPreserveSig": false
         }
       ],
@@ -6378,8 +6536,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
+          "tryLength": 57,
+          "handlerOffset": 58,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -6430,49 +6588,49 @@
           "opCode": 14,
           "ilOffset": 11,
           "resultType": "System.Byte\u0026",
-          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
           "reference": {
-            "assemblyName": "System.Memory",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Memory",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
-              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
@@ -6490,16 +6648,35 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 16,
-          "resultType": "System.Byte",
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 17,
+          "ilOffset": 21,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -6507,7 +6684,7 @@
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
-          "ilOffset": 19,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -6532,57 +6709,57 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 25,
+          "ilOffset": 29,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 26,
+          "ilOffset": 30,
           "resultType": "System.Byte\u0026",
-          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
           "reference": {
-            "assemblyName": "System.Memory",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Memory",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
-              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+              "displaySubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
@@ -6600,15 +6777,34 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
-          "ilOffset": 31,
-          "resultType": "System.Byte",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
+          "ilOffset": 40,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6616,14 +6812,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 42,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 43,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6631,7 +6827,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 45,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6639,14 +6835,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 46,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 55,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6654,7 +6850,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6662,7 +6858,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -6688,22 +6884,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
+          "operand": 69,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 50,
+          "ilOffset": 58,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 52,
+          "ilOffset": 60,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6711,7 +6907,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 53,
+          "ilOffset": 61,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -6737,15 +6933,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
+          "operand": 69,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 69,
           "isPreserveSig": false
         }
       ],
@@ -6786,8 +6982,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 49,
-          "handlerOffset": 50,
+          "tryLength": 57,
+          "handlerOffset": 58,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -6838,49 +7034,49 @@
           "opCode": 14,
           "ilOffset": 11,
           "resultType": "System.Byte\u0026",
-          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
           "reference": {
-            "assemblyName": "System.Memory",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)"
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Memory",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
-            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
-              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
-              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.Span\u003CSystem.Byte\u003E)",
+              "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+              "displaySubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.Span\u003CSystem.Byte\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
@@ -6898,16 +7094,35 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 16,
-          "resultType": "System.Byte",
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 17,
+          "ilOffset": 21,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -6915,7 +7130,7 @@
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
-          "ilOffset": 19,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -6940,57 +7155,57 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 1,
-          "ilOffset": 25,
+          "ilOffset": 29,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 26,
+          "ilOffset": 30,
           "resultType": "System.Byte\u0026",
-          "callee": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
           "reference": {
-            "assemblyName": "System.Memory",
+            "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)"
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)"
           },
           "targetReference": {
             "kind": 3,
-            "assemblyName": "System.Memory",
-            "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
-            "openDefinitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+              "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "body:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
+                "value": "stub:definition=System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
-              "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
-              "displaySubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.Span\u003CSystem.Byte\u003E)",
+              "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+              "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+              "displaySubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E(System.Span\u003CSystem.Byte\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Byte"
@@ -7008,15 +7223,34 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldind.u1",
-          "ilOffset": 31,
-          "resultType": "System.Byte",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 32,
+          "ilOffset": 40,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -7024,14 +7258,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 42,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 35,
+          "ilOffset": 43,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -7039,7 +7273,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 37,
+          "ilOffset": 45,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -7047,14 +7281,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 38,
+          "ilOffset": 46,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 47,
-          "ilOffset": 39,
+          "operand": 55,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -7062,7 +7296,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -7070,7 +7304,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 42,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -7096,22 +7330,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 61,
-          "ilOffset": 48,
+          "operand": 69,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 50,
+          "ilOffset": 58,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 52,
+          "ilOffset": 60,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -7119,7 +7353,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
-          "ilOffset": 53,
+          "ilOffset": 61,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SpanMemoryBuffersSubjects",
@@ -7145,15 +7379,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 61,
-          "ilOffset": 59,
+          "operand": 69,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 61,
+          "ilOffset": 69,
           "isPreserveSig": false
         }
       ],

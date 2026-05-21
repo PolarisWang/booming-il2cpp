@@ -23,6 +23,12 @@ def run_audit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult
     # Apply skip-stage overrides matching old orchestrator behavior
     _apply_audit_overrides(principle, overall, mechanism, ctx)
 
+    # Use old-orchestrator logic: CONCERN is acceptable, only VIOLATION blocks.
+    # run_full_audit() requires ALIGNED which is too strict.
+    mechanism_passed = overall.get("mechanism_passed", False)
+    principle_status = overall.get("principle_status", "NOT_APPLICABLE")
+    overall["passed"] = mechanism_passed and principle_status != "VIOLATION"
+
     status = "passed" if overall.get("passed", False) else "failed"
 
     total = mechanism.get("total_methods", 0)

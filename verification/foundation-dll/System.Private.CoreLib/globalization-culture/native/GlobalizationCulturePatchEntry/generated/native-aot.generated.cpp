@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -14,6 +15,7 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -33,14 +35,22 @@ using namespace chaos::il2cpp::runtime_core;
 
 
 inline TypeInfoV0 chaos_mt_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry = {{nullptr, nullptr, 9296901207614401216ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(9296901207614401216ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry = static_cast<CHAOS_IL2CPP_INTPTR>(9296901207614401216ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {{nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -403,7 +413,7 @@ static void (*kAotMethods[14])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-static void (*kBenchmarkWrappers[14])() = {
+extern "C" void (*kBenchmarkWrappers[14])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -420,7 +430,31 @@ static void (*kBenchmarkWrappers[14])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[13])(0);},
 };
 
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 13;
+extern "C" const int kSubjectEntryIndices[13] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12,
+};
+
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -477,7 +511,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
@@ -490,6 +524,252 @@ extern "C" double BenchmarkMethod(
 	return std::chrono::duration<double, std::milli>(
 		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry0;
+	/* ── Entry 1: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry1;
+	/* ── Entry 2: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry2;
+	/* ── Entry 3: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry3;
+	/* ── Entry 4: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry4;
+	/* ── Entry 5: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry5;
+	/* ── Entry 6: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry6;
+	/* ── Entry 7: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry7;
+	/* ── Entry 8: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry8;
+	/* ── Entry 9: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry9;
+	/* ── Entry 10: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry10;
+	/* ── Entry 11: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry11;
+	/* ── Entry 12: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry12;
+	/* ── Entry 13: GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Run_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry13;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry1 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry2 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry3 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry4 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry5 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry6 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry7 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry8 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry9 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry10 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10 */
+	.entry10 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry11 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11 */
+	.entry11 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry12 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12 */
+	.entry12 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry13 = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Run_System_Int32 */
+	.entry13 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Run_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 8u, 16u, 24u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 396u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[14] = {
@@ -525,6 +805,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = nullptr,
 	.vtable_descriptor_count = 0u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -845,11 +1128,10 @@ extern "C" void GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Ru
 	CHAOS_IL2CPP_INTPTR _s14{};
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = chaos_args[0];
 			{
 				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
@@ -1072,544 +1354,21 @@ extern "C" void GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Ru
 					}
 				}
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				switch (chaos_switch_value)
-				{
-					case 0:
-						{
-							auto& _d0 = s_hotpatch_entries[0];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d0.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 1:
-						{
-							auto& _d1 = s_hotpatch_entries[1];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d1.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 2:
-						{
-							auto& _d2 = s_hotpatch_entries[2];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d2.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 3:
-						{
-							auto& _d3 = s_hotpatch_entries[3];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d3.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 4:
-						{
-							auto& _d4 = s_hotpatch_entries[4];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d4.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 5:
-						{
-							auto& _d5 = s_hotpatch_entries[5];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d5.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 6:
-						{
-							auto& _d6 = s_hotpatch_entries[6];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d6.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 7:
-						{
-							auto& _d7 = s_hotpatch_entries[7];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d7.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 8:
-						{
-							auto& _d8 = s_hotpatch_entries[8];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 10:
-						{
-							auto& _d10 = s_hotpatch_entries[10];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d10.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 11:
-						{
-							auto& _d11 = s_hotpatch_entries[11];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d11.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 12:
-					{
-						{
-							auto& _d12 = s_hotpatch_entries[12];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d12.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				switch (chaos_switch_value)
-				{
-					case 0:
-						{
-							auto& _d0 = s_hotpatch_entries[0];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d0)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d0))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d0.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_0();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 1:
-						{
-							auto& _d1 = s_hotpatch_entries[1];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d1.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_1();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 2:
-						{
-							auto& _d2 = s_hotpatch_entries[2];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d2)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d2))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d2.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_2();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 3:
-						{
-							auto& _d3 = s_hotpatch_entries[3];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d3)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d3))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d3.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_3();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 4:
-						{
-							auto& _d4 = s_hotpatch_entries[4];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d4)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d4))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d4.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_4();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 5:
-						{
-							auto& _d5 = s_hotpatch_entries[5];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d5)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d5))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d5.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_5();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 6:
-						{
-							auto& _d6 = s_hotpatch_entries[6];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d6)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d6))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d6.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_6();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 7:
-						{
-							auto& _d7 = s_hotpatch_entries[7];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d7)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d7))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d7.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_7();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 8:
-						{
-							auto& _d8 = s_hotpatch_entries[8];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d8.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_8();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 9:
-						{
-							auto& _d9 = s_hotpatch_entries[9];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d9.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_9();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 10:
-						{
-							auto& _d10 = s_hotpatch_entries[10];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d10.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_10();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 11:
-						{
-							auto& _d11 = s_hotpatch_entries[11];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d11.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_11();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-					case 12:
-					{
-						{
-							auto& _d12 = s_hotpatch_entries[12];
-							CHAOS_IL2CPP_INT32 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
-							{
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d12.method_key, nullptr, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry_Subject_12();
-							}
-							_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_GlobalizationCulturePatchEntry_GlobalizationCulturePatchEntry___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 

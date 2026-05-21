@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "ZipFileApisSubjects",
+  "entrySubjectId": "ZipFileApisSubjects/ZipFileApisSubjects::Subject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "ZipFileApisSubjects_ZipFileApisSubjects_Subject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

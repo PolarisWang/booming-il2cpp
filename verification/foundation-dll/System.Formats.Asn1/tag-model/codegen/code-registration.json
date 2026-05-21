@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TagModelSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_0",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_1",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_2",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_3",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_4",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_5",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_6",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_7",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_8",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_9",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_10",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_11",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_12",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_13",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_14",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_15",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_16",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_17",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "TagModelSubjects_TagModelSubjects_Subject_18",
+          "subjectId": "TagModelSubjects/TagModelSubjects::Subject_18:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

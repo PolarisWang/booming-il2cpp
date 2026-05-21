@@ -1,0 +1,26 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": []
+}

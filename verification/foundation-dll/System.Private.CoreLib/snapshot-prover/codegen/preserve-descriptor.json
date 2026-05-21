@@ -4,79 +4,79 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+      "subjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::CustomEntryMethod8:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

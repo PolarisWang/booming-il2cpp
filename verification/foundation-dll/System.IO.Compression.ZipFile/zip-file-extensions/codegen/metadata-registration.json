@@ -1,0 +1,160 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ZipFileExtensionsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "name": "ZipFileExtensionsSubjects",
+      "displayName": "ZipFileExtensionsSubjects",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::_exitCode",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

@@ -1965,6 +1965,57 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(vo
 
 
 	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				auto& _d27 = s_hotpatch_entries[27];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
+				{
+					alignas(16) uint8_t _d_ab[4];
+					ArgBuffer _d_bw(_d_ab);
+					_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d27.method_key, _d_ab, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				auto& _d27 = s_hotpatch_entries[27];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d27)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d27))
+				{
+					alignas(16) uint8_t _d_ab[4];
+					ArgBuffer _d_bw(_d_ab);
+					_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d27.method_key, _d_ab, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2000,6 +2051,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d35 = s_hotpatch_entries[35];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d35)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d35))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d35.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d35 = s_hotpatch_entries[35];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d35)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d35))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d35.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2035,6 +2127,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d34 = s_hotpatch_entries[34];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d34)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d34))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d34.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d34 = s_hotpatch_entries[34];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d34)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d34))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d34.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2070,6 +2203,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d33 = s_hotpatch_entries[33];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d33)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d33))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d33.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d33 = s_hotpatch_entries[33];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d33)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d33))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d33.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2105,6 +2279,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d32 = s_hotpatch_entries[32];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d32.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d32 = s_hotpatch_entries[32];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d32.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2140,6 +2355,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d28 = s_hotpatch_entries[28];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d28.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d28 = s_hotpatch_entries[28];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d28)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d28))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d28.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2175,6 +2431,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d29 = s_hotpatch_entries[29];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d29.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d29 = s_hotpatch_entries[29];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d29)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d29))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d29.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2210,6 +2507,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d30 = s_hotpatch_entries[30];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d30.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d30 = s_hotpatch_entries[30];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d30.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -2245,6 +2583,47 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(vo
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d31 = s_hotpatch_entries[31];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d31.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d31 = s_hotpatch_entries[31];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d31.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ExceptionThrowDiagnosticsSubjects",
   "entrySubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

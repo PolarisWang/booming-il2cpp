@@ -8,8 +8,14 @@
     <IsTestProject>true</IsTestProject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <ExcludeByFile>**/obj/**/*.cs;**/ReferenceProof/**/*.cs;**/PatchData*.cs</ExcludeByFile>
+    <ExcludeByFile>**/obj/**/*.cs;**/ReferenceProof/**/*.cs;**/PatchData*.cs;**/NativeReferenceProofEmitter*.cs;**/RuntimeSkeleton*.cs;**/NativeReferenceLoweringPlanner.PlanBuilders*.cs;**/NativeReferenceLoweringPlanner.GeneratedPluginExports*.cs</ExcludeByFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />

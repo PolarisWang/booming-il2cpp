@@ -3,6 +3,636 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-0",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-0",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-1",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-1",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-2",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-2",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-3",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-3",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-4",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-4",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-5",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-5",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-6",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-6",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-7",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-7",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-8",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-8",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-9",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-9",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-10",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-10",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-11",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-11",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-12",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-12",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-13",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-13",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
+      "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-14",
+      "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()",
+      "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14()",
+      "identity": {
+        "assemblyName": "ThreadingTasksPrimitivesSubjects",
+        "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+        "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()",
+        "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()",
+        "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-subjects.custom-entry-subject-14",
+        "signature": "System.Void ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14()"
+      },
+      "nativeSymbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingTasksPrimitivesSubjects"
+    },
+    {
       "methodId": "threading-tasks-primitives-subjects.threading-tasks-primitives-native-entry.custom-entry-method0",
       "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod0:System.Void()",
       "signature": "System.Void ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod0()",

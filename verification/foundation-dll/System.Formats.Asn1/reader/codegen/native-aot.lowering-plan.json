@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "ReaderSubjects",
+  "entrySubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_11",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}
