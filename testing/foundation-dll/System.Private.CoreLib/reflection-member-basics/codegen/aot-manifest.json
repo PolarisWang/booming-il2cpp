@@ -125,13 +125,13 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
       "reason": "external-call"
     },
     {

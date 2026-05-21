@@ -1,0 +1,361 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "schema-subjects.schema-subjects.subject-0",
+      "subjectId": "SchemaSubjects/SchemaSubjects::Subject_0:System.Void()",
+      "signature": "System.Void SchemaSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "SchemaSubjects",
+        "declaringTypeSubjectId": "SchemaSubjects/SchemaSubjects",
+        "definitionSubjectId": "SchemaSubjects/SchemaSubjects::Subject_0:System.Void()",
+        "subjectId": "SchemaSubjects/SchemaSubjects::Subject_0:System.Void()",
+        "methodId": "schema-subjects.schema-subjects.subject-0",
+        "signature": "System.Void SchemaSubjects::Subject_0()"
+      },
+      "nativeSymbol": "SchemaSubjects_SchemaSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 28,
+          "handlerOffset": 29,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 14,
+          "resultType": "System.Text.Json.Nodes.JsonNode",
+          "callee": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SchemaSubjects/SchemaSubjects::_exitCode",
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SchemaSubjects",
+            "subjectKind": "field",
+            "subjectId": "SchemaSubjects/SchemaSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SchemaSubjects",
+            "subjectId": "SchemaSubjects/SchemaSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SchemaSubjects/SchemaSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 34,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 34,
+          "ilOffset": 32,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 34,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SchemaSubjects"
+    },
+    {
+      "methodId": "schema-subjects.schema-subjects.subject-1",
+      "subjectId": "SchemaSubjects/SchemaSubjects::Subject_1:System.Void()",
+      "signature": "System.Void SchemaSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "SchemaSubjects",
+        "declaringTypeSubjectId": "SchemaSubjects/SchemaSubjects",
+        "definitionSubjectId": "SchemaSubjects/SchemaSubjects::Subject_1:System.Void()",
+        "subjectId": "SchemaSubjects/SchemaSubjects::Subject_1:System.Void()",
+        "methodId": "schema-subjects.schema-subjects.subject-1",
+        "signature": "System.Void SchemaSubjects::Subject_1()"
+      },
+      "nativeSymbol": "SchemaSubjects_SchemaSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 18,
+          "handlerOffset": 19,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "System.Text.Json.Nodes.JsonNode",
+          "callee": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+          "reference": {
+            "assemblyName": "System.Text.Json",
+            "subjectKind": "method",
+            "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Text.Json",
+            "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SchemaSubjects/SchemaSubjects::_exitCode",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SchemaSubjects",
+            "subjectKind": "field",
+            "subjectId": "SchemaSubjects/SchemaSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SchemaSubjects",
+            "subjectId": "SchemaSubjects/SchemaSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SchemaSubjects/SchemaSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SchemaSubjects"
+    }
+  ]
+}

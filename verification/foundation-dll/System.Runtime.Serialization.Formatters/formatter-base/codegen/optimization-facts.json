@@ -1,0 +1,423 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_12:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_13:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_14:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_15:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "FormatterBaseSubjects/FormatterBaseSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_10:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_11:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_13:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_14:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "FormatterBaseSubjects/FormatterBaseSubjects::Subject_15:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

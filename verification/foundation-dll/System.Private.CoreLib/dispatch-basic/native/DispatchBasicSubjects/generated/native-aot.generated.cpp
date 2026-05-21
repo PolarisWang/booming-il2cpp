@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -618,10 +619,12 @@ extern "C" const int kSubjectEntryIndices[5] = {
 	1,
 	2,
 	3,
-	4
+	4,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -678,180 +681,329 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: switch-based direct dispatch per method.
-// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
-// the method body into the timing loop — eliminating function pointer indirection.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	switch (chaos_entry_index) {
-	case 0: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicSubjects_Subject_0();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
-	case 1: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicSubjects_Subject_1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 2: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicSubjects_Subject_2();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 3: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicSubjects_Subject_3();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 4: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicSubjects_Subject_4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 5: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 6: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_BasicImpl_GetValue(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 7: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 8: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 9: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 10: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 11: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 12: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 13: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 14: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 15: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 16: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_StatusProvider_GetStatusCode(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 17: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	default:
-		return -1.0;
-	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: DispatchBasicSubjects_DispatchBasicSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry0;
+	/* ── Entry 1: DispatchBasicSubjects_DispatchBasicSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry1;
+	/* ── Entry 2: DispatchBasicSubjects_DispatchBasicSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry2;
+	/* ── Entry 3: DispatchBasicSubjects_DispatchBasicSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: DispatchBasicSubjects_DispatchBasicSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry4;
+	/* ── Entry 5: DispatchBasicSubjects_BasicImpl__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry5;
+	/* ── Entry 6: DispatchBasicSubjects_BasicImpl_GetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry6;
+	/* ── Entry 7: DispatchBasicSubjects_Calculator__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry7;
+	/* ── Entry 8: DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry8;
+	/* ── Entry 9: DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry9;
+	/* ── Entry 10: DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry10;
+	/* ── Entry 11: DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry11;
+	/* ── Entry 12: DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry12;
+	/* ── Entry 13: DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry13;
+	/* ── Entry 14: DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry14;
+	/* ── Entry 15: DispatchBasicSubjects_StatusProvider__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry15;
+	/* ── Entry 16: DispatchBasicSubjects_StatusProvider_GetStatusCode ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry16;
+	/* ── Entry 17: DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry17;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = DispatchBasicSubjects_DispatchBasicSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry1 = DispatchBasicSubjects_DispatchBasicSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry2 = DispatchBasicSubjects_DispatchBasicSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_2),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry3 = DispatchBasicSubjects_DispatchBasicSubjects_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_3),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry4 = DispatchBasicSubjects_DispatchBasicSubjects_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_4),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry5 = DispatchBasicSubjects_BasicImpl__ctor */
+	.entry5 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_BasicImpl__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry6 = DispatchBasicSubjects_BasicImpl_GetValue */
+	.entry6 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_BasicImpl_GetValue),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry7 = DispatchBasicSubjects_Calculator__ctor */
+	.entry7 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_Calculator__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry8 = DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32 */
+	.entry8 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 24u, 32u }
+	},
+	/* entry9 = DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32 */
+	.entry9 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 24u, 32u }
+	},
+	/* entry10 = DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32 */
+	.entry10 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 8u, 16u, 24u, 32u }
+	},
+	/* entry11 = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus */
+	.entry11 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry12 = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd */
+	.entry12 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry13 = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub */
+	.entry13 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry14 = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue */
+	.entry14 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry15 = DispatchBasicSubjects_StatusProvider__ctor */
+	.entry15 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_StatusProvider__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry16 = DispatchBasicSubjects_StatusProvider_GetStatusCode */
+	.entry16 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry17 = DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType */
+	.entry17 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 576u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[18] = {
@@ -933,6 +1085,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
 	.vtable_descriptor_count = 3u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -1088,103 +1243,73 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				auto& _d10 = s_hotpatch_entries[10];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
+				{
+					alignas(16) uint8_t _d_ab[4];
+					ArgBuffer _d_bw(_d_ab);
+					_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d10.method_key, _d_ab, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				auto& _d10 = s_hotpatch_entries[10];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
+				{
+					alignas(16) uint8_t _d_ab[4];
+					ArgBuffer _d_bw(_d_ab);
+					_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d10.method_key, _d_ab, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -1204,103 +1329,63 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+			{
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -1320,103 +1405,63 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+			{
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -1436,103 +1481,63 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+			{
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -1552,103 +1557,63 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_TRY
+			{
+				auto& _d14 = s_hotpatch_entries[14];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d14.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d14 = s_hotpatch_entries[14];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d14.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
 			}
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = chaos_value;
-			}
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+	CHAOS_EH_END
 	return;
 }
 
@@ -1663,7 +1628,7 @@ extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -1691,7 +1656,7 @@ extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -2039,7 +2004,7 @@ extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR c
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }

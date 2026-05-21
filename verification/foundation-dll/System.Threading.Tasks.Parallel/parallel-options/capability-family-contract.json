@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+  "displayName": "Parallel Options",
+  "methodSubjectIds": [
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()"
+  ],
+  "methodSubjectCount": 7,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

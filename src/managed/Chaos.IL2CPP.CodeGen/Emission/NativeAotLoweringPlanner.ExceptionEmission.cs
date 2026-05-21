@@ -601,7 +601,9 @@ public sealed partial class NativeAotLoweringPlanner
 
 		case "ldlen":
 		{
-			EmitEvalStackPush(builder, indentation, $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()}))");
+			var arrExpr = ConsumeEvalStackValueExpression();
+			EmitEvalStackPush(builder, indentation,
+				"[&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(" + arrExpr + "); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }()");
 			break;
 		}
 		case "dup":
@@ -1231,8 +1233,6 @@ public sealed partial class NativeAotLoweringPlanner
 		case "localloc":
 			EmitLinearLocalAlloc(builder, indentation);
 			break;
-		case "brfalse":
-		case "brtrue":
 		{
 			builder.AppendLine($"{indentation}// {instruction.Op} (structured EH branch)");
 			break;
@@ -1379,6 +1379,47 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine("#endif");
 				break;
 			}
+		case "nop":
+		{
+			break;
+		}
+		case "beq":
+		case "bge":
+		case "bge.un":
+		case "bgt":
+		case "bgt.un":
+		case "ble":
+		case "ble.un":
+		case "blt":
+		case "blt.un":
+		case "bne.un":
+		case "brfalse":
+		case "brtrue":
+		{
+			builder.AppendLine($"{indentation}// {instruction.Op} (structured EH branch)");
+			break;
+		}
+		case "endcatch":
+		{
+			builder.AppendLine($"{indentation}// endcatch (handled via structured EH)");
+			break;
+		}
+		case "br":
+		case "leave":
+		{
+			builder.AppendLine($"{indentation}// {instruction.Op} (handled via structured EH branches)");
+			break;
+		}
+		case "endfinally":
+		{
+			builder.AppendLine($"{indentation}// endfinally (handled via structured EH)");
+			break;
+		}
+		case "endfilter":
+		{
+			builder.AppendLine($"{indentation}// endfilter (handled via structured EH)");
+			break;
+		}
 		default:
 			throw new NotSupportedException("native-aot structured EH linear lowering does not support opcode '" + instruction.Op + "'.");
 		}
@@ -3385,6 +3426,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					break;
 				}
 				case "endfinally":
+				case "endcatch":
 				{
 					break;
 				}

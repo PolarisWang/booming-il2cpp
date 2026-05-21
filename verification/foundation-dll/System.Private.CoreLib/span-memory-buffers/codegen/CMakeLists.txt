@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: SpanMemoryBuffersSubjects
-add_library(chaos_gen_SpanMemoryBuffersSubjects STATIC
-    ${CHAOS_GEN_DIR}/SpanMemoryBuffersSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/SpanMemoryBuffersSubjects/generated/chaos_generated_module.cpp
+# Assembly: SpanMemoryBuffersPatchEntry
+add_library(chaos_gen_SpanMemoryBuffersPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/SpanMemoryBuffersPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/SpanMemoryBuffersPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_SpanMemoryBuffersSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_SpanMemoryBuffersSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_SpanMemoryBuffersSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_SpanMemoryBuffersPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_SpanMemoryBuffersPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_SpanMemoryBuffersPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_SpanMemoryBuffersSubjects
+    chaos_gen_SpanMemoryBuffersPatchEntry
     ${NATIVE_LIBS}
 )
 

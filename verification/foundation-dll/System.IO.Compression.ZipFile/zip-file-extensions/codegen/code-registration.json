@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ZipFileExtensionsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_0",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_1",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_2",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_3",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_4",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_5",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_6",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_7",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_8",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_9",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_10",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ZipFileExtensionsSubjects_ZipFileExtensionsSubjects_Subject_11",
+          "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

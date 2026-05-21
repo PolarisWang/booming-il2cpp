@@ -1,0 +1,617 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-0",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-0",
+        "signature": "System.Void DataErrorsSubjects::Subject_0()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DataErrorsSubjects",
+            "subjectKind": "field",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DataErrorsSubjects",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    },
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-1",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-1",
+        "signature": "System.Void DataErrorsSubjects::Subject_1()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 6,
+          "resultType": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs",
+          "callee": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    },
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-2",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_2:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-2",
+        "signature": "System.Void DataErrorsSubjects::Subject_2()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    },
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-3",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-3",
+        "signature": "System.Void DataErrorsSubjects::Subject_3()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DataErrorsSubjects",
+            "subjectKind": "field",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DataErrorsSubjects",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    },
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-4",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-4",
+        "signature": "System.Void DataErrorsSubjects::Subject_4()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 22,
+          "handlerOffset": 23,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 8,
+          "resultType": "System.Collections.IEnumerable",
+          "callee": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DataErrorsSubjects",
+            "subjectKind": "field",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DataErrorsSubjects",
+            "subjectId": "DataErrorsSubjects/DataErrorsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 28,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 28,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    },
+    {
+      "methodId": "data-errors-subjects.data-errors-subjects.subject-5",
+      "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+      "signature": "System.Void DataErrorsSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "DataErrorsSubjects",
+        "declaringTypeSubjectId": "DataErrorsSubjects/DataErrorsSubjects",
+        "definitionSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+        "subjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_5:System.Void()",
+        "methodId": "data-errors-subjects.data-errors-subjects.subject-5",
+        "signature": "System.Void DataErrorsSubjects::Subject_5()"
+      },
+      "nativeSymbol": "DataErrorsSubjects_DataErrorsSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DataErrorsSubjects"
+    }
+  ]
+}

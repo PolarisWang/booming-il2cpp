@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SourceGenerationContextSubjects",
+      "subjectKind": "method",
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SourceGenerationContextSubjects",
+      "subjectKind": "method",
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SourceGenerationContextSubjects",
+      "subjectKind": "field",
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::get_Options:JsonSerializerOptions()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "reason": "external-call"
+    }
+  ]
+}

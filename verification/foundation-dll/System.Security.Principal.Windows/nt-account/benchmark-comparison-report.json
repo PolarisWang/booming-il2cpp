@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/nt/account",
+  "summary": {
+    "totalMethods": 10,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 10,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

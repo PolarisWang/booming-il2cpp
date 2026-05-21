@@ -18,6 +18,8 @@ file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "verification_dispatch.generated.cpp"
+    "microbench.cpp"  # microbench support  # verification dispatch (sources)
     ${CHAOS_CODEGEN_CPP}
 )
 
@@ -67,7 +69,6 @@ target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
 target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_EH_WIN32_SEH)
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_PROFILE)  # chaos-il2cpp config tier
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_LOG_LEVEL=2)
-target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_PROFILE_ENABLED=1)
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_LOG_LEVEL=3)
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})

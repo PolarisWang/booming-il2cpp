@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ParallelOptionsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ParallelOptionsSubjects/ParallelOptionsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "subjectKind": "method",
+      "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

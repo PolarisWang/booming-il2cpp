@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PrimitiveNumericConversionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PrimitiveNumericConversionsSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "68ba10b9-66ef-4fd7-9fae-435512fec8bc",
+  "inputModuleVersionId": "67e828db-2bd0-4ac5-b4ba-d1e4460153d5",
   "artifacts": [
     {
       "kind": "typedIlIr",

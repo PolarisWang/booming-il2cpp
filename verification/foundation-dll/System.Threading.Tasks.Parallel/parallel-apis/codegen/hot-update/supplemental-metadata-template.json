@@ -1,0 +1,441 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_9:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_10:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_11:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_11:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_12:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_13:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_13:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_14:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_14:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_15:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_15:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_16:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_16:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_17:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_17:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_18:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_18:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_19:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_19:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_20:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_20:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_21:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_21:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_22:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_22:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_23:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_23:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_24:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_24:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_25:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_25:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_26:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_26:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_27:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_27:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_28:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_28:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_29:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_29:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_30:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_30:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_31:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_31:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_32:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_32:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_33:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_33:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_34:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_34:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_35:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_35:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_36:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_36:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_37:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_37:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_38:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_38:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_39:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_39:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_40:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_40:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_42:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_42:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663342,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663343,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663344,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663345,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663346,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663347,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

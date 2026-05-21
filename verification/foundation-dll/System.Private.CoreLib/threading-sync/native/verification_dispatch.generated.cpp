@@ -7,10 +7,9 @@
 extern "C" const int kAotMethodCount;
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32);
 
-extern "C" const int kSubjectEntryCount = 17;
-extern "C" const int kSubjectEntryIndices[17] = {
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
-};
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+// (defined in native-aot.generated.cpp)
 
 // ── RunFactAll: run every method via RunNativeAot, return failure count ──
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {

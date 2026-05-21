@@ -1,0 +1,1570 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-0",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-0",
+        "signature": "System.Void NtAccountSubjects::Subject_0()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 24,
+          "handlerOffset": 25,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 5,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 10,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 15,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 30,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 30,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-1",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-1",
+        "signature": "System.Void NtAccountSubjects::Subject_1()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-2",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-2",
+        "signature": "System.Void NtAccountSubjects::Subject_2()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-3",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-3",
+        "signature": "System.Void NtAccountSubjects::Subject_3()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 27,
+          "handlerOffset": 28,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Boolean",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-4",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-4",
+        "signature": "System.Void NtAccountSubjects::Subject_4()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 30,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-5",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-5",
+        "signature": "System.Void NtAccountSubjects::Subject_5()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-6",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-6",
+        "signature": "System.Void NtAccountSubjects::Subject_6()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Object::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-7",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-7",
+        "signature": "System.Void NtAccountSubjects::Subject_7()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 27,
+          "handlerOffset": 28,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 3,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 8,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 13,
+          "resultType": "System.Security.Principal.IdentityReference",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "NtAccountSubjects",
+            "subjectKind": "field",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "NtAccountSubjects",
+            "subjectId": "NtAccountSubjects/NtAccountSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-8",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-8",
+        "signature": "System.Void NtAccountSubjects::Subject_8()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 6,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 11,
+          "resultType": "System.Security.Principal.Windows/System.Security.Principal.NTAccount",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    },
+    {
+      "methodId": "nt-account-subjects.nt-account-subjects.subject-9",
+      "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+      "signature": "System.Void NtAccountSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "NtAccountSubjects",
+        "declaringTypeSubjectId": "NtAccountSubjects/NtAccountSubjects",
+        "definitionSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+        "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+        "methodId": "nt-account-subjects.nt-account-subjects.subject-9",
+        "signature": "System.Void NtAccountSubjects::Subject_9()"
+      },
+      "nativeSymbol": "NtAccountSubjects_NtAccountSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "hello",
+          "ilOffset": 1,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 6,
+          "resultType": "System.Security.Principal.Windows/System.Security.Principal.NTAccount",
+          "callee": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectKind": "method",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Security.Principal.Windows",
+            "subjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "NtAccountSubjects"
+    }
+  ]
+}

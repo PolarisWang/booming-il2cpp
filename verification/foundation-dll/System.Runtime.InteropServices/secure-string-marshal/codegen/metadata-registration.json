@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SecureStringMarshalSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "name": "SecureStringMarshalSubjects",
+      "displayName": "SecureStringMarshalSubjects",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::_exitCode",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

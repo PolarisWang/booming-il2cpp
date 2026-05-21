@@ -1,0 +1,79 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "unmanaged-calling-conventions-subjects.unmanaged-calling-conventions-subjects.subject-0",
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void UnmanagedCallingConventionsSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "UnmanagedCallingConventionsSubjects",
+        "declaringTypeSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects",
+        "definitionSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+        "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+        "methodId": "unmanaged-calling-conventions-subjects.unmanaged-calling-conventions-subjects.subject-0",
+        "signature": "System.Void UnmanagedCallingConventionsSubjects::Subject_0()"
+      },
+      "nativeSymbol": "UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.Runtime.InteropServices.SuppressGCTransitionAttribute",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SuppressGCTransitionAttribute",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "UnmanagedCallingConventionsSubjects"
+    }
+  ]
+}

@@ -191,7 +191,19 @@
     {
       "methodSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Attributes:System.Reflection.ParameterAttributes()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {

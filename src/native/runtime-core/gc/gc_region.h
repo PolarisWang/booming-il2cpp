@@ -52,6 +52,7 @@ enum class RegionKind : CHAOS_IL2CPP_UINT8 {
     REGION_RAW           = 3,  // Raw/temp allocations (malloc-backed)
     REGION_FOH           = 4,  // Freakishly large object heap (>85 KB, BDWGC mark-sweep)
     REGION_POH           = 5,  // Pinned object heap (bump-pointer, no young GC copy)
+    REGION_GEN1          = 6,  // Gen1 survivor space (bump-pointer, young GC promotes here)
 };
 
 // ── Region structure ───────────────────────────────────────────
@@ -112,6 +113,13 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept;
 
 /// Check if @a ptr falls within any REGION_POH region.
 bool IsPohPointer(const void* ptr) noexcept;
+
+/// Resize the Gen1 region to @a new_size after a Gen1 collection.
+/// Allocates a new REGION_GEN1, updates g_young_gen atomically, registers
+/// the new range with the card table, and frees the old region.
+/// No object migration needed — Gen1 is empty after GcGen1Collection resets bump.
+/// Logs a warning on OOM and keeps the existing Gen1 region.
+void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size);
 
 /// Release the current TLS nursery (now a no-op with shared young gen).
 inline void TeardownTlsNursery() noexcept {}

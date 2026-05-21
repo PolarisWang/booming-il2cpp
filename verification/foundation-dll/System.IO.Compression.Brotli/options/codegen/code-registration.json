@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "OptionsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "OptionsSubjects_OptionsSubjects_Subject_0",
+          "subjectId": "OptionsSubjects/OptionsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "OptionsSubjects_OptionsSubjects_Subject_1",
+          "subjectId": "OptionsSubjects/OptionsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "OptionsSubjects_OptionsSubjects_Subject_2",
+          "subjectId": "OptionsSubjects/OptionsSubjects::Subject_2:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

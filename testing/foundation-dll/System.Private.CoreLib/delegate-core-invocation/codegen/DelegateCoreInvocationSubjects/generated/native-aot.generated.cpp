@@ -1352,6 +1352,43 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			_s0 = 0;
+			_s1 = 0;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_delegate_combine(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = 0;
+			_s2 = 0;
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_delegate_combine(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1393,6 +1430,43 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			_s0 = 0;
+			_s1 = 0;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_delegate_remove(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = 0;
+			_s2 = 0;
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_delegate_remove(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1444,6 +1518,123 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0;
+			_s1 = _s0;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s1 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 3)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[3];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s3 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_1;
+			_s4 = _s3;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s4 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 4)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[4];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s5;
+				const auto chaos_target = _s4;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s5 = _s4;
+			{
+				auto chaos_value = _s5;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_1 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1513,6 +1704,113 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__4_0;
+			_s1 = _s0;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s1 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 6)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[6];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__4_0 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s3 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__4_1;
+			_s4 = _s3;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s4 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 7)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[7];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s5;
+				const auto chaos_target = _s4;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s5 = _s4;
+			{
+				auto chaos_value = _s5;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__4_1 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1582,6 +1880,113 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__5_0;
+			_s1 = _s0;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s1 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 9)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[9];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__5_0 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s3 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__5_1;
+			_s4 = _s3;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s4 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 10)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[10];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s5;
+				const auto chaos_target = _s4;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s5 = _s4;
+			{
+				auto chaos_value = _s5;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__5_1 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1677,6 +2082,107 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 
 
 	CHAOS_EH_TRY
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__8_0;
+			_s1 = _s0;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s1 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 14)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[14];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__8_0 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s2); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s2));
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s3 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__8_1;
+			_s4 = _s3;
+			// brtrue (structured EH branch)
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+			_s4 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 15)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[15];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s5;
+				const auto chaos_target = _s4;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s5 = _s4;
+			{
+				auto chaos_value = _s5;
+			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__8_1 = chaos_value;
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s5 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s5); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s5));
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

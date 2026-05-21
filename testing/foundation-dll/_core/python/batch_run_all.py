@@ -38,11 +38,7 @@ _TESTING_ROOT = _CORE_PACKAGE.parent
 
 SKIP_SLUGS = {
     "aggregation", "filtering", "immutable-array", "immutable-list", "reports",
-}
-
-# Families that need special handling (comma in path)
-COMBINED_FAMILIES = {
-    "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+    "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",  # duplicate of individual families
 }
 
 

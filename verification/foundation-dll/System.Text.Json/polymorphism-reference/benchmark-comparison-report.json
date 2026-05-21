@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/polymorphism/reference",
+  "summary": {
+    "totalMethods": 8,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 8,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_IgnoreCycles:System.Text.Json.Serialization.ReferenceHandler()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Preserve:System.Text.Json.Serialization.ReferenceHandler()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::AddReference:System.Void(System.String,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::GetReference:System.String(System.Object,System.Boolean&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::ResolveReference:System.Object(System.String)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "TypeRuntimeHandlesSubjects",
-  "entrySubjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()",
+  "assemblyName": "TypeRuntimeHandlesPatchEntry",
+  "entrySubjectId": "TypeRuntimeHandlesPatchEntry/TypeRuntimeHandlesPatchEntry::Run:System.Void(System.Int32)",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_0",
+  "entrySymbol": "TypeRuntimeHandlesPatchEntry_TypeRuntimeHandlesPatchEntry_Run_System_Int32",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

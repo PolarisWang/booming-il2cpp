@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/unmanaged/calling/conventions",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()",
+      "elapsedMilliseconds": 7.303,
+      "calibratedMs": 7.303,
+      "opsPerSecond": 13693377.9,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

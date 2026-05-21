@@ -1,0 +1,186 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_10:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_13:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_14:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    }
+  ]
+}

@@ -22,46 +22,6 @@
     },
     {
       "requestingAssemblyName": "SpanMemoryBuffersSubjects",
-      "owningAssemblyName": "System.Memory",
-      "subjectKind": "method",
-      "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-      "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
-      "demandSourceKind": "methodSpec",
-      "instantiationKey": {
-        "contextKind": 2,
-        "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
-        "typeArguments": [],
-        "methodArguments": [
-          "System.Byte"
-        ]
-      },
-      "supportKindCode": 3,
-      "specializationKindCode": 1,
-      "familyKindCode": 3,
-      "isCrossAssembly": true
-    },
-    {
-      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
-      "owningAssemblyName": "System.Memory",
-      "subjectKind": "method",
-      "subjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
-      "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
-      "demandSourceKind": "methodSpec",
-      "instantiationKey": {
-        "contextKind": 2,
-        "definitionSubjectId": "System.Memory/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
-        "typeArguments": [],
-        "methodArguments": [
-          "System.Byte"
-        ]
-      },
-      "supportKindCode": 3,
-      "specializationKindCode": 1,
-      "familyKindCode": 3,
-      "isCrossAssembly": true
-    },
-    {
-      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte[])",
@@ -258,6 +218,46 @@
       "supportKindCode": 3,
       "specializationKindCode": 1,
       "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.ReadOnlySpan\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SpanMemoryBuffersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference\u003CSystem.Byte\u003E:System.Byte\u0026(System.Span\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:!!0\u0026(System.Span\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
       "isCrossAssembly": true
     },
     {

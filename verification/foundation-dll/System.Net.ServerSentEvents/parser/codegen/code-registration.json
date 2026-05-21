@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ParserSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_0",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ParserSubjects_ParserSubjects_CustomEntrySubject_1",
+          "subjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_2",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_3",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_4",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_5",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_6",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ParserSubjects_ParserSubjects_Subject_7",
+          "subjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -7,6 +7,12 @@
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\runtime-compiler-services\native\runtime-patchdata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\runtime-compiler-services\native\verification_dispatch.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\runtime-compiler-services\native\microbench.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\runtime-compiler-services\codegen\RuntimeCompilerServicesSubjects\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

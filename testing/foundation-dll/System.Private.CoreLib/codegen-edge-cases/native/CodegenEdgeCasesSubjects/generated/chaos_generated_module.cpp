@@ -30,7 +30,7 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_Syst
 extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(
         void
 );
-extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(
             CHAOS_IL2CPP_INT32
 );
 

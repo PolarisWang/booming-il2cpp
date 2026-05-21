@@ -1,0 +1,67 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "LoopStateSubjects",
+      "subjectId": "LoopStateSubjects/LoopStateSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "LoopStateSubjects/LoopStateSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

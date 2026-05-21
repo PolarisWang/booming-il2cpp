@@ -926,6 +926,65 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_object_equals(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s4;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s4;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = chaos_object_equals(chaos_arg_0, chaos_arg_1);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -977,6 +1036,69 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s0;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectEqualsStatic(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s3;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s4;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s4;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectEqualsStatic(chaos_arg_0, chaos_arg_1);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1026,6 +1148,57 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s0;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			// beq (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s4;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s5;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			// beq (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1063,6 +1236,39 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1102,6 +1308,57 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectToString(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectToString(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1141,6 +1398,47 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 
 
 	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

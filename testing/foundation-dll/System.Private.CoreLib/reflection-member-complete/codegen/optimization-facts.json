@@ -167,10 +167,22 @@
     {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
@@ -299,7 +311,19 @@
     {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_8:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -431,7 +455,19 @@
     {
       "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_21:System.Void()",
       "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],

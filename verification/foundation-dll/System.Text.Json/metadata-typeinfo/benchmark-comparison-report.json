@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/metadata/typeinfo",
+  "summary": {
+    "totalMethods": 39,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 39,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonPropertyInfo:System.Text.Json.Serialization.Metadata.JsonPropertyInfo(System.Type,System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo{T}:System.Text.Json.Serialization.Metadata.JsonTypeInfo{T}(System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ConstructorAttributeProvider:System.Reflection.ICustomAttributeProvider()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Converter:System.Text.Json.Serialization.JsonConverter()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func{System.Object}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ElementType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_IsReadOnly:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_KeyType:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Kind:System.Text.Json.Serialization.Metadata.JsonTypeInfoKind()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_NumberHandling:System.Nullable{System.Text.Json.Serialization.JsonNumberHandling}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserialized:System.Action{System.Object}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserializing:System.Action{System.Object}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerialized:System.Action{System.Object}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerializing:System.Action{System.Object}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Options:System.Text.Json.JsonSerializerOptions()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OriginatingResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PolymorphismOptions:System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PreferredPropertyObjectCreationHandling:System.Nullable{System.Text.Json.Serialization.JsonObjectCreationHandling}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Properties:System.Collections.Generic.IList{System.Text.Json.Serialization.Metadata.JsonPropertyInfo}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Type:System.Type()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_UnmappedMemberHandling:System.Nullable{System.Text.Json.Serialization.JsonUnmappedMemberHandling}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::MakeReadOnly:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func{System.Object})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_NumberHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonNumberHandling})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserialized:System.Void(System.Action{System.Object})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserializing:System.Void(System.Action{System.Object})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerialized:System.Void(System.Action{System.Object})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerializing:System.Void(System.Action{System.Object})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OriginatingResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PolymorphismOptions:System.Void(System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PreferredPropertyObjectCreationHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonObjectCreationHandling})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_UnmappedMemberHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonUnmappedMemberHandling})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_IsReadOnly:System.Void(System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_ConstructorAttributeProvider:System.Void(System.Reflection.ICustomAttributeProvider)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_CreateObject:System.Func{T}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_SerializeHandler:System.Action{System.Text.Json.Utf8JsonWriter,T}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_CreateObject:System.Void(System.Func{T})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_SerializeHandler:System.Void(System.Action{System.Text.Json.Utf8JsonWriter,T})",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

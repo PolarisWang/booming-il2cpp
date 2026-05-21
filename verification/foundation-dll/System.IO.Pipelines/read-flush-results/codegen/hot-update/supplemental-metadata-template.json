@@ -1,0 +1,75 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

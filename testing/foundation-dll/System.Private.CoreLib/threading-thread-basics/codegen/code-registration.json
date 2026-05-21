@@ -8,78 +8,144 @@
         {
           "registrationKind": "methodPointer",
           "slot": 0,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_0",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_1",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_2",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_3",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_4",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_5",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_6",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_7",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_8",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_9",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_10",
+          "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod0",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 1,
+          "slot": 12,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod1",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod1:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 2,
+          "slot": 13,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod2",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod2:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 3,
+          "slot": 14,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod3",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod3:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 4,
+          "slot": 15,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod4",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod4:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 5,
+          "slot": 16,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod5",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod5:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 6,
+          "slot": 17,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod6",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 7,
+          "slot": 18,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod7",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 8,
+          "slot": 19,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod8",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod8:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 9,
+          "slot": 20,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod9",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod9:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 10,
+          "slot": 21,
           "symbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod10",
           "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod10:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 11,
+          "slot": 22,
           "symbol": "ThreadingThreadBasicsSubjects_AutoGeneratedProgram_Main_System_String",
           "subjectId": "ThreadingThreadBasicsSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 12,
+          "slot": 23,
           "symbol": "ThreadingThreadBasicsSubjects_AutoGeneratedProgram__ctor",
           "subjectId": "ThreadingThreadBasicsSubjects/AutoGeneratedProgram::.ctor:System.Void()"
         }

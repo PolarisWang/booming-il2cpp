@@ -1,0 +1,144 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ComTypesSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_0",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_1",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_2",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_3",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_4",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_5",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_6",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_7",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_8",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_9",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_10",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_11",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_12",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_13",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_14",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_15",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_16",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_17",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_18",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_19",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_20",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ComTypesSubjects_ComTypesSubjects_Subject_21",
+          "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,14 +1,14 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "RuntimeCompilerServicesSubjects",
+  "assemblyName": "RuntimeCompilerServicesPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/managed/subjects/build-output/RuntimeCompilerServicesSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/managed/patch/build-output/RuntimeCompilerServicesPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
-      "assemblyName": "RuntimeCompilerServicesSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/managed/subjects/build-output/RuntimeCompilerServicesSubjects.dll"
+      "assemblyName": "RuntimeCompilerServicesPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/runtime-compiler-services/managed/patch/build-output/RuntimeCompilerServicesPatchEntry.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "a605e775-1f32-4d12-9cbf-ddc9c4d1df9f",
+  "inputModuleVersionId": "8e3c3c55-cce9-4b48-a329-975e884359c2",
   "artifacts": [
     {
       "kind": "typedIlIr",

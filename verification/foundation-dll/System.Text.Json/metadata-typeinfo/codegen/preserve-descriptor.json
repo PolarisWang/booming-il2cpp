@@ -1,0 +1,252 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_22:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_23:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_24:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_25:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_26:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_27:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_28:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_29:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_30:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_31:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_32:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_33:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_34:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_36:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_37:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_38:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

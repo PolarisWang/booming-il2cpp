@@ -1,0 +1,312 @@
+{
+  "family": "parallel-apis",
+  "assembly": "System.Threading.Tasks.Parallel",
+  "mode": "standard",
+  "timestamp": "2026-05-21T17:48:58",
+  "duration_ms": 116565,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "43 methods, 33 custom entries",
+      "details": {
+        "methodCount": 43,
+        "customMethodCount": 33,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 43,
+        "dllPath": "D:\\agent\\booming-il2cpp\\verification\\foundation-dll\\System.Threading.Tasks.Parallel\\parallel-apis\\managed\\subjects\\build-output\\ParallelApisSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 37325
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 39978
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=failed (18/19)",
+      "details": {
+        "fact": {
+          "status": "failed",
+          "passed": 18,
+          "total": 19
+        }
+      },
+      "errors": [],
+      "duration_ms": 432
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (19/19)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 19,
+          "total": 19,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 503
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 9,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1290
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 10/43 methods OK, avg JIT=80.0 instr, avg AOT IR=14.9 instr, expansion=0.19x",
+      "details": {
+        "totalMethods": 43,
+        "okCount": 10,
+        "failedCount": 33,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 220,
+          "avg": 80.0,
+          "total": 800
+        },
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 25,
+          "avg": 14.9,
+          "total": 149
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 7
+        },
+        "overallIrExpansionRatio": 0.19,
+        "averageExpansionRatio": 0.3,
+        "maxExpansionRatio": 0.57,
+        "minExpansionRatio": 0.02
+      },
+      "errors": [],
+      "duration_ms": 4147
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=3.2ns/op | FastExecute=8.9ns/op | CallVirt dispatch=6.4ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 3.2,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 8.9
+        },
+        "callVirt": {
+          "handlerDispatchNs": 6.4,
+          "emptyStackNs": 7.0
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 93
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 43 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 28997
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "18/19 passed, 0 failed (stub=3)",
+      "details": {
+        "passedMethods": 18,
+        "failedMethods": 0,
+        "totalMethods": 19,
+        "realMethods": 19,
+        "stubMethods": 3
+      },
+      "errors": [],
+      "duration_ms": 28
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-38.27% (0.6x) over 16 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -38.27,
+        "slowdownFactor": 0.6173,
+        "threshold": 50.0,
+        "nonStubMethods": 16
+      },
+      "errors": [],
+      "duration_ms": 1055
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "19/19 passed, 0 failed",
+      "details": {
+        "passed": 19,
+        "failed": 0,
+        "total": 19
+      },
+      "errors": [],
+      "duration_ms": 27
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-5.08% (0.9x) over 17 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": -5.08,
+        "slowdownFactor": 0.9492,
+        "threshold": 50.0,
+        "nonStubMethods": 17
+      },
+      "errors": [],
+      "duration_ms": 2681
+    }
+  },
+  "coverage": {
+    "methodCoverage": 94.74,
+    "testedRate": 79.07,
+    "overall": 86.91
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 3.2,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 6.4,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {
+      "totalMethods": 43,
+      "okCount": 10,
+      "failedCount": 33,
+      "overallIrExpansionRatio": 0.19,
+      "averageExpansionRatio": 0.3,
+      "maxExpansionRatio": 0.57,
+      "jitInstructionAvg": 80.0,
+      "aotInstructionAvg": 14.9,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 7
+      }
+    },
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 18,
+        "failedMethods": 0,
+        "totalMethods": 19
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -38.27,
+        "slowdownFactor": 0.6173,
+        "nonStubMethods": 16
+      },
+      "jitFunctional": {
+        "passedMethods": 19,
+        "failedMethods": 0,
+        "totalMethods": 19
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": -5.08,
+        "slowdownFactor": 0.9492,
+        "nonStubMethods": 17
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0.19,
+      "interpreterSlowdownFactor": 0.6173,
+      "asmPassRate": 23.3
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 43,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

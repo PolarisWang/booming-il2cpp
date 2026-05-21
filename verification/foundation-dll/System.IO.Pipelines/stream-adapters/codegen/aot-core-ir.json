@@ -1,0 +1,217 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "stream-adapters-subjects.stream-adapters-subjects.subject-0",
+      "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
+      "signature": "System.Void StreamAdaptersSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "StreamAdaptersSubjects",
+        "declaringTypeSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects",
+        "definitionSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
+        "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
+        "methodId": "stream-adapters-subjects.stream-adapters-subjects.subject-0",
+        "signature": "System.Void StreamAdaptersSubjects::Subject_0()"
+      },
+      "nativeSymbol": "StreamAdaptersSubjects_StreamAdaptersSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 31,
+          "handlerOffset": 32,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 2,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 7,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 8,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Threading.CancellationToken",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Threading.Tasks.Task",
+          "callee": "System.IO.Pipelines/StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,PipeWriter,System.Threading.CancellationToken)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,PipeWriter,System.Threading.CancellationToken)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,PipeWriter,System.Threading.CancellationToken)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "StreamAdaptersSubjects/StreamAdaptersSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "StreamAdaptersSubjects",
+            "subjectKind": "field",
+            "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "StreamAdaptersSubjects",
+            "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 37,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 37,
+          "ilOffset": 35,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 37,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "StreamAdaptersSubjects"
+    }
+  ]
+}

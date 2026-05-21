@@ -3,43 +3,49 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ReflectionModuleSubjects.dll",
+      "moduleName": "ReflectionModulePatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_0",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_1",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_2",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_3",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Subject_4",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5",
-          "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::CustomEntrySubject_5:System.Void()"
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_Run_System_Int32",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::Run:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionModulePatchEntry_ReflectionModulePatchEntry_CustomEntryMethod5",
+          "subjectId": "ReflectionModulePatchEntry/ReflectionModulePatchEntry::CustomEntryMethod5:System.Void()"
         }
       ]
     }

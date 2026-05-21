@@ -1,0 +1,1117 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-0",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-0",
+        "signature": "System.Void ParserSubjects::Subject_0()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.Private.CoreLib/System.IO.MemoryStream",
+          "callee": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.IO.MemoryStream",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 6,
+          "resultType": "SseParser\u003CSystem.String\u003E",
+          "callee": "System.Net.ServerSentEvents/SseParser::Create:SseParser\u003CSystem.String\u003E(System.IO.Stream)",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseParser::Create:SseParser\u003CSystem.String\u003E(System.IO.Stream)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseParser::Create:SseParser\u003CSystem.String\u003E(System.IO.Stream)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 7880838,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 36,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParserSubjects/ParserSubjects::_exitCode",
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParserSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParserSubjects",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 36,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.custom-entry-subject-1",
+      "subjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ParserSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.custom-entry-subject-1",
+        "signature": "System.Void ParserSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-2",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-2",
+        "signature": "System.Void ParserSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E",
+          "callee": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003C!0\u003E\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParserSubjects/ParserSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParserSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParserSubjects",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-3",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-3",
+        "signature": "System.Void ParserSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 26,
+          "handlerOffset": 27,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Threading.CancellationToken",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 12,
+          "resultType": "System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E",
+          "callee": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E(System.Threading.CancellationToken)",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E(System.Threading.CancellationToken)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E(System.Threading.CancellationToken)",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken)",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken);type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken);type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken)",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken);type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken);type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E(System.Threading.CancellationToken)",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken)",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync(System.Threading.CancellationToken)",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003C!0\u003E\u003E(System.Threading.CancellationToken)",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParserSubjects/ParserSubjects::_exitCode",
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParserSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParserSubjects",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-4",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-4",
+        "signature": "System.Void ParserSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.String",
+          "callee": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_LastEventId:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParserSubjects/ParserSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParserSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParserSubjects",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-5",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-5",
+        "signature": "System.Void ParserSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.TimeSpan",
+          "callee": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseParser\u00601::get_ReconnectionInterval:System.TimeSpan()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParserSubjects/ParserSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParserSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParserSubjects",
+            "subjectId": "ParserSubjects/ParserSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-6",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_6:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-6",
+        "signature": "System.Void ParserSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    },
+    {
+      "methodId": "parser-subjects.parser-subjects.subject-7",
+      "subjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ParserSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ParserSubjects",
+        "declaringTypeSubjectId": "ParserSubjects/ParserSubjects",
+        "definitionSubjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()",
+        "subjectId": "ParserSubjects/ParserSubjects::Subject_7:System.Void()",
+        "methodId": "parser-subjects.parser-subjects.subject-7",
+        "signature": "System.Void ParserSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ParserSubjects_ParserSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParserSubjects"
+    }
+  ]
+}

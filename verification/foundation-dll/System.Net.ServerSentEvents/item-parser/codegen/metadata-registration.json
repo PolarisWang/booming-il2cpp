@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ItemParserSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects",
+      "name": "ItemParserSubjects",
+      "displayName": "ItemParserSubjects",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::_exitCode",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

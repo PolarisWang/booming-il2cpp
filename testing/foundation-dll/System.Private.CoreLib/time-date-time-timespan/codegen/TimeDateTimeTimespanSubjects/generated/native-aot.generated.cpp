@@ -1380,6 +1380,47 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeParse(chaos_arg_0);
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeParse(chaos_arg_0);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1423,6 +1464,45 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
+			}}
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{{
+				_s3 = CHAOS_IL2CPP_STRING_ID("2024-01-01");
+			}}
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_1 = _s4;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1464,6 +1544,57 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeToString(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeToString(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1507,6 +1638,65 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeToStringFormat(ChaosLoadInt64(chaos_arg_0), chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{{
+				_s2 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeToStringFormat(ChaosLoadInt64(chaos_arg_0), chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1552,6 +1742,57 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeAddDays(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeAddDays(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1597,6 +1838,57 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeAddHours(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeAddHours(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1642,6 +1934,57 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeAddMinutes(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeAddMinutes(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDatetimeGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1681,6 +2024,45 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeCompare(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_result = ChaosDatetimeGetUtcNow();
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeCompare(ChaosLoadInt64(chaos_arg_0), ChaosLoadInt64(chaos_arg_1));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1720,6 +2102,33 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(2024);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDateTimeDaysInMonth(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(2024);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDateTimeDaysInMonth(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1805,6 +2214,41 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosTimeSpanFromDays(ChaosLoadInt64(chaos_arg_0));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosTimeSpanFromDays(ChaosLoadInt64(chaos_arg_0));
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1846,6 +2290,41 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosTimeSpanFromHours(ChaosLoadInt64(chaos_arg_0));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosTimeSpanFromHours(ChaosLoadInt64(chaos_arg_0));
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1887,6 +2366,41 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosTimeSpanFromMinutes(ChaosLoadInt64(chaos_arg_0));
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosTimeSpanFromMinutes(ChaosLoadInt64(chaos_arg_0));
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1928,6 +2442,45 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("1:00:00");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosTimeSpanParse(chaos_arg_0);
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s2 = CHAOS_IL2CPP_STRING_ID("1:00:00");
+			}}
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosTimeSpanParse(chaos_arg_0);
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

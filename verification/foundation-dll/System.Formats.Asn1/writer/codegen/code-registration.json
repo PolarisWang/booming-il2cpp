@@ -1,0 +1,264 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "WriterSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_0",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_1",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_2",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "WriterSubjects_WriterSubjects_CustomEntrySubject_3",
+          "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "WriterSubjects_WriterSubjects_CustomEntrySubject_4",
+          "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "WriterSubjects_WriterSubjects_CustomEntrySubject_5",
+          "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_6",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_7",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_8",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_9",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_10",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_11",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_12",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_13",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_14",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_15",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_16",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_17",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_18",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_19",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_20",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_21",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_22",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_23",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "WriterSubjects_WriterSubjects_CustomEntrySubject_24",
+          "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_25",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_26",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_27",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_28",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_29",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_30",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_31",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "WriterSubjects_WriterSubjects_CustomEntrySubject_32",
+          "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_33",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_34",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_35",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_36",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_37",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_37:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_38",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_39",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_40",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "WriterSubjects_WriterSubjects_Subject_41",
+          "subjectId": "WriterSubjects/WriterSubjects::Subject_41:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

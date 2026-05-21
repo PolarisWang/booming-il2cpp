@@ -13,7 +13,7 @@
     "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
     "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
     "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
-    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
+    "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)"
   ],
   "translationUnitMethodCount": 4,
   "translationUnitPageSize": 1024,
@@ -24,7 +24,7 @@
       "methodCount": 4,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
-      "lastMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)"
+      "lastMethodSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)"
     }
   ],
   "auditStatus": "runtime-skeleton",

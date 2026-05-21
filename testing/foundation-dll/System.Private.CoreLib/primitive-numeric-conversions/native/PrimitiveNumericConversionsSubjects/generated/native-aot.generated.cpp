@@ -1230,6 +1230,41 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("true");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToBoolean(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{{
+				_s3 = CHAOS_IL2CPP_STRING_ID("true");
+			}}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosConvertToBoolean(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1267,6 +1302,33 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToByte(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToByte(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1304,6 +1366,33 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToInt16(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToInt16(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1341,6 +1430,33 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToInt32(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToInt32(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1382,6 +1498,35 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToInt64(chaos_arg_0);
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToInt64(chaos_arg_0);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1423,6 +1568,35 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToSingle(chaos_arg_0);
+				_s0 = ChaosStoreFloat32(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s0)));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToSingle(chaos_arg_0);
+				_s1 = ChaosStoreFloat32(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s1)));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1464,6 +1638,35 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToDouble(chaos_arg_0);
+				_s0 = ChaosStoreFloat64(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToDouble(chaos_arg_0);
+				_s1 = ChaosStoreFloat64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s1)));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1503,6 +1706,43 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToDecimal(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToDecimal(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1542,6 +1782,47 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosFormatInt32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosFormatInt32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1581,6 +1862,47 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosFormatDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosFormatDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1620,6 +1942,39 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosDecimalFromDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosDecimalFromDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1657,6 +2012,29 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			_s0 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosConvertToInt32FromDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = ChaosStoreFloat64(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosConvertToInt32FromDouble(ChaosLoadFloat64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s0) == ChaosLoadFloat64(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1694,6 +2072,33 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosParseInt32(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosParseInt32(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1735,6 +2140,35 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosParseInt64(chaos_arg_0);
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosParseInt64(chaos_arg_0);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -1776,6 +2210,35 @@ extern "C" void PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsS
 
 
 	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosParseDouble(chaos_arg_0);
+				_s0 = ChaosStoreFloat64(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("42");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosParseDouble(chaos_arg_0);
+				_s1 = ChaosStoreFloat64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s1)));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

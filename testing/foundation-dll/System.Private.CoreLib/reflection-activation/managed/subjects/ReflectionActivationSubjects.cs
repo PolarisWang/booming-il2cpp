@@ -37,7 +37,7 @@ public static partial class ReflectionActivationSubjects
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_3()
     {
-        try { if (((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode()) != ((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode())) _exitCode = 1; }
+        try { if (((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

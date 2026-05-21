@@ -1,0 +1,84 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "SseItemSubjects",
+      "owningAssemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
+      "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SseItemSubjects",
+      "owningAssemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()",
+      "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SseItemSubjects",
+      "owningAssemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
+      "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "SseItemSubjects",
+      "owningAssemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+      "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

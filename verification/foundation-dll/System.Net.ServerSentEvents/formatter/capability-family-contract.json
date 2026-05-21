@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Net.ServerSentEvents/formatter",
+  "displayName": "SSE Formatter",
+  "methodSubjectIds": [
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{System.String}},System.IO.Stream,System.Threading.CancellationToken)",
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync{T}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{T}},System.IO.Stream,System.Action{System.Net.ServerSentEvents.SseItem{T},System.Buffers.IBufferWriter{System.Byte}},System.Threading.CancellationToken)"
+  ],
+  "methodSubjectCount": 2,
+  "customEntryIndices": [
+    1
+  ],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

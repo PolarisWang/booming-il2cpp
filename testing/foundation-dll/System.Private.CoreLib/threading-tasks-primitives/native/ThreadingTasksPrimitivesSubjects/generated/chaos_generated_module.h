@@ -114,6 +114,53 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } threadingTasksPrimitivesNativeEntry___c;
+    struct ThreadingTasksPrimitivesSubjects_t {
+        void (*CustomEntrySubject_0)(
+                void
+        );
+        void (*CustomEntrySubject_10)(
+                void
+        );
+        void (*CustomEntrySubject_11)(
+                void
+        );
+        void (*CustomEntrySubject_12)(
+                void
+        );
+        void (*CustomEntrySubject_13)(
+                void
+        );
+        void (*CustomEntrySubject_14)(
+                void
+        );
+        void (*CustomEntrySubject_1)(
+                void
+        );
+        void (*CustomEntrySubject_2)(
+                void
+        );
+        void (*CustomEntrySubject_3)(
+                void
+        );
+        void (*CustomEntrySubject_4)(
+                void
+        );
+        void (*CustomEntrySubject_5)(
+                void
+        );
+        void (*CustomEntrySubject_6)(
+                void
+        );
+        void (*CustomEntrySubject_7)(
+                void
+        );
+        void (*CustomEntrySubject_8)(
+                void
+        );
+        void (*CustomEntrySubject_9)(
+                void
+        );
+    } threadingTasksPrimitivesSubjects;
     int32_t method_count;
 };
 
@@ -285,6 +332,86 @@ struct ThreadingTasksPrimitivesNativeEntry___c {
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 8;
+};
+
+struct ThreadingTasksPrimitivesSubjects {
+    static inline void CustomEntrySubject_0(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_0(
+        );
+    }
+    static inline void CustomEntrySubject_10(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_10(
+        );
+    }
+    static inline void CustomEntrySubject_11(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_11(
+        );
+    }
+    static inline void CustomEntrySubject_12(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_12(
+        );
+    }
+    static inline void CustomEntrySubject_13(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_13(
+        );
+    }
+    static inline void CustomEntrySubject_14(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_14(
+        );
+    }
+    static inline void CustomEntrySubject_1(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_1(
+        );
+    }
+    static inline void CustomEntrySubject_2(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_2(
+        );
+    }
+    static inline void CustomEntrySubject_3(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_3(
+        );
+    }
+    static inline void CustomEntrySubject_4(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_4(
+        );
+    }
+    static inline void CustomEntrySubject_5(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_5(
+        );
+    }
+    static inline void CustomEntrySubject_6(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_6(
+        );
+    }
+    static inline void CustomEntrySubject_7(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_7(
+        );
+    }
+    static inline void CustomEntrySubject_8(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_8(
+        );
+    }
+    static inline void CustomEntrySubject_9(
+    ) {
+        return kFunctions.threadingTasksPrimitivesSubjects.CustomEntrySubject_9(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 15;
 };
 
 

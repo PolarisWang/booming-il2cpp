@@ -8,6 +8,7 @@
     <RootNamespace>CcwBasicSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CcwBasicSubjects.cs" />

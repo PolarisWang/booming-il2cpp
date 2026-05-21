@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "FunctionPointersSubjects",
+      "subjectKind": "method",
+      "subjectId": "FunctionPointersSubjects/FunctionPointersSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "FunctionPointersSubjects",
+      "subjectKind": "field",
+      "subjectId": "FunctionPointersSubjects/FunctionPointersSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

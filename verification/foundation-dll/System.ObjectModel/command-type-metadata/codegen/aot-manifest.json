@@ -1,0 +1,198 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "method",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CommandTypeMetadataSubjects",
+      "subjectKind": "field",
+      "subjectId": "CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    }
+  ]
+}

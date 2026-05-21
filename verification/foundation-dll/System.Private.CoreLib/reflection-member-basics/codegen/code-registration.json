@@ -3,91 +3,97 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ReflectionMemberBasicsSubjects.dll",
+      "moduleName": "ReflectionMemberBasicsPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_0",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_0",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_1",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_1",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_2",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_2",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_3",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_3",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_4",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_4",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_5",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_5",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_6",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_6",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_7",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_7",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_7:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 8,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_8",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_8",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_8:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 9,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_9",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_9",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_9:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 10,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_10",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_10",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_10:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_11",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_11",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_11:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 12,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_12",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_12",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_12:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 13,
-          "symbol": "ReflectionMemberBasicsSubjects_ReflectionMemberBasicsSubjects_Subject_13",
-          "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()"
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Subject_13",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Subject_13:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionMemberBasicsPatchEntry_ReflectionMemberBasicsPatchEntry_Run_System_Int32",
+          "subjectId": "ReflectionMemberBasicsPatchEntry/ReflectionMemberBasicsPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

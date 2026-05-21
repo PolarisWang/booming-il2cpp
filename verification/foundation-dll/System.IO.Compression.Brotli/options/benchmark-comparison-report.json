@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.IO.Compression.Brotli",
+  "familyId": "family/System.IO.Compression.Brotli/options",
+  "summary": {
+    "totalMethods": 3,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 3,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

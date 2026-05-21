@@ -12,10 +12,10 @@
     "native-aot.methods.json"
   ],
   "generatedCppFileCount": 6,
-  "generatedCppTotalBytes": 777173,
+  "generatedCppTotalBytes": 788987,
   "largestGeneratedCppBytes": 533736,
   "generatedSymbolCount": 38,
-  "peakWorkingSetBytes": 491786240,
+  "peakWorkingSetBytes": 498475008,
   "structuredMethodCount": 17,
   "structuredExceptionBodyCount": 7,
   "flatFallbackCount": 0,

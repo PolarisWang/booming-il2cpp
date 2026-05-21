@@ -35,6 +35,11 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
+    struct SnapshotProverNativeEntry_t {
+        void (*CustomEntryMethod8)(
+                void
+        );
+    } snapshotProverNativeEntry;
     struct SnapshotProverSubjects_t {
         void (*CustomEntryMethod8)(
                 void
@@ -728,6 +733,16 @@ extern "C" void* kFunctionsFlat[];
 // These provide type-safe invocation without exposing the raw function table.
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
+
+struct SnapshotProverNativeEntry {
+    static inline void CustomEntryMethod8(
+    ) {
+        return kFunctions.snapshotProverNativeEntry.CustomEntryMethod8(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 1;
+};
 
 struct SnapshotProverSubjects {
     static inline void CustomEntryMethod8(

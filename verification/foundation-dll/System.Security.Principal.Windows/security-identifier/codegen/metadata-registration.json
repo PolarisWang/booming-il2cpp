@@ -1,0 +1,248 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SecurityIdentifierSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "name": "SecurityIdentifierSubjects",
+      "displayName": "SecurityIdentifierSubjects",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::_exitCode",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_17:System.Void()",
+      "name": "Subject_17",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_18:System.Void()",
+      "name": "Subject_18",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_19:System.Void()",
+      "name": "Subject_19",
+      "definitionSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "SecurityIdentifierSubjects/SecurityIdentifierSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

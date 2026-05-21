@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/document/element",
+  "summary": {
+    "totalMethods": 69,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 69,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Dispose:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::get_RootElement:System.Text.Json.JsonElement()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory{System.Byte},System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence{System.Byte},System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.IO.Stream,System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory{System.Char},System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.String,System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task{System.Text.Json.JsonDocument}(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseValue:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Text.Json.JsonDocument&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Clone:System.Text.Json.JsonElement()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::DeepEquals:System.Boolean(System.Text.Json.JsonElement,System.Text.Json.JsonElement)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateArray:System.Text.Json.JsonElement+ArrayEnumerator()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateObject:System.Text.Json.JsonElement+ObjectEnumerator()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_Item:System.Text.Json.JsonElement(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_ValueKind:System.Text.Json.JsonValueKind()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetArrayLength:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetBoolean:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetByte:System.Byte()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetBytesFromBase64:System.Byte{}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDateTime:System.DateTime()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDateTimeOffset:System.DateTimeOffset()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDecimal:System.Decimal()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDouble:System.Double()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetGuid:System.Guid()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt16:System.Int16()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt32:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt64:System.Int64()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Char})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Byte})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetPropertyCount:System.Int32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetRawText:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetSByte:System.SByte()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetSingle:System.Single()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetString:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt16:System.UInt16()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt32:System.UInt32()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt64:System.UInt64()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Char},System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.String,System.Text.Json.JsonDocumentOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ParseValue:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ToString:System.String()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetByte:System.Boolean(System.Byte&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetBytesFromBase64:System.Boolean(System.Byte{}&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTime:System.Boolean(System.DateTime&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDecimal:System.Boolean(System.Decimal&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDouble:System.Boolean(System.Double&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetGuid:System.Boolean(System.Guid&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt16:System.Boolean(System.Int16&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt32:System.Boolean(System.Int32&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt64:System.Boolean(System.Int64&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.String,System.Text.Json.JsonElement&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan{System.Char},System.Text.Json.JsonElement&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonElement&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSByte:System.Boolean(System.SByte&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSingle:System.Boolean(System.Single&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt16:System.Boolean(System.UInt16&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt32:System.Boolean(System.UInt32&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt64:System.Boolean(System.UInt64&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Nullable{System.Text.Json.JsonElement}&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.String)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan{System.Byte})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan{System.Char})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_Item:System.Text.Json.JsonElement()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

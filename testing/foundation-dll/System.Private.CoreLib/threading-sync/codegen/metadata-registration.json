@@ -57,6 +57,39 @@
     {
       "registrationKind": "method",
       "slot": 6,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
+      "name": "CustomEntrySubject_2",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
+      "name": "CustomEntrySubject_3",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
+      "name": "CustomEntrySubject_4",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
       "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
@@ -67,7 +100,40 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 10,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
+      "name": "CustomEntrySubject_6",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
+      "name": "CustomEntrySubject_7",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
+      "name": "CustomEntrySubject_8",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
       "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
@@ -78,7 +144,40 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 14,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
+      "name": "CustomEntrySubject_10",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
+      "name": "CustomEntrySubject_11",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
+      "name": "CustomEntrySubject_12",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
       "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
@@ -89,7 +188,40 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 18,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
+      "name": "CustomEntrySubject_14",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
+      "name": "CustomEntrySubject_15",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
+      "name": "CustomEntrySubject_16",
+      "definitionSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
+      "declaringTypeSubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
       "subjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])",
       "name": "Main",
       "definitionSubjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])",
@@ -100,7 +232,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 22,
       "subjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::.ctor:System.Void()",
@@ -111,7 +243,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 11,
+      "slot": 23,
       "subjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])::parameter[0]:args",
       "name": "args",
       "declaringMethodSubjectId": "ThreadingSyncSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])",

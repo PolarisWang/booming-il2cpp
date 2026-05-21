@@ -1,0 +1,444 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "method",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "MetadataTypeinfoSubjects",
+      "subjectKind": "field",
+      "subjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonPropertyInfo:System.Text.Json.Serialization.Metadata.JsonPropertyInfo(System.Type,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,JsonSerializerOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ConstructorAttributeProvider:System.Reflection.ICustomAttributeProvider()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Converter:System.Text.Json.Serialization.JsonConverter()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func\u003CSystem.Object\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ElementType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_IsReadOnly:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_KeyType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Kind:System.Text.Json.Serialization.Metadata.JsonTypeInfoKind()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_NumberHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonNumberHandling\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserialized:System.Action\u003CSystem.Object\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserializing:System.Action\u003CSystem.Object\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerialized:System.Action\u003CSystem.Object\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerializing:System.Action\u003CSystem.Object\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Options:JsonSerializerOptions()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OriginatingResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PolymorphismOptions:System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PreferredPropertyObjectCreationHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonObjectCreationHandling\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Properties:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.Metadata.JsonPropertyInfo\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Type:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_UnmappedMemberHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonUnmappedMemberHandling\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::MakeReadOnly:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Text.Json.Serialization.JsonNumberHandling\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_NumberHandling:System.Void(System.Nullable\u003CSystem.Text.Json.Serialization.JsonNumberHandling\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OriginatingResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PolymorphismOptions:System.Void(System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Text.Json.Serialization.JsonObjectCreationHandling\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PreferredPropertyObjectCreationHandling:System.Void(System.Nullable\u003CSystem.Text.Json.Serialization.JsonObjectCreationHandling\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Text.Json.Serialization.JsonUnmappedMemberHandling\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_UnmappedMemberHandling:System.Void(System.Nullable\u003CSystem.Text.Json.Serialization.JsonUnmappedMemberHandling\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func\u003CSystem.Object\u003E)",
+      "reason": "external-call"
+    }
+  ]
+}

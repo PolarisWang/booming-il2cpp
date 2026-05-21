@@ -1,0 +1,39 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "UnmanagedCallingConventionsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects",
+      "name": "UnmanagedCallingConventionsSubjects",
+      "displayName": "UnmanagedCallingConventionsSubjects",
+      "definitionSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::_exitCode",
+      "declaringTypeSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

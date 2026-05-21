@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "familyId": "family/System.Runtime.Serialization.Formatters/binary/formatter",
+  "summary": {
+    "totalMethods": 16,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 16,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_AssemblyFormat:System.Runtime.Serialization.Formatters.FormatterAssemblyStyle()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_FilterLevel:System.Runtime.Serialization.Formatters.TypeFilterLevel()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_TypeFormat:System.Runtime.Serialization.Formatters.FormatterTypeStyle()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_AssemblyFormat:System.Void(System.Runtime.Serialization.Formatters.FormatterAssemblyStyle)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_FilterLevel:System.Void(System.Runtime.Serialization.Formatters.TypeFilterLevel)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_TypeFormat:System.Void(System.Runtime.Serialization.Formatters.FormatterTypeStyle)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::.ctor:System.Void(System.Runtime.Serialization.ISurrogateSelector,System.Runtime.Serialization.StreamingContext)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

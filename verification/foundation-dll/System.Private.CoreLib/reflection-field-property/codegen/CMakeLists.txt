@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ReflectionFieldPropertySubjects
-add_library(chaos_gen_ReflectionFieldPropertySubjects STATIC
-    ${CHAOS_GEN_DIR}/ReflectionFieldPropertySubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/ReflectionFieldPropertySubjects/generated/chaos_generated_module.cpp
+# Assembly: ReflectionFieldPropertyPatchEntry
+add_library(chaos_gen_ReflectionFieldPropertyPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ReflectionFieldPropertyPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/ReflectionFieldPropertyPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_ReflectionFieldPropertySubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ReflectionFieldPropertySubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ReflectionFieldPropertySubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ReflectionFieldPropertyPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ReflectionFieldPropertyPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ReflectionFieldPropertyPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ReflectionFieldPropertySubjects
+    chaos_gen_ReflectionFieldPropertyPatchEntry
     ${NATIVE_LIBS}
 )
 

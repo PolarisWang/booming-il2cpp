@@ -1,0 +1,851 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_0:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_0:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_1:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_1:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_2:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_2:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_3:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_3:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_4:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_4:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_6:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_7:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_7:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_8:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_9:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_9:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_10:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_11:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_11:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_12:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_13:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_13:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_14:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_14:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_15:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_15:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_16:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_16:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_17:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_17:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_18:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_18:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_19:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_19:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_20:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_20:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_21:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_21:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_22:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_22:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_23:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_23:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_24:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_24:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_25:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_25:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_26:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_26:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_27:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_27:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_28:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_28:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_29:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_29:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_30:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_30:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_31:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_31:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_32:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_32:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_33:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_33:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_34:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_34:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_35:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_35:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_36:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_36:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_37:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_37:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_38:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_38:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663335,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_39:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_39:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_40:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_40:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_41:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_41:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_42:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_42:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_43:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_43:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_44:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_44:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_45:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_45:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663342,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_46:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_46:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663343,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_47:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_47:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663344,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_48:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_48:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_49:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_49:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663346,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_50:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_50:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663347,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_51:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_51:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_52:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_52:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663349,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_53:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_53:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663350,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_54:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_54:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663351,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_55:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_55:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663352,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_56:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_56:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663353,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_57:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_57:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663354,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_58:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_58:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663355,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_59:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_59:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_60:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_60:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663357,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_61:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_61:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663358,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_62:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_62:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_63:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_63:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663360,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_64:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_64:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663361,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_65:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_65:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663362,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_66:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_66:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663363,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_67:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_67:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663364,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_68:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_68:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663365,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_69:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_69:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663366,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_70:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_70:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663367,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_71:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_71:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663368,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_72:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_72:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663369,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_73:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_73:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663370,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_74:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_74:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663371,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_75:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_75:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663372,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_76:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_76:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663373,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_77:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_77:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663374,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_78:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_78:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663375,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_79:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_79:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663376,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_80:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_80:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663377,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_81:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_81:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663378,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_82:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_82:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663379,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_83:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_83:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663380,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_84:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_84:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663381,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_85:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_85:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663382,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_86:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_86:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663383,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_87:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_87:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663384,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_88:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_88:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663385,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_89:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_89:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663386,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_90:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_90:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663387,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_91:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_91:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663388,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_92:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_92:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663389,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_93:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_93:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663390,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_94:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_94:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663391,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_95:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_95:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663392,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_96:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_96:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663393,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_97:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_97:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663394,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_98:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_98:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663395,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_99:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_99:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663396,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_100:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_100:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663397,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_101:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_101:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663398,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_102:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_102:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663399,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "SerializerSubjects",
+      "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_103:System.Void()",
+      "definitionSubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_103:System.Void()",
+      "declaringTypeSubjectId": "SerializerSubjects/SerializerSubjects",
+      "metadataToken": 100663400,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

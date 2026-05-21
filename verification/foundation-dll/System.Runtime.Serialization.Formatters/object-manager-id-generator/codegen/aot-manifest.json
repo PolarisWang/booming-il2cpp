@@ -1,0 +1,204 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectManagerIdGeneratorSubjects",
+      "subjectKind": "field",
+      "subjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::.ctor:System.Void(System.Runtime.Serialization.ISurrogateSelector,System.Runtime.Serialization.StreamingContext)",
+      "reason": "external-call"
+    }
+  ]
+}

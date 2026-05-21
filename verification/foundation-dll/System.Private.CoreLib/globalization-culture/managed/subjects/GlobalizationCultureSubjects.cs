@@ -16,19 +16,19 @@ public static partial class GlobalizationCultureSubjects
     // [0] System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()
     public static void Subject_0()
     {
-        if (((CultureInfo.CurrentCulture).GetHashCode()) != 1837774308) _exitCode = 1;
+        if (((CultureInfo.CurrentCulture).GetHashCode()) != -247039058) _exitCode = 1;
     }
 
     // [1] System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()
     public static void Subject_1()
     {
-        if (((CultureInfo.InvariantCulture).GetHashCode()) != 411464452) _exitCode = 1;
+        if (((CultureInfo.InvariantCulture).GetHashCode()) != -1901630074) _exitCode = 1;
     }
 
     // [2] System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)
     public static void Subject_2()
     {
-        if (((CultureInfo.GetCultureInfo("")).GetHashCode()) != 411464452) _exitCode = 1;
+        if (((CultureInfo.GetCultureInfo("")).GetHashCode()) != -1901630074) _exitCode = 1;
     }
 
     // [3] System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()

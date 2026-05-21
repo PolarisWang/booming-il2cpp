@@ -3,6 +3,468 @@
   "artifactKind": "aotCoreIr",
   "methods": [
     {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-0",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-0",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-1",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-1",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-2",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-2",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-3",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_3()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-3",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_3()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-4",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_4()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-4",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_4()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-5",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_5()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-5",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_5()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-6",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_6()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-6",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_6()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-7",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_7()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-7",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_7()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-8",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_8()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-8",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_8()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-9",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_9()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-9",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_9()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
+      "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-10",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
+      "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_10()",
+      "identity": {
+        "assemblyName": "ThreadingThreadBasicsSubjects",
+        "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+        "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
+        "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
+        "methodId": "threading-thread-basics-subjects.threading-thread-basics-subjects.custom-entry-subject-10",
+        "signature": "System.Void ThreadingThreadBasicsSubjects::CustomEntrySubject_10()"
+      },
+      "nativeSymbol": "ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadingThreadBasicsSubjects"
+    },
+    {
       "methodId": "threading-thread-basics-subjects.threading-thread-basics-native-entry.custom-entry-method0",
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
       "signature": "System.Void ThreadingThreadBasicsNativeEntry::CustomEntryMethod0()",

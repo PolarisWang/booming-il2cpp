@@ -60,27 +60,31 @@ const GcSlotMapV0* GcLookupSlotMap(const void* code_address) {
 
 void GcRegisterSlotMapsFromSection(const void* begin, const void* end) {
     // The .gc_slot_maps section contains entries laid out as:
-    //   [GcSlotMapSectionEntryHdrV0][GcSlotMapV0 body][slots data]
-    // Each entry starts with GcSlotMapSectionEntryHdrV0.entry_total_size
-    // giving the total byte count for that entry (including the header),
-    // enabling iteration over variable-length entries.
+    //   [entry_total_size:4][code_address:8][frame_size:4][num_gc_slots:4][slots:N*4]
+    // The section is generated with #pragma pack(1) so fields are at byte
+    // offsets with no padding — code_address is at offset 4, not offset 8.
     auto* ptr = static_cast<const uint8_t*>(begin);
     auto* end_ptr = static_cast<const uint8_t*>(end);
 
     while (ptr + static_cast<ptrdiff_t>(sizeof(uint32_t)) <= end_ptr) {
         uint32_t entry_total;
         std::memcpy(&entry_total, ptr, sizeof(entry_total));
-        if (entry_total < sizeof(GcSlotMapSectionEntryHdrV0)) {
+        if (entry_total < 12u) {  // minimum: entry_total(4) + code_address(8)
             CHAOS_IL2CPP_LOG_WARN("CRAG", "slot_map_section_entry_too_small: %u", entry_total);
             break;
         }
 
-        auto* hdr = reinterpret_cast<const GcSlotMapSectionEntryHdrV0*>(ptr);
-        auto* sm = reinterpret_cast<const GcSlotMapV0*>(hdr + 1);
+        // Read code_address from ptr+4 (packed layout, no pointer alignment).
+        const void* code_address;
+        std::memcpy(&code_address, ptr + 4, sizeof(code_address));
+
+        // GcSlotMapV0 body starts at ptr+12 (after entry_total + code_address).
+        // Safe to reinterpret since GcSlotMapV0 has only uint32_t fields
+        // (frame_size at +12, num_gc_slots at +16, slots at +20).
+        auto* sm = reinterpret_cast<const GcSlotMapV0*>(ptr + 12);
 
         // Sanity-check: slot map must fit within the declared entry size.
-        uint32_t expected_min = sizeof(GcSlotMapSectionEntryHdrV0)
-            + static_cast<uint32_t>(sizeof(GcSlotMapV0))
+        uint32_t expected_min = 12u + 8u  // packed header
             + sm->num_gc_slots * static_cast<uint32_t>(sizeof(uint32_t));
         if (entry_total < expected_min) {
             CHAOS_IL2CPP_LOG_WARN("CRAG",
@@ -89,8 +93,8 @@ void GcRegisterSlotMapsFromSection(const void* begin, const void* end) {
             break;
         }
 
-        if (hdr->code_address != nullptr) {
-            GcRegisterSlotMap(hdr->code_address, sm);
+        if (code_address != nullptr) {
+            GcRegisterSlotMap(code_address, sm);
         }
 
         // Advance by entry_total (includes the header).

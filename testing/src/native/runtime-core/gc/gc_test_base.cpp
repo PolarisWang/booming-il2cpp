@@ -239,8 +239,10 @@ void GcBenchTestBase::RecordMetric(const char* name, uint64_t value_ns) {
 
 void GcUnitTestBase::FillSurvivorTo(float occupancy) {
     // Calculate how many bytes to allocate in Gen1.
-    char* survivor_start = g_young_gen.survivor_begin;
-    char* survivor_end   = g_young_gen.survivor_end;
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    char* survivor_start = gen1 ? gen1->begin : nullptr;
+    char* survivor_end   = g_young_gen.gen1_end;
+    if (!survivor_start || !survivor_end) return;
     CHAOS_IL2CPP_SIZE total_size = static_cast<CHAOS_IL2CPP_SIZE>(
         survivor_end - survivor_start);
     CHAOS_IL2CPP_SIZE target = static_cast<CHAOS_IL2CPP_SIZE>(

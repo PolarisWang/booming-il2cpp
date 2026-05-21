@@ -86,6 +86,26 @@ if(USE_ASAN)
     add_compile_options(/fsanitize=address)
     add_link_options(/fsanitize=address /FORCE:MULTIPLE)
     add_compile_definitions(_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
+
+    # Locate the ASan runtime DLL for post-build copy.
+    # MSVC places it alongside the toolchain binaries.
+    find_file(CHAOS_ASAN_DLL clang_rt.asan_dynamic-x86_64.dll
+        PATHS
+            "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64"
+            "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64"
+            "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64"
+            "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64"
+    )
+    if(CHAOS_ASAN_DLL)
+        message(STATUS "ASan DLL found: ${CHAOS_ASAN_DLL}")
+        # Also copy suppressions file to build root for ASAN_OPTIONS
+        configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/../../asan-suppressions.txt"
+            "${CMAKE_CURRENT_BINARY_DIR}/asan-suppressions.txt"
+            COPYONLY)
+    else()
+        message(WARNING "ASan DLL not found — tests may fail with 0xc0000135 at runtime")
+    endif()
 endif()
 
 # Convenience: create gtest executable with chaos library support
@@ -98,6 +118,21 @@ function(add_chaos_test name)
         target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
     endif()
     add_test(NAME ${name} COMMAND ${name})
+    if(USE_ASAN AND CHAOS_ASAN_DLL)
+        add_custom_command(TARGET ${name} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CHAOS_ASAN_DLL}" "$<TARGET_FILE_DIR:${name}>/"
+            COMMENT "Copy ASan DLL to $<TARGET_FILE_DIR:${name}>"
+        )
+    endif()
+    if(USE_ASAN)
+        add_custom_command(TARGET ${name} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CMAKE_BINARY_DIR}/asan-suppressions.txt"
+                "$<TARGET_FILE_DIR:${name}>/"
+            COMMENT "Copy asan-suppressions.txt to $<TARGET_FILE_DIR:${name}>"
+        )
+    endif()
 endfunction()
 
 # Subdirectories

@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "NtAccountSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_0",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_1",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_2",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_3",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_4",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_5",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_6",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_7",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_8",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "NtAccountSubjects_NtAccountSubjects_Subject_9",
+          "subjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

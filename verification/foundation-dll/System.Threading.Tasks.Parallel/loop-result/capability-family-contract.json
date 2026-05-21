@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+  "displayName": "Parallel Loop Result",
+  "methodSubjectIds": [
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()"
+  ],
+  "methodSubjectCount": 2,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

@@ -1,0 +1,44 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "WriterSubjects",
+      "owningAssemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnWriter::WriteEnumeratedValue\u003CSystem.DayOfWeek\u003E:System.Void(System.DayOfWeek,System.Nullable\u003CAsn1Tag\u003E)",
+      "definitionSubjectId": "System.Formats.Asn1/AsnWriter::WriteEnumeratedValue:System.Void(!!0,System.Nullable\u003CAsn1Tag\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Formats.Asn1/AsnWriter::WriteEnumeratedValue:System.Void(!!0,System.Nullable\u003CAsn1Tag\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.DayOfWeek"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "WriterSubjects",
+      "owningAssemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnWriter::WriteNamedBitList\u003CSystem.DayOfWeek\u003E:System.Void(System.DayOfWeek,System.Nullable\u003CAsn1Tag\u003E)",
+      "definitionSubjectId": "System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(!!0,System.Nullable\u003CAsn1Tag\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(!!0,System.Nullable\u003CAsn1Tag\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.DayOfWeek"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

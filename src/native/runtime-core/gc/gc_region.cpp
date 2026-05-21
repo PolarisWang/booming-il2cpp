@@ -81,20 +81,66 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     // Phase 2: Young region is exhausted — trigger a young GC.
     // When in NO_GC_REGION, skip young GC and go straight to old-gen fallback.
     if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
-        uint32_t gen = threading::RequestGlobalSafepoint();
-        auto* mt = threading::GetCurrentThread();
-        if (mt) {
-            mt->tlab_start = tls_tlab.start;
-            mt->tlab_current = tls_tlab.current;
+
+        // Phase 2a: Check if Gen1 needs independent collection before young GC.
+        // If Gen1 is near-full/fragmented, collect it independently — this avoids
+        // the cost of Cheney-scavenging the nursery when only Gen1 needs cleanup.
+        if (GcGen1ShouldCollect()) {
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto* mt = threading::GetCurrentThread();
+            if (mt) {
+                mt->tlab_start = tls_tlab.start;
+                mt->tlab_current = tls_tlab.current;
+            }
+            GcGen1Collection();
+            if (mt) {
+                mt->tlab_start = nullptr;
+                mt->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
+
+            // Retry TLAB after Gen1 collection freed Gen2 capacity.
+            TLAB tlab2 = TlabClaimFromYoungGen();
+            if (tlab2.current != nullptr) {
+                tls_tlab = tlab2;
+                return NurseryAllocate(size);
+            }
+
+            // TLAB still exhausted — do young GC with force_skip_gen1=true
+            // since Gen1 was just collected independently.
+            uint32_t gen2 = threading::RequestGlobalSafepoint();
+            auto* mt2 = threading::GetCurrentThread();
+            if (mt2) {
+                mt2->tlab_start = tls_tlab.start;
+                mt2->tlab_current = tls_tlab.current;
+            }
+            GcYoungCollection(true);  // force_skip_gen1=true
+            if (mt2) {
+                mt2->tlab_start = nullptr;
+                mt2->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen2);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
+        } else {
+            // Normal flow: young GC with default Gen1 handling (Phase 4).
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            auto* mt = threading::GetCurrentThread();
+            if (mt) {
+                mt->tlab_start = tls_tlab.start;
+                mt->tlab_current = tls_tlab.current;
+            }
+            GcYoungCollection();
+            if (mt) {
+                mt->tlab_start = nullptr;
+                mt->tlab_current = nullptr;
+            }
+            threading::ReleaseGlobalSafepoint(gen);
+            GcAdvanceBgcCycle();
+            tls_tlab = TLAB{};
         }
-        GcYoungCollection();
-        if (mt) {
-            mt->tlab_start = nullptr;
-            mt->tlab_current = nullptr;
-        }
-        threading::ReleaseGlobalSafepoint(gen);
-        GcAdvanceBgcCycle();
-        tls_tlab = TLAB{};
     }
 
     // Phase 3: Retry from the fresh young region + new TLAB.
@@ -246,54 +292,81 @@ void TeardownTlsPoh() noexcept {
 // ======================================================================
 
 void InitYoungGeneration() noexcept {
-    auto* region = RegionManager::Instance().AllocateRegion(
+    // Allocate an independent nursery region (no longer split 50/50 with survivor).
+    auto* nursery = RegionManager::Instance().AllocateRegion(
         RegionKind::REGION_NURSERY, kDefaultYoungRegionSize);
-    auto* region_begin = region ? region->begin : nullptr;
-    g_young_gen.region.store(region, std::memory_order_release);
-    if (region) {
-        // Split the nursery region into young half (8 MB) and survivor half (8 MB).
-        CHAOS_IL2CPP_SIZE half_size = kDefaultYoungRegionSize / 2;
-        char* mid = region_begin + half_size;
+    g_young_gen.region.store(nursery, std::memory_order_release);
 
-        region->end = mid;  // young half ends at mid
-        g_young_gen.region = region;
-        g_young_gen.bump.store(region_begin, std::memory_order_release);
-        g_young_gen.region_end.store(mid, std::memory_order_release);
+    // Allocate an independent Gen1 survivor region.
+    auto* gen1 = RegionManager::Instance().AllocateRegion(
+        RegionKind::REGION_GEN1, kDefaultYoungRegionSize);
+    g_young_gen.gen1_region.store(gen1, std::memory_order_release);
 
-        // Survivor area occupies the second half.
-        g_young_gen.survivor_begin = mid;
-        g_young_gen.survivor_end = mid + half_size;
-        g_young_gen.survivor_bump.store(mid, std::memory_order_release);
+    if (nursery && gen1) {
+        g_young_gen.bump.store(nursery->begin, std::memory_order_release);
+        g_young_gen.region_end.store(nursery->end, std::memory_order_release);
 
-        // Register nursery+survivor range with the card table so that
-        // DirtyCard() write barrier covers writes to these regions.
-        // Without this registration, the card table has no L2 segments
-        // for the nursery/survivor address range and all writes are
-        // silently dropped, creating a correctness hole for BGC
-        // concurrent mark (Gen1→Gen2 references established during
-        // concurrent mark are never recorded in dirty cards).
+        // Initialize Gen1 bump pointer and end.
+        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+        g_young_gen.gen1_end = gen1->end;
+
+        // Register nursery range with the card table.
         GcRegisterHeapRange(
-            reinterpret_cast<uintptr_t>(region_begin),
-            reinterpret_cast<uintptr_t>(region_begin + kDefaultYoungRegionSize));
+            reinterpret_cast<uintptr_t>(nursery->begin),
+            reinterpret_cast<uintptr_t>(nursery->end));
+
+        // Register Gen1 range with the card table.
+        GcRegisterHeapRange(
+            reinterpret_cast<uintptr_t>(gen1->begin),
+            reinterpret_cast<uintptr_t>(gen1->end));
 
         // Set nursery range for DirtyCard fast skip (young GC Phase 2
         // scans nursery precisely, so card writes are unnecessary).
         GcSetCardTableNurseryRange(
-            reinterpret_cast<uintptr_t>(region_begin),
-            reinterpret_cast<uintptr_t>(mid));
+            reinterpret_cast<uintptr_t>(nursery->begin),
+            reinterpret_cast<uintptr_t>(nursery->end));
     }
 }
 
 void DestroyYoungGeneration() noexcept {
-    auto* region = g_young_gen.region.exchange(nullptr, std::memory_order_acq_rel);
-    if (region) {
-        g_young_gen.survivor_begin = nullptr;
-        g_young_gen.survivor_end = nullptr;
-        g_young_gen.survivor_bump.store(nullptr, std::memory_order_release);
-        RegionManager::Instance().FreeRegion(region->id);
+    auto* nursery = g_young_gen.region.exchange(nullptr, std::memory_order_acq_rel);
+    if (nursery) {
+        RegionManager::Instance().FreeRegion(nursery->id);
+    }
+    auto* gen1 = g_young_gen.gen1_region.exchange(nullptr, std::memory_order_acq_rel);
+    if (gen1) {
+        RegionManager::Instance().FreeRegion(gen1->id);
     }
     g_young_gen.bump.store(nullptr, std::memory_order_release);
     g_young_gen.region_end.store(nullptr, std::memory_order_release);
+}
+
+void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
+    auto* old_gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (old_gen1 == nullptr) return;
+
+    auto* new_gen1 = RegionManager::Instance().AllocateRegion(
+        RegionKind::REGION_GEN1, new_size);
+    if (new_gen1 == nullptr) {
+        CHAOS_IL2CPP_LOG_WARN("CRAG", "gen1_resize_oom size={0}",
+            static_cast<unsigned long long>(new_size));
+        return;
+    }
+
+    // Publish new region atomically.
+    g_young_gen.gen1_region.store(new_gen1, std::memory_order_release);
+    g_young_gen.gen1_bump.store(new_gen1->begin, std::memory_order_release);
+    g_young_gen.gen1_end = new_gen1->end;
+
+    // Register new Gen1 range with the card table.
+    // The old range's L2 segments remain registered but are harmless
+    // (the old region's pages are freed, so no writes can dirty them).
+    GcRegisterHeapRange(
+        reinterpret_cast<uintptr_t>(new_gen1->begin),
+        reinterpret_cast<uintptr_t>(new_gen1->end));
+
+    // Free the old Gen1 region (Gen1 is empty after collection, no migration needed).
+    RegionManager::Instance().FreeRegion(old_gen1->id);
 }
 
 TLAB TlabClaimFromYoungGen() noexcept {
@@ -329,6 +402,7 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     CHAOS_IL2CPP_SIZE region_size = kDefaultRegionSize;
     switch (kind) {
     case RegionKind::REGION_NURSERY: region_size = kDefaultRegionSize; break;
+    case RegionKind::REGION_GEN1:    region_size = kDefaultYoungRegionSize; break;
     case RegionKind::REGION_TENURED: region_size = kTenuredRegionSize; break;
     case RegionKind::REGION_DOMAIN:  region_size = kDomainRegionSize;  break;
     case RegionKind::REGION_POH:     region_size = kPohRegionSize;     break;
@@ -353,6 +427,11 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
         if (kind == RegionKind::REGION_NURSERY) {
             AddNurseryRange(reinterpret_cast<uintptr_t>(r->begin),
                             reinterpret_cast<uintptr_t>(r->end));
+        }
+        if (kind == RegionKind::REGION_GEN1) {
+            g_young_gen.gen1_region.store(r, std::memory_order_release);
+            g_young_gen.gen1_end = r->end;
+            g_young_gen.gen1_bump.store(r->begin, std::memory_order_release);
         }
         if (kind == RegionKind::REGION_DOMAIN) {
             AddDomainRange(domain_id,
@@ -445,6 +524,13 @@ void RegionManager::FreeRegion(RegionId id) {
     if (r->kind == RegionKind::REGION_NURSERY) {
         RemoveNurseryRange(reinterpret_cast<uintptr_t>(r->begin),
                            reinterpret_cast<uintptr_t>(r->end));
+    }
+
+    // If this is the Gen1 region, clear the published pointer.
+    if (r->kind == RegionKind::REGION_GEN1) {
+        g_young_gen.gen1_region.store(nullptr, std::memory_order_release);
+        g_young_gen.gen1_end = nullptr;
+        g_young_gen.gen1_bump.store(nullptr, std::memory_order_release);
     }
 
     // If this is a POH region, remove its range.
@@ -913,15 +999,16 @@ extern "C" void chaos_gc_collect() noexcept {
     void* bump = g_young_gen.bump.load(std::memory_order_acquire);
     if (young_region != nullptr && bump > young_region->begin) {
         uint32_t gen = threading::RequestGlobalSafepoint();
-        GcYoungCollection();
+        GcYoungCollection(true);  // force_skip_gen1=true — Gen1 handled by step 1.5
         threading::ReleaseGlobalSafepoint(gen);
     }
 
-    // Step 1.5: Gen1 collection (if Gen1/survivor has objects).
-    // Collects the survivor area and promotes live objects to Gen2.
-    if (g_young_gen.survivor_begin != nullptr) {
-        char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-        if (s_bump > g_young_gen.survivor_begin) {
+    // Step 1.5: Gen1 collection (if Gen1 has objects).
+    // Collects Gen1 and promotes live objects to Gen2.
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        char* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (s_bump > gen1->begin) {
             uint32_t gen = threading::RequestGlobalSafepoint();
             auto gen1_result = GcGen1Collection();
             threading::ReleaseGlobalSafepoint(gen);

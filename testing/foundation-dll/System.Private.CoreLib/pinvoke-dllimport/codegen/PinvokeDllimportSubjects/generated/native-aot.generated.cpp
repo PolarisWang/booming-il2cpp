@@ -892,6 +892,47 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d10 = s_hotpatch_entries[10];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d10.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d10 = s_hotpatch_entries[10];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d10)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d10))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d10.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PinvokeDllimportSubjects_PinvokeDllimportSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -927,6 +968,47 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PinvokeDllimportSubjects_PinvokeDllimportSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -962,6 +1044,47 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PinvokeDllimportSubjects_PinvokeDllimportSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
@@ -997,6 +1120,47 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void
 
 
 	CHAOS_EH_TRY
+			{
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle();
+				}
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			{
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
+				{
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
+				}
+				else
+				{
+					_d_hpresult = PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle();
+				}
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_PinvokeDllimportSubjects_PinvokeDllimportSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);

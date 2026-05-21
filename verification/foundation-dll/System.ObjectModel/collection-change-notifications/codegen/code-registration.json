@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "CollectionChangeNotificationsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "CollectionChangeNotificationsSubjects_CollectionChangeNotificationsSubjects_Subject_0",
+          "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "CollectionChangeNotificationsSubjects_CollectionChangeNotificationsSubjects_Subject_1",
+          "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_1:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

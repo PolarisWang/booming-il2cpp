@@ -1,0 +1,636 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SerializerSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_0",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_1",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_2",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_3",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_4",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_5",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_6",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_7",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_8",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_9",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_10",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_11",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_12",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_13",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_14",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_15",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_16",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_17",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_18",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_19",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_20",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_21",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_22",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_23",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_24",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_25",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_26",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_27",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_28",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_29",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_30",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_31",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_32",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_33",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_34",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_35",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_36",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_37",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_37:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_38",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_39",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_40",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_41",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_41:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_42",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_42:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_43",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_43:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_44",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_44:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_45",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_45:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_46",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_46:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_47",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_47:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_48",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_48:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_49",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_49:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_50",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_50:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_51",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_51:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_52",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_52:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_53",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_53:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_54",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_54:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_55",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_55:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_56",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_56:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_57",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_57:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_58",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_58:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_59",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_59:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_60",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_60:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_61",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_61:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_62",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_62:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_63",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_63:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_64",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_64:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_65",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_65:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_66",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_66:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_67",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_67:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_68",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_68:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_69",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_69:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_70",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_70:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_71",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_71:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_72",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_72:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_73",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_73:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_74",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_74:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_75",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_75:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_76",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_76:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_77",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_77:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_78",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_78:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_79",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_79:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_80",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_80:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_81",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_81:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_82",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_82:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_83",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_83:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_84",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_84:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_85",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_85:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_86",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_86:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_87",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_87:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_88",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_88:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_89",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_89:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_90",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_90:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_91",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_91:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_92",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_92:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_93",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_93:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_94",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_94:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_95",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_95:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_96",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_96:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_97",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_97:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_98",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_98:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_99",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_99:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_100",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_100:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_101",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_101:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_102",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_102:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 103,
+          "symbol": "SerializerSubjects_SerializerSubjects_CustomEntrySubject_103",
+          "subjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_103:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

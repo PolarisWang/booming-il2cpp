@@ -34,10 +34,10 @@ public static partial class CodegenEdgeCasesSubjects
     }
 
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
-    public static void Subject_3(int p0)
+    public static int Subject_3(int p0)
     {
-        try { }
-        catch { _exitCode = 1; }
+        try { return default; }
+        catch { _exitCode = 1; return default; }
     }
 
 }

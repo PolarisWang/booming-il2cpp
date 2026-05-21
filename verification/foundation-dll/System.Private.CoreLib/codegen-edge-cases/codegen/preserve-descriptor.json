@@ -34,7 +34,7 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

@@ -1,0 +1,40 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "WindowsPrincipalRolesSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_0:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_1:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_2:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_3:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_4:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_5:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_6:System.Void()",
+    "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_7:System.Void()"
+  ],
+  "translationUnitMethodCount": 8,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 8,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_7:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/token/access",
+  "summary": {
+    "totalMethods": 4,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 4,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

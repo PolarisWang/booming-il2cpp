@@ -549,12 +549,30 @@ public sealed partial class LoaderStage
         {
             HandleKind.TypeDefinition or HandleKind.TypeReference or HandleKind.TypeSpecification
                 => CreateLdtokenTypeInstruction(typeResolver.ResolveTypeIdentity(handle)),
-            HandleKind.FieldDefinition or HandleKind.MemberReference
+            HandleKind.FieldDefinition
                 => CreateLdtokenFieldInstruction(ResolveFieldReference(metadataReader, typeResolver, fieldOwners, handle)),
+            HandleKind.MemberReference
+                => DecodeLdtokenMemberReference(metadataReader, typeResolver, typeModels, fieldOwners, methodOwners, (MemberReferenceHandle)handle),
             HandleKind.MethodDefinition or HandleKind.MethodSpecification
                 => CreateLdtokenMethodInstruction(ResolveMethodReference(metadataReader, typeResolver, typeModels, methodOwners, handle)),
             _ => throw new NotSupportedException($"unsupported ldtoken handle kind in loader: {handle.Kind}"),
         };
+    }
+
+    private static ManagedInstructionModel DecodeLdtokenMemberReference(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        IReadOnlyDictionary<FieldDefinitionHandle, ManagedTypeModel> fieldOwners,
+        IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
+        MemberReferenceHandle handle)
+    {
+        var memberRef = metadataReader.GetMemberReference(handle);
+        if (memberRef.GetKind() == MemberReferenceKind.Field)
+        {
+            return CreateLdtokenFieldInstruction(ResolveFieldReference(metadataReader, typeResolver, fieldOwners, handle));
+        }
+        return CreateLdtokenMethodInstruction(ResolveMethodReference(metadataReader, typeResolver, typeModels, methodOwners, handle));
     }
 
     private static ManagedInstructionModel CreateLdtokenTypeInstruction(TypeIdentity typeIdentity)

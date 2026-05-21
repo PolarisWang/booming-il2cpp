@@ -135,6 +135,19 @@ public:
     /// objects are promoted into the survivor area (Gen1).
     void RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept;
 
+    /// Total Gen1 allocation (in bytes) since the last Gen1 collection.
+    /// Used by GcGen1ShouldCollect() for budget-based triggering.
+    CHAOS_IL2CPP_SIZE Gen1AllocSinceLastGc() const noexcept {
+        return gen1_alloc_since_last_gc_.load(std::memory_order_relaxed);
+    }
+
+    /// EMA-smoothed Gen1 survival rate as a float in [0, 1].
+    /// Used by GcGen1ShouldCollect() to adapt the occupancy threshold.
+    float Gen1SurvivalRate() const noexcept {
+        return BitsToDouble(
+            gen1_survival_rate_bits_.load(std::memory_order_relaxed));
+    }
+
     /// Record page count growth since last full GC.
     /// When page_count grows rapidly without matching reclaim, the GC
     /// scheduler can trigger earlier to prevent unbounded page growth.
@@ -240,10 +253,10 @@ public:
         return scheduler_recommended_threshold_.load(std::memory_order_acquire);
     }
 
-    /// Recommended survivor area size in bytes.
+    /// Recommended Gen1 area size in bytes (formerly RecommendedSurvivorSize).
     /// Computed from EMA of promoted bytes per young GC and Gen1 survival rate.
-    /// Clamped to [kMinSurvivorSize, kMaxSurvivorSize].
-    CHAOS_IL2CPP_SIZE RecommendedSurvivorSize() const noexcept;
+    /// Clamped to [kMinGen1Size, kMaxGen1Size].
+    CHAOS_IL2CPP_SIZE RecommendedGen1Size() const noexcept;
 
     // ── BGC monitoring accessors ──────────────────────────────────
 
@@ -280,14 +293,15 @@ public:
     }
 
     // ── Survivor sizing constants ──────────────────────────────────
-    /// Minimum survivor area: 2 MB.  Below this, Gen1 filtering is too
+    /// Minimum Gen1 area: 2 MB.  Below this, Gen1 filtering is too
     /// constrained and objects promote to Gen2 too quickly.
-    static constexpr CHAOS_IL2CPP_SIZE kMinSurvivorSize = 2 * 1024 * 1024;   // 2 MB
-    /// Maximum survivor area: 10 MB.  Above this, the nursery becomes too
-    /// small (< 6 MB) and young GC frequency increases unacceptably.
-    static constexpr CHAOS_IL2CPP_SIZE kMaxSurvivorSize = 10 * 1024 * 1024;  // 10 MB
-    /// Default survivor area (current fixed split).
-    static constexpr CHAOS_IL2CPP_SIZE kDefaultSurvivorSize = 8 * 1024 * 1024; // 8 MB
+    static constexpr CHAOS_IL2CPP_SIZE kMinGen1Size = 2 * 1024 * 1024;   // 2 MB
+    /// Maximum Gen1 area: 16 MB (matches kDefaultYoungRegionSize).  Above
+    /// this, the virtual address space consumed by the independent Gen1
+    /// region becomes excessive relative to its filtering benefit.
+    static constexpr CHAOS_IL2CPP_SIZE kMaxGen1Size = 16 * 1024 * 1024;  // 16 MB
+    /// Default Gen1 area (current fixed size at init time).
+    static constexpr CHAOS_IL2CPP_SIZE kDefaultGen1Size = 8 * 1024 * 1024; // 8 MB
 
     /// Young-collection EMA survival rate (nursery→survivor promotion).
     double SurvivalRate() const noexcept {

@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "WindowsPrincipalRolesSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_0",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_1",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_2",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_3",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_4",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_5",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_6",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "WindowsPrincipalRolesSubjects_WindowsPrincipalRolesSubjects_Subject_7",
+          "subjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_7:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

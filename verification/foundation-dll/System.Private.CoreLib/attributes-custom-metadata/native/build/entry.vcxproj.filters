@@ -7,6 +7,12 @@
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\attributes-custom-metadata\native\runtime-patchdata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\attributes-custom-metadata\native\verification_dispatch.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\attributes-custom-metadata\native\microbench.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\attributes-custom-metadata\codegen\AttributesCustomMetadataSubjects\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

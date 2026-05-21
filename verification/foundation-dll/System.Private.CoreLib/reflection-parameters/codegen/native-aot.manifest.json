@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ReflectionParametersSubjects",
-  "entrySubjectId": "ReflectionParametersSubjects/ReflectionParametersSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/reflection-parameters/codegen",
+  "assemblyName": "ReflectionParametersPatchEntry",
+  "entrySubjectId": "ReflectionParametersPatchEntry/ReflectionParametersPatchEntry::Run:System.Void(System.Int32)",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/reflection-parameters/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

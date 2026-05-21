@@ -49,5 +49,8 @@ public static partial class ReflectionModuleSubjects
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)
+    public static void CustomEntrySubject_5()
+    {
+    }
 
 }

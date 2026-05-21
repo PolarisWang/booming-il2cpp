@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReadFlushResultsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "type",
+      "subjectId": "System.IO.Pipelines/FlushResult",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/FlushResult::get_IsCanceled:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/FlushResult::get_IsCompleted:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "type",
+      "subjectId": "System.IO.Pipelines/ReadResult",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/ReadResult::get_Buffer:System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/ReadResult::get_IsCanceled:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/ReadResult::get_IsCompleted:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Memory",
+      "subjectKind": "type",
+      "subjectId": "System.Memory/System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "subjectKind": "method",
+      "subjectId": "System.IO.Pipelines/ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean,System.Boolean)",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "TimeDateTimeTimespanSubjects",
+  "assemblyName": "TimeDateTimeTimespanPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/patch/build-output/TimeDateTimeTimespanPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -11,12 +11,12 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
     },
     {
-      "assemblyName": "TimeDateTimeTimespanSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll"
+      "assemblyName": "TimeDateTimeTimespanPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/patch/build-output/TimeDateTimeTimespanPatchEntry.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "a4a1c1f0-de98-429b-ad17-1617b8fc104e",
+  "inputModuleVersionId": "8573dc56-829b-4c3b-9e49-8c2f46a7d4aa",
   "artifacts": [
     {
       "kind": "typedIlIr",

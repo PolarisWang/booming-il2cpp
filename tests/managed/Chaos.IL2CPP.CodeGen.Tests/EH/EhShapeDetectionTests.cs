@@ -17,7 +17,7 @@ public sealed class EhShapeDetectionTests : IDisposable
     /// with goto-based EH handling (EH-aware structured codegen requires
     /// additional IR context not available in minimal in-memory artifacts).
     /// </summary>
-    [Fact(Skip = "endcatch not supported in structured EH linear lowering")]
+    [Fact]
     public void SimpleTryCatch_EmitsEHPatterns()
     {
         var method = ModelFactory.CreateMethod(
@@ -107,7 +107,7 @@ public sealed class EhShapeDetectionTests : IDisposable
     /// should produce valid C++ code (goto-based flat fallback for
     /// in-memory artifacts).
     /// </summary>
-    [Fact(Skip = "endcatch not supported in structured EH linear lowering")]
+    [Fact]
     public void NestedTryCatch_GeneratesValidCode()
     {
         var method = ModelFactory.CreateMethod(

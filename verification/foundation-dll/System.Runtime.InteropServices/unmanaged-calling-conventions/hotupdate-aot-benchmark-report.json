@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/unmanaged/calling/conventions",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 73.03,
+      "postPatchNsPerOp": 100.3,
+      "slowdownPercent": 37.34
+    }
+  ],
+  "summary": {
+    "totalMethods": 1,
+    "nonStubMethods": 1,
+    "averageSlowdownPercent": 37.34,
+    "slowdownFactor": 1.3734,
+    "slowdownThresholdX": 50.0
+  }
+}

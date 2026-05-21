@@ -977,14 +977,42 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         // Emit JSON string literals
+        // MSVC string literal limit is 16380 chars; split into chunks to avoid C2026.
+        const int maxStringLiteralLen = 16000;
         for (int i = 0; i < methodsForLowering.Count; i++)
         {
             string escaped = EscapeCppStringLiteral(jsonStrings[i]);
             sb.Append("static const char kMethodJson_")
                 .Append(i)
-                .Append("[] = \"")
-                .Append(escaped)
-                .AppendLine("\";");
+                .Append("[] = ");
+            if (escaped.Length <= maxStringLiteralLen)
+            {
+                sb.Append("\"").Append(escaped).AppendLine("\";");
+            }
+            else
+            {
+                sb.AppendLine();
+                for (int pos = 0; pos < escaped.Length;)
+                {
+                    // Find a safe split point: not in the middle of \\ or \"
+                    int chunkEnd = Math.Min(pos + maxStringLiteralLen, escaped.Length);
+                    if (chunkEnd < escaped.Length)
+                    {
+                        // Back up until we're not splitting after a backslash
+                        int adjusted = chunkEnd;
+                        while (adjusted > pos && escaped[adjusted - 1] == '\\')
+                            adjusted--;
+                        // adjusted is now at a position not preceded by backslash,
+                        // or we gave up and use chunkEnd directly
+                        if (adjusted > pos)
+                            chunkEnd = adjusted;
+                    }
+                    int chunkLen = chunkEnd - pos;
+                    sb.Append("    \"").Append(escaped, pos, chunkLen).AppendLine("\"");
+                    pos = chunkEnd;
+                }
+                sb.AppendLine("    ;");
+            }
         }
 
         sb.AppendLine();

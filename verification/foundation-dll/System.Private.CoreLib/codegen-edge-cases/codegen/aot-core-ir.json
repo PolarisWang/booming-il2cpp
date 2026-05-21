@@ -333,22 +333,22 @@
     },
     {
       "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-3",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-      "signature": "System.Void CodegenEdgeCasesSubjects::Subject_3(System.Int32)",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+      "signature": "System.Int32 CodegenEdgeCasesSubjects::Subject_3(System.Int32)",
       "identity": {
         "assemblyName": "CodegenEdgeCasesSubjects",
         "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
-        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+        "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+        "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
         "methodId": "codegen-edge-cases-subjects.codegen-edge-cases-subjects.subject-3",
-        "signature": "System.Void CodegenEdgeCasesSubjects::Subject_3(System.Int32)"
+        "signature": "System.Int32 CodegenEdgeCasesSubjects::Subject_3(System.Int32)"
       },
       "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
       "isStatic": true,
-      "returnType": "System.Void",
+      "returnType": "System.Int32",
       "returnAbi": {
-        "carrierKindCode": 0,
-        "typeShape": 1
+        "carrierKindCode": 1,
+        "typeShape": 2
       },
       "parameterCount": 1,
       "parameterAbis": [
@@ -357,38 +357,54 @@
           "typeShape": 2
         }
       ],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 4,
-          "handlerOffset": 5,
-          "handlerLength": 11,
+          "tryLength": 5,
+          "handlerOffset": 6,
+          "handlerLength": 12,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "leave",
           "opCode": 50,
-          "operand": 16,
-          "ilOffset": 3,
+          "operand": 18,
+          "ilOffset": 4,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 5,
+          "ilOffset": 6,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 7,
+          "ilOffset": 8,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -396,7 +412,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode",
-          "ilOffset": 8,
+          "ilOffset": 9,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "CodegenEdgeCasesSubjects",
@@ -420,17 +436,40 @@
           "isPreserveSig": false
         },
         {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "leave",
           "opCode": 50,
-          "operand": 16,
-          "ilOffset": 14,
+          "operand": 18,
+          "ilOffset": 16,
           "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 16,
+          "ilOffset": 19,
           "isPreserveSig": false
         }
       ],

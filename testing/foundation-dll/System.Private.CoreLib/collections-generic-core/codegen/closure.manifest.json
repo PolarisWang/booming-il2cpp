@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CollectionsGenericCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "System.Private.CoreLib/collections-generic-core/codegen/_subjects_input/CollectionsGenericCoreSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/collections-generic-core/codegen/_subjects_input/CollectionsGenericCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CollectionsGenericCoreSubjects",
-      "path": "System.Private.CoreLib/collections-generic-core/codegen/_subjects_input/CollectionsGenericCoreSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/collections-generic-core/codegen/_subjects_input/CollectionsGenericCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7da75098-f6f4-4403-bec3-6104fe1c916f",
+  "inputModuleVersionId": "a0cff8a6-4080-46b7-8070-d1c2507e3a3f",
   "artifacts": [
     {
       "kind": "typedIlIr",

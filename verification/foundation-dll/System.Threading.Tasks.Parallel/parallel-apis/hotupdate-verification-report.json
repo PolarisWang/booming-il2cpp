@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel/apis",
+  "passedMethods": 18,
+  "failedMethods": 0,
+  "totalMethods": 19,
+  "stubMethods": 3,
+  "realMethods": 40,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 19,
+    "passedMethods": 18,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "SnapshotProverSubjects",
-  "entrySubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntryMethod8:System.Void()",
+  "assemblyName": "SnapshotProverPatchEntry",
+  "entrySubjectId": "SnapshotProverPatchEntry/SnapshotProverPatchEntry::CustomEntryMethod8:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntryMethod8",
+  "entrySymbol": "SnapshotProverPatchEntry_SnapshotProverPatchEntry_CustomEntryMethod8",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

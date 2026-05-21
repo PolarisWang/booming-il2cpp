@@ -1,11 +1,16 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ThreadingThreadBasicsSubjects, Methods: 13
+// Assembly: ThreadingThreadBasicsSubjects, Methods: 24
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>
 
 extern "C" const int kAotMethodCount;
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32);
+
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+// (defined in native-aot.generated.cpp)
+
 
 // ── RunFactAll: run every method via RunNativeAot, return failure count ──
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {

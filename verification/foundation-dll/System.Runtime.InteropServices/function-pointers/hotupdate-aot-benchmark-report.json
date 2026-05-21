@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/function/pointers",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 74.05,
+      "postPatchNsPerOp": 82.0,
+      "slowdownPercent": 10.74
+    }
+  ],
+  "summary": {
+    "totalMethods": 1,
+    "nonStubMethods": 1,
+    "averageSlowdownPercent": 10.74,
+    "slowdownFactor": 1.1074,
+    "slowdownThresholdX": 50.0
+  }
+}

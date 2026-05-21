@@ -5,6 +5,72 @@
     {
       "assemblyName": "ThreadingThreadBasicsSubjects",
       "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ThreadingThreadBasicsSubjects",
+      "subjectKind": "method",
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
       "reason": "generated-direct-call"
     },

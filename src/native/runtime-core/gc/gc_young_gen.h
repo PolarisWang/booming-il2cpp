@@ -65,15 +65,19 @@ struct YoungGeneration {
     /// End of the young region (exclusive).
     std::atomic<char*> region_end{nullptr};
 
-    // ── Survivor area (within the nursery region) ─────────────
-    /// Survivor area start (beginning of second half of nursery).
-    char* survivor_begin{nullptr};
+    // ── Gen1 survivor space (independent REGION_GEN1 region) ──
+    /// The Gen1 survivor region (nullptr = uninitialized / not allocated).
+    /// Objects that survive one young GC are copied here via promotion_age_threshold.
+    /// Replaces the old fixed 8 MB survivor area within the nursery region.
+    std::atomic<Region*> gen1_region{nullptr};
 
-    /// Survivor area end (exclusive).
-    char* survivor_end{nullptr};
+    /// Gen1 bump pointer for atomic allocation during promotion.
+    /// Separate from Region::current because current is non-atomic and
+    /// Gen1 allocation needs CAS for multi-threaded promotion.
+    std::atomic<char*> gen1_bump{nullptr};
 
-    /// Survivor bump pointer for objects that survived one young GC.
-    std::atomic<char*> survivor_bump{nullptr};
+    /// Cached Gen1 end pointer (exclusive) for fast bounds check.
+    char* gen1_end{nullptr};
 
     /// Promotion age threshold: number of young GCs an object survives
     /// in the survivor area before being promoted to old gen.

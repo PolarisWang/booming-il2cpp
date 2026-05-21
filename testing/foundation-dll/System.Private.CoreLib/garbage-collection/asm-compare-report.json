@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-21T09:29:56",
+  "capturedAt": "2026-05-21T18:32:25",
   "batchMode": true,
   "summary": {
     "totalMethods": 6,
@@ -16,21 +16,21 @@
       "total": 264
     },
     "aotInstructionCount": {
-      "min": 2,
-      "max": 15,
-      "avg": 7.8,
-      "total": 47
+      "min": 7,
+      "max": 24,
+      "avg": 14.5,
+      "total": 87
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 8
+      "external_runtime_call": 13
     },
-    "overallIrExpansionRatio": 0.18,
-    "averageExpansionRatio": 0.18,
-    "maxExpansionRatio": 0.34,
-    "minExpansionRatio": 0.05
+    "overallIrExpansionRatio": 0.33,
+    "averageExpansionRatio": 0.33,
+    "maxExpansionRatio": 0.55,
+    "minExpansionRatio": 0.16
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 2,
-        "ratio": 0.05,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-        "instructions": 2
+        "instructions": 7
       },
       "analysis": [
         {
@@ -72,8 +72,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 2,
-        "ratio": 0.05,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -84,7 +84,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-        "instructions": 2
+        "instructions": 7
       },
       "analysis": [
         {
@@ -104,8 +104,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 4,
-        "ratio": 0.09,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -116,7 +116,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-        "instructions": 4
+        "instructions": 9
       },
       "analysis": [
         {
@@ -136,8 +136,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -148,9 +148,14 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-        "instructions": 11
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -158,7 +163,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {
@@ -168,8 +173,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 24,
+        "ratio": 0.55,
         "jitCodeSize": 256
       },
       "jit": {
@@ -180,9 +185,24 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-        "instructions": 15
+        "instructions": 24
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -200,7 +220,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 3
+        "external_runtime_call": 6
       }
     },
     {
@@ -210,8 +230,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -222,9 +242,14 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-        "instructions": 13
+        "instructions": 20
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -232,7 +257,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     }
   ]

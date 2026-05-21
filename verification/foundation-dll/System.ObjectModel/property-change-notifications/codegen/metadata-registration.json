@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PropertyChangeNotificationsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "name": "PropertyChangeNotificationsSubjects",
+      "displayName": "PropertyChangeNotificationsSubjects",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::_exitCode",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

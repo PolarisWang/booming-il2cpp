@@ -113,6 +113,22 @@ void BgcController::StartBgcCycle() {
         return;
     }
 
+    // Pre-allocate Gen1 mark bitmap BEFORE PopulateRootSet.
+    // CHAOS_IL2CPP_MALLOC (raw malloc) does not need a safepoint, so this
+    // is safe to run outside the safepoint region.  If allocation fails,
+    // we fall back to GEN2_ONLY before doing any real work (root scanning),
+    // avoiding wasted effort and the need for OOM handling during the mark
+    // phase.  The BGC scope was already set by DecideBgcScope() in the
+    // caller (GcAdvanceBgcCycle), so g_gc_scheduler.GetBgcScope() is current.
+    if (g_gc_scheduler.GetBgcScope() == BgcScope::GEN1_GEN2) {
+        if (!AllocateGen1MarkBitmap()) {
+            CHAOS_IL2CPP_LOG_WARN("BGC",
+                "gen1_bitmap OOM — falling back to GEN2_ONLY");
+        }
+    } else {
+        FreeGen1MarkBitmap();  // Clean up any leftover from prior cycle.
+    }
+
     // Acquire safepoint before PopulateRootSet.  Root scanning
     // (GcScanAllThreadRoots + TLS nursery enumeration) reads thread
     // stacks and nursery regions — doing this while threads are
@@ -124,18 +140,6 @@ void BgcController::StartBgcCycle() {
     PopulateRootSet();
     threading::ReleaseGlobalSafepoint(bgc_gen);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
-
-    // Allocate Gen1 mark bitmap if BGC scope includes Gen1.
-    // Must happen after PopulateRootSet because the scheduler scope must
-    // be set by DecideBgcScope before entering StartBgcCycle.
-    if (g_gc_scheduler.GetBgcScope() == BgcScope::GEN1_GEN2) {
-        if (!AllocateGen1MarkBitmap()) {
-            CHAOS_IL2CPP_LOG_WARN("BGC",
-                "gen1_bitmap allocation failed — falling back to GEN2_ONLY");
-        }
-    } else {
-        FreeGen1MarkBitmap();  // Clean up any leftover from prior cycle.
-    }
 
     // Transition to concurrent mark phase.
     phase_.store(BgcPhase::CONCURRENT_MARK, std::memory_order_release);
@@ -169,6 +173,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
         [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
             cards_dirty++;
             // Scan every pointer slot in the dirty card range for old-gen refs.
+            // Skip any addresses that fall in the Gen1 range (separate region,
+            // handled by its own re-scan below; this guard is belt-and-suspenders).
             for (auto* slot = reinterpret_cast<void**>(card_start);
                  slot < reinterpret_cast<void**>(card_end);
                  slot++) {
@@ -187,15 +193,16 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     marked += DrainWorkerDeque(0, 0);
 
     // ── Gen1 re-scan via card table ──────────────────────────
-    // The nursery+survivor range is registered with the card table
+    // The Gen1 region is registered with the card table
     // via GcRegisterHeapRange, so DirtyCard() write barrier tracks
     // all pointer writes into Gen1 objects during concurrent mark.
-    // Scan only dirty cards in the survivor range for efficiency,
+    // Scan only dirty cards in the Gen1 region for efficiency,
     // replacing the prior full-walk re-scan.
     {
-        auto* sv_begin = g_young_gen.survivor_begin;
-        if (sv_begin != nullptr) {
-            auto* sv_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        if (gen1 != nullptr) {
+            char* sv_begin = gen1->begin;
+            auto* sv_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
             if (sv_bump > sv_begin) {
                 auto& ctrl = BgcController::Instance();
                 ScanDirtyCards(
@@ -247,11 +254,12 @@ void BgcController::StwCompact() {
     // ── Gen1 promote/keep decision (GEN1_GEN2 scope) ─────────────
     // After BGC concurrent mark + sweep, walk Gen1 using the BGC Gen1
     // mark bitmap.  If Gen1 survival is low (< 30%), promote live objects
-    // to Gen2 and reset survivor_bump (Gen1 filtering was effective).  If
+    // to Gen2 and reset gen1_bump (Gen1 filtering was effective).  If
     // survival is high, leave Gen1 for the young GC to collect later.
     if (gen1_mark_bitmap_ != nullptr) {
-        char* sv_begin = g_young_gen.survivor_begin;
-        char* sv_bump  = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        char* sv_begin = (gen1 != nullptr) ? gen1->begin : nullptr;
+        char* sv_bump  = g_young_gen.gen1_bump.load(std::memory_order_acquire);
         if (sv_begin != nullptr && sv_bump > sv_begin) {
             GcFireEvent(GcEvent::GC_GEN1_COLLECT);
 
@@ -357,8 +365,8 @@ void BgcController::StwCompact() {
                 }
 
                 if (!oom) {
-                    g_young_gen.survivor_bump.store(
-                        g_young_gen.survivor_begin, std::memory_order_release);
+                    g_young_gen.gen1_bump.store(
+                        gen1->begin, std::memory_order_release);
                     CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
                         "gen1_promote_done: promoted={0} objs, {1} bytes",
                         static_cast<unsigned long long>(promoted_objects),
@@ -590,13 +598,14 @@ void BgcController::PopulateRootSet() {
         }
     }
 
-    // Phase 1b2: Scan Gen1 (survivor area) for Gen2 pointers.
+    // Phase 1b2: Scan Gen1 region for Gen2 pointers.
     // Gen1 objects may reference Gen2 objects.  These Gen2 references
     // must be marked by BGC to prevent premature reclamation.
     {
-        auto* sv_begin = g_young_gen.survivor_begin;
-        if (sv_begin != nullptr) {
-            auto* sv_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        if (gen1 != nullptr) {
+            char* sv_begin = gen1->begin;
+            auto* sv_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
             if (sv_bump > sv_begin) {
                 auto& ctrl = BgcController::Instance();
                 auto& layout_registry = GcLayoutRegistry::Instance();
@@ -1451,8 +1460,9 @@ CHAOS_IL2CPP_SIZE BgcController::DrainAllTlsSatbBuffers() {
 bool BgcController::AllocateGen1MarkBitmap() noexcept {
     if (gen1_mark_bitmap_ != nullptr) return true;
 
-    char* s_begin = g_young_gen.survivor_begin;
-    char* s_end   = g_young_gen.survivor_end;
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    char* s_begin = (gen1 != nullptr) ? gen1->begin : nullptr;
+    char* s_end   = g_young_gen.gen1_end;
     if (s_begin == nullptr || s_end == nullptr || s_begin >= s_end) {
         CHAOS_IL2CPP_LOG_DEBUG("BGC", "gen1_bitmap: no Gen1 range");
         return false;
@@ -1518,10 +1528,10 @@ bool BgcController::BgcTryMarkGen1(void* obj) noexcept {
 void BgcController::ResetGen1MarkBitmap() noexcept {
     if (gen1_mark_bitmap_ != nullptr) {
         std::memset(gen1_mark_bitmap_, 0, gen1_bitmap_bytes_);
-        // Rebase to current survivor range in case it changed.
-        char* s_begin = g_young_gen.survivor_begin;
-        if (s_begin != nullptr) {
-            gen1_bitmap_base_ = reinterpret_cast<uintptr_t>(s_begin);
+        // Rebase to current Gen1 range in case it changed.
+        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        if (gen1 != nullptr) {
+            gen1_bitmap_base_ = reinterpret_cast<uintptr_t>(gen1->begin);
         }
         CHAOS_IL2CPP_LOG_DEBUG("BGC", "gen1_bitmap reset");
     }

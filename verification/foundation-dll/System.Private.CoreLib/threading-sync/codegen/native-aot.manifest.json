@@ -1,8 +1,8 @@
 {
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
-  "assemblyName": "ThreadingSyncSubjects",
-  "entrySubjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::.cctor:System.Void()",
+  "assemblyName": "ThreadingSyncPatchEntry",
+  "entrySubjectId": "ThreadingSyncPatchEntry/ThreadingSyncPatchEntry::.cctor:System.Void()",
   "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/threading-sync/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [

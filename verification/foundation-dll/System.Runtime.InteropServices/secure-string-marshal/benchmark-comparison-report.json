@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/secure/string/marshal",
+  "summary": {
+    "totalMethods": 4,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 4,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

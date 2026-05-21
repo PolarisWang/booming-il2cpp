@@ -1,0 +1,24 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "ConvertersSubjects",
+      "owningAssemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u003CSystem.Byte\u003E::get_HandleNull:System.Boolean()",
+      "definitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter\u00601::get_HandleNull:System.Boolean()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

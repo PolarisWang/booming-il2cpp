@@ -3,55 +3,61 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "ReflectionActivationSubjects.dll",
+      "moduleName": "ReflectionActivationPatchEntry.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_0",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_0:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_1",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_1:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_2",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_2:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 3,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_3",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_3:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 4,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_4",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_4:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 5,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_5",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_5:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 6,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_6",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_6:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
           "slot": 7,
-          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7",
-          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Subject_7",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Subject_7:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionActivationPatchEntry_ReflectionActivationPatchEntry_Run_System_Int32",
+          "subjectId": "ReflectionActivationPatchEntry/ReflectionActivationPatchEntry::Run:System.Void(System.Int32)"
         }
       ]
     }

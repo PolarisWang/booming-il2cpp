@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -747,10 +748,12 @@ extern "C" const int kSubjectEntryIndices[14] = {
 	10,
 	11,
 	12,
-	13
+	13,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -807,144 +810,265 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: switch-based direct dispatch per method.
-// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
-// the method body into the timing loop — eliminating function pointer indirection.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	switch (chaos_entry_index) {
-	case 0: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
-	case 1: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 2: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 3: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 4: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 5: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 6: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 7: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 8: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 9: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 10: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 11: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 12: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 13: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	default:
-		return -1.0;
-	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry0;
+	/* ── Entry 1: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry1;
+	/* ── Entry 2: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry2;
+	/* ── Entry 3: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry3;
+	/* ── Entry 4: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry4;
+	/* ── Entry 5: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry5;
+	/* ── Entry 6: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry6;
+	/* ── Entry 7: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry7;
+	/* ── Entry 8: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry8;
+	/* ── Entry 9: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry9;
+	/* ── Entry 10: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry10;
+	/* ── Entry 11: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry11;
+	/* ── Entry 12: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry12;
+	/* ── Entry 13: GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry13;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry1 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry2 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry3 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry4 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry5 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry6 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry7 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry8 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry9 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry10 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10 */
+	.entry10 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry11 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11 */
+	.entry11 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry12 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12 */
+	.entry12 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry13 = GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13 */
+	.entry13 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 476u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[14] = {
@@ -980,6 +1104,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = nullptr,
 	.vtable_descriptor_count = 0u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -1119,9 +1246,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1(
 	CHAOS_IL2CPP_INTPTR _s6{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 			{
 				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
@@ -1142,8 +1267,8 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1(
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_raw_arg_0 = _s1;
-				const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-				chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+				chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 			}
 			{
 				const auto chaos_arg_1 = _s0;
@@ -1157,155 +1282,16 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1(
 				auto chaos_value = _s0;
 				chaos_static_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects___exitCode = chaos_value;
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-			{
-				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				if (chaos_length < 0)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
-				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
-				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
-				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
-			}
-			_s1 = _s0;
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(73644948u);
-			{
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_raw_arg_0 = _s1;
-				const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-				chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
-			}
-			{
-				const auto chaos_arg_1 = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Guid, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Guid.hot;
-				chaos_external_runtime_System_Private_CoreLib_System_Guid___ctor_System_Void_System_Byte___(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects___exitCode = chaos_value;
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-			{
-				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
-				if (chaos_length < 0)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
-				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
-				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
-				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
-			}
-			_s1 = _s0;
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(73644948u);
-			{
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_raw_arg_0 = _s1;
-				const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-				chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
-			}
-			{
-				const auto chaos_arg_1 = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Guid, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Guid.hot;
-				chaos_external_runtime_System_Private_CoreLib_System_Guid___ctor_System_Void_System_Byte___(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects___exitCode = chaos_value;
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+	CHAOS_EH_END
 	return;
 }
 
@@ -1336,7 +1322,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2(
 		const auto chaos_result = ChaosGuidGetHashCode(ChaosLoadInt64(chaos_arg_0));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(856493968);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(64886455);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1549,7 +1535,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7(
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Random__Next_System_Int32__();
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(2100274156);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1619816320);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
@@ -1598,7 +1584,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8(
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Random__Next_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(30);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(40);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
@@ -1638,11 +1624,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9(
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Random__NextDouble_System_Double__(chaos_arg_0);
+		const auto chaos_result = ChaosRandomNextDouble(chaos_arg_0);
 		_s0 = ChaosStoreInt64(chaos_result);
 	}
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
@@ -1699,17 +1681,13 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10
 	{
 		const auto chaos_arg_1 = _s3;
 		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		chaos_external_runtime_System_Private_CoreLib_System_Random__NextBytes_System_Void_System_Byte___(chaos_arg_0, chaos_arg_1);
+		ChaosRandomNextBytes(chaos_arg_0, chaos_arg_1);
 	}
 	return;
 }
@@ -1781,7 +1759,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_HashCode__ToHashCode_System_Int32__(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1070987500);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(143188953);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1822,7 +1800,7 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13
 		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_HashCode__Combine_System_Int32_System_Int32__System_Int32_System_Int32_System_Int32_(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(432803180);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(420125028);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);

@@ -1,0 +1,1086 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "NativeMemoryPointersSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_3",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_4",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_5",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_6",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_7",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_8",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_9",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_10",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_11",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_12",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_13",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_14",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_15",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_16",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_17",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_18",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_19",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_20",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_21",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 103,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 104,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 105,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 106,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 107,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 108,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 109,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 110,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 111,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 112,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 113,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 114,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 115,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 116,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 117,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 118,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 119,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 120,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 121,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 122,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 123,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 124,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 125,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 126,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 127,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 128,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 129,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 130,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 131,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 132,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 133,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 134,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 135,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 136,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 137,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 138,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 139,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 140,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 141,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 142,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 143,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 144,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 145,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 146,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 147,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 148,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 149,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 150,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 151,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 152,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 153,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 154,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 155,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 156,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 157,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 158,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 159,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 160,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 161,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 162,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 163,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 164,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 165,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 166,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 167,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 168,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 169,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 170,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 171,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 172,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 173,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 174,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 175,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 176,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 177,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 178,
+          "symbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198",
+          "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

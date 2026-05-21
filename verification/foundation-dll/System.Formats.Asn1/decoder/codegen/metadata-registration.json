@@ -1,0 +1,391 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "DecoderSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "DecoderSubjects/DecoderSubjects",
+      "name": "DecoderSubjects",
+      "displayName": "DecoderSubjects",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "DecoderSubjects/DecoderSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::_exitCode",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_6:System.Void()",
+      "name": "CustomEntrySubject_6",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_6:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_12:System.Void()",
+      "name": "CustomEntrySubject_12",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_17:System.Void()",
+      "name": "Subject_17",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_18:System.Void()",
+      "name": "Subject_18",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_19:System.Void()",
+      "name": "Subject_19",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 23,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_20:System.Void()",
+      "name": "Subject_20",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 24,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_21:System.Void()",
+      "name": "Subject_21",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_21:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 25,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_22:System.Void()",
+      "name": "Subject_22",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_22:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 26,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_23:System.Void()",
+      "name": "Subject_23",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_23:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 27,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_24:System.Void()",
+      "name": "Subject_24",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_24:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 28,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_25:System.Void()",
+      "name": "Subject_25",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_25:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 29,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_26:System.Void()",
+      "name": "Subject_26",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_26:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 30,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_27:System.Void()",
+      "name": "Subject_27",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_27:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 31,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_28:System.Void()",
+      "name": "Subject_28",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_28:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 32,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_29:System.Void()",
+      "name": "Subject_29",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_29:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 33,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_30:System.Void()",
+      "name": "Subject_30",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_30:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 34,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_31:System.Void()",
+      "name": "Subject_31",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_31:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 35,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_32:System.Void()",
+      "name": "Subject_32",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_32:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

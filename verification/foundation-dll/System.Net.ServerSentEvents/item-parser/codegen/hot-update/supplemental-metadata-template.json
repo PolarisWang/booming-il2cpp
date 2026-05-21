@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ItemParserSubjects",
+      "subjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ItemParserSubjects/ItemParserSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ItemParserSubjects/ItemParserSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

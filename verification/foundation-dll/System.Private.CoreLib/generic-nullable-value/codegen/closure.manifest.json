@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GenericNullableValueSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GenericNullableValueSubjects",
-      "path": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll"
+      "path": "verification/foundation-dll/System.Private.CoreLib/generic-nullable-value/managed/subjects/build-output/GenericNullableValueSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2dbd1538-14bd-4dfa-b5db-8d60771add1f",
+  "inputModuleVersionId": "aca49f2a-3f99-4099-90a0-93569ee9fffb",
   "artifacts": [
     {
       "kind": "typedIlIr",

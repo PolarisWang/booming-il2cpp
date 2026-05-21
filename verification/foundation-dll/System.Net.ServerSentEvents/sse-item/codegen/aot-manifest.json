@@ -1,0 +1,102 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "method",
+      "subjectId": "SseItemSubjects/SseItemSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SseItemSubjects",
+      "subjectKind": "field",
+      "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "type",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

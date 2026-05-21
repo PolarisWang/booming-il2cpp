@@ -9,10 +9,12 @@
 #include <cstdlib>
 #include <cstring>
 
+#include "gc_bgc.h"
 #include "gc_events.h"
 #include "gc_layout.h"
 #include "gc_mark_bitmap.h"
 #include "gc_old_gen.h"
+#include "gc_scheduler.h"
 #include "gc_young_gen.h"
 #include "thread_state.h"
 
@@ -30,11 +32,21 @@ Gen1State g_gen1_state;
 
 bool IsInGen1(const void* ptr) {
     if (ptr == nullptr) return false;
-    if (g_young_gen.survivor_begin == nullptr) return false;
-    auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-    if (s_bump == nullptr) return false;
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return false;
+    auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    if (bump == nullptr) return false;
     auto* cptr = static_cast<const char*>(ptr);
-    return cptr >= g_young_gen.survivor_begin && cptr < s_bump;
+    return cptr >= gen1->begin && cptr < bump;
+}
+
+bool IsInGen1Range(const void* ptr) {
+    if (ptr == nullptr) return false;
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return false;
+    if (g_young_gen.gen1_end == nullptr) return false;
+    auto* cptr = static_cast<const char*>(ptr);
+    return cptr >= gen1->begin && cptr < g_young_gen.gen1_end;
 }
 
 // ======================================================================
@@ -42,15 +54,16 @@ bool IsInGen1(const void* ptr) {
 // ======================================================================
 
 void* TryAllocateInGen1(CHAOS_IL2CPP_SIZE size) {
-    char* current = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    char* current = g_young_gen.gen1_bump.load(std::memory_order_acquire);
     char* next;
     do {
         if (current == nullptr) return nullptr;
         next = current + size;
-        if (next > g_young_gen.survivor_end) return nullptr;
-    } while (!g_young_gen.survivor_bump.compare_exchange_weak(
+        if (next > g_young_gen.gen1_end) return nullptr;
+    } while (!g_young_gen.gen1_bump.compare_exchange_weak(
         current, next, std::memory_order_release, std::memory_order_acquire));
     std::memset(current, 0, size);
+    g_gc_scheduler.RecordGen1Allocation(size);
     return current;
 }
 
@@ -59,16 +72,96 @@ void* TryAllocateInGen1(CHAOS_IL2CPP_SIZE size) {
 // ======================================================================
 
 float Gen1Fragmentation() {
-    if (g_young_gen.survivor_begin == nullptr) return 0.0f;
-    auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return 0.0f;
+    auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
     CHAOS_IL2CPP_SIZE total = static_cast<CHAOS_IL2CPP_SIZE>(
-        g_young_gen.survivor_end - g_young_gen.survivor_begin);
+        g_young_gen.gen1_end - gen1->begin);
     CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
-        (s_bump ? s_bump : g_young_gen.survivor_begin) - g_young_gen.survivor_begin);
+        (bump ? bump : gen1->begin) - gen1->begin);
     if (total == 0) return 0.0f;
-    // Fragmentation = 1 - (used / total), capped at 0 (empty Gen1).
     float frag = 1.0f - (static_cast<float>(used) / static_cast<float>(total));
     return (frag < 0.0f) ? 0.0f : frag;
+}
+
+// ======================================================================
+// GcGen1ShouldCollect — decision helper for independent Gen1 collection
+// ======================================================================
+
+/// Maximum young GCs between Gen1 collections (interval-based trigger).
+static constexpr int kGen1MaxInterval = 8;
+
+/// Base Gen1 occupancy threshold (fraction of Gen1 used) to trigger collection.
+/// Adjusted downward when survival rate is low (most objects die quickly).
+static constexpr float kGen1OccupancyThreshold = 0.80f;
+
+/// Minimum occupancy threshold (safety floor — never trigger below this).
+static constexpr float kGen1MinOccupancyThreshold = 0.40f;
+
+/// Gen1 fragmentation threshold to trigger collection.
+static constexpr float kGen1FragThreshold = 0.50f;
+
+/// Budget multiplier: trigger when total allocation into Gen1 since last
+/// collection exceeds this × Gen1 capacity (catch high-throughput phases).
+static constexpr float kGen1BudgetMultiplier = 3.0f;
+
+/// Survival rate below which we consider Gen1 objects "mostly dead" and
+/// trigger collection more eagerly (lower occupancy threshold).
+static constexpr float kGen1LowSurvivalThreshold = 0.30f;
+
+bool GcGen1ShouldCollect() {
+    // 1. Check Gen1 has data.
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return false;
+    auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    if (bump == nullptr || bump <= gen1->begin) return false;
+
+    // 2. Check BGC is not actively marking Gen1 (GEN1_GEN2 scope).
+    if (BgcController::Instance().IsGen1MarkingActive()) return false;
+
+    CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(bump - gen1->begin);
+    CHAOS_IL2CPP_SIZE capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+        g_young_gen.gen1_end - gen1->begin);
+    if (capacity == 0) return false;
+
+    float occupancy = static_cast<float>(used) / static_cast<float>(capacity);
+
+    // 3a. Budget-based check: if total allocation since last collection
+    // exceeds budget × capacity, trigger early.  This catches high-throughput
+    // phases where Gen1 fills and drains rapidly despite low instantaneous
+    // occupancy (objects promoted then quickly die).
+    if (g_gc_scheduler.Gen1AllocSinceLastGc() >
+        static_cast<CHAOS_IL2CPP_SIZE>(kGen1BudgetMultiplier * capacity)) {
+        return true;
+    }
+
+    // 3b. Survival-rate adaptive occupancy threshold.
+    // When survival rate is low (<30%), most objects in Gen1 are dead —
+    // promote eagerly at a lower occupancy threshold (50% instead of 80%).
+    // When survival is high, use the default 80% threshold.
+    float survival = g_gc_scheduler.Gen1SurvivalRate();
+    float adaptive_threshold = kGen1OccupancyThreshold;
+    if (survival < kGen1LowSurvivalThreshold) {
+        // Linear interpolation: survival=0% -> 40%, survival=30% -> 80%
+        adaptive_threshold = kGen1MinOccupancyThreshold +
+            (kGen1OccupancyThreshold - kGen1MinOccupancyThreshold) *
+            (survival / kGen1LowSurvivalThreshold);
+    }
+    if (occupancy > adaptive_threshold) return true;
+
+    // 3c. Check fragmentation (only when Gen1 has meaningful data).
+    // High fragmentation with <25% occupancy just means "barely used" —
+    // not a real fragmentation problem.
+    constexpr float kMinFragUsageFraction = 0.25f;
+    float frag = Gen1Fragmentation();
+    if (occupancy >= kMinFragUsageFraction && frag > kGen1FragThreshold) return true;
+
+    // 3d. Check interval (young GCs since last Gen1 collection).
+    int young_since = g_gen1_state.young_gc_since_last_gen1.load(
+        std::memory_order_relaxed);
+    if (young_since >= kGen1MaxInterval) return true;
+
+    return false;
 }
 
 // ======================================================================
@@ -125,11 +218,12 @@ Gen1CollectionResult GcGen1Collection() {
     auto pause_start = std::chrono::steady_clock::now();
 
     // ── Phase 1: Determine Gen1 range ──
-    if (g_young_gen.survivor_begin == nullptr) {
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) {
         return result;  // No Gen1 area configured.
     }
-    char* s_begin = g_young_gen.survivor_begin;
-    char* s_bump  = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    char* s_begin = gen1->begin;
+    char* s_bump  = g_young_gen.gen1_bump.load(std::memory_order_acquire);
     if (s_bump == nullptr || s_bump <= s_begin) {
         return result;  // Gen1 is empty.
     }
@@ -178,7 +272,7 @@ Gen1CollectionResult GcGen1Collection() {
             }
             tiny_cur += obj_size;
         }
-        g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
         auto pause_end = std::chrono::steady_clock::now();
         result.pause_ns = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -239,7 +333,7 @@ Gen1CollectionResult GcGen1Collection() {
                 }
                 ec2_cur += sz2;
             }
-            g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+            g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
             auto pause_end = std::chrono::steady_clock::now();
             result.pause_ns = static_cast<uint64_t>(
                 std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -299,7 +393,7 @@ Gen1CollectionResult GcGen1Collection() {
         // Reset Gen1 even if some promotions failed — better to lose Gen1 space
         // than to leave dangling pointers. Mutators have already been told their
         // objects are in Gen2 (via forwarding or reference updates in the caller).
-        g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
         auto pause_end = std::chrono::steady_clock::now();
         result.pause_ns = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -536,7 +630,7 @@ Gen1CollectionResult GcGen1Collection() {
         }
 
         // Commit only if no failures.  If any Gen2 alloc failed, we leave Gen1
-        // content intact (survivor_bump NOT reset) for the next cycle to retry.
+        // content intact (gen1_bump NOT reset) for the next cycle to retry.
         // Reporting partial promotions would create duplicates on the next retry.
         if (!local_failed) {
             result.objects_promoted = local_promoted;
@@ -552,9 +646,9 @@ Gen1CollectionResult GcGen1Collection() {
     // ── Phase 5: Reset Gen1 (only if all promotions succeeded) ──
     // If Gen2 OOM occurred, preserve Gen1 content for retry on next cycle.
     if (!result.promotion_failed) {
-        g_young_gen.survivor_bump.store(g_young_gen.survivor_begin, std::memory_order_release);
+        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
     } else {
-        CHAOS_IL2CPP_LOG_WARN("CRAG", "gen1_collection promotion_failed — survivor_bump NOT reset");
+        CHAOS_IL2CPP_LOG_WARN("CRAG", "gen1_collection promotion_failed — gen1_bump NOT reset");
     }
 
     // ── Phase 6: Cleanup ──

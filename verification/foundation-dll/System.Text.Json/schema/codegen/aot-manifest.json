@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SchemaSubjects",
+      "subjectKind": "method",
+      "subjectId": "SchemaSubjects/SchemaSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SchemaSubjects",
+      "subjectKind": "method",
+      "subjectId": "SchemaSubjects/SchemaSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SchemaSubjects",
+      "subjectKind": "field",
+      "subjectId": "SchemaSubjects/SchemaSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "subjectKind": "method",
+      "subjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+      "reason": "external-call"
+    }
+  ]
+}

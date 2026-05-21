@@ -1,0 +1,3264 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-0",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-0",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_0()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "PipeOptions",
+          "callee": "System.IO.Pipelines/PipeOptions::get_Default:PipeOptions()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_Default:PipeOptions()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_Default:PipeOptions()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 7880838,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-1",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-1",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_1()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.IO.Pipelines/PipeOptions::get_MinimumSegmentSize:System.Int32()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_MinimumSegmentSize:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_MinimumSegmentSize:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-2",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-2",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_2()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int64",
+          "callee": "System.IO.Pipelines/PipeOptions::get_PauseWriterThreshold:System.Int64()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_PauseWriterThreshold:System.Int64()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_PauseWriterThreshold:System.Int64()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-3",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-3",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_3()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Buffers.MemoryPool\u003CSystem.Byte\u003E",
+          "callee": "System.IO.Pipelines/PipeOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-4",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-4",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_4()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeScheduler",
+          "callee": "System.IO.Pipelines/PipeOptions::get_ReaderScheduler:PipeScheduler()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_ReaderScheduler:PipeScheduler()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_ReaderScheduler:PipeScheduler()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-5",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-5",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_5()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int64",
+          "callee": "System.IO.Pipelines/PipeOptions::get_ResumeWriterThreshold:System.Int64()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_ResumeWriterThreshold:System.Int64()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_ResumeWriterThreshold:System.Int64()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-6",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-6",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_6()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.IO.Pipelines/PipeOptions::get_UseSynchronizationContext:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_UseSynchronizationContext:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_UseSynchronizationContext:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-7",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-7",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_7()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeScheduler",
+          "callee": "System.IO.Pipelines/PipeOptions::get_WriterScheduler:PipeScheduler()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_WriterScheduler:PipeScheduler()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions::get_WriterScheduler:PipeScheduler()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-8",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_8:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_8:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_8:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-8",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_8()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i8",
+          "opCode": 40,
+          "ilOffset": 6,
+          "resultType": "System.Int64",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i8",
+          "opCode": 40,
+          "ilOffset": 9,
+          "resultType": "System.Int64",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 13,
+          "resultType": "System.IO.Pipelines/PipeOptions",
+          "callee": "System.IO.Pipelines/PipeOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,PipeScheduler,PipeScheduler,System.Int64,System.Int64,System.Int32,System.Boolean)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,PipeScheduler,PipeScheduler,System.Int64,System.Int64,System.Int32,System.Boolean)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeOptions",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-9",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-9",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_9()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "PipeScheduler",
+          "callee": "System.IO.Pipelines/PipeScheduler::get_Inline:PipeScheduler()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::get_Inline:PipeScheduler()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::get_Inline:PipeScheduler()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 56793269,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-10",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-10",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_10()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "PipeScheduler",
+          "callee": "System.IO.Pipelines/PipeScheduler::get_ThreadPool:PipeScheduler()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::get_ThreadPool:PipeScheduler()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::get_ThreadPool:PipeScheduler()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 115000,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 31,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 26,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-11",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-11",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_11()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 25,
+          "handlerOffset": 26,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 6,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "callee": "System.IO.Pipelines/PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-12",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-12",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_12()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::get_BufferSize:System.Int32()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_BufferSize:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_BufferSize:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-13",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-13",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_13()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::get_LeaveOpen:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_LeaveOpen:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_LeaveOpen:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-14",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_14()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-14",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_14()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::get_MinimumReadSize:System.Int32()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_MinimumReadSize:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_MinimumReadSize:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-15",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_15()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-15",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_15()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_15",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Buffers.MemoryPool\u003CSystem.Byte\u003E",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-16",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_16()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-16",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_16()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_16",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Boolean",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::get_UseZeroByteReads:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_UseZeroByteReads:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_UseZeroByteReads:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-17",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_17:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_17()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_17:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_17:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-17",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_17()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_17",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 7,
+          "resultType": "System.IO.Pipelines/StreamPipeReaderOptions",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Int32,System.Boolean)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Int32,System.Boolean)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-18",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_18:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_18()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_18:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_18:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-18",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_18()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_18",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 6,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 8,
+          "resultType": "System.IO.Pipelines/StreamPipeReaderOptions",
+          "callee": "System.IO.Pipelines/StreamPipeReaderOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Int32,System.Boolean,System.Boolean)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Int32,System.Boolean,System.Boolean)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeReaderOptions",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 14,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.custom-entry-subject-19",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::CustomEntrySubject_19()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.custom-entry-subject-19",
+        "signature": "System.Void OptionsSchedulerSubjects::CustomEntrySubject_19()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_CustomEntrySubject_19",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-20",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_20()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-20",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_20()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_20",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.IO.Pipelines/StreamPipeWriterOptions::get_MinimumBufferSize:System.Int32()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_MinimumBufferSize:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_MinimumBufferSize:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-21",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_21()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-21",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_21()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_21",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Buffers.MemoryPool\u003CSystem.Byte\u003E",
+          "callee": "System.IO.Pipelines/StreamPipeWriterOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectKind": "field",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "OptionsSchedulerSubjects",
+            "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    },
+    {
+      "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-22",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_22:System.Void()",
+      "signature": "System.Void OptionsSchedulerSubjects::Subject_22()",
+      "identity": {
+        "assemblyName": "OptionsSchedulerSubjects",
+        "declaringTypeSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+        "definitionSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_22:System.Void()",
+        "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_22:System.Void()",
+        "methodId": "options-scheduler-subjects.options-scheduler-subjects.subject-22",
+        "signature": "System.Void OptionsSchedulerSubjects::Subject_22()"
+      },
+      "nativeSymbol": "OptionsSchedulerSubjects_OptionsSchedulerSubjects_Subject_22",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 1,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 5,
+          "resultType": "System.IO.Pipelines/StreamPipeWriterOptions",
+          "callee": "System.IO.Pipelines/StreamPipeWriterOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Boolean)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions::.ctor:System.Void(System.Buffers.MemoryPool\u003CSystem.Byte\u003E,System.Int32,System.Boolean)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/StreamPipeWriterOptions",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "OptionsSchedulerSubjects"
+    }
+  ]
+}

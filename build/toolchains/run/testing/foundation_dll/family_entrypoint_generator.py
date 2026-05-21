@@ -66,11 +66,16 @@ def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> Non
     """Extract and add using from a full type path like 'System.Private.CoreLib/System.Reflection.MemberInfo'."""
     if "/" not in full_type_path:
         return
-    _, full_type = full_type_path.split("/", 1)
+    assembly_part, full_type = full_type_path.split("/", 1)
     if "." in full_type:
         ns = ".".join(full_type.split(".")[:-1])
         if ns and ns != "System":
             usings.add(ns)
+    else:
+        # Type has no dot-delimited namespace — try the assembly part as namespace.
+        # e.g. "SnapshotTestFixtures/ArithmeticOps" → using SnapshotTestFixtures;
+        if assembly_part and assembly_part != "System.Private.CoreLib":
+            usings.add(assembly_part)
 
 
 def _add_type_using(t: str, usings: set[str]) -> None:
@@ -243,6 +248,7 @@ def _generate_entrypoint_source(
     custom_method_indices: set[int] | None = None,
     probe_mode: bool = False,
     expected_values: dict[int, dict] | None = None,
+    has_custom_entry: bool = False,
 ) -> str:
     """Generate the synthetic C# entry point source code.
 
@@ -326,8 +332,14 @@ def _generate_entrypoint_source(
                 lines.append(f"{ns_indent}    }}")
                 lines.append("")
             else:
-                # Normal mode: void stub defined in Custom.cs
-                lines.append("")
+                # Custom entry — Custom.cs (if exists) provides the implementation.
+                # Only emit an empty stub when no Custom.cs exists, to ensure the
+                # IL method appears in the DLL for the native-AOT lowering planner.
+                if variant in ("subjects", "patch") and not has_custom_entry:
+                    lines.append(f"{ns_indent}    public static void {custom_prefix}{idx}()")
+                    lines.append(f"{ns_indent}    {{")
+                    lines.append(f"{ns_indent}    }}")
+                    lines.append("")
             continue
 
         if variant == "patch":
@@ -369,10 +381,24 @@ def _generate_entrypoint_source(
         is_self_ref = (variant == "subjects" and parsed["type_name"] == class_name)
         if is_self_ref:
             param_decls = _csharp_param_decls(parsed["param_types"]) if parsed["param_types"] else ""
-            lines.append(f"{ns_indent}    public static void {method_prefix}{idx}({param_decls})")
+            ret_type = parsed["return_type"]
+            if ret_type == "System.Void":
+                cs_return = "void"
+                body_lines = [
+                    f"{ns_indent}        try {{ }}",
+                    f"{ns_indent}        catch {{ _exitCode = 1; }}",
+                ]
+            else:
+                bare = ret_type.rstrip("&*?").strip()
+                cs_return = _SYSTEM_TYPE_TO_CSHARP.get(bare, bare)
+                body_lines = [
+                    f"{ns_indent}        try {{ return default; }}",
+                    f"{ns_indent}        catch {{ _exitCode = 1; return default; }}",
+                ]
+            lines.append(f"{ns_indent}    public static {cs_return} {method_prefix}{idx}({param_decls})")
             lines.append(f"{ns_indent}    {{")
-            lines.append(f"{ns_indent}        try {{ }}")
-            lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
+            for bl in body_lines:
+                lines.append(bl)
             lines.append(f"{ns_indent}    }}")
             lines.append("")
             continue
@@ -394,6 +420,11 @@ def _generate_entrypoint_source(
                 # Known-throwing method: emit try/catch. The stub throws directly
                 # via C++ throw and /EHs allows propagation through extern "C" frames.
                 exc_type = ev["exception"]
+                # Fully qualify exception types outside the standard System namespace
+                _EXCEPTION_FULL_NAMES = {
+                    "SecurityException": "System.Security.SecurityException",
+                }
+                exc_type = _EXCEPTION_FULL_NAMES.get(exc_type, exc_type)
                 if _looks_like_property_read(call_expr):
                     lines.append(f"{ns_indent}        try {{ _ = {call_expr}; _exitCode = 1; }}")
                 else:
@@ -592,6 +623,7 @@ def _generate_csproj(
             f"    {namespace_part}\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
             "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+            "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>\n"
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'
@@ -956,6 +988,7 @@ def generate_and_build(
         variant=variant,
         custom_method_indices=custom_method_indices,
         expected_values=expected_values,
+        has_custom_entry=has_custom_entry,
     )
 
     source_path = output_dir / cs_file_name

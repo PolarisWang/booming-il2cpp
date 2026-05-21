@@ -34,15 +34,15 @@ set(COMMON_INCLUDE_DIRS
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
-# Assembly: ThreadingSyncSubjects
-add_library(chaos_gen_ThreadingSyncSubjects STATIC
-    ${CHAOS_GEN_DIR}/ThreadingSyncSubjects/generated/native-aot.generated.cpp
-    ${CHAOS_GEN_DIR}/ThreadingSyncSubjects/generated/chaos_generated_module.cpp
+# Assembly: ThreadingSyncPatchEntry
+add_library(chaos_gen_ThreadingSyncPatchEntry STATIC
+    ${CHAOS_GEN_DIR}/ThreadingSyncPatchEntry/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/ThreadingSyncPatchEntry/generated/chaos_generated_module.cpp
 )
 
-target_include_directories(chaos_gen_ThreadingSyncSubjects PUBLIC ${COMMON_INCLUDE_DIRS})
-target_compile_features(chaos_gen_ThreadingSyncSubjects PUBLIC cxx_std_20)
-target_compile_options(chaos_gen_ThreadingSyncSubjects PUBLIC ${COMMON_COMPILE_OPTIONS})
+target_include_directories(chaos_gen_ThreadingSyncPatchEntry PUBLIC ${COMMON_INCLUDE_DIRS})
+target_compile_features(chaos_gen_ThreadingSyncPatchEntry PUBLIC cxx_std_20)
+target_compile_options(chaos_gen_ThreadingSyncPatchEntry PUBLIC ${COMMON_COMPILE_OPTIONS})
 
 
 # Entry executable — links generated code + native runtime
@@ -51,7 +51,7 @@ add_executable(entry
 )
 
 target_link_libraries(entry PRIVATE
-    chaos_gen_ThreadingSyncSubjects
+    chaos_gen_ThreadingSyncPatchEntry
     ${NATIVE_LIBS}
 )
 

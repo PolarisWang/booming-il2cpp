@@ -1,0 +1,234 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "method",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RuntimeInteropServicesSubjects",
+      "subjectKind": "field",
+      "subjectId": "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_FrameworkDescription:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_OSArchitecture:System.Runtime.InteropServices.Architecture()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_OSDescription:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_ProcessArchitecture:System.Runtime.InteropServices.Architecture()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_RuntimeIdentifier:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::IsOSPlatform:System.Boolean(System.Runtime.InteropServices.OSPlatform)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::Create:System.Runtime.InteropServices.OSPlatform(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Runtime.InteropServices.OSPlatform)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_FreeBSD:System.Runtime.InteropServices.OSPlatform()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_Linux:System.Runtime.InteropServices.OSPlatform()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_OSX:System.Runtime.InteropServices.OSPlatform()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_Windows:System.Runtime.InteropServices.OSPlatform()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::op_Equality:System.Boolean(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::op_Inequality:System.Boolean(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    }
+  ]
+}

@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel/apis",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+      "elapsedMilliseconds": 1244.297,
+      "calibratedMs": 1244.297,
+      "opsPerSecond": 80366.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+      "elapsedMilliseconds": 406.113,
+      "calibratedMs": 406.113,
+      "opsPerSecond": 246236.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+      "elapsedMilliseconds": 1296.387,
+      "calibratedMs": 1296.387,
+      "opsPerSecond": 77137.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+      "elapsedMilliseconds": 395.02,
+      "calibratedMs": 395.02,
+      "opsPerSecond": 253151.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 1457.278,
+      "calibratedMs": 1457.278,
+      "opsPerSecond": 68621.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 360.446,
+      "calibratedMs": 360.446,
+      "opsPerSecond": 277433.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 1614.949,
+      "calibratedMs": 1614.949,
+      "opsPerSecond": 61921.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 331.186,
+      "calibratedMs": 331.186,
+      "opsPerSecond": 301945.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 1342.4,
+      "calibratedMs": 1342.4,
+      "opsPerSecond": 74493.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 456.619,
+      "calibratedMs": 456.619,
+      "opsPerSecond": 219001.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 449.781,
+      "calibratedMs": 449.781,
+      "opsPerSecond": 222330.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 353.968,
+      "calibratedMs": 353.968,
+      "opsPerSecond": 282511.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 1316.656,
+      "calibratedMs": 1316.656,
+      "opsPerSecond": 75950.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+      "elapsedMilliseconds": 335.587,
+      "calibratedMs": 335.587,
+      "opsPerSecond": 297985.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+      "elapsedMilliseconds": 325.405,
+      "calibratedMs": 325.405,
+      "opsPerSecond": 307309.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 960.526,
+      "calibratedMs": 960.526,
+      "opsPerSecond": 104109.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 1026.216,
+      "calibratedMs": 1026.216,
+      "opsPerSecond": 97445.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 42,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    }
+  ]
+}

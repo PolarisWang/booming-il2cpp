@@ -1,0 +1,270 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ComTypesSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects",
+      "name": "ComTypesSubjects",
+      "displayName": "ComTypesSubjects",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()",
+      "name": "Subject_13",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()",
+      "name": "Subject_17",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()",
+      "name": "Subject_18",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 22,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()",
+      "name": "Subject_19",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 23,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()",
+      "name": "Subject_20",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 24,
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()",
+      "name": "Subject_21",
+      "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()",
+      "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

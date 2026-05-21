@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "IoStreamsBasicsSubjects",
   "entrySubjectId": "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/io-streams-basics/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/io-streams-basics/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -1,9 +1,9 @@
 {
   "formatVersion": "v0",
   "artifactKind": "managedClosureManifest",
-  "assemblyName": "ThreadingSyncSubjects",
+  "assemblyName": "ThreadingSyncPatchEntry",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-sync/managed/subjects/build-output/ThreadingSyncSubjects.dll",
+  "inputAssemblyPath": "verification/foundation-dll/System.Private.CoreLib/threading-sync/managed/patch/build-output/ThreadingSyncPatchEntry.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -15,12 +15,12 @@
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Threading.dll"
     },
     {
-      "assemblyName": "ThreadingSyncSubjects",
-      "path": "verification/foundation-dll/System.Private.CoreLib/threading-sync/managed/subjects/build-output/ThreadingSyncSubjects.dll"
+      "assemblyName": "ThreadingSyncPatchEntry",
+      "path": "verification/foundation-dll/System.Private.CoreLib/threading-sync/managed/patch/build-output/ThreadingSyncPatchEntry.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b8919a70-1d03-40a6-8472-f50602bd7d9d",
+  "inputModuleVersionId": "cb5b67e8-5e74-4b65-a222-460f4bde3add",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/property/change/notifications",
+  "summary": {
+    "totalMethods": 4,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 4,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

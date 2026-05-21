@@ -4,97 +4,103 @@
   "entries": [
     {
       "subjectKind": "type",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry",
       "preserve": "all",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "field",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::_exitCode",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::_exitCode",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_0:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_0:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_1:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_1:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_2:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_2:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_3:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_3:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_4:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_4:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_5:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_5:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_6:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_6:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_7:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_7:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_8:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_8:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_9:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_9:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_10:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_10:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_11:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_11:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_12:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_12:System.Int32()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
-      "subjectId": "SpanMemoryBuffersSubjects/SpanMemoryBuffersSubjects::Subject_13:System.Void()",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Subject_13:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SpanMemoryBuffersPatchEntry/SpanMemoryBuffersPatchEntry::Run:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

@@ -93,7 +93,7 @@ public static partial class ReflectionBindingSubjects
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_11()
     {
-        try { if (((default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode()) != ((default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

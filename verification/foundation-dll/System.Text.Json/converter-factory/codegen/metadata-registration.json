@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ConverterFactorySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects",
+      "name": "ConverterFactorySubjects",
+      "displayName": "ConverterFactorySubjects",
+      "definitionSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::_exitCode",
+      "declaringTypeSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

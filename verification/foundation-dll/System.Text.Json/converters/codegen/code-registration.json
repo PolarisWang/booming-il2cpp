@@ -1,0 +1,66 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ConvertersSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_0",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_1",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_2",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_3",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_4",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_5",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_6",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_7",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ConvertersSubjects_ConvertersSubjects_Subject_8",
+          "subjectId": "ConvertersSubjects/ConvertersSubjects::Subject_8:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

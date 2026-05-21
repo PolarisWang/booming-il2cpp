@@ -1,0 +1,115 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ZipFileExtensionsSubjects",
+      "subjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ZipFileExtensionsSubjects/ZipFileExtensionsSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

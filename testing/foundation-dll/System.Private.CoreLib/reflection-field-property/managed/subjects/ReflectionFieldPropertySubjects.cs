@@ -17,14 +17,14 @@ public static partial class ReflectionFieldPropertySubjects
     // [0] System.Private.CoreLib/System.Reflection.FieldInfo::get_MemberType:System.Reflection.MemberTypes()
     public static void Subject_0()
     {
-        try { if ((int)(default(FieldInfo)!.MemberType) != (int)(default(FieldInfo)!.MemberType)) _exitCode = 1; }
+        try { if (((default(FieldInfo)!.MemberType).GetHashCode()) != ((default(FieldInfo)!.MemberType).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()
     public static void Subject_1()
     {
-        try { if ((int)(default(FieldInfo)!.Attributes) != (int)(default(FieldInfo)!.Attributes)) _exitCode = 1; }
+        try { if (((default(FieldInfo)!.Attributes).GetHashCode()) != ((default(FieldInfo)!.Attributes).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -115,7 +115,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
     public static void Subject_14()
     {
-        try { default(FieldInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, null!); }
+        try { default(FieldInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, default, default); }
         catch { _exitCode = 1; }
     }
 
@@ -143,7 +143,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()
     public static void Subject_18()
     {
-        try { if ((int)(default(PropertyInfo)!.Attributes) != (int)(default(PropertyInfo)!.Attributes)) _exitCode = 1; }
+        try { if (((default(PropertyInfo)!.Attributes).GetHashCode()) != ((default(PropertyInfo)!.Attributes).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -213,7 +213,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [28] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_28()
     {
-        try { if (((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode()) != ((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -234,7 +234,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [31] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_31()
     {
-        try { default(PropertyInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!); }
+        try { default(PropertyInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
         catch { _exitCode = 1; }
     }
 

@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "collection-change-notifications-subjects.collection-change-notifications-subjects.subject-0",
+      "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_0:System.Void()",
+      "signature": "System.Void CollectionChangeNotificationsSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "CollectionChangeNotificationsSubjects",
+        "declaringTypeSubjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects",
+        "definitionSubjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_0:System.Void()",
+        "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_0:System.Void()",
+        "methodId": "collection-change-notifications-subjects.collection-change-notifications-subjects.subject-0",
+        "signature": "System.Void CollectionChangeNotificationsSubjects::Subject_0()"
+      },
+      "nativeSymbol": "CollectionChangeNotificationsSubjects_CollectionChangeNotificationsSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionChangeNotificationsSubjects"
+    },
+    {
+      "methodId": "collection-change-notifications-subjects.collection-change-notifications-subjects.subject-1",
+      "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_1:System.Void()",
+      "signature": "System.Void CollectionChangeNotificationsSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "CollectionChangeNotificationsSubjects",
+        "declaringTypeSubjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects",
+        "definitionSubjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_1:System.Void()",
+        "subjectId": "CollectionChangeNotificationsSubjects/CollectionChangeNotificationsSubjects::Subject_1:System.Void()",
+        "methodId": "collection-change-notifications-subjects.collection-change-notifications-subjects.subject-1",
+        "signature": "System.Void CollectionChangeNotificationsSubjects::Subject_1()"
+      },
+      "nativeSymbol": "CollectionChangeNotificationsSubjects_CollectionChangeNotificationsSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "CollectionChangeNotificationsSubjects"
+    }
+  ]
+}

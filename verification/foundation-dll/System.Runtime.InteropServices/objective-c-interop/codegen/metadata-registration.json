@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ObjectiveCInteropSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "name": "ObjectiveCInteropSubjects",
+      "displayName": "ObjectiveCInteropSubjects",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
+      "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

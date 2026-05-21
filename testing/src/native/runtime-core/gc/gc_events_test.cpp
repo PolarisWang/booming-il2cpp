@@ -19,9 +19,19 @@
 
 using namespace chaos::il2cpp::runtime_core;
 
-// ── Test 1: Register and fire callback ──────────────────────────────
+// Reset all event callback slots between tests to avoid use-after-scope
+// from stale handler pointers pointing to previous test's stack locals.
+void ResetGcEventCallbacks() {
+    for (int i = 0; i < kMaxGcEventCallbacks; i++) {
+        g_gc_event_slots[i].callback.store(nullptr, std::memory_order_release);
+        g_gc_event_slots[i].user_data = nullptr;
+    }
+}
+
+// ── Test 1: Register and fire callback ──────────────────────────────────────
 
 TEST(GcEvents, RegisterFireCallback) {
+    ResetGcEventCallbacks();
     std::atomic<int> callback_count{0};
 
     auto handler = +[](GcEvent event, void* user_data) {
@@ -36,9 +46,10 @@ TEST(GcEvents, RegisterFireCallback) {
     EXPECT_GE(callback_count.load(), 1) << "callback fired for events";
 }
 
-// ── Test 2: Multiple callbacks ──────────────────────────────────────
+// ── Test 2: Multiple callbacks ──────────────────────────────────────────────
 
 TEST(GcEvents, MultipleCallbacks) {
+    ResetGcEventCallbacks();
     std::atomic<int> count1{0}, count2{0};
 
     auto handler1 = +[](GcEvent, void* ud) {
@@ -57,9 +68,10 @@ TEST(GcEvents, MultipleCallbacks) {
     EXPECT_GE(count2.load(), 1) << "second callback fired";
 }
 
-// ── Test 3: Fire multiple events ────────────────────────────────────
+// ── Test 3: Fire multiple events ────────────────────────────────────────────
 
 TEST(GcEvents, FireMultipleEvents) {
+    ResetGcEventCallbacks();
     std::atomic<int> count{0};
     auto handler = +[](GcEvent, void* ud) {
         static_cast<std::atomic<int>*>(ud)->fetch_add(1);
@@ -73,7 +85,7 @@ TEST(GcEvents, FireMultipleEvents) {
     EXPECT_GE(count.load(), 1) << "callback fired for multiple events";
 }
 
-// ── Test 4: Pinned object lifecycle ─────────────────────────────────
+// ── Test 4: Pinned object lifecycle ─────────────────────────────────────────
 
 TEST(GcEvents, AddRemovePinnedObject) {
     int dummy_obj = 0;
@@ -88,7 +100,7 @@ TEST(GcEvents, AddRemovePinnedObject) {
     EXPECT_FALSE(is_pinned) << "object is not pinned after GcRemovePinnedObject";
 }
 
-// ── Test 5: Set/Get handle target ───────────────────────────────────
+// ── Test 5: Set/Get handle target ───────────────────────────────────────────
 
 TEST(GcEvents, SetGetHandleTarget) {
     int obj1 = 0, obj2 = 0;

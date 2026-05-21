@@ -1,0 +1,949 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-0",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-0",
+        "signature": "System.Void PipeCoreSubjects::Subject_0()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeReader",
+          "callee": "System.IO.Pipelines/IDuplexPipe::get_Input:PipeReader()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/IDuplexPipe::get_Input:PipeReader()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/IDuplexPipe::get_Input:PipeReader()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-1",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-1",
+        "signature": "System.Void PipeCoreSubjects::Subject_1()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeWriter",
+          "callee": "System.IO.Pipelines/IDuplexPipe::get_Output:PipeWriter()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/IDuplexPipe::get_Output:PipeWriter()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/IDuplexPipe::get_Output:PipeWriter()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-2",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-2",
+        "signature": "System.Void PipeCoreSubjects::Subject_2()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeReader",
+          "callee": "System.IO.Pipelines/Pipe::get_Reader:PipeReader()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/Pipe::get_Reader:PipeReader()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/Pipe::get_Reader:PipeReader()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-3",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-3",
+        "signature": "System.Void PipeCoreSubjects::Subject_3()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "PipeWriter",
+          "callee": "System.IO.Pipelines/Pipe::get_Writer:PipeWriter()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/Pipe::get_Writer:PipeWriter()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/Pipe::get_Writer:PipeWriter()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-4",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_4:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_4:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_4:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-4",
+        "signature": "System.Void PipeCoreSubjects::Subject_4()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "callee": "System.IO.Pipelines/Pipe::Reset:System.Void()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/Pipe::Reset:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/Pipe::Reset:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-5",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_5:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_5:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_5:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-5",
+        "signature": "System.Void PipeCoreSubjects::Subject_5()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 1,
+          "resultType": "System.IO.Pipelines/Pipe",
+          "callee": "System.IO.Pipelines/Pipe::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/Pipe::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/Pipe",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    },
+    {
+      "methodId": "pipe-core-subjects.pipe-core-subjects.subject-6",
+      "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()",
+      "signature": "System.Void PipeCoreSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "PipeCoreSubjects",
+        "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+        "definitionSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()",
+        "subjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()",
+        "methodId": "pipe-core-subjects.pipe-core-subjects.subject-6",
+        "signature": "System.Void PipeCoreSubjects::Subject_6()"
+      },
+      "nativeSymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 3,
+          "resultType": "System.IO.Pipelines/Pipe",
+          "callee": "System.IO.Pipelines/Pipe::.ctor:System.Void(PipeOptions)",
+          "reference": {
+            "assemblyName": "System.IO.Pipelines",
+            "subjectKind": "method",
+            "subjectId": "System.IO.Pipelines/Pipe::.ctor:System.Void(PipeOptions)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.IO.Pipelines",
+            "subjectId": "System.IO.Pipelines/Pipe",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PipeCoreSubjects",
+            "subjectKind": "field",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PipeCoreSubjects",
+            "subjectId": "PipeCoreSubjects/PipeCoreSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PipeCoreSubjects/PipeCoreSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "PipeCoreSubjects"
+    }
+  ]
+}

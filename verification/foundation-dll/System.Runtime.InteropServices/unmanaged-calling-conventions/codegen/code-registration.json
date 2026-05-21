@@ -1,0 +1,18 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "UnmanagedCallingConventionsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects_Subject_0",
+          "subjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,39 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "PipeCoreSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "PipeCoreSubjects_PipeCoreSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_4:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_5:System.Void()",
+    "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()"
+  ],
+  "translationUnitMethodCount": 7,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 7,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

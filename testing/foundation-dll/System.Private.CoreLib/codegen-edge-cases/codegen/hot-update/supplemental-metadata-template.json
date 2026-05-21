@@ -42,8 +42,8 @@
     },
     {
       "assemblyName": "CodegenEdgeCasesSubjects",
-      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
-      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Void(System.Int32)",
+      "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "metadataToken": 100663300,
       "parameterCount": 1

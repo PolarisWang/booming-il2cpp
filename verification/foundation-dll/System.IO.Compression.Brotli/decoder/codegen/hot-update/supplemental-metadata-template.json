@@ -1,0 +1,43 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectId": "DecoderSubjects/DecoderSubjects",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

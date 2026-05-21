@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "TagModelSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "TagModelSubjects_TagModelSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "TagModelSubjects/TagModelSubjects::Subject_0:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_10:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_11:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_12:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_13:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_14:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_15:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_16:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_17:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_18:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_1:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_2:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_3:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_4:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_5:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_6:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_7:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_8:System.Void()",
+    "TagModelSubjects/TagModelSubjects::Subject_9:System.Void()"
+  ],
+  "translationUnitMethodCount": 19,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 19,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "TagModelSubjects/TagModelSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "TagModelSubjects/TagModelSubjects::Subject_9:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

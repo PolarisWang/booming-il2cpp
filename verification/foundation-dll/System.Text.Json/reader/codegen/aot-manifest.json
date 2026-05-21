@@ -1,0 +1,378 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_39:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_40:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_41:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_42:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_43:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_44:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_45:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_46:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_47:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_48:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_49:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_50:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_51:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_52:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_53:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_54:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_55:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_56:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_57:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_58:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_59:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_60:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReaderSubjects",
+      "subjectKind": "field",
+      "subjectId": "ReaderSubjects/ReaderSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/object/model/collections",
+  "passedMethods": 0,
+  "failedMethods": 0,
+  "totalMethods": 0,
+  "stubMethods": 4,
+  "realMethods": 2,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 0,
+    "passedMethods": 0,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

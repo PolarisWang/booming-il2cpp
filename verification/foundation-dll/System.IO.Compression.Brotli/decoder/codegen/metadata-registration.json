@@ -1,0 +1,61 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "DecoderSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "DecoderSubjects/DecoderSubjects",
+      "name": "DecoderSubjects",
+      "displayName": "DecoderSubjects",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "DecoderSubjects/DecoderSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::_exitCode",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

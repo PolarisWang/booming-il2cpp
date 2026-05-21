@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "LoopResultSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "LoopResultSubjects/LoopResultSubjects",
+      "name": "LoopResultSubjects",
+      "displayName": "LoopResultSubjects",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "LoopResultSubjects/LoopResultSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects::_exitCode",
+      "declaringTypeSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "LoopResultSubjects/LoopResultSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

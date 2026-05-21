@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "BufferMemorySubjects",
   "entrySubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
-  "managedClosureRootPath": "D:/agent/booming-il2cpp/verification/foundation-dll/System.Private.CoreLib/buffer-memory/codegen",
+  "managedClosureRootPath": "verification/foundation-dll/System.Private.CoreLib/buffer-memory/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

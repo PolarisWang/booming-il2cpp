@@ -78,6 +78,41 @@ struct Functions {
                 void
         );
     } threadingThreadBasicsNativeEntry;
+    struct ThreadingThreadBasicsSubjects_t {
+        void (*CustomEntrySubject_0)(
+                void
+        );
+        void (*CustomEntrySubject_10)(
+                void
+        );
+        void (*CustomEntrySubject_1)(
+                void
+        );
+        void (*CustomEntrySubject_2)(
+                void
+        );
+        void (*CustomEntrySubject_3)(
+                void
+        );
+        void (*CustomEntrySubject_4)(
+                void
+        );
+        void (*CustomEntrySubject_5)(
+                void
+        );
+        void (*CustomEntrySubject_6)(
+                void
+        );
+        void (*CustomEntrySubject_7)(
+                void
+        );
+        void (*CustomEntrySubject_8)(
+                void
+        );
+        void (*CustomEntrySubject_9)(
+                void
+        );
+    } threadingThreadBasicsSubjects;
     int32_t method_count;
 };
 
@@ -169,6 +204,66 @@ struct ThreadingThreadBasicsNativeEntry {
     static inline void CustomEntryMethod9(
     ) {
         return kFunctions.threadingThreadBasicsNativeEntry.CustomEntryMethod9(
+        );
+    }
+    /// Total number of AOT-compiled methods in this type.
+    static constexpr int32_t MethodCount = 11;
+};
+
+struct ThreadingThreadBasicsSubjects {
+    static inline void CustomEntrySubject_0(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_0(
+        );
+    }
+    static inline void CustomEntrySubject_10(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_10(
+        );
+    }
+    static inline void CustomEntrySubject_1(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_1(
+        );
+    }
+    static inline void CustomEntrySubject_2(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_2(
+        );
+    }
+    static inline void CustomEntrySubject_3(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_3(
+        );
+    }
+    static inline void CustomEntrySubject_4(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_4(
+        );
+    }
+    static inline void CustomEntrySubject_5(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_5(
+        );
+    }
+    static inline void CustomEntrySubject_6(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_6(
+        );
+    }
+    static inline void CustomEntrySubject_7(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_7(
+        );
+    }
+    static inline void CustomEntrySubject_8(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_8(
+        );
+    }
+    static inline void CustomEntrySubject_9(
+    ) {
+        return kFunctions.threadingThreadBasicsSubjects.CustomEntrySubject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

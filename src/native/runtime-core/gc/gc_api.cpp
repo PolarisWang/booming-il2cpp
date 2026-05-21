@@ -165,11 +165,12 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
                 GcYoungCollection(true);
                 threading::ReleaseGlobalSafepoint(gen);
             }
-            // Always attempt Gen1 collection (survivor may have data from
+            // Always attempt Gen1 collection (gen1 may have data from
             // prior young GCs even if current young region was empty).
-            if (g_young_gen.survivor_begin != nullptr) {
-                char* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-                if (s_bump > g_young_gen.survivor_begin) {
+            Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+            if (gen1 != nullptr) {
+                char* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+                if (s_bump > gen1->begin) {
                     uint32_t gen = threading::RequestGlobalSafepoint();
                     auto gen1_result = GcGen1Collection();
                     threading::ReleaseGlobalSafepoint(gen);
@@ -327,11 +328,12 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
         }
     }
     CHAOS_IL2CPP_SIZE survivor_occupancy = 0;
-    if (g_young_gen.survivor_begin != nullptr) {
-        auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
-        if (s_bump > g_young_gen.survivor_begin) {
+    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 != nullptr) {
+        char* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (s_bump > gen1->begin) {
             survivor_occupancy = static_cast<CHAOS_IL2CPP_SIZE>(
-                s_bump - g_young_gen.survivor_begin);
+                s_bump - gen1->begin);
         }
     }
 

@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: EnumParsingSubjects, Methods: 14
+// Assembly: EnumParsingSubjects, Methods: 15
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

@@ -1,0 +1,39 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "StreamAdaptersSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects",
+      "name": "StreamAdaptersSubjects",
+      "displayName": "StreamAdaptersSubjects",
+      "definitionSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::_exitCode",
+      "declaringTypeSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

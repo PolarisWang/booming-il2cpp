@@ -1,0 +1,321 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_17:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_18:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_22:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_MinimumSegmentSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_PauseWriterThreshold:System.Int64()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_ReaderScheduler:PipeScheduler()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_ResumeWriterThreshold:System.Int64()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_UseSynchronizationContext:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeOptions::get_WriterScheduler:PipeScheduler()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/PipeScheduler::Schedule:System.Void(System.Action\u003CSystem.Object\u003E,System.Object)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_BufferSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_LeaveOpen:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_MinimumReadSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeReaderOptions::get_UseZeroByteReads:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_MinimumBufferSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/StreamPipeWriterOptions::get_Pool:System.Buffers.MemoryPool\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_11:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_12:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_13:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_14:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_15:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_16:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_20:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    },
+    {
+      "methodSubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::Subject_21:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+    }
+  ]
+}

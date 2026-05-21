@@ -1,0 +1,50 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SourceGenerationContextSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects",
+      "name": "SourceGenerationContextSubjects",
+      "displayName": "SourceGenerationContextSubjects",
+      "definitionSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::_exitCode",
+      "declaringTypeSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

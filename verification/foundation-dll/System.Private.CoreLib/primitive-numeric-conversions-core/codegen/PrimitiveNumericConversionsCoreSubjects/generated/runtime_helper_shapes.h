@@ -84,6 +84,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_EXCEPTION__CTOR_SYSTEM_STRING = 0x1B319934u,
     SHAPE_SYSTEM_GC_ADDMEMORYPRESSURE_SYSTEM_INT64 = 0x0D6763A0u,
     SHAPE_SYSTEM_GC_COLLECT = 0xBC962311u,
+    SHAPE_SYSTEM_GC_COLLECTIONCOUNT_SYSTEM_INT32 = 0x26DF7669u,
     SHAPE_SYSTEM_GC_COLLECT_SYSTEM_INT32_SYSTEM_GCCOLLECTIONMODE = 0xF2752978u,
     SHAPE_SYSTEM_GC_GETMEMORYINFO_SYSTEM_GCMEMORYINFODATA_SYSTEM_INT32 = 0xD47FE725u,
     SHAPE_SYSTEM_GC_GETTOTALMEMORY_SYSTEM_BOOLEAN = 0x6E1AEB6Fu,
@@ -324,10 +325,11 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_TYPE_MAKEBYREFTYPE = 0x975FB66Du,
     SHAPE_SYSTEM_TYPE_MAKEGENERICTYPE_SYSTEM_TYPE__ = 0x326178A7u,
     SHAPE_SYSTEM_TYPE_MAKEPOINTERTYPE = 0xDBA001CEu,
+    SHAPE_SYSTEM_TYPE_OP_INEQUALITY_SYSTEM_TYPE_SYSTEM_TYPE = 0xDF8CE938u,
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 313u,
+    SHAPE_COUNT = 315u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1149,6 +1151,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosTypeMakePointerType(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_TYPE_OP_INEQUALITY_SYSTEM_TYPE_SYSTEM_TYPE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosTypeInequality(args...));
+    }
     else {
         static_assert(S != S, "Unhandled shape ID in DispatchNativeInt");
         return 0;
@@ -1381,6 +1387,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosExceptionGetHresult(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_GC_COLLECTIONCOUNT_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_gc_get_collection_count(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_GC_GET_LATENCYMODE) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_gc_get_latency_mode(args...));
@@ -1556,7 +1566,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 313u,
+static_assert(SHAPE_COUNT == 315u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

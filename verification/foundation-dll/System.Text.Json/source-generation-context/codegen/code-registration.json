@@ -1,0 +1,24 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SourceGenerationContextSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SourceGenerationContextSubjects_SourceGenerationContextSubjects_Subject_0",
+          "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SourceGenerationContextSubjects_SourceGenerationContextSubjects_Subject_1",
+          "subjectId": "SourceGenerationContextSubjects/SourceGenerationContextSubjects::Subject_1:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

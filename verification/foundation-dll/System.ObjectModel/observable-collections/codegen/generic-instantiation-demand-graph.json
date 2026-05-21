@@ -1,0 +1,104 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "ObservableCollectionsSubjects",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ObservableCollectionsSubjects",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void(System.Collections.Generic.List\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void(System.Collections.Generic.List\u003C!0\u003E)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::.ctor:System.Void(System.Collections.Generic.List\u003C!0\u003E)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ObservableCollectionsSubjects",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::Move:System.Void(System.Int32,System.Int32)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u00601::Move:System.Void(System.Int32,System.Int32)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ObservableCollectionsSubjects",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection\u003C!0\u003E)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection\u003C!0\u003E)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ObservableCollectionsSubjects",
+      "owningAssemblyName": "System.ObjectModel",
+      "subjectKind": "method",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()",
+      "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

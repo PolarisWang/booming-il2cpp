@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/attributes/custom/metadata",
-  "capturedAt": "2026-05-21T09:15:19",
+  "capturedAt": "2026-05-21T19:19:06",
   "batchMode": true,
   "summary": {
     "totalMethods": 9,
@@ -17,19 +17,19 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 20,
-      "avg": 16.6,
-      "total": 149
+      "max": 34,
+      "avg": 27.7,
+      "total": 249
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 40
+      "external_runtime_call": 80
     },
-    "overallIrExpansionRatio": 0.38,
-    "averageExpansionRatio": 0.38,
-    "maxExpansionRatio": 0.45,
+    "overallIrExpansionRatio": 0.63,
+    "averageExpansionRatio": 0.63,
+    "maxExpansionRatio": 0.77,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 17,
-        "ratio": 0.39,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,9 +52,34 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
-        "instructions": 17
+        "instructions": 28
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -82,7 +107,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 5
+        "external_runtime_call": 10
       }
     },
     {
@@ -92,8 +117,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 17,
-        "ratio": 0.39,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -104,9 +129,34 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1",
-        "instructions": 17
+        "instructions": 28
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute:System.Attribute(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -134,7 +184,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 5
+        "external_runtime_call": 10
       }
     },
     {
@@ -144,8 +194,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 19,
-        "ratio": 0.43,
+        "aotInstructionCount": 32,
+        "ratio": 0.73,
         "jitCodeSize": 256
       },
       "jit": {
@@ -156,9 +206,39 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2",
-        "instructions": 19
+        "instructions": 32
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable<System.Attribute>(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Linq/Enumerable::Cast<System.Attribute>:System.Collections.Generic.IEnumerable<System.Attribute>(System.Collections.IEnumerable)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Attribute>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -191,7 +271,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 6
+        "external_runtime_call": 12
       }
     },
     {
@@ -201,8 +281,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 19,
-        "ratio": 0.43,
+        "aotInstructionCount": 32,
+        "ratio": 0.73,
         "jitCodeSize": 256
       },
       "jit": {
@@ -213,9 +293,39 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3",
-        "instructions": 19
+        "instructions": 32
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttributes:System.Collections.Generic.IEnumerable<System.Attribute>(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Linq/Enumerable::Cast<System.Attribute>:System.Collections.Generic.IEnumerable<System.Attribute>(System.Collections.IEnumerable)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Attribute>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -248,7 +358,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 6
+        "external_runtime_call": 12
       }
     },
     {
@@ -258,8 +368,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
         "jitCodeSize": 256
       },
       "jit": {
@@ -270,9 +380,34 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4",
-        "instructions": 18
+        "instructions": 30
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetCustomAttributes:System.Object[](System.Boolean)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Linq/Enumerable::Cast<System.Attribute>:System.Collections.Generic.IEnumerable<System.Attribute>(System.Collections.IEnumerable)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Attribute>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -300,7 +435,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 5
+        "external_runtime_call": 10
       }
     },
     {
@@ -310,8 +445,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
         "jitCodeSize": 256
       },
       "jit": {
@@ -322,9 +457,34 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5",
-        "instructions": 18
+        "instructions": 30
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetCustomAttributes:System.Object[](System.Boolean)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Linq/Enumerable::Cast<System.Attribute>:System.Collections.Generic.IEnumerable<System.Attribute>(System.Collections.IEnumerable)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Attribute>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -352,7 +512,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 5
+        "external_runtime_call": 10
       }
     },
     {
@@ -362,8 +522,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 34,
+        "ratio": 0.77,
         "jitCodeSize": 256
       },
       "jit": {
@@ -374,9 +534,29 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6",
-        "instructions": 20
+        "instructions": 34
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -399,7 +579,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 8
       }
     },
     {
@@ -409,8 +589,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 34,
+        "ratio": 0.77,
         "jitCodeSize": 256
       },
       "jit": {
@@ -421,9 +601,29 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7",
-        "instructions": 20
+        "instructions": 34
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::IsDefined:System.Boolean(System.Reflection.Assembly,System.Type)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -446,7 +646,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 8
       }
     },
     {

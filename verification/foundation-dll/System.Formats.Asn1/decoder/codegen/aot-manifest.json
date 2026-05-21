@@ -1,0 +1,438 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "method",
+      "subjectId": "DecoderSubjects/DecoderSubjects::Subject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DecoderSubjects",
+      "subjectKind": "field",
+      "subjectId": "DecoderSubjects/DecoderSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::DecodeLength:System.Nullable\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CAsn1Tag\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadBitString:System.Byte[](System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadBoolean:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadCharacterString:System.String(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,UniversalTagNumber,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadEncodedValue:Asn1Tag(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadEnumeratedBytes:System.ReadOnlySpan\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadEnumeratedValue:System.Enum(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Type,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadGeneralizedTime:System.DateTimeOffset(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadInteger:System.Numerics.BigInteger(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadIntegerBytes:System.ReadOnlySpan\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadNamedBitList:BitArray(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadNamedBitListValue:System.Enum(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Type,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadNull:System.Void(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadObjectIdentifier:System.String(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadOctetString:System.Byte[](System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadSequence:System.Void(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadSetOf:System.Void(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Int32\u0026,System.Boolean,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::ReadUtcTime:System.DateTimeOffset(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryDecodeLength:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Nullable\u003CSystem.Int32\u003E\u0026,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadBitString:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,System.Span\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Span\u003CSystem.Char\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadCharacterString:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,System.Span\u003CSystem.Char\u003E,AsnEncodingRules,UniversalTagNumber,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "type",
+      "subjectId": "System.Formats.Asn1/Asn1Tag",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadCharacterStringBytes:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,System.Span\u003CSystem.Byte\u003E,AsnEncodingRules,Asn1Tag,System.Int32\u0026,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadEncodedValue:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,Asn1Tag\u0026,System.Int32\u0026,System.Int32\u0026,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadInt32:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadInt64:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int64\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadOctetString:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,System.Span\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadPrimitiveBitString:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.Int32\u0026,System.ReadOnlySpan\u003CSystem.Byte\u003E\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,Asn1Tag,System.ReadOnlySpan\u003CSystem.Byte\u003E\u0026,System.Int32\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.ReadOnlySpan\u003CSystem.Byte\u003E\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadUInt32:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.UInt32\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "subjectKind": "method",
+      "subjectId": "System.Formats.Asn1/AsnDecoder::TryReadUInt64:System.Boolean(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,System.UInt64\u0026,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    }
+  ]
+}

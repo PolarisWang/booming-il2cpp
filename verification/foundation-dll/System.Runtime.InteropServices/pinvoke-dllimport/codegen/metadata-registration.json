@@ -1,0 +1,160 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PinvokeDllimportSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "name": "PinvokeDllimportSubjects",
+      "displayName": "PinvokeDllimportSubjects",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

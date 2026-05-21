@@ -57,10 +57,12 @@ static constexpr CHAOS_IL2CPP_SIZE kObjSize = 64;
 
 // ── Gen1 helpers ─────────────────────────────────────────────────────
 
-/// Survivor capacity (8 MB).
-static CHAOS_IL2CPP_SIZE SurvivorCapacity() {
+/// Gen1 capacity (16 MB default).
+static CHAOS_IL2CPP_SIZE Gen1Capacity() {
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return 0;
     return static_cast<CHAOS_IL2CPP_SIZE>(
-        g_young_gen.survivor_end - g_young_gen.survivor_begin);
+        g_young_gen.gen1_end - gen1->begin);
 }
 
 /// Clear nursery data to prevent stale Gen0→Gen1 references.
@@ -91,24 +93,21 @@ struct Measurement {
 /// Returns the number of objects created.
 static int FillGen1(CHAOS_IL2CPP_SIZE target_bytes, double survival_fraction) {
     int count = 0;
-    char* s_begin = g_young_gen.survivor_begin;
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return 0;
+    char* s_begin = gen1->begin;
     CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
-        g_young_gen.survivor_bump.load(std::memory_order_acquire) - s_begin);
+        g_young_gen.gen1_bump.load(std::memory_order_acquire) - s_begin);
 
     while (used < target_bytes) {
         void* obj = TryAllocateInGen1(kObjSize);
-        if (obj == nullptr) break;  // survivor full
+        if (obj == nullptr) break;  // Gen1 full
 
         // Write TypeInfo header.
         *static_cast<const void**>(obj) = g_test_type_info;
 
         // Create Gen0 nursery reference for a fraction of objects.
-        if (survival_fraction > 0.0 &&
-            (static_cast<double>(count) * survival_fraction) -
-                static_cast<double>(static_cast<int>(count) - 1) >= 1.0) {
-            // Use deterministic every-N pattern for survival.
-        }
-        // Actually, use simple modulo for deterministic survival.
+        // Use simple modulo for deterministic survival.
         // If survival_fraction == 1.0: keep all.
         // If survival_fraction == 0.5: keep every other.
         // If survival_fraction == 0.0: keep none.
@@ -123,7 +122,7 @@ static int FillGen1(CHAOS_IL2CPP_SIZE target_bytes, double survival_fraction) {
 
         count++;
         used = static_cast<CHAOS_IL2CPP_SIZE>(
-            g_young_gen.survivor_bump.load(std::memory_order_acquire) - s_begin);
+            g_young_gen.gen1_bump.load(std::memory_order_acquire) - s_begin);
     }
 
     return count;
@@ -155,7 +154,7 @@ static Measurement RunOne(const char* occ_label, double occ_pct,
             g_young_gen.bump.store(nursery->begin, std::memory_order_release);
         }
     }
-    GcGen1Collection();  // resets survivor_bump
+    GcGen1Collection();  // resets gen1_bump
 
     // Fill Gen1.
     int total_objects = FillGen1(target_bytes, survival_pct / 100.0);
@@ -243,13 +242,15 @@ struct DrainRow {
 };
 
 /// Measure a raw drain (promote-all) time for the current Gen1 content.
-/// Walks [survivor_begin, survivor_bump), copies every object to Gen2.
+/// Walks [gen1->begin, gen1_bump), copies every object to Gen2.
 /// Returns pause in ns.
 static uint64_t MeasureDrain() {
     auto t0 = std::chrono::steady_clock::now();
 
-    char* s_begin = g_young_gen.survivor_begin;
-    char* s_bump  = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1 == nullptr) return 0;
+    char* s_begin = gen1->begin;
+    char* s_bump  = g_young_gen.gen1_bump.load(std::memory_order_acquire);
     auto& layout_registry = GcLayoutRegistry::Instance();
 
     char* cur = s_begin;
@@ -335,9 +336,9 @@ static void RunDrainComparison(CHAOS_IL2CPP_SIZE capacity) {
             GcGen1Collection();
             FillGen1(level.bytes, surv / 100.0);
             uint64_t drain_ns = MeasureDrain();
-            // Reset Gen1 after drain (MeasureDrain does NOT reset survivor_bump).
-            g_young_gen.survivor_bump.store(g_young_gen.survivor_begin,
-                                            std::memory_order_release);
+            // Reset Gen1 after drain (MeasureDrain does NOT reset gen1_bump).
+            g_young_gen.gen1_bump.store(s_begin,
+                                        std::memory_order_release);
 
             DrainRow row{};
             row.occ_pct = level.pct;
@@ -383,8 +384,8 @@ int main() {
     // Warm up old gen.
     g_old_gen.Allocate(8, true);
 
-    CHAOS_IL2CPP_SIZE capacity = SurvivorCapacity();
-    printf("  Survivor capacity: %llu bytes (%.1f MB)\n",
+    CHAOS_IL2CPP_SIZE capacity = Gen1Capacity();
+    printf("  Gen1 capacity: %llu bytes (%.1f MB)\n",
            static_cast<unsigned long long>(capacity),
            static_cast<double>(capacity) / (1024.0 * 1024.0));
     printf("  Object size: %llu bytes\n\n",
@@ -437,10 +438,10 @@ int main() {
     puts("  - Called GcGen1Collection() directly (not through GcYoungCollection)");
     puts("    to isolate Gen1 throughput from young-GC dispatch policy.\n");
     puts("OOM fallback (gc_gen1.cpp:149-195):");
-    puts("  - If CHAOS_IL2CPP_MALLOC fails for the mark bitmap (128KB for full 8MB");
-    puts("    survivor), GcGen1Collection falls back to promote-all (drain). Every");
+    puts("  - If CHAOS_IL2CPP_MALLOC fails for the mark bitmap (128KB for full 16MB");
+    puts("    Gen1), GcGen1Collection falls back to promote-all (drain). Every");
     puts("    object is unconditionally promoted to Gen2 via g_old_gen.Allocate +");
-    puts("    memcpy. Survivor_bump IS reset on this path even if Gen2 OOM occurs");
+    puts("    memcpy. gen1_bump IS reset on this path even if Gen2 OOM occurs");
     puts("    (data loss is accepted over dangling pointers).");
     puts("  - In practice, a 128KB allocation never fails on desktop/server, so");
     puts("    this fallback is a safety net for constrained memory environments.\n");

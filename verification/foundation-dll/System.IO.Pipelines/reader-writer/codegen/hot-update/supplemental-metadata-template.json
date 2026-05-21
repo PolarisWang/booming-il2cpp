@@ -1,0 +1,235 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_10:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_10:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_16:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_17:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_18:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_19:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_20:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_21:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_21:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_22:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_22:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_23:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_23:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663320,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_24:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_24:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_25:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::CustomEntrySubject_25:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReaderWriterSubjects",
+      "subjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_26:System.Void()",
+      "definitionSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects::Subject_26:System.Void()",
+      "declaringTypeSubjectId": "ReaderWriterSubjects/ReaderWriterSubjects",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -606,10 +607,12 @@ extern "C" const int kSubjectEntryIndices[13] = {
 	9,
 	10,
 	11,
-	12
+	12,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -666,135 +669,249 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: switch-based direct dispatch per method.
-// Each case is a compile-time constant, enabling MSVC to devirtualize and inline
-// the method body into the timing loop — eliminating function pointer indirection.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
 		return -1.0;
-	switch (chaos_entry_index) {
-	case 0: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
-	case 1: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 2: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 3: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 4: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 5: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 6: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 7: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 8: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 9: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 10: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 11: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	case 12: {
-		auto start = std::chrono::steady_clock::now();
-		for (int i = 0; i < iterations; i++) {
-			GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12();
-		}
-		auto end = std::chrono::steady_clock::now();
-		return std::chrono::duration<double, std::milli>(
-			end - start).count();
-	}
-	default:
-		return -1.0;
-	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry0;
+	/* ── Entry 1: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry1;
+	/* ── Entry 2: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry2;
+	/* ── Entry 3: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry4;
+	/* ── Entry 5: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry5;
+	/* ── Entry 6: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry6;
+	/* ── Entry 7: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry7;
+	/* ── Entry 8: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry8;
+	/* ── Entry 9: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry9;
+	/* ── Entry 10: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry10;
+	/* ── Entry 11: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry11;
+	/* ── Entry 12: GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry12;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry1 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry2 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry3 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3 */
+	.entry3 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry4 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4 */
+	.entry4 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry5 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5 */
+	.entry5 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry6 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6 */
+	.entry6 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry7 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry8 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry9 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry10 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10 */
+	.entry10 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry11 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11 */
+	.entry11 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry12 = GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12 */
+	.entry12 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 440u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[13] = {
@@ -829,6 +946,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = nullptr,
 	.vtable_descriptor_count = 0u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -947,19 +1067,15 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_CurrentCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetCurrent();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1837774308);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-247039058);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -992,19 +1108,15 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(411464452);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1901630074);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1051,14 +1163,10 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(411464452);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1901630074);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -1090,16 +1198,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_Name_System_String__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetName(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1143,16 +1247,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_DisplayName_System_String__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetDisplayName(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
@@ -1198,25 +1298,17 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_DateTimeFormat_System_Globalization_DateTimeFormatInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetDateTimeFormat(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(35342034);
@@ -1253,25 +1345,17 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_NumberFormat_System_Globalization_NumberFormatInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetNumberFormat(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(56793269);
@@ -1308,16 +1392,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_CompareInfo_System_Globalization_CompareInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetCompareInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{{
@@ -1330,11 +1410,7 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 		const auto chaos_arg_2 = _s2;
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CompareInfo__Compare_System_Int32_System_String_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		const auto chaos_result = ChaosCompareInfoCompare(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1370,16 +1446,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_CompareInfo_System_Globalization_CompareInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetCompareInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{{
@@ -1428,16 +1500,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_CompareInfo_System_Globalization_CompareInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetCompareInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{{
@@ -1450,11 +1518,7 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 		const auto chaos_arg_2 = _s2;
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CompareInfo__IndexOf_System_Int32_System_String_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		const auto chaos_result = ChaosCompareInfoIndexOf(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1491,16 +1555,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_TextInfo_System_Globalization_TextInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetTextInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{{
@@ -1556,16 +1616,12 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_TextInfo_System_Globalization_TextInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetTextInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{{
@@ -1618,25 +1674,17 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 
 
 	{
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_InvariantCulture_System_Globalization_CultureInfo__();
+		const auto chaos_result = ChaosCultureGetInvariant();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_CultureInfo__get_TextInfo_System_Globalization_TextInfo__(chaos_arg_0);
+		const auto chaos_result = ChaosCultureGetTextInfo(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Globalization_TextInfo__get_CultureName_System_String__(chaos_arg_0);
+		const auto chaos_result = ChaosTextInfoGetCultureName(chaos_arg_0);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	{

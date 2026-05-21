@@ -2,10 +2,10 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
-  "assemblyName": "ThreadingMonitorInterlockedSubjects",
-  "entrySubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
+  "assemblyName": "ThreadingMonitorInterlockedPatchEntry",
+  "entrySubjectId": "ThreadingMonitorInterlockedPatchEntry/ThreadingMonitorInterlockedPatchEntry::CustomEntryMethod0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0",
+  "entrySymbol": "ThreadingMonitorInterlockedPatchEntry_ThreadingMonitorInterlockedPatchEntry_CustomEntryMethod0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

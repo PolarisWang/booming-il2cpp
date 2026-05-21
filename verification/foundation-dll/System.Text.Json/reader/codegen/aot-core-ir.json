@@ -1,0 +1,2568 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-0",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_0:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_0()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_0:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_0:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-0",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_0()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-1",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_1:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_1()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_1:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_1:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-1",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_1()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-2",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_2:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_2()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_2:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_2:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-2",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_2()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-3",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_3:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_3()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_3:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_3:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-3",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_3()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-4",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_4:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_4()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_4:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_4:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-4",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_4()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-5",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_5:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_5()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_5:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_5:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-5",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_5()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-6",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_6:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_6()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_6:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_6:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-6",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_6()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-7",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_7:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_7()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_7:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_7:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-7",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_7()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-8",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_8:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_8()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_8:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_8:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-8",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_8()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-9",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_9:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_9()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_9:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_9:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-9",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_9()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-10",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_10:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_10()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_10:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_10:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-10",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_10()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-11",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_11()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_11:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-11",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_11()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-12",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_12:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_12()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_12:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_12:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-12",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_12()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-13",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_13:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_13()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_13:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_13:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-13",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_13()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-14",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_14:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_14()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_14:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_14:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-14",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_14()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-15",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_15:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_15()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_15:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_15:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-15",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_15()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_15",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-16",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_16:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_16()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_16:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_16:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-16",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_16()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_16",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-17",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_17()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_17:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-17",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_17()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_17",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-18",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_18:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_18()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_18:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_18:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-18",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_18()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_18",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-19",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_19:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_19()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_19:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_19:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-19",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_19()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_19",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-20",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_20:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_20()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_20:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_20:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-20",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_20()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_20",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-21",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_21:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_21()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_21:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_21:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-21",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_21()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_21",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-22",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_22:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_22()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_22:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_22:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-22",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_22()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_22",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-23",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_23:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_23()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_23:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_23:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-23",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_23()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_23",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-24",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_24:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_24()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_24:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_24:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-24",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_24()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_24",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-25",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_25:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_25()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_25:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_25:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-25",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_25()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_25",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-26",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_26:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_26()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_26:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_26:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-26",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_26()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_26",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-27",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_27:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_27()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_27:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_27:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-27",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_27()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_27",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-28",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_28:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_28()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_28:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_28:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-28",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_28()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_28",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-29",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_29:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_29()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_29:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_29:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-29",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_29()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_29",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-30",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_30:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_30()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_30:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_30:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-30",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_30()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_30",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-31",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_31:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_31()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_31:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_31:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-31",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_31()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_31",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-32",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_32:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_32()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_32:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_32:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-32",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_32()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_32",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-33",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_33:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_33()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_33:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_33:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-33",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_33()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_33",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-34",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_34:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_34()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_34:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_34:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-34",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_34()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_34",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-35",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_35:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_35()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_35:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_35:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-35",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_35()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_35",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-36",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_36:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_36()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_36:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_36:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-36",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_36()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_36",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-37",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_37:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_37()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_37:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_37:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-37",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_37()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_37",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-38",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_38:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_38()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_38:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_38:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-38",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_38()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_38",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-39",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_39:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_39()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_39:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_39:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-39",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_39()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_39",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-40",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_40:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_40()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_40:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_40:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-40",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_40()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_40",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-41",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_41:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_41()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_41:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_41:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-41",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_41()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_41",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-42",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_42:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_42()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_42:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_42:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-42",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_42()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_42",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-43",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_43:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_43()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_43:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_43:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-43",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_43()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_43",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-44",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_44:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_44()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_44:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_44:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-44",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_44()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_44",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-45",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_45:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_45()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_45:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_45:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-45",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_45()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_45",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-46",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_46:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_46()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_46:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_46:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-46",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_46()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_46",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-47",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_47:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_47()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_47:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_47:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-47",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_47()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_47",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-48",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_48:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_48()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_48:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_48:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-48",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_48()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_48",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-49",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_49:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_49()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_49:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_49:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-49",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_49()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_49",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-50",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_50:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_50()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_50:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_50:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-50",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_50()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_50",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-51",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_51:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_51()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_51:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_51:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-51",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_51()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_51",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-52",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_52:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_52()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_52:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_52:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-52",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_52()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_52",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-53",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_53:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_53()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_53:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_53:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-53",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_53()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_53",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-54",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_54:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_54()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_54:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_54:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-54",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_54()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_54",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-55",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_55:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_55()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_55:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_55:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-55",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_55()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_55",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-56",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_56:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_56()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_56:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_56:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-56",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_56()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_56",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-57",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_57:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_57()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_57:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_57:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-57",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_57()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_57",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-58",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_58:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_58()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_58:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_58:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-58",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_58()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_58",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-59",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_59:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_59()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_59:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_59:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-59",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_59()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_59",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    },
+    {
+      "methodId": "reader-subjects.reader-subjects.custom-entry-subject-60",
+      "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_60:System.Void()",
+      "signature": "System.Void ReaderSubjects::CustomEntrySubject_60()",
+      "identity": {
+        "assemblyName": "ReaderSubjects",
+        "declaringTypeSubjectId": "ReaderSubjects/ReaderSubjects",
+        "definitionSubjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_60:System.Void()",
+        "subjectId": "ReaderSubjects/ReaderSubjects::CustomEntrySubject_60:System.Void()",
+        "methodId": "reader-subjects.reader-subjects.custom-entry-subject-60",
+        "signature": "System.Void ReaderSubjects::CustomEntrySubject_60()"
+      },
+      "nativeSymbol": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_60",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ReaderSubjects"
+    }
+  ]
+}

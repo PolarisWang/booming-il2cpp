@@ -1,0 +1,768 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_39:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_40:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_41:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_42:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_43:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_44:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_45:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_46:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_47:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_48:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_49:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_50:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_51:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_52:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_53:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_54:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_55:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_56:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_57:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_58:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_59:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_60:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_61:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_62:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_63:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_64:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_65:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_66:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_67:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_68:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_69:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_70:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_71:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_72:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_73:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_74:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_75:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_76:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_77:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_78:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_79:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_80:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_81:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_82:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_83:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_84:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_85:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_86:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_87:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_88:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_89:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_90:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_91:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_92:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_93:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_94:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_95:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_96:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_97:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_98:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_99:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_100:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_101:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_102:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_103:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_104:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_105:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_106:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_107:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_108:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_109:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_110:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_111:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_112:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_113:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_114:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_115:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_116:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_117:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_118:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_119:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_120:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_121:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_122:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_123:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_124:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "method",
+      "subjectId": "WriterSubjects/WriterSubjects::CustomEntrySubject_125:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "WriterSubjects",
+      "subjectKind": "field",
+      "subjectId": "WriterSubjects/WriterSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

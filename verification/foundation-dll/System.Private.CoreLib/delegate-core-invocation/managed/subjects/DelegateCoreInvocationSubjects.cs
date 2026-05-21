@@ -16,14 +16,14 @@ public static partial class DelegateCoreInvocationSubjects
     // [0] System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_0()
     {
-        try { Delegate.Combine(null!, null!); _exitCode = 1; }
+        try { Delegate.Combine(default, default); _exitCode = 1; }
         catch (NullReferenceException) { }
     }
 
     // [1] System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_1()
     {
-        try { Delegate.Remove(null!, null!); _exitCode = 1; }
+        try { Delegate.Remove(default, default); _exitCode = 1; }
         catch (NullReferenceException) { }
     }
 
@@ -37,7 +37,7 @@ public static partial class DelegateCoreInvocationSubjects
     // [3] System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
     public static void Subject_3()
     {
-        if (((new System.Action(() => {}).Method).GetHashCode()) != 1176259652) _exitCode = 1;
+        if (((new System.Action(() => {}).Method).GetHashCode()) != -1227720105) _exitCode = 1;
     }
 
     // [4] System.Private.CoreLib/System.Delegate::get_Target:System.Object()

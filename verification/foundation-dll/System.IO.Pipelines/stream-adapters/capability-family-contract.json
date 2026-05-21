@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.IO.Pipelines/stream-adapters",
+  "displayName": "Stream Adapters",
+  "methodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)"
+  ],
+  "methodSubjectCount": 1,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

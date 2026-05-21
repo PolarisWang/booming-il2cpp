@@ -1,0 +1,54 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SseItemSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_0",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_1",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_2",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_3",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_4",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_5",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SseItemSubjects_SseItemSubjects_Subject_6",
+          "subjectId": "SseItemSubjects/SseItemSubjects::Subject_6:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

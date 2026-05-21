@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "UnmanagedCallingConventionsSubjects",
+  "methodCount": 1,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    }
+  ]
+}
