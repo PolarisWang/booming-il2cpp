@@ -7,7 +7,7 @@
 
 | 工件 | 路径 | 用途 |
 |------|------|------|
-| program.json | testing/verification-catalog/projections/foundation-dll-audit/program.json | 程序摘要 |
+| program.json | artifact/verification-catalog/projections/foundation-dll-audit/program.json | 程序摘要 |
 | dll-matrix.json | (同上目录) | DLL 矩阵行 |
 | family-verification.json | (同上目录) | 每个 family 的 gate 评估结果 |
 | family-verification-claims.json | (同上目录) | 验证 claims |

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/generated/marshalling",
+  "capturedAt": "2026-05-21T23:57:32",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 5.2,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 3.3
+    },
+    "callVirt": {
+      "handlerDispatchNs": 3.1,
+      "emptyStackNs": 3.4
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-21T23:57:32][DEBUG][codegen] T4 VEH handler registered\n[2026-05-21T23:57:32][WARN][CRAG] young_collection_no_region\n[2026-05-21T23:57:32][INFO][NUMA] numa_init count=%d\n[2026-05-21T23:57:32][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-21T23:57:32][INFO][OldGen] init done base=0x1750978985984 pages=8\n[2026-05-21T23:57:32][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.2 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 3.3 ns/op\nHandler dispatch overhead (LdcI4): 3.1 ns/call\nCallVirt empty-stack: 3.4 ns/call\n"
+}

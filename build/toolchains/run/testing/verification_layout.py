@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 
-VERIFICATION_ROOT_NAME = "testing/verification-catalog"
+VERIFICATION_ROOT_NAME = "artifact/verification-catalog"
 OWNER_MANIFEST_NAME = "owner.manifest.json"
 OWNER_FEATURES_NAME = "owner.features.json"
 WORKSPACE_MANIFEST_NAME = "workspace.manifest.json"

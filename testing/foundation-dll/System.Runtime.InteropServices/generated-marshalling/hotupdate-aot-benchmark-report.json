@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/generated/marshalling",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComExposedClassAttribute`1::GetComInterfaceEntries:System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry*(System.Int32&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComExposedClassAttribute`1::.ctor:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::ConvertToManaged:T(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::ConvertToUnmanaged:System.Void*(T)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::Free:System.Void(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComObject::FinalRelease:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller::ConvertToManaged:System.Object(System.Runtime.InteropServices.Marshalling.ComVariant)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller::ConvertToUnmanaged:System.Runtime.InteropServices.Marshalling.ComVariant(System.Object)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller::Free:System.Void(System.Runtime.InteropServices.Marshalling.ComVariant)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::Free:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromManaged:System.Void(System.Object)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::FromUnmanaged:System.Void(System.Runtime.InteropServices.Marshalling.ComVariant)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToManaged:System.Object()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate::ToUnmanaged:System.Runtime.InteropServices.Marshalling.ComVariant()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller`1::ConvertToUnmanaged:T(System.Exception)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller`1::ConvertToUnmanaged:T(System.Exception)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller`1::ConvertToUnmanaged:T(System.Exception)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller::ConvertToUnmanaged:System.Void(System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.54,
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 10.17
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComClassAttribute::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 115.0,
+      "postPatchNsPerOp": 134.2,
+      "slowdownPercent": 16.7
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_ExceptionToUnmanagedMarshaller:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.31,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 9.05
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_Options:System.Runtime.InteropServices.Marshalling.ComInterfaceOptions()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.29,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 2.56
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshalling:System.Runtime.InteropServices.StringMarshalling()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.12,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 14.08
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshallingCustomType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.47,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": -1.57
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_ExceptionToUnmanagedMarshaller:System.Void(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 144.63,
+      "postPatchNsPerOp": 136.3,
+      "slowdownPercent": -5.76
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_Options:System.Void(System.Runtime.InteropServices.Marshalling.ComInterfaceOptions)",
+      "status": "passed",
+      "prePatchNsPerOp": 5.11,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 5.68
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_StringMarshalling:System.Void(System.Runtime.InteropServices.StringMarshalling)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.74,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 1.27
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_StringMarshallingCustomType:System.Void(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 150.82,
+      "postPatchNsPerOp": 146.1,
+      "slowdownPercent": -3.13
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 106.5,
+      "postPatchNsPerOp": 115.0,
+      "slowdownPercent": 7.98
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IComExposedClass::GetComInterfaceEntries:System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry*(System.Int32&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IComExposedDetails::GetComInterfaceEntries:System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry*(System.Int32&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::Clear:System.Void(System.Runtime.InteropServices.Marshalling.IIUnknownStrategy)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.71,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 10.4
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::ConstructTableInfo:System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo(System.RuntimeTypeHandle,System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails,System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::TryGetTableInfo:System.Boolean(System.RuntimeTypeHandle,System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::TrySetTableInfo:System.Boolean(System.RuntimeTypeHandle,System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::get_ManagedType:System.RuntimeTypeHandle()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::get_Table:System.Void**()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::get_ThisPtr:System.Void*()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::set_ManagedType:System.Void(System.RuntimeTypeHandle)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::set_Table:System.Void(System.Void**)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo::set_ThisPtr:System.Void(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails::get_Iid:System.Guid()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails::get_Implementation:System.Type()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 42,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails::get_ManagedVirtualMethodTable:System.Void**()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 43,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy::GetComExposedTypeDetails:System.Runtime.InteropServices.Marshalling.IComExposedDetails(System.RuntimeTypeHandle)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 44,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy::GetIUnknownDerivedDetails:System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails(System.RuntimeTypeHandle)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 45,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceType::get_Iid:System.Guid()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 46,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceType::get_ManagedVirtualMethodTable:System.Void**()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 47,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownStrategy::CreateInstancePointer:System.Void*(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 48,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownStrategy::QueryInterface:System.Int32(System.Void*,System.Guid&,System.Void*&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 49,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownStrategy::Release:System.Int32(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 50,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2::get_Iid:System.Guid()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 51,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2::get_Implementation:System.Type()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 52,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2::get_ManagedVirtualMethodTable:System.Void**()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 53,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2::.ctor:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 54,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider::GetVirtualMethodTableInfoForKey:System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo(System.Type)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 55,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers::get_DefaultIUnknownInterfaceDetailsStrategy:System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 56,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers::get_DefaultIUnknownStrategy:System.Runtime.InteropServices.Marshalling.IIUnknownStrategy()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 57,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 118.59,
+      "postPatchNsPerOp": 108.5,
+      "slowdownPercent": -8.51
+    },
+    {
+      "methodIndex": 58,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::ConvertToManaged:T(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 59,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::ConvertToUnmanaged:System.Void*(T)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 60,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::Free:System.Void(System.Void*)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 61,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 62,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::get_ThisPointer:System.Void*()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 63,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::get_VirtualMethodTable:System.Void**()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 64,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::.ctor:System.Void(System.Void*,System.Void**)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 65,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_ManagedType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.59,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 2.4
+    },
+    {
+      "methodIndex": 66,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshallerType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.49,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 6.9
+    },
+    {
+      "methodIndex": 67,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshalMode:System.Runtime.InteropServices.Marshalling.MarshalMode()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.27,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": 7.73
+    },
+    {
+      "methodIndex": 68,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::.ctor:System.Void(System.Type,System.Runtime.InteropServices.Marshalling.MarshalMode,System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 448.02,
+      "postPatchNsPerOp": 485.9,
+      "slowdownPercent": 8.45
+    }
+  ],
+  "summary": {
+    "totalMethods": 69,
+    "nonStubMethods": 17,
+    "averageSlowdownPercent": 4.96,
+    "slowdownFactor": 1.0495999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ObjectiveCInteropSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectiveCInteropSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectiveCInteropSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectiveCInteropSubjects",
+      "subjectKind": "method",
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ObjectiveCInteropSubjects",
+      "subjectKind": "field",
+      "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span\u003CSystem.IntPtr\u003E\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendCallback:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal\u002BMessageSendFunction,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendPendingException:System.Void(System.Exception)",
+      "reason": "external-call"
+    }
+  ]
+}

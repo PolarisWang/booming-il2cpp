@@ -302,7 +302,7 @@ def _regenerate_subject_workspace_manifest(
     if loaded_manifest is None:
         raise RuntimeError(
             "workspace manifest is missing after regeneration: "
-            f"testing/verification-catalog/workspaces/subjects/{subject_id}/workspace.manifest.json"
+            f"artifact/verification-catalog/workspaces/subjects/{subject_id}/workspace.manifest.json"
         )
     return loaded_manifest
 

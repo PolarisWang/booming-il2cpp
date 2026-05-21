@@ -24,7 +24,7 @@
 - �?agent 负责任务实现与审查，不负责绕过活动任务守�?
 - 规格合规性审查必须先于代码质量审�?- 命中 obligation 字段时，必须先消�?`verification-before-completion`
 - `completed` 前至少确�?`requiredGates`、managed proof、native proof、按需 hotupdate proof / benchmark、以及全�?`formalVerificationObjects`
-- 如本轮要求新�?verification 数据，`completed` 前还必须确认 `testing/verification-catalog/archive/{latest,master,reports}` 已刷新；命中 codegen 主线时再确认 `testing/verification-catalog/evidence/owners/*/codegen-stubs/*`
+- 如本轮要求新�?verification 数据，`completed` 前还必须确认 `artifact/verification-catalog/archive/{latest,master,reports}` 已刷新；命中 codegen 主线时再确认 `artifact/verification-catalog/evidence/owners/*/codegen-stubs/*`
 - 测试阶段如果出现 `dotnet` 编译崩溃，必须先查根因并修复
 - 开始新的复杂任务、切换任务或恢复任务前，必须先执行与顺序主线等价�?`ACTIVE.md` 守卫
 - `docs/dev/in-progress/` 只允许承�?`lifecycle_status: in-progress` 的任务；终态任务必须同步更�?`STATUS.md`、`current_dir`、索引和物理目录

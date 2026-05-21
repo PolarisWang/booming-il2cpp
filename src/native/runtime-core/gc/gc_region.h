@@ -98,6 +98,12 @@ extern thread_local TLAB tls_tlab;
 /// 25,600+ atomic RMWs per stress test run.
 extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc;
 
+/// Per-thread total allocated bytes counter (monotonically increasing, never reset).
+/// Incremented by every allocation path: NurseryAllocate, NurseryAllocateAtomic,
+/// PohAllocate, and fallback paths to old gen / LOH.
+/// Exposed via chaos_gc_get_allocated_bytes_for_current_thread().
+extern thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes;
+
 /// Slow path for NurseryAllocate — acquires a new nursery region or
 /// falls back to old-gen allocation when the request exceeds capacity.
 void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size);
@@ -154,6 +160,7 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         tlab->current = next;
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
+        tls_total_allocated_bytes += size;
         if (threading::SafepointRequested()) [[unlikely]] {
             threading::SafepointPoll();
         }
@@ -180,6 +187,7 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
         tlab->current = next;
         std::memset(ptr, 0, size);
         tls_alloc_since_last_gc += size;
+        tls_total_allocated_bytes += size;
         if (threading::SafepointRequested()) [[unlikely]] {
             threading::SafepointPoll();
         }

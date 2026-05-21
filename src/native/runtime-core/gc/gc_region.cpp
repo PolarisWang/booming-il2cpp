@@ -178,6 +178,9 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     threading::EnterPreemptiveMode();
     void* old_result = g_old_gen.Allocate(size, true);
     threading::EnterCooperativeMode();  // SafepointPoll re-sync if pending
+    if (old_result) {
+        tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+    }
     return old_result;
 }
 
@@ -253,6 +256,9 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     threading::EnterPreemptiveMode();
     void* old_result = g_old_gen.Allocate(size, false);
     threading::EnterCooperativeMode();
+    if (old_result) {
+        tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+    }
     return old_result;
 }
 
@@ -289,7 +295,11 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     if (size > kPohRegionSize - sizeof(Region)) {
         // Single object larger than a POH region — allocate oversized via old gen.
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "poh_oversized");
-        return g_old_gen.Allocate(size, true);
+        void* result = g_old_gen.Allocate(size, true);
+        if (result) {
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+        }
+        return result;
     }
 
     std::lock_guard<std::mutex> lock(s_poh_mutex);
@@ -302,6 +312,7 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
             s_poh_current->current = next;
             std::memset(ptr, 0, size);
             g_gc_scheduler.RecordAllocation(size);
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
             return ptr;
         }
     }
@@ -311,7 +322,11 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         RegionKind::REGION_POH, kPohRegionSize);
     if (new_poh == nullptr) {
         CHAOS_IL2CPP_LOG_WARN("CRAG", "poh_oom_fallback");
-        return g_old_gen.Allocate(size, true);
+        void* result = g_old_gen.Allocate(size, true);
+        if (result) {
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+        }
+        return result;
     }
 
     s_poh_current = new_poh;

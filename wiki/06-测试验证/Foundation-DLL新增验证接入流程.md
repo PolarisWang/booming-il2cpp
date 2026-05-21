@@ -14,7 +14,7 @@
 
 至少确认以下输入已经就位：
 
-- `testing/verification-catalog/catalog/programs/foundation-dll-translation-audit.program.json`
+- `artifact/verification-catalog/catalog/programs/foundation-dll-translation-audit.program.json`
 - `public-surface-manifest-v1-01.json`
 - `semantic-family-plan-v1-01.json`
 - `nativeization plan` / `lowering plan`
@@ -28,7 +28,7 @@ run foundation-dll derive --scope <assembly>
 
 输出：
 
-- `testing/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.candidate.json`
+- `artifact/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.candidate.json`
 
 此时产物是 `candidate-derived`，不能直接当正式分母 authority。
 
@@ -49,7 +49,7 @@ run foundation-dll promote --scope <assembly> --promote-approved true
 
 输出：
 
-- `testing/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`
+- `artifact/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`
 
 ### 5. 刷新报告和 formal 数据
 

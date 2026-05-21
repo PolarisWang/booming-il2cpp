@@ -2269,7 +2269,7 @@ def _detect_regression(family_slug: str, assembly: str,
             result["hasRegression"] = True
 
     # Load / auto-create baseline
-    baseline_path = _VERIFICATION_BASE.parent.parent / "testing" / "verification-history" / assembly / family_slug / "baseline-benchmark.json"
+    baseline_path = _VERIFICATION_BASE.parent.parent / "artifact" / "verification-history" / assembly / family_slug / "baseline-benchmark.json"
     if baseline_path.exists():
         try:
             with open(baseline_path, encoding="utf-8") as f:

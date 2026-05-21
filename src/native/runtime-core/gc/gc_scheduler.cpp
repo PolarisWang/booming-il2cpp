@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <condition_variable>
+#include <mutex>
 
 #include "gc_bgc.h"
 #include "gc_api.h"
@@ -499,6 +501,70 @@ CHAOS_IL2CPP_SIZE GcScheduler::RecommendedGen1Size() const noexcept {
     if (size > kMaxGen1Size) size = kMaxGen1Size;
 
     return size;
+}
+
+// ── Full GC notification ───────────────────────────────────────────
+
+void GcScheduler::EnableFullGcNotification() noexcept {
+    std::lock_guard<std::mutex> lock(notification_mutex_);
+    fullgc_notification_enabled_.store(true, std::memory_order_release);
+    fullgc_approach_signaled_ = false;
+    fullgc_complete_signaled_ = false;
+}
+
+void GcScheduler::DisableFullGcNotification() noexcept {
+    std::lock_guard<std::mutex> lock(notification_mutex_);
+    fullgc_notification_enabled_.store(false, std::memory_order_release);
+    fullgc_approach_signaled_ = false;
+    fullgc_complete_signaled_ = false;
+    approach_cv_.notify_all();
+    complete_cv_.notify_all();
+}
+
+void GcScheduler::SignalFullGcApproach() noexcept {
+    if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return;
+    std::lock_guard<std::mutex> lock(notification_mutex_);
+    fullgc_approach_signaled_ = true;
+    approach_cv_.notify_all();
+}
+
+void GcScheduler::SignalFullGcComplete() noexcept {
+    if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return;
+    std::lock_guard<std::mutex> lock(notification_mutex_);
+    fullgc_complete_signaled_ = true;
+    complete_cv_.notify_all();
+}
+
+bool GcScheduler::WaitForFullGcApproach(int32_t timeout_ms) noexcept {
+    std::unique_lock<std::mutex> lock(notification_mutex_);
+    if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return false;
+    fullgc_approach_signaled_ = false;
+    if (timeout_ms <= 0) {
+        approach_cv_.wait(lock, [this]() {
+            return fullgc_approach_signaled_ || !fullgc_notification_enabled_.load(std::memory_order_acquire);
+        });
+    } else {
+        approach_cv_.wait_for(lock, std::chrono::milliseconds(timeout_ms), [this]() {
+            return fullgc_approach_signaled_ || !fullgc_notification_enabled_.load(std::memory_order_acquire);
+        });
+    }
+    return fullgc_approach_signaled_;
+}
+
+bool GcScheduler::WaitForFullGcComplete(int32_t timeout_ms) noexcept {
+    std::unique_lock<std::mutex> lock(notification_mutex_);
+    if (!fullgc_notification_enabled_.load(std::memory_order_acquire)) return false;
+    fullgc_complete_signaled_ = false;
+    if (timeout_ms <= 0) {
+        complete_cv_.wait(lock, [this]() {
+            return fullgc_complete_signaled_ || !fullgc_notification_enabled_.load(std::memory_order_acquire);
+        });
+    } else {
+        complete_cv_.wait_for(lock, std::chrono::milliseconds(timeout_ms), [this]() {
+            return fullgc_complete_signaled_ || !fullgc_notification_enabled_.load(std::memory_order_acquire);
+        });
+    }
+    return fullgc_complete_signaled_;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

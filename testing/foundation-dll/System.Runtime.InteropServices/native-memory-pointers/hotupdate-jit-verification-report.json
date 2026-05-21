@@ -1,6 +1,6 @@
 {
-  "status": "passed",
-  "passed": 199,
-  "total": 199,
-  "exit_code": 0
+  "status": "failed",
+  "passed": 0,
+  "total": 0,
+  "exit_code": 3221225794
 }

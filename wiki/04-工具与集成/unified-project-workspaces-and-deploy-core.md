@@ -1,9 +1,9 @@
-﻿# 统一入口工程工作区、`testing/verification-catalog/workspaces/**` 与 `deploy core`
+﻿# 统一入口工程工作区、`artifact/verification-catalog/workspaces/**` 与 `deploy core`
 
 ## 一句话摘要
 
 统一入口现在区分两类输出：
-- `generate/build project ...` 面向 IDE 与本地调试，统一落在 `testing/verification-catalog/workspaces/**`
+- `generate/build project ...` 面向 IDE 与本地调试，统一落在 `artifact/verification-catalog/workspaces/**`
 - `deploy core ...` 面向正式产品导出，继续落在 `deploy/core/**`
 
 `run menu` 中的 `Project And IDE` / `工程 / IDE` 负责聚合工程生成与工程构建入口。
@@ -20,8 +20,8 @@
 规则：
 - `generate project all` 为当前宿主生成全部可用 subject/core workspace。
 - 聚合索引固定写到：
-  - `testing/verification-catalog/workspaces/verification-all.manifest.json`
-  - `testing/verification-catalog/workspaces/verification-all.generation.report.json`
+  - `artifact/verification-catalog/workspaces/verification-all.manifest.json`
+  - `artifact/verification-catalog/workspaces/verification-all.generation.report.json`
 - `--refresh-generated` 只在显式传入时刷新 subject stable `subject-exec`。
 
 ### Subject
@@ -35,8 +35,8 @@
 
 规则：
 - `generate project subject` 生成 subject source 工程、subject-owned validation 工程和 native 调试工程。
-- Subject 工作区固定落在 `testing/verification-catalog/workspaces/subjects/<subject-id>/`。
-- Subject managed solution 固定命名为 `testing/verification-catalog/workspaces/subjects/<subject-id>/<subject-id>.sln`。
+- Subject 工作区固定落在 `artifact/verification-catalog/workspaces/subjects/<subject-id>/`。
+- Subject managed solution 固定命名为 `artifact/verification-catalog/workspaces/subjects/<subject-id>/<subject-id>.sln`。
 - Windows 宿主下生成 subject solution 时，会把同次生成的 native `.vcxproj` 一并写入 `.sln`。
 - 不传 `--refresh-generated` 时，工作区继续复用 `artifacts/subjects/<subject-id>/runs/subject-exec/analysis/generated/`。
 
@@ -50,8 +50,8 @@
 
 规则：
 - `generate project core` 生成 IL2CPP managed 核心工程和目标平台 native 工作区。
-- Core 工作区固定落在 `testing/verification-catalog/workspaces/core/<host>/`。
-- Core managed solution 固定命名为 `testing/verification-catalog/workspaces/core/<host>/chaos-il2cpp-core.sln`。
+- Core 工作区固定落在 `artifact/verification-catalog/workspaces/core/<host>/`。
+- Core managed solution 固定命名为 `artifact/verification-catalog/workspaces/core/<host>/chaos-il2cpp-core.sln`。
 - `deploy core` 不把工作区当正式产物，而是导出到 `deploy/core/**`。
 
 ## 菜单语义
@@ -94,7 +94,7 @@
 ### IDE / 调试工作区
 
 ```text
-testing/verification-catalog/workspaces/
+artifact/verification-catalog/workspaces/
   verification-all.manifest.json
   verification-all.generation.report.json
   subjects/
@@ -135,7 +135,7 @@ testing/verification-catalog/workspaces/
 ### Subject
 
 - managed solution 自动收集 subject source 与 subject-owned validation project。
-- native 工作区按 matrix 生成到 `testing/verification-catalog/workspaces/subjects/<subject-id>/native/<matrix-id>/`。
+- native 工作区按 matrix 生成到 `artifact/verification-catalog/workspaces/subjects/<subject-id>/native/<matrix-id>/`。
 - Windows 下 subject solution 会引用同次生成的 native `.vcxproj`。
 
 ### Core
@@ -164,4 +164,4 @@ testing/verification-catalog/workspaces/
 ## 最近更新
 
 - `2026-04-08`：新增统一入口工程工作区与 `deploy core` 正式规则，冻结 `artifacts/projects/**` 与 `deploy/core/**` 边界，并明确 `subject-exec` 只允许手动刷新。
-- `2026-04-10`：工程工作区根从 `artifacts/projects/**` 迁移到 `testing/verification-catalog/workspaces/**`，新增 `Project And IDE` 菜单与 `generate project all` 聚合入口，并让 Windows subject solution 引用同次生成的 native project。
+- `2026-04-10`：工程工作区根从 `artifacts/projects/**` 迁移到 `artifact/verification-catalog/workspaces/**`，新增 `Project And IDE` 菜单与 `generate project all` 聚合入口，并让 Windows subject solution 引用同次生成的 native project。

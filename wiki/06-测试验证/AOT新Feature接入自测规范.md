@@ -313,7 +313,7 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 - 命中 hotupdate 触发条件时，对应 hotupdate smoke / proof 已通过
 - `formalVerificationObjects` 已全部通过；如果原本缺失，已补齐正式对象或 case 并通过
 - 受影响回归已通过
-- 如果本轮同时改动 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、projection 页面字段或证据链接规则，则 formal object 与回归通过后还必须执行 `run verify verification-v1 --json` 刷新正式数据，并确认对应 `testing/verification-catalog/projections/**` 派生产物已更新
+- 如果本轮同时改动 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、projection 页面字段或证据链接规则，则 formal object 与回归通过后还必须执行 `run verify verification-v1 --json` 刷新正式数据，并确认对应 `artifact/verification-catalog/projections/**` 派生产物已更新
 
 ## 6. 反模式
 
