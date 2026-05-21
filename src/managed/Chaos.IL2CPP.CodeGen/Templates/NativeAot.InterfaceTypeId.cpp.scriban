@@ -1,4 +1,0 @@
-// ── Interface type_id pre-declarations ──
-{{~ for entry in entries ~}}
-{{ indentation }}inline constexpr CHAOS_IL2CPP_INTPTR {{ entry.symbol }} = static_cast<CHAOS_IL2CPP_INTPTR>({{ entry.stable_id }}ULL);
-{{~ end ~}}

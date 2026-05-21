@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Chaos.IL2CPP.CodeGen.SnapshotTests;
+namespace Chaos.IL2CPP.Generator.SnapshotTests;
 
 /// <summary>
 /// Discovers fixture directories under Fixtures/ in the test project output.

@@ -8,18 +8,18 @@ from tests.support import read_contracts_source, read_loader_stage_source
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
-AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "AotCoreIrLowering.cs"
-NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
-NATIVE_AOT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotEmitter.cs"
-NATIVE_AOT_INVOCATION_PLANNING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Planning" / "NativeAotLoweringPlanner.InvocationPlanning.cs"
-NATIVE_AOT_METHOD_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
-NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.ObjectModelEmission.cs"
+AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "AotCoreIrLowering.cs"
+NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeAotLoweringPlanner.cs"
+NATIVE_AOT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeAotEmitter.cs"
+NATIVE_AOT_INVOCATION_PLANNING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Planning" / "NativeAotLoweringPlanner.InvocationPlanning.cs"
+NATIVE_AOT_METHOD_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
+NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Emission" / "NativeAotLoweringPlanner.ObjectModelEmission.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
-NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.ObjectModel.cpp.scriban"
-NATIVE_AOT_METHOD_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.Method.cpp.scriban"
-ASSEMBLY_FULL_CLOSURE_AUDIT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "AssemblyFullClosureAuditEmitter.cs"
-ASSEMBLY_FULL_CLOSURE_AUDIT_SUMMARY_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "AssemblyFullClosureAuditSummary.cpp.scriban"
+NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
+NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeAot.ObjectModel.cpp.scriban"
+NATIVE_AOT_METHOD_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeAot.Method.cpp.scriban"
+ASSEMBLY_FULL_CLOSURE_AUDIT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "AssemblyFullClosureAuditEmitter.cs"
+ASSEMBLY_FULL_CLOSURE_AUDIT_SUMMARY_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "AssemblyFullClosureAuditSummary.cpp.scriban"
 
 
 class ObjectModelAotCoreIrContractTests(unittest.TestCase):

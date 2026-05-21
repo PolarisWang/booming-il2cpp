@@ -3,7 +3,7 @@ $xmlFile = Get-ChildItem -Path TestResults -Recurse -Filter 'coverage.cobertura.
 $xml = [xml](Get-Content $xmlFile.FullName)
 $results = @()
 foreach($pkg in $xml.coverage.packages.package) {
-    if($pkg.name -notlike '*Chaos.IL2CPP.CodeGen*') { continue }
+    if($pkg.name -notlike '*Chaos.IL2CPP.Generator*') { continue }
     foreach($cls in $pkg.classes.class) {
         $total = 0; $covered = 0
         foreach($line in $cls.lines.line) {

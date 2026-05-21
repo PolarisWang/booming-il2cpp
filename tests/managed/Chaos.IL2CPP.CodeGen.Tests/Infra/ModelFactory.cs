@@ -1,6 +1,6 @@
 using Chaos.IL2CPP.Contracts;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.Infra;
+namespace Chaos.IL2CPP.Generator.Tests.Infra;
 
 /// <summary>
 /// Factory for constructing minimal artifact instances to feed into

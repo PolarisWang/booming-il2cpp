@@ -1,8 +1,8 @@
 using Chaos.IL2CPP.Contracts;
-using Chaos.IL2CPP.CodeGen.Tests.Infra;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.EH;
+namespace Chaos.IL2CPP.Generator.Tests.EH;
 
 /// <summary>
 /// Tests that verify exception handling shapes are correctly detected and

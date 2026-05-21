@@ -29,7 +29,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _TEST_CODE_GENERATOR = _HERE / "test_code_generator.py"
 
 sys.path.insert(0, str(_HERE.parent.parent))  # for testing package
@@ -248,6 +248,8 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     # Fallback: load from contract file directly
     if not relevant_types:
         contract_path = family_dir / "capability-family-contract.json"
+        if not contract_path.exists():
+            contract_path = family_dir / "contract.json"
         if contract_path.exists():
             try:
                 contract = json.loads(contract_path.read_bytes())

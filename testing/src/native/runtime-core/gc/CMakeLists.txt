@@ -54,6 +54,7 @@ add_chaos_test(test_gc_region
     gc_region_test.cpp ${CHAOS_GC_STUBS}
     LIBS ${CHAOS_GC_LIBS}
 )
+target_link_options(test_gc_region PRIVATE /FORCE:MULTIPLE)
 
 # gc_card_table_ext_test — Card table edge case tests
 add_chaos_test(test_gc_card_table_ext
@@ -236,7 +237,16 @@ add_chaos_test(test_gc_gen1_benchmark
     gc_gen1_benchmark.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
+target_link_options(test_gc_gen1_benchmark PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_gen1_benchmark PROPERTIES LABELS "benchmark;gc")
+
+# gc_throughput_benchmark — Native GC throughput (allocation + GC pause + BGC latency)
+add_chaos_test(test_gc_throughput_benchmark
+    gc_throughput_benchmark.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_link_options(test_gc_throughput_benchmark PRIVATE /FORCE:MULTIPLE)
+set_tests_properties(test_gc_throughput_benchmark PROPERTIES LABELS "benchmark;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch G — Migrated from old contracts: stress/smoke tests (G1)
@@ -319,6 +329,7 @@ add_chaos_test(test_gc_bgc_root_scan
     gc_bgc_root_scan_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
+target_link_options(test_gc_bgc_root_scan PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
 
 # gc_bgc_unit_test — BGC subsystem unit tests (SATB, phase, worker deque)
@@ -339,6 +350,7 @@ add_chaos_test(test_gc_bgc_stress
     gc_bgc_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
     LIBS ${CHAOS_GC_LIBS}
 )
+target_link_options(test_gc_bgc_stress PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_bgc_stress PROPERTIES LABELS "stress;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════

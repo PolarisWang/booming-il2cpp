@@ -266,7 +266,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Planning"
             / "NativeAotLoweringPlanner.ExceptionShapePlanning.cs"
         )
@@ -318,7 +318,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.StructuredIR.cs"
         ).read_text(encoding="utf-8"))
@@ -340,7 +340,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.StructuredIR.cs"
         ).read_text(encoding="utf-8"))
@@ -357,7 +357,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.StructuredIR.cs"
         ).read_text(encoding="utf-8")
@@ -385,7 +385,7 @@ class TestIl2CppCodeGenStructureGovernanceNativeAotEmission(Il2CppCodeGenStructu
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "Emission"
             / "NativeAotLoweringPlanner.StructuredIR.cs"
         ).read_text(encoding="utf-8")

@@ -4,7 +4,7 @@ import sys
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
 target = 'CodeGen'
 
 for cls in pkg.findall('.//class'):
@@ -20,5 +20,5 @@ for cls in pkg.findall('.//class'):
     covered = sum(1 for l in lines if int(l.get('hits', '0')) > 0)
     t = len(lines)
     if covered > 0 and t <= 50:
-        short_fn = fn_norm.split('Chaos.IL2CPP.CodeGen/')[-1]
+        short_fn = fn_norm.split('Chaos.IL2CPP.Generator/')[-1]
         print(f'{covered}/{t} = {covered/t*100:.0f}%  {short_fn}')

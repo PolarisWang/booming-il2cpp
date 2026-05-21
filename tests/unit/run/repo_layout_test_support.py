@@ -30,10 +30,11 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
         "Chaos.IL2CPP.Contracts",
     ],
     "Chaos.IL2CPP.Driver": [
-        "Chaos.IL2CPP.CodeGen",
         "Chaos.IL2CPP.Contracts",
-        "Chaos.IL2CPP.ProjectGraph",
+        "Chaos.IL2CPP.Diagnostics",
+        "Chaos.IL2CPP.Generator",
         "Chaos.IL2CPP.Pipeline",
+        "Chaos.IL2CPP.ProjectGraph",
     ],
     "Chaos.IL2CPP.Loader": [
         "Chaos.IL2CPP.Contracts",
@@ -51,7 +52,7 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
         "Chaos.IL2CPP.SemanticWorld",
         "Chaos.IL2CPP.Linker",
         "Chaos.IL2CPP.MetadataWriter",
-        "Chaos.IL2CPP.CodeGen",
+        "Chaos.IL2CPP.Generator",
     ],
     "Chaos.IL2CPP.Linker": [
         "Chaos.IL2CPP.Contracts",
@@ -61,8 +62,9 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
         "Chaos.IL2CPP.Contracts",
         "Chaos.IL2CPP.Linker",
     ],
-    "Chaos.IL2CPP.CodeGen": [
+    "Chaos.IL2CPP.Generator": [
         "Chaos.IL2CPP.Contracts",
+        "Chaos.IL2CPP.Generator.Generators",
         "Chaos.IL2CPP.Loader",
         "Chaos.IL2CPP.MetadataWriter",
         "Scriban",

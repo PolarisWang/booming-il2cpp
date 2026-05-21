@@ -83,4 +83,4 @@ static_assert(sizeof(DelegateObject) == 56);
 - `src/native/runtime-core/core/delegate_thunks.cpp` — Marshal bridge thunks
 - `src/native/bootstrap/bootstrap.cpp` — CreateDelegate / DelegateInvoke
 - `contracts/native/v0/codegen_bridge.h`
-- `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeAot.DelegateRuntimeSupport.cpp.scriban`
+- `src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.DelegateRuntimeSupport.cpp.scriban`

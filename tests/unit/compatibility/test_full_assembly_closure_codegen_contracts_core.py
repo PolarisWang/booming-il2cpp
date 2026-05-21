@@ -310,7 +310,7 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
             REPO_ROOT
             / "src"
             / "managed"
-            / "Chaos.IL2CPP.CodeGen"
+            / "Chaos.IL2CPP.Generator"
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")

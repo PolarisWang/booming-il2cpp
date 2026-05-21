@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.Tests.Emission.ComprehensiveEmissionTests">
+<CoverageReport scope="Chaos.IL2CPP.Generator.Tests.Emission.ComprehensiveEmissionTests">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.Tests.Emission.ComprehensiveEmissionTests</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator.Tests.Emission.ComprehensiveEmissionTests</Class>
+    <Assembly>Chaos.IL2CPP.Generator.Tests.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\ComprehensiveEmissionTests.cs</File>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\Emission\ComprehensiveEmissionTests.cs</File>
     </Files>
     <Coveredlines>108</Coveredlines>
     <Uncoveredlines>74</Uncoveredlines>
@@ -54,12 +54,12 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\ComprehensiveEmissionTests.cs">
-      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.CodeGen.Tests.Infra;" />
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\Emission\ComprehensiveEmissionTests.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Generator.Tests.Infra;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Xunit;" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Tests.Emission;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator.Tests.Emission;" />
       <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
       <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Comprehensive integration test that exercises many codegen paths through" />

@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;

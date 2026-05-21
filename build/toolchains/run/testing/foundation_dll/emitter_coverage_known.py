@@ -1,6 +1,6 @@
 """
 Known IL opcodes supported by the NativeAot emitter switch-case.
-Source: src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs
+Source: src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs
 """
 
 # Current 110 opcodes handled by the emitter switch-case (case "xxx":)

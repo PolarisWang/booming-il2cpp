@@ -88,7 +88,7 @@ if (HasSuppressGCTransitionAttribute(method))
 
 ### 文件
 
-`src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs` → `TryCreateMethod()`
+`src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs` → `TryCreateMethod()`
 
 ### Artifact 字段传递
 
@@ -101,7 +101,7 @@ IsSuppressGCTransition = method.Import?.IsSuppressGCTransition ?? false,
 
 ### 文件
 
-`src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` → `EmitPInvokeMethod()`
+`src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs` → `EmitPInvokeMethod()`
 
 ### 函数声明
 

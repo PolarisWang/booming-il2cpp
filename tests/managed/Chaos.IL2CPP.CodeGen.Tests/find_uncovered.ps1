@@ -1,7 +1,7 @@
 $xml = New-Object XML
 $xml.Load('coverage.xml')
 
-$codegenModule = $xml.results.modules.module | Where-Object { $_.name -eq 'Chaos.IL2CPP.CodeGen.dll' }
+$codegenModule = $xml.results.modules.module | Where-Object { $_.name -eq 'Chaos.IL2CPP.Generator.dll' }
 
 $totalUncovered = 0
 $results = @()

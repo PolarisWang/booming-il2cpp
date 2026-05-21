@@ -23,7 +23,7 @@
 - `src/managed/Chaos.IL2CPP.SemanticWorld`
 - `src/managed/Chaos.IL2CPP.Linker`
 - `src/managed/Chaos.IL2CPP.MetadataWriter`
-- `src/managed/Chaos.IL2CPP.CodeGen`
+- `src/managed/Chaos.IL2CPP.Generator`
 - `src/managed/Chaos.IL2CPP.Pipeline`
 - `src/native/`
 

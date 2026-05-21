@@ -10,6 +10,7 @@
 #include <chaos/profile.h>
 
 #include <gc/gc_bgc_inline.h>
+#include <gc/gc_api.h>
 #include <gc/gc_helpers.h>
 
 #include <intrin.h>  // _ReturnAddress()
@@ -80,7 +81,9 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
         BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
     }
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    chaos_gc_dirty_card(obj);
+    if (chaos_is_gc_pointer(obj)) {
+        chaos_gc_dirty_card(obj);
+    }
 }
 
 extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
@@ -385,7 +388,9 @@ extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept
     using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    chaos_gc_dirty_card(as);
+    if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(as)) {
+        chaos_gc_dirty_card(as);
+    }
 }
 
 // ── Type check helpers ──────────────────────────────────────────────────────
@@ -470,7 +475,9 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     auto* iv = static_cast<InterpreterValue*>(ptr);
     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
-    chaos_gc_dirty_card(ptr);
+    if (chaos_is_gc_pointer(ptr)) {
+        chaos_gc_dirty_card(ptr);
+    }
 }
 
 // ── Cpblk helper ─────────────────────────────────────────────────────────────
@@ -593,6 +600,7 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
             }
         }
         t_deopt_state.instr_pc = entry->instr_pc;
+        t_deopt_state.osr_resume_pc = entry->osr_resume_pc;
     }
 
     t_deopt_state.deopt_happened = true;
@@ -660,5 +668,6 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     //    and return.  InterpreterEntryDirect reads this state to reconstruct
     //    the RegisterFrame for RegisterExecute.
     t_deopt_state.instr_pc = entry->instr_pc;
+    t_deopt_state.osr_resume_pc = entry->osr_resume_pc;
     t_deopt_state.deopt_happened = true;
 }

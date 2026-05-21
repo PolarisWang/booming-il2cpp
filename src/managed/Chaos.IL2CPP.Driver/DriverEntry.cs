@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;

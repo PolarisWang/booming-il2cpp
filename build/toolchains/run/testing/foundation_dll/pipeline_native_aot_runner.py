@@ -155,7 +155,7 @@ def _build_subjects_dll(
     from family_entrypoint_generator import generate_and_build
     extra_refs = None
     if family_slug in ("snapshot-prover",):
-        extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+        extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
     # frozen-collections requires FrozenDictionary.Create which needs net10.0+
     tfm = "net10.0"
     result = generate_and_build(
@@ -262,10 +262,14 @@ def _run_convert_to_cpp(
     codegen_out = v / family_slug / "codegen"
     codegen_out.mkdir(parents=True, exist_ok=True)
 
+    driver_dir = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0"
+    driver_dll = driver_dir / "Chaos.IL2CPP.Driver.dll"
+    if not driver_dll.exists():
+        print(f"    Driver DLL not found at {driver_dll}")
+        return False
+
     cmd = [
-        "dotnet", "run", "--no-build",
-        "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-        "--", "convert-to-cpp",
+        "dotnet", "exec", str(driver_dll), "convert-to-cpp",
         "--assembly", dll_path,
         "--assembly-dir", str(Path(dll_path).parent),
         "--output", str(codegen_out),

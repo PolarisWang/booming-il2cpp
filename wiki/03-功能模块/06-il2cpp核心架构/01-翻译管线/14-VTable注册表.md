@@ -263,9 +263,9 @@ A4-Dual+V2 vtable 系统与现有的 `vtable_registry.*`（token-based 运行时
 
 - TypeInfo 定义: `src/native/common/chaos/type_info.h`
 - Header 类型定义: `src/native/runtime-core/generated_code_compat.h`
-- Slot 分配算法: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 534-563)
-- VTable 数组发射: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 566-627)
-- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
-- DevirtualizationHint: `src/managed/Chaos.IL2CPP.CodeGen/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
+- Slot 分配算法: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 534-563)
+- VTable 数组发射: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` (行 566-627)
+- Virtual dispatch codegen: `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs` (行 986-1176)
+- DevirtualizationHint: `src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs` (行 412-426)
 - 运行时 vtable_registry: `src/native/runtime-core/vtable_registry.*`
 - 解释器虚方法分派: `src/native/interpreter/interpreter_vm.cpp` (CallVirt case)

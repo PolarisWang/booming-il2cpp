@@ -2,9 +2,9 @@
 <CoverageReport scope="System.Text.RegularExpressions.Generated.FD9823E4028316D43DBFDCA34EE93CA3B22E5A1719D8F54B765D99305B166172F__ExternCSymbolPattern_0">
   <Summary>
     <Class>System.Text.RegularExpressions.Generated.FD9823E4028316D43DBFDCA34EE93CA3B22E5A1719D8F54B765D99305B166172F__ExternCSymbolPattern_0</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Assembly>Chaos.IL2CPP.Generator.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\obj\Release\net8.0\System.Text.RegularExpressions.Generator\System.Text.RegularExpressions.Generator.RegexGenerator\RegexGenerator.g.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\obj\Release\net8.0\System.Text.RegularExpressions.Generator\System.Text.RegularExpressions.Generator.RegexGenerator\RegexGenerator.g.cs</File>
     </Files>
     <Coveredlines>96</Coveredlines>
     <Uncoveredlines>26</Uncoveredlines>
@@ -38,7 +38,7 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\obj\Release\net8.0\System.Text.RegularExpressions.Generator\System.Text.RegularExpressions.Generator.RegexGenerator\RegexGenerator.g.cs">
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\obj\Release\net8.0\System.Text.RegularExpressions.Generator\System.Text.RegularExpressions.Generator.RegexGenerator\RegexGenerator.g.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />

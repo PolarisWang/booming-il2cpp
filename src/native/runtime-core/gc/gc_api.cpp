@@ -117,10 +117,16 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 // ======================================================================
 
 extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
-    // g_heap_base is the lowest address managed by the card table.
-    // Stack-allocated value types live below this address (they are
-    // allocated on the native stack far below the GC heap).
-    return reinterpret_cast<uintptr_t>(ptr) >= g_heap_base;
+    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+    // Fast path: g_heap_base is the minimum address registered with the
+    // card table, covering old-gen and nursery.  Stack-allocated value
+    // types live far below this address.
+    if (addr >= g_heap_base) return true;
+    // POH regions are independently VirtualAlloc'd and may be below
+    // g_heap_base (the card table does not cover POH).  Check via the
+    // lock-free POH slot array.
+    if (RegionManager::Instance().IsPohPointer(ptr)) return true;
+    return false;
 }
 
 // ======================================================================

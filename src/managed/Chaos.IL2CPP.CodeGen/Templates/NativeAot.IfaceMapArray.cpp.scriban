@@ -1,8 +1,0 @@
-// ── IfaceMap array for a reference/boxed type ──
-{{~ for entry in entries ~}}
-{{ indentation }}static constexpr InterfaceMapEntry {{ entry.symbol }}[] = {
-{{~ for iface in entry.ifaces ~}}
-{{ indentation }}{{ tab }}{ {{ iface.type_id_symbol }}, {{ iface.vtable_offset }}, {{ iface.method_count }} }{{ if !forlast }},{{ end }}
-{{~ end ~}}
-{{ indentation }}};
-{{~ end ~}}

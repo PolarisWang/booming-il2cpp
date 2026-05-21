@@ -1,9 +1,9 @@
 using System.Reflection;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests;
+namespace Chaos.IL2CPP.Generator.Tests;
 
 public sealed class NativeAotEmitterTests
 {

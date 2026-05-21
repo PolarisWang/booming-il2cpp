@@ -20,7 +20,7 @@ TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework
 ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericLayoutProofEntry::Run()"
 CANONICAL_ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericLayoutProofEntry::Run:System.Int32()"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "generic-matrix-gates"
-MATRIX_BUILDER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "GenericCapabilityMatrixBuilder.cs"
+MATRIX_BUILDER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "GenericCapabilityMatrixBuilder.cs"
 CONTRACTS_SOURCE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 
 

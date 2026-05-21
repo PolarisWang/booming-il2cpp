@@ -14,7 +14,7 @@
 
 本规范适用于以下场景：
 
-- `src/managed/Chaos.IL2CPP.CodeGen/` 中的 managed / native codegen
+- `src/managed/Chaos.IL2CPP.Generator/` 中的 managed / native codegen
 - managed test host、native test host、hotupdate host 等结构化文本产物生成
 - manifest、配置文件、桥接代码、生成型 `.g.cs` / `.cpp` / `.h` / `.json`
 - Python 侧新增或重构的代码生成、样例生成、测试模板生成
@@ -23,9 +23,9 @@
 
 当前仓库内与 `Scriban` 相关的正式入口包括：
 
-- `src/managed/Chaos.IL2CPP.CodeGen/Templating/ScribanTemplateRenderer.cs`
-- `src/managed/Chaos.IL2CPP.CodeGen/Templates/`
-- `src/managed/Chaos.IL2CPP.CodeGen/ReferenceProof/NativeReferenceProofCatalog.cs`
+- `src/managed/Chaos.IL2CPP.Generator/Templating/ScribanTemplateRenderer.cs`
+- `src/managed/Chaos.IL2CPP.Generator/Templates/`
+- `src/managed/Chaos.IL2CPP.Generator/ReferenceProof/NativeReferenceProofCatalog.cs`
 - 各类 planner / emitter 对 template path 与 render model 的映射
 
 结论：
@@ -78,7 +78,7 @@ Python 侧新增或重构代码生成时，同样必须优先使用 `Scriban`：
 
 Python 侧生成结构化文本时，优先顺序固定为：
 
-1. 复用现有 `Chaos.IL2CPP.CodeGen` 的 `Scriban` 模板与 contract
+1. 复用现有 `Chaos.IL2CPP.Generator` 的 `Scriban` 模板与 contract
 2. 如确需 Python 直接生成，则消费同一份 `Scriban` 模板真相源
 3. 只有产物不是结构化文本时，才允许不走模板
 

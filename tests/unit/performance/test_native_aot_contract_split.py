@@ -19,13 +19,13 @@ SUBJECT_EXECUTOR_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tes
 MANAGED_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 MANAGED_ARTIFACT_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 DRIVER_ENTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
-CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
-NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
+CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "CodeGenStage.cs"
+NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeAotLoweringPlanner.cs"
 NATIVE_AOT_METHOD_EMISSION_PATH = (
-    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
 )
 NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = (
-    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
 )
 NATIVE_AOT_LOWERING_PLAN_SAMPLE_PATH = (
     REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-aot.lowering-plan.min.json"

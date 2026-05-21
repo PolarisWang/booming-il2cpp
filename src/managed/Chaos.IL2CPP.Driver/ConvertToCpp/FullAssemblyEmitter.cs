@@ -1,5 +1,5 @@
 using System.Text;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 

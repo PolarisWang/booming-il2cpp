@@ -27,6 +27,13 @@
 │                         │                                    │
 │                         ▼                                    │
 │  ┌────────────────────────────────────────────────────┐     │
+│  │   Gen1 (Survivor) — 16MB fixed-size region          │     │
+│  │   Bump-pointer allocation, Cheney-style promote     │     │
+│  │   BGC concurrent Gen1 marking (GEN1_GEN2 scope)    │     │
+│  └──────────────────────┬─────────────────────────────┘     │
+│                         │                                    │
+│                         ▼                                    │
+│  ┌────────────────────────────────────────────────────┐     │
 │  │              Old Generation                         │     │
 │  │  28 size classes × 64KB pages, mark bitmap         │     │
 │  │  Parallel mark (work-stealing deques)              │     │
@@ -56,6 +63,7 @@
 | 代 | 区域 | 分配方式 | 回收算法 | 触发条件 |
 |----|------|---------|---------|---------|
 | Young (Nursery) | 每线程 256KB region | Bump pointer | Cheney 复制 + 精确 GcLayout 扫描 | 分配预算耗尽 (EMA 阈值) |
+| Gen1 (Survivor) | 16MB 固定 region | Bump pointer | Cheney promote + BGC 并发 Gen1 标记 | NurseryAllocateSlow 预检查 / 占用 >50% / BGC GEN1_GEN2 scope |
 | Old (Tenured) | 28 size class × 64KB pages | Size-class freelist | Mark-sweep (并行) + 可选 compact | 分配失败 / 显式 GC.Collect |
 | LOH | VirtualAlloc segments | 直接分配 | Mark-sweep (可选压缩, CompactMode) | >85KB 对象 |
 
@@ -66,6 +74,7 @@
 | Region 类型 | 用途 | 大小 | 回收方式 |
 |------------|------|------|---------|
 | NURSERY | 每线程年轻代 | 256KB (可调) | Young GC 后释放或重用 |
+| GEN1 | 过渡代 survivor | 16MB (固定) | Young GC Phase 4 GcGen1Collection + BGC 并发标记 |
 | TENURED | 老年代 page | 1MB | Mark-sweep + 可选 compact |
 | DOMAIN | 模块元数据 | 64KB | 域卸载时批量释放 |
 | RAW | 临时分配 | 按需 | malloc/free |
@@ -373,6 +382,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 | `gc_loh.h/cpp` | Large Object Heap + 可选压缩 | `LargeObjectHeap`, `MarkObject`, `Sweep`, `Compact` |
 | `gc_parallel_mark.h/cpp` | 并行标记框架 (含 BGC work-stealing) | `ParallelMarkState`, `StealChunk`, `DrainMarkStackParallel` |
 | `gc_layout.h/cpp` | GC 布局注册表 | `GcLayoutRegistry`, `ScanObjectPointers` |
+| `gc_gen1.h/cpp` | Gen1 收集 (survivor promote + BGC 并发标记) | `GcGen1Collection`, `TryAllocateInGen1`, `GcGen1ShouldCollect` |
 | `gc_scheduler.h/cpp` | GC 调度器 (EMA) | `GcScheduler`, `DecideCollection`, `RecommendedNurserySize` |
 | `gc_bgc.h/cpp` | BGC 线程 + 事件驱动 | `BgcThreadMain`, `NotifyBgc`, `SpawnParallelMarkWorkers` |
 | `gc_stats.h/cpp` | GC 统计 + 诊断 | `GcStats`, `GcGetSnapshot`, pause histogram, event ring buffer |
@@ -422,7 +432,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 
 | 能力 | CRAG GC | CoreCLR | Mono GC | Unity IL2CPP (BDWGC) |
 |------|---------|---------|---------|---------------------|
-| 分代 | 2 代 (young + old) | 3 代 (gen0/1/2) | 2 代 (nursery + old) | 无 (保守式) |
+| 分代 | 3 代 (Nursery + Gen1 + Old) | 3 代 (gen0/1/2) | 2 代 (nursery + old) | 无 (保守式) |
 | 并行标记 | 是 (work-stealing) | 是 (BGC 并发) | 是 | 无 |
 | 并发标记 | 是 (BGC 并发, SATB) | 是 (BGC) | 否 | 无 |
 | 压缩 | 是 (page 内) | 是 (gen0/1) | 是 | 无 |
@@ -464,10 +474,9 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 | R16 | MemoryDomain HEAP 线程安全 | ✅ 已实现 | ArenaHeap std::mutex 保护 bump pointer |
 
 **剩余演进方向**（非阻塞）：
-1. **三代分代**：CoreCLR 的 gen0/gen1 过渡代可减少 promotion 波动
-2. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表，200+ DLL 时 region 数 ≤ 数千，仍可接受
-3. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
-4. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
+1. **Region 框架 O(R) 扫描**：FreeRegion 和 IsInDomain 线性扫描 region 表，200+ DLL 时 region 数 ≤ 数千，仍可接受
+2. **值类型嵌套引用写屏障（runtime GC-heap-pointer 检测函数）**：当前 codegen 通过 `chaos_gc_dirty_card(chaos_value_owner)` 对任意值类型赋值触发写屏障，存在假阳性（栈上值类型不需要 DirtyCard），可增加 runtime GC-heap-pointer 检测函数避免不必要的 barrier
+3. **完整 GCMemoryInfo 结构体（BCL 侧）**：native 侧 `GcMemoryInfoNative` 结构已实现并可通过 `chaos_gc_get_memory_info()` 获取，但 BCL 侧缺少对应的 `GCMemoryInfo` 托管类型定义
 
 ## P1-P3 扩展功能（2026-05 完成）
 
@@ -558,6 +567,7 @@ inline void GcTrackDomainAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
 
 ## 文档更新
 
+- `2026-05-21`：新增三代分代 GC (Nursery+Gen1+Old) 架构描述：Gen1 region 类型和配置参数、Young GC Phase 4 Gen1 收集路径、BGC 并发 Gen1 标记 (GEN1_GEN2 scope)、Full GC Gen1 sweep；更新对比表分代数 2→3
 - `2026-05-20`：新增 P1-P3 扩展功能附录（6 项：寄存器根枚举、写屏障补齐、GC Stress、NO_GC_REGION、静态根注册、NUMA 感知）；修复 Full GC `Collect()` 中使用 `young_region->current` 而非 `g_young_gen.bump` 的 nursery 根扫描 bug（与 BGC Phase 1b 同类的 bug）
 - `2026-05-19`：新增 GC 测试覆盖附录（27 个测试 target，含 Phase A/B/C 全部实现 + 运行状态）；更新完成度矩阵 R15 场景数 14→17；新增压力测试场景 O/P/Q
 - `2026-05-18`：POH Phase 2 完成（region bump-pointer + GC mark-sweep integration + standalone tests）；GCHandle SetTargetFromNative API + 测试完成；完成度矩阵更新
@@ -602,7 +612,10 @@ GcYoungCollection(nursery)
   │
   ├─ Phase 3b: GcProcessWeakHandlesAfterYoungGC
   │
-  └─ Phase 4: Sweep nursery + ClearAllCards
+  └─ Phase 4: Sweep nursery + Gen1 collection
+    ├─ GcGen1ShouldCollect() → GcGen1Collection (try-promote)
+    │  BGC concurrent marking active → skip (gen1_bgc_marking_active)
+    └─ ClearAllCards
 ```
 
 ### Full GC 路径
@@ -619,6 +632,7 @@ OldGen::Collect(domain_id, reason)
   │
   ├─ Sweep phase:
   │    ├─ SweepPages (free unmarked pages)
+  │    ├─ Gen1Sweep (BGC 并发标记后 promote/keep Gen1 对象)
   │    ├─ LOH::Sweep (free unmarked segments, trim to 4)
   │    ├─ Compact if fragmentation > 30% (parallel via GcWorkerPool)
   │    └─ LOH::Compact if mode != NONE (AUTOMATIC at 25% frag threshold)
@@ -656,6 +670,12 @@ OldGen::Collect(domain_id, reason)
 | LOH compact budget | 4MB | 单次 cycle 最大压缩量 |
 | Cross-page compact budget | max(512KB, min(total×10%, 4MB)) | 动态 evacuation 预算 |
 | Parallel compact workers | min(pages, hw_concurrency, 8) | 受 hw_concurrency 限制 |
+| Gen1 区域大小 | 16MB | 固定值，与 nursery 分离 |
+| Gen1 收集触发占用率 | 50% | GcGen1ShouldCollect() 阈值 |
+| Gen1 分配速率跟踪窗口 | 64 allocations | GcScheduler 计数器窗口 |
+| BGC Gen1 marking scope | GEN1_GEN2 | BGC 同时标记 Gen1 + Old |
+| Promotion age threshold | 2 | 对象经 2 次 young GC 后 promote 到 old |
+| Default survivor size | 8MB | Gen1 (survivor) 区域大小 |
 
 ## 托管 GC API
 
@@ -876,7 +896,7 @@ run stress finalizer-stress
 
 | 子维度 | CRAG | CoreCLR WKS | 评价 |
 |--------|------|-------------|------|
-| 分代数 | 2 代 | 3 代（Gen0/1/2） | CoreCLR 多一代 transitional 区域减少升级波动，CRAG 用自适应 nursery 弥补 |
+| 分代数 | 3 代（Nursery+Gen1+Old） | 3 代（Gen0/1/2） | CoreCLR 多一代 transitional 区域减少升级波动，CRAG 用自适应 nursery 弥补 |
 | Region | 固定大小 region | 固定大小 segment (64MB) | CRAG 更细粒度，域卸载优势明显 |
 | Young 算法 | Cheney BFS 复制 | Mark-Sweep + 复制 | CRAG Cheney 复制更快无碎片，但内存占用更高（需 from/to space） |
 | Old Gen 布局 | 28 size class, 64KB 页 | 细粒度 bucket + large heap | CRAG 更粗粒度可能会有更多碎片 |
@@ -895,7 +915,7 @@ run stress finalizer-stress
 
 | 子维度 | CRAG | Mono SGen | 评价 |
 |--------|------|-----------|------|
-| 分代数 | 2 代 | 2 代 | 一致 |
+| 分代数 | 3 代（Nursery+Gen1+Old） | 2 代 | CRAG 多一级过渡代减少升级波动 |
 | Young 算法 | Cheney BFS 复制 | Copying | 一致 |
 | Old 算法 | Mark-Sweep (28 class) | Mark-Sweep | 一致 |
 | 并发 | SATB 并发 BGC | STW + 可选 concurrent mark | CRAG 并发能力更强 |
@@ -914,7 +934,7 @@ run stress finalizer-stress
 | 子维度 | CRAG | Unity IL2CPP (Boehm) | 评价 |
 |--------|------|---------------------|------|
 | 精确/保守 | 精确 precise | 保守 conservative | **CRAG 绝对优势**：Boehm 误识别整数为指针 |
-| 分代 | 2 代 generational | 无分代 | Unity 老版本卡顿的根源 |
+| 分代 | 3 代 (Nursery+Gen1+Old) generational | 无分代 | Unity 老版本卡顿的根源 |
 | 写屏障 | 有（card + SATB） | 无 | CRAG 精确控制跨代引用 |
 | 并发 | 并发 Mark | STW | Unity 大堆 GC 卡顿主要原因 |
 | 对象移动 | 可移动 | 不可移动 | CRAG 可压缩堆，Boehm 产生碎片 |

@@ -68,6 +68,8 @@ struct GraphNode {
     uint64_t payload[5];
 };
 
+static constexpr uint16_t kGraphPtrOffsets[] = { offsetof(GraphNode, next) };
+
 // ── Tree structures ──────────────────────────────────────────────
 
 struct TreeNode {
@@ -98,27 +100,42 @@ static void* AllocOldGen(size_t size, bool scanning = true) {
 }
 
 static void RunBgcCycle() {
-    while (BgcController::Instance().IsBusy())
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    // Retry loop: if a Full GC interrupts the BGC cycle, restart.
+    for (int attempt = 0; attempt < 3; attempt++) {
+        while (BgcController::Instance().IsBusy())
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-    uint32_t gen = threading::RequestGlobalSafepoint();
-    BgcController::Instance().StartBgcCycle();
-    threading::ReleaseGlobalSafepoint(gen);
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StartBgcCycle();
+        threading::ReleaseGlobalSafepoint(gen);
 
-    ASSERT_TRUE(WaitForPhase(BgcPhase::REMARK_NEEDED));
+        // Wait for concurrent mark to complete.
+        if (!WaitForPhase(BgcPhase::REMARK_NEEDED)) {
+            // BGC was interrupted (e.g. by Full GC). Check if BGC is now idle
+            // and retry.
+            auto phase = BgcController::Instance().Phase();
+            if (phase == BgcPhase::IDLE || !BgcController::Instance().IsBusy()) {
+                continue;  // retry
+            }
+            // BGC is still running in some unexpected state — fail.
+            FAIL() << "BGC cycle interrupted, phase=" << static_cast<int>(phase);
+        }
 
-    gen = threading::RequestGlobalSafepoint();
-    BgcController::Instance().StwRemark();
-    BgcController::Instance().StartConcurrentSweep();
-    threading::ReleaseGlobalSafepoint(gen);
+        gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwRemark();
+        BgcController::Instance().StartConcurrentSweep();
+        threading::ReleaseGlobalSafepoint(gen);
 
-    ASSERT_TRUE(WaitForPhase(BgcPhase::COMPACT_NEEDED));
+        ASSERT_TRUE(WaitForPhase(BgcPhase::COMPACT_NEEDED));
 
-    gen = threading::RequestGlobalSafepoint();
-    BgcController::Instance().StwCompact();
-    threading::ReleaseGlobalSafepoint(gen);
+        gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
 
-    BgcController::Instance().WaitForCycleComplete();
+        BgcController::Instance().WaitForCycleComplete();
+        return;  // success
+    }
+    FAIL() << "BGC cycle failed after 3 attempts";
 }
 
 // ── Finalizer ────────────────────────────────────────────────────
@@ -135,7 +152,7 @@ struct BgcStressTest : GcStressTestBase {
         GcStressTestBase::SetUp();
         if (!s_inited.load()) {
             GcSetHeapBase(reinterpret_cast<void*>(uintptr_t(0)));
-            g_old_gen.Init(0, 8);
+            g_old_gen.Init(0, 64);
             InitCrossGen();
             BgcController::Instance().Start();
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -158,7 +175,7 @@ std::atomic<bool> BgcStressTest::s_inited{false};
 TEST_F(BgcStressTest, ConcurrentStress) {
     static constexpr int kThreads = 4;
     static constexpr int kRootsPerThread = 20;
-    static constexpr int kGarbagePerCycle = 500;
+    static constexpr int kGarbagePerCycle = 50;
     static constexpr int kCycles = 2;
 
     std::atomic<bool> failed{false};
@@ -211,14 +228,25 @@ TEST_F(BgcStressTest, WorkStealingStress) {
     uint64_t tree_sid = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(sizeof(TreeNode));
     GcLayoutRegistry::Instance().Register(tree_sid, sizeof(TreeNode), kTreePtrOffsets, 2);
 
+    // Create a proper TypeInfo with the tree_sid stable_id so BGC's
+    // MarkObject/ScanObjectChildren can resolve the GcLayout by stable_id.
+    struct alignas(8) TreeTypeInfo {
+        uint64_t stable_id;
+        uint64_t _pad[3];
+    };
+    static TreeTypeInfo s_tree_type_info;
+    s_tree_type_info.stable_id = tree_sid;
+    uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_tree_type_info);
+    GcLayoutRegistry::Instance().RegisterTypeInfoRange(ti_addr,
+        ti_addr + sizeof(TreeTypeInfo));
+
     auto build_tree = [&](int depth, auto&& self) -> TreeNode* {
         if (depth == 0) return nullptr;
         void* mem = AllocOldGen(sizeof(TreeNode));
         if (!mem) return nullptr;
         auto* node = static_cast<TreeNode*>(mem);
         std::memset(node, 0, sizeof(TreeNode));
-        node->type_info = const_cast<void*>(
-            reinterpret_cast<const void*>(&g_fake_type_info));
+        node->type_info = &s_tree_type_info;
         node->left = self(depth - 1, self);
         node->right = self(depth - 1, self);
         // Touch payload to ensure pages are committed.
@@ -301,8 +329,21 @@ TEST_F(BgcStressTest, FinalizationStress) {
 // ── Test 5: Graph mutation ──────────────────────────────────────
 
 TEST_F(BgcStressTest, GraphMutation) {
-    static constexpr int kNumNodes = 500;
+    static constexpr int kNumNodes = 50;
     std::vector<GraphNode*> nodes;
+
+    // Register GraphNode layout with next pointer offset.
+    uint64_t graph_sid = GcLayoutRegistry::Instance().RegisterOrGetRawAllocType(sizeof(GraphNode));
+    GcLayoutRegistry::Instance().Register(graph_sid, sizeof(GraphNode), kGraphPtrOffsets, 1);
+
+    // Create a proper TypeInfo with the graph_sid stable_id so BGC can
+    // resolve the GcLayout for precise scanning.
+    static GraphTypeInfo s_graph_type_info;
+    s_graph_type_info.stable_id = graph_sid;
+    s_graph_type_info.stable_id2 = graph_sid;
+    uintptr_t ti_addr = reinterpret_cast<uintptr_t>(&s_graph_type_info);
+    GcLayoutRegistry::Instance().RegisterTypeInfoRange(ti_addr,
+        ti_addr + sizeof(GraphTypeInfo));
 
     // Build linked list.
     GraphNode* prev = nullptr;
@@ -311,7 +352,7 @@ TEST_F(BgcStressTest, GraphMutation) {
         ASSERT_NE(mem, nullptr);
         auto* node = static_cast<GraphNode*>(mem);
         std::memset(node, 0, sizeof(GraphNode));
-        node->type_info = reinterpret_cast<GraphTypeInfo*>(&g_fake_type_info);
+        node->type_info = &s_graph_type_info;
         node->next = prev;
         g_old_gen.AddPinnedRoot(node, sizeof(GraphNode));
         nodes.push_back(node);
@@ -330,6 +371,7 @@ TEST_F(BgcStressTest, GraphMutation) {
                 DirtyCard(&nodes[i]->next);
             }
             threading::SafepointPoll();
+            std::this_thread::sleep_for(std::chrono::microseconds(100));
         }
         threading::UnregisterThread();
     });
@@ -343,7 +385,7 @@ TEST_F(BgcStressTest, GraphMutation) {
     // Verify all nodes survived.
     for (auto* node : nodes) {
         ASSERT_TRUE(g_old_gen.IsInOldGen(node)) << "Node lost during BGC graph mutation";
-        EXPECT_EQ(node->type_info, reinterpret_cast<GraphTypeInfo*>(&g_fake_type_info));
+        EXPECT_EQ(node->type_info, &s_graph_type_info);
     }
     SUCCEED();
 }

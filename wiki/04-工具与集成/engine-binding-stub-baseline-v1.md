@@ -23,7 +23,7 @@
   - `Chaos.IL2CPP.SemanticWorld`
   - `Chaos.IL2CPP.Linker`
   - `Chaos.IL2CPP.MetadataWriter`
-  - `Chaos.IL2CPP.CodeGen`
+  - `Chaos.IL2CPP.Generator`
   - `Chaos.IL2CPP.Pipeline`
 
 这条隔离规则的目标是让 engine-facing binding 入口不反向耦合 pipeline 内部实现。

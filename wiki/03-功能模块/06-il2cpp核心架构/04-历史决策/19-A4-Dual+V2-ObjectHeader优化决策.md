@@ -207,9 +207,9 @@ inline const TypeInfo* chaos_object_get_type_info(const void* obj) noexcept {
 | `src/native/runtime-core/runtime_core.cpp` | 删除 field_storage[32]（ObjectHeader 56→24B），新增 ObjectNewThin/ObjectNewPure 分配路径，sync_state 移植到 ThinLockable 偷位，SyncBlock 扩展 type_info 字段 |
 | `src/native/runtime-core/reflection_api.cpp` | 使用 chaos_object_get_type_info() 统一访问 |
 | `src/native/runtime-core/exception_api.cpp` | sizeof(chaos_object_header) → sizeof(FatHeader)，偏移量验证 |
-| `src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs` | 新增 HeaderKind/VTableVariant 决策引擎 |
-| `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` | TypeInfo 按 variant 发射（V0/V1/V2），struct 定义嵌入对应 header 类型 |
-| `src/managed/Chaos.IL2CPP.CodeGen/Emission/NativeAotLoweringPlanner.MethodEmission.cs` | EmitVirtualDispatchCall 按 header 分型发射 |
+| `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs` | 新增 HeaderKind/VTableVariant 决策引擎 |
+| `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` | TypeInfo 按 variant 发射（V0/V1/V2），struct 定义嵌入对应 header 类型 |
+| `src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs` | EmitVirtualDispatchCall 按 header 分型发射 |
 
 ## 实施路线
 

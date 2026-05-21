@@ -2,9 +2,9 @@
 <CoverageReport scope="Program">
   <Summary>
     <Class>Program</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Assembly>Chaos.IL2CPP.Generator.Tests.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\CoverageReport\Program.cs</File>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\CoverageReport\Program.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>63</Uncoveredlines>
@@ -26,14 +26,14 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\CoverageReport\Program.cs">
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.Generator.Tests\CoverageReport\Program.cs">
       <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Xml.Linq;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="3" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var path = args.Length &gt; 0 ? args[0] : &quot;coverage_analysis.xml&quot;;" />
       <LineAnalysis line="4" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var xml = XDocument.Load(path);" />
       <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="6" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var module = xml.Descendants(&quot;module&quot;)" />
-      <LineAnalysis line="7" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    .FirstOrDefault(m =&gt; m.Attribute(&quot;name&quot;)?.Value == &quot;Chaos.IL2CPP.CodeGen.dll&quot;);" />
+      <LineAnalysis line="7" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    .FirstOrDefault(m =&gt; m.Attribute(&quot;name&quot;)?.Value == &quot;Chaos.IL2CPP.Generator.dll&quot;);" />
       <LineAnalysis line="8" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="if (module == null) { Console.Error.WriteLine(&quot;Module not found&quot;); return; }" />
       <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="10" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var srcMap = new Dictionary&lt;string, string&gt;();" />
@@ -57,7 +57,7 @@
       <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    else if (cov == &quot;partial&quot;) s.Partial++;" />
       <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
       <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
-      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var prefix = &quot;D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\&quot;;" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var prefix = &quot;D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Generator\\&quot;;" />
       <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="int grandTotal = 0, grandCovered = 0;" />
       <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="double grandPartial = 0;" />
       <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="int refProofTotal = 0, refProofCovered = 0;" />

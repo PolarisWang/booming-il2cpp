@@ -1,8 +1,8 @@
-using Chaos.IL2CPP.CodeGen.Tests.Infra;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Chaos.IL2CPP.Contracts;
 using Xunit;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.Emission;
+namespace Chaos.IL2CPP.Generator.Tests.Emission;
 
 public sealed class VTableAndInterfaceEmissionTests : IDisposable
 {

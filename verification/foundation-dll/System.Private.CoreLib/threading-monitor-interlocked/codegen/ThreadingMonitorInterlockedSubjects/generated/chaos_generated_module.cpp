@@ -57,6 +57,15 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3(
         void
 );
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor(
+        void
+);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0(
+            CHAOS_IL2CPP_INTPTR
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -79,7 +88,12 @@ static const Functions s_functions = {
         &ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2,
         &ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3,
     },
-    14,
+    {
+        &ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor,
+        &ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor,
+        &ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0,
+    },
+    17,
 };
 
 const Functions kFunctions = s_functions;
@@ -87,8 +101,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[14];
-void* kFunctionsFlat[14] = {
+extern "C" void* kFunctionsFlat[17];
+void* kFunctionsFlat[17] = {
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0),
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10),
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11),
@@ -103,6 +117,9 @@ void* kFunctionsFlat[14] = {
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13),
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2),
     reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3),
+    reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor),
+    reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor),
+    reinterpret_cast<void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__4_0),
 };
 
 

@@ -11,7 +11,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
-CODEGEN_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Chaos.IL2CPP.CodeGen.csproj"
+CODEGEN_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Chaos.IL2CPP.Generator.csproj"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "aot-core-ir-ldtoken-target-reference"
 TYPE_FIXTURE_ASSEMBLY_NAME = "LdtokenTypeDecodeRepro"
 TYPE_HELPER_SUBJECT_ID = f"{TYPE_FIXTURE_ASSEMBLY_NAME}/Program::TypeHandleRoundTrip:System.Int32()"
@@ -137,7 +137,7 @@ internal sealed class TokenCarrier
         (project_root / "Program.cs").write_text(
             """
 using System.Text.Json;
-using Chaos.IL2CPP.CodeGen;
+using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 
 var assembly = new AssemblyIdentityModel

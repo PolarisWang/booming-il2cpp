@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonFamilyPluginAttribute">
+<CoverageReport scope="Chaos.IL2CPP.Generator.RuntimeSkeletonFamilyPluginAttribute">
   <Summary>
-    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonFamilyPluginAttribute</Class>
-    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Class>Chaos.IL2CPP.Generator.RuntimeSkeletonFamilyPluginAttribute</Class>
+    <Assembly>Chaos.IL2CPP.Generator.dll</Assembly>
     <Files>
-      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Pluginization\CodeGenPluginAttributes.cs</File>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\Pluginization\CodeGenPluginAttributes.cs</File>
     </Files>
     <Coveredlines>0</Coveredlines>
     <Uncoveredlines>10</Uncoveredlines>
@@ -26,8 +26,8 @@
     </Element>
   </Metrics>
   <Files>
-    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Pluginization\CodeGenPluginAttributes.cs">
-      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.Generator\Pluginization\CodeGenPluginAttributes.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.Generator;" />
       <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
       <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal enum CodeGenPluginProductLine" />
       <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />

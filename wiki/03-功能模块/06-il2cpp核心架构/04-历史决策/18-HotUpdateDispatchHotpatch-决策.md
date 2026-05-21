@@ -198,7 +198,7 @@ for (auto& tc : kTestTable) {
 
 | 范畴 | 文件 | 变更类型 |
 |------|------|---------|
-| Codegen emit | `src/managed/Chaos.IL2CPP.CodeGen/Emission/*.cs` | 新增 emit-patch-data 模式 |
+| Codegen emit | `src/managed/Chaos.IL2CPP.Generator/Emission/*.cs` | 新增 emit-patch-data 模式 |
 | Codegen pipeline | `batch_native_aot_runner.py` / `batch_hotupdate_runner.py` | 修改 patch variant 流程 |
 | Runtime | `src/native/runtime-core/patch_loader.h/cpp` | 新增 — PatchLoader |
 | Runtime | `src/native/runtime-core/patch_metadata_cache.h/cpp` | 新增 — 本地 Metadata cache |

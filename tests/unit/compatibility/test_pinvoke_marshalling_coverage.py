@@ -9,7 +9,7 @@ METHOD_EMISSION_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
-    / "Chaos.IL2CPP.CodeGen"
+    / "Chaos.IL2CPP.Generator"
     / "Emission"
     / "NativeAotLoweringPlanner.MethodEmission.cs"
 )

@@ -15,7 +15,7 @@ SCANNED_PATHS = [
     REPO_ROOT / "run.ps1",
     REPO_ROOT / "run.sh",
     REPO_ROOT / "src" / "native",
-    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen",
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator",
     REPO_ROOT / "tests" / "contracts" / "native",
     REPO_ROOT / "tests" / "tooling" / "run",
     REPO_ROOT / "subjects" / "SolutionCorePack" / "validation" / "proof" / "native-reference",

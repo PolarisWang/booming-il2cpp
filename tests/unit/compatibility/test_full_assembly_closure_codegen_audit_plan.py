@@ -14,7 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "tooling.py"
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
-NATIVE_REFERENCE_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+NATIVE_REFERENCE_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "NativeReferenceProofEmitter.cs"
 ARTIFACT_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 LIBRARY_PROJECT_PATH = (
     REPO_ROOT
@@ -2367,7 +2367,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             'RuntimeExecutionKind',
         ]
 
-        codegen_stage_source = (REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs").read_text(encoding="utf-8")
+        codegen_stage_source = (REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "CodeGenStage.cs").read_text(encoding="utf-8")
         combined_source = emitter_source + "\n" + artifact_models_source + "\n" + codegen_stage_source
         for fragment in required_fragments:
             self.assertIn(fragment, combined_source)

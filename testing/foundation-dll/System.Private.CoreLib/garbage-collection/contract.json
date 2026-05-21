@@ -10,9 +10,10 @@
     "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
     "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
     "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-    "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)"
+    "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
+    "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()"
   ],
-  "methodSubjectCount": 6,
+  "methodSubjectCount": 7,
   "functionalObligation": {
     "required": false
   },

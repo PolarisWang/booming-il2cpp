@@ -463,6 +463,7 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
         r->current = r->begin;
         r->gc_state = {};
         r->next = nullptr;
+        r->poh_next = nullptr;
         r->id = static_cast<RegionId>(region_count_ + 1);
         r->table_slot = -1;  // recycled region: not in region_table_, managed via free-list
         // Do NOT double-count: this region was already counted when first allocated.
@@ -481,6 +482,13 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
             AddDomainRange(domain_id,
                 reinterpret_cast<uintptr_t>(r->begin),
                 reinterpret_cast<uintptr_t>(r->end));
+        }
+        if (kind == RegionKind::REGION_POH) {
+            AddPohRange(reinterpret_cast<uintptr_t>(r->begin),
+                         reinterpret_cast<uintptr_t>(r->end));
+            r->poh_next = poh_region_list_;
+            poh_region_list_ = r;
+            poh_region_count_++;
         }
         return r;
     }
@@ -532,10 +540,14 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
                         reinterpret_cast<uintptr_t>(r->end));
     }
 
-    // If this is a POH region, publish to the POH range array.
+    // If this is a POH region, publish to the POH range array
+    // and prepend to the POH linked list for O(1) iteration.
     if (kind == RegionKind::REGION_POH) {
         AddPohRange(reinterpret_cast<uintptr_t>(r->begin),
                      reinterpret_cast<uintptr_t>(r->end));
+        r->poh_next = poh_region_list_;
+        poh_region_list_ = r;
+        poh_region_count_++;
     }
 
     // If this is a DOMAIN region, publish to the lock-free domain range cache.
@@ -577,10 +589,24 @@ void RegionManager::FreeRegion(RegionId id) {
         g_young_gen.gen1_bump.store(nullptr, std::memory_order_release);
     }
 
-    // If this is a POH region, remove its range.
+    // If this is a POH region, remove its range and unlink from POH list.
     if (r->kind == RegionKind::REGION_POH) {
         RemovePohRange(reinterpret_cast<uintptr_t>(r->begin),
                        reinterpret_cast<uintptr_t>(r->end));
+        // Unlink from POH singly-linked list (O(n) but FreeRegion is rare).
+        if (poh_region_list_ == r) {
+            poh_region_list_ = r->poh_next;
+        } else {
+            Region* prev = poh_region_list_;
+            while (prev != nullptr && prev->poh_next != r) {
+                prev = prev->poh_next;
+            }
+            if (prev != nullptr) {
+                prev->poh_next = r->poh_next;
+            }
+        }
+        r->poh_next = nullptr;
+        poh_region_count_--;
     }
 
     // If this is a DOMAIN region, remove its range from the lock-free cache.
@@ -656,10 +682,23 @@ void RegionManager::ReleaseDomainRegions(CHAOS_IL2CPP_UINT32 domain_id) {
                                reinterpret_cast<uintptr_t>(r->end));
         }
 
-        // If this is a POH-kind region, remove its range.
+        // If this is a POH-kind region, remove its range and unlink from list.
         if (r->kind == RegionKind::REGION_POH) {
             RemovePohRange(reinterpret_cast<uintptr_t>(r->begin),
                            reinterpret_cast<uintptr_t>(r->end));
+            if (poh_region_list_ == r) {
+                poh_region_list_ = r->poh_next;
+            } else {
+                Region* prev = poh_region_list_;
+                while (prev != nullptr && prev->poh_next != r) {
+                    prev = prev->poh_next;
+                }
+                if (prev != nullptr) {
+                    prev->poh_next = r->poh_next;
+                }
+            }
+            r->poh_next = nullptr;
+            poh_region_count_--;
         }
 
         // If this is a DOMAIN-kind region, remove its range.
@@ -987,39 +1026,23 @@ void RegionManager::RemoveDomainRange(uint32_t domain_id) {
 }
 
 Region* RegionManager::GetFirstPohRegion() const {
+    // O(1): returns cached POH list head instead of O(R) region table scan.
+    // Mutex ensures caller sees a consistent list (mutators may be allocating).
     std::lock_guard<std::mutex> lock(mutex_);
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < region_count_; i++) {
-        const Region& r = region_table_[i];
-        if (r.id != kRegionIdInvalid && r.kind == RegionKind::REGION_POH) {
-            // We need a mutable pointer.  Since we're under mutex_ and
-            // this is the only writer, const_cast is safe for internal use.
-            return const_cast<Region*>(&region_table_[i]);
-        }
-    }
-    return nullptr;
+    return poh_region_list_;
 }
 
 int RegionManager::GetPohRegionCount() const {
+    // O(1): returns cached count instead of O(R) region table scan.
     std::lock_guard<std::mutex> lock(mutex_);
-    int count = 0;
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < region_count_; i++) {
-        if (region_table_[i].id != kRegionIdInvalid &&
-            region_table_[i].kind == RegionKind::REGION_POH) {
-            count++;
-        }
-    }
-    return count;
+    return poh_region_count_;
 }
 
 Region* RegionManager::GetNextPohRegion(const Region* current) const {
+    // O(1): follows poh_next pointer instead of scanning the region table.
+    if (current == nullptr) return nullptr;
     std::lock_guard<std::mutex> lock(mutex_);
-    for (CHAOS_IL2CPP_UINT32 i = current->table_slot + 1; i < region_count_; i++) {
-        const Region& r = region_table_[i];
-        if (r.id != kRegionIdInvalid && r.kind == RegionKind::REGION_POH) {
-            return const_cast<Region*>(&region_table_[i]);
-        }
-    }
-    return nullptr;
+    return current->poh_next;
 }
 
 // 🔔 P2-3: RegionAllocate removed (dead code — callers use NurseryAllocate,

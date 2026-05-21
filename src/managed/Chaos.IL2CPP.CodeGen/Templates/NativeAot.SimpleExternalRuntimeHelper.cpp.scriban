@@ -1,6 +1,0 @@
-static {{ return_type }} {{ helper_symbol }}({{ parameter_signature }})
-{
-{{~ for line in body_lines ~}}
-{{ line }}
-{{~ end ~}}
-}

@@ -1,6 +1,6 @@
 using Xunit.Sdk;
 
-namespace Chaos.IL2CPP.CodeGen.Tests.Infra;
+namespace Chaos.IL2CPP.Generator.Tests.Infra;
 
 /// <summary>
 /// Custom assertion helpers for verifying generated C++ code patterns.

@@ -8,7 +8,7 @@ from tests.support import read_contracts_source
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SEMANTIC_WORLD_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
-CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
+CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "CodeGenStage.cs"
 
 
 class TypedIlSharedContractTests(unittest.TestCase):

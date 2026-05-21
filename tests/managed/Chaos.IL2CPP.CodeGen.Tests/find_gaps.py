@@ -4,7 +4,7 @@ import sys
 
 tree = ET.parse(sys.argv[1])
 root = tree.getroot()
-pkg = root.find('.//package[@name="Chaos.IL2CPP.CodeGen"]')
+pkg = root.find('.//package[@name="Chaos.IL2CPP.Generator"]')
 target = 'CodeGen'
 
 # Group by file (deduplicate class entries)
@@ -34,5 +34,5 @@ print("-" * 80)
 for fn, d in sorted_files[:50]:
     pct = d["c"] / d["t"] * 100 if d["t"] > 0 else 0
     uncovered = d["t"] - d["c"]
-    short_fn = fn.split('Chaos.IL2CPP.CodeGen/')[-1] if 'Chaos.IL2CPP.CodeGen/' in fn else fn
+    short_fn = fn.split('Chaos.IL2CPP.Generator/')[-1] if 'Chaos.IL2CPP.Generator/' in fn else fn
     print(f'{pct:>7.1f}% {uncovered:>10} {d["t"]:>8}  {short_fn}')

@@ -1,3 +1,44 @@
 {
-  "demands": []
+  "demands": [
+    {
+      "requestingAssemblyName": "ThreadingMonitorInterlockedSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "ThreadingMonitorInterlockedSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32\u003E::Invoke:System.Int32()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00601::Invoke:!0()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
 }
