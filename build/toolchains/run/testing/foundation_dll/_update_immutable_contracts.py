@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-IMMUTABLE_DIR = Path("D:/agent/booming-il2cpp/verification/foundation-dll/System.Collections.Immutable")
+IMMUTABLE_DIR = Path("D:/agent/booming-il2cpp/testing/foundation-dll/System.Collections.Immutable")
 
 FAMILY_CONTRACTS: dict[str, list[str]] = {
     "immutable-array": [

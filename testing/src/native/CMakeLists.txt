@@ -16,7 +16,10 @@ FetchContent_Declare(
 if(USE_ASAN)
     set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
 else()
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    # Chaos prebuilt libraries were compiled with /MDd (debug DLL CRT).
+    # Use gtest_force_shared_crt OFF so gtest doesn't override CRT choice,
+    # and set global MSVC runtime to MultiThreadedDebugDLL to match.
+    set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
 endif()
 FetchContent_MakeAvailable(googletest)
 
@@ -66,6 +69,7 @@ add_chaos_imported_lib(chaos_bootstrap      bootstrap)
 add_chaos_imported_lib(chaos_common         common)
 add_chaos_imported_lib(chaos_support        support)
 add_chaos_imported_lib(chaos_hot_update     hot-update)
+add_chaos_imported_lib(chaos_engine_bridge  engine-bridge)
 
 # chaos_fmt is built as a standalone project outside the src/native tree
 if(NOT TARGET chaos_fmt)
@@ -82,6 +86,13 @@ endif()
 
 # Compiler settings
 add_compile_options(/utf-8 /GS- /W1)
+
+# Prebuilt chaos libraries were compiled with /MDd (debug DLL CRT).
+# Set the MSVC runtime library to match (applies to all configurations).
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
+endif()
+
 if(USE_ASAN)
     add_compile_options(/fsanitize=address)
     add_link_options(/fsanitize=address /FORCE:MULTIPLE)
@@ -138,5 +149,9 @@ endfunction()
 # Subdirectories
 add_subdirectory(support)
 add_subdirectory(abi)
-add_subdirectory(runtime-core)
+add_subdirectory(common)
+add_subdirectory(bootstrap)
+add_subdirectory(codegen)
+add_subdirectory(engine-bridge)
 add_subdirectory(hot-update)
+add_subdirectory(runtime-core)

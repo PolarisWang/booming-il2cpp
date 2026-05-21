@@ -97,8 +97,10 @@ public static partial class EnumParsingSubjects
     }
 
     // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
-    public static void CustomEntrySubject_12()
+    public static void Subject_12()
     {
+        try { if (((DayOfWeek.Monday.BoxToString()).Length) != ((DayOfWeek.Monday.BoxToString()).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

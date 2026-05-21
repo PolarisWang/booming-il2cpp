@@ -92,22 +92,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
   - 命中 codegen 主线时，`verification/evidence/owners/*/codegen-stubs/*`
 - `artifacts/**` 下的 `summaryPath` / `eventsPath` / `consolePath` 只是过程证据，不等于新的 formal verification 数据
 
-### 6. Foundation DLL family verification 补充约束
-
-- 如果本轮改动触及 foundation-dll family verification 链路，例如：
-  - `build/toolchains/run/testing/foundation_dll/family_verification_claims.py`
-  - `build/toolchains/run/testing/foundation_dll/verification_kernel.py`
-  - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
-  - `Native Proof Detail` / family progress / family tooltip-detail 的渲染或消费逻辑
-  则必须显式判断是否需要刷新 `verification/projections/foundation-dll-audit/family-verification-claims.json`
-- 上一条命中时，默认不能只更新 HTML 或局部 detail JSON；应执行 `run verify verification-v1 --json` 刷新整体 formal source
-- 刷新后至少核对：
-  - `verification/projections/foundation-dll-audit/family-verification-claims.json`
-  - `verification/projections/foundation-dll-audit/family-verification.json`
-  - `verification/projections/foundation-dll-audit/dlls/*.json`
-  - `docs/verification/foundation-dll-audit/family-verification-claims.json`
-
-### 8. CodeGen 快照测试
+### 6. CodeGen 快照测试
 
 以下改动必须先过快照测试：
 
@@ -125,7 +110,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 详见 [`wiki/06-测试验证/CodeGen快照测试规范.md`](../../../wiki/06-测试验证/CodeGen快照测试规范.md)。
 
-### 9. DLL-first reporting 的 primary evidence 约束
+### 7. DLL-first reporting 的 primary evidence 约束
 
 - 只有 `artifacts/**` 下的真实产物允许进入 primary evidence / artifact index
 - `docs/**`、`subjects/**`、`verification/**` 等引用只能作为 support refs

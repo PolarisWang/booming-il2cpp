@@ -989,4 +989,217 @@ public sealed class AotCoreIrLoweringTests
         var dict = (IReadOnlyDictionary<string, GenericInstantiationDemandModel>)result;
         Assert.Empty(dict);
     }
+
+    // ── AreEquivalentInstantiationKeys ────────────────────────────────────
+
+    [Fact]
+    public void AreEquivalentInstantiationKeys_SameKeys_ReturnsTrue()
+    {
+        var method = s_t.GetMethod("AreEquivalentInstantiationKeys", s_flags,
+            new[] { typeof(GenericInstantiationKey), typeof(GenericInstantiationKey) })!;
+        var key1 = new GenericInstantiationKey
+        {
+            ContextKind = GenericContextKind.TypeInstantiation,
+            DefinitionSubjectId = "Test/Type",
+        };
+        var key2 = new GenericInstantiationKey
+        {
+            ContextKind = GenericContextKind.TypeInstantiation,
+            DefinitionSubjectId = "Test/Type",
+        };
+        Assert.True((bool)method.Invoke(null, new object[] { key1, key2 })!);
+    }
+
+    [Fact]
+    public void AreEquivalentInstantiationKeys_DifferentContextKind_ReturnsFalse()
+    {
+        var method = s_t.GetMethod("AreEquivalentInstantiationKeys", s_flags,
+            new[] { typeof(GenericInstantiationKey), typeof(GenericInstantiationKey) })!;
+        var key1 = new GenericInstantiationKey { ContextKind = GenericContextKind.TypeInstantiation, DefinitionSubjectId = "T" };
+        var key2 = new GenericInstantiationKey { ContextKind = GenericContextKind.MethodInstantiation, DefinitionSubjectId = "T" };
+        Assert.False((bool)method.Invoke(null, new object[] { key1, key2 })!);
+    }
+
+    [Fact]
+    public void AreEquivalentInstantiationKeys_DifferentDefinitionId_ReturnsFalse()
+    {
+        var method = s_t.GetMethod("AreEquivalentInstantiationKeys", s_flags,
+            new[] { typeof(GenericInstantiationKey), typeof(GenericInstantiationKey) })!;
+        var key1 = new GenericInstantiationKey { ContextKind = GenericContextKind.TypeInstantiation, DefinitionSubjectId = "A" };
+        var key2 = new GenericInstantiationKey { ContextKind = GenericContextKind.TypeInstantiation, DefinitionSubjectId = "B" };
+        Assert.False((bool)method.Invoke(null, new object[] { key1, key2 })!);
+    }
+
+    // ── EnsureEquivalentDemand ────────────────────────────────────────────
+
+    private static GenericInstantiationDemandModel MakeDemand(string def, GenericSupportKind support, GenericSpecializationKind spec, GenericDemandFamilyKind family) =>
+        new()
+        {
+            RequestingAssemblyName = "T", OwningAssemblyName = "T", SubjectKind = "type",
+            SubjectId = "T/X", DefinitionSubjectId = def, DemandSourceKind = "loader",
+            InstantiationKey = new GenericInstantiationKey { ContextKind = GenericContextKind.TypeInstantiation, DefinitionSubjectId = def },
+            SupportKindCode = support, SpecializationKindCode = spec, FamilyKindCode = family,
+        };
+
+    [Fact]
+    public void EnsureEquivalentDemand_EqualDemands_ReturnsNormally()
+    {
+        var method = s_t.GetMethod("EnsureEquivalentDemand", s_flags,
+            new[] { typeof(GenericInstantiationDemandModel), typeof(GenericInstantiationDemandModel) })!;
+        var demand = MakeDemand("T/X", GenericSupportKind.Legal, GenericSpecializationKind.SharedBody, GenericDemandFamilyKind.ClosedGenericType);
+        var ex = Record.Exception(() => method.Invoke(null, new object[] { demand, demand }));
+        Assert.Null(ex);
+    }
+
+    [Fact]
+    public void EnsureEquivalentDemand_DifferentDefId_Throws()
+    {
+        var method = s_t.GetMethod("EnsureEquivalentDemand", s_flags,
+            new[] { typeof(GenericInstantiationDemandModel), typeof(GenericInstantiationDemandModel) })!;
+        var d1 = MakeDemand("T/A", GenericSupportKind.Legal, GenericSpecializationKind.SharedBody, GenericDemandFamilyKind.ClosedGenericType);
+        var d2 = MakeDemand("T/B", GenericSupportKind.Legal, GenericSpecializationKind.SharedBody, GenericDemandFamilyKind.ClosedGenericType);
+        var ex = Assert.Throws<TargetInvocationException>(() => method.Invoke(null, new object[] { d1, d2 }));
+        Assert.Contains("conflicting generic instantiation demand", ex.InnerException!.Message);
+    }
+
+    // ── ResolveConstrainedValueTypeOverride ───────────────────────────────
+
+    [Fact]
+    public void ResolveConstrainedValueTypeOverride_NoConstrainedType_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ResolveConstrainedValueTypeOverride", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt", Callee = "System.Object::GetHashCode" };
+        Assert.Null(method.Invoke(null, new object[] { instr }));
+    }
+
+    [Fact]
+    public void ResolveConstrainedValueTypeOverride_NoCallee_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ResolveConstrainedValueTypeOverride", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt", ConstrainedTypeSubjectId = "System.Int32" };
+        Assert.Null(method.Invoke(null, new object[] { instr }));
+    }
+
+    [Fact]
+    public void ResolveConstrainedValueTypeOverride_Valid_ReturnsOverride()
+    {
+        var method = s_t.GetMethod("ResolveConstrainedValueTypeOverride", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact) })!;
+        var instr = new TypedIlInstructionArtifact
+        {
+            Op = "callvirt",
+            Callee = "System.Object::GetHashCode",
+            ConstrainedTypeSubjectId = "System.Int32",
+        };
+        var result = (string?)method.Invoke(null, new object[] { instr });
+        Assert.Equal("System.Int32::GetHashCode", result);
+    }
+
+    [Fact]
+    public void ResolveConstrainedValueTypeOverride_CalleeWithoutDoubleColon_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ResolveConstrainedValueTypeOverride", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact) })!;
+        var instr = new TypedIlInstructionArtifact
+        {
+            Op = "callvirt",
+            Callee = "NoSeparator",
+            ConstrainedTypeSubjectId = "System.Int32",
+        };
+        Assert.Null(method.Invoke(null, new object[] { instr }));
+    }
+
+    // ── ComputeComVtableSlot ──────────────────────────────────────────────
+
+    private static AotCoreIrReferenceArtifact MakeMethodRef(string declaringType) =>
+        new()
+        {
+            Kind = AotCoreIrReferenceKind.Method,
+            AssemblyName = "T",
+            SubjectId = "IfaceType::Method",
+            DeclaringTypeSubjectId = declaringType,
+        };
+
+    private static ManagedMethodModel CreateMethod(string subjectId, string declaringType, string name, int token)
+    {
+        return new ManagedMethodModel
+        {
+            SubjectId = subjectId,
+            DeclaringTypeSubjectId = declaringType,
+            DeclaringTypeDisplayName = declaringType,
+            Name = name,
+            MetadataToken = token,
+            AssemblyName = "T",
+            DefinitionSubjectId = subjectId,
+            Signature = "void()",
+            ReturnType = "System.Void",
+            IsStatic = false,
+            IsVirtual = true,
+            Parameters = [],
+            Body = new ManagedMethodBodyModel
+            {
+                Blocks = [],
+                ExceptionRegions = [],
+            },
+        };
+    }
+
+    [Fact]
+    public void ComputeComVtableSlot_NoDeclaringType_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ComputeComVtableSlot", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact), typeof(IReadOnlyDictionary<string, ManagedMethodModel>), typeof(AotCoreIrReferenceArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt" };
+        Assert.Null(method.Invoke(null, new object[] { instr, new Dictionary<string, ManagedMethodModel>(), MakeMethodRef("") }));
+    }
+
+    [Fact]
+    public void ComputeComVtableSlot_NoCallee_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ComputeComVtableSlot", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact), typeof(IReadOnlyDictionary<string, ManagedMethodModel>), typeof(AotCoreIrReferenceArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt" };
+        Assert.Null(method.Invoke(null, new object[] { instr, new Dictionary<string, ManagedMethodModel>(), MakeMethodRef("I") }));
+    }
+
+    [Fact]
+    public void ComputeComVtableSlot_NoInterfaceMethods_ReturnsNull()
+    {
+        var method = s_t.GetMethod("ComputeComVtableSlot", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact), typeof(IReadOnlyDictionary<string, ManagedMethodModel>), typeof(AotCoreIrReferenceArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt", Callee = "IfaceType::Method" };
+        Assert.Null(method.Invoke(null, new object[] { instr, new Dictionary<string, ManagedMethodModel>(), MakeMethodRef("IfaceType") }));
+    }
+
+    [Fact]
+    public void ComputeComVtableSlot_FirstMethod_ReturnsSlot3()
+    {
+        var method = s_t.GetMethod("ComputeComVtableSlot", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact), typeof(IReadOnlyDictionary<string, ManagedMethodModel>), typeof(AotCoreIrReferenceArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt", Callee = "IfaceType::MethodA" };
+        var methods = new Dictionary<string, ManagedMethodModel>
+        {
+            ["IfaceType::MethodA"] = CreateMethod("IfaceType::MethodA", "IfaceType", "MethodA", 1),
+            ["IfaceType::MethodB"] = CreateMethod("IfaceType::MethodB", "IfaceType", "MethodB", 2),
+        };
+        var result = (int?)method.Invoke(null, new object[] { instr, methods, MakeMethodRef("IfaceType") });
+        Assert.Equal(3, result); // 3 IUnknown reserved + 0
+    }
+
+    [Fact]
+    public void ComputeComVtableSlot_SecondMethod_ReturnsSlot4()
+    {
+        var method = s_t.GetMethod("ComputeComVtableSlot", s_flags,
+            new[] { typeof(TypedIlInstructionArtifact), typeof(IReadOnlyDictionary<string, ManagedMethodModel>), typeof(AotCoreIrReferenceArtifact) })!;
+        var instr = new TypedIlInstructionArtifact { Op = "callvirt", Callee = "IfaceType::MethodB" };
+        var methods = new Dictionary<string, ManagedMethodModel>
+        {
+            ["IfaceType::MethodA"] = CreateMethod("IfaceType::MethodA", "IfaceType", "MethodA", 1),
+            ["IfaceType::MethodB"] = CreateMethod("IfaceType::MethodB", "IfaceType", "MethodB", 2),
+        };
+        var result = (int?)method.Invoke(null, new object[] { instr, methods, MakeMethodRef("IfaceType") });
+        Assert.Equal(4, result);
+    }
 }

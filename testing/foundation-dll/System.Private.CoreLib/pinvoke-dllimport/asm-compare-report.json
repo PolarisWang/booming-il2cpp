@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/pinvoke/dllimport",
-  "capturedAt": "2026-05-21T18:43:00",
+  "capturedAt": "2026-05-21T20:41:20",
   "batchMode": true,
   "summary": {
     "totalMethods": 4,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 83,
-      "avg": 53.8,
-      "total": 215
+      "max": 44,
+      "avg": 44.0,
+      "total": 176
     },
     "aotInstructionCount": {
       "min": 16,
@@ -25,10 +25,10 @@
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.3,
-    "averageExpansionRatio": 0.32,
+    "overallIrExpansionRatio": 0.36,
+    "averageExpansionRatio": 0.36,
     "maxExpansionRatio": 0.36,
-    "minExpansionRatio": 0.19
+    "minExpansionRatio": 0.36
   },
   "methodResults": [
     {
@@ -109,15 +109,15 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 83,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0.19,
+        "ratio": 0.36,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 83
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

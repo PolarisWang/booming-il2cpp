@@ -8,8 +8,8 @@ can consume.
 
 Usage:
     python hotupdate_verification_runner.py
-        --results-dir verification/foundation-dll/hotupdate-results
-        --verification-root verification/foundation-dll
+        --results-dir testing/foundation-dll/hotupdate-results
+        --verification-root testing/foundation-dll
 """
 
 from __future__ import annotations

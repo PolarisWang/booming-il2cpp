@@ -72,9 +72,9 @@ def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> Non
         if ns and ns != "System":
             usings.add(ns)
     else:
-        # Type has no dot-delimited namespace — try the assembly part as namespace.
-        # e.g. "SnapshotTestFixtures/ArithmeticOps" → using SnapshotTestFixtures;
-        if assembly_part and assembly_part != "System.Private.CoreLib":
+        # Type has no dot-delimited namespace — only add well-known namespaces.
+        # SnapshotTestFixtures is a non-dotted namespace used by snapshot-prover subjects.
+        if assembly_part == "SnapshotTestFixtures":
             usings.add(assembly_part)
 
 

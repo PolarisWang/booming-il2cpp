@@ -74,3 +74,10 @@ add_chaos_test(test_tiering_benchmark
     tiering_benchmark.cpp
     LIBS ${CHAOS_FULL_LIBS}
 )
+
+# Tiering benchmark with extended scenarios (arithmetic, register, array, etc.)
+add_chaos_test(test_interpreter_tiering_benchmark
+    interpreter_tiering_benchmark_test.cpp
+    LIBS ${CHAOS_FULL_LIBS}
+)
+set_tests_properties(test_interpreter_tiering_benchmark PROPERTIES LABELS "benchmark")

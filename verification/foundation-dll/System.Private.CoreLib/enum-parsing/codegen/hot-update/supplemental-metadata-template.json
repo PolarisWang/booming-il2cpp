@@ -3,123 +3,115 @@
   "artifactKind": "supplementalMetadataTemplate",
   "registeredTypes": [
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 33554434
     }
   ],
   "registeredMethods": [
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_0:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_0:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663297,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_1:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_1:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663298,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_2:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_2:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663299,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_3:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_3:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663300,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_4:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_4:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663301,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_5:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_5:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663302,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_6:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_6:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663303,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_7:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_7:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_8:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_8:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663305,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_9:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_9:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663306,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_10:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_10:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663307,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_11:System.Int32()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Subject_11:System.Int32()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663308,
       "parameterCount": 0
     },
     {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::Run:System.Void(System.Int32)",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
+      "assemblyName": "EnumParsingSubjects",
+      "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
+      "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "metadataToken": 100663309,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "EnumParsingPatchEntry",
-      "subjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::CustomEntryMethod12:System.Void()",
-      "definitionSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry::CustomEntryMethod12:System.Void()",
-      "declaringTypeSubjectId": "EnumParsingPatchEntry/EnumParsingPatchEntry",
-      "metadataToken": 100663310,
       "parameterCount": 0
     }
   ],
