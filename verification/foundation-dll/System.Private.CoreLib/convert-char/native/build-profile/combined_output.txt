@@ -1,2 +1,0 @@
-Passed: 19/19
-GC|region|active=0|total_allocated=0

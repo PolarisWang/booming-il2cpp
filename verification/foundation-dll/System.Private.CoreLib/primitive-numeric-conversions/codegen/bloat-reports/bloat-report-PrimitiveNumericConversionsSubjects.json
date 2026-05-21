@@ -1,9 +1,0 @@
-{
-  "BaseMethodsCount": 16,
-  "AppliedMethodsCount": 16,
-  "BloatRatio": 1,
-  "Strategy": "MethodLevel",
-  "AssemblyName": "PrimitiveNumericConversionsSubjects",
-  "ExtraMethodsFromVTable": 0,
-  "ExtraMethodsFromTypeLevel": 0
-}
