@@ -31,15 +31,15 @@ class SubjectContractsSourceCutoverTests(unittest.TestCase):
         paths = contracts_module.analysis_contract_json_paths(REPO_ROOT)
 
         self.assertIn(
-            REPO_ROOT / "contracts" / "artifacts" / "v0" / "schemas" / "aot-manifest.schema.json",
-            paths,
-        )
-        self.assertIn(
             REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "aot-manifest.min.json",
             paths,
         )
         self.assertIn(
             REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "snapshots" / "aot-manifest.snapshot.json",
+            paths,
+        )
+        self.assertNotIn(
+            REPO_ROOT / "contracts" / "artifacts" / "v0" / "schemas" / "aot-manifest.schema.json",
             paths,
         )
         self.assertNotIn(
