@@ -321,6 +321,19 @@ add_chaos_test(test_gc_bgc_root_scan
 )
 set_tests_properties(test_gc_bgc_root_scan PROPERTIES LABELS "stress;gc")
 
+# gc_bgc_unit_test — BGC subsystem unit tests (SATB, phase, worker deque)
+# NOTE: gc_bgc.cpp compiled directly (same pattern as test_gc_bgc_smoke) because
+# the prebuilt chaos_runtime_core.lib uses GNU ar format that MSVC link.exe
+# cannot search for COMDAT resolution.
+add_chaos_test(test_gc_bgc_unit
+    gc_bgc_unit_test.cpp ${CHAOS_GC_STUBS}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_bgc.cpp
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_include_directories(test_gc_bgc_unit PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_bgc_unit PRIVATE /FORCE:MULTIPLE)
+
 # gc_bgc_stress_test — BGC concurrent stress, work-stealing, graph mutation
 add_chaos_test(test_gc_bgc_stress
     gc_bgc_stress_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}

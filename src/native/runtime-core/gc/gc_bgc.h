@@ -248,6 +248,9 @@ public:
         bgc_workers_[idx].deque.push_back(entry);
     }
 
+    /// Drain up to @a batch_limit entries from worker @a idx's deque.
+    CHAOS_IL2CPP_SIZE DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit = 0);
+
     // ── Gen1 concurrent marking (GEN1_GEN2 scope) ──────────────────
 
     /// Try to mark a Gen1 object in the BGC Gen1 mark bitmap.
@@ -341,13 +344,6 @@ private:
     std::atomic<int> satb_pool_alloc_{0};
 
     // ── Parallel mark workers ─────────────────────────────────────
-
-    /// Drain up to @a batch_limit entries from worker @a idx's deque.
-    /// Processes each entry and pushes newly-marked children to the same deque.
-    /// @param idx        Worker index (0 = BGC thread).
-    /// @param batch_limit  Max entries to process (0 = drain all).
-    /// @returns Number of entries processed.
-    CHAOS_IL2CPP_SIZE DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit = 0);
 
     /// Flag: set by BGC thread to signal parallel workers to stop.
     std::atomic<bool> bgc_parallel_done_{false};
