@@ -1,7 +1,7 @@
 """stress_records.py — Append-Only JSON Lines store for stress test run data.
 
 Each stress test run appends a single JSON record (one line) to:
-    .artifact/verification/stress-records/{test_name}/records.jsonl
+    artifact/verification/stress-records/{test_name}/records.jsonl
 
 Queries scan the file from the end to retrieve the most-recent record(s).
 File locking prevents concurrent-write corruption.

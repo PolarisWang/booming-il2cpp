@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/objective/c/interop",
+  "summary": {
+    "totalMethods": 4,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 4,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span{System.IntPtr}&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::Initialize:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendCallback:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction,System.IntPtr)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendPendingException:System.Void(System.Exception)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

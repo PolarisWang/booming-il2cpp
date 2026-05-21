@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/com/wrappers",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetIUnknownImpl:System.Void(System.IntPtr&,System.IntPtr&,System.IntPtr&)",
+      "status": "passed",
+      "prePatchNsPerOp": 18397.86,
+      "postPatchNsPerOp": 16158.8,
+      "slowdownPercent": -12.17
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,System.Runtime.InteropServices.CreateComInterfaceFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 18018.22,
+      "postPatchNsPerOp": 21578.2,
+      "slowdownPercent": 19.76
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags)",
+      "status": "passed",
+      "prePatchNsPerOp": 18942.46,
+      "postPatchNsPerOp": 19318.5,
+      "slowdownPercent": 1.99
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 17005.96,
+      "postPatchNsPerOp": 23051.6,
+      "slowdownPercent": 35.55
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 14636.02,
+      "postPatchNsPerOp": 22458.2,
+      "slowdownPercent": 53.44
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object,System.IntPtr)",
+      "status": "passed",
+      "prePatchNsPerOp": 16334.5,
+      "postPatchNsPerOp": 18477.7,
+      "slowdownPercent": 13.12
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForMarshalling:System.Void(System.Runtime.InteropServices.ComWrappers)",
+      "status": "passed",
+      "prePatchNsPerOp": 15050.09,
+      "postPatchNsPerOp": 19007.0,
+      "slowdownPercent": 26.29
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForTrackerSupport:System.Void(System.Runtime.InteropServices.ComWrappers)",
+      "status": "passed",
+      "prePatchNsPerOp": 14112.04,
+      "postPatchNsPerOp": 17772.3,
+      "slowdownPercent": 25.94
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetComInstance:System.Boolean(System.Object,System.IntPtr&)",
+      "status": "passed",
+      "prePatchNsPerOp": 14967.04,
+      "postPatchNsPerOp": 19250.8,
+      "slowdownPercent": 28.62
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetObject:System.Boolean(System.IntPtr,System.Object&)",
+      "status": "passed",
+      "prePatchNsPerOp": 20060.29,
+      "postPatchNsPerOp": 16765.9,
+      "slowdownPercent": -16.42
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 10,
+    "averageSlowdownPercent": 17.61,
+    "slowdownFactor": 1.1761,
+    "slowdownThresholdX": 50.0
+  }
+}

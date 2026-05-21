@@ -1,7 +1,7 @@
 """benchmark_records.py — Append-Only JSON Lines store for benchmark run data.
 
 Each benchmark run appends a single JSON record (one line) to:
-    .artifact/verification/benchmark-records/{subject_id}/records.jsonl
+    artifact/verification/benchmark-records/{subject_id}/records.jsonl
 
 Queries scan the file from the end to retrieve the most-recent record(s).
 File locking prevents concurrent-write corruption.

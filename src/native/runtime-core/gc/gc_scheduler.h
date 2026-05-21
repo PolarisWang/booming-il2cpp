@@ -2,8 +2,11 @@
 #define CHAOS_IL2CPP_GC_SCHEDULER_H_
 
 #include <atomic>
+#include <chrono>
+#include <condition_variable>
 #include <cstdint>
 #include <cstring>
+#include <mutex>
 #include <chaos/native_types.h>
 
 namespace chaos::il2cpp::runtime_core {
@@ -317,6 +320,11 @@ public:
     /// Block until a full GC completion is signaled, or timeout_ms elapses.
     /// Returns true if complete was signaled, false on timeout.
     bool WaitForFullGcComplete(int32_t timeout_ms) noexcept;
+
+    /// Check whether full GC notification is currently enabled.
+    bool IsNotificationEnabled() const noexcept {
+        return fullgc_notification_enabled_.load(std::memory_order_acquire);
+    }
 
     // ── Survivor sizing constants ──────────────────────────────────
     /// Minimum Gen1 area: 4 MB.  Below this, Gen1 filtering is too

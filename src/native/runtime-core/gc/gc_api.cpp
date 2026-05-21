@@ -503,6 +503,38 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_byte
     return tls_total_allocated_bytes;
 }
 
+// ======================================================================
+// Full GC Notification API
+// ======================================================================
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enable_full_gc_notification(
+    CHAOS_IL2CPP_INT32 /*max_generation_threshold*/,
+    CHAOS_IL2CPP_INT32 /*large_object_heap_threshold*/) noexcept
+{
+    g_gc_scheduler.EnableFullGcNotification();
+}
+
+extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_disable_full_gc_notification() noexcept
+{
+    g_gc_scheduler.DisableFullGcNotification();
+}
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_approach(
+    CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    bool signaled = g_gc_scheduler.WaitForFullGcApproach(timeout_ms);
+    if (!g_gc_scheduler.IsNotificationEnabled()) return -1;  // not registered
+    return signaled ? 0 : 1;  // 0=success, 1=timeout
+}
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_complete(
+    CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    bool signaled = g_gc_scheduler.WaitForFullGcComplete(timeout_ms);
+    if (!g_gc_scheduler.IsNotificationEnabled()) return -1;  // not registered
+    return signaled ? 0 : 1;  // 0=success, 1=timeout
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 
 // ── ABI export wrapper (C-linkage for generated AOT code) ─────────────

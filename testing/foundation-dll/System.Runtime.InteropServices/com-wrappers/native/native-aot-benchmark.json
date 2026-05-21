@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/com/wrappers",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetIUnknownImpl:System.Void(System.IntPtr&,System.IntPtr&,System.IntPtr&)",
+      "elapsedMilliseconds": 0.349,
+      "calibratedMs": 0.349,
+      "opsPerSecond": 286697247.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,System.Runtime.InteropServices.CreateComInterfaceFlags)",
+      "elapsedMilliseconds": 11.578,
+      "calibratedMs": 11.578,
+      "opsPerSecond": 8637219.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags)",
+      "elapsedMilliseconds": 0.272,
+      "calibratedMs": 0.272,
+      "opsPerSecond": 367511944.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)",
+      "elapsedMilliseconds": 10.248,
+      "calibratedMs": 10.248,
+      "opsPerSecond": 9757620.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)",
+      "elapsedMilliseconds": 10.134,
+      "calibratedMs": 10.134,
+      "opsPerSecond": 9867966.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object,System.IntPtr)",
+      "elapsedMilliseconds": 11.63,
+      "calibratedMs": 11.63,
+      "opsPerSecond": 8598822.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForMarshalling:System.Void(System.Runtime.InteropServices.ComWrappers)",
+      "elapsedMilliseconds": 0.695,
+      "calibratedMs": 0.695,
+      "opsPerSecond": 143967751.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::RegisterForTrackerSupport:System.Void(System.Runtime.InteropServices.ComWrappers)",
+      "elapsedMilliseconds": 0.304,
+      "calibratedMs": 0.304,
+      "opsPerSecond": 328947368.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetComInstance:System.Boolean(System.Object,System.IntPtr&)",
+      "elapsedMilliseconds": 11.175,
+      "calibratedMs": 11.175,
+      "opsPerSecond": 8948866.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::TryGetObject:System.Boolean(System.IntPtr,System.Object&)",
+      "elapsedMilliseconds": 0.462,
+      "calibratedMs": 0.462,
+      "opsPerSecond": 216262975.8,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}
