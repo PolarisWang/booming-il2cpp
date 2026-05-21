@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Runtime.InteropServices/exception-errors",
+  "displayName": "Interop Exceptions And Errors",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)"
+  ],
+  "methodSubjectCount": 18,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

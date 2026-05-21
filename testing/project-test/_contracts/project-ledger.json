@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "projects": [
+    {
+      "projectId": "runtime-self-test",
+      "displayName": "Runtime Self Test",
+      "description": "Minimal complete-project verification for il2cpp core paths: GC, arithmetic, strings, arrays",
+      "path": "runtime-self-test"
+    },
+    {
+      "projectId": "generics-delegates",
+      "displayName": "Generics & Delegates",
+      "description": "Tests generic methods, generic classes, and delegate creation/invocation through il2cpp codegen",
+      "path": "generics-delegates"
+    },
+    {
+      "projectId": "virtual-dispatch",
+      "displayName": "Virtual Dispatch",
+      "description": "Tests virtual method dispatch through base class references and interface dispatch through interface references",
+      "path": "virtual-dispatch"
+    }
+  ]
+}

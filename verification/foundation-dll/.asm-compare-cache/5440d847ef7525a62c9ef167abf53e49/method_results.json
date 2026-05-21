@@ -1,0 +1,466 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 10,
+      "ratio": 0.23,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1",
+      "instructions": 10
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_Message:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_Message:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::get_StackTrace:System.String()",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 28,
+      "ratio": 0.64,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4",
+      "instructions": 28
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_StackTrace:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_StackTrace:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 18,
+      "ratio": 0.41,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5",
+      "instructions": 18
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_HResult:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::get_HResult:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::ToString:System.String()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 10,
+      "ratio": 0.23,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8",
+      "instructions": 10
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 10,
+    "methodSubjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_10",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 11,
+    "methodSubjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_11",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 12,
+    "methodSubjectId": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_12",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 13,
+    "methodSubjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+    "shortName": "Subject_13",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

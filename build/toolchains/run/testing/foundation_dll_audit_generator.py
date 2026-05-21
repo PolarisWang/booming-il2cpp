@@ -32,8 +32,8 @@ except ImportError:
 
 
 PROGRAM_MANIFEST_RELATIVE_PATH = (
-    "verification",
-    "catalog",
+    "testing",
+    "verification-catalog",
     "programs",
     "foundation-dll-translation-audit.program.json",
 )
@@ -77,7 +77,8 @@ PROJECT_PROGRESS_ORDER = (
 )
 ARTIFACT_PATH_PATTERN = re.compile(r"(?P<path>(?:artifacts|docs|verification|subjects)/[^\s`]+)")
 LEDGER_RELATIVE_PATH = (
-    "verification",
+    "testing",
+    "verification-catalog",
     "projections",
     "foundation-dll-audit",
     "capability-family-ledger.json",
@@ -306,7 +307,7 @@ def _project_artifacts(
         # that are produced by the verify-family pipeline directly into
         # verification/foundation-dll/<assembly>/<family>/.
         if not (normalized.startswith("artifacts/") or
-                normalized.startswith("verification/foundation-dll/") or
+                normalized.startswith("testing/foundation-dll/") or
                 normalized.startswith("testing/foundation-dll/")):
             continue
         if any(keyword in normalized for keyword in keywords):
@@ -612,7 +613,7 @@ def _build_projects(
     # Fallback: scan for native-reference runtime skeleton coverage JSONs
     # when no task evidence references them yet. The batch pipeline produces
     # these files but they may not be registered as formal task evidence.
-    coverage_glob = repo_root / "verification" / "foundation-dll" / assembly_name / "*" / "il2cpp_dist" / "native-reference.runtime-skeleton.coverage.json"
+    coverage_glob = repo_root / "testing" / "foundation-dll" / assembly_name / "*" / "il2cpp_dist" / "native-reference.runtime-skeleton.coverage.json"
     for cov_path in repo_root.glob(str(coverage_glob.relative_to(repo_root))):
         rel = cov_path.relative_to(repo_root).as_posix()
         if rel not in evidence_paths:
@@ -622,7 +623,7 @@ def _build_projects(
     # hotupdate-verification-report.json produced by the verify-family
     # pipeline, so they appear as evidence in benchmark/hotupdate detail pages.
     for report_name in ("benchmark-comparison-report.json", "hotupdate-verification-report.json", "post-hotupdate-benchmark-report.json"):
-        report_glob = repo_root / "verification" / "foundation-dll" / assembly_name / "*" / report_name
+        report_glob = repo_root / "testing" / "foundation-dll" / assembly_name / "*" / report_name
         for report_path in repo_root.glob(str(report_glob.relative_to(repo_root))):
             rel = report_path.relative_to(repo_root).as_posix()
             if rel not in evidence_paths:
@@ -838,7 +839,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
             )
             families = list(family_snapshot.get("families") or [])
             # Load Fact Static native correctness results from batch pipeline
-            native_pipeline_path = repo_root / "verification" / "foundation-dll" / assembly_name / "reports" / "batch-native-aot-pipeline-results.json"
+            native_pipeline_path = repo_root / "testing" / "foundation-dll" / assembly_name / "reports" / "batch-native-aot-pipeline-results.json"
             native_lookup: dict[str, dict[str, Any]] = {}
             if native_pipeline_path.is_file():
                 try:
@@ -924,7 +925,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                     proof["caseSectionLabel"] = section_label
                     # Inject benchmark comparison report into benchmarkProof
                     if proof_key == "benchmarkProof":
-                        comparison_path = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id) / "benchmark-comparison-report.json"
+                        comparison_path = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id) / "benchmark-comparison-report.json"
                         if comparison_path.is_file():
                             try:
                                 cmp_data = json.loads(comparison_path.read_text(encoding="utf-8"))
@@ -939,7 +940,7 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
                     # (schemaVersion 2: d3PatchApplied, d3PatchedCount, methodResults
                     #  with d3Patched/patchReturnValue/interpreterDispatched).
                     if proof_key == "hotupdateProof":
-                        report_path = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id) / "hotupdate-verification-report.json"
+                        report_path = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id) / "hotupdate-verification-report.json"
                         d3_passed = 0
                         d3_total = 0
                         d3_method_results: list[dict[str, Any]] = []

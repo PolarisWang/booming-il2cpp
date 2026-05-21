@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "RuntimeSelfTest",
+  "entrySubjectId": "RuntimeSelfTest/ArithmeticProof::Add:System.Int32(System.Int32,System.Int32)",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "RuntimeSelfTest_ArithmeticProof_Add_System_Int32_System_Int32",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

@@ -19,23 +19,26 @@ set(CHAOS_THREADING_LIBS
 add_chaos_test(test_threading_smoke
     threading_smoke_test.cpp
     LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
 )
 
 # synchronization_smoke_test — Semaphore, RWLock, WaitHandle, TimerQueue
 add_chaos_test(test_synchronization_smoke
     synchronization_smoke_test.cpp
     LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
 )
 
 # threading_benchmark_test — Threading benchmarks
 add_chaos_test(test_threading_benchmark
     threading_benchmark_test.cpp
     LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "benchmark;threading"
 )
-set_tests_properties(test_threading_benchmark PROPERTIES LABELS "benchmark")
 
 # async_integration_smoke_test — Task.Run integration with ThreadPool
 add_chaos_test(test_async_integration_smoke
     async_integration_smoke_test.cpp
     LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
 )

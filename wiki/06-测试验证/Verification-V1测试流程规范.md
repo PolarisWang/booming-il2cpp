@@ -37,16 +37,16 @@ managed solution
 ## Formal Source
 
 新的 formal source 固定只有以下几类�?
-- `verification/archive/latest/`
-- `verification/archive/master/`
-- `verification/archive/reports/`
-- `verification/evidence/owners/<OwnerPack>/codegen-stubs/`
+- `testing/verification-catalog/archive/latest/`
+- `testing/verification-catalog/archive/master/`
+- `testing/verification-catalog/archive/reports/`
+- `testing/verification-catalog/evidence/owners/<OwnerPack>/codegen-stubs/`
 
 `artifacts/` 只放临时过程产物，不是 formal source。
 benchmark 补充规则：
-- `benchmark --record` 只写 raw benchmark records，不直接刷新 `verification/archive/*` 或 formal projections。
+- `benchmark --record` 只写 raw benchmark records，不直接刷新 `testing/verification-catalog/archive/*` 或 formal projections。
 - 需要新的 benchmark merged data、dashboard 或 archive summary 时，必须后续执行 `run verify verification-v1 --json`。
-- 命中 report / projection contract 时，还必须确认对应 `verification/projections/**` 派生产物已从新的 formal source 重生成。
+- 命中 report / projection contract 时，还必须确认对应 `testing/verification-catalog/projections/**` 派生产物已从新的 formal source 重生成。
 
 ## 覆盖模型
 
@@ -120,13 +120,13 @@ capability x route x platform x deviceProfile x evidenceKind
 首页不默认展�?scenario 和物�?device�?
 下游投影视图固定为：
 
-- `verification/projections/testing-inventory/unit-test-inventory.*`
+- `testing/verification-catalog/projections/testing-inventory/unit-test-inventory.*`
   - 一行一个方�?x route/stage
-- `verification/projections/testing-inventory/benchmark-inventory.*`
+- `testing/verification-catalog/projections/testing-inventory/benchmark-inventory.*`
   - 一行一�?declared-benchmark x device-profile
-- `verification/projections/testing-inventory/capability-inventory.*`
+- `testing/verification-catalog/projections/testing-inventory/capability-inventory.*`
   - 一行一�?capability x closure
-- `verification/projections/benchmark/*`
+- `testing/verification-catalog/projections/benchmark/*`
   - perf 视角的投影视�?
 ## 与旧测试流程的关�?
 旧测试流程的核心问题是：
@@ -169,5 +169,5 @@ capability x route x platform x deviceProfile x evidenceKind
 - `supportState` �?`verificationState` 必须分离
 - `failed / blocked / missing / unsupported` 不得混写
 - `AOT / IL2CPP / codegen / contracts / loader / test governance` 六条主线必须进入权责图审�?
-- 只要 formal report / projection contract 发生变化，就必须刷新 `verification/archive/{latest,master,reports}` 与对应 `verification/projections/**`；不允许只改页面或 schema 而不刷新正式数据
+- 只要 formal report / projection contract 发生变化，就必须刷新 `testing/verification-catalog/archive/{latest,master,reports}` 与对应 `testing/verification-catalog/projections/**`；不允许只改页面或 schema 而不刷新正式数据
 

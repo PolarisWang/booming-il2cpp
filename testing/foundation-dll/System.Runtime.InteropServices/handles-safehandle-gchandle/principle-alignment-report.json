@@ -1,0 +1,369 @@
+{
+  "family": "handles-safehandle-gchandle",
+  "assembly": "System.Runtime.InteropServices",
+  "generated_at": "2026-05-21T23:26:31.385527",
+  "checks": {
+    "p1_benchmark": {
+      "check_id": "p1_benchmark",
+      "status": "NOT_APPLICABLE",
+      "summary": "No benchmark data available — benchmarks not run for this family",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_lowering": {
+      "check_id": "p1_lowering",
+      "status": "CONCERN",
+      "summary": "50/58 methods have lowering (file has lowering in helper functions)",
+      "details": [],
+      "evidence": {
+        "has_lowering": true,
+        "file_has_lowering": true,
+        "methods_with_lowering": 50,
+        "methods_total": 58,
+        "stub_count": 0,
+        "simple_forward_count": 0
+      },
+      "per_method": [
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_1",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_24",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_25",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_27",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_1",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_24",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_25",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_27",
+          "has_lowering": false
+        },
+        {
+          "name": "HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_28",
+          "has_lowering": true
+        }
+      ]
+    },
+    "p1_no_redundant_branch": {
+      "check_id": "p1_no_redundant_branch",
+      "status": "ALIGNED",
+      "summary": "No runtime dispatch branches in generated code",
+      "details": [],
+      "evidence": {
+        "checked_patterns": [
+          "if\\s*\\(\\s*family\\s*[=!]=",
+          "switch\\s*\\(\\s*methodIndex\\b",
+          "if\\s*\\(\\s*methodIndex\\b",
+          "CHAOS_FAMILY_SPECIFIC",
+          "if\\s*\\(\\s*__family\\b"
+        ]
+      }
+    },
+    "p1_no_unnecessary_indirection": {
+      "check_id": "p1_no_unnecessary_indirection",
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_abstraction_balance": {
+      "check_id": "p2_abstraction_balance",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_layer_correctness": {
+      "check_id": "p2_layer_correctness",
+      "status": "ALIGNED",
+      "summary": "All 29 changed source files within expected architecture layers",
+      "details": [],
+      "evidence": {
+        "changed_source_count": 29,
+        "layer_distribution": {
+          "Codegen": 4,
+          "RuntimeCore": 18,
+          "BuildConfig": 4,
+          "Bootstrap": 1,
+          "Common": 1,
+          "HotUpdate": 1
+        }
+      }
+    },
+    "p2_no_bare_new": {
+      "check_id": "p2_no_bare_new",
+      "status": "ALIGNED",
+      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_no_code_duplication": {
+      "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_template_hygiene": {
+      "check_id": "p2_template_hygiene",
+      "status": "ALIGNED",
+      "summary": "All Scriban templates clean — no semantic decision logic",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_no_hardcoded_state": {
+      "check_id": "p3_no_hardcoded_state",
+      "status": "ALIGNED",
+      "summary": "No hardcoded static state in generated code",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patch_entry": {
+      "check_id": "p3_patch_entry",
+      "status": "ALIGNED",
+      "summary": "Dispatch table: 29 entries, all with interrupt_ptr [OK]",
+      "details": [],
+      "evidence": {
+        "table_size": 29,
+        "entries_with_interrupt_ptr": 29,
+        "has_hotpatch_module": true
+      }
+    },
+    "p3_patchdata": {
+      "check_id": "p3_patchdata",
+      "status": "ALIGNED",
+      "summary": "1/1 valid .patchdata files",
+      "details": [],
+      "evidence": {
+        "patchdata_count": 1,
+        "valid_count": 1,
+        "stub_patchdata_count": 0,
+        "files": [
+          "System.Runtime.InteropServices\\handles-safehandle-gchandle\\managed\\patch\\patchdata\\handles-safehandle-gchandle.patchdata"
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total": 12,
+    "aligned": 8,
+    "concern": 1,
+    "violation": 0,
+    "not_applicable": 3,
+    "overall": "CONCERN"
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 154,
+      "aotInstructionCount": 18,
+      "ratio": 0.12,
+      "jitCodeSize": 1442
+    },
+    "jit": {
+      "status": "ok",
+      "size": 1442,
+      "instructions": 154
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_0",
+      "instructions": 18
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 242,
+      "aotInstructionCount": 16,
+      "ratio": 0.07,
+      "jitCodeSize": 1970
+    },
+    "jit": {
+      "status": "ok",
+      "size": 1970,
+      "instructions": 242
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_1",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 210,
+      "aotInstructionCount": 16,
+      "ratio": 0.08,
+      "jitCodeSize": 1778
+    },
+    "jit": {
+      "status": "ok",
+      "size": 1778,
+      "instructions": 210
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_2",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 170,
+      "aotInstructionCount": 16,
+      "ratio": 0.09,
+      "jitCodeSize": 1538
+    },
+    "jit": {
+      "status": "ok",
+      "size": 1538,
+      "instructions": 170
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_3",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 346,
+      "aotInstructionCount": 16,
+      "ratio": 0.05,
+      "jitCodeSize": 2594
+    },
+    "jit": {
+      "status": "ok",
+      "size": 2594,
+      "instructions": 346
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_4",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 16,
+      "ratio": 0.36,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_5",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 16,
+      "ratio": 0.36,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_6",
+      "instructions": 16
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

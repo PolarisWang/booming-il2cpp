@@ -405,7 +405,7 @@ def main(argv: list[str] | None = None) -> int:
         write_step("Generate per-family hotupdate verification reports")
         generate_hotupdate_reports(
             input_path=artifact_root / "hotupdate-verification-output.json",
-            verification_root=repo_root / "verification",
+            verification_root=repo_root / "testing" / "verification-catalog",
             assembly_name=subject_id,
         )
 

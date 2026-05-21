@@ -337,8 +337,12 @@ static void RunDrainComparison(CHAOS_IL2CPP_SIZE capacity) {
             FillGen1(level.bytes, surv / 100.0);
             uint64_t drain_ns = MeasureDrain();
             // Reset Gen1 after drain (MeasureDrain does NOT reset gen1_bump).
-            g_young_gen.gen1_bump.store(s_begin,
-                                        std::memory_order_release);
+            {
+                auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+                if (gen1 != nullptr)
+                    g_young_gen.gen1_bump.store(gen1->begin,
+                                                std::memory_order_release);
+            }
 
             DrainRow row{};
             row.occ_pct = level.pct;

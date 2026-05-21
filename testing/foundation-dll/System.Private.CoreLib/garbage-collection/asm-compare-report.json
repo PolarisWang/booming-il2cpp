@@ -2,33 +2,33 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-21T22:39:19",
+  "capturedAt": "2026-05-21T23:23:03",
   "batchMode": true,
   "summary": {
-    "totalMethods": 6,
-    "okCount": 6,
+    "totalMethods": 7,
+    "okCount": 7,
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 264
+      "total": 308
     },
     "aotInstructionCount": {
       "min": 7,
       "max": 24,
-      "avg": 14.5,
-      "total": 87
+      "avg": 15.6,
+      "total": 109
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 13
+      "external_runtime_call": 15
     },
-    "overallIrExpansionRatio": 0.33,
-    "averageExpansionRatio": 0.33,
+    "overallIrExpansionRatio": 0.35,
+    "averageExpansionRatio": 0.35,
     "maxExpansionRatio": 0.55,
     "minExpansionRatio": 0.16
   },
@@ -254,6 +254,43 @@
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
+        "instructions": 22
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.InteropServices",
+  "familyId": "family/System.Runtime.InteropServices/com/types",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnClose:System.Void()",
+      "elapsedMilliseconds": 4198.789,
+      "calibratedMs": 4198.789,
+      "opsPerSecond": 23816.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnDataChange:System.Void(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.STGMEDIUM&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnRename:System.Void(System.Runtime.InteropServices.ComTypes.IMoniker)",
+      "elapsedMilliseconds": 2486.735,
+      "calibratedMs": 2486.735,
+      "opsPerSecond": 40213.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnSave:System.Void()",
+      "elapsedMilliseconds": 1560.167,
+      "calibratedMs": 1560.167,
+      "opsPerSecond": 64095.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnViewChange:System.Void(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 2528.428,
+      "calibratedMs": 2528.428,
+      "opsPerSecond": 39550.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DAdvise:System.Int32(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.ADVF,System.Runtime.InteropServices.ComTypes.IAdviseSink,System.Int32&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DUnadvise:System.Void(System.Int32)",
+      "elapsedMilliseconds": 2772.065,
+      "calibratedMs": 2772.065,
+      "opsPerSecond": 36074.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumDAdvise:System.Int32(System.Runtime.InteropServices.ComTypes.IEnumSTATDATA&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumFormatEtc:System.Runtime.InteropServices.ComTypes.IEnumFORMATETC(System.Runtime.InteropServices.ComTypes.DATADIR)",
+      "elapsedMilliseconds": 1932.559,
+      "calibratedMs": 1932.559,
+      "opsPerSecond": 51744.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::GetCanonicalFormatEtc:System.Int32(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.FORMATETC&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::GetData:System.Void(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.STGMEDIUM&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::GetDataHere:System.Void(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.STGMEDIUM&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::QueryGetData:System.Int32(System.Runtime.InteropServices.ComTypes.FORMATETC&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::SetData:System.Void(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.STGMEDIUM&,System.Boolean)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Clone:System.Void(System.Runtime.InteropServices.ComTypes.IEnumFORMATETC&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC{},System.Int32{})",
+      "elapsedMilliseconds": 1913.029,
+      "calibratedMs": 1913.029,
+      "opsPerSecond": 52273.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Reset:System.Int32()",
+      "elapsedMilliseconds": 2592.12,
+      "calibratedMs": 2592.12,
+      "opsPerSecond": 38578.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Skip:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 4752.553,
+      "calibratedMs": 4752.553,
+      "opsPerSecond": 21041.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Clone:System.Void(System.Runtime.InteropServices.ComTypes.IEnumSTATDATA&)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.STATDATA{},System.Int32{})",
+      "elapsedMilliseconds": 3375.874,
+      "calibratedMs": 3375.874,
+      "opsPerSecond": 29622.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Reset:System.Int32()",
+      "elapsedMilliseconds": 3484.808,
+      "calibratedMs": 3484.808,
+      "opsPerSecond": 28696.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 2672.044,
+      "calibratedMs": 2672.044,
+      "opsPerSecond": 37424.5,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

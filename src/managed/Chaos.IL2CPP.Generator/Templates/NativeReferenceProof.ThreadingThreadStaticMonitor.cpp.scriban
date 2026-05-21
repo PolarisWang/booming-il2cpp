@@ -1,0 +1,156 @@
+#include "{{ include_header }}"
+#include "runtime_core.h"
+
+#include <atomic>
+#include <chaos/native_types.h>
+#include <thread>
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+constexpr const char* kThreadStaticSlotKey = "ThreadingProof.thread-slot";
+constexpr const char* kExpectedOutput = {{ expected_output_literal }};
+CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) g_finalized_count = 0;
+
+void RecordFinalizer(void* object_instance) {
+    if (object_instance != nullptr) {
+        g_finalized_count.fetch_add(1);
+    }
+}
+
+bool WriteExpectedOutputLine() {
+    CHAOS_IL2CPP_LOG_WRITE_RAW_M("{0}\n", kExpectedOutput);
+    CHAOS_IL2CPP_LOG_FLUSH_STDOUT();
+    return true;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)managed_args;
+
+    if (runtime == nullptr || thread == nullptr) {
+        return 1;
+    }
+
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return 1;
+    }
+
+    int gate_object = 0;
+    void* gate = &gate_object;
+    CHAOS_IL2CPP_INT32 shared_total = 0;
+    CHAOS_IL2CPP_INT32 main_slot = 0;
+    if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, thread, kThreadStaticSlotKey, 1, &main_slot) ||
+        main_slot != 1) {
+        return 1;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, thread, kThreadStaticSlotKey, 1, &main_slot) ||
+        main_slot != 2) {
+        return 1;
+    }
+
+    if (!chaos::il2cpp::runtime_core::MonitorEnter(gate)) {
+        return 1;
+    }
+
+    shared_total += 1;
+
+    if (!chaos::il2cpp::runtime_core::MonitorExit(gate)) {
+        return 1;
+    }
+
+    CHAOS_IL2CPP_INT32 main_root = 7;
+    if (chaos::il2cpp::runtime_core::ReportThreadRoot(runtime, thread, &main_root, sizeof(main_root)) != 1u) {
+        return 1;
+    }
+
+    if (!chaos::il2cpp::runtime_core::GcSafepoint(runtime, thread)) {
+        return 1;
+    }
+
+    g_finalized_count.store(0);
+
+    CHAOS_IL2CPP_INT32 worker_slot = 0;
+    CHAOS_IL2CPP_SIZE worker_root_count = 0u;
+    bool worker_ok = false;
+    CHAOS_IL2CPP_THREAD worker([&]() {
+        ThreadState* worker_thread = nullptr;
+        if (abi->thread_attach(runtime, &worker_thread) != CHAOS_RUNTIME_STATUS_OK || worker_thread == nullptr) {
+            return;
+        }
+
+        CHAOS_IL2CPP_INT32 worker_root = 11;
+        if (!chaos::il2cpp::runtime_core::ThreadStaticInt32Add(runtime, worker_thread, kThreadStaticSlotKey, 1, &worker_slot) ||
+            worker_slot != 1) {
+            abi->thread_detach(runtime, worker_thread);
+            return;
+        }
+
+        if (!chaos::il2cpp::runtime_core::MonitorEnter(gate)) {
+            abi->thread_detach(runtime, worker_thread);
+            return;
+        }
+
+        shared_total += 1;
+
+        if (!chaos::il2cpp::runtime_core::MonitorExit(gate)) {
+            abi->thread_detach(runtime, worker_thread);
+            return;
+        }
+
+        worker_root_count =
+            chaos::il2cpp::runtime_core::ReportThreadRoot(runtime, worker_thread, &worker_root, sizeof(worker_root));
+        if (worker_root_count != 1u) {
+            abi->thread_detach(runtime, worker_thread);
+            return;
+        }
+
+        if (!chaos::il2cpp::runtime_core::GcSafepoint(runtime, worker_thread)) {
+            abi->thread_detach(runtime, worker_thread);
+            return;
+        }
+
+        worker_ok = true;
+        abi->thread_detach(runtime, worker_thread);
+    });
+    worker.join();
+
+    if (!worker_ok || worker_slot != 1 || worker_root_count != 1u) {
+        return 1;
+    }
+
+    if (shared_total != 2) {
+        return 1;
+    }
+
+    if (!chaos::il2cpp::runtime_core::EnqueueFinalizer(runtime, gate, &RecordFinalizer)) {
+        return 1;
+    }
+
+    if (chaos::il2cpp::runtime_core::DrainFinalizerQueue(runtime) != 1u) {
+        return 1;
+    }
+
+    if (g_finalized_count.load() != 1) {
+        return 1;
+    }
+
+    return WriteExpectedOutputLine() ? 0 : 1;
+}
+
+}  // namespace chaos::il2cpp::generated

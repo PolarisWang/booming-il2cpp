@@ -15,10 +15,11 @@ set(CHAOS_ENGINE_BRIDGE_LIBS
 add_chaos_test(test_engine_bridge_smoke
     engine_bridge_test.cpp
     LIBS ${CHAOS_ENGINE_BRIDGE_LIBS}
+    LABELS "unit;engine-bridge"
 )
 
 add_chaos_test(test_engine_bridge_stress
     engine_bridge_stress.cpp
     LIBS ${CHAOS_ENGINE_BRIDGE_LIBS}
+    LABELS "stress;engine-bridge"
 )
-set_tests_properties(test_engine_bridge_stress PROPERTIES LABELS "stress")

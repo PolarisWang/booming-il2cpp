@@ -16,4 +16,5 @@ set(CHAOS_ABI_LIBS
 add_chaos_test(test_abi_method_table
     method_table_abi_test.cpp
     LIBS ${CHAOS_ABI_LIBS}
+    LABELS "unit;abi"
 )

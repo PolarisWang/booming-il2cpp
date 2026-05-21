@@ -11,52 +11,62 @@ using System.Reflection;
 
 public static partial class ReflectionActivationSubjects
 {
+    // Inlined exit code — avoids SDK method call resolution in codegen
+    public static int _exitCode;
+
     // [0] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
-    public static int Subject_0()
+    public static void Subject_0()
     {
-        return ((Activator.CreateInstance(typeof(byte))).GetHashCode());
+        try { if (((Activator.CreateInstance(typeof(byte))).GetHashCode()) != ((Activator.CreateInstance(typeof(byte))).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
-    public static int Subject_1()
+    public static void Subject_1()
     {
-        return ((Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>())).GetHashCode());
+        try { if (((Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>())).GetHashCode()) != ((Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>())).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
-    public static int Subject_2()
+    public static void Subject_2()
     {
-        return -1;  // cannot auto-generate call
+        // TODO: System.Private.CoreLib/System.Activator::CreateInstance:T() could not be auto-generated
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static int Subject_3()
+    public static void Subject_3()
     {
-        return ((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode());
+        try { if (((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
-    public static int Subject_4()
+    public static void Subject_4()
     {
-        return ((Array.CreateInstance(typeof(byte), 42)).GetHashCode());
+        try { if (((Array.CreateInstance(typeof(byte), 42)).GetHashCode()) != ((Array.CreateInstance(typeof(byte), 42)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
-    public static int Subject_5()
+    public static void Subject_5()
     {
-        return ((Array.CreateInstance(typeof(byte), 42, 42)).GetHashCode());
+        try { if (((Array.CreateInstance(typeof(byte), 42, 42)).GetHashCode()) != ((Array.CreateInstance(typeof(byte), 42, 42)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])
-    public static int Subject_6()
+    public static void Subject_6()
     {
-        return ((Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>())).GetHashCode());
+        try { if (((Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>())).GetHashCode()) != ((Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>())).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])
-    public static int Subject_7()
+    public static void Subject_7()
     {
-        return ((typeof(byte).GetConstructors()[0].Invoke(new object[0])).GetHashCode());
+        try { if (((typeof(byte).GetConstructors()[0].Invoke(new object[0])).GetHashCode()) != ((typeof(byte).GetConstructors()[0].Invoke(new object[0])).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

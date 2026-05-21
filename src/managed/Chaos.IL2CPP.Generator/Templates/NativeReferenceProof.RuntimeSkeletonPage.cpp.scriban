@@ -1,0 +1,1878 @@
+// assembly-full-closure-runtime-skeleton
+// runtime skeleton page {{ page_number }}
+#include "codegen_bridge.h"
+#include "runtime_core.h"
+#include <atomic>
+#include <chaos/native_types.h>
+
+namespace chaos::il2cpp::generated::runtime_skeleton
+{
+constexpr const char* kRuntimeExecutionKind = {{ runtime_execution_kind_literal }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_number = {{ page_number }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_item_count = {{ page_item_count }};
+
+using NativeReferenceAssemblyStubFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args);
+
+struct RuntimeSkeletonFieldBindingCacheEntry
+{
+    const char* image_name;
+    CHAOS_IL2CPP_UINT32 reference_type_token;
+    CHAOS_IL2CPP_UINT32 captured_field_token;
+    TypeInfoHandle reference_type;
+    FieldInfoHandle captured_field;
+};
+
+struct RuntimeSkeletonTypeCacheEntry
+{
+    const char* image_name;
+    CHAOS_IL2CPP_UINT32 type_token;
+    TypeInfoHandle type_handle;
+};
+
+struct RuntimeSkeletonTypeDescriptor
+{
+    const char* fallback_assembly_name;
+    CHAOS_IL2CPP_UINT32 type_token;
+};
+
+struct RuntimeSkeletonTypeState
+{
+    CHAOS_IL2CPP_ATOMIC(const char*) image_name;
+    CHAOS_IL2CPP_ATOMIC(void*) type_handle;
+};
+
+struct RuntimeSkeletonConvertDecimalCarrier
+{
+    CHAOS_IL2CPP_UINT32 flags;
+    CHAOS_IL2CPP_UINT64 lo64;
+    CHAOS_IL2CPP_UINT32 hi32;
+};
+
+struct RuntimeSkeletonConvertSpanCarrier
+{
+    void* data;
+    CHAOS_IL2CPP_UINTPTR length;
+};
+
+struct RuntimeSkeletonStringDecimalCarrier
+{
+    CHAOS_IL2CPP_UINT32 flags;
+    CHAOS_IL2CPP_UINT64 lo64;
+    CHAOS_IL2CPP_UINT32 hi32;
+};
+
+struct RuntimeSkeletonStringSpanCarrier
+{
+    void* data;
+    CHAOS_IL2CPP_UINTPTR length;
+};
+
+struct RuntimeSkeletonFieldBindingDescriptor
+{
+    const char* fallback_assembly_name;
+    CHAOS_IL2CPP_UINT32 reference_type_token;
+    CHAOS_IL2CPP_UINT32 captured_field_token;
+};
+
+struct RuntimeSkeletonFieldBindingState
+{
+    CHAOS_IL2CPP_ATOMIC(const char*) image_name;
+    CHAOS_IL2CPP_ATOMIC(void*) reference_type;
+    CHAOS_IL2CPP_ATOMIC(void*) captured_field;
+    CHAOS_IL2CPP_ATOMIC(CHAOS_IL2CPP_INT32) class_init_status;
+};
+
+struct RuntimeSkeletonConstructorFieldSetterDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+};
+
+struct RuntimeSkeletonFieldGetterStringReturnDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+};
+
+struct RuntimeSkeletonFieldBackedStringReturnDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* string_concat_triple_icall;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonFieldArgumentStringReturnDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonStaticCallCtorGetterDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* console_write_line_string_icall;
+    const char* echo_literal;
+    CHAOS_IL2CPP_UINT32 echo_literal_byte_count;
+};
+
+struct RuntimeSkeletonStaticStringLiteralAppendDescriptor
+{
+    const char* concat_icall;
+    const char* appended_literal;
+    CHAOS_IL2CPP_UINT32 appended_literal_byte_count;
+};
+
+struct RuntimeSkeletonConstructorThenInstanceCallDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* string_concat_triple_icall;
+    const char* console_write_line_string_icall;
+    const char* constructor_literal;
+    CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonDelegateClosedTargetRelayDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* console_write_line_string_icall;
+    const char* constructor_literal;
+    CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+    const char* trailing_literal;
+    CHAOS_IL2CPP_UINT32 trailing_literal_byte_count;
+};
+
+struct RuntimeSkeletonArrayBoxingReferenceArrayDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    CHAOS_IL2CPP_UINT32 boxed_value_type_index;
+    const char* concat_icall;
+    const char* string_concat_triple_icall;
+    const char* console_write_line_string_icall;
+    CHAOS_IL2CPP_INT32 boxed_int32_value;
+    const char* constructor_literal;
+    CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonArrayReverseReferenceArrayDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* string_concat_triple_icall;
+    const char* console_write_line_string_icall;
+    CHAOS_IL2CPP_UINT32 array_length;
+    CHAOS_IL2CPP_UINT32 array_store_index;
+    CHAOS_IL2CPP_UINT32 reverse_start_index;
+    CHAOS_IL2CPP_UINT32 reverse_length;
+    CHAOS_IL2CPP_UINT32 array_read_index;
+    const char* constructor_literal;
+    CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonArrayCopyReferenceArrayDescriptor
+{
+    CHAOS_IL2CPP_UINT32 field_binding_index;
+    const char* concat_icall;
+    const char* string_concat_triple_icall;
+    const char* console_write_line_string_icall;
+    CHAOS_IL2CPP_UINT32 source_array_length;
+    CHAOS_IL2CPP_UINT32 target_array_length;
+    CHAOS_IL2CPP_UINT32 source_store_index;
+    CHAOS_IL2CPP_UINT32 source_array_index;
+    CHAOS_IL2CPP_UINT32 target_array_index;
+    CHAOS_IL2CPP_UINT32 target_read_index;
+    CHAOS_IL2CPP_UINT32 copy_length;
+    const char* constructor_literal;
+    CHAOS_IL2CPP_UINT32 constructor_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+    const char* message_suffix_literal;
+    CHAOS_IL2CPP_UINT32 message_suffix_literal_byte_count;
+};
+
+struct RuntimeSkeletonArrayClearReferenceArrayDescriptor
+{
+    CHAOS_IL2CPP_UINT32 string_type_index;
+    const char* concat_icall;
+    const char* console_write_line_string_icall;
+    CHAOS_IL2CPP_UINT32 array_length;
+    CHAOS_IL2CPP_UINT32 array_store_index;
+    CHAOS_IL2CPP_UINT32 clear_start_index;
+    CHAOS_IL2CPP_UINT32 clear_length;
+    CHAOS_IL2CPP_UINT32 array_read_index;
+    const char* stored_literal;
+    CHAOS_IL2CPP_UINT32 stored_literal_byte_count;
+    const char* message_prefix_literal;
+    CHAOS_IL2CPP_UINT32 message_prefix_literal_byte_count;
+};
+
+constexpr RuntimeSkeletonTypeDescriptor kPageTypeDescriptors[] =
+{
+{{~ for descriptor in type_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageTypeDescriptorCount = {{ type_descriptor_count }};
+RuntimeSkeletonTypeState gPageTypeStates[{{ type_storage_count }}] = {};
+
+constexpr RuntimeSkeletonFieldBindingDescriptor kPageFieldBindingDescriptors[] =
+{
+{{~ for descriptor in field_binding_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageFieldBindingDescriptorCount = {{ field_binding_descriptor_count }};
+RuntimeSkeletonFieldBindingState gPageFieldBindingStates[{{ field_binding_storage_count }}] = {};
+
+constexpr RuntimeSkeletonConstructorFieldSetterDescriptor kPageConstructorFieldSetterDescriptors[] =
+{
+{{~ for descriptor in constructor_field_setter_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageConstructorFieldSetterDescriptorCount = {{ constructor_field_setter_descriptor_count }};
+
+constexpr RuntimeSkeletonFieldGetterStringReturnDescriptor kPageFieldGetterStringReturnDescriptors[] =
+{
+{{~ for descriptor in field_getter_string_return_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageFieldGetterStringReturnDescriptorCount = {{ field_getter_string_return_descriptor_count }};
+
+constexpr RuntimeSkeletonFieldBackedStringReturnDescriptor kPageFieldBackedStringReturnDescriptors[] =
+{
+{{~ for descriptor in field_backed_string_return_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageFieldBackedStringReturnDescriptorCount = {{ field_backed_string_return_descriptor_count }};
+
+constexpr RuntimeSkeletonFieldArgumentStringReturnDescriptor kPageFieldArgumentStringReturnDescriptors[] =
+{
+{{~ for descriptor in field_argument_string_return_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageFieldArgumentStringReturnDescriptorCount = {{ field_argument_string_return_descriptor_count }};
+
+constexpr RuntimeSkeletonStaticCallCtorGetterDescriptor kPageStaticCallCtorGetterDescriptors[] =
+{
+{{~ for descriptor in static_call_ctor_getter_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageStaticCallCtorGetterDescriptorCount = {{ static_call_ctor_getter_descriptor_count }};
+
+constexpr RuntimeSkeletonStaticStringLiteralAppendDescriptor kPageStaticStringLiteralAppendDescriptors[] =
+{
+{{~ for descriptor in static_string_literal_append_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageStaticStringLiteralAppendDescriptorCount = {{ static_string_literal_append_descriptor_count }};
+
+constexpr RuntimeSkeletonConstructorThenInstanceCallDescriptor kPageConstructorThenInstanceCallDescriptors[] =
+{
+{{~ for descriptor in constructor_then_instance_call_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageConstructorThenInstanceCallDescriptorCount = {{ constructor_then_instance_call_descriptor_count }};
+
+constexpr RuntimeSkeletonDelegateClosedTargetRelayDescriptor kPageDelegateClosedTargetRelayDescriptors[] =
+{
+{{~ for descriptor in delegate_closed_target_relay_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageDelegateClosedTargetRelayDescriptorCount = {{ delegate_closed_target_relay_descriptor_count }};
+
+constexpr RuntimeSkeletonArrayBoxingReferenceArrayDescriptor kPageArrayBoxingReferenceArrayDescriptors[] =
+{
+{{~ for descriptor in array_boxing_reference_array_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageArrayBoxingReferenceArrayDescriptorCount = {{ array_boxing_reference_array_descriptor_count }};
+
+constexpr RuntimeSkeletonArrayReverseReferenceArrayDescriptor kPageArrayReverseReferenceArrayDescriptors[] =
+{
+{{~ for descriptor in array_reverse_reference_array_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageArrayReverseReferenceArrayDescriptorCount = {{ array_reverse_reference_array_descriptor_count }};
+
+constexpr RuntimeSkeletonArrayCopyReferenceArrayDescriptor kPageArrayCopyReferenceArrayDescriptors[] =
+{
+{{~ for descriptor in array_copy_reference_array_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageArrayCopyReferenceArrayDescriptorCount = {{ array_copy_reference_array_descriptor_count }};
+
+constexpr RuntimeSkeletonArrayClearReferenceArrayDescriptor kPageArrayClearReferenceArrayDescriptors[] =
+{
+{{~ for descriptor in array_clear_reference_array_descriptors ~}}
+{{ descriptor }}
+{{ end ~}}
+};
+constexpr CHAOS_IL2CPP_SIZE kPageArrayClearReferenceArrayDescriptorCount = {{ array_clear_reference_array_descriptor_count }};
+
+const RuntimeAbiV0* TryGetRuntimeSkeletonAbi(CHAOS_IL2CPP_INT32* status)
+{
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        *status = CHAOS_BRIDGE_STATUS_NOT_READY;
+        return nullptr;
+    }
+
+    *status = CHAOS_BRIDGE_STATUS_OK;
+    return abi;
+}
+
+const char* ResolveRuntimeSkeletonImageName(
+    const CodegenRegistrationOptionsV0* options,
+    const char* fallback_assembly_name)
+{
+    return options != nullptr && options->image_name_utf8 != nullptr
+        ? options->image_name_utf8
+        : fallback_assembly_name;
+}
+
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonType(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeSkeletonTypeCacheEntry* cache,
+    TypeInfoHandle* type_handle,
+    const char* fallback_assembly_name)
+{
+    if (bridge == nullptr || options == nullptr || cache == nullptr || type_handle == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const char* image_name = ResolveRuntimeSkeletonImageName(options, fallback_assembly_name);
+    if (cache->image_name != nullptr &&
+        CHAOS_IL2CPP_STRCMP(cache->image_name, image_name) == 0 &&
+        cache->type_handle != nullptr) {
+        *type_handle = cache->type_handle;
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle resolved_type = bridge->resolve_type_by_token(image, cache->type_token);
+    if (resolved_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    cache->image_name = image_name;
+    cache->type_handle = resolved_type;
+    *type_handle = resolved_type;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonType(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    TypeInfoHandle* type_handle)
+{
+    if (bridge == nullptr || options == nullptr || type_handle == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageTypeDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto& descriptor = kPageTypeDescriptors[descriptor_index];
+    auto& state = gPageTypeStates[descriptor_index];
+    const char* image_name = ResolveRuntimeSkeletonImageName(options, descriptor.fallback_assembly_name);
+    const char* cached_image_name = state.image_name.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    void* cached_type_handle = state.type_handle.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    if (cached_image_name != nullptr &&
+        CHAOS_IL2CPP_STRCMP(cached_image_name, image_name) == 0 &&
+        cached_type_handle != nullptr) {
+        *type_handle = reinterpret_cast<TypeInfoHandle>(cached_type_handle);
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle resolved_type = bridge->resolve_type_by_token(image, descriptor.type_token);
+    if (resolved_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_METADATA_RESOLUTION_FAILED;
+    }
+
+    state.type_handle.store(reinterpret_cast<void*>(resolved_type), CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    state.image_name.store(image_name, CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    *type_handle = resolved_type;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonFieldBinding(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeSkeletonFieldBindingCacheEntry* cache,
+    TypeInfoHandle* reference_type,
+    FieldInfoHandle* captured_field,
+    const char* fallback_assembly_name)
+{
+    if (bridge == nullptr || options == nullptr || cache == nullptr || reference_type == nullptr || captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const char* image_name = ResolveRuntimeSkeletonImageName(options, fallback_assembly_name);
+    if (cache->image_name != nullptr &&
+        CHAOS_IL2CPP_STRCMP(cache->image_name, image_name) == 0 &&
+        cache->reference_type != nullptr &&
+        cache->captured_field != nullptr) {
+        *reference_type = cache->reference_type;
+        *captured_field = cache->captured_field;
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle resolved_reference_type = bridge->resolve_type_by_token(image, cache->reference_type_token);
+    FieldInfoHandle resolved_captured_field = bridge->resolve_field_by_token(image, cache->captured_field_token);
+    if (resolved_reference_type == nullptr || resolved_captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    cache->image_name = image_name;
+    cache->reference_type = resolved_reference_type;
+    cache->captured_field = resolved_captured_field;
+    *reference_type = resolved_reference_type;
+    *captured_field = resolved_captured_field;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ResolveRuntimeSkeletonFieldBinding(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    TypeInfoHandle* reference_type,
+    FieldInfoHandle* captured_field)
+{
+    if (bridge == nullptr || options == nullptr || reference_type == nullptr || captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageFieldBindingDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto& descriptor = kPageFieldBindingDescriptors[descriptor_index];
+    auto& state = gPageFieldBindingStates[descriptor_index];
+    const char* image_name = ResolveRuntimeSkeletonImageName(options, descriptor.fallback_assembly_name);
+    const char* cached_image_name = state.image_name.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    void* cached_reference_type = state.reference_type.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    void* cached_captured_field = state.captured_field.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    if (cached_image_name != nullptr &&
+        CHAOS_IL2CPP_STRCMP(cached_image_name, image_name) == 0 &&
+        cached_reference_type != nullptr &&
+        cached_captured_field != nullptr) {
+        *reference_type = reinterpret_cast<TypeInfoHandle>(cached_reference_type);
+        *captured_field = reinterpret_cast<FieldInfoHandle>(cached_captured_field);
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle resolved_reference_type = bridge->resolve_type_by_token(image, descriptor.reference_type_token);
+    FieldInfoHandle resolved_captured_field = bridge->resolve_field_by_token(image, descriptor.captured_field_token);
+    if (resolved_reference_type == nullptr || resolved_captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_METADATA_RESOLUTION_FAILED;
+    }
+
+    state.reference_type.store(reinterpret_cast<void*>(resolved_reference_type), CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    state.captured_field.store(reinterpret_cast<void*>(resolved_captured_field), CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    state.class_init_status.store(0, CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    state.image_name.store(image_name, CHAOS_IL2CPP_MEMORY_ORDER_RELEASE);
+    *reference_type = resolved_reference_type;
+    *captured_field = resolved_captured_field;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 EnsureRuntimeSkeletonClassInitialized(
+    const RuntimeAbiV0* abi,
+    RuntimeState* runtime,
+    TypeInfoHandle reference_type)
+{
+    if (abi == nullptr || runtime == nullptr || reference_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    return abi->class_init(runtime, reference_type) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 EnsureRuntimeSkeletonFieldBindingClassInitialized(
+    const RuntimeAbiV0* abi,
+    RuntimeState* runtime,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    TypeInfoHandle reference_type)
+{
+    if (abi == nullptr || runtime == nullptr || reference_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageFieldBindingDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    auto& state = gPageFieldBindingStates[descriptor_index];
+    const CHAOS_IL2CPP_INT32 cached_status = state.class_init_status.load(CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    if (cached_status != 0) {
+        return cached_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = abi->class_init(runtime, reference_type) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED;
+    CHAOS_IL2CPP_INT32 expected = 0;
+    state.class_init_status.compare_exchange_strong(
+        expected,
+        class_init_status,
+        CHAOS_IL2CPP_MEMORY_ORDER_RELEASE,
+        CHAOS_IL2CPP_MEMORY_ORDER_ACQUIRE);
+    return expected == 0
+        ? class_init_status
+        : expected;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonConstructorFieldSetter(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    void* instance,
+    const void* value,
+    CHAOS_IL2CPP_SIZE value_size)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || instance == nullptr || value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    return abi->field_set_value(runtime, thread, captured_field, instance, value, value_size) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldGetterStringReturn(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    void* instance,
+    void** return_value)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || instance == nullptr || return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    void* captured_value = nullptr;
+    if (abi->field_get_value(
+            runtime,
+            thread,
+            captured_field,
+            instance,
+            &captured_value,
+            sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK || captured_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    *return_value = captured_value;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldBackedStringReturn(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    void* instance,
+    void** return_value)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || instance == nullptr || return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageFieldBackedStringReturnDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageFieldBackedStringReturnDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    void* captured_value = nullptr;
+    if (abi->field_get_value(
+            runtime,
+            thread,
+            captured_field,
+            instance,
+            &captured_value,
+            sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK || captured_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    if (raw_concat_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = nullptr;
+    if (CHAOS_IL2CPP_STRCMP(descriptor.concat_icall, descriptor.string_concat_triple_icall) == 0) {
+        const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
+        full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
+    } else {
+        const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+        void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+        if (combined_message == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+
+        full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    }
+
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    *return_value = full_message;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonFieldArgumentStringReturn(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    void* instance,
+    void* value,
+    void** return_value)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || instance == nullptr || return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageFieldArgumentStringReturnDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageFieldArgumentStringReturnDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    void* captured_value = nullptr;
+    if (abi->field_get_value(
+            runtime,
+            thread,
+            captured_field,
+            instance,
+            &captured_value,
+            sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    if (raw_concat_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+    void* combined_message = concat_string_pair(runtime, thread, value, captured_value);
+    if (combined_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    *return_value = full_message;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonStaticCallCtorGetter(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageStaticCallCtorGetterDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageStaticCallCtorGetterDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* echo_argument = abi->string_new_utf8(runtime, thread, descriptor.echo_literal, descriptor.echo_literal_byte_count);
+    if (echo_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* constructed_instance = abi->object_new(runtime, thread, reference_type);
+    if (constructed_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        constructed_instance,
+        &echo_argument,
+        sizeof(echo_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    void* message = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        constructed_instance,
+        &message);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    return write_line_string(runtime, thread, message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonConstructorThenInstanceCall(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageArrayCopyReferenceArrayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageArrayCopyReferenceArrayDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, descriptor.constructor_literal, descriptor.constructor_literal_byte_count);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* constructed_instance = abi->object_new(runtime, thread, reference_type);
+    if (constructed_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        constructed_instance,
+        &constructor_argument,
+        sizeof(constructor_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    void* captured_value = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        constructed_instance,
+        &captured_value);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    if (raw_concat_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = nullptr;
+    if (CHAOS_IL2CPP_STRCMP(descriptor.concat_icall, descriptor.string_concat_triple_icall) == 0) {
+        const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
+        full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
+    } else {
+        const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+        void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+        if (combined_message == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+
+        full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    }
+
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    return write_line_string(runtime, thread, full_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonStaticStringLiteralAppend(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index,
+    void* value,
+    void** return_value)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageStaticStringLiteralAppendDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageStaticStringLiteralAppendDescriptors[descriptor_index];
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    if (raw_concat_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    void* appended_literal = abi->string_new_utf8(runtime, thread, descriptor.appended_literal, descriptor.appended_literal_byte_count);
+    if (appended_literal == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+    void* result = concat_string_pair(runtime, thread, value, appended_literal);
+    if (result == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    *return_value = result;
+    return CHAOS_BRIDGE_STATUS_OK;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageDelegateClosedTargetRelayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageDelegateClosedTargetRelayDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, descriptor.constructor_literal, descriptor.constructor_literal_byte_count);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* banner = abi->object_new(runtime, thread, reference_type);
+    if (banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        banner,
+        &constructor_argument,
+        sizeof(constructor_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    void* captured_value = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        banner,
+        &captured_value);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    void* formatted = concat_string_pair(runtime, thread, prefix, captured_value);
+    if (formatted == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* suffixed_message = concat_string_pair(runtime, thread, formatted, message_suffix);
+    if (suffixed_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* trailing = abi->string_new_utf8(runtime, thread, descriptor.trailing_literal, descriptor.trailing_literal_byte_count);
+    if (trailing == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* final_message = concat_string_pair(runtime, thread, suffixed_message, trailing);
+    if (final_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    return write_line_string(runtime, thread, final_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayBoxingReferenceArray(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageArrayBoxingReferenceArrayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageArrayBoxingReferenceArrayDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    TypeInfoHandle boxed_value_type = nullptr;
+    const CHAOS_IL2CPP_INT32 boxed_type_status = ResolveRuntimeSkeletonType(
+        bridge,
+        options,
+        descriptor.boxed_value_type_index,
+        &boxed_value_type);
+    if (boxed_type_status != CHAOS_BRIDGE_STATUS_OK) {
+        return boxed_type_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    const CHAOS_IL2CPP_INT32 boxed_input = descriptor.boxed_int32_value;
+    void* boxed_value = bridge->box_value(runtime, thread, boxed_value_type, &boxed_input, sizeof(boxed_input));
+    if (boxed_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* reference_array = abi->array_new(runtime, thread, reference_type, 1u);
+    if (reference_array == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, descriptor.constructor_literal, descriptor.constructor_literal_byte_count);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* banner = abi->object_new(runtime, thread, reference_type);
+    if (banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        banner,
+        &constructor_argument,
+        sizeof(constructor_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayStoreReference(reference_array, 0u, banner)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* loaded_banner = chaos::il2cpp::runtime_core::ArrayLoadReference(reference_array, 0u);
+    if (loaded_banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* captured_value = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        loaded_banner,
+        &captured_value);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = nullptr;
+    if (CHAOS_IL2CPP_STRCMP(descriptor.concat_icall, descriptor.string_concat_triple_icall) == 0) {
+        const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
+        full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
+    } else {
+        const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+        void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+        if (combined_message == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+
+        full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    }
+
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    (void)boxed_value;
+    return write_line_string(runtime, thread, full_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayReverseReferenceArray(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageArrayReverseReferenceArrayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageArrayReverseReferenceArrayDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* array_instance = abi->array_new(runtime, thread, reference_type, descriptor.array_length);
+    if (array_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, descriptor.constructor_literal, descriptor.constructor_literal_byte_count);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* banner = abi->object_new(runtime, thread, reference_type);
+    if (banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        banner,
+        &constructor_argument,
+        sizeof(constructor_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayStoreReference(array_instance, descriptor.array_store_index, banner)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayReverseReferenceRange(
+            array_instance,
+            descriptor.reverse_start_index,
+            descriptor.reverse_length)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* loaded_banner = chaos::il2cpp::runtime_core::ArrayLoadReference(array_instance, descriptor.array_read_index);
+    if (loaded_banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* captured_value = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        loaded_banner,
+        &captured_value);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = nullptr;
+    if (CHAOS_IL2CPP_STRCMP(descriptor.concat_icall, descriptor.string_concat_triple_icall) == 0) {
+        const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
+        full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
+    } else {
+        const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+        void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+        if (combined_message == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+
+        full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    }
+
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    return write_line_string(runtime, thread, full_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayCopyReferenceArray(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageArrayCopyReferenceArrayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageArrayCopyReferenceArrayDescriptors[descriptor_index];
+    TypeInfoHandle reference_type = nullptr;
+    FieldInfoHandle captured_field = nullptr;
+    const CHAOS_IL2CPP_INT32 binding_status = ResolveRuntimeSkeletonFieldBinding(
+        bridge,
+        options,
+        descriptor.field_binding_index,
+        &reference_type,
+        &captured_field);
+    if (binding_status != CHAOS_BRIDGE_STATUS_OK) {
+        return binding_status;
+    }
+
+    const CHAOS_IL2CPP_INT32 class_init_status = EnsureRuntimeSkeletonFieldBindingClassInitialized(
+        abi,
+        runtime,
+        descriptor.field_binding_index,
+        reference_type);
+    if (class_init_status != CHAOS_BRIDGE_STATUS_OK) {
+        return class_init_status;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using ConcatStringTripleFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* first_string, const void* second_string, const void* third_string);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* source_array = abi->array_new(runtime, thread, reference_type, descriptor.source_array_length);
+    if (source_array == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* target_array = abi->array_new(runtime, thread, reference_type, descriptor.target_array_length);
+    if (target_array == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, descriptor.constructor_literal, descriptor.constructor_literal_byte_count);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* banner = abi->object_new(runtime, thread, reference_type);
+    if (banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    const CHAOS_IL2CPP_INT32 setter_status = ExecuteRuntimeSkeletonConstructorFieldSetter(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        banner,
+        &constructor_argument,
+        sizeof(constructor_argument));
+    if (setter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return setter_status;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayStoreReference(source_array, descriptor.source_store_index, banner)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayCopyReferenceRange(
+            source_array,
+            descriptor.source_array_index,
+            target_array,
+            descriptor.target_array_index,
+            descriptor.copy_length)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* loaded_banner = chaos::il2cpp::runtime_core::ArrayLoadReference(target_array, descriptor.target_read_index);
+    if (loaded_banner == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* captured_value = nullptr;
+    const CHAOS_IL2CPP_INT32 getter_status = ExecuteRuntimeSkeletonFieldGetterStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        descriptor.field_binding_index,
+        loaded_banner,
+        &captured_value);
+    if (getter_status != CHAOS_BRIDGE_STATUS_OK) {
+        return getter_status;
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* message_suffix = abi->string_new_utf8(runtime, thread, descriptor.message_suffix_literal, descriptor.message_suffix_literal_byte_count);
+    if (message_suffix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = nullptr;
+    if (CHAOS_IL2CPP_STRCMP(descriptor.concat_icall, descriptor.string_concat_triple_icall) == 0) {
+        const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
+        full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
+    } else {
+        const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+        void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+        if (combined_message == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+
+        full_message = concat_string_pair(runtime, thread, combined_message, message_suffix);
+    }
+
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    return write_line_string(runtime, thread, full_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+CHAOS_IL2CPP_INT32 ExecuteRuntimeSkeletonArrayClearReferenceArray(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 descriptor_index)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (descriptor_index >= kPageArrayClearReferenceArrayDescriptorCount) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    CHAOS_IL2CPP_INT32 abi_status = CHAOS_BRIDGE_STATUS_OK;
+    const RuntimeAbiV0* abi = TryGetRuntimeSkeletonAbi(&abi_status);
+    if (abi == nullptr) {
+        return abi_status;
+    }
+
+    const auto& descriptor = kPageArrayClearReferenceArrayDescriptors[descriptor_index];
+    TypeInfoHandle string_type = nullptr;
+    const CHAOS_IL2CPP_INT32 type_status = ResolveRuntimeSkeletonType(
+        bridge,
+        options,
+        descriptor.string_type_index,
+        &string_type);
+    if (type_status != CHAOS_BRIDGE_STATUS_OK) {
+        return type_status;
+    }
+
+    if (abi->class_init(runtime, string_type) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED;
+    }
+
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_concat_string = bridge->resolve_icall(descriptor.concat_icall);
+    void* raw_write_line_string = bridge->resolve_icall(descriptor.console_write_line_string_icall);
+    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+
+    void* array_instance = abi->array_new(runtime, thread, string_type, descriptor.array_length);
+    if (array_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* stored_value = abi->string_new_utf8(runtime, thread, descriptor.stored_literal, descriptor.stored_literal_byte_count);
+    if (stored_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayStoreReference(array_instance, descriptor.array_store_index, stored_value)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    if (!chaos::il2cpp::runtime_core::ArrayClearReferenceRange(
+            array_instance,
+            descriptor.clear_start_index,
+            descriptor.clear_length)) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* cleared_value = chaos::il2cpp::runtime_core::ArrayLoadReference(array_instance, descriptor.array_read_index);
+    if (cleared_value == nullptr) {
+        cleared_value = abi->string_new_utf8(runtime, thread, "", 0u);
+        if (cleared_value == nullptr) {
+            return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+        }
+    }
+
+    void* message_prefix = abi->string_new_utf8(runtime, thread, descriptor.message_prefix_literal, descriptor.message_prefix_literal_byte_count);
+    if (message_prefix == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    void* full_message = concat_string_pair(runtime, thread, message_prefix, cleared_value);
+    if (full_message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+    }
+
+    return write_line_string(runtime, thread, full_message) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED;
+}
+
+{{~ for stub_declaration in method_stub_declarations ~}}
+{{ stub_declaration }}
+{{ end ~}}
+
+{{~ for external_stub_declaration in external_method_stub_declarations ~}}
+{{ external_stub_declaration }}
+{{ end ~}}
+
+{{~ for stub_definition in method_stub_definitions ~}}
+{{ stub_definition }}
+
+{{ end ~}}
+constexpr NativeReferenceAssemblyStubFn kPageMethodDispatch[] =
+{
+{{~ for dispatch_entry in dispatch_entries ~}}
+{{ dispatch_entry }}
+{{ end ~}}
+};
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ page_dispatch_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    CHAOS_IL2CPP_UINT32 method_slot,
+    void* managed_args)
+{
+    if (method_slot >= (sizeof(kPageMethodDispatch) / sizeof(kPageMethodDispatch[0]))) {
+        return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+    }
+
+    // Domain is already pushed by the summary entry point.
+    return kPageMethodDispatch[method_slot](
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        managed_args);
+}
+}  // namespace chaos::il2cpp::generated::runtime_skeleton

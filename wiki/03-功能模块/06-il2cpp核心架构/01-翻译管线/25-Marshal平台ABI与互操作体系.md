@@ -160,7 +160,7 @@ Native 实现位于 `src/native/runtime-core/core/marshal_api.cpp`。
 | `src/native/runtime-core/engine_binding.h` | Engine → codegen ABI 表注册 |
 | `src/managed/.../RuntimeHelperShapeRegistry.cs` | GenericShapeDescriptor 注册 |
 | `src/managed/.../MethodEmission.cs` | P/Invoke 4 路径 codegen |
-| `verification/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/` | P/Invoke + COM 验证 |
+| `testing/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/` | P/Invoke + COM 验证 |
 
 ## 已排除能力
 

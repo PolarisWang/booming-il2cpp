@@ -364,7 +364,7 @@ chaos-il2cpp asm-compare <dll> --method <method> --sections header,metrics,analy
 
 ```bash
 chaos-il2cpp asm-compare \
-  verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --method ConvertCharSubjects::Subject_0
 ```
 
@@ -374,7 +374,7 @@ chaos-il2cpp asm-compare \
 
 ```bash
 chaos-il2cpp asm-compare \
-  verification/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --method ConvertCharSubjects::Run \
   --sections header,metrics,analysis
 ```

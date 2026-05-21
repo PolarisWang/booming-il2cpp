@@ -1,0 +1,20 @@
+// ── External Runtime Dispatch Table ──────────────────────────
+// Startup-time-resolved function pointers for cross-assembly calls.
+
+extern "C" const char* kChaosExternalRuntimeSubjects[{{ subject_count }}] = {
+{{~ for entry in entries ~}}
+    "{{ entry.subject_literal }}",
+{{~ end ~}}
+};
+
+extern "C" void* kChaosExternalRuntimeFnTable[{{ subject_count }}] = {
+{{~ for entry in entries ~}}
+{{~ if entry.has_helper_symbol ~}}
+    reinterpret_cast<void*>(&{{ entry.helper_symbol }}),
+{{~ else ~}}
+    nullptr,
+{{~ end ~}}
+{{~ end ~}}
+};
+
+extern "C" int32_t kChaosExternalRuntimeCount = {{ subject_count }};

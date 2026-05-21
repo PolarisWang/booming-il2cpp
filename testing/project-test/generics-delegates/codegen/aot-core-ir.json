@@ -1,0 +1,1358 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "generics-delegates.program.main",
+      "subjectId": "GenericsDelegates/Program::\u003CMain\u003E$:System.Void(System.String[])",
+      "signature": "System.Void Program::\u003CMain\u003E$(System.String[])",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/Program",
+        "definitionSubjectId": "GenericsDelegates/Program::\u003CMain\u003E$:System.Void(System.String[])",
+        "subjectId": "GenericsDelegates/Program::\u003CMain\u003E$:System.Void(System.String[])",
+        "methodId": "generics-delegates.program.main",
+        "signature": "System.Void Program::\u003CMain\u003E$(System.String[])"
+      },
+      "nativeSymbol": "GenericsDelegates_Program_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_DEL_CUSTOM=",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "callee": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericsDelegates_DelegateSubjects_TestCustomDelegate",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 11,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 13,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 18,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_DEL_AS_PARAM=",
+          "ilOffset": 28,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "callee": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericsDelegates_DelegateSubjects_TestDelegateAsParam",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 39,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 46,
+          "resultType": "System.String",
+          "callee": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "RTS_DONE=ok",
+          "ilOffset": 56,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "callee": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+          "reference": {
+            "assemblyName": "System.Console",
+            "subjectKind": "method",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Console",
+            "subjectId": "System.Console/System.Console::WriteLine:System.Void(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 66,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.program.ctor",
+      "subjectId": "GenericsDelegates/Program::.ctor:System.Void()",
+      "signature": "System.Void Program::.ctor()",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/Program",
+        "definitionSubjectId": "GenericsDelegates/Program::.ctor:System.Void()",
+        "subjectId": "GenericsDelegates/Program::.ctor:System.Void()",
+        "methodId": "generics-delegates.program.ctor",
+        "signature": "System.Void Program::.ctor()"
+      },
+      "nativeSymbol": "GenericsDelegates_Program__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "GenericsDelegates/Program",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.auto-generated-program.main",
+      "subjectId": "GenericsDelegates/AutoGeneratedProgram::Main:System.Void(System.String[])",
+      "signature": "System.Void AutoGeneratedProgram::Main(System.String[])",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/AutoGeneratedProgram",
+        "definitionSubjectId": "GenericsDelegates/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "subjectId": "GenericsDelegates/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "methodId": "generics-delegates.auto-generated-program.main",
+        "signature": "System.Void AutoGeneratedProgram::Main(System.String[])"
+      },
+      "nativeSymbol": "GenericsDelegates_AutoGeneratedProgram_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 0,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.auto-generated-program.ctor",
+      "subjectId": "GenericsDelegates/AutoGeneratedProgram::.ctor:System.Void()",
+      "signature": "System.Void AutoGeneratedProgram::.ctor()",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/AutoGeneratedProgram",
+        "definitionSubjectId": "GenericsDelegates/AutoGeneratedProgram::.ctor:System.Void()",
+        "subjectId": "GenericsDelegates/AutoGeneratedProgram::.ctor:System.Void()",
+        "methodId": "generics-delegates.auto-generated-program.ctor",
+        "signature": "System.Void AutoGeneratedProgram::.ctor()"
+      },
+      "nativeSymbol": "GenericsDelegates_AutoGeneratedProgram__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "GenericsDelegates/AutoGeneratedProgram",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.binary-op.ctor",
+      "subjectId": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)",
+      "signature": "System.Void BinaryOp::.ctor(System.Object,System.IntPtr)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/BinaryOp",
+        "definitionSubjectId": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)",
+        "subjectId": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)",
+        "methodId": "generics-delegates.binary-op.ctor",
+        "signature": "System.Void BinaryOp::.ctor(System.Object,System.IntPtr)"
+      },
+      "nativeSymbol": "GenericsDelegates_BinaryOp__ctor_System_Object_System_IntPtr",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        },
+        {
+          "carrierKindCode": 2,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.binary-op.invoke",
+      "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+      "signature": "System.Int32 BinaryOp::Invoke(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/BinaryOp",
+        "definitionSubjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+        "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+        "methodId": "generics-delegates.binary-op.invoke",
+        "signature": "System.Int32 BinaryOp::Invoke(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "GenericsDelegates_BinaryOp_Invoke_System_Int32_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.binary-op.begin-invoke",
+      "subjectId": "GenericsDelegates/BinaryOp::BeginInvoke:System.IAsyncResult(System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "signature": "System.IAsyncResult BinaryOp::BeginInvoke(System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/BinaryOp",
+        "definitionSubjectId": "GenericsDelegates/BinaryOp::BeginInvoke:System.IAsyncResult(System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "subjectId": "GenericsDelegates/BinaryOp::BeginInvoke:System.IAsyncResult(System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "methodId": "generics-delegates.binary-op.begin-invoke",
+        "signature": "System.IAsyncResult BinaryOp::BeginInvoke(System.Int32,System.Int32,System.AsyncCallback,System.Object)"
+      },
+      "nativeSymbol": "GenericsDelegates_BinaryOp_BeginInvoke_System_Int32_System_Int32_System_AsyncCallback_System_Object",
+      "isStatic": false,
+      "returnType": "System.IAsyncResult",
+      "returnAbi": {
+        "carrierKindCode": 2,
+        "typeShape": 1
+      },
+      "parameterCount": 4,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        },
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.binary-op.end-invoke",
+      "subjectId": "GenericsDelegates/BinaryOp::EndInvoke:System.Int32(System.IAsyncResult)",
+      "signature": "System.Int32 BinaryOp::EndInvoke(System.IAsyncResult)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/BinaryOp",
+        "definitionSubjectId": "GenericsDelegates/BinaryOp::EndInvoke:System.Int32(System.IAsyncResult)",
+        "subjectId": "GenericsDelegates/BinaryOp::EndInvoke:System.Int32(System.IAsyncResult)",
+        "methodId": "generics-delegates.binary-op.end-invoke",
+        "signature": "System.Int32 BinaryOp::EndInvoke(System.IAsyncResult)"
+      },
+      "nativeSymbol": "GenericsDelegates_BinaryOp_EndInvoke_System_IAsyncResult",
+      "isStatic": false,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.delegate-subjects.add",
+      "subjectId": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+      "signature": "System.Int32 DelegateSubjects::Add(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects",
+        "definitionSubjectId": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+        "subjectId": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+        "methodId": "generics-delegates.delegate-subjects.add",
+        "signature": "System.Int32 DelegateSubjects::Add(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "GenericsDelegates_DelegateSubjects_Add_System_Int32_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.delegate-subjects.multiply",
+      "subjectId": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+      "signature": "System.Int32 DelegateSubjects::Multiply(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects",
+        "definitionSubjectId": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+        "subjectId": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+        "methodId": "generics-delegates.delegate-subjects.multiply",
+        "signature": "System.Int32 DelegateSubjects::Multiply(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "GenericsDelegates_DelegateSubjects_Multiply_System_Int32_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.delegate-subjects.test-custom-delegate",
+      "subjectId": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()",
+      "signature": "System.Int32 DelegateSubjects::TestCustomDelegate()",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects",
+        "definitionSubjectId": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()",
+        "subjectId": "GenericsDelegates/DelegateSubjects::TestCustomDelegate:System.Int32()",
+        "methodId": "generics-delegates.delegate-subjects.test-custom-delegate",
+        "signature": "System.Int32 DelegateSubjects::TestCustomDelegate()"
+      },
+      "nativeSymbol": "GenericsDelegates_DelegateSubjects_TestCustomDelegate",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 0,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+          "ilOffset": 1,
+          "resultType": "System.IntPtr",
+          "callee": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects::Add:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 7,
+          "resultType": "GenericsDelegates/BinaryOp",
+          "callee": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/BinaryOp",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.MulticastDelegate",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 4,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericsDelegates_BinaryOp_Invoke_System_Int32_System_Int32",
+          "targetParameterCount": 2,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.delegate-subjects.apply-function",
+      "subjectId": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)",
+      "signature": "System.Int32 DelegateSubjects::ApplyFunction(BinaryOp,System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects",
+        "definitionSubjectId": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)",
+        "subjectId": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)",
+        "methodId": "generics-delegates.delegate-subjects.apply-function",
+        "signature": "System.Int32 DelegateSubjects::ApplyFunction(BinaryOp,System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "GenericsDelegates_DelegateSubjects_ApplyFunction_BinaryOp_System_Int32_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 3,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeSubjectId": "GenericsDelegates/BinaryOp",
+          "typeShape": 1
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "BinaryOp",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 2,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/BinaryOp::Invoke:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericsDelegates_BinaryOp_Invoke_System_Int32_System_Int32",
+          "targetParameterCount": 2,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    },
+    {
+      "methodId": "generics-delegates.delegate-subjects.test-delegate-as-param",
+      "subjectId": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()",
+      "signature": "System.Int32 DelegateSubjects::TestDelegateAsParam()",
+      "identity": {
+        "assemblyName": "GenericsDelegates",
+        "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects",
+        "definitionSubjectId": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()",
+        "subjectId": "GenericsDelegates/DelegateSubjects::TestDelegateAsParam:System.Int32()",
+        "methodId": "generics-delegates.delegate-subjects.test-delegate-as-param",
+        "signature": "System.Int32 DelegateSubjects::TestDelegateAsParam()"
+      },
+      "nativeSymbol": "GenericsDelegates_DelegateSubjects_TestDelegateAsParam",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply",
+          "ilOffset": 0,
+          "resultType": "BinaryOp",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "field",
+            "subjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "BinaryOp"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 27,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 9,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+          "ilOffset": 10,
+          "resultType": "System.IntPtr",
+          "callee": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects::Multiply:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 16,
+          "resultType": "GenericsDelegates/BinaryOp",
+          "callee": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/BinaryOp::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/BinaryOp",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.MulticastDelegate",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "field",
+            "subjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO::\u003C0\u003E__Multiply",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericsDelegates/DelegateSubjects\u002B\u003C\u003EO",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "BinaryOp"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 6,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "callee": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "GenericsDelegates",
+            "subjectKind": "method",
+            "subjectId": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericsDelegates",
+            "subjectId": "GenericsDelegates/DelegateSubjects::ApplyFunction:System.Int32(BinaryOp,System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericsDelegates_DelegateSubjects_ApplyFunction_BinaryOp_System_Int32_System_Int32",
+          "targetParameterCount": 3,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 34,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericsDelegates"
+    }
+  ]
+}

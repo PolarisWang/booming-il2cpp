@@ -6,6 +6,10 @@
 ///   GcStressTestBase — adds multi-threaded stress test helpers
 ///   GcBenchTestBase  — adds RDTSC timing helpers
 ///
+/// All fixtures perform automatic resource-leak detection in TearDown():
+///   - Thread count (registered threads must return to baseline)
+///   - TLAB state (must not be left in an inconsistent state)
+///
 /// Usage:
 ///   TEST_F(GcUnitTestBase, MyTest) { ... }
 ///   TEST_F(GcStressTestBase, ScenarioS) { ... }
@@ -28,12 +32,101 @@
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_scheduler.h"
+#include "gc_stats.h"
 #include "gc_young_gen.h"
 #include "thread_state.h"
 
 #include <gtest/gtest.h>
 
 namespace chaos { namespace il2cpp { namespace runtime_core {
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GcResourceSnapshot — lightweight resource-state snapshot for leak detection
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Captures the current state of global GC resources. GcTestBase captures one
+// at the end of SetUp() and asserts in TearDown() that no resources leaked.
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcResourceSnapshot {
+    int32_t thread_count = 0;
+    CHAOS_IL2CPP_UINT32 active_region_count = 0;
+    int poh_region_count = 0;
+    bool tlab_clean = true;  // true = tls_tlab.start == nullptr
+
+    void Capture() {
+        thread_count = threading::GetThreadCount();
+        active_region_count = RegionManager::Instance().ActiveRegionCount();
+        poh_region_count = RegionManager::Instance().GetPohRegionCount();
+        tlab_clean = (tls_tlab.start == nullptr);
+    }
+
+    /// Assert that current state matches this snapshot (within tolerance).
+    /// Thread count and TLAB are strict; region counts are advisory.
+    void ExpectNoLeaks(const char* test_name) const {
+        GcResourceSnapshot current;
+        current.Capture();
+
+        EXPECT_EQ(current.thread_count, thread_count)
+            << "[" << test_name << "] Thread leak detected: "
+            << current.thread_count << " now vs " << thread_count << " at setup";
+
+        EXPECT_EQ(current.tlab_clean, tlab_clean)
+            << "[" << test_name << "] TLAB state changed: "
+            << (current.tlab_clean ? "clean" : "dirty") << " now vs "
+            << (tlab_clean ? "clean" : "dirty") << " at setup";
+
+        // Region count changes are reported as warnings since some tests
+        // legitimately allocate persistent old-gen memory.
+        if (current.active_region_count != active_region_count) {
+            ADD_FAILURE()
+                << "[" << test_name << "] Region count changed: "
+                << current.active_region_count << " now vs "
+                << active_region_count << " at setup";
+        }
+        if (current.poh_region_count != poh_region_count) {
+            ADD_FAILURE()
+                << "[" << test_name << "] POH region count changed: "
+                << current.poh_region_count << " now vs "
+                << poh_region_count << " at setup";
+        }
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GcAllocationTracker — RAII allocation counter for test assertions
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Captures total allocation count and bytes in constructor, computes delta
+// in AllocCount() / AllocBytes().  Uses process-wide GcStats counters so
+// it captures all GC-tracked allocations (nursery + old gen + LOH).
+//
+// Usage:
+//   GcAllocationTracker tracker;
+//   DoOperation();
+//   EXPECT_EQ(tracker.AllocCount(), 0);   // zero-allocation assertion
+//   EXPECT_GT(tracker.AllocBytes(), 0);   // some bytes allocated
+// ═══════════════════════════════════════════════════════════════════════════
+
+struct GcAllocationTracker {
+    uint64_t count_before_;
+    uint64_t bytes_before_;
+
+    GcAllocationTracker() {
+        count_before_ = g_gc_stats.alloc_total.load(std::memory_order_relaxed);
+        bytes_before_ = g_gc_stats.alloc_bytes.load(std::memory_order_relaxed);
+    }
+
+    /// Number of allocations since construction.
+    uint64_t AllocCount() const {
+        return g_gc_stats.alloc_total.load(std::memory_order_relaxed) - count_before_;
+    }
+
+    /// Total bytes allocated since construction.
+    uint64_t AllocBytes() const {
+        return g_gc_stats.alloc_bytes.load(std::memory_order_relaxed) - bytes_before_;
+    }
+};
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Level 1: GcTestBase — minimal shared fixture
@@ -54,15 +147,22 @@ namespace chaos { namespace il2cpp { namespace runtime_core {
 
 struct GcTestBase : ::testing::Test {
     uint32_t tid = 0;
+    GcResourceSnapshot snapshot_;
 
     void SetUp() override {
         tid = threading::AllocateThreadId();
         threading::RegisterThread(tid, nullptr);
         threading::EnterCooperativeMode();
         InitYoungGeneration();
+        snapshot_.Capture();
     }
 
     void TearDown() override {
+        const char* test_name = "?";
+        if (auto* info = ::testing::UnitTest::GetInstance()->current_test_info()) {
+            test_name = info->name();
+        }
+        snapshot_.ExpectNoLeaks(test_name);
         threading::UnregisterThread();
     }
 
@@ -120,6 +220,10 @@ struct GcUnitTestBase : GcTestBase {
 
         // Warmup: allocate one old-gen object so the old-gen page pool is ready.
         warmup_ = g_old_gen.Allocate(8, true);
+
+        // Re-capture snapshot after warmup allocation so region count baseline
+        // includes the warmup object's region.
+        snapshot_.Capture();
     }
 
     void TearDown() override {

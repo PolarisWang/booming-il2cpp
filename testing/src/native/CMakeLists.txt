@@ -115,14 +115,29 @@ if(USE_ASAN)
     endif()
 endif()
 
+# Include sanitizer config modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../config/sanitizers")
+include(asan)
+include(rtc)
+
 # Convenience: create gtest executable with chaos library support
 function(add_chaos_test name)
-    cmake_parse_arguments(ARG "" "" "LIBS;INCLUDES" ${ARGN})
+    cmake_parse_arguments(ARG "" "SANITIZE" "LIBS;INCLUDES;LABELS" ${ARGN})
     add_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
     target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
     target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
     target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
     add_test(NAME ${name} COMMAND ${name})
+    if(ARG_LABELS)
+        set_tests_properties(${name} PROPERTIES LABELS "${ARG_LABELS}")
+    endif()
+    # Apply per-target sanitizer config
+    if(ARG_SANITIZE STREQUAL "asan")
+        chaos_enable_asan(${name})
+    elseif(ARG_SANITIZE STREQUAL "rtc")
+        chaos_enable_rtc(${name})
+    endif()
+    # Global USE_ASAN still applies (legacy path)
     if(USE_ASAN AND CHAOS_ASAN_DLL)
         add_custom_command(TARGET ${name} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -149,3 +164,4 @@ add_subdirectory(codegen)
 add_subdirectory(engine-bridge)
 add_subdirectory(hot-update)
 add_subdirectory(runtime-core)
+add_subdirectory(fuzz)

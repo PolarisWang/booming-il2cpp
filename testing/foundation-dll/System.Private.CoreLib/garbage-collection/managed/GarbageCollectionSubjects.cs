@@ -54,4 +54,11 @@ public static partial class GarbageCollectionSubjects
         catch { _exitCode = 1; }
     }
 
+    // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
+    public static void Subject_6()
+    {
+        try { if (((GC.GetGCMemoryInfo()).GetHashCode()) != ((GC.GetGCMemoryInfo()).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
+    }
+
 }

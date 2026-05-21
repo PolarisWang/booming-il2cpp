@@ -31,8 +31,7 @@ TEST_F(GcBenchTestBase, Gen1Benchmark_98PercentOccupancy) {
     // Measure Gen1 collection pause.
     uint64_t ns = MeasureGen1Collection();
 
-    printf("  [Bench] 98%% occupancy Gen1 collection: %llu ns (target < 10ms)\n",
-           static_cast<unsigned long long>(ns));
+    RecordMetric("Gen1Benchmark/98PercentOccupancy", ns);
 
     // Target: < 10ms for 98% survival + 98% occupancy.
     EXPECT_LT(ns, 10'000'000ULL) << "Gen1 collection exceeded 10ms target";
@@ -47,8 +46,7 @@ TEST_F(GcBenchTestBase, Gen1Benchmark_50PercentOccupancy) {
 
     uint64_t ns = MeasureGen1Collection();
 
-    printf("  [Bench] 50%% occupancy Gen1 collection: %llu ns\n",
-           static_cast<unsigned long long>(ns));
+    RecordMetric("Gen1Benchmark/50PercentOccupancy", ns);
 
     // At 50% occupancy, target should be well under 5ms.
     EXPECT_LT(ns, 5'000'000ULL) << "Gen1 collection at 50% exceeded 5ms target";
@@ -64,8 +62,7 @@ TEST_F(GcBenchTestBase, Gen1Benchmark_Empty) {
 
     uint64_t ns = MeasureGen1Collection();
 
-    printf("  [Bench] Empty Gen1 collection: %llu ns\n",
-           static_cast<unsigned long long>(ns));
+    RecordMetric("Gen1Benchmark/Empty", ns);
 
     // Empty Gen1 should complete extremely fast (< 100μs).
     EXPECT_LT(ns, 100'000ULL) << "Empty Gen1 collection exceeded 100μs target";

@@ -1,0 +1,2247 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-0",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_0:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-0",
+        "signature": "System.Void ComTypesSubjects::Subject_0()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnClose:System.Void()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnClose:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnClose:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-1",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_1:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-1",
+        "signature": "System.Void ComTypesSubjects::Subject_1()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-2",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_2:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-2",
+        "signature": "System.Void ComTypesSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 18,
+          "handlerOffset": 19,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnRename:System.Void(System.Runtime.InteropServices.ComTypes.IMoniker)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnRename:System.Void(System.Runtime.InteropServices.ComTypes.IMoniker)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnRename:System.Void(System.Runtime.InteropServices.ComTypes.IMoniker)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-3",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_3:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-3",
+        "signature": "System.Void ComTypesSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnSave:System.Void()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnSave:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnSave:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-4",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_4:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-4",
+        "signature": "System.Void ComTypesSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 21,
+          "handlerOffset": 22,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnViewChange:System.Void(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnViewChange:System.Void(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnViewChange:System.Void(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-5",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_5:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-5",
+        "signature": "System.Void ComTypesSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-6",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_6:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-6",
+        "signature": "System.Void ComTypesSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 19,
+          "handlerOffset": 20,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DUnadvise:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DUnadvise:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DUnadvise:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-7",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_7:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-7",
+        "signature": "System.Void ComTypesSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-8",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_8:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-8",
+        "signature": "System.Void ComTypesSubjects::Subject_8()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 18,
+          "handlerOffset": 19,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 4,
+          "resultType": "System.Runtime.InteropServices.ComTypes.IEnumFORMATETC",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumFormatEtc:System.Runtime.InteropServices.ComTypes.IEnumFORMATETC(System.Runtime.InteropServices.ComTypes.DATADIR)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumFormatEtc:System.Runtime.InteropServices.ComTypes.IEnumFORMATETC(System.Runtime.InteropServices.ComTypes.DATADIR)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumFormatEtc:System.Runtime.InteropServices.ComTypes.IEnumFORMATETC(System.Runtime.InteropServices.ComTypes.DATADIR)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 19,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-9",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_9:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-9",
+        "signature": "System.Void ComTypesSubjects::Subject_9()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-10",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_10()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_10:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-10",
+        "signature": "System.Void ComTypesSubjects::Subject_10()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_10",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-11",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_11()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_11:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-11",
+        "signature": "System.Void ComTypesSubjects::Subject_11()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_11",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-12",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_12()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_12:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-12",
+        "signature": "System.Void ComTypesSubjects::Subject_12()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_12",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-13",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_13()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_13:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-13",
+        "signature": "System.Void ComTypesSubjects::Subject_13()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_13",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-14",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_14()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_14:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-14",
+        "signature": "System.Void ComTypesSubjects::Subject_14()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_14",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-15",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_15()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_15:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-15",
+        "signature": "System.Void ComTypesSubjects::Subject_15()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_15",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 21,
+          "handlerOffset": 22,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 5,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 6,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-16",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_16()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_16:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-16",
+        "signature": "System.Void ComTypesSubjects::Subject_16()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_16",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Reset:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Reset:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Reset:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-17",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_17()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_17:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-17",
+        "signature": "System.Void ComTypesSubjects::Subject_17()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_17",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 19,
+          "handlerOffset": 20,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Skip:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Skip:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Skip:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-18",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_18()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_18:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-18",
+        "signature": "System.Void ComTypesSubjects::Subject_18()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_18",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-19",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_19()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_19:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-19",
+        "signature": "System.Void ComTypesSubjects::Subject_19()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_19",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 21,
+          "handlerOffset": 22,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 5,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 6,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.STATDATA[],System.Int32[])",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.STATDATA[],System.Int32[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.STATDATA[],System.Int32[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-20",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_20()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_20:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-20",
+        "signature": "System.Void ComTypesSubjects::Subject_20()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_20",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 17,
+          "handlerOffset": 18,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Reset:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Reset:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Reset:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 21,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    },
+    {
+      "methodId": "com-types-subjects.com-types-subjects.subject-21",
+      "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()",
+      "signature": "System.Void ComTypesSubjects::Subject_21()",
+      "identity": {
+        "assemblyName": "ComTypesSubjects",
+        "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+        "definitionSubjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()",
+        "subjectId": "ComTypesSubjects/ComTypesSubjects::Subject_21:System.Void()",
+        "methodId": "com-types-subjects.com-types-subjects.subject-21",
+        "signature": "System.Void ComTypesSubjects::Subject_21()"
+      },
+      "nativeSymbol": "ComTypesSubjects_ComTypesSubjects_Subject_21",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 19,
+          "handlerOffset": 20,
+          "handlerLength": 5,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 3,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 5,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 11,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ComTypesSubjects",
+            "subjectKind": "field",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ComTypesSubjects",
+            "subjectId": "ComTypesSubjects/ComTypesSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ComTypesSubjects/ComTypesSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 25,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 25,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ComTypesSubjects"
+    }
+  ]
+}

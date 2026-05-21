@@ -1,0 +1,25 @@
+#include "{{ include_header }}"
+#include "runtime_core.h"
+
+namespace chaos::il2cpp::generated {
+
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+
+    return chaos::il2cpp::runtime_core::EngineLogWrite("service-call", {{ expected_output_literal }});
+}
+
+}  // namespace chaos::il2cpp::generated

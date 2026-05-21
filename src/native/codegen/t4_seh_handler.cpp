@@ -64,6 +64,20 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
         "RegisterT4Code: code={} size={} seh_offset={} token={}",
         code_start, code_size, nm->seh_table_offset, patch_method_token);
+
+#if defined(_WIN64)
+    // Register .pdata/.xdata unwind info for OS stack unwinding.
+    // This must happen after the code buffer address is finalized.
+    if (nm->runtime_function != nullptr) {
+        if (!RtlAddFunctionTable(
+                static_cast<PRUNTIME_FUNCTION>(nm->runtime_function),
+                1,
+                reinterpret_cast<DWORD64>(code_start))) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+                "RtlAddFunctionTable failed for token={}", patch_method_token);
+        }
+    }
+#endif
 }
 
 void UnregisterT4Code(void* code_start) noexcept {
@@ -385,6 +399,111 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
         reinterpret_cast<void*>(ex_obj));
 
     return EXCEPTION_CONTINUE_EXECUTION;
+}
+
+// ── Win64 Personality Routine (V2) ──────────────────────────────────────
+// Called by the OS unwinder during exception dispatch.  This is the second
+// line of defense after the VEH handler:
+//
+//   VEH (first chance): catches managed exceptions, dispatches within the
+//     current method via FindSehHandlerForOffset.  If no handler found in
+//     the current method, returns CONTINUE_SEARCH.
+//
+//   Personality routine (second chance): when VEH returns CONTINUE_SEARCH,
+//     the OS unwinder walks the call stack and calls the personality routine
+//     for each frame.  If a T4 frame has a matching handler, the personality
+//     routine redirects RIP and returns ExceptionCollidedUnwind.
+//
+// This function is invoked via a JMP thunk embedded in the code buffer
+// after the UNWIND_INFO (see EmitUnwindInfo in unwind_info.cpp).
+
+extern "C" EXCEPTION_DISPOSITION T4PersonalityRoutine(
+    PEXCEPTION_RECORD ExceptionRecord,
+    ULONG64 /*EstablisherFrame*/,
+    PCONTEXT ContextRecord,
+    PDISPATCHER_CONTEXT DispatcherContext) noexcept {
+
+    if (ExceptionRecord == nullptr || ContextRecord == nullptr ||
+        DispatcherContext == nullptr) {
+        return ExceptionContinueSearch;
+    }
+
+    // Only handle managed exceptions (0xE0000001).
+    // For hardware exceptions or native C++ exceptions, let the OS
+    // continue searching — the VEH handler handles hardware exceptions
+    // within the same method, and native C++ exceptions go through the
+    // standard C++ runtime.
+    if (ExceptionRecord->ExceptionCode != kManagedSehExceptionCode) {
+        return ExceptionContinueSearch;
+    }
+
+    // Find NativeMethod covering the ControlPc (the return address that
+    // triggered the unwind).  This is the instruction after the
+    // `call ChaosT4RaiseException` in the T4 code.
+    const NativeMethod* nm = FindT4CodeByAddress(
+        reinterpret_cast<const void*>(DispatcherContext->ControlPc));
+    if (nm == nullptr) {
+        return ExceptionContinueSearch;
+    }
+
+    // No SEH table — can't dispatch
+    if (nm->seh_table_offset == 0) {
+        return ExceptionContinueSearch;
+    }
+
+    // Compute code offset from the T4 code base
+    const uint8_t* code_base = static_cast<const uint8_t*>(nm->code);
+    uint32_t code_offset = static_cast<uint32_t>(
+        reinterpret_cast<const uint8_t*>(DispatcherContext->ControlPc) - code_base);
+
+    // Walk SEH clause table to find matching handler
+    const uint8_t* table = code_base + nm->seh_table_offset;
+    uint32_t count;
+    std::memcpy(&count, table, sizeof(count));
+    const uint8_t* clauses = table + sizeof(uint32_t);
+
+    for (uint32_t i = 0; i < count; i++) {
+        const uint8_t* entry = clauses + i * (5 * sizeof(uint32_t));
+        uint32_t clause_flags, try_start, try_end;
+        std::memcpy(&clause_flags, entry + 0, sizeof(clause_flags));
+        std::memcpy(&try_start,    entry + 4, sizeof(try_start));
+        std::memcpy(&try_end,      entry + 8, sizeof(try_end));
+
+        if (code_offset >= try_start && code_offset < try_end) {
+            uint32_t handler_st;
+            std::memcpy(&handler_st, entry + 12, sizeof(handler_st));
+
+            // Redirect RIP to the handler code
+            void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_st;
+            ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
+
+            // RSP stays at the establisher frame (the T4 frame's RSP after
+            // prologue).  The handler code expects the T4 frame layout.
+            // EstablisherFrame is the T4 frame's RSP, set by RtlVirtualUnwind.
+
+            // Place the exception object pointer in RCX (Win64 first arg).
+            // DispatcherContext doesn't give us direct access to TLS, but we
+            // can read g_t4_exception_obj which was set by ChaosT4RaiseException.
+            ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
+
+            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+                "T4 personality: clause {} matches offset={} (ControlPc={}) "
+                "-> handler at {} (offset={}), ex_obj={}",
+                i, code_offset,
+                reinterpret_cast<const void*>(DispatcherContext->ControlPc),
+                handler_addr, handler_st,
+                reinterpret_cast<void*>(g_t4_exception_obj));
+
+            return ExceptionCollidedUnwind;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+        "T4 personality: no handler for offset={} (ControlPc={})",
+        code_offset,
+        reinterpret_cast<const void*>(DispatcherContext->ControlPc));
+
+    return ExceptionContinueSearch;
 }
 
 void RegisterT4SehHandler() noexcept {

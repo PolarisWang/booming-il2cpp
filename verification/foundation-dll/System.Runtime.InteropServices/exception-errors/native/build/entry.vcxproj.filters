@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\native\runtime-entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\native\runtime-patchdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\native\verification_dispatch.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\native\microbench.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\codegen\ExceptionErrorsSubjects\generated\native-aot.generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\verification\foundation-dll\System.Runtime.InteropServices\exception-errors\native\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AD026438-1F86-31DE-8F2E-3BCF68CE2A8B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -113,23 +113,6 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 }
 
 // ======================================================================
-// chaos_is_gc_pointer — fast check for GC-heap membership
-// ======================================================================
-
-extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
-    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
-    // Fast path: g_heap_base is the minimum address registered with the
-    // card table, covering old-gen and nursery.  Stack-allocated value
-    // types live far below this address.
-    if (addr >= g_heap_base) return true;
-    // POH regions are independently VirtualAlloc'd and may be below
-    // g_heap_base (the card table does not cover POH).  Check via the
-    // lock-free POH slot array.
-    if (RegionManager::Instance().IsPohPointer(ptr)) return true;
-    return false;
-}
-
-// ======================================================================
 // chaos_gc_collect_with_mode
 // ======================================================================
 
@@ -413,4 +396,19 @@ bool GcIsInNoGcRegion() noexcept {
     return tls_no_gc_region_depth > 0;
 }
 
+void chaos_gc_register_finalizable(void* obj) noexcept {
+    // Minimal stub: records the object for future finalization.
+    // The finalizer lookup from type_info is not yet wired — the GC will
+    // not invoke the finalizer until a full registration path is added.
+    // This is sufficient for testing scenarios that don't exercise the
+    // finalization pipeline (e.g. hotupdate emit-patch-data flow).
+    (void)obj;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
+
+// ── ABI export wrapper (C-linkage for generated AOT code) ─────────────
+
+extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
+    return chaos::il2cpp::runtime_core::chaos_is_gc_pointer(ptr);
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "projectId": "runtime-self-test",
+  "displayName": "Runtime Self Test",
+  "description": "Minimal complete-project verification for il2cpp core paths: GC, arithmetic, strings, arrays, integration",
+  "entryPoint": "RuntimeSelfTest",
+  "assemblies": ["RuntimeSelfTest"],
+  "expectedOutputFile": "expected/fact-output.txt",
+  "hotupdatePatches": ["ArithmeticPatch"],
+  "subjects": [
+    "RuntimeSelfTest/Program::Main(System.String[])",
+    "RuntimeSelfTest/ArithmeticProof::Add(System.Int32,System.Int32)",
+    "RuntimeSelfTest/ArithmeticProof::Multiply(System.Int32,System.Int32)",
+    "RuntimeSelfTest/GcAllocationProof::AllocateAndReturn(System.Int32)",
+    "RuntimeSelfTest/StringOperations::FormatString(System.String,System.Int32)",
+    "RuntimeSelfTest/ArrayOperations::CreateAndSum(System.Int32)",
+    "RuntimeSelfTest/IntegrationProof::GcAndDelegateInvoke(System.Int32)",
+    "RuntimeSelfTest/IntegrationProof::FinalizerAndNewAllocation(System.Int32)",
+    "RuntimeSelfTest/IntegrationProof::GcAcrossMethodCalls(System.Int32)",
+    "RuntimeSelfTest/IntegrationProof::ThreadedGcAllocation(System.Int32)"
+  ]
+}

@@ -293,7 +293,7 @@ def _get_git_branch(repo_root: Path) -> str:
 
 def _backup_baseline(repo_root: Path, test_name: str) -> None:
     """Backup existing baseline before a new full run."""
-    history_root = repo_root / "verification-history" / "stress" / test_name
+    history_root = repo_root / "testing" / "stress-history" / test_name
     latest_dir = history_root / "latest"
     baseline_file = latest_dir / "baseline.json"
 
@@ -304,7 +304,7 @@ def _backup_baseline(repo_root: Path, test_name: str) -> None:
     backup_dir = history_root / timestamp
     backup_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(str(baseline_file), str(backup_dir / "baseline.json"))
-    print(f"  Baseline backed up to verification-history/stress/{test_name}/{timestamp}/")
+    print(f"  Baseline backed up to testing/stress-history/{test_name}/{timestamp}/")
 
 
 # ---------------------------------------------------------------------------
@@ -515,7 +515,7 @@ def _handle_export(args: list[str], repo_root: Path) -> int:
         return 0
 
     # Check baseline
-    history_root = repo_root / "verification-history" / "stress" / test_name
+    history_root = repo_root / "testing" / "stress-history" / test_name
     latest_baseline = history_root / "latest" / "baseline.json"
     baseline_data = None
     if latest_baseline.exists():
@@ -583,7 +583,7 @@ def _handle_import(args: list[str], repo_root: Path) -> int:
     # Restore baseline if present
     baseline = archive.get("baseline")
     if baseline:
-        history_root = repo_root / "verification-history" / "stress" / test_name
+        history_root = repo_root / "testing" / "stress-history" / test_name
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S")
         import_dir = history_root / f"imported-{timestamp}"
         import_dir.mkdir(parents=True, exist_ok=True)

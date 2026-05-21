@@ -1,8 +1,8 @@
 """Baseline Manager — checksum + performance baseline read/write/compare.
 
-Stores per-family baselines in verification-history/:
-  verification-history/<assembly>/<family>/baseline-checksums.json
-  verification-history/<assembly>/<family>/baseline-benchmark.json
+Stores per-family baselines in testing/verification-history/:
+  testing/verification-history/<assembly>/<family>/baseline-checksums.json
+  testing/verification-history/<assembly>/<family>/baseline-benchmark.json
 
 Supports:
   - Save/reload checksum baselines from Fact Static verification
@@ -21,7 +21,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_DEFAULT_BASELINE_ROOT = _REPO_ROOT / "verification-history"
+_DEFAULT_BASELINE_ROOT = _REPO_ROOT / "testing" / "verification-history"
 
 sys.path.insert(0, str(_HERE.parent.parent))
 try:

@@ -53,13 +53,13 @@ python build/toolchains/run/testing/foundation_dll/family_entrypoint_generator.p
 
 # 2. 生成 .patchdata
 chaos-il2cpp emit-patch-data \
-    verification/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/build-output/ConvertCharPatchEntry.dll \
-    verification/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata \
-    --aot-core-ir verification/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/closure-sp/analysis/aot-core-ir.json
+    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/build-output/ConvertCharPatchEntry.dll \
+    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata \
+    --aot-core-ir testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/entrypoint-patch/closure-sp/analysis/aot-core-ir.json
 
 # 3. 验证生成的 .patchdata
 chaos-il2cpp emit-patch-data dump \
-    verification/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata
+    testing/foundation-dll/System.Private.CoreLib/convert-char/il2cpp_dist/patch/patchdata/convert-char.patchdata
 ```
 
 ---

@@ -1,0 +1,96 @@
+// ── CodeRegistrationV0 ─────────────────────────────────────────
+// method_pointers: flat array of all AOT function pointers.
+static void* const kMethodPointers[{{ methods_count }}] = {
+{{~ for method in methods ~}}
+    reinterpret_cast<void*>(&{{ method.native_symbol }}),
+{{~ end ~}}
+};
+
+{{~ if reverse_pinvoke_count > 0 ~}}
+static void* const kReversePInvokeWrappers[{{ reverse_pinvoke_count }}] = {
+{{~ for entry in reverse_pinvoke_entries ~}}
+    reinterpret_cast<void*>(&{{ entry.native_symbol }}),
+{{~ end ~}}
+};
+
+{{~ end ~}}
+// CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+{{~ if vtable_descriptor_count > 0 ~}}
+// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
+static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
+{{~ for desc in vtable_descriptors ~}}
+    {
+        {{ desc.stable_id }},
+        {{ desc.type_token_literal }},
+        {{ desc.base_token_literal }},
+        {{ desc.slot_count }}u,
+        reinterpret_cast<const void*>({{ desc.slots_symbol }}),
+        reinterpret_cast<const void**>({{ desc.vtable_array_symbol }}),
+        {{ desc.vtable_length }}u,
+        {{ desc.type_shape }},
+        {0, 0, 0},
+        {{ desc.iface_map_symbol }},
+        {{ desc.iface_count }}u,
+    },
+{{~ end ~}}
+};
+{{~ end ~}}
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
+    = {
+    .struct_size               = sizeof(CodeRegistrationV0),
+    .method_pointers           = kMethodPointers,
+    .method_pointer_count      = {{ methods_count }}u,
+{{~ if reverse_pinvoke_count > 0 ~}}
+    .reverse_pinvoke_wrappers  = kReversePInvokeWrappers,
+    .reverse_pinvoke_wrapper_count = {{ reverse_pinvoke_count }}u,
+{{~ else ~}}
+    .reverse_pinvoke_wrappers  = nullptr,
+    .reverse_pinvoke_wrapper_count = 0u,
+{{~ end ~}}
+    .invoker_pointers          = nullptr,
+    .invoker_pointer_count     = 0u,
+    .unresolved_virtual_calls = nullptr,
+    .unresolved_virtual_call_count = 0u,
+    .type_capabilities       = nullptr,
+    .type_capability_count   = 0u,
+    .vtable_descriptors = {{ if vtable_descriptor_count > 0 }}kChaosVTableDescriptors{{ else }}nullptr{{ end }},
+    .vtable_descriptor_count = {{ if vtable_descriptor_count > 0 }}{{ vtable_descriptor_count }}{{ else }}0{{ end }}u,
+{{~ if has_gc_slot_map_section ~}}
+    .slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+    .slot_map_section_end   = reinterpret_cast<const void*>(
+        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
+{{~ else ~}}
+    .slot_map_section_begin = nullptr,
+    .slot_map_section_end   = nullptr,
+{{~ end ~}}
+};
+
+// MetadataRegistrationV0
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration
+    = {
+    .struct_size              = sizeof(MetadataRegistrationV0),
+    .generic_types            = kGenericTypeEntries,
+    .generic_type_count       = sizeof(kGenericTypeEntries) / sizeof(kGenericTypeEntries[0]),
+    .generic_type_args        = kGenericTypeArgTokens,
+    .generic_type_arg_count   = sizeof(kGenericTypeArgTokens) / sizeof(kGenericTypeArgTokens[0]),
+    .generic_methods          = kGenericMethodEntries,
+    .generic_method_count     = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),
+    .generic_method_args      = kGenericMethodArgTokens,
+    .generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),
+    .method_aot_entries       = s_method_aot_entries,
+    .method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),
+    .method_aot_entry_args    = s_method_aot_entry_args,
+    .method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),
+    .field_offsets           = nullptr,
+    .field_offset_count      = 0u,
+    .metadata_usages         = nullptr,
+    .metadata_usage_count    = 0u,
+};
+
+// CodegenRegistrationOptionsV0
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
+    = {
+    .struct_size       = sizeof(CodegenRegistrationOptionsV0),
+    .registration_flags = 0u,
+    .image_name_utf8    = "{{ assembly_name }}",
+};

@@ -1,0 +1,46 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "RuntimeSelfTest",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::.ctor:System.Void(System.Object,System.IntPtr)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "RuntimeSelfTest",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::Invoke:System.Int32(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::Invoke:!1(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Func\u00602::Invoke:!1(!0)",
+        "typeArguments": [
+          "System.Int32",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    }
+  ]
+}

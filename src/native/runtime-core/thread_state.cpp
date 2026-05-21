@@ -10,6 +10,13 @@
 #include "gc_card_table.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
+#if defined(_WIN32) || defined(_WIN64)
+    #include <windows.h>
+    #include <intrin.h>
+#else
+    #include <pthread.h>
+#endif
+
 #include "../codegen/t4_seh_handler.h"    // FindT4CodeByAddress for hybrid GC scanning
 #include "../codegen/native_method.h"     // NativeMethod (slot_map_data for GcSlotMapV0)
 
@@ -23,13 +30,6 @@
 #include <cstring>
 #if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
 #include <signal.h>
-#endif
-
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-    #include <intrin.h>
-#else
-    #include <pthread.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {

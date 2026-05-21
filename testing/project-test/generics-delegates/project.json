@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "projectId": "generics-delegates",
+  "displayName": "Generics & Delegates",
+  "description": "Tests generic methods, generic classes, and delegate creation/invocation through il2cpp codegen",
+  "entryPoint": "GenericsDelegates",
+  "assemblies": ["GenericsDelegates"],
+  "expectedOutputFile": "expected/fact-output.txt",
+  "subjects": [
+    "GenericsDelegates/Program::Main(System.String[])",
+    "GenericsDelegates/GenericSubjects::Identity(System.Object)",
+    "GenericsDelegates/GenericSubjects::Max(System.Object,System.Object)",
+    "GenericsDelegates/GenericSubjects::MakePair(System.Object,System.Object)",
+    "GenericsDelegates/DelegateSubjects::TestCustomDelegate()",
+    "GenericsDelegates/DelegateSubjects::TestFuncDelegate()",
+    "GenericsDelegates/DelegateSubjects::TestActionDelegate()",
+    "GenericsDelegates/DelegateSubjects::TestDelegateAsParam()"
+  ]
+}

@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: D:/agent/booming-il2cpp/testing/src/native/bootstrap
+# Build directory: D:/agent/booming-il2cpp/build/testing/bootstrap
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test([=[test_bootstrap_smoke]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/Debug/test_bootstrap_smoke.exe")
+  set_tests_properties([=[test_bootstrap_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;14;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test([=[test_bootstrap_smoke]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/Release/test_bootstrap_smoke.exe")
+  set_tests_properties([=[test_bootstrap_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;14;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test([=[test_bootstrap_smoke]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/MinSizeRel/test_bootstrap_smoke.exe")
+  set_tests_properties([=[test_bootstrap_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;14;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test([=[test_bootstrap_smoke]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/RelWithDebInfo/test_bootstrap_smoke.exe")
+  set_tests_properties([=[test_bootstrap_smoke]=] PROPERTIES  _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;14;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+else()
+  add_test([=[test_bootstrap_smoke]=] NOT_AVAILABLE)
+endif()
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test([=[test_bootstrap_stress]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/Debug/test_bootstrap_stress.exe")
+  set_tests_properties([=[test_bootstrap_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;19;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test([=[test_bootstrap_stress]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/Release/test_bootstrap_stress.exe")
+  set_tests_properties([=[test_bootstrap_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;19;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test([=[test_bootstrap_stress]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/MinSizeRel/test_bootstrap_stress.exe")
+  set_tests_properties([=[test_bootstrap_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;19;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test([=[test_bootstrap_stress]=] "D:/agent/booming-il2cpp/build/testing/bootstrap/RelWithDebInfo/test_bootstrap_stress.exe")
+  set_tests_properties([=[test_bootstrap_stress]=] PROPERTIES  LABELS "stress" _BACKTRACE_TRIPLES "D:/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;127;add_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;19;add_chaos_test;D:/agent/booming-il2cpp/testing/src/native/bootstrap/CMakeLists.txt;0;")
+else()
+  add_test([=[test_bootstrap_stress]=] NOT_AVAILABLE)
+endif()

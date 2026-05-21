@@ -21,7 +21,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-LEDGER = REPO / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+LEDGER = REPO / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
 REFRESH_CMD = [sys.executable, str(REPO / "build" / "toolchains" / "run" / "run.py"),
                "verify", "verification-v1", "--json"]
@@ -50,7 +50,7 @@ def _load_ledger():
 
 def _on_disk_families(aname):
     """Return set of family slugs that have a directory on disk."""
-    dll_dir = REPO / "verification" / "foundation-dll" / aname
+    dll_dir = REPO / "testing" / "foundation-dll" / aname
     if not dll_dir.is_dir():
         return set()
     return {p.name for p in dll_dir.iterdir() if p.is_dir() and p.name != "reports"}
@@ -173,7 +173,7 @@ def _get_verifyable_families(dlls, lookup):
                 slug = fid.rsplit("/", 1)[-1] if "/" in fid else fid
             if slug not in disk_slugs:
                 continue
-            contract_path = REPO / "verification" / "foundation-dll" / aname / slug / "capability-family-contract.json"
+            contract_path = REPO / "testing" / "foundation-dll" / aname / slug / "capability-family-contract.json"
             if not contract_path.exists():
                 print(f"  SKIP {aname}/{slug} — no contract on disk")
                 continue

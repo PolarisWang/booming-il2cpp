@@ -12,6 +12,7 @@ add_library(chaos_codegen STATIC
     codegen_helpers.cpp
     deopt_runtime.cpp
     t4_seh_handler.cpp
+    unwind_info.cpp
     )
 
 target_compile_features(chaos_codegen PUBLIC cxx_std_17)

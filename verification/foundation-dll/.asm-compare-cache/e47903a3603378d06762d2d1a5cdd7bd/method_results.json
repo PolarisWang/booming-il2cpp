@@ -1,0 +1,473 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 12,
+      "ratio": 0.27,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0",
+      "instructions": 12
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 14,
+      "ratio": 0.32,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1",
+      "instructions": 14
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 11,
+      "ratio": 0.25,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2",
+      "instructions": 11
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 17,
+      "ratio": 0.39,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3",
+      "instructions": 17
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Func<System.Int32>::Invoke:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4",
+      "instructions": 8
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[])' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 10,
+      "ratio": 0.23,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5",
+      "instructions": 10
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Collections/System.Collections.Generic.Comparer<System.Byte>::get_Default:System.Collections.Generic.Comparer<System.Byte>()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Sort<System.Byte>:System.Void(System.Byte[],System.Collections.Generic.IComparer<System.Byte>)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 22,
+      "ratio": 0.5,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 26,
+      "ratio": 0.59,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7",
+      "instructions": 26
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::BinarySearch<System.Byte>:System.Int32(System.Byte[],System.Int32,System.Int32,System.Byte)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 1518,
+      "aotInstructionCount": 22,
+      "ratio": 0.01,
+      "jitCodeSize": 4082
+    },
+    "jit": {
+      "status": "ok",
+      "size": 4082,
+      "instructions": 1518
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::IndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 22,
+      "ratio": 0.5,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::LastIndexOf<System.Byte>:System.Int32(System.Byte[],System.Byte)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 10,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
+    "shortName": "Subject_10",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10",
+      "instructions": 8
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::Reverse<System.Byte>:System.Void(System.Byte[])' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 11,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+    "shortName": "Subject_11",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 22,
+      "ratio": 0.5,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 12,
+    "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+    "shortName": "Subject_12",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 24,
+      "ratio": 0.55,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12",
+      "instructions": 24
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  }
+]
