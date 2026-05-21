@@ -1528,27 +1528,27 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 					}
 					else
 					{
+						CHAOS_IL2CPP_INT32 chaos_result{};
 						if (chaos_delegate->chaos_delegate_target == 0)
 						{
 							const auto chaos_open_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(chaos_delegate->chaos_delegate_method_ptr);
-							const auto chaos_result = chaos_open_function();
-							_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+							chaos_result = chaos_open_function();
 						}
 						else
 						{
 							const auto chaos_closed_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_delegate->chaos_delegate_method_ptr);
-							const auto chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target);
-							_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+							chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target);
 						}
+						_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 				}
 			}
 			chaos_ensure_type_initialized_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c();
-			_s5 = chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9__14_1;
-			_s6 = _s5;
+			_s4 = chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9__14_1;
+			_s5 = _s4;
 			// brtrue (structured EH branch)
 			chaos_ensure_type_initialized_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c();
-			_s6 = chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9;
+			_s5 = chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9;
 			{
 				// Hotpatch-aware ldftn wrapper (slot 15)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
@@ -1566,25 +1566,25 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 					}
 					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
 				};
-			_s7 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
 			}
 			{
-				const auto chaos_method_ptr = _s7;
-				const auto chaos_target = _s6;
+				const auto chaos_method_ptr = _s6;
+				const auto chaos_target = _s5;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
 				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			_s7 = _s6;
+			_s6 = _s5;
 			{
-				auto chaos_value = _s7;
+				auto chaos_value = _s6;
 			chaos_ensure_type_initialized_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c();
 				chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9__14_1 = chaos_value;
 			}
 			{
-				const auto chaos_delegate_value = _s6;
+				const auto chaos_delegate_value = _s5;
 				if (chaos_delegate_value == 0)
 				{
 					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
@@ -1623,7 +1623,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 							chaos_result = chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target);
 						}
 					}
-					_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+					_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 				}
 				else
 				{
@@ -1648,34 +1648,34 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 
 					if (__chaos_hotpatch_taken)
 					{
-						_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(__chaos_hotpatch_result);
+						_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(__chaos_hotpatch_result);
 					}
 					else
 					{
+						CHAOS_IL2CPP_INT32 chaos_result{};
 						if (chaos_delegate->chaos_delegate_target == 0)
 						{
 							const auto chaos_open_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(chaos_delegate->chaos_delegate_method_ptr);
-							const auto chaos_result = chaos_open_function();
-							_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+							chaos_result = chaos_open_function();
 						}
 						else
 						{
 							const auto chaos_closed_function = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_delegate->chaos_delegate_method_ptr);
-							const auto chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target);
-							_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+							chaos_result = chaos_closed_function(chaos_delegate->chaos_delegate_target);
 						}
+						_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 					}
 				}
 			}
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s8) == static_cast<CHAOS_IL2CPP_INTPTR>(_s9) ? 1 : 0);
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s8) == static_cast<CHAOS_IL2CPP_INTPTR>(_s9) ? 1 : 0);
-			chaos_locals[0] = _s8;
-			_s8 = chaos_locals[0];
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s9;
+				auto chaos_value = _s7;
 				chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN

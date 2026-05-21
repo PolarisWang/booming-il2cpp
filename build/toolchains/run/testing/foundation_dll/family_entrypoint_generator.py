@@ -906,7 +906,7 @@ def generate_and_build(
     custom_method_indices: set[int] | None = None
     family_slug = _slug_from_family_id(family_id)
     # Prefer testing/ contract path, fall back to verification/ (legacy)
-    contract_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "contract.json"
+    contract_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
     if not contract_path.exists():
         contract_path = _REPO_ROOT / "verification" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
     if contract_path.exists():

@@ -8,6 +8,7 @@
 #include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
+#include "gc_numa.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_young_gen.h"
@@ -1200,6 +1201,12 @@ int BgcController::SpawnParallelMarkWorkers() {
     bgc_parallel_done_.store(false, std::memory_order_release);
     bgc_parallel_workers_.clear();
 
+    // Bind worker 0 (BGC thread) to NUMA node 0; spawned workers bind in BgcWorkerMain.
+    int numa_count = GcNumaNodeCount();
+    if (numa_count > 1) {
+        GcNumaBindThread(0);
+    }
+
     for (int i = 1; i < n_workers; i++) {
         bgc_parallel_workers_.emplace_back(&BgcController::BgcWorkerMain, this, i);
     }
@@ -1295,6 +1302,12 @@ namespace {
 }
 
 void BgcController::BgcWorkerMain(int worker_idx) {
+    // Bind to NUMA node for locality.
+    int numa_count = GcNumaNodeCount();
+    if (numa_count > 1) {
+        GcNumaBindThread(worker_idx % numa_count);
+    }
+
     // Worker loop: per-worker deque with work-stealing (P1-1).
     // Each worker pops from its own deque (under steal_mutex).
     // When empty, attempts up to 3 random steals from other workers.

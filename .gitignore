@@ -39,10 +39,7 @@ il2cpp_dist/
 # root-level test reports only (/reports/report.json, not testing/*/reports/)
 /reports/
 
-# Auto-generated verification evidence (regenerated on every pipeline run)
-docs/verification/foundation-dll-audit/
-
-# Runtime-generated verification catalog/history (under artifact/ to keep root clean)
+# Auto-generated verification catalog/history (under artifact/ to keep root clean)
 artifact/
 
 # .NET outputs

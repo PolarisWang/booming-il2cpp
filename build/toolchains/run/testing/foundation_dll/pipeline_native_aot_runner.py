@@ -92,6 +92,9 @@ def _load_method_subject_ids(family_slug: str, *, verification: Path | None = No
     v = verification or _VERIFICATION
     contract_path = v / family_slug / "capability-family-contract.json"
     if not contract_path.exists():
+        # Fall back to testing/ (authoritative contract source for old families)
+        contract_path = (_REPO_ROOT / "testing" / contract_path.relative_to(_REPO_ROOT / "verification"))
+    if not contract_path.exists():
         print(f"  [SKIP] no contract at {contract_path}")
         return []
 
@@ -109,6 +112,8 @@ def _count_methods_in_contract(family_slug: str, *, verification: Path | None = 
     """Count methods from contract (either methodSubjectIds list or contract entries)."""
     v = verification or _VERIFICATION
     contract_path = v / family_slug / "capability-family-contract.json"
+    if not contract_path.exists():
+        contract_path = (_REPO_ROOT / "testing" / contract_path.relative_to(_REPO_ROOT / "verification"))
     if not contract_path.exists():
         return 0
     with open(contract_path, encoding="utf-8") as f:

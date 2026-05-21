@@ -47,4 +47,9 @@ void GcNumaVirtualFree(void* ptr, CHAOS_IL2CPP_SIZE size) noexcept {
     // No-op — platform does not use NUMA-aware virtual memory.
 }
 
+void GcNumaBindThread(int node) noexcept {
+    (void)node;
+    // No-op — platform does not support NUMA thread binding.
+}
+
 }  // namespace chaos::il2cpp::runtime_core

@@ -89,3 +89,23 @@ NativeMethod* GenerateNativeCode(
 
 // RegisterT4SehHandler is provided by chaos_codegen.lib (t4_seh_handler.cpp)
 // which is linked by all test targets via CHAOS_GC_COMMON_LIBS.  No stub needed.
+
+// ── Thread-local variable stubs ──────────────────────────────────────────
+// These thread_local variables are referenced by inline functions in
+// gc_region.h (NurseryAllocateFast, PohAllocateFast) which are called from
+// gc_test_base.cpp and directly-compiled production source files.
+// The real definitions live in gc_region.cpp and gc_api.cpp inside
+// chaos_runtime_core.lib, but MSVC link.exe cannot search GNU ar format
+// archives to resolve TLS relocations.  These stubs provide the definitions
+// so that test targets that use NurseryAllocate / gc_test_base.cpp can link.
+//
+// NOTE: Tests that directly compile gc_region.cpp or gc_api.cpp do NOT
+// need these stubs — they get the real definitions from those .cpp files.
+#include <chaos/native_types.h>
+#include "gc_region.h"
+namespace chaos { namespace il2cpp { namespace runtime_core {
+thread_local TLAB tls_tlab;
+thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = 0;
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
+thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
+}}}

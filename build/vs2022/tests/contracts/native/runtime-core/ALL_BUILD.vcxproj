@@ -341,6 +341,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{98970DC5-F87C-3316-A447-C9857AB3C99B}</Project>
       <Name>chaos_threading_smoke</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_unwind_info_test.vcxproj">
+      <Project>{FED9F2D7-0732-358D-9393-2318BD0989D9}</Project>
+      <Name>chaos_unwind_info_test</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

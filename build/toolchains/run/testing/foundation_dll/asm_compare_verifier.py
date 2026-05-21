@@ -153,9 +153,6 @@ def _load_contract_methods(family_slug: str, assembly: str,
     family_dir = v_base / assembly / family_slug
     contract_path = family_dir / "capability-family-contract.json"
     if not contract_path.exists():
-        # Fall back to contract.json (used by the new testing/ pipeline)
-        contract_path = family_dir / "contract.json"
-    if not contract_path.exists():
         return []
     try:
         with open(contract_path, encoding="utf-8") as f:

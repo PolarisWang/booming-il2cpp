@@ -431,6 +431,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{0414932E-DDED-3AC0-A01C-ABAC274F93E3}</Project>
       <Name>chaos_unordered_map_bench</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_unwind_info_test.vcxproj">
+      <Project>{FED9F2D7-0732-358D-9393-2318BD0989D9}</Project>
+      <Name>chaos_unwind_info_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\abi\runtime_abi_compile_only.vcxproj">
       <Project>{968E6BB7-F2FF-3336-B926-2FF7AD568DAE}</Project>
       <Name>runtime_abi_compile_only</Name>

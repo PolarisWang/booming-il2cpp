@@ -248,8 +248,6 @@ def audit_family(assembly: str, family_slug: str) -> MechanismAuditReport:
     # Fallback: load from contract file directly
     if not relevant_types:
         contract_path = family_dir / "capability-family-contract.json"
-        if not contract_path.exists():
-            contract_path = family_dir / "contract.json"
         if contract_path.exists():
             try:
                 contract = json.loads(contract_path.read_bytes())

@@ -93,6 +93,28 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 			}
 		}
+
+		// Pass 2: Fill in missing base types for delegate types.
+		// Delegate constructors always have signature ::.ctor:System.Void(System.Object,System.IntPtr).
+		// When the AOT IR's targetReference for a delegate type lacks baseTypeSubjectId
+		// (e.g., cross-assembly types like System.Threading.ThreadStart), detect it via the
+		// unique callee pattern and set the missing base to MulticastDelegate.
+		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
+		{
+			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
+			{
+				if (!string.IsNullOrEmpty(instruction.Callee) &&
+					instruction.Callee.Contains("::.ctor:", StringComparison.Ordinal) &&
+					instruction.Callee.EndsWith("(System.Object,System.IntPtr)", StringComparison.Ordinal))
+				{
+					string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+					if (!dictionary.TryGetValue(declaringType, out var existingBase) || string.IsNullOrEmpty(existingBase))
+					{
+						dictionary[declaringType] = "System.Private.CoreLib/System.MulticastDelegate";
+					}
+				}
+			}
+		}
 		return dictionary;
 	}
 

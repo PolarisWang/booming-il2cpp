@@ -70,6 +70,9 @@ void TestLohSweep() {
 
     int count_before = g_loh.SegmentCount();
 
+    // Clear pre-marks (Allocate pre-marks segments for BGC safety).
+    g_loh.UnmarkAllForTesting();
+
     // Mark them all as reachable (simulating a GC mark phase).
     for (int i = 0; i < 5; i++) {
         CHECK(g_loh.MarkObject(objs[i]), "Mark LOH object");
@@ -95,6 +98,9 @@ void TestLohSweep() {
 
     // Reclaim partial free mark.
     int count_before_partial = g_loh.SegmentCount();
+
+    // Clear all pre-marks before testing partial mark + sweep.
+    g_loh.UnmarkAllForTesting();
 
     // Mark only the 3 "keep" objects + the 5 original.
     for (int i = 0; i < 3; i++) {

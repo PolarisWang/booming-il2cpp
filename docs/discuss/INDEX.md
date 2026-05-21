@@ -1,28 +1,34 @@
-﻿# docs/discuss INDEX
+# docs/discuss 技术讨论与评估报告
 
-## 璇存槑
+> 技术方案的讨论、评估、对比分析。结论稳定后迁入 `architecture/` 或 `design/`。
 
-- `docs/discuss/` 鐜板湪鎸?`docs/discuss/{topic}/xxxx.md` 缁勭粐锛宼opic 鐩綍鏄悗缁璁虹殑 canonical 鍏ュ彛銆?- 鏍圭洰褰曚粛淇濈暀涓€鎵规棫鐨勫钩閾烘枃浠朵綔涓哄吋瀹瑰壇鏈紱褰撳墠鐢变簬 Windows 鏂囦欢閿侊紝鏆傛湭灏卞湴娓呯悊锛屽悗缁彲鍦ㄩ攣閲婃斁鍚庢敹灏俱€?- 褰撴煇涓柟鍚戝凡缁忓畬鎴愬喅绛栧苟杩涘叆姝ｅ紡瀹炴柦锛屽簲鎶婄ǔ瀹氱粨璁鸿縼绉诲埌 `docs/architecture/` 鎴?`docs/dev/`銆?
-## Topics
+所有文档按 `YYYYMMDD-{topic}-{description}.md` 命名。
 
-- `roadmap-0/`
-  - 鍘嗗彶 `roadmap-0` 鍦ㄦ柊妗嗘灦涓殑瀹氫綅涓庨檷绾у垽鏂€?  - 鍏ュ彛锛歚docs/discuss/roadmap-0/INDEX.md`
-- `helloworldobject-windows/`
-  - `HelloWorldObject` 棣栨壒 Windows matrix 涓?stage/worker 璁捐銆?  - 鍏ュ彛锛歚docs/discuss/helloworldobject-windows/INDEX.md`
-- `subject-framework/`
-  - `subject + matrix + artifact-chain` 鐨勪富妯″瀷銆乧utover銆乸lanner / executor / worker / manifest 璁ㄨ銆?  - 鍏ュ彛锛歚docs/discuss/subject-framework/INDEX.md`
-- `reporting/`
-  - reporting / events / session compatibility 鐨勮璁¤璁恒€?  - 鍏ュ彛锛歚docs/discuss/reporting/INDEX.md`
-- `il2cpp-mainline/`
-  - IL2CPP 涓荤嚎 roadmap 楠ㄦ灦涓庡悗缁寜闃舵鎸佺画缁嗗寲鐨勪笓棰樿璁恒€?  - 鍏ュ彛锛歚docs/discuss/il2cpp-mainline/INDEX.md`
+## 推荐阅读顺序
 
-## 褰撳墠寤鸿闃呰椤哄簭
+**理解新测试框架：**
+- `20260406-07-analysis-contract-storage-strategy-v1-01.md`
+- `20260406-20-reporting-schema-design-v1-01.md`
+- `20260406-04-roadmap-0-rationality-assessment-v1-01.md`
 
-如果是理解新测试框架：
-1. `docs/discuss/subject-framework/INDEX.md`
-2. `docs/discuss/reporting/INDEX.md`
-3. `docs/discuss/roadmap-0/INDEX.md`
+**IL2CPP 主线讨论：**
+- `20260407-01-il2cpp-mainline-roadmap-skeleton-v1-01.md`
+- 后续 `20260407-*` 系列为 phase-a 设计讨论
 
-如果是继续 IL2CPP 主线讨论：
-1. `docs/discuss/il2cpp-mainline/20260407-01-il2cpp-mainline-roadmap-skeleton-v1-01.md`
-2. `docs/discuss/il2cpp-mainline/20260407-02-phase-a-phase-b-boundary-v1-01.md`
+**GC 相关评估：**
+- `20260515-crag-gc-execution-plan.md`
+- `20260515-crag-gc-risk-assessment-report.md`
+- `20260516-memory-gc-comprehensive-evaluation.md`
+- `20260518-gc-risk-assessment-report.md`
+- `crag-vs-coreclr-gc-comprehensive-assessment.md`
+
+**CodeGen 相关：**
+- `20260517-codegen-p1-call-model-unify.md`
+- `20260517-codegen-p1-exception-equiv.md`
+- `20260517-codegen-p1-generic-sharing.md`
+- `20260517-codegen-p2-unify-alive-paging.md`
+
+**EH/Reflection 评估：**
+- `20260515-eh-comprehensive-evaluation-v2.md`
+- `20260515-eh-strategy-comprehensive-comparison.md`
+- `20260515-reflection-comprehensive-evaluation.md`
