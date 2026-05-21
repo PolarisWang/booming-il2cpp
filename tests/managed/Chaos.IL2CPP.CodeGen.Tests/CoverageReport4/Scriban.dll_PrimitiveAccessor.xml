@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Runtime.Accessors.PrimitiveAccessor">
+  <Summary>
+    <Class>Scriban.Runtime.Accessors.PrimitiveAccessor</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\Accessors\PrimitiveAccessor.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>21</Uncoveredlines>
+    <Coverablelines>21</Coverablelines>
+    <Totallines>87</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>14</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="PrimitiveAccessor">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="PrimitiveAccessor">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="GetMemberCount">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="GetMembers">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="HasMember">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>14</Blocksnotcovered>
+    </Element>
+    <Element name="TrySetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetItem">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>14</Blocksnotcovered>
+    </Element>
+    <Element name="TrySetItem">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="GetLength">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="GetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="SetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\Accessors\PrimitiveAccessor.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Helpers;" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Parsing;" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Syntax;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Runtime.Accessors" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class PrimitiveAccessor : IObjectAccessor, IListAccessor" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="13" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public static readonly PrimitiveAccessor Default = new PrimitiveAccessor();" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        private PrimitiveAccessor()" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="17" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int GetMemberCount(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return 0;" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public IEnumerable&lt;string&gt; GetMembers(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            yield break;" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool HasMember(TemplateContext context, SourceSpan span, object target, string member)" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TryGetValue(TemplateContext context, SourceSpan span, object target, string member, out object? value)" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (!context.EnableRelaxedMemberAccess)" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ScriptRuntimeException(span, $&quot;Cannot get or set a member on the primitive `{target}/{context.GetTypeName(target)}` when accessing member: {member}&quot;); // unit test: 132-member-accessor-error2.txt" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If this is relaxed, set the target object to null" />
+      <LineAnalysis line="42" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            value = null;" />
+      <LineAnalysis line="43" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="46" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TrySetValue(TemplateContext context, SourceSpan span, object target, string member, object? value)" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="48" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;Cannot get or set a member on the primitive `{target}/{context.GetTypeName(target)}` when accessing member: {member}&quot;); // unit test: 132-member-accessor-error2.txt" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TryGetItem(TemplateContext context, SourceSpan span, object target, object index, out object? value)" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (!context.EnableRelaxedMemberAccess)" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ScriptRuntimeException(span, $&quot;Cannot get or set a member on the primitive `{target}/{context.GetTypeName(target)}` when accessing index: {index}&quot;);" />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If this is relaxed, set the target object to null" />
+      <LineAnalysis line="59" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            value = null;" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="61" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="62" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="63" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TrySetItem(TemplateContext context, SourceSpan span, object target, object index, object? value)" />
+      <LineAnalysis line="64" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="65" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;Cannot get or set a member on the primitive `{target}/{context.GetTypeName(target)}` when accessing index: {index}&quot;);" />
+      <LineAnalysis line="66" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="67" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public bool HasIndexer =&gt; false;" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="70" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public Type? IndexType =&gt; null;" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="72" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int GetLength(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="73" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;Cannot use the {context.GetTypeName(target)} primitive `{target}` as a list.&quot;);" />
+      <LineAnalysis line="75" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="76" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public object GetValue(TemplateContext context, SourceSpan span, object target, int index)" />
+      <LineAnalysis line="78" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;Cannot index the {context.GetTypeName(target)} primitive `{target}`.&quot;); // unit test: 130-indexer-accessor-error4.txt" />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void SetValue(TemplateContext context, SourceSpan span, object target, int index, object? value)" />
+      <LineAnalysis line="83" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;Cannot index the {context.GetTypeName(target)} primitive `{target}`.&quot;); // unit test: 130-indexer-accessor-error4.txt" />
+      <LineAnalysis line="85" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

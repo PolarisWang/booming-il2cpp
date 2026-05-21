@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Runtime.Accessors.ListAccessor">
+  <Summary>
+    <Class>Scriban.Runtime.Accessors.ListAccessor</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\Accessors\ListAccessor.cs</File>
+    </Files>
+    <Coveredlines>7</Coveredlines>
+    <Uncoveredlines>28</Uncoveredlines>
+    <Coverablelines>35</Coverablelines>
+    <Totallines>119</Totallines>
+    <Linecoverage>20</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>4</Coveredmethods>
+    <Fullcoveredmethods>3</Fullcoveredmethods>
+    <Totalmethods>14</Totalmethods>
+    <Methodcoverage>28.5</Methodcoverage>
+    <Fullmethodcoverage>21.4</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ListAccessor">
+      <Blockscovered>2</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ListAccessor">
+      <Blockscovered>2</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="GetLength">
+      <Blockscovered>2</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="GetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+    <Element name="SetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="GetMemberCount">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="GetMembers">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="HasMember">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetValue">
+      <Blockscovered>4</Blockscovered>
+      <Blocksnotcovered>4</Blocksnotcovered>
+    </Element>
+    <Element name="TrySetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetItem">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="TrySetItem">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\Accessors\ListAccessor.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Copyright (c) Alexandre Mutel. All rights reserved." />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Licensed under the BSD-Clause 2 license." />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// See license.txt file in the project root for full license information." />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Parsing;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Runtime.Accessors" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class ListAccessor : IListAccessor, IObjectAccessor" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="21" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public static ListAccessor Default = new ListAccessor();" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="23" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        private ListAccessor()" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="25" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int GetLength(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="29" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            return ((IList) target).Count;" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public object? GetValue(TemplateContext context, SourceSpan span, object target, int index)" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var list = ((IList)target);" />
+      <LineAnalysis line="35" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (index &lt; 0 || index &gt;= list.Count)" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return null;" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return list[index];" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void SetValue(TemplateContext context, SourceSpan span, object target, int index, object? value)" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="45" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var list = ((IList) target);" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (index &lt; 0)" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="48" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return;" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Auto-expand the array in case of accessing a range outside the current value" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = list.Count; i &lt;= index; i++)" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                // TODO: If the array doesn't support null value, we shoud add a default value or throw an error?" />
+      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                list.Add(null);" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            list[index] = value;" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int GetMemberCount(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="61" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="62" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // size" />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return 1;" />
+      <LineAnalysis line="64" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="66" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public IEnumerable&lt;string&gt; GetMembers(TemplateContext context, SourceSpan span, object target)" />
+      <LineAnalysis line="67" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            yield return &quot;size&quot;;" />
+      <LineAnalysis line="69" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool HasMember(TemplateContext context, SourceSpan span, object target, string member)" />
+      <LineAnalysis line="72" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return member == &quot;size&quot;;" />
+      <LineAnalysis line="74" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="75" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="76" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TryGetValue(TemplateContext context, SourceSpan span, object target, string member, out object? value)" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="78" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (member == &quot;size&quot;)" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="80" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                value = GetLength(context, span, target);" />
+      <LineAnalysis line="81" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (target is IScriptObject)" />
+      <LineAnalysis line="84" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return (((IScriptObject) target)).TryGetValue(context, span, member, out value);" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            value = null;" />
+      <LineAnalysis line="89" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="92" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TrySetValue(TemplateContext context, SourceSpan span, object target, string member, object? value)" />
+      <LineAnalysis line="93" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (member == &quot;size&quot;)" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return false;" />
+      <LineAnalysis line="97" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="98" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (target is IScriptObject)" />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="100" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return (((IScriptObject)target)).TrySetValue(context, span, member, value, false);" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="102" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TryGetItem(TemplateContext context, SourceSpan span, object target, object index, out object? value)" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="107" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new System.NotImplementedException();" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="110" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TrySetItem(TemplateContext context, SourceSpan span, object target, object index, object? value)" />
+      <LineAnalysis line="111" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new System.NotImplementedException();" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="114" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public bool HasIndexer =&gt; false;" />
+      <LineAnalysis line="116" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public Type? IndexType =&gt; null;" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsManagedInvokeAbiFactory">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsManagedInvokeAbiFactory</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonCollectionsManagedInvokeAbi.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>112</Uncoveredlines>
+    <Coverablelines>112</Coverablelines>
+    <Totallines>206</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>8</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="TryCreate">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>44</Blocksnotcovered>
+    </Element>
+    <Element name="MatchesCollectionsPrefix">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="IsSupportedMethodRole">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="IsInstanceLike">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="CreateArgumentShape">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>26</Blocksnotcovered>
+    </Element>
+    <Element name="IsDirectOrOpaqueReturnType">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>41</Blocksnotcovered>
+    </Element>
+    <Element name="IsKnownPrimitiveType">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>90</Blocksnotcovered>
+    </Element>
+    <Element name="TryResolveTypedValueCarrier">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>97</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonCollectionsManagedInvokeAbi.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal sealed record RuntimeSkeletonCollectionsManagedInvokeArgShape(" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string FieldDeclaration," />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ArgReferenceExpression);" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal sealed record RuntimeSkeletonCollectionsManagedInvokeAbi(" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ContractId," />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ThisFieldDeclaration," />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ThisValidationStatement," />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ThisArgumentExpression," />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    IReadOnlyList&lt;RuntimeSkeletonCollectionsManagedInvokeArgShape&gt; ArgumentShapes," />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    RuntimeSkeletonManagedInvokeReturnContract ReturnShape)" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public const string HotUpdateStableContractId = &quot;collections-managed-invoke-v1&quot;;" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public int ArgumentCount =&gt; ArgumentShapes.Count;" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public int ArgumentStorageSize =&gt; Math.Max(1, ArgumentCount);" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static bool TryCreate(" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        TypedIlMethodArtifact method," />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out RuntimeSkeletonCollectionsManagedInvokeAbi abi) =&gt;" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        RuntimeSkeletonCollectionsManagedInvokeAbiFactory.TryCreate(method, out abi);" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal static class RuntimeSkeletonCollectionsManagedInvokeAbiFactory" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static bool TryCreate(" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        TypedIlMethodArtifact method," />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out RuntimeSkeletonCollectionsManagedInvokeAbi abi)" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="35" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        abi = null!;" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (!MatchesCollectionsPrefix(method.SubjectId) ||" />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            !string.Equals(method.BodyAvailability, &quot;has-canonical-body&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            !IsSupportedMethodRole(method.MethodRole))" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="43" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var argumentShapes = new List&lt;RuntimeSkeletonCollectionsManagedInvokeArgShape&gt;(method.Parameters.Count);" />
+      <LineAnalysis line="44" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        for (var parameterIndex = 0; parameterIndex &lt; method.Parameters.Count; parameterIndex++)" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            CreateArgumentShape(method.Parameters[parameterIndex].Type, parameterIndex, out var argumentShape);" />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            argumentShapes.Add(argumentShape);" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var hasThisArgument = IsInstanceLike(method.MethodRole);" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (!RuntimeSkeletonManagedInvokeAbiCore.TryCreateStandardReturnContract(" />
+      <LineAnalysis line="52" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                RuntimeSkeletonManagedInvokeAbiCore.GetMethodReturnType(method.SubjectId)," />
+      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                out var returnShape," />
+      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                IsDirectOrOpaqueReturnType," />
+      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                includeIndirectFlag: true))" />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        abi = new RuntimeSkeletonCollectionsManagedInvokeAbi(" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            RuntimeSkeletonCollectionsManagedInvokeAbi.HotUpdateStableContractId," />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            hasThisArgument ? &quot;void* this_arg;&quot; : string.Empty," />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            hasThisArgument" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ? &quot;if (request-&gt;this_arg == nullptr) {\n        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;\n    }&quot;" />
+      <LineAnalysis line="65" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                : string.Empty," />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            hasThisArgument ? &quot;request-&gt;this_arg&quot; : &quot;nullptr&quot;," />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            argumentShapes," />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnShape);" />
+      <LineAnalysis line="69" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return true;" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="72" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool MatchesCollectionsPrefix(string subjectId)" />
+      <LineAnalysis line="73" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return subjectId.Contains(&quot;/System.Collections.&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               subjectId.Contains(&quot;Stack`1&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               subjectId.Contains(&quot;LinkedList`1&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="77" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               subjectId.Contains(&quot;SortedDictionary`2&quot;, StringComparison.Ordinal);" />
+      <LineAnalysis line="78" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool IsSupportedMethodRole(string methodRole)" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="82" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return string.Equals(methodRole, &quot;static-method&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;static-forwarder&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;instance-method&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;constructor&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="86" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;instance-field-getter&quot;, StringComparison.Ordinal);" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="89" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool IsInstanceLike(string methodRole)" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="91" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return string.Equals(methodRole, &quot;instance-method&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;constructor&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="93" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="               string.Equals(methodRole, &quot;instance-field-getter&quot;, StringComparison.Ordinal);" />
+      <LineAnalysis line="94" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="96" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void CreateArgumentShape(" />
+      <LineAnalysis line="97" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string managedType," />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int parameterIndex," />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out RuntimeSkeletonCollectionsManagedInvokeArgShape shape)" />
+      <LineAnalysis line="100" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="101" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (TryResolveTypedValueCarrier(managedType, out var cppCarrier))" />
+      <LineAnalysis line="102" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="103" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            shape = new RuntimeSkeletonCollectionsManagedInvokeArgShape(" />
+      <LineAnalysis line="104" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                $&quot;{cppCarrier} arg{parameterIndex};&quot;," />
+      <LineAnalysis line="105" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                $&quot;const_cast&lt;void*&gt;(reinterpret_cast&lt;const void*&gt;(&amp;request-&gt;arg{parameterIndex}))&quot;);" />
+      <LineAnalysis line="106" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return;" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="109" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        shape = new RuntimeSkeletonCollectionsManagedInvokeArgShape(" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            $&quot;void* arg{parameterIndex};&quot;," />
+      <LineAnalysis line="111" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            $&quot;request-&gt;arg{parameterIndex}&quot;);" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="114" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool IsDirectOrOpaqueReturnType(string managedType)" />
+      <LineAnalysis line="115" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="116" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (string.Equals(managedType, &quot;System.Void&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="119" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;!&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="120" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="121" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="122" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (IsKnownPrimitiveType(managedType))" />
+      <LineAnalysis line="123" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;System.Collections.Generic.&quot;, StringComparison.Ordinal) &amp;&amp;" />
+      <LineAnalysis line="126" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            (managedType.Contains(&quot;+Enumerator&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="127" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="             managedType.Contains(&quot;+KeyCollection&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="128" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="             managedType.Contains(&quot;+ValueCollection&quot;, StringComparison.Ordinal)))" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="131" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="132" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="133" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;System.Collections.Generic.KeyValuePair&lt;&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            string.Equals(managedType, &quot;System.Collections.Generic.KeyValuePair`2&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="135" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="136" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="137" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="139" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;System.ValueTuple&lt;&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="140" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType.StartsWith(&quot;System.ValueTuple`&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="141" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="142" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="143" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;System.Nullable&lt;&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="147" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="148" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="150" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (managedType.StartsWith(&quot;System.&quot;, StringComparison.Ordinal) &amp;&amp;" />
+      <LineAnalysis line="151" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            (managedType.EndsWith(&quot;Comparison&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="152" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="             managedType.EndsWith(&quot;Kind&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="153" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="             managedType.EndsWith(&quot;Flags&quot;, StringComparison.Ordinal)))" />
+      <LineAnalysis line="154" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="155" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="158" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return true;" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="161" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    private static bool IsKnownPrimitiveType(string managedType) =&gt; managedType switch" />
+      <LineAnalysis line="162" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="163" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Boolean&quot; =&gt; true," />
+      <LineAnalysis line="164" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Byte&quot; =&gt; true," />
+      <LineAnalysis line="165" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.SByte&quot; =&gt; true," />
+      <LineAnalysis line="166" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Int16&quot; =&gt; true," />
+      <LineAnalysis line="167" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.UInt16&quot; =&gt; true," />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Char&quot; =&gt; true," />
+      <LineAnalysis line="169" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Int32&quot; =&gt; true," />
+      <LineAnalysis line="170" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.UInt32&quot; =&gt; true," />
+      <LineAnalysis line="171" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Int64&quot; =&gt; true," />
+      <LineAnalysis line="172" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.UInt64&quot; =&gt; true," />
+      <LineAnalysis line="173" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Single&quot; =&gt; true," />
+      <LineAnalysis line="174" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.Double&quot; =&gt; true," />
+      <LineAnalysis line="175" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.IntPtr&quot; =&gt; true," />
+      <LineAnalysis line="176" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.UIntPtr&quot; =&gt; true," />
+      <LineAnalysis line="177" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        &quot;System.StringComparison&quot; =&gt; true," />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        _ =&gt; false," />
+      <LineAnalysis line="179" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    };" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool TryResolveTypedValueCarrier(string managedType, out string cppCarrier)" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="183" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        cppCarrier = managedType switch" />
+      <LineAnalysis line="184" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="185" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Boolean&quot; =&gt; &quot;bool&quot;," />
+      <LineAnalysis line="186" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Byte&quot; =&gt; &quot;CHAOS_IL2CPP_UINT8&quot;," />
+      <LineAnalysis line="187" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.SByte&quot; =&gt; &quot;CHAOS_IL2CPP_INT8&quot;," />
+      <LineAnalysis line="188" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int16&quot; =&gt; &quot;CHAOS_IL2CPP_INT16&quot;," />
+      <LineAnalysis line="189" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt16&quot; =&gt; &quot;CHAOS_IL2CPP_UINT16&quot;," />
+      <LineAnalysis line="190" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Char&quot; =&gt; &quot;CHAOS_IL2CPP_UINT16&quot;," />
+      <LineAnalysis line="191" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int32&quot; =&gt; &quot;CHAOS_IL2CPP_INT32&quot;," />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt32&quot; =&gt; &quot;CHAOS_IL2CPP_UINT32&quot;," />
+      <LineAnalysis line="193" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int64&quot; =&gt; &quot;CHAOS_IL2CPP_INT64&quot;," />
+      <LineAnalysis line="194" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt64&quot; =&gt; &quot;CHAOS_IL2CPP_UINT64&quot;," />
+      <LineAnalysis line="195" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Single&quot; =&gt; &quot;float&quot;," />
+      <LineAnalysis line="196" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Double&quot; =&gt; &quot;double&quot;," />
+      <LineAnalysis line="197" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.IntPtr&quot; =&gt; &quot;CHAOS_IL2CPP_INTPTR&quot;," />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UIntPtr&quot; =&gt; &quot;CHAOS_IL2CPP_UINTPTR&quot;," />
+      <LineAnalysis line="199" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.StringComparison&quot; =&gt; &quot;CHAOS_IL2CPP_INT32&quot;," />
+      <LineAnalysis line="200" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Collections.Generic.InsertionBehavior&quot; =&gt; &quot;CHAOS_IL2CPP_INT32&quot;," />
+      <LineAnalysis line="201" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _ =&gt; string.Empty," />
+      <LineAnalysis line="202" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="203" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="204" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return cppCarrier.Length &gt; 0;" />
+      <LineAnalysis line="205" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="206" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

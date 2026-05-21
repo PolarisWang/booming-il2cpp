@@ -1,0 +1,156 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "CcwBasicSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
+          "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
+          "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
+          "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
+          "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
+          "subjectId": "CcwBasicSubjects/CcwBasicSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "CcwBasicSubjects_ISimpleMath_Add_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "CcwBasicSubjects_ISimpleMath_Multiply_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "CcwBasicSubjects_IConstantValue_GetValue",
+          "subjectId": "CcwBasicSubjects/IConstantValue::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "CcwBasicSubjects_SimpleMath__ctor",
+          "subjectId": "CcwBasicSubjects/SimpleMath::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "CcwBasicSubjects_ConstantFortyTwo_GetValue",
+          "subjectId": "CcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "CcwBasicSubjects_ConstantFortyTwo__ctor",
+          "subjectId": "CcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/DualInterfaceImpl::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32",
+          "subjectId": "CcwBasicSubjects/DualInterfaceImpl::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "CcwBasicSubjects_DualInterfaceImpl_GetValue",
+          "subjectId": "CcwBasicSubjects/DualInterfaceImpl::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "CcwBasicSubjects_DualInterfaceImpl__ctor",
+          "subjectId": "CcwBasicSubjects/DualInterfaceImpl::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32",
+          "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd",
+          "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul",
+          "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue",
+          "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestConstantValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface",
+          "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry::TestDualInterface:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "CcwBasicSubjects_AutoGeneratedProgram_Main_System_String",
+          "subjectId": "CcwBasicSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "CcwBasicSubjects_AutoGeneratedProgram__ctor",
+          "subjectId": "CcwBasicSubjects/AutoGeneratedProgram::.ctor:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

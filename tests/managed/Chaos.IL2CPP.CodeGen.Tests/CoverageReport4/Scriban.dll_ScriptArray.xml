@@ -1,0 +1,1050 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Runtime.ScriptArray">
+  <Summary>
+    <Class>Scriban.Runtime.ScriptArray</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\ScriptArray.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>293</Uncoveredlines>
+    <Coverablelines>293</Coverablelines>
+    <Totallines>806</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>66</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>12</Blocksnotcovered>
+    </Element>
+    <Element name="Clone">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>28</Blocksnotcovered>
+    </Element>
+    <Element name="ToArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Add">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="AddRange">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListAdd">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListContains">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Clear">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListIndexOf">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListInsert">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="Contains">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="CopyTo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="CopyTo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="IndexOf">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Insert">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListRemove">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="RemoveAt">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListget_Item">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListset_Item">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="Remove">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="GetEnumerator">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListget_IsFixedSize">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsICollectionget_IsSynchronized">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsICollectionget_SyncRoot">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIListget_IsReadOnly">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsGenericIEnumerableTGetEnumerator">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsIEnumerableGetEnumerator">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsGenericICollectionTget_IsReadOnly">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="SystemCollectionsICollectionCopyTo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="GetMembers">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>12</Blocksnotcovered>
+    </Element>
+    <Element name="Contains">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="CanWrite">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+    <Element name="TrySetValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="Remove">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="SetReadOnly">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="TryEvaluate">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>166</Blocksnotcovered>
+    </Element>
+    <Element name="TryGetArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="CompareTo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>52</Blocksnotcovered>
+    </Element>
+    <Element name="CanTransform">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="Visit">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="Transform">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>25</Blocksnotcovered>
+    </Element>
+    <Element name="DebugListView">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ConvertValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="GetDefaultValue">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ScriptArray">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="From">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>35</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\ScriptArray.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Copyright (c) Alexandre Mutel. All rights reserved." />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Licensed under the BSD-Clause 2 license." />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// See license.txt file in the project root for full license information." />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Diagnostics;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Diagnostics.CodeAnalysis;" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Linq;" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Runtime.CompilerServices;" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Functions;" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Helpers;" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Parsing;" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Syntax;" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Runtime" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Base runtime object for arrays." />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;seealso cref=&quot;object&quot; /&gt;" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;seealso cref=&quot;System.Collections.IList&quot; /&gt;" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [DebuggerDisplay(&quot;Count = {Count}&quot;)]" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [DebuggerTypeProxy(typeof(ScriptArray&lt;&gt;.DebugListView))]" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class ScriptArray&lt;T&gt; : IList&lt;T&gt;, IList, IScriptObject, IScriptCustomBinaryOperation, IScriptTransformable" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private List&lt;T&gt; _values;" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private bool _isReadOnly;" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Attached ScriptObject is only created if needed" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private ScriptObject? _script;" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Initializes a new instance of the &lt;see cref=&quot;ScriptArray&quot;/&gt; class." />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="44" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray()" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values = new List&lt;T&gt;();" />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Initializes a new instance of the &lt;see cref=&quot;ScriptArray&quot;/&gt; class." />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;capacity&quot;&gt;The capacity.&lt;/param&gt;" />
+      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(int capacity)" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values = new List&lt;T&gt;(capacity);" />
+      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(T[] array)" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (array is null) throw new ArgumentNullException(nameof(array));" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values = new List&lt;T&gt;(array.Length);" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = 0; i &lt; array.Length; i++)" />
+      <LineAnalysis line="63" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                _values.Add(array[i]);" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="67" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="68" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Initializes a new instance of the &lt;see cref=&quot;ScriptArray&quot;/&gt; class." />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;values&quot;&gt;The values.&lt;/param&gt;" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(IEnumerable&lt;T&gt; values)" />
+      <LineAnalysis line="73" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this._values = new List&lt;T&gt;(values);" />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="76" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="77" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(IEnumerable values)" />
+      <LineAnalysis line="78" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this._values = new List&lt;T&gt;();" />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            foreach (var value in values)" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="82" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ((IList)_values).Add(ConvertValue(value));" />
+      <LineAnalysis line="83" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="85" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public int Capacity" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            get =&gt; _values.Capacity;" />
+      <LineAnalysis line="89" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            set =&gt; _values.Capacity = value;" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="92" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool IsReadOnly" />
+      <LineAnalysis line="93" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            get =&gt; _isReadOnly;" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            set" />
+      <LineAnalysis line="96" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (_script is not null)" />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="99" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    _script.IsReadOnly = value;" />
+      <LineAnalysis line="100" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="101" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                _isReadOnly = value;" />
+      <LineAnalysis line="102" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual IScriptObject Clone(bool deep)" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="107" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var array = (ScriptArray&lt;T&gt;) MemberwiseClone();" />
+      <LineAnalysis line="108" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            array._values = new List&lt;T&gt;(_values.Count);" />
+      <LineAnalysis line="109" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            array._script = null;" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (deep)" />
+      <LineAnalysis line="111" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                foreach (var value in _values)" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="114" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var fromValue = value;" />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (value is IScriptObject)" />
+      <LineAnalysis line="116" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        var fromObject = (IScriptObject)value;" />
+      <LineAnalysis line="118" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        fromValue = (T)fromObject.Clone(true);" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="120" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    array._values.Add(fromValue);" />
+      <LineAnalysis line="121" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="122" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="123" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (_script is not null)" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    array._script = (ScriptObject)_script.Clone(true);" />
+      <LineAnalysis line="126" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="128" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            else" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                foreach (var value in _values)" />
+      <LineAnalysis line="131" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="132" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    array._values.Add(value);" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="134" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="135" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (_script is not null)" />
+      <LineAnalysis line="136" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="137" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    array._script = (ScriptObject)_script.Clone(false);" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="139" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="140" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return array;" />
+      <LineAnalysis line="141" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="143" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptObject ScriptObject =&gt; _script ?? (_script = new ScriptObject() { IsReadOnly = IsReadOnly});" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public T[] ToArray() =&gt; _values.ToArray();" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="147" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public int Count =&gt; _values.Count;" />
+      <LineAnalysis line="148" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [AllowNull]" />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual T this[int index]" />
+      <LineAnalysis line="151" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="152" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            get" />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="154" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return _values[index];" />
+      <LineAnalysis line="155" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            set" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="158" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (index &lt; 0)" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="160" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return;" />
+      <LineAnalysis line="161" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="163" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                this.AssertNotReadOnly();" />
+      <LineAnalysis line="164" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="165" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                // Auto-expand the array in case of accessing a range outside the current value" />
+      <LineAnalysis line="166" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                for (int i = _values.Count; i &lt;= index; i++)" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    ((IList)_values).Add(GetDefaultValue());" />
+      <LineAnalysis line="169" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="170" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="171" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ((IList)_values)[index] = value;" />
+      <LineAnalysis line="172" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="173" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="174" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="175" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void Add([AllowNull] T item)" />
+      <LineAnalysis line="176" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="177" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this.AssertNotReadOnly();" />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((IList)_values).Add(item);" />
+      <LineAnalysis line="179" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void AddRange(IEnumerable&lt;T&gt; items)" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="183" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (items is null) throw new ArgumentNullException(nameof(items));" />
+      <LineAnalysis line="184" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            foreach (var item in items)" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="186" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Add(item);" />
+      <LineAnalysis line="187" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="188" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="189" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int IList.Add(object? value)" />
+      <LineAnalysis line="191" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((IList)_values).Add(ConvertValue(value));" />
+      <LineAnalysis line="193" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return 0;" />
+      <LineAnalysis line="194" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="195" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="196" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        bool IList.Contains(object? value)" />
+      <LineAnalysis line="197" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ((IList) _values).Contains(value);" />
+      <LineAnalysis line="199" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="200" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="201" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void Clear()" />
+      <LineAnalysis line="202" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="203" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this.AssertNotReadOnly();" />
+      <LineAnalysis line="204" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values.Clear();" />
+      <LineAnalysis line="205" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="206" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="207" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int IList.IndexOf(object? value)" />
+      <LineAnalysis line="208" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="209" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ((IList)_values).IndexOf(value);" />
+      <LineAnalysis line="210" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="211" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="212" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        void IList.Insert(int index, object? value)" />
+      <LineAnalysis line="213" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="214" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((IList)_values).Insert(index, ConvertValue(value));" />
+      <LineAnalysis line="215" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="216" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="217" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool Contains(T item)" />
+      <LineAnalysis line="218" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="219" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.Contains(item);" />
+      <LineAnalysis line="220" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="221" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="222" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void CopyTo(T[] array, int arrayIndex)" />
+      <LineAnalysis line="223" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="224" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values.CopyTo(array, arrayIndex);" />
+      <LineAnalysis line="225" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="226" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="227" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [MethodImpl(MethodImplOptions.AggressiveInlining)]" />
+      <LineAnalysis line="228" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void CopyTo(int index, T[] array, int arrayIndex, int count)" />
+      <LineAnalysis line="229" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="230" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values.CopyTo(index, array, arrayIndex, count);" />
+      <LineAnalysis line="231" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="232" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="233" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual int IndexOf(T item)" />
+      <LineAnalysis line="234" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="235" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.IndexOf(item);" />
+      <LineAnalysis line="236" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="237" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="238" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void Insert(int index, [AllowNull] T item)" />
+      <LineAnalysis line="239" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="240" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this.AssertNotReadOnly();" />
+      <LineAnalysis line="241" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Auto-expand the array in case of accessing a range outside the current value" />
+      <LineAnalysis line="242" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = _values.Count; i &lt; index; i++)" />
+      <LineAnalysis line="243" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="244" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ((IList)_values).Add(GetDefaultValue());" />
+      <LineAnalysis line="245" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="246" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="247" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((IList)_values).Insert(index, item);" />
+      <LineAnalysis line="248" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="249" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="250" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        void IList.Remove(object? value)" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="252" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((IList)_values).Remove(ConvertValue(value));" />
+      <LineAnalysis line="253" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="254" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="255" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void RemoveAt(int index)" />
+      <LineAnalysis line="256" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="257" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this.AssertNotReadOnly();" />
+      <LineAnalysis line="258" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (index &lt; 0 || index &gt;= _values.Count)" />
+      <LineAnalysis line="259" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="260" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return;" />
+      <LineAnalysis line="261" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="262" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _values.RemoveAt(index);" />
+      <LineAnalysis line="263" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="264" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="265" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        object? IList.this[int index]" />
+      <LineAnalysis line="266" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="267" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            get =&gt; this[index];" />
+      <LineAnalysis line="268" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            set =&gt; ((IList)_values)[index] = ConvertValue(value);" />
+      <LineAnalysis line="269" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="270" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="271" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool Remove(T item)" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="273" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            this.AssertNotReadOnly();" />
+      <LineAnalysis line="274" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.Remove(item);" />
+      <LineAnalysis line="275" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="276" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="277" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public List&lt;T&gt;.Enumerator GetEnumerator()" />
+      <LineAnalysis line="278" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="279" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.GetEnumerator();" />
+      <LineAnalysis line="280" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="281" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="282" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        bool IList.IsFixedSize =&gt; ((IList)_values).IsFixedSize;" />
+      <LineAnalysis line="283" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="284" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        bool ICollection.IsSynchronized =&gt; ((ICollection)_values).IsSynchronized;" />
+      <LineAnalysis line="285" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="286" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        object ICollection.SyncRoot =&gt; ((ICollection)_values).SyncRoot;" />
+      <LineAnalysis line="287" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="288" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        bool IList.IsReadOnly =&gt; IsReadOnly;" />
+      <LineAnalysis line="289" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="290" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        IEnumerator&lt;T&gt; IEnumerable&lt;T&gt;.GetEnumerator()" />
+      <LineAnalysis line="291" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="292" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.GetEnumerator();" />
+      <LineAnalysis line="293" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="294" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="295" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        IEnumerator IEnumerable.GetEnumerator()" />
+      <LineAnalysis line="296" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="297" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _values.GetEnumerator();" />
+      <LineAnalysis line="298" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="299" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="300" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        bool ICollection&lt;T&gt;.IsReadOnly =&gt; IsReadOnly;" />
+      <LineAnalysis line="301" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="302" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        void ICollection.CopyTo(Array array, int index)" />
+      <LineAnalysis line="303" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="304" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ((ICollection)_values).CopyTo(array, index);" />
+      <LineAnalysis line="305" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="306" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="307" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public IEnumerable&lt;string&gt; GetMembers()" />
+      <LineAnalysis line="308" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="309" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            yield return &quot;size&quot;;" />
+      <LineAnalysis line="310" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (_script is not null)" />
+      <LineAnalysis line="311" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="312" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                foreach (var member in _script.GetMembers())" />
+      <LineAnalysis line="313" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="314" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    yield return member;" />
+      <LineAnalysis line="315" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="316" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="317" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="318" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="319" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool Contains(string member)" />
+      <LineAnalysis line="320" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="321" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptObject.Contains(member);" />
+      <LineAnalysis line="322" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="323" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="324" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool TryGetValue(TemplateContext context, SourceSpan span, string member, out object? value)" />
+      <LineAnalysis line="325" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="326" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (member == &quot;size&quot;)" />
+      <LineAnalysis line="327" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="328" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                value = Count;" />
+      <LineAnalysis line="329" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="330" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="331" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="332" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptObject.TryGetValue(context, span, member, out value);" />
+      <LineAnalysis line="333" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="334" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="335" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool CanWrite(string member)" />
+      <LineAnalysis line="336" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="337" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (member == &quot;size&quot;)" />
+      <LineAnalysis line="338" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="339" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return false;" />
+      <LineAnalysis line="340" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="341" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="342" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptObject.CanWrite(member);" />
+      <LineAnalysis line="343" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="344" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="345" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool TrySetValue(TemplateContext context, SourceSpan span, string member, object? value, bool readOnly)" />
+      <LineAnalysis line="346" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="347" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptObject.TrySetValue(context, span, member, value, readOnly);" />
+      <LineAnalysis line="348" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="349" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="350" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool Remove(string member)" />
+      <LineAnalysis line="351" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="352" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptObject.Remove(member);" />
+      <LineAnalysis line="353" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="354" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="355" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual void SetReadOnly(string member, bool readOnly)" />
+      <LineAnalysis line="356" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="357" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ScriptObject.SetReadOnly(member, readOnly);" />
+      <LineAnalysis line="358" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="359" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="360" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public bool TryEvaluate(TemplateContext context, SourceSpan span, ScriptBinaryOperator op, SourceSpan leftSpan, object? leftValue, SourceSpan rightSpan, object? rightValue, out object? result)" />
+      <LineAnalysis line="361" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="362" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            result = null;" />
+      <LineAnalysis line="363" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var leftArray = TryGetArray(leftValue);" />
+      <LineAnalysis line="364" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var rightArray = TryGetArray(rightValue);" />
+      <LineAnalysis line="365" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            int intModifier = 0;" />
+      <LineAnalysis line="366" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var intSpan = leftSpan;" />
+      <LineAnalysis line="367" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="368" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var errorSpan = span;" />
+      <LineAnalysis line="369" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            string? reason = null;" />
+      <LineAnalysis line="370" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            switch (op)" />
+      <LineAnalysis line="371" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="372" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.BinaryOr:" />
+      <LineAnalysis line="373" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.BinaryAnd:" />
+      <LineAnalysis line="374" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareEqual:" />
+      <LineAnalysis line="375" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareNotEqual:" />
+      <LineAnalysis line="376" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLessOrEqual:" />
+      <LineAnalysis line="377" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreaterOrEqual:" />
+      <LineAnalysis line="378" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLess:" />
+      <LineAnalysis line="379" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreater:" />
+      <LineAnalysis line="380" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Add:" />
+      <LineAnalysis line="381" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null)" />
+      <LineAnalysis line="382" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="383" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        errorSpan = leftSpan;" />
+      <LineAnalysis line="384" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting an array for the left argument.&quot;;" />
+      <LineAnalysis line="385" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="386" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (rightArray is null)" />
+      <LineAnalysis line="387" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="388" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        errorSpan = rightSpan;" />
+      <LineAnalysis line="389" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting an array for the right argument.&quot;;" />
+      <LineAnalysis line="390" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="391" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="392" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Multiply:" />
+      <LineAnalysis line="393" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null &amp;&amp; rightArray is null || leftArray is not null &amp;&amp; rightArray is not null)" />
+      <LineAnalysis line="394" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="395" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting only one array for the left or right argument.&quot;;" />
+      <LineAnalysis line="396" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="397" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    else" />
+      <LineAnalysis line="398" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="399" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        intModifier = context.ToInt(span, leftArray is null ? leftValue : rightValue);" />
+      <LineAnalysis line="400" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        if (rightArray is null) intSpan = rightSpan;" />
+      <LineAnalysis line="401" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="402" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="403" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Divide:" />
+      <LineAnalysis line="404" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.DivideRound:" />
+      <LineAnalysis line="405" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Modulus:" />
+      <LineAnalysis line="406" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null)" />
+      <LineAnalysis line="407" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="408" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        errorSpan = leftSpan;" />
+      <LineAnalysis line="409" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting an array for the left argument.&quot;;" />
+      <LineAnalysis line="410" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="411" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    else" />
+      <LineAnalysis line="412" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="413" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        intModifier = context.ToInt(span, rightValue);" />
+      <LineAnalysis line="414" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        intSpan = rightSpan;" />
+      <LineAnalysis line="415" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="416" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="417" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.ShiftLeft:" />
+      <LineAnalysis line="418" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null)" />
+      <LineAnalysis line="419" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="420" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        errorSpan = leftSpan;" />
+      <LineAnalysis line="421" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting an array for the left argument.&quot;;" />
+      <LineAnalysis line="422" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="423" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="424" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.ShiftRight:" />
+      <LineAnalysis line="425" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (rightArray is null)" />
+      <LineAnalysis line="426" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="427" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        errorSpan = rightSpan;" />
+      <LineAnalysis line="428" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        reason = &quot; Expecting an array for the right argument.&quot;;" />
+      <LineAnalysis line="429" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="430" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="431" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                default:" />
+      <LineAnalysis line="432" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    reason = string.Empty;" />
+      <LineAnalysis line="433" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="434" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="435" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="436" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (intModifier &lt; 0)" />
+      <LineAnalysis line="437" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="438" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                errorSpan = intSpan;" />
+      <LineAnalysis line="439" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                reason = $&quot; Integer {intModifier} cannot be negative when multiplying&quot;;" />
+      <LineAnalysis line="440" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="441" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="442" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (reason is not null)" />
+      <LineAnalysis line="443" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="444" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ScriptRuntimeException(errorSpan, $&quot;The operator `{op.ToText()}` is not supported between {context.GetTypeName(leftValue)} and {context.GetTypeName(rightValue)}.{reason}&quot;);" />
+      <LineAnalysis line="445" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="446" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="447" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            switch (op)" />
+      <LineAnalysis line="448" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="449" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.BinaryOr:" />
+      <LineAnalysis line="450" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null || rightArray is null)" />
+      <LineAnalysis line="451" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="452" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires array operands.&quot;);" />
+      <LineAnalysis line="453" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="454" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="455" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = new ScriptArray&lt;T&gt;(leftArray.Union(rightArray));" />
+      <LineAnalysis line="456" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="457" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="458" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.BinaryAnd:" />
+      <LineAnalysis line="459" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null || rightArray is null)" />
+      <LineAnalysis line="460" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="461" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires array operands.&quot;);" />
+      <LineAnalysis line="462" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="463" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="464" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = new ScriptArray&lt;T&gt;(leftArray.Intersect(rightArray));" />
+      <LineAnalysis line="465" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="466" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="467" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Add:" />
+      <LineAnalysis line="468" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null || rightArray is null)" />
+      <LineAnalysis line="469" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="470" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires array operands.&quot;);" />
+      <LineAnalysis line="471" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="472" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="473" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = ArrayFunctions.Concat(leftArray, rightArray);" />
+      <LineAnalysis line="474" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="475" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="476" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareEqual:" />
+      <LineAnalysis line="477" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareNotEqual:" />
+      <LineAnalysis line="478" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLessOrEqual:" />
+      <LineAnalysis line="479" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreaterOrEqual:" />
+      <LineAnalysis line="480" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLess:" />
+      <LineAnalysis line="481" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreater:" />
+      <LineAnalysis line="482" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null || rightArray is null)" />
+      <LineAnalysis line="483" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="484" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires array operands.&quot;);" />
+      <LineAnalysis line="485" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="486" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="487" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = CompareTo(context, span, op, leftArray, rightArray);" />
+      <LineAnalysis line="488" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="489" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="490" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Multiply:" />
+      <LineAnalysis line="491" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="492" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    // array with integer" />
+      <LineAnalysis line="493" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var array = leftArray ?? rightArray;" />
+      <LineAnalysis line="494" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (array is null)" />
+      <LineAnalysis line="495" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="496" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires an array operand.&quot;);" />
+      <LineAnalysis line="497" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="498" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (intModifier == 0)" />
+      <LineAnalysis line="499" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="500" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        result = new ScriptArray&lt;T&gt;();" />
+      <LineAnalysis line="501" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        return true;" />
+      <LineAnalysis line="502" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="503" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="504" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newArray = new ScriptArray&lt;T&gt;(intModifier * array.Count);" />
+      <LineAnalysis line="505" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    for (int i = 0; i &lt; intModifier; i++)" />
+      <LineAnalysis line="506" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="507" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        newArray.AddRange(array);" />
+      <LineAnalysis line="508" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="509" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="510" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = newArray;" />
+      <LineAnalysis line="511" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="512" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="513" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="514" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Divide:" />
+      <LineAnalysis line="515" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.DivideRound:" />
+      <LineAnalysis line="516" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="517" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    // array with integer" />
+      <LineAnalysis line="518" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var array = leftArray ?? rightArray;" />
+      <LineAnalysis line="519" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (array is null)" />
+      <LineAnalysis line="520" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="521" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires an array operand.&quot;);" />
+      <LineAnalysis line="522" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="523" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (intModifier == 0) throw new ScriptRuntimeException(intSpan, &quot;Cannot divide by 0&quot;);" />
+      <LineAnalysis line="524" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="525" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newLength = array.Count / intModifier;" />
+      <LineAnalysis line="526" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newArray = new ScriptArray&lt;T&gt;(newLength);" />
+      <LineAnalysis line="527" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    for (int i = 0; i &lt; newLength; i++)" />
+      <LineAnalysis line="528" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="529" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        newArray.Add(array[i]);" />
+      <LineAnalysis line="530" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="531" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="532" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = newArray;" />
+      <LineAnalysis line="533" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="534" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="535" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="536" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.Modulus:" />
+      <LineAnalysis line="537" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="538" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    // array with integer" />
+      <LineAnalysis line="539" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var array = leftArray ?? rightArray;" />
+      <LineAnalysis line="540" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (array is null)" />
+      <LineAnalysis line="541" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="542" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` requires an array operand.&quot;);" />
+      <LineAnalysis line="543" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="544" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (intModifier == 0) throw new ScriptRuntimeException(intSpan, &quot;Cannot divide by 0&quot;);" />
+      <LineAnalysis line="545" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="546" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newArray = new ScriptArray&lt;T&gt;(array.Count);" />
+      <LineAnalysis line="547" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    for (int i = 0; i &lt; array.Count; i++)" />
+      <LineAnalysis line="548" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="549" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        if ((i % intModifier) == 0)" />
+      <LineAnalysis line="550" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                        {" />
+      <LineAnalysis line="551" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            newArray.Add(array[i]);" />
+      <LineAnalysis line="552" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                        }" />
+      <LineAnalysis line="553" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="554" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="555" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = newArray;" />
+      <LineAnalysis line="556" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="557" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="558" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="559" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.ShiftLeft:" />
+      <LineAnalysis line="560" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (leftArray is null)" />
+      <LineAnalysis line="561" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="562" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(leftSpan, &quot;Expecting an array for the left argument.&quot;);" />
+      <LineAnalysis line="563" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="564" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="565" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newLeft = new ScriptArray&lt;T&gt;(leftArray);" />
+      <LineAnalysis line="566" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    ((IList)newLeft._values).Add(typeof(T) == typeof(object) ? ConvertValue(rightValue) : context.ToObject&lt;T&gt;(rightSpan, rightValue));" />
+      <LineAnalysis line="567" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = newLeft;" />
+      <LineAnalysis line="568" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="569" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="570" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.ShiftRight:" />
+      <LineAnalysis line="571" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (rightArray is null)" />
+      <LineAnalysis line="572" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="573" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        throw new ScriptRuntimeException(rightSpan, &quot;Expecting an array for the right argument.&quot;);" />
+      <LineAnalysis line="574" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="575" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="576" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var newRight = new ScriptArray&lt;T&gt;(rightArray);" />
+      <LineAnalysis line="577" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    ((IList)newRight._values).Insert(0, typeof(T) == typeof(object) ? ConvertValue(leftValue) : context.ToObject&lt;T&gt;(leftSpan, leftValue));" />
+      <LineAnalysis line="578" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    result = newRight;" />
+      <LineAnalysis line="579" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return true;" />
+      <LineAnalysis line="580" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="581" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="582" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="583" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="584" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="585" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static ScriptArray&lt;T&gt;? TryGetArray(object? rightValue)" />
+      <LineAnalysis line="586" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="587" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var rightArray = rightValue as ScriptArray&lt;T&gt;;" />
+      <LineAnalysis line="588" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (rightArray is null)" />
+      <LineAnalysis line="589" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="590" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var list = rightValue as IList;" />
+      <LineAnalysis line="591" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (list is not null)" />
+      <LineAnalysis line="592" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="593" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    rightArray = new ScriptArray&lt;T&gt;(list);" />
+      <LineAnalysis line="594" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="595" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                else if (rightValue is IEnumerable enumerable &amp;&amp; !(rightValue is string))" />
+      <LineAnalysis line="596" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="597" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    rightArray = new ScriptArray&lt;T&gt;(enumerable);" />
+      <LineAnalysis line="598" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="599" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="600" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return rightArray;" />
+      <LineAnalysis line="601" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="602" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="603" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static bool CompareTo(TemplateContext context, SourceSpan span, ScriptBinaryOperator op, ScriptArray&lt;T&gt; left, ScriptArray&lt;T&gt; right)" />
+      <LineAnalysis line="604" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="605" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Compare the length first" />
+      <LineAnalysis line="606" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var compare = left.Count.CompareTo(right.Count);" />
+      <LineAnalysis line="607" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            switch (op)" />
+      <LineAnalysis line="608" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="609" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareEqual:" />
+      <LineAnalysis line="610" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare != 0) return false;" />
+      <LineAnalysis line="611" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="612" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareNotEqual:" />
+      <LineAnalysis line="613" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare != 0) return true;" />
+      <LineAnalysis line="614" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (left.Count == 0) return false;" />
+      <LineAnalysis line="615" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="616" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLessOrEqual:" />
+      <LineAnalysis line="617" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareLess:" />
+      <LineAnalysis line="618" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare &lt; 0) return true;" />
+      <LineAnalysis line="619" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare &gt; 0) return false;" />
+      <LineAnalysis line="620" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (left.Count == 0 &amp;&amp; op == ScriptBinaryOperator.CompareLess) return false;" />
+      <LineAnalysis line="621" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="622" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreaterOrEqual:" />
+      <LineAnalysis line="623" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case ScriptBinaryOperator.CompareGreater:" />
+      <LineAnalysis line="624" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare &lt; 0) return false;" />
+      <LineAnalysis line="625" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (compare &gt; 0) return true;" />
+      <LineAnalysis line="626" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (left.Count == 0 &amp;&amp; op == ScriptBinaryOperator.CompareGreater) return false;" />
+      <LineAnalysis line="627" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    break;" />
+      <LineAnalysis line="628" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                default:" />
+      <LineAnalysis line="629" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    throw new ScriptRuntimeException(span, $&quot;The operator `{op.ToText()}` is not supported between {context.GetTypeName(left)} and {context.GetTypeName(right)}.&quot;);" />
+      <LineAnalysis line="630" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="631" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="632" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Otherwise we need to compare each element" />
+      <LineAnalysis line="633" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = 0; i &lt; left.Count; i++)" />
+      <LineAnalysis line="634" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="635" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (ScriptBinaryExpression.Evaluate(context, span, op, left[i], right[i]) is not true)" />
+      <LineAnalysis line="636" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="637" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return false;" />
+      <LineAnalysis line="638" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="639" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="640" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="641" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="642" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="643" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="644" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public Type ElementType =&gt; typeof(T);" />
+      <LineAnalysis line="645" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="646" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool CanTransform(Type transformType)" />
+      <LineAnalysis line="647" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="648" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="649" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="650" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="651" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual bool Visit(TemplateContext context, SourceSpan span, Func&lt;object?, bool&gt; visit)" />
+      <LineAnalysis line="652" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="653" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            foreach (var item in this)" />
+      <LineAnalysis line="654" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="655" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (!visit(item)) return false;" />
+      <LineAnalysis line="656" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="657" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="658" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="659" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="660" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual object? Transform(TemplateContext context, SourceSpan span, Func&lt;object?, object?&gt; apply, Type destType)" />
+      <LineAnalysis line="661" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="662" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (apply is null) throw new ArgumentNullException(nameof(apply));" />
+      <LineAnalysis line="663" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var clone = (ScriptArray&lt;T&gt;)Clone(true);" />
+      <LineAnalysis line="664" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var values = clone._values;" />
+      <LineAnalysis line="665" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (typeof(T) == typeof(object))" />
+      <LineAnalysis line="666" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="667" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                for (int i = 0; i &lt; values.Count; i++)" />
+      <LineAnalysis line="668" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="669" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    ((IList)values)[i] = ConvertValue(apply(values[i]));" />
+      <LineAnalysis line="670" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="671" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="672" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            else" />
+      <LineAnalysis line="673" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="674" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                for (int i = 0; i &lt; values.Count; i++)" />
+      <LineAnalysis line="675" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="676" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    ((IList)values)[i] = context.ToObject&lt;T&gt;(span, apply(values[i]));" />
+      <LineAnalysis line="677" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="678" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="679" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="680" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return clone;" />
+      <LineAnalysis line="681" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="682" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="683" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        internal class DebugListView" />
+      <LineAnalysis line="684" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="685" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            private readonly ScriptArray&lt;T&gt; _collection;" />
+      <LineAnalysis line="686" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="687" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            public DebugListView(ScriptArray&lt;T&gt; collection)" />
+      <LineAnalysis line="688" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="689" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                this._collection = collection;" />
+      <LineAnalysis line="690" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="691" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="692" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]" />
+      <LineAnalysis line="693" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            public object?[] Items =&gt; _collection._values.Cast&lt;object?&gt;().ToArray();" />
+      <LineAnalysis line="694" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="695" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="696" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [return: MaybeNull]" />
+      <LineAnalysis line="697" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static T ConvertValue(object? value)" />
+      <LineAnalysis line="698" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="699" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is T typedValue)" />
+      <LineAnalysis line="700" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="701" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return typedValue;" />
+      <LineAnalysis line="702" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="703" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="704" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is null)" />
+      <LineAnalysis line="705" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="706" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (default(T) is null)" />
+      <LineAnalysis line="707" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="708" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return default;" />
+      <LineAnalysis line="709" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="710" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="711" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ArgumentNullException(nameof(value));" />
+      <LineAnalysis line="712" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="713" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="714" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return (T)Convert.ChangeType(value, typeof(T));" />
+      <LineAnalysis line="715" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="716" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="717" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [return: MaybeNull]" />
+      <LineAnalysis line="718" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static T GetDefaultValue()" />
+      <LineAnalysis line="719" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="720" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (default(T) is null)" />
+      <LineAnalysis line="721" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="722" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return default;" />
+      <LineAnalysis line="723" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="724" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="725" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            return default;" />
+      <LineAnalysis line="726" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="727" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="728" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="729" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="730" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="731" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="732" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="733" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="734" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class ScriptArray : ScriptArray&lt;object?&gt;" />
+      <LineAnalysis line="735" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="736" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray()" />
+      <LineAnalysis line="737" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="738" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="739" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="740" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public override object? this[int index]" />
+      <LineAnalysis line="741" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="742" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            get" />
+      <LineAnalysis line="743" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="744" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (index &lt; 0 || index &gt;= Count)" />
+      <LineAnalysis line="745" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="746" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return null;" />
+      <LineAnalysis line="747" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="748" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="749" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return base[index];" />
+      <LineAnalysis line="750" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="751" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            set =&gt; base[index] = value;" />
+      <LineAnalysis line="752" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="753" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="754" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(int capacity) : base(capacity)" />
+      <LineAnalysis line="755" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="756" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="757" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="758" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(IEnumerable&lt;object?&gt; values) : base(values)" />
+      <LineAnalysis line="759" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="760" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="761" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="762" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptArray(IEnumerable values) : base(values)" />
+      <LineAnalysis line="763" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="764" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="765" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="766" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="767" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Creates a new &lt;see cref=&quot;ScriptArray&quot;/&gt; from the specified object." />
+      <LineAnalysis line="768" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="769" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;obj&quot;&gt;The object to create the array from. Supports &lt;see cref=&quot;IEnumerable&quot;/&gt; and, when System.Text.Json support is enabled, JsonElement arrays.&lt;/param&gt;" />
+      <LineAnalysis line="770" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new &lt;see cref=&quot;ScriptArray&quot;/&gt; containing the elements from the specified object.&lt;/returns&gt;" />
+      <LineAnalysis line="771" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;exception cref=&quot;ArgumentNullException&quot;&gt;If &lt;paramref name=&quot;obj&quot;/&gt; is null.&lt;/exception&gt;" />
+      <LineAnalysis line="772" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;exception cref=&quot;ArgumentException&quot;&gt;If &lt;paramref name=&quot;obj&quot;/&gt; is not a supported type.&lt;/exception&gt;" />
+      <LineAnalysis line="773" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [ScriptMemberIgnore]" />
+      <LineAnalysis line="774" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static ScriptArray From(object? obj)" />
+      <LineAnalysis line="775" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="776" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (obj is null) throw new ArgumentNullException(nameof(obj));" />
+      <LineAnalysis line="777" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="778" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if !SCRIBAN_NO_SYSTEM_TEXT_JSON" />
+      <LineAnalysis line="779" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (obj is System.Text.Json.JsonElement json)" />
+      <LineAnalysis line="780" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="781" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (json.ValueKind == System.Text.Json.JsonValueKind.Array)" />
+      <LineAnalysis line="782" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="783" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return json.CopyToScriptArray(new ScriptArray());" />
+      <LineAnalysis line="784" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="785" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ArgumentException($&quot;Unsupported JsonElement ValueKind `{json.ValueKind}`. Expecting Array.&quot;, nameof(obj));" />
+      <LineAnalysis line="786" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="787" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="788" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="789" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (obj is IEnumerable enumerable)" />
+      <LineAnalysis line="790" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="791" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var array = new ScriptArray();" />
+      <LineAnalysis line="792" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                foreach (var item in enumerable)" />
+      <LineAnalysis line="793" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="794" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    array.Add(item);" />
+      <LineAnalysis line="795" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="796" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return array;" />
+      <LineAnalysis line="797" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="798" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="799" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if !SCRIBAN_NO_SYSTEM_TEXT_JSON" />
+      <LineAnalysis line="800" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ArgumentException($&quot;Unsupported object type `{obj.GetType()}`. Expecting an IEnumerable or a JsonElement array.&quot;, nameof(obj));" />
+      <LineAnalysis line="801" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="802" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            throw new ArgumentException($&quot;Unsupported object type `{obj.GetType()}`. Expecting an IEnumerable.&quot;, nameof(obj));" />
+      <LineAnalysis line="803" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="804" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="805" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="806" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

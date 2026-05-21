@@ -1,0 +1,1135 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/field/property",
+  "capturedAt": "2026-05-21T09:51:05",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 34,
+    "okCount": 34,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 1496
+    },
+    "aotInstructionCount": {
+      "min": 9,
+      "max": 16,
+      "avg": 9.6,
+      "total": 328
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {
+      "external_runtime_call": 36
+    },
+    "overallIrExpansionRatio": 0.22,
+    "averageExpansionRatio": 0.22,
+    "maxExpansionRatio": 0.36,
+    "minExpansionRatio": 0.2
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_MemberType:System.Reflection.MemberTypes()",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsNotSerialized:System.Boolean()",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsNotSerialized:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPinvokeImpl:System.Boolean()",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPinvokeImpl:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSpecialName:System.Boolean()",
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSpecialName:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsAssembly:System.Boolean()",
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsAssembly:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamily:System.Boolean()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamily:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyAndAssembly:System.Boolean()",
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyAndAssembly:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyOrAssembly:System.Boolean()",
+      "shortName": "Subject_8",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyOrAssembly:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPrivate:System.Boolean()",
+      "shortName": "Subject_9",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPrivate:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPublic:System.Boolean()",
+      "shortName": "Subject_10",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPublic:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityCritical:System.Boolean()",
+      "shortName": "Subject_11",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityCritical:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecuritySafeCritical:System.Boolean()",
+      "shortName": "Subject_12",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecuritySafeCritical:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityTransparent:System.Boolean()",
+      "shortName": "Subject_13",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityTransparent:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)",
+      "shortName": "Subject_14",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()",
+      "shortName": "Subject_15",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()",
+      "shortName": "Subject_16",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()",
+      "shortName": "Subject_17",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()",
+      "shortName": "Subject_18",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_IsSpecialName:System.Boolean()",
+      "shortName": "Subject_19",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::get_IsSpecialName:System.Boolean()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()",
+      "shortName": "Subject_20",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)",
+      "shortName": "Subject_21",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()",
+      "shortName": "Subject_22",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()",
+      "shortName": "Subject_23",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "shortName": "Subject_24",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()",
+      "shortName": "Subject_25",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()",
+      "shortName": "Subject_26",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "shortName": "Subject_27",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "shortName": "Subject_28",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()",
+      "shortName": "Subject_29",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()",
+      "shortName": "Subject_30",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "shortName": "Subject_31",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31",
+        "instructions": 16
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()",
+      "shortName": "Subject_32",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()",
+      "shortName": "Subject_33",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33",
+        "instructions": 9
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    }
+  ]
+}

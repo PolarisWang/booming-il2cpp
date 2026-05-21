@@ -1,0 +1,178 @@
+Summary
+  Generated on: 5/21/2026 - 2:04:05 AM
+  Parser: OpenCover
+  Assemblies: 1
+  Classes: 157
+  Files: 177
+  Line coverage: 13.9%
+  Covered lines: 7416
+  Uncovered lines: 45744
+  Coverable lines: 53160
+  Total lines: 73219
+  Branch coverage: 11.5% (3344 of 28911)
+  Covered branches: 3344
+  Total branches: 28911
+  Method coverage: 13.8% (427 of 3077)
+  Full method coverage: 8% (247 of 3077)
+  Covered methods: 427
+  Fully covered methods: 247
+  Total methods: 3077
+
+Chaos.IL2CPP.CodeGen                                                                    13.9%
+  Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlyArray<T>                                      60%
+  Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlySingleElementList<T>                          60%
+  Chaos.IL2CPP.CodeGen.AotCoreIrLowering                                                   0%
+  Chaos.IL2CPP.CodeGen.AssemblyFullClosureAuditEmitter                                     0%
+  Chaos.IL2CPP.CodeGen.BufferMemoryKernelArgShape                                          0%
+  Chaos.IL2CPP.CodeGen.BuildSystem.BuildSystemTemplateCatalog                              0%
+  Chaos.IL2CPP.CodeGen.BuildSystem.CmakeGenerator                                          0%
+  Chaos.IL2CPP.CodeGen.CodeGenRuntimeProviderCatalog                                       0%
+  Chaos.IL2CPP.CodeGen.CodeGenStage                                                        0%
+  Chaos.IL2CPP.CodeGen.CodegenTemplateBundlePluginAttribute                                0%
+  Chaos.IL2CPP.CodeGen.CollectionsKernelArgShape                                           0%
+  Chaos.IL2CPP.CodeGen.CollectionsKernelReturnShape                                        0%
+  Chaos.IL2CPP.CodeGen.ConvertCharKernelArgShape                                           0%
+  Chaos.IL2CPP.CodeGen.ConvertNumericKernelArgShape                                        0%
+  Chaos.IL2CPP.CodeGen.EnumMetadataExtractor                                               0%
+  Chaos.IL2CPP.CodeGen.GeneratedLoweringPlanPluginMetadata                                 0%
+  Chaos.IL2CPP.CodeGen.GeneratedRuntimeProviderPluginMetadata                              0%
+  Chaos.IL2CPP.CodeGen.GeneratedRuntimeSkeletonFamilyPluginMetadata                        0%
+  Chaos.IL2CPP.CodeGen.GeneratedTemplateBundlePluginMetadata                               0%
+  Chaos.IL2CPP.CodeGen.GeneratedTranslationUnitRenderPlan                                  0%
+  Chaos.IL2CPP.CodeGen.GenericCapabilityMatrixBuilder                                      0%
+  Chaos.IL2CPP.CodeGen.GlobalGenericSharingDirective                                       0%
+  Chaos.IL2CPP.CodeGen.InliningPlanner                                                     0%
+  Chaos.IL2CPP.CodeGen.LoweringPlanPluginAttribute                                         0%
+  Chaos.IL2CPP.CodeGen.MathKernelArgShape                                                  0%
+  Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeNameResolver                            0%
+  Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeProvider                                0%
+  Chaos.IL2CPP.CodeGen.NativeAotEmitter                                                    0%
+  Chaos.IL2CPP.CodeGen.NativeAotLoweringPlanner                                           33%
+  Chaos.IL2CPP.CodeGen.NativeAotMethodTemplateModel                                     66.6%
+  Chaos.IL2CPP.CodeGen.NativeAotRuntimeProviderRegistry                                    0%
+  Chaos.IL2CPP.CodeGen.NativeAotTemplateBundleRegistry                                     0%
+  Chaos.IL2CPP.CodeGen.NativeAotTemplateCatalog                                         42.1%
+  Chaos.IL2CPP.CodeGen.NativeAotTemplateModel                                           95.2%
+  Chaos.IL2CPP.CodeGen.NativeCodegenMetricsBuilder                                         0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceLoweringPlanner                                      0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceLoweringPlanRegistry                                 0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceProofCatalog                                         0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceProofEmitter                                         0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceRuntimeProviderRegistry                              0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceRuntimeSkeletonFamilyRegistry                        0%
+  Chaos.IL2CPP.CodeGen.NativeReferenceTemplateBundleRegistry                               0%
+  Chaos.IL2CPP.CodeGen.PatchDataDumper                                                     0%
+  Chaos.IL2CPP.CodeGen.PatchDataExtractor                                                  0%
+  Chaos.IL2CPP.CodeGen.Planning.MethodTableAllocator                                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeProviderPluginAttribute                                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonArrayAndMemoryMarshalAbi                             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonArrayAndMemoryMarshalAbiFactory                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonArrayAndMemoryMarshalArgShape                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonArrayAndMemoryMarshalReturnShape                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonBackendSelector                                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonBufferMemoryKernelAbi                                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonBufferMemoryKernelAbiFactory                         0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonBufferMemoryKernelReturnShape                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCalendarStructManagedInvokeAbi                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCalendarStructManagedInvokeAbiFactory                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCharManagedInvokeAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCharManagedInvokeAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsKernelAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsKernelAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsManagedInvokeAbi                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsManagedInvokeAbiFactory                   0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCollectionsManagedInvokeArgShape                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCompanionManagedInvokeAbi                            0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonCompanionManagedInvokeAbiFactory                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertCharKernelAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertCharKernelAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertCharKernelReturnShape                         0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertNumericKernelAbi                              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertNumericKernelAbiFactory                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertNumericKernelReturnShape                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertRuntimeHelperAbi                              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonConvertRuntimeHelperAbiFactory                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonDateTimeSemanticEngineAbi                            0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonDateTimeSemanticEngineAbiFactory                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonDecimalManagedInvokeAbi                              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonDecimalManagedInvokeAbiFactory                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonEnumManagedInvokeAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonEnumManagedInvokeAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonFamilyPluginAttribute                                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonFloatingScalarManagedInvokeAbi                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonFloatingScalarManagedInvokeAbiFactory                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonGenericManagedInvokeAbi                              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonGenericManagedInvokeAbiFactory                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonGlobalizationDateTimeSupportAbi                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonGlobalizationDateTimeSupportAbiFactory               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonHalfManagedInvokeAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonHalfManagedInvokeAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonIdentityStructManagedInvokeAbi                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonIdentityStructManagedInvokeAbiFactory                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32FastPathPlan                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32ManagedInvokeAbi                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32ManagedInvokeAbiFactory               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32PlatformCore                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonIntrinsicsManagedInvokeAbi                           0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonIntrinsicsManagedInvokeAbiFactory                    0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonKernelCarrierSchema                                  0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonKernelCore                                           0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonKernelEmissionPlan                                   0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonKernelSemanticDescriptor                             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonManagedInvokeAbiCore                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonManagedInvokePointerArgShape                         0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonManagedInvokeReturnContract                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMarshalManagedInvokeAbi                              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMarshalManagedInvokeAbiFactory                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMarshalPlatformCore                                  0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMarshalPlatformFastPathPlan                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMathKernelAbi                                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMathKernelAbiFactory                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMathKernelReturnShape                                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMemoryExtensionsManagedInvokeAbi                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMemoryExtensionsManagedInvokeAbiFactory              0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMemoryExtensionsManagedInvokeArgShape                0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonMemoryExtensionsManagedInvokeReturnShape             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeAbi             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeAbiFactory      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonNumberManagedInvokeAbi                               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonNumberManagedInvokeAbiFactory                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonPrimitiveScalarManagedInvokeAbi                      0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonPrimitiveScalarManagedInvokeAbiFactory               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSemanticFamilyDescriptor                             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSemanticRegistry                                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSpanHelpersKernelAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSpanHelpersKernelAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSpanHelpersKernelArgShape                            0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonSpanHelpersKernelReturnShape                         0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeAbi                               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeAbiFactory                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeArgShape                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonStringManagedInvokeReturnShape                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonTaskManagedInvokeAbi                                 0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonTaskManagedInvokeAbiFactory                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonTaskPlatformCore                                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonTaskPlatformFastPathPlan                             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingAtomicCore                                  0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingManagedInvokeAbi                            0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingManagedInvokeAbiFactory                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingSyncKernelAbi                               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingSyncKernelAbiFactory                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonUnsafeManagedInvokeAbi                               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonUnsafeManagedInvokeAbiFactory                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonUnsafeManagedInvokeArgShape                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonUnsafeManagedInvokeReturnShape                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonValueTypeManagedInvokeCore                           0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonValueTypeManagedInvokeDescriptor                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorKernelCarrierSchema                            0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorKernelCore                                     0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorKernelEmissionPlan                             0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorKernelSemanticDescriptor                       0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorManagedInvokeAbi                               0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonVectorManagedInvokeAbiFactory                        0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonWideNumericManagedInvokeAbi                          0%
+  Chaos.IL2CPP.CodeGen.RuntimeSkeletonWideNumericManagedInvokeAbiFactory                   0%
+  Chaos.IL2CPP.CodeGen.ScribanTemplateRenderer                                          76.7%
+  Chaos.IL2CPP.CodeGen.ThreadingSyncKernelArgShape                                         0%
+  Chaos.IL2CPP.CodeGen.ThreadingSyncKernelReturnShape                                      0%
+  Chaos.IL2CPP.CodeGen.Validation.NativeCodegenValidator                                   0%

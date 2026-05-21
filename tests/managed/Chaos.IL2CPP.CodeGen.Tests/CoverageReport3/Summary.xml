@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>5/21/2026 - 12:03:42 PM</Generatedon>
+    <Parser>DynamicCodeCoverage</Parser>
+    <Assemblies>2</Assemblies>
+    <Classes>34</Classes>
+    <Files>57</Files>
+    <Coveredlines>7155</Coveredlines>
+    <Uncoveredlines>12721</Uncoveredlines>
+    <Coverablelines>19876</Coverablelines>
+    <Totallines>33499</Totallines>
+    <Linecoverage>35.9</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>569</Coveredmethods>
+    <Fullcoveredmethods>344</Fullcoveredmethods>
+    <Totalmethods>1116</Totalmethods>
+    <Methodcoverage>50.9</Methodcoverage>
+    <Fullmethodcoverage>30.8</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="Total">
+      <Blockscovered>10812</Blockscovered>
+      <Blocksnotcovered>22282</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Coverage>
+    <Assembly name="Chaos.IL2CPP.CodeGen.dll" classes="12" coverage="36" coveredlines="5408" coverablelines="15006" totallines="37122" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="405" fullcoveredmethods="198" totalmethods="749" methodcoverage="54" fullmethodcoverage="26.4">
+      <Class name="Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlyArray" coverage="66.6" coveredlines="4" coverablelines="6" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" fullcoveredmethods="3" totalmethods="5" methodcoverage="60" fullmethodcoverage="60" />
+      <Class name="Chaos.IL2CPP.CodeGen._003C_003Ez__ReadOnlySingleElementList" coverage="71.4" coveredlines="5" coverablelines="7" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" fullcoveredmethods="3" totalmethods="5" methodcoverage="60" fullmethodcoverage="60" />
+      <Class name="Chaos.IL2CPP.CodeGen.AotCoreIrLowering" coverage="23.2" coveredlines="233" coverablelines="1004" totallines="1753" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="16" fullcoveredmethods="12" totalmethods="47" methodcoverage="34" fullmethodcoverage="25.5" />
+      <Class name="Chaos.IL2CPP.CodeGen.AssemblyFullClosureAuditEmitter" coverage="100" coveredlines="76" coverablelines="76" totallines="163" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" fullcoveredmethods="9" totalmethods="9" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Chaos.IL2CPP.CodeGen.CodeGenStage" coverage="29" coveredlines="173" coverablelines="596" totallines="1009" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" fullcoveredmethods="8" totalmethods="30" methodcoverage="30" fullmethodcoverage="26.6" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeNameResolver" coverage="0" coveredlines="0" coverablelines="17" totallines="3505" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" fullcoveredmethods="0" totalmethods="2" methodcoverage="0" fullmethodcoverage="0" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotCustomAttributeTypeProvider" coverage="0" coveredlines="0" coverablelines="28" totallines="3505" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" fullcoveredmethods="0" totalmethods="10" methodcoverage="0" fullmethodcoverage="0" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotEmitter" coverage="0" coveredlines="0" coverablelines="285" totallines="469" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" fullcoveredmethods="0" totalmethods="14" methodcoverage="0" fullmethodcoverage="0" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotLoweringPlanner" coverage="37.6" coveredlines="4855" coverablelines="12902" totallines="22650" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="344" fullcoveredmethods="142" totalmethods="583" methodcoverage="59" fullmethodcoverage="24.3" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotTemplateCatalog" coverage="43.9" coveredlines="18" coverablelines="41" totallines="251" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" fullcoveredmethods="18" totalmethods="41" methodcoverage="43.9" fullmethodcoverage="43.9" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeAotTemplateModel" coverage="100" coveredlines="7" coverablelines="7" totallines="3505" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" fullcoveredmethods="1" totalmethods="1" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Chaos.IL2CPP.CodeGen.NativeCodegenMetricsBuilder" coverage="100" coveredlines="37" coverablelines="37" totallines="72" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" fullcoveredmethods="2" totalmethods="2" methodcoverage="100" fullmethodcoverage="100" />
+    </Assembly>
+    <Assembly name="Chaos.IL2CPP.CodeGen.Tests.dll" classes="22" coverage="35.8" coveredlines="1747" coverablelines="4870" totallines="7132" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="164" fullcoveredmethods="146" totalmethods="367" methodcoverage="44.6" fullmethodcoverage="39.7">
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.AotCoreIrLoweringTests" coverage="100" coveredlines="176" coverablelines="176" totallines="417" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="29" fullcoveredmethods="29" totalmethods="29" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.AssemblyFullClosureAuditEmitterTests" coverage="100" coveredlines="225" coverablelines="225" totallines="302" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="15" fullcoveredmethods="15" totalmethods="15" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.CodeGenStageTests" coverage="100" coveredlines="157" coverablelines="157" totallines="292" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="22" fullcoveredmethods="22" totalmethods="22" methodcoverage="100" fullmethodcoverage="100" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.AbiAndEdgeCaseTests" coverage="46.2" coveredlines="49" coverablelines="106" totallines="166" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" fullcoveredmethods="5" totalmethods="10" methodcoverage="70" fullmethodcoverage="50" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ArithmeticEmissionTests" coverage="11.9" coveredlines="29" coverablelines="242" totallines="342" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="4" totalmethods="19" methodcoverage="21" fullmethodcoverage="21" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ArrayAccessEmissionTests" coverage="17.9" coveredlines="43" coverablelines="240" totallines="323" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="19" methodcoverage="26.3" fullmethodcoverage="21" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ComprehensiveEmissionTests" coverage="59.3" coveredlines="108" coverablelines="182" totallines="247" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="8" methodcoverage="50" fullmethodcoverage="37.5" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ControlFlowEmissionTests" coverage="51.9" coveredlines="67" coverablelines="129" totallines="195" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="8" methodcoverage="62.5" fullmethodcoverage="50" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ExtendedArithmeticEmissionTests" coverage="12.3" coveredlines="43" coverablelines="347" totallines="482" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="26" methodcoverage="19.2" fullmethodcoverage="15.3" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ExtendedEmissionGapTests" coverage="4.7" coveredlines="24" coverablelines="510" totallines="741" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="41" methodcoverage="9.7" fullmethodcoverage="7.3" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.FieldAccessEmissionTests" coverage="34.6" coveredlines="45" coverablelines="130" totallines="186" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="10" methodcoverage="50" fullmethodcoverage="40" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.IndirectAccessEmissionTests" coverage="10.8" coveredlines="27" coverablelines="249" totallines="340" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="21" methodcoverage="19" fullmethodcoverage="14.2" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.MetadataRegistrationTests" coverage="65.7" coveredlines="100" coverablelines="152" totallines="207" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="5" methodcoverage="80" fullmethodcoverage="60" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.MethodDispatchEmissionTests" coverage="49.2" coveredlines="68" coverablelines="138" totallines="189" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="9" methodcoverage="55.5" fullmethodcoverage="44.4" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.MiscEmissionTests" coverage="7.4" coveredlines="32" coverablelines="429" totallines="581" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="29" methodcoverage="13.7" fullmethodcoverage="10.3" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.ObjectModelEmissionTests" coverage="17.5" coveredlines="42" coverablelines="240" totallines="388" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="18" methodcoverage="27.7" fullmethodcoverage="22.2" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.OverflowConversionEmissionTests" coverage="15.2" coveredlines="37" coverablelines="242" totallines="337" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="22" methodcoverage="22.7" fullmethodcoverage="18.1" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.RichObjectModelEmissionTests" coverage="48.7" coveredlines="140" coverablelines="287" totallines="446" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" fullcoveredmethods="8" totalmethods="19" methodcoverage="47.3" fullmethodcoverage="42.1" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.StaticInitAndMetadataTests" coverage="28.6" coveredlines="39" coverablelines="136" totallines="235" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="12" methodcoverage="41.6" fullmethodcoverage="33.3" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.UtilityPathTests" coverage="26.3" coveredlines="68" coverablelines="258" totallines="329" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" fullcoveredmethods="3" totalmethods="10" methodcoverage="40" fullmethodcoverage="30" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.Emission.VTableAndInterfaceEmissionTests" coverage="68" coveredlines="143" coverablelines="210" totallines="246" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" fullcoveredmethods="4" totalmethods="6" methodcoverage="83.3" fullmethodcoverage="66.6" />
+      <Class name="Chaos.IL2CPP.CodeGen.Tests.NativeCodegenMetricsBuilderTests" coverage="100" coveredlines="85" coverablelines="85" totallines="141" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" fullcoveredmethods="9" totalmethods="9" methodcoverage="100" fullmethodcoverage="100" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>

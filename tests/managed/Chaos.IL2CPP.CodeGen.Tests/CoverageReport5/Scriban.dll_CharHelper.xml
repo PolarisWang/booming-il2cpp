@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Helpers.CharHelper">
+  <Summary>
+    <Class>Scriban.Helpers.CharHelper</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Helpers\CharHelper.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>18</Uncoveredlines>
+    <Coverablelines>18</Coverablelines>
+    <Totallines>52</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>4</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="IsHexa">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="TryParseDigit">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>4</Blocksnotcovered>
+    </Element>
+    <Element name="TryHexaToInt">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="IsBinary">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Helpers\CharHelper.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Helpers" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class CharHelper" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static bool IsHexa(char c)" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return Char.IsDigit(c) || (c &gt;= 'a' &amp;&amp; c &lt;= 'f') || (c &gt;= 'A' &amp;&amp; c &lt;= 'F');" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static bool TryParseDigit(char c, out int value)" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="19" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (c &gt;= '0' &amp;&amp; c &lt;= '9')" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                value = c - '0';" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            value = 0;" />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static bool TryHexaToInt(char c, out int value)" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (c &gt;= '0' &amp;&amp; c &lt;= '9')" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                value = c - '0';" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="35" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (c &gt;= 'A' &amp;&amp; c &lt;= 'F')" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                value = 10 + (c - 'A');" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (c &gt;= 'a' &amp;&amp; c &lt;= 'f')" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="42" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                value = 10 + (c - 'a');" />
+      <LineAnalysis line="43" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            value = 0;" />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public static bool IsBinary(char c) =&gt; c == '0' || c == '1';" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

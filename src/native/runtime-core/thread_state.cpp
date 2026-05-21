@@ -1,5 +1,6 @@
 #include "thread_state.h"
 
+#include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
@@ -661,8 +662,10 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         // ── Phase 1: Full-stack conservative scan ─────────────────
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
             auto* val_ptr = reinterpret_cast<void**>(slot);
-            if (*val_ptr != nullptr &&
-                reinterpret_cast<uintptr_t>(*val_ptr) >= g_heap_base) {
+            if (auto* read = static_cast<void*>(
+                    chaos::il2cpp::common::AsanReadPtrNoCheck(val_ptr));
+                read != nullptr &&
+                reinterpret_cast<uintptr_t>(read) >= g_heap_base) {
                 s_callback(reinterpret_cast<void*>(slot), /*is_interior=*/false, s_user_data);
             }
         }
@@ -674,13 +677,17 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
         //   [rbp + 0] = saved old RBP     (must be a stack address)
         //   frame_ptr = RSP = rbp - 880   (base for GcSlotMap offsets)
         for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
-            void* val = *reinterpret_cast<void**>(slot);
+            void* val = static_cast<void*>(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(
+                    reinterpret_cast<void*>(slot)));
             const auto* nm = chaos::il2cpp::codegen::FindT4CodeByAddress(val);
             if (nm == nullptr) continue;
             if (nm->slot_map_data == nullptr) continue;
 
             if (slot < start_aligned + sizeof(void*)) continue;
-            uintptr_t saved_rbp = *reinterpret_cast<uintptr_t*>(slot - sizeof(void*));
+            uintptr_t saved_rbp = reinterpret_cast<uintptr_t>(
+                chaos::il2cpp::common::AsanReadPtrNoCheck(
+                    reinterpret_cast<void*>(slot - sizeof(void*))));
             if (saved_rbp < reinterpret_cast<uintptr_t>(scan_start) ||
                 saved_rbp > reinterpret_cast<uintptr_t>(scan_end)) continue;
 

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects</AssemblyName>
+    <RootNamespace>InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs" />
+  </ItemGroup>
+</Project>

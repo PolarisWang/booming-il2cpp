@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Program">
+  <Summary>
+    <Class>Program</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\CoverageReport\Program.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>63</Uncoveredlines>
+    <Coverablelines>63</Coverablelines>
+    <Totallines>91</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>1</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="Main">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>185</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\CoverageReport\Program.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Xml.Linq;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var path = args.Length &gt; 0 ? args[0] : &quot;coverage_analysis.xml&quot;;" />
+      <LineAnalysis line="4" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var xml = XDocument.Load(path);" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var module = xml.Descendants(&quot;module&quot;)" />
+      <LineAnalysis line="7" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    .FirstOrDefault(m =&gt; m.Attribute(&quot;name&quot;)?.Value == &quot;Chaos.IL2CPP.CodeGen.dll&quot;);" />
+      <LineAnalysis line="8" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="if (module == null) { Console.Error.WriteLine(&quot;Module not found&quot;); return; }" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="10" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var srcMap = new Dictionary&lt;string, string&gt;();" />
+      <LineAnalysis line="11" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="foreach (var sf in module.Descendants(&quot;source_file&quot;))" />
+      <LineAnalysis line="12" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    srcMap[sf.Attribute(&quot;id&quot;)!.Value] = sf.Attribute(&quot;path&quot;)!.Value;" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var stats = new Dictionary&lt;string, CovStat&gt;();" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="foreach (var func in module.Descendants(&quot;function&quot;))" />
+      <LineAnalysis line="16" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="foreach (var range in func.Descendants(&quot;range&quot;))" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="18" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var sid = range.Attribute(&quot;source_id&quot;)?.Value;" />
+      <LineAnalysis line="19" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (sid == null || !srcMap.ContainsKey(sid)) continue;" />
+      <LineAnalysis line="20" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var p = srcMap[sid];" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (!p.Contains(&quot;CodeGen\\&quot;) || p.Contains(&quot;obj\\&quot;)) continue;" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (!stats.ContainsKey(p)) stats[p] = new CovStat();" />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var s = stats[p];" />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    s.Total++;" />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var cov = range.Attribute(&quot;covered&quot;)?.Value;" />
+      <LineAnalysis line="27" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (cov == &quot;yes&quot;) s.Covered++;" />
+      <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    else if (cov == &quot;partial&quot;) s.Partial++;" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var prefix = &quot;D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.CodeGen\\&quot;;" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="int grandTotal = 0, grandCovered = 0;" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="double grandPartial = 0;" />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="int refProofTotal = 0, refProofCovered = 0;" />
+      <LineAnalysis line="35" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="double refProofPartial = 0;" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="int coreTotal = 0, coreCovered = 0;" />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="double corePartial = 0;" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="39" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var refProofPrefixes = new[] { &quot;ReferenceProof&quot;, &quot;NativeReferenceProof&quot;, &quot;RuntimeSkeleton&quot;," />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    &quot;GenericCapabilityMatrix&quot;, &quot;NativeAotEmitter&quot;, &quot;PatchData&quot;, &quot;Pluginization&quot;," />
+      <LineAnalysis line="41" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    &quot;BuildSystem&quot;, &quot;CodeGenRuntimeProviderCatalog&quot;, &quot;NativeReferenceLoweringPlanner&quot; };" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="bool IsRefProof(string p)" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="45" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var name = Path.GetFileNameWithoutExtension(p);" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    foreach (var x in refProofPrefixes)" />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (name.StartsWith(x) || p.Contains(&quot;\\&quot; + x + &quot;\\&quot;) || p.Contains(&quot;/&quot; + x + &quot;/&quot;))" />
+      <LineAnalysis line="48" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="49" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    return false;" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="52" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine(&quot;=== FILES BELOW 90% ===&quot;);" />
+      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="foreach (var kv in stats.OrderBy(k =&gt; k.Key))" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var pct = (kv.Value.Covered + kv.Value.Partial * 0.5) / kv.Value.Total * 100;" />
+      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var shortName = kv.Key.StartsWith(prefix) ? kv.Key[prefix.Length..] : kv.Key;" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    var marker = IsRefProof(kv.Key) ? &quot; [RP]&quot; : &quot;&quot;;" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (pct &lt; 90)" />
+      <LineAnalysis line="59" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        Console.WriteLine($&quot;{pct,6:F1}%  {kv.Value.Covered,5} yes + {kv.Value.Partial,3} par / {kv.Value.Total,5} blk{marker}  {shortName}&quot;);" />
+      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    grandTotal += kv.Value.Total;" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    grandCovered += kv.Value.Covered;" />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    grandPartial += kv.Value.Partial * 0.5;" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    if (IsRefProof(kv.Key))" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        refProofTotal += kv.Value.Total;" />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        refProofCovered += kv.Value.Covered;" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        refProofPartial += kv.Value.Partial * 0.5;" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    else" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        coreTotal += kv.Value.Total;" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        coreCovered += kv.Value.Covered;" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        corePartial += kv.Value.Partial * 0.5;" />
+      <LineAnalysis line="75" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="76" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;\n=== CORE (excl. ReferenceProof) ===&quot;);" />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var corePct = coreTotal &gt; 0 ? (coreCovered + corePartial) / coreTotal * 100 : 0;" />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;  Total: {coreCovered + corePartial:F0} / {coreTotal} blocks = {corePct:F1}%&quot;);" />
+      <LineAnalysis line="81" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;  Need {(90 * coreTotal / 100.0 - coreCovered - corePartial):F0} more blocks for 90%&quot;);" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;\n=== REFERENCE PROOF ===&quot;);" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var rpPct = refProofTotal &gt; 0 ? (refProofCovered + refProofPartial) / refProofTotal * 100 : 0;" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;  Total: {refProofCovered + refProofPartial:F0} / {refProofTotal} blocks = {rpPct:F1}%&quot;);" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="87" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;\n=== GRAND TOTAL ===&quot;);" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="var grandPct = grandTotal &gt; 0 ? (grandCovered + grandPartial) / grandTotal * 100 : 0;" />
+      <LineAnalysis line="89" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="Console.WriteLine($&quot;  Total: {grandCovered + grandPartial:F0} / {grandTotal} blocks = {grandPct:F1}%&quot;);" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="record CovStat { public int Covered; public int Partial; public int Total; }" />
+    </File>
+  </Files>
+</CoverageReport>

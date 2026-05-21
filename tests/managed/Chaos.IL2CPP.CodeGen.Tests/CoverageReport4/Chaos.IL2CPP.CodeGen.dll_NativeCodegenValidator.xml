@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.Validation.NativeCodegenValidator">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.Validation.NativeCodegenValidator</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Validation\NativeCodegenValidator.cs</File>
+    </Files>
+    <Coveredlines>90</Coveredlines>
+    <Uncoveredlines>1</Uncoveredlines>
+    <Coverablelines>91</Coverablelines>
+    <Totallines>196</Totallines>
+    <Linecoverage>98.9</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>7</Coveredmethods>
+    <Fullcoveredmethods>6</Fullcoveredmethods>
+    <Totalmethods>7</Totalmethods>
+    <Methodcoverage>100</Methodcoverage>
+    <Fullmethodcoverage>85.7</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ValidationResult">
+      <Blockscovered>4</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="NativeCodegenValidator">
+      <Blockscovered>10</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ValidateFile">
+      <Blockscovered>12</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ValidateContent">
+      <Blockscovered>149</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="EstimateLineNumber">
+      <Blockscovered>11</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ValidateGeneratedFile">
+      <Blockscovered>25</Blockscovered>
+      <Blocksnotcovered>4</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Validation\NativeCodegenValidator.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.IO;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Linq;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text.RegularExpressions;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Validation;" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public sealed class NativeCodegenValidator" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public sealed class ValidationResult" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="12" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public bool IsValid =&gt; Errors.Count == 0;" />
+      <LineAnalysis line="13" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public List&lt;string&gt; Errors { get; } = [];" />
+      <LineAnalysis line="14" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public List&lt;string&gt; Warnings { get; } = [];" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex UsingNamespaceRegex = new(" />
+      <LineAnalysis line="18" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;using\s+namespace\s+(std|chaos)\s*;&quot;," />
+      <LineAnalysis line="19" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="21" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex NullPointerRegex = new(" />
+      <LineAnalysis line="22" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;\bNULL\b&quot;," />
+      <LineAnalysis line="23" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="25" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex BareIntRegex = new(" />
+      <LineAnalysis line="26" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;(?&lt;!\w)(?&lt;!std::)(?&lt;!::)(?&lt;!\w_)(int|long|unsigned\s+(int|long))(?!\w)(?!\s*_)&quot;," />
+      <LineAnalysis line="27" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled | RegexOptions.IgnoreCase);" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="29" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex IncludeGuardRegex = new(" />
+      <LineAnalysis line="30" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;#ifndef\s+CHAOS_IL2CPP_\w+_H_\s*&quot;," />
+      <LineAnalysis line="31" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="33" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex ChaosPrefixInNamespaceRegex = new(" />
+      <LineAnalysis line="34" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;\bchaos_\w+&quot;," />
+      <LineAnalysis line="35" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="37" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex RawNewDeleteRegex = new(" />
+      <LineAnalysis line="38" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;\b(?:new|delete)\s+\w+&quot;," />
+      <LineAnalysis line="39" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="41" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex UsingDirectiveRegex = new(" />
+      <LineAnalysis line="42" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;^using\s+namespace\s+(std|chaos)\s*;&quot;," />
+      <LineAnalysis line="43" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled | RegexOptions.Multiline);" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="45" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex RawStdTypeRegex = new(" />
+      <LineAnalysis line="46" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;\bstd::(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t|string|string_view|vector|array|unique_ptr|make_unique|shared_ptr|make_shared|unordered_map|pair|abort\s*\(|malloc\s*\(|free\s*\(|realloc\s*\(|memcpy|memcmp|memmove|strcmp|strlen|memset|mutex|lock_guard|recursive_timed_mutex|recursive_mutex|once_flag|call_once|thread|numeric_limits|atomic|to_string|printf|fwrite|fputc|fflush|chrono|move|nothrow)\b&quot;," />
+      <LineAnalysis line="47" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="49" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Regex BareCStdintTypeRegex = new(" />
+      <LineAnalysis line="50" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        @&quot;(?&lt;!\w)(intptr_t|int\d+_t|uint\d+_t|size_t|ptrdiff_t)(?!\w)&quot;," />
+      <LineAnalysis line="51" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        RegexOptions.Compiled);" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public ValidationResult ValidateFile(string filePath)" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="55" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var result = new ValidationResult();" />
+      <LineAnalysis line="56" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (!File.Exists(filePath))" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="58" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            result.Errors.Add($&quot;File not found: {filePath}&quot;);" />
+      <LineAnalysis line="59" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            return result;" />
+      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="61" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="62" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var lines = File.ReadAllLines(filePath);" />
+      <LineAnalysis line="63" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var content = string.Join(&quot;\n&quot;, lines);" />
+      <LineAnalysis line="64" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var fileName = Path.GetFileName(filePath);" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="66" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        ValidateContent(content, fileName, result);" />
+      <LineAnalysis line="67" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        return result;" />
+      <LineAnalysis line="68" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public ValidationResult ValidateContent(string content, string fileName, ValidationResult? result = null)" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="72" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        result ??= new ValidationResult();" />
+      <LineAnalysis line="73" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="74" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 1: No `using namespace std;` or `using namespace chaos;`" />
+      <LineAnalysis line="75" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var usingMatch = UsingNamespaceRegex.Match(content);" />
+      <LineAnalysis line="76" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (usingMatch.Success)" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="78" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            result.Errors.Add($&quot;'{fileName}': 'using namespace std/chaos' is forbidden — use explicit std:: prefix instead (found near line {EstimateLineNumber(content, usingMatch.Index)})&quot;);" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 2: No `using std::` or `using chaos::` directives" />
+      <LineAnalysis line="82" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var usingDirectiveMatch = UsingDirectiveRegex.Match(content);" />
+      <LineAnalysis line="83" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (usingDirectiveMatch.Success)" />
+      <LineAnalysis line="84" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="85" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            result.Errors.Add($&quot;'{fileName}': 'using std::...' or 'using chaos::...' is forbidden — use explicit prefixes instead (found near line {EstimateLineNumber(content, usingDirectiveMatch.Index)})&quot;);" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 3: Must use nullptr, not NULL or 0 as pointer" />
+      <LineAnalysis line="89" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var nullMatch = NullPointerRegex.Match(content);" />
+      <LineAnalysis line="90" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (nullMatch.Success)" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="92" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            result.Errors.Add($&quot;'{fileName}': 'NULL' is forbidden — use 'nullptr' instead (found near line {EstimateLineNumber(content, nullMatch.Index)})&quot;);" />
+      <LineAnalysis line="93" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="94" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 4: Must use &lt;cstdint&gt; types (CHAOS_IL2CPP_INT32 etc.), not bare int/long" />
+      <LineAnalysis line="96" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Only flag in generated code, not in runtime library code" />
+      <LineAnalysis line="97" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (!fileName.StartsWith(&quot;chaos/&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="99" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var bareIntMatch = BareIntRegex.Match(content);" />
+      <LineAnalysis line="100" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (bareIntMatch.Success)" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="102" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Warnings.Add($&quot;'{fileName}': prefer &lt;cstdint&gt; types (CHAOS_IL2CPP_INT32, etc.) over '{bareIntMatch.Value}' (found near line {EstimateLineNumber(content, bareIntMatch.Index)})&quot;);" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 5: Include guard format (only for header files)" />
+      <LineAnalysis line="107" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (fileName.EndsWith(&quot;.h&quot;, StringComparison.Ordinal) &amp;&amp; !fileName.StartsWith(&quot;chaos/&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="109" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var headerLines = content.Split('\n');" />
+      <LineAnalysis line="110" visits="1" coverage="PartiallyCovered" coveredbranches="" totalbranches="" content="            var hasGuard = headerLines.Length &gt; 0 &amp;&amp; IncludeGuardRegex.IsMatch(headerLines[0]);" />
+      <LineAnalysis line="111" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (!hasGuard)" />
+      <LineAnalysis line="112" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="113" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Warnings.Add($&quot;'{fileName}': header should have include guard matching 'CHAOS_IL2CPP_*_H_'&quot;);" />
+      <LineAnalysis line="114" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="115" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="116" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="117" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 6: chaos_common namespace symbols must not use chaos_ prefix" />
+      <LineAnalysis line="118" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (content.Contains(&quot;namespace ChaosIl2cpp::Common&quot;))" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="120" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var chaosPrefixMatch = ChaosPrefixInNamespaceRegex.Match(content);" />
+      <LineAnalysis line="121" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (chaosPrefixMatch.Success)" />
+      <LineAnalysis line="122" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="123" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Errors.Add($&quot;'{fileName}': ChaosIl2cpp::Common symbols must not use 'chaos_' prefix — use plain names instead (found '{chaosPrefixMatch.Value}' near line {EstimateLineNumber(content, chaosPrefixMatch.Index)})&quot;);" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="125" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="126" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 7: Generated code must include &lt;chaos/common.h&gt; instead of inline preludes" />
+      <LineAnalysis line="128" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (fileName.EndsWith(&quot;.cpp&quot;, StringComparison.Ordinal) &amp;&amp; !fileName.Contains(&quot;chaos/&quot;))" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="130" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (content.Contains(&quot;chaos_finally_scope_guard&quot;) || content.Contains(&quot;chaos_wrap_add&quot;))" />
+      <LineAnalysis line="131" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="132" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Errors.Add($&quot;'{fileName}': contains inline prelude definitions (chaos_finally_scope_guard, chaos_wrap_add) — must include &lt;chaos/common.h&gt; instead&quot;);" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="134" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="135" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="136" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 8: Generated code must not contain raw std:: types — use CHAOS_IL2CPP_* macros" />
+      <LineAnalysis line="137" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (!fileName.StartsWith(&quot;chaos/&quot;, StringComparison.Ordinal) &amp;&amp;" />
+      <LineAnalysis line="138" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            !fileName.StartsWith(&quot;native_types&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="139" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="140" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var rawStdMatch = RawStdTypeRegex.Match(content);" />
+      <LineAnalysis line="141" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (rawStdMatch.Success)" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="143" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Errors.Add($&quot;'{fileName}': raw std:: type '{rawStdMatch.Value}' found — use CHAOS_IL2CPP_* macros instead (found near line {EstimateLineNumber(content, rawStdMatch.Index)})&quot;);" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="145" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="147" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Check 9: Generated code must not contain bare &lt;cstdint&gt; types (int32_t, uint32_t, etc.) — use CHAOS_IL2CPP_* macros" />
+      <LineAnalysis line="148" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (!fileName.StartsWith(&quot;chaos/&quot;, StringComparison.Ordinal) &amp;&amp;" />
+      <LineAnalysis line="149" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            !fileName.StartsWith(&quot;native_types&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="151" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var bareTypeMatch = BareCStdintTypeRegex.Match(content);" />
+      <LineAnalysis line="152" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (bareTypeMatch.Success)" />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="154" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                result.Errors.Add($&quot;'{fileName}': bare type '{bareTypeMatch.Value}' found — use CHAOS_IL2CPP_* macro instead (found near line {EstimateLineNumber(content, bareTypeMatch.Index)})&quot;);" />
+      <LineAnalysis line="155" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="158" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        return result;" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="161" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static int EstimateLineNumber(string content, int index)" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="163" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (index &lt;= 0) return 1;" />
+      <LineAnalysis line="164" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var lineNumber = 1;" />
+      <LineAnalysis line="165" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        for (var i = 0; i &lt; index &amp;&amp; i &lt; content.Length; i++)" />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="167" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            if (content[i] == '\n') lineNumber++;" />
+      <LineAnalysis line="168" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="169" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        return lineNumber;" />
+      <LineAnalysis line="170" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="171" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="172" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static bool ValidateGeneratedFile(string filePath, List&lt;string&gt;? errors = null)" />
+      <LineAnalysis line="173" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="174" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var validator = new NativeCodegenValidator();" />
+      <LineAnalysis line="175" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var result = validator.ValidateFile(filePath);" />
+      <LineAnalysis line="176" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (errors != null)" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="178" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            errors.AddRange(result.Errors);" />
+      <LineAnalysis line="179" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="181" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        if (!result.IsValid)" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="183" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            foreach (var error in result.Errors)" />
+      <LineAnalysis line="184" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="185" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                System.Console.Error.WriteLine($&quot;[NativeCodegenValidator] ERROR: {error}&quot;);" />
+      <LineAnalysis line="186" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="187" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="188" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="189" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        foreach (var warning in result.Warnings)" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="191" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            System.Console.Error.WriteLine($&quot;[NativeCodegenValidator] WARNING: {warning}&quot;);" />
+      <LineAnalysis line="192" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="193" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="194" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        return result.IsValid;" />
+      <LineAnalysis line="195" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="196" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

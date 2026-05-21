@@ -19,7 +19,8 @@ file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
-    "verification_dispatch.generated.cpp"  # verification dispatch
+    "verification_dispatch.generated.cpp"
+    "microbench.cpp"  # microbench support  # verification dispatch
     ${CHAOS_CODEGEN_CPP}
 )
 

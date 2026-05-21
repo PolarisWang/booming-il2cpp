@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.GeneratedTranslationUnitRenderPlan">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.GeneratedTranslationUnitRenderPlan</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Lowering\GeneratedTranslationUnitRenderPlan.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>1</Uncoveredlines>
+    <Coverablelines>1</Coverablelines>
+    <Totallines>6</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>1</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="GeneratedTranslationUnitRenderPlan">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Lowering\GeneratedTranslationUnitRenderPlan.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="internal sealed record GeneratedTranslationUnitRenderPlan(Template Template, ScriptObject Model);" />
+    </File>
+  </Files>
+</CoverageReport>

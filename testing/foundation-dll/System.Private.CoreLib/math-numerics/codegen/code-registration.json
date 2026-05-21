@@ -1,0 +1,132 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "MathNumericsSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_6",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_8",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_14",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_15",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_16",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
+          "subjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "MathNumericsSubjects_AutoGeneratedProgram_Main_System_String",
+          "subjectId": "MathNumericsSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "MathNumericsSubjects_AutoGeneratedProgram__ctor",
+          "subjectId": "MathNumericsSubjects/AutoGeneratedProgram::.ctor:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

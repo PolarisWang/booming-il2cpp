@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Runtime.ScriptLazy">
+  <Summary>
+    <Class>Scriban.Runtime.ScriptLazy</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\ScriptLazy.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>10</Uncoveredlines>
+    <Coverablelines>10</Coverablelines>
+    <Totallines>50</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>8</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ScriptLazy">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="GetParameterInfo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>1</Blocksnotcovered>
+    </Element>
+    <Element name="Invoke">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="InvokeAsync">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Runtime\ScriptLazy.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Copyright (c) Alexandre Mutel. All rights reserved." />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Licensed under the BSD-Clause 2 license." />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// See license.txt file in the project root for full license information." />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Diagnostics.CodeAnalysis;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Threading.Tasks;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Syntax;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Runtime" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    class ScriptLazy&lt;[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T&gt; : IScriptCustomFunction" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private readonly Lazy&lt;T&gt; _lazy;" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptLazy(Func&lt;T&gt; valueFactory)" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _lazy = new Lazy&lt;T&gt;(valueFactory);" />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public int RequiredParameterCount =&gt; 0;" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public int ParameterCount =&gt; 0;" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptVarParamKind VarParamKind =&gt; ScriptVarParamKind.None;" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public Type ReturnType =&gt; typeof(T);" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptParameterInfo GetParameterInfo(int index) =&gt; default;" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public object? Invoke(TemplateContext context, ScriptNode? callerContext, ScriptArray arguments, ScriptBlockStatement? blockStatement)" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return _lazy.Value;" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if !SCRIBAN_NO_ASYNC" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public ValueTask&lt;object?&gt; InvokeAsync(TemplateContext context, ScriptNode? callerContext, ScriptArray arguments, ScriptBlockStatement? blockStatement)" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new ValueTask&lt;object?&gt;(_lazy.Value);" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

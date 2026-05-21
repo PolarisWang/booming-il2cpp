@@ -24,30 +24,21 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 33,
-          "handlerOffset": 34,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 4,
+          "ilOffset": 3,
           "resultType": "System.Int32",
           "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
           "reference": {
@@ -75,43 +66,15 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
-          "ilOffset": 9,
+          "operand": -1,
+          "ilOffset": 8,
           "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 11,
-          "resultType": "System.Int32",
-          "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_Run_System_Int32",
-          "targetParameterCount": 1,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 16,
+          "ilOffset": 9,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -119,14 +82,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 11,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 19,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -134,7 +97,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 21,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -142,14 +105,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 22,
+          "ilOffset": 15,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 31,
-          "ilOffset": 23,
+          "operand": 24,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -157,7 +120,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 25,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -165,7 +128,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 26,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ErrorInfoBasicSubjects",
@@ -186,69 +149,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 45,
-          "ilOffset": 32,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 34,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 37,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 45,
-          "ilOffset": 43,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 45,
+          "ilOffset": 24,
           "isPreserveSig": false
         }
       ],
@@ -284,22 +190,13 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
           "reference": {
@@ -325,37 +222,17 @@
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 6,
           "resultType": "System.Int32",
-          "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 12,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -363,14 +240,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 14,
+          "ilOffset": 9,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 15,
+          "ilOffset": 10,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -378,7 +255,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 12,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -386,14 +263,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 13,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
+          "operand": 22,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -401,7 +278,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 21,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -409,7 +286,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 22,
+          "ilOffset": 17,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ErrorInfoBasicSubjects",
@@ -430,69 +307,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 22,
           "isPreserveSig": false
         }
       ],
@@ -528,22 +348,13 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
           "reference": {
@@ -566,55 +377,20 @@
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetHRForException",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 14,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -622,7 +398,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 9,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -630,14 +406,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 10,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
+          "operand": 19,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -645,7 +421,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 21,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -653,7 +429,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 22,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ErrorInfoBasicSubjects",
@@ -674,69 +450,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 19,
           "isPreserveSig": false
         }
       ],
@@ -772,22 +491,13 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
           "reference": {
@@ -810,55 +520,20 @@
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestThrowExceptionForHR_S_OK",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 14,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -866,7 +541,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 9,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -874,14 +549,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 10,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
+          "operand": 19,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -889,7 +564,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 21,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -897,7 +572,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 22,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ErrorInfoBasicSubjects",
@@ -918,69 +593,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 19,
           "isPreserveSig": false
         }
       ],
@@ -1016,22 +634,13 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 1,
-      "exceptionRegions": [
-        {
-          "handlingKindCode": 1,
-          "tryOffset": 1,
-          "tryLength": 29,
-          "handlerOffset": 30,
-          "handlerLength": 11,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-        }
-      ],
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 2,
+          "ilOffset": 1,
           "resultType": "System.Int32",
           "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
           "reference": {
@@ -1054,55 +663,20 @@
           "targetParameterCount": 0,
           "targetReturnType": "System.Int32",
           "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "method",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "targetSymbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR_Zero",
-          "targetParameterCount": 0,
-          "targetReturnType": "System.Int32",
-          "dispatchKindCode": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 12,
-          "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 14,
+          "ilOffset": 6,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 15,
+          "op": "cgt.un",
+          "opCode": 33,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1110,7 +684,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 17,
+          "ilOffset": 9,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1118,14 +692,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 10,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 27,
-          "ilOffset": 19,
+          "operand": 19,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -1133,7 +707,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 21,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1141,7 +715,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 22,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ErrorInfoBasicSubjects",
@@ -1162,69 +736,12 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 28,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 30,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 32,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectKind": "field",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "ErrorInfoBasicSubjects",
-            "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
-          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 19,
           "isPreserveSig": false
         }
       ],

@@ -86,8 +86,6 @@ if(USE_ASAN)
     add_compile_options(/fsanitize=address)
     add_link_options(/fsanitize=address /FORCE:MULTIPLE)
     add_compile_definitions(_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
-else()
-    add_compile_options(/utf-8 /GS- /W1)
 endif()
 
 # Convenience: create gtest executable with chaos library support
@@ -96,6 +94,9 @@ function(add_chaos_test name)
     add_executable(${name} ${ARG_UNPARSED_ARGUMENTS})
     target_link_libraries(${name} PRIVATE gtest_main ${ARG_LIBS})
     target_include_directories(${name} PRIVATE ${CHAOS_INCLUDE_DIRS} ${ARG_INCLUDES})
+    if(USE_ASAN)
+        target_link_options(${name} PRIVATE /FORCE:MULTIPLE)
+    endif()
     add_test(NAME ${name} COMMAND ${name})
 endfunction()
 

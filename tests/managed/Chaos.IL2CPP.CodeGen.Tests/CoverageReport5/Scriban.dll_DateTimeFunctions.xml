@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Functions.DateTimeFunctions">
+  <Summary>
+    <Class>Scriban.Functions.DateTimeFunctions</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Functions\DateTimeFunctions.cs</File>
+    </Files>
+    <Coveredlines>58</Coveredlines>
+    <Uncoveredlines>90</Uncoveredlines>
+    <Coverablelines>148</Coverablelines>
+    <Totallines>588</Totallines>
+    <Linecoverage>39.1</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>5</Coveredmethods>
+    <Fullcoveredmethods>4</Fullcoveredmethods>
+    <Totalmethods>27</Totalmethods>
+    <Methodcoverage>18.5</Methodcoverage>
+    <Fullmethodcoverage>14.8</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="DateTimeFunctions">
+      <Blockscovered>127</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="DateTimeFunctions">
+      <Blockscovered>6</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="Now">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddDays">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddMonths">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddYears">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddHours">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddMinutes">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddSeconds">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="AddMilliseconds">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ParseCustomFormat">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>34</Blocksnotcovered>
+    </Element>
+    <Element name="ParseDateTime">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>34</Blocksnotcovered>
+    </Element>
+    <Element name="Parse">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="ParseToString">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>18</Blocksnotcovered>
+    </Element>
+    <Element name="Clone">
+      <Blockscovered>3</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ToString">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>37</Blocksnotcovered>
+    </Element>
+    <Element name="Invoke">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>22</Blocksnotcovered>
+    </Element>
+    <Element name="GetParameterInfo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="InvokeAsync">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="CreateImportFunctions">
+      <Blockscovered>4</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ToStringTrampoline">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Functions\DateTimeFunctions.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Copyright (c) Alexandre Mutel. All rights reserved." />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Licensed under the BSD-Clause 2 license." />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// See license.txt file in the project root for full license information." />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Diagnostics.CodeAnalysis;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Globalization;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text;" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text.RegularExpressions;" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Threading.Tasks;" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Syntax;" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Functions" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// A datetime object represents an instant in time, expressed as a date and time of day." />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    ///" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | Name             | Description" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// |--------------    |-----------------" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.year`          | Gets the year of a date object" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.month`         | Gets the month of a date object" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.day`           | Gets the day in the month of a date object" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.day_of_year`   | Gets the day within the year" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.hour`          | Gets the hour of the date object" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.minute`        | Gets the minute of the date object" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.second`        | Gets the second of the date object" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// | `.millisecond`   | Gets the millisecond of the date object" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    ///" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// [:top:](#builtins)" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// #### Binary operations" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    ///" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// The subtract operation `date1 - date2`: Subtract `date2` from `date1` and return a timespan internal object (see timespan object below)." />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    ///" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Other comparison operators(`==`, `!=`, `&amp;lt;=`, `&amp;gt;=`, `&amp;lt;`, `&amp;gt;`) are also working with date objects." />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    ///" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// A `timespan` and also the added to a `datetime` object." />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;seealso cref=&quot;Scriban.Runtime.ScriptObject&quot; /&gt;" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="46" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    partial class DateTimeFunctions : ScriptObject, IScriptCustomFunction, IScriptFunctionInfo" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private const string FormatKey = &quot;format&quot;;" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // This is exposed as well as default_format" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public const string DefaultFormat = &quot;%d %b %Y&quot;;" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [ScriptMemberIgnore]" />
+      <LineAnalysis line="56" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public static readonly ScriptVariable DateVariable = new ScriptVariableGlobal(&quot;date&quot;);" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Code from DotLiquid https://github.com/dotliquid/dotliquid/blob/master/src/DotLiquid/Util/StrFTime.cs" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Apache License, Version 2.0" />
+      <LineAnalysis line="60" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        private static readonly Dictionary&lt;char, (Func&lt;DateTime, CultureInfo, string&gt;, string?)&gt; Formats = new Dictionary&lt;char, (Func&lt;DateTime, CultureInfo, string&gt;, string?)&gt;" />
+      <LineAnalysis line="61" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="62" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'a', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;ddd&quot;, cultureInfo), &quot;ddd&quot;) }," />
+      <LineAnalysis line="63" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'A', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;dddd&quot;, cultureInfo), &quot;dddd&quot;) }," />
+      <LineAnalysis line="64" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'b', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;MMM&quot;, cultureInfo), &quot;MMM&quot;) }," />
+      <LineAnalysis line="65" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'B', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;MMMM&quot;, cultureInfo), &quot;MMM&quot;) }," />
+      <LineAnalysis line="66" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'c', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;ddd MMM dd HH:mm:ss yyyy&quot;, cultureInfo), &quot;ddd MMM dd HH:mm:ss yyyy&quot;) }," />
+      <LineAnalysis line="67" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'C', ((dateTime, cultureInfo) =&gt; (dateTime.Year / 100).ToString(&quot;D2&quot;, cultureInfo), null) }," />
+      <LineAnalysis line="68" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'd', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;dd&quot;, cultureInfo), &quot;dd&quot;) }," />
+      <LineAnalysis line="69" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'D', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;MM/dd/yy&quot;, cultureInfo), &quot;MM/dd/yy&quot;) }," />
+      <LineAnalysis line="70" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'e', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;%d&quot;, cultureInfo).PadLeft(2, ' '), &quot;%d&quot;) }," />
+      <LineAnalysis line="71" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'F', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;yyyy-MM-dd&quot;, cultureInfo), &quot;yyyy-MM-dd&quot;) }," />
+      <LineAnalysis line="72" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'h', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;MMM&quot;, cultureInfo), &quot;MMM&quot;) }," />
+      <LineAnalysis line="73" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'H', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;HH&quot;, cultureInfo), &quot;HH&quot;) }," />
+      <LineAnalysis line="74" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'I', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;hh&quot;, cultureInfo), &quot;hh&quot;) }," />
+      <LineAnalysis line="75" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'j', ((dateTime, cultureInfo) =&gt; dateTime.DayOfYear.ToString(&quot;D3&quot;, cultureInfo), null) }," />
+      <LineAnalysis line="76" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'k', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;%H&quot;, cultureInfo).PadLeft(2, ' '), &quot;%H&quot;) }," />
+      <LineAnalysis line="77" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'l', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;%h&quot;, cultureInfo).PadLeft(2, ' '), &quot;%h&quot;) }," />
+      <LineAnalysis line="78" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'L', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;fff&quot;, cultureInfo), &quot;fff&quot;) }," />
+      <LineAnalysis line="79" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'm', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;MM&quot;, cultureInfo), &quot;MM&quot;) }," />
+      <LineAnalysis line="80" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'M', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;mm&quot;, cultureInfo), &quot;mm&quot;) }," />
+      <LineAnalysis line="81" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'n', ((dateTime, cultureInfo) =&gt; &quot;\n&quot;, null) }," />
+      <LineAnalysis line="82" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'N', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;fffffff00&quot;, cultureInfo), &quot;fffffff00&quot;) }," />
+      <LineAnalysis line="83" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'p', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;tt&quot;, cultureInfo), &quot;tt&quot;) }," />
+      <LineAnalysis line="84" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'P', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;tt&quot;, cultureInfo).ToLowerInvariant(), &quot;tt&quot;) }," />
+      <LineAnalysis line="85" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'r', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;hh:mm:ss tt&quot;, cultureInfo), &quot;hh:mm:ss tt&quot;) }," />
+      <LineAnalysis line="86" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'R', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;HH:mm&quot;, cultureInfo), &quot;HH:mm&quot;) }," />
+      <LineAnalysis line="87" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 's', ((dateTime, cultureInfo) =&gt; ((dateTime.ToUniversalTime().Ticks - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks) / TimeSpan.TicksPerSecond).ToString(cultureInfo), null) }," />
+      <LineAnalysis line="88" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'S', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;ss&quot;, cultureInfo), &quot;ss&quot;) }," />
+      <LineAnalysis line="89" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 't', ((dateTime, cultureInfo) =&gt; &quot;\t&quot;, null) }," />
+      <LineAnalysis line="90" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'T', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;HH:mm:ss&quot;, cultureInfo), &quot;HH:mm:ss&quot;) }," />
+      <LineAnalysis line="91" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'u', ((dateTime, cultureInfo) =&gt; ((dateTime.DayOfWeek == DayOfWeek.Sunday) ? 7 : (int) dateTime.DayOfWeek).ToString(cultureInfo), null) }," />
+      <LineAnalysis line="92" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'U', ((dateTime, cultureInfo) =&gt; cultureInfo.Calendar.GetWeekOfYear(dateTime, cultureInfo.DateTimeFormat.CalendarWeekRule, DayOfWeek.Sunday).ToString(&quot;D2&quot;, cultureInfo), null) }," />
+      <LineAnalysis line="93" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'v', ((dateTime, cultureInfo) =&gt; string.Format(CultureInfo.InvariantCulture, &quot;{0,2}-{1}-{2:D4}&quot;, dateTime.Day, dateTime.ToString(&quot;MMM&quot;, CultureInfo.InvariantCulture).ToUpper(), dateTime.Year), null) }," />
+      <LineAnalysis line="94" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'V', ((dateTime, cultureInfo) =&gt; cultureInfo.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString(&quot;D2&quot;, cultureInfo), null) }," />
+      <LineAnalysis line="95" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'W', ((dateTime, cultureInfo) =&gt; cultureInfo.Calendar.GetWeekOfYear(dateTime, cultureInfo.DateTimeFormat.CalendarWeekRule, DayOfWeek.Monday).ToString(&quot;D2&quot;, cultureInfo), null) }," />
+      <LineAnalysis line="96" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'w', ((dateTime, cultureInfo) =&gt; ((int) dateTime.DayOfWeek).ToString(cultureInfo), null) }," />
+      <LineAnalysis line="97" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'x', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;d&quot;, cultureInfo), &quot;d&quot;) }," />
+      <LineAnalysis line="98" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'X', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;T&quot;, cultureInfo), &quot;T&quot;) }," />
+      <LineAnalysis line="99" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'y', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;yy&quot;, cultureInfo), &quot;yy&quot;) }," />
+      <LineAnalysis line="100" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'Y', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;yyyy&quot;, cultureInfo), &quot;yyyy&quot;) }," />
+      <LineAnalysis line="101" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { 'Z', ((dateTime, cultureInfo) =&gt; dateTime.ToString(&quot;zzz&quot;, cultureInfo), &quot;zzz&quot;) }," />
+      <LineAnalysis line="102" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            { '%', ((dateTime, cultureInfo) =&gt; &quot;%&quot;, null) }" />
+      <LineAnalysis line="103" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Initializes a new instance of the &lt;see cref=&quot;DateTimeFunctions&quot;/&gt; class." />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="108" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        public DateTimeFunctions()" />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="110" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            SetValue(&quot;default_format&quot;, DefaultFormat, true);" />
+      <LineAnalysis line="111" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            SetValue(FormatKey, DefaultFormat, false);" />
+      <LineAnalysis line="112" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            Format = DefaultFormat;" />
+      <LineAnalysis line="113" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            CreateImportFunctions();" />
+      <LineAnalysis line="114" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="115" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="116" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="117" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Gets or sets the format used to format all dates" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public string Format" />
+      <LineAnalysis line="120" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="121" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            get =&gt; GetSafeValue&lt;string&gt;(FormatKey) ?? DefaultFormat;" />
+      <LineAnalysis line="122" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            set =&gt; SetValue(FormatKey, value, false);" />
+      <LineAnalysis line="123" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="125" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="126" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Returns a datetime object of the current time, including the hour, minutes, seconds and milliseconds." />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="128" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="130" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.now.year }}" />
+      <LineAnalysis line="131" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="132" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 2026" />
+      <LineAnalysis line="134" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="135" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="136" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public static DateTime Now() =&gt; DateTime.Now;" />
+      <LineAnalysis line="137" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="139" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of days to the input date." />
+      <LineAnalysis line="140" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="141" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;days&quot;&gt;The days.&lt;/param&gt;" />
+      <LineAnalysis line="143" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="145" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' | date.add_days 1 }}" />
+      <LineAnalysis line="147" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="148" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 06 Jan 2016" />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="151" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="152" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddDays(DateTime date, double days)" />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="154" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddDays(days);" />
+      <LineAnalysis line="155" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="158" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of months to the input date." />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="161" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;months&quot;&gt;The months.&lt;/param&gt;" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="163" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="164" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="165" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' | date.add_months 1 }}" />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="168" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 05 Feb 2016" />
+      <LineAnalysis line="169" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="170" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="171" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddMonths(DateTime date, int months)" />
+      <LineAnalysis line="172" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="173" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddMonths(months);" />
+      <LineAnalysis line="174" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="175" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="176" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of years to the input date." />
+      <LineAnalysis line="178" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="179" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;years&quot;&gt;The years.&lt;/param&gt;" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="183" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="184" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' | date.add_years 1 }}" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="186" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="187" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 05 Jan 2017" />
+      <LineAnalysis line="188" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="189" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddYears(DateTime date, int years)" />
+      <LineAnalysis line="191" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddYears(years);" />
+      <LineAnalysis line="193" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="194" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="195" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="196" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of hours to the input date." />
+      <LineAnalysis line="197" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="198" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="199" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;hours&quot;&gt;The hours.&lt;/param&gt;" />
+      <LineAnalysis line="200" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="201" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddHours(DateTime date, double hours)" />
+      <LineAnalysis line="202" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="203" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddHours(hours);" />
+      <LineAnalysis line="204" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="205" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="206" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="207" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of minutes to the input date." />
+      <LineAnalysis line="208" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="209" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="210" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;minutes&quot;&gt;The minutes.&lt;/param&gt;" />
+      <LineAnalysis line="211" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="212" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddMinutes(DateTime date, double minutes)" />
+      <LineAnalysis line="213" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="214" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddMinutes(minutes);" />
+      <LineAnalysis line="215" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="216" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="217" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="218" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of seconds to the input date." />
+      <LineAnalysis line="219" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="220" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="221" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;seconds&quot;&gt;The seconds.&lt;/param&gt;" />
+      <LineAnalysis line="222" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="223" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddSeconds(DateTime date, double seconds)" />
+      <LineAnalysis line="224" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="225" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddSeconds(seconds);" />
+      <LineAnalysis line="226" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="227" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="228" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="229" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Adds the specified number of milliseconds to the input date." />
+      <LineAnalysis line="230" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="231" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;date&quot;&gt;The date.&lt;/param&gt;" />
+      <LineAnalysis line="232" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;millis&quot;&gt;The milliseconds.&lt;/param&gt;" />
+      <LineAnalysis line="233" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A new date&lt;/returns&gt;" />
+      <LineAnalysis line="234" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime AddMilliseconds(DateTime date, double millis)" />
+      <LineAnalysis line="235" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="236" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return date.AddMilliseconds(millis);" />
+      <LineAnalysis line="237" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="238" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="239" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        private static readonly Regex PlusFollowedByNumberRegex = new Regex(@&quot;\+\d&quot;);" />
+      <LineAnalysis line="240" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="241" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static string? ParseCustomFormat(CultureInfo culture, string? pattern, out CultureInfo cultureOverride)" />
+      <LineAnalysis line="242" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="243" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            cultureOverride = culture;" />
+      <LineAnalysis line="244" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (pattern is null)" />
+      <LineAnalysis line="245" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="246" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return null;" />
+      <LineAnalysis line="247" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="248" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="249" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var builder = new StringBuilder();" />
+      <LineAnalysis line="250" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = 0; i &lt; pattern.Length; i++)" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="252" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var c = pattern[i];" />
+      <LineAnalysis line="253" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (c == '%' &amp;&amp; (i + 1) &lt; pattern.Length)" />
+      <LineAnalysis line="254" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="255" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    i++;" />
+      <LineAnalysis line="256" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var format = pattern[i];" />
+      <LineAnalysis line="257" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="258" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    // Switch to invariant culture" />
+      <LineAnalysis line="259" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (format == 'g')" />
+      <LineAnalysis line="260" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="261" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        cultureOverride = CultureInfo.InvariantCulture;" />
+      <LineAnalysis line="262" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        continue;" />
+      <LineAnalysis line="263" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="264" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="265" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (Formats.TryGetValue(format, out var formatterPair))" />
+      <LineAnalysis line="266" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="267" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        if (formatterPair.Item2 is null)" />
+      <LineAnalysis line="268" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                        {" />
+      <LineAnalysis line="269" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            throw new ArgumentException($&quot;The pattern %{format} is not supported for the parse method&quot;, nameof(pattern));" />
+      <LineAnalysis line="270" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                        }" />
+      <LineAnalysis line="271" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append(formatterPair.Item2);" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="273" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    else" />
+      <LineAnalysis line="274" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="275" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append('%');" />
+      <LineAnalysis line="276" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append(format);" />
+      <LineAnalysis line="277" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="278" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="279" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="280" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="281" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    builder.Append(c);" />
+      <LineAnalysis line="282" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="283" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="284" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return builder.ToString();" />
+      <LineAnalysis line="285" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="286" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="287" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private static DateTime? ParseDateTime(TemplateContext context, string? text, string? pattern = null, string? culture = null)" />
+      <LineAnalysis line="288" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="289" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (text is null || text.Length == 0)" />
+      <LineAnalysis line="290" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="291" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return null;" />
+      <LineAnalysis line="292" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="293" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="294" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            bool hasOffset = PlusFollowedByNumberRegex.IsMatch(text);" />
+      <LineAnalysis line="295" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            bool hasZ = text.TrimEnd().EndsWith(&quot;Z&quot;, StringComparison.OrdinalIgnoreCase);" />
+      <LineAnalysis line="296" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var dateTimeStyle = hasOffset || hasZ ? DateTimeStyles.None : DateTimeStyles.AssumeLocal;" />
+      <LineAnalysis line="297" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="298" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var currentCulture = (culture is not null ? CultureInfo.GetCultureInfo(culture) : context.CurrentCulture) ?? context.CurrentCulture;" />
+      <LineAnalysis line="299" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var customFormat = ParseCustomFormat(currentCulture, pattern, out var inputCulture);" />
+      <LineAnalysis line="300" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="301" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var result = new DateTime();" />
+      <LineAnalysis line="302" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (customFormat is not null)" />
+      <LineAnalysis line="303" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="304" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (hasOffset || hasZ)" />
+      <LineAnalysis line="305" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="306" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (DateTimeOffset.TryParseExact(text, customFormat, inputCulture, dateTimeStyle, out var dateTimeOffset))" />
+      <LineAnalysis line="307" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="308" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        result = dateTimeOffset.LocalDateTime;" />
+      <LineAnalysis line="309" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="310" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="311" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                else if (DateTime.TryParseExact(text, customFormat, inputCulture, dateTimeStyle, out result))" />
+      <LineAnalysis line="312" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="313" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="314" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="315" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="316" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            else" />
+      <LineAnalysis line="317" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="318" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (hasOffset || hasZ)" />
+      <LineAnalysis line="319" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="320" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (DateTimeOffset.TryParse(text, inputCulture, dateTimeStyle, out var dateTimeOffset))" />
+      <LineAnalysis line="321" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="322" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        result = dateTimeOffset.LocalDateTime;" />
+      <LineAnalysis line="323" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="324" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="325" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="326" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="327" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    DateTime.TryParse(text, inputCulture, dateTimeStyle, out result);" />
+      <LineAnalysis line="328" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="329" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="330" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return result;" />
+      <LineAnalysis line="331" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="332" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="333" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="334" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Parses the specified input string to a date object." />
+      <LineAnalysis line="335" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="336" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context.&lt;/param&gt;" />
+      <LineAnalysis line="337" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;text&quot;&gt;A text representing a date.&lt;/param&gt;" />
+      <LineAnalysis line="338" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;pattern&quot;&gt;The date format pattern. See `to_string` method about the format of a pattern.&lt;/param&gt;" />
+      <LineAnalysis line="339" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;culture&quot;&gt;The culture used to format the datetime. Default is current culture.&lt;/param&gt;" />
+      <LineAnalysis line="340" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A date object&lt;/returns&gt;" />
+      <LineAnalysis line="341" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="342" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="343" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' }}" />
+      <LineAnalysis line="344" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2018--06--17' '%Y--%m--%d' }}" />
+      <LineAnalysis line="345" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2021/11/30 09:50:23Z' }}" />
+      <LineAnalysis line="346" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '20/01/2022 08:32:48 +00:00' culture:'en-GB' }}" />
+      <LineAnalysis line="347" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="348" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="349" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 05 Jan 2016" />
+      <LineAnalysis line="350" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 17 Jun 2018" />
+      <LineAnalysis line="351" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 30 Nov 2021" />
+      <LineAnalysis line="352" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 20 Jan 2022" />
+      <LineAnalysis line="353" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="354" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="355" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static DateTime? Parse(TemplateContext context, string? text, string? pattern = null, string? culture = null)" />
+      <LineAnalysis line="356" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="357" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ParseDateTime(context, text, pattern, culture);" />
+      <LineAnalysis line="358" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="359" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="360" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="361" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Parses the specified input string to a formatted date string." />
+      <LineAnalysis line="362" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="363" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context.&lt;/param&gt;" />
+      <LineAnalysis line="364" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;text&quot;&gt;A text representing a date.&lt;/param&gt;" />
+      <LineAnalysis line="365" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;output_pattern&quot;&gt;The output date format pattern. See `to_string` method about the format of a pattern.&lt;/param&gt;" />
+      <LineAnalysis line="366" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;output_culture&quot;&gt;The culture used to format the datetime. Default is current culture.&lt;/param&gt;" />
+      <LineAnalysis line="367" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;input_pattern&quot;&gt;The input date format pattern. See `to_string` method about the format of a pattern.&lt;/param&gt;" />
+      <LineAnalysis line="368" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;input_culture&quot;&gt;The culture used to parse the input datetime. Default is current culture.&lt;/param&gt;" />
+      <LineAnalysis line="369" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A formatted date string&lt;/returns&gt;" />
+      <LineAnalysis line="370" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="371" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="372" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse_to_string '2016/01/05' '%Y--%m--%d' }}" />
+      <LineAnalysis line="373" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ &quot;03 14, 2016&quot; | date.parse_to_string &quot;%b %d, %y&quot; input_pattern: &quot;%m %d, %Y&quot; }}" />
+      <LineAnalysis line="374" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ &quot;2025-01-01 14:01:23&quot; | date.parse_to_string &quot;%r&quot; input_pattern: &quot;%Y-%m-%d %k:%M:%S&quot; }}" />
+      <LineAnalysis line="375" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ &quot;03/01/2025 14:01:23&quot; | date.parse_to_string &quot;%F&quot; input_culture:'en-US' output_culture:'en-GB' }}" />
+      <LineAnalysis line="376" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="377" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="378" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 2016--01--05" />
+      <LineAnalysis line="379" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Mar 14, 16" />
+      <LineAnalysis line="380" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 02:01:23 PM" />
+      <LineAnalysis line="381" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 2025-03-01" />
+      <LineAnalysis line="382" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="383" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="384" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static string? ParseToString(TemplateContext context, string? text, string? output_pattern = null, string? output_culture = null, string? input_pattern = null, string? input_culture = null)" />
+      <LineAnalysis line="385" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="386" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var datetime = ParseDateTime(context, text, input_pattern, input_culture);" />
+      <LineAnalysis line="387" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (datetime is null)" />
+      <LineAnalysis line="388" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="389" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return null;" />
+      <LineAnalysis line="390" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="391" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (output_pattern is null)" />
+      <LineAnalysis line="392" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="393" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return datetime.Value.ToString(DefaultFormat);" />
+      <LineAnalysis line="394" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="395" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var defaultOutputCulture = (output_culture is not null ? CultureInfo.GetCultureInfo(output_culture) : context.CurrentCulture) ?? context.CurrentCulture;" />
+      <LineAnalysis line="396" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var outputCustomFormat = ParseCustomFormat(defaultOutputCulture, output_pattern, out var outputCulture);" />
+      <LineAnalysis line="397" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="398" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return datetime.Value.ToString(outputCustomFormat, outputCulture);" />
+      <LineAnalysis line="399" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="400" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="401" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public override IScriptObject Clone(bool deep)" />
+      <LineAnalysis line="402" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="403" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            var dateFunctions = (DateTimeFunctions)base.Clone(deep);" />
+      <LineAnalysis line="404" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // This is important to call the CreateImportFunctions as it is instance specific (using DefaultFormat from `date` object)" />
+      <LineAnalysis line="405" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            dateFunctions.CreateImportFunctions();" />
+      <LineAnalysis line="406" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            return dateFunctions;" />
+      <LineAnalysis line="407" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="408" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="409" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="410" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Converts a datetime object to a textual representation using the specified format string." />
+      <LineAnalysis line="411" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="412" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// By default, if you are using a date, it will use the format specified by `date.format` which defaults to `date.default_format` (readonly) which default to `%d %b %Y`" />
+      <LineAnalysis line="413" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="414" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// You can override the format used for formatting all dates by assigning the a new format: `date.format = '%a %b %e %T %Y';`" />
+      <LineAnalysis line="415" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="416" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// You can recover the default format by using `date.format = date.default_format;`" />
+      <LineAnalysis line="417" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="418" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// By default, the to_string format is using the **current culture**, but you can switch to an invariant culture by using the modifier `%g`" />
+      <LineAnalysis line="419" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="420" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// For example, using `%g %d %b %Y` will output the date using an invariant culture." />
+      <LineAnalysis line="421" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="422" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// If you are using `%g` alone, it will output the date with `date.format` using an invariant culture." />
+      <LineAnalysis line="423" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="424" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Suppose that `date.now` would return the date `2013-09-12 22:49:27 +0530`, the following table explains the format modifiers:" />
+      <LineAnalysis line="425" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="426" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | Format | Result            | Description" />
+      <LineAnalysis line="427" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// |--------|-------------------|--------------------------------------------" />
+      <LineAnalysis line="428" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%a&quot;` |  `&quot;Thu&quot;`          | Name of week day in short form of the" />
+      <LineAnalysis line="429" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%A&quot;` |  `&quot;Thursday&quot;`     | Week day in full form of the time" />
+      <LineAnalysis line="430" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%b&quot;` |  `&quot;Sep&quot;`          | Month in short form of the time" />
+      <LineAnalysis line="431" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%B&quot;` |  `&quot;September&quot;`    | Month in full form of the time" />
+      <LineAnalysis line="432" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%c&quot;` |                   | Date and time (%a %b %e %T %Y)" />
+      <LineAnalysis line="433" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%C&quot;` |  `&quot;20&quot;`           | Century of the time" />
+      <LineAnalysis line="434" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%d&quot;` |  `&quot;12&quot;`           | Day of the month of the time" />
+      <LineAnalysis line="435" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%D&quot;` |  `&quot;09/12/13&quot;`     | Date (%m/%d/%y)" />
+      <LineAnalysis line="436" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%e&quot;` |  `&quot;12&quot;`           | Day of the month, blank-padded ( 1..31)" />
+      <LineAnalysis line="437" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%F&quot;` |  `&quot;2013-09-12&quot;`   | ISO 8601 date (%Y-%m-%d)" />
+      <LineAnalysis line="438" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%h&quot;` |  `&quot;Sep&quot;`          | Alias for %b" />
+      <LineAnalysis line="439" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%H&quot;` |  `&quot;22&quot;`           | Hour of the time in 24 hour clock format" />
+      <LineAnalysis line="440" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%I&quot;` |  `&quot;10&quot;`           | Hour of the time in 12 hour clock format" />
+      <LineAnalysis line="441" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%j&quot;` |  `&quot;255&quot;`          | Day of the year (001..366) (3 digits, left padded with zero)" />
+      <LineAnalysis line="442" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%k&quot;` |  `&quot;22&quot;`           | Hour of the time in 24 hour clock format, blank-padded ( 0..23)" />
+      <LineAnalysis line="443" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%l&quot;` |  `&quot;10&quot;`           | Hour of the time in 12 hour clock format, blank-padded ( 0..12)" />
+      <LineAnalysis line="444" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%L&quot;` |  `&quot;000&quot;`          | Millisecond of the time (3 digits, left padded with zero)" />
+      <LineAnalysis line="445" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%m&quot;` |  `&quot;09&quot;`           | Month of the time" />
+      <LineAnalysis line="446" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%M&quot;` |  `&quot;49&quot;`           | Minutes of the time (2 digits, left padded with zero e.g 01 02)" />
+      <LineAnalysis line="447" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%n&quot;` |                   | Newline character (\n)" />
+      <LineAnalysis line="448" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%N&quot;` |  `&quot;000000000&quot;`    | Nanoseconds of the time (9 digits, left padded with zero)" />
+      <LineAnalysis line="449" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%p&quot;` |  `&quot;PM&quot;`           | Gives AM / PM of the time" />
+      <LineAnalysis line="450" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%P&quot;` |  `&quot;pm&quot;`           | Gives am / pm of the time" />
+      <LineAnalysis line="451" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%r&quot;` |  `&quot;10:49:27 PM&quot;`  | Long time in 12 hour clock format (%I:%M:%S %p)" />
+      <LineAnalysis line="452" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%R&quot;` |  `&quot;22:49&quot;`        | Short time in 24 hour clock format (%H:%M)" />
+      <LineAnalysis line="453" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%s&quot;` |                   | Number of seconds since 1970-01-01 00:00:00 +0000" />
+      <LineAnalysis line="454" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%S&quot;` |  `&quot;27&quot;`           | Seconds of the time" />
+      <LineAnalysis line="455" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%t&quot;` |                   | Tab character (\t)" />
+      <LineAnalysis line="456" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%T&quot;` |  `&quot;22:49:27&quot;`     | Long time in 24 hour clock format (%H:%M:%S)" />
+      <LineAnalysis line="457" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%u&quot;` |  `&quot;4&quot;`            | Day of week of the time (from 1 for Monday to 7 for Sunday)" />
+      <LineAnalysis line="458" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%U&quot;` |  `&quot;36&quot;`           | Week number of the current year, starting with the first Sunday as the first day of the first week (00..53)" />
+      <LineAnalysis line="459" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%v&quot;` |  `&quot;12-SEP-2013&quot;`  | VMS date (%e-%b-%Y) (culture invariant)" />
+      <LineAnalysis line="460" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%V&quot;` |  `&quot;37&quot;`           | Week number of the current year according to ISO 8601 (01..53)" />
+      <LineAnalysis line="461" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%W&quot;` |  `&quot;36&quot;`           | Week number of the current year, starting with the first Monday as the first day of the first week (00..53)" />
+      <LineAnalysis line="462" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%w&quot;` |  `&quot;4&quot;`            | Day of week of the time (from 0 for Sunday to 6 for Saturday)" />
+      <LineAnalysis line="463" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%x&quot;` |                   | Preferred representation for the date alone, no time" />
+      <LineAnalysis line="464" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%X&quot;` |                   | Preferred representation for the time alone, no date" />
+      <LineAnalysis line="465" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%y&quot;` |  `&quot;13&quot;`           | Gives year without century of the time" />
+      <LineAnalysis line="466" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%Y&quot;` |  `&quot;2013&quot;`         | Year of the time" />
+      <LineAnalysis line="467" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%Z&quot;` |  `&quot;+05:30&quot;`       | Gives Time Zone of the time" />
+      <LineAnalysis line="468" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// | `&quot;%%&quot;` |  `&quot;%&quot;`            | Output the character `%`" />
+      <LineAnalysis line="469" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        ///" />
+      <LineAnalysis line="470" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Note that the format is using a good part of the ruby format ([source](http://apidock.com/ruby/DateTime/strftime))" />
+      <LineAnalysis line="471" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="472" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' | date.to_string '%d %b %Y' }}" />
+      <LineAnalysis line="473" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ date.parse '2016/01/05' | date.to_string '%d %B %Y' 'fr-FR' }}" />
+      <LineAnalysis line="474" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="475" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="476" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 05 Jan 2016" />
+      <LineAnalysis line="477" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 05 janvier 2016" />
+      <LineAnalysis line="478" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="479" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="480" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;datetime&quot;&gt;The input datetime to format&lt;/param&gt;" />
+      <LineAnalysis line="481" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;pattern&quot;&gt;The date format pattern.&lt;/param&gt;" />
+      <LineAnalysis line="482" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;culture&quot;&gt;The culture used to format the datetime&lt;/param&gt;" />
+      <LineAnalysis line="483" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;" />
+      <LineAnalysis line="484" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// A &lt;see cref=&quot;System.String&quot; /&gt; that represents this instance." />
+      <LineAnalysis line="485" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/returns&gt;" />
+      <LineAnalysis line="486" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual string? ToString(DateTime? datetime, string pattern, CultureInfo culture)" />
+      <LineAnalysis line="487" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="488" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (pattern is null) throw new ArgumentNullException(nameof(pattern));" />
+      <LineAnalysis line="489" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (!datetime.HasValue) return null;" />
+      <LineAnalysis line="490" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="491" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If pattern is %g only, use the default date" />
+      <LineAnalysis line="492" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (pattern == &quot;%g&quot;)" />
+      <LineAnalysis line="493" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="494" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                pattern = &quot;%g &quot; + Format;" />
+      <LineAnalysis line="495" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="496" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="497" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var builder = new StringBuilder();" />
+      <LineAnalysis line="498" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="499" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            for (int i = 0; i &lt; pattern.Length; i++)" />
+      <LineAnalysis line="500" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="501" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var c = pattern[i];" />
+      <LineAnalysis line="502" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (c == '%' &amp;&amp; (i + 1) &lt; pattern.Length)" />
+      <LineAnalysis line="503" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="504" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    i++;" />
+      <LineAnalysis line="505" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var format = pattern[i];" />
+      <LineAnalysis line="506" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="507" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    // Switch to invariant culture" />
+      <LineAnalysis line="508" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (format == 'g')" />
+      <LineAnalysis line="509" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="510" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        culture = CultureInfo.InvariantCulture;" />
+      <LineAnalysis line="511" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        continue;" />
+      <LineAnalysis line="512" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="513" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="514" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    if (Formats.TryGetValue(format, out var formatterPair))" />
+      <LineAnalysis line="515" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="516" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        var formatter = formatterPair.Item1;" />
+      <LineAnalysis line="517" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append(formatter.Invoke(datetime.Value, culture));" />
+      <LineAnalysis line="518" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="519" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    else" />
+      <LineAnalysis line="520" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    {" />
+      <LineAnalysis line="521" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append('%');" />
+      <LineAnalysis line="522" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                        builder.Append(format);" />
+      <LineAnalysis line="523" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                    }" />
+      <LineAnalysis line="524" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="525" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="526" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="527" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    builder.Append(c);" />
+      <LineAnalysis line="528" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="529" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="530" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="531" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return builder.ToString();" />
+      <LineAnalysis line="532" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="533" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="534" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="535" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public virtual object? Invoke(TemplateContext context, ScriptNode? callerContext, ScriptArray arguments, ScriptBlockStatement? blockStatement)" />
+      <LineAnalysis line="536" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="537" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var callerSpan = callerContext?.Span ?? context.CurrentSpan;" />
+      <LineAnalysis line="538" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If we access `date` without any parameter, it calls by default the &quot;parse&quot; function" />
+      <LineAnalysis line="539" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // otherwise it is the 'date' object itself" />
+      <LineAnalysis line="540" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            switch (arguments.Count)" />
+      <LineAnalysis line="541" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="542" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case 0:" />
+      <LineAnalysis line="543" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return this;" />
+      <LineAnalysis line="544" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                case 1:" />
+      <LineAnalysis line="545" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    var text = context.ObjectToString(arguments[0]);" />
+      <LineAnalysis line="546" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return text is null ? null : ParseDateTime(context, text);" />
+      <LineAnalysis line="547" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                default:" />
+      <LineAnalysis line="548" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    throw new ScriptRuntimeException(callerSpan, $&quot;Invalid number of parameters `{arguments.Count}` for `date` object/function.&quot;);" />
+      <LineAnalysis line="549" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="550" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="551" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="552" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public int RequiredParameterCount =&gt; 0;" />
+      <LineAnalysis line="553" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="554" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public int ParameterCount =&gt; 0;" />
+      <LineAnalysis line="555" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="556" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ScriptVarParamKind VarParamKind =&gt; ScriptVarParamKind.Direct;" />
+      <LineAnalysis line="557" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="558" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public Type ReturnType =&gt; typeof(object);" />
+      <LineAnalysis line="559" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="560" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private const string Parameter1Name = &quot;text&quot;;" />
+      <LineAnalysis line="561" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="562" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public ScriptParameterInfo GetParameterInfo(int index)" />
+      <LineAnalysis line="563" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="564" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new ScriptParameterInfo(typeof(object), Parameter1Name);" />
+      <LineAnalysis line="565" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="566" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="567" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if !SCRIBAN_NO_ASYNC" />
+      <LineAnalysis line="568" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public ValueTask&lt;object?&gt; InvokeAsync(TemplateContext context, ScriptNode? callerContext, ScriptArray arguments, ScriptBlockStatement? blockStatement)" />
+      <LineAnalysis line="569" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="570" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new ValueTask&lt;object?&gt;(Invoke(context, callerContext, arguments, blockStatement));" />
+      <LineAnalysis line="571" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="572" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="573" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="574" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        [UnconditionalSuppressMessage(&quot;Trimming&quot;, &quot;IL2026&quot;, Justification = &quot;Importing a known delegate with a compile-time-known target method.&quot;)]" />
+      <LineAnalysis line="575" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private void CreateImportFunctions()" />
+      <LineAnalysis line="576" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="577" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // This function is very specific, as it is calling a member function of this instance" />
+      <LineAnalysis line="578" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // in order to retrieve the `date.format`" />
+      <LineAnalysis line="579" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            SetValue(&quot;to_string&quot;, DynamicCustomFunction.Create(new Func&lt;TemplateContext, DateTime?, string, string?, string?&gt;(ToStringTrampoline)), true);" />
+      <LineAnalysis line="580" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="581" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="582" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private string? ToStringTrampoline(TemplateContext context, DateTime? date, string pattern, string? culture = null)" />
+      <LineAnalysis line="583" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="584" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var cultureObject = culture is not null ? CultureInfo.GetCultureInfo(culture) : null;" />
+      <LineAnalysis line="585" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ToString(date, pattern, cultureObject ?? context.CurrentCulture);" />
+      <LineAnalysis line="586" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="587" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="588" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

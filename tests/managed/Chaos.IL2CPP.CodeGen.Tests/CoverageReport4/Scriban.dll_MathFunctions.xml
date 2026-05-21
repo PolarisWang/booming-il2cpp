@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Scriban.Functions.MathFunctions">
+  <Summary>
+    <Class>Scriban.Functions.MathFunctions</Class>
+    <Assembly>Scriban.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Functions\MathFunctions.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>61</Uncoveredlines>
+    <Coverablelines>61</Coverablelines>
+    <Totallines>392</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>13</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="Abs">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>34</Blocksnotcovered>
+    </Element>
+    <Element name="Ceil">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="DividedBy">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="Floor">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Format">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>20</Blocksnotcovered>
+    </Element>
+    <Element name="IsNumber">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>13</Blocksnotcovered>
+    </Element>
+    <Element name="Minus">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Modulo">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Plus">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Round">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Times">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>2</Blocksnotcovered>
+    </Element>
+    <Element name="Uuid">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>3</Blocksnotcovered>
+    </Element>
+    <Element name="Random">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\third_party\scriban\src\Scriban\Functions\MathFunctions.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Copyright (c) Alexandre Mutel. All rights reserved." />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// Licensed under the BSD-Clause 2 license." />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="// See license.txt file in the project root for full license information." />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#nullable enable" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Globalization;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Numerics;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Helpers;" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Parsing;" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Syntax;" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Scriban.Functions" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Math functions available through the object 'math' in scriban." />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#if SCRIBAN_PUBLIC" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#else" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="#endif" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    partial class MathFunctions : ScriptObject" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private const string RandomTagKey = &quot;random&quot;;" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Returns the absolute value of a specified number." />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The absolute value of the input value&lt;/returns&gt;" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ -15.5| math.abs }}" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ -5| math.abs }}" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 15.5" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 5" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="46" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? Abs(TemplateContext context, SourceSpan span, object? value)" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="49" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is null)" />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return null;" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is int)" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((int) value);" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is float)" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((float)value);" />
+      <LineAnalysis line="61" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is double)" />
+      <LineAnalysis line="63" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((double)value);" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is sbyte)" />
+      <LineAnalysis line="67" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((sbyte)value);" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="70" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is short)" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((short)value);" />
+      <LineAnalysis line="73" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is long)" />
+      <LineAnalysis line="75" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((long)value);" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is decimal)" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return Math.Abs((decimal)value);" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="83" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If it is a primitive it is already unsigned" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value.GetType().IsPrimitive)" />
+      <LineAnalysis line="85" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="86" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return value;" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="89" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // otherwise we don't have a number, throw an exception just in case" />
+      <LineAnalysis line="90" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            throw new ScriptRuntimeException(span, $&quot;The value `{value}` is not a number&quot;);" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="92" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="93" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="94" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Returns the smallest integer greater than or equal to the specified number." />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="96" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="97" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The smallest integer greater than or equal to the specified number.&lt;/returns&gt;" />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="100" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.6 | math.ceil }}" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.3 | math.ceil }}" />
+      <LineAnalysis line="102" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 5" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 5" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static double Ceil(double value)" />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return Math.Ceiling(value);" />
+      <LineAnalysis line="111" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="112" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="114" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Divides the specified value by another value. If the divisor is an integer, the result will" />
+      <LineAnalysis line="115" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// be floor to and converted back to an integer." />
+      <LineAnalysis line="116" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="117" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="120" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;divisor&quot;&gt;The divisor value&lt;/param&gt;" />
+      <LineAnalysis line="121" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The division of `value` by `divisor`.&lt;/returns&gt;" />
+      <LineAnalysis line="122" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="123" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 8.4 | math.divided_by 2.0 | math.round 1 }}" />
+      <LineAnalysis line="125" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 8.4 | math.divided_by 2 }}" />
+      <LineAnalysis line="126" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="128" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4.2" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4" />
+      <LineAnalysis line="130" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="131" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="132" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? DividedBy(TemplateContext context, SourceSpan span, double value, object divisor)" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var result = ScriptBinaryExpression.Evaluate(context, span, ScriptBinaryOperator.Divide, value, divisor);" />
+      <LineAnalysis line="135" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="136" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // If the divisor is an integer, return a an integer" />
+      <LineAnalysis line="137" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (divisor is int)" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="139" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (result is double)" />
+      <LineAnalysis line="140" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="141" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return (int) Math.Floor((double) result);" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="143" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (result is float)" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    return (int) Math.Floor((float) result);" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="147" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="148" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return result;" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="151" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="152" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Returns the largest integer less than or equal to the specified number." />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="154" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="155" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The largest integer less than or equal to the specified number.&lt;/returns&gt;" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="158" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.6 | math.floor }}" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.3 | math.floor }}" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="161" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4" />
+      <LineAnalysis line="163" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4" />
+      <LineAnalysis line="164" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="165" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static double Floor(double value)" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return Math.Floor(value);" />
+      <LineAnalysis line="169" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="170" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="171" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="172" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Formats a number value with specified [.NET standard numeric format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings)" />
+      <LineAnalysis line="173" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="174" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="175" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="176" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;format&quot;&gt;The format string.&lt;/param&gt;" />
+      <LineAnalysis line="178" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;culture&quot;&gt;The culture as a string (e.g `en-US`). By default the culture from &lt;see cref=&quot;TemplateContext.CurrentCulture&quot;/&gt; is used&lt;/param&gt;" />
+      <LineAnalysis line="179" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The largest integer less than or equal to the specified number.&lt;/returns&gt;" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 255 | math.format &quot;X4&quot; }}" />
+      <LineAnalysis line="183" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="184" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 00FF" />
+      <LineAnalysis line="186" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="187" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="188" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static string Format(TemplateContext context, SourceSpan span, object? value, string? format, string? culture = null)" />
+      <LineAnalysis line="189" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="190" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (value is null)" />
+      <LineAnalysis line="191" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return string.Empty;" />
+      <LineAnalysis line="193" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="194" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            format = format ?? string.Empty;" />
+      <LineAnalysis line="195" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var formattable = value as IFormattable;" />
+      <LineAnalysis line="196" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (!IsNumber(value) || formattable is null)" />
+      <LineAnalysis line="197" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ScriptRuntimeException(span, $&quot;Unexpected `{value}`. Must be a formattable number&quot;);" />
+      <LineAnalysis line="199" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="200" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return formattable.ToString(format, culture is not null ? new CultureInfo(culture) : context.CurrentCulture);" />
+      <LineAnalysis line="201" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="202" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="203" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="204" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Returns a boolean indicating if the input value is a number" />
+      <LineAnalysis line="205" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="206" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="207" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;**true** if the input value is a number; otherwise false.&lt;/returns&gt;" />
+      <LineAnalysis line="208" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="209" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="210" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 255 | math.is_number }}" />
+      <LineAnalysis line="211" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ &quot;yo&quot; | math.is_number }}" />
+      <LineAnalysis line="212" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="213" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="214" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// true" />
+      <LineAnalysis line="215" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// false" />
+      <LineAnalysis line="216" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="217" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="218" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static bool IsNumber(object value)" />
+      <LineAnalysis line="219" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="220" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return value is sbyte" />
+      <LineAnalysis line="221" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is byte" />
+      <LineAnalysis line="222" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is short" />
+      <LineAnalysis line="223" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is ushort" />
+      <LineAnalysis line="224" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is int" />
+      <LineAnalysis line="225" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is uint" />
+      <LineAnalysis line="226" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is long" />
+      <LineAnalysis line="227" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is ulong" />
+      <LineAnalysis line="228" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is float" />
+      <LineAnalysis line="229" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is double" />
+      <LineAnalysis line="230" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is decimal" />
+      <LineAnalysis line="231" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                   || value is BigInteger;" />
+      <LineAnalysis line="232" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="233" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="234" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="235" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Subtracts from the input value the `with` value" />
+      <LineAnalysis line="236" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="237" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="238" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="239" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="240" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;with&quot;&gt;The with value to subtract from `value`&lt;/param&gt;" />
+      <LineAnalysis line="241" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The results of the subtraction: `value` - `with`&lt;/returns&gt;" />
+      <LineAnalysis line="242" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="243" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="244" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 255 | math.minus 5}}" />
+      <LineAnalysis line="245" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="246" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="247" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 250" />
+      <LineAnalysis line="248" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="249" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="250" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? Minus(TemplateContext context, SourceSpan span, object value, object with)" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="252" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptBinaryExpression.Evaluate(context, span, ScriptBinaryOperator.Subtract, value, with);" />
+      <LineAnalysis line="253" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="254" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="255" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="256" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Performs the modulo of the input value with the `with` value" />
+      <LineAnalysis line="257" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="258" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="259" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="260" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="261" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;with&quot;&gt;The with value to module `value`&lt;/param&gt;" />
+      <LineAnalysis line="262" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The results of the modulo: `value` % `with`&lt;/returns&gt;" />
+      <LineAnalysis line="263" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="264" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="265" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 11 | math.modulo 10}}" />
+      <LineAnalysis line="266" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="267" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="268" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 1" />
+      <LineAnalysis line="269" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="270" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="271" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? Modulo(TemplateContext context, SourceSpan span, object value, object with)" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="273" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptBinaryExpression.Evaluate(context, span, ScriptBinaryOperator.Modulus, value, with);" />
+      <LineAnalysis line="274" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="275" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="276" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="277" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Performs the addition of the input value with the `with` value" />
+      <LineAnalysis line="278" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="279" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="280" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="281" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="282" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;with&quot;&gt;The with value to add to`value`&lt;/param&gt;" />
+      <LineAnalysis line="283" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The results of the addition: `value` + `with`&lt;/returns&gt;" />
+      <LineAnalysis line="284" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="285" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="286" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 1 | math.plus 2}}" />
+      <LineAnalysis line="287" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="288" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="289" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 3" />
+      <LineAnalysis line="290" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="291" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="292" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? Plus(TemplateContext context, SourceSpan span, object value, object with)" />
+      <LineAnalysis line="293" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="294" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptBinaryExpression.Evaluate(context, span, ScriptBinaryOperator.Add, value, with);" />
+      <LineAnalysis line="295" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="296" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="297" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="298" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Rounds a value to the nearest integer or to the specified number of fractional digits." />
+      <LineAnalysis line="299" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="300" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="301" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;precision&quot;&gt;The number of fractional digits in the return value. Default is 0.&lt;/param&gt;" />
+      <LineAnalysis line="302" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A value rounded to the nearest integer or to the specified number of fractional digits.&lt;/returns&gt;" />
+      <LineAnalysis line="303" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="304" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="305" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.6 | math.round }}" />
+      <LineAnalysis line="306" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.3 | math.round }}" />
+      <LineAnalysis line="307" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 4.5612 | math.round 2 }}" />
+      <LineAnalysis line="308" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="309" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="310" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 5" />
+      <LineAnalysis line="311" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4" />
+      <LineAnalysis line="312" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 4.56" />
+      <LineAnalysis line="313" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="314" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="315" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static double Round(double value, int precision = 0)" />
+      <LineAnalysis line="316" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="317" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return Math.Round(value, precision);" />
+      <LineAnalysis line="318" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="319" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="320" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="321" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Performs the multiplication of the input value with the `with` value" />
+      <LineAnalysis line="322" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="323" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="324" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="325" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;value&quot;&gt;The input value&lt;/param&gt;" />
+      <LineAnalysis line="326" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;with&quot;&gt;The with value to multiply to`value`&lt;/param&gt;" />
+      <LineAnalysis line="327" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The results of the multiplication: `value` * `with`&lt;/returns&gt;" />
+      <LineAnalysis line="328" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="329" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="330" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ 2 | math.times 3}}" />
+      <LineAnalysis line="331" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="332" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="333" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 6" />
+      <LineAnalysis line="334" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="335" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="336" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object? Times(TemplateContext context, SourceSpan span, object value, object with)" />
+      <LineAnalysis line="337" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="338" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return ScriptBinaryExpression.Evaluate(context, span, ScriptBinaryOperator.Multiply, value, with);" />
+      <LineAnalysis line="339" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="340" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="341" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="342" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Creates a new UUID" />
+      <LineAnalysis line="343" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="344" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;The created UUID, ex. 2dc55d50-3f6c-446a-87d0-a5a4eed23269&lt;/returns&gt;" />
+      <LineAnalysis line="345" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="346" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="347" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ math.uuid }}" />
+      <LineAnalysis line="348" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="349" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="350" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 1c0a4aa8-680e-4bd6-95e9-cdbec45ef057" />
+      <LineAnalysis line="351" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="352" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="353" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static string Uuid()" />
+      <LineAnalysis line="354" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="355" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return Guid.NewGuid().ToString();" />
+      <LineAnalysis line="356" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="357" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="358" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;" />
+      <LineAnalysis line="359" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// Creates a random number" />
+      <LineAnalysis line="360" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/summary&gt;" />
+      <LineAnalysis line="361" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;context&quot;&gt;The template context&lt;/param&gt;" />
+      <LineAnalysis line="362" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;span&quot;&gt;The source span&lt;/param&gt;" />
+      <LineAnalysis line="363" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;minValue&quot;&gt;The inclusive lower bound of the random number returned&lt;/param&gt;" />
+      <LineAnalysis line="364" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;param name=&quot;maxValue&quot;&gt;The exclusive upper bound of the random number returned. maxValue must be greater than or equal to minValue.&lt;/param&gt;" />
+      <LineAnalysis line="365" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;returns&gt;A random number greater or equal to minValue and less than maxValue&lt;/returns&gt;" />
+      <LineAnalysis line="366" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;remarks&gt;" />
+      <LineAnalysis line="367" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```scriban-html" />
+      <LineAnalysis line="368" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// {{ math.random 1 10 }}" />
+      <LineAnalysis line="369" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="370" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```html" />
+      <LineAnalysis line="371" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// 7" />
+      <LineAnalysis line="372" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// ```" />
+      <LineAnalysis line="373" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;/remarks&gt;" />
+      <LineAnalysis line="374" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public static object Random(TemplateContext context, SourceSpan span, int minValue, int maxValue)" />
+      <LineAnalysis line="375" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="376" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (minValue &gt; maxValue)" />
+      <LineAnalysis line="377" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="378" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                throw new ScriptRuntimeException(span, &quot;minValue must be greater than maxValue&quot;);" />
+      <LineAnalysis line="379" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="380" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="381" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var currentTags = context.Tags;" />
+      <LineAnalysis line="382" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (!currentTags.TryGetValue(RandomTagKey, out var randomObject))" />
+      <LineAnalysis line="383" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="384" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                randomObject = new Random();" />
+      <LineAnalysis line="385" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                currentTags.Add(RandomTagKey, randomObject);" />
+      <LineAnalysis line="386" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="387" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="388" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var random = (Random)randomObject;" />
+      <LineAnalysis line="389" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return random.Next(minValue, maxValue);" />
+      <LineAnalysis line="390" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="391" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="392" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

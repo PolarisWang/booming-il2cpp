@@ -1,0 +1,26 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeCodegenMetrics",
+  "codegenKind": "native-aot",
+  "planKind": "full-assembly-entry",
+  "generatedSourcePaths": [
+    "generated/runtime_helper_shapes.h",
+    "generated/enum_metadata.generated.h",
+    "generated/native-aot.generated.cpp",
+    "generated/chaos_generated_module.h",
+    "generated/chaos_generated_module.cpp",
+    "native-aot.methods.json"
+  ],
+  "generatedCppFileCount": 6,
+  "generatedCppTotalBytes": 655799,
+  "largestGeneratedCppBytes": 510077,
+  "generatedSymbolCount": 16,
+  "peakWorkingSetBytes": 501211136,
+  "structuredMethodCount": 3,
+  "structuredExceptionBodyCount": 6,
+  "flatFallbackCount": 0,
+  "totalMethodCount": 9,
+  "structuredRecoveryRate": 1,
+  "aotReachableMethodCount": 10,
+  "aotUnreachableMethodCount": 0
+}

@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/io/streams/basics",
+  "capturedAt": "2026-05-21T09:39:27",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 18,
+    "okCount": 18,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 792
+    },
+    "aotInstructionCount": {
+      "min": 3,
+      "max": 18,
+      "avg": 9.2,
+      "total": 165
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {
+      "external_runtime_call": 21
+    },
+    "overallIrExpansionRatio": 0.21,
+    "averageExpansionRatio": 0.21,
+    "maxExpansionRatio": 0.41,
+    "minExpansionRatio": 0.07
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0",
+        "instructions": 18
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1",
+        "instructions": 7
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 3,
+        "ratio": 0.07,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2",
+        "instructions": 3
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::Flush:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 16,
+        "ratio": 0.36,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3",
+        "instructions": 16
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 5,
+        "ratio": 0.11,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4",
+        "instructions": 5
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5",
+        "instructions": 11
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6",
+        "instructions": 11
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)",
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 4,
+        "ratio": 0.09,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7",
+        "instructions": 4
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
+      "shortName": "Subject_8",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
+      "shortName": "Subject_9",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
+      "shortName": "Subject_10",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 4,
+        "ratio": 0.09,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10",
+        "instructions": 4
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+      "shortName": "Subject_11",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 4,
+        "ratio": 0.09,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11",
+        "instructions": 4
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
+      "shortName": "Subject_12",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 3,
+        "ratio": 0.07,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12",
+        "instructions": 3
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
+      "shortName": "Subject_13",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
+      "shortName": "Subject_14",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
+      "shortName": "Subject_15",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
+      "shortName": "Subject_16",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 5,
+        "ratio": 0.11,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16",
+        "instructions": 5
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)",
+      "shortName": "Subject_17",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 5,
+        "ratio": 0.11,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17",
+        "instructions": 5
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    }
+  ]
+}

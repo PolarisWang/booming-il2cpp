@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/collections/generic/core",
+  "capturedAt": "2026-05-21T09:25:47",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 16,
+    "okCount": 16,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 704
+    },
+    "aotInstructionCount": {
+      "min": 1,
+      "max": 13,
+      "avg": 3.2,
+      "total": 51
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {
+      "external_runtime_call": 8
+    },
+    "overallIrExpansionRatio": 0.07,
+    "averageExpansionRatio": 0.07,
+    "maxExpansionRatio": 0.3,
+    "minExpansionRatio": 0.02
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Add:System.Void(T)",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 3,
+        "ratio": 0.07,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1",
+        "instructions": 3
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Clear:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::IndexOf:System.Int32(T)",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Remove:System.Boolean(T)",
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_5",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Add:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Add:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Add:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::RemoveAt:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 3,
+        "ratio": 0.07,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6",
+        "instructions": 3
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Sort:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7",
+        "instructions": 11
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::ToArray:System.Int32[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)",
+      "shortName": "Subject_8",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
+      "shortName": "Subject_9",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections/System.Collections.Generic.Dictionary<System.String,System.Int32>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)",
+      "shortName": "Subject_10",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::ContainsKey:System.Boolean(TKey)",
+      "shortName": "Subject_11",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Remove:System.Boolean(TKey)",
+      "shortName": "Subject_12",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Add:System.Boolean(T)",
+      "shortName": "Subject_13",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Contains:System.Boolean(T)",
+      "shortName": "Subject_14",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)",
+      "shortName": "Subject_15",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
+    }
+  ]
+}

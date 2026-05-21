@@ -1,0 +1,306 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "method",
+      "subjectId": "ReflectionMemberCompleteSubjects/AutoGeneratedProgram::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ReflectionMemberCompleteSubjects",
+      "subjectKind": "field",
+      "subjectId": "ReflectionMemberCompleteSubjects/ReflectionMemberCompleteSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.RuntimeMethodHandle::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_IsPublic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_IsStatic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.MethodBase::get_IsVirtual:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Int32::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsInitOnly:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsLiteral:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanWrite:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.RuntimeFieldHandle::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

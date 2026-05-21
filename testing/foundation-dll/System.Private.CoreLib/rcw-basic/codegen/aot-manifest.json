@@ -1,0 +1,294 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/AutoGeneratedProgram::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/RuntimeState::_state",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "RcwBasicSubjects",
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E::DA5979D52E989A03770DCD85298CC184B885A2D2AF51AEB79151BB6630C1D46E",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::Copy:System.Void(System.Byte[],System.Int32,System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::FreeHGlobal:System.Void(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Alloc:System.Runtime.InteropServices.GCHandle(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::ToIntPtr:System.IntPtr(System.Runtime.InteropServices.GCHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::FromIntPtr:System.Runtime.InteropServices.GCHandle(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::Free:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

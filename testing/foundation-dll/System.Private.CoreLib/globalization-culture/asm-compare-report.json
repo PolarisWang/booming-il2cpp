@@ -1,0 +1,583 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/globalization/culture",
+  "capturedAt": "2026-05-21T09:35:33",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 13,
+    "okCount": 13,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 572
+    },
+    "aotInstructionCount": {
+      "min": 11,
+      "max": 15,
+      "avg": 13.0,
+      "total": 169
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {
+      "external_runtime_call": 39
+    },
+    "overallIrExpansionRatio": 0.3,
+    "averageExpansionRatio": 0.3,
+    "maxExpansionRatio": 0.34,
+    "minExpansionRatio": 0.25
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0",
+        "instructions": 12
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1",
+        "instructions": 12
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3",
+        "instructions": 11
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "shortName": "Subject_8",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8",
+        "instructions": 14
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "shortName": "Subject_9",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9",
+        "instructions": 13
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_CompareInfo:System.Globalization.CompareInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "shortName": "Subject_10",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "shortName": "Subject_11",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11",
+        "instructions": 15
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "shortName": "Subject_12",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12",
+        "instructions": 12
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.CultureInfo::get_TextInfo:System.Globalization.TextInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
+    }
+  ]
+}
