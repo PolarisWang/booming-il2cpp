@@ -247,10 +247,20 @@ add_chaos_test(test_gc_domain_unload
 # ═══════════════════════════════════════════════════════════════════════════
 
 # gc_stress_scenarios — Multi-threaded GC stress tests (Scenario S)
+# NOTE: gc_api.cpp and gc_region.cpp compiled directly (same pattern as
+# test_gc_managed_api) because the prebuilt chaos_runtime_core.lib uses
+# GNU ar format that MSVC link.exe cannot search for COMDAT resolution
+# of thread_local variables (tls_total_allocated_bytes, tls_tlab, etc.).
 add_chaos_test(test_gc_stress
     gc_stress_scenarios.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_api.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_region.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     LIBS ${CHAOS_GC_LIBS}
 )
+target_include_directories(test_gc_stress PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_stress PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_stress PROPERTIES LABELS "stress;gc")
 
 # ═══════════════════════════════════════════════════════════════════════════

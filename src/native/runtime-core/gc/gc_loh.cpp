@@ -207,6 +207,13 @@ void LargeObjectHeap::Free(void* ptr) {
 // GC operations
 // ======================================================================
 
+void LargeObjectHeap::UnmarkAllForTesting() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    for (auto* seg = segment_list_; seg != nullptr; seg = seg->next) {
+        seg->marked.store(false, std::memory_order_relaxed);
+    }
+}
+
 bool LargeObjectHeap::MarkObject(void* obj) {
     if (obj == nullptr) return false;
     auto* seg = FindSegment(obj);

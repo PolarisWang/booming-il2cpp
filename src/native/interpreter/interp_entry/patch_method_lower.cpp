@@ -68,6 +68,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
         auto* ir = new interpreter::IRMethod();
         ir->instructions.push_back({});
         patch_method->cached_ir = ir;
+        state.store(2, std::memory_order_release);
         return;
     }
 

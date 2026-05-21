@@ -119,6 +119,9 @@ public:
     /// Get the current compaction mode.
     CompactMode GetCompactMode() const { return compact_mode_; }
 
+    /// Clear all segment marks (for testing — clears pre-mark from Allocate).
+    void UnmarkAllForTesting();
+
     /// Compact the LOH: relocate live objects from fragmented segments
     /// to reduce free-segment interleaving.  Returns total bytes relocated,
     /// or 0 if no compaction was needed/performed.

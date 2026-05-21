@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/string/construction",
+  "displayName": "String Construction And Static Helpers",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char[])",
+    "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char,System.Int32)",
+    "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char[],System.Int32,System.Int32)",
+    "System.Private.CoreLib/System.String::IsNullOrEmpty:System.Boolean(System.String)",
+    "System.Private.CoreLib/System.String::IsNullOrWhiteSpace:System.Boolean(System.String)",
+    "System.Private.CoreLib/System.String::Copy:System.String(System.String)",
+    "System.Private.CoreLib/System.String::Intern:System.String(System.String)",
+    "System.Private.CoreLib/System.String::IsInterned:System.String(System.String)"
+  ],
+  "methodSubjectCount": 8,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

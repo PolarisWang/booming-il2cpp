@@ -715,6 +715,25 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
             chaos_hot_update)
 endif()
 
+# unwind_info_test — standalone UNWIND_INFO layout byte-level verification
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
+    add_executable(chaos_unwind_info_test unwind_info_test.cpp)
+    target_compile_features(chaos_unwind_info_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_unwind_info_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_unwind_info_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_unwind_info_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/codegen"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core")
+    target_link_libraries(
+        chaos_unwind_info_test
+        PRIVATE
+            chaos_codegen)
+endif()
+
 # ============================================================
 # Phase A — HIGH priority new tests
 # ============================================================
