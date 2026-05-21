@@ -27,8 +27,6 @@ verification/foundation-dll/.asm-compare-cache/
 deploy/
 !contracts/artifacts/
 !contracts/artifacts/v0/
-!contracts/artifacts/v0/schemas/
-!contracts/artifacts/v0/schemas/**
 !contracts/native/v0/
 
 # Generated managed solution directory (csproj + sln + bin/obj)

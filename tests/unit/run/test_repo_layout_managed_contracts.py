@@ -81,20 +81,9 @@ class RepoLayoutManagedContractsTests(RepoLayoutTestSupport):
     def test_phase8_proof_root_is_retired(self) -> None:
         self.assertFalse((REPO_ROOT / "tests" / "proof").exists())
 
-    def test_shared_contracts_directory_exists(self) -> None:
-        shared_root = REPO_ROOT / "contracts" / "shared" / "v0"
-        self.assertTrue(shared_root.is_dir(), msg="contracts/shared/v0/ must exist")
-        self.assertTrue((shared_root / "README.md").is_file())
-        self.assertTrue((shared_root / "identity-model.md").is_file())
-        self.assertTrue((shared_root / "object-model.md").is_file())
-        self.assertTrue((shared_root / "handle-model.md").is_file())
-        self.assertTrue((shared_root / "abi-calling-convention.md").is_file())
-        self.assertTrue((shared_root / "exception-boundary.md").is_file())
-        self.assertTrue((shared_root / "delegate-abi.md").is_file())
-        self.assertTrue((shared_root / "metadata-token-mapping.md").is_file())
-        self.assertTrue((shared_root / "version-policy.md").is_file())
-        self.assertTrue((shared_root / "interpreter-ir-decision.md").is_file())
-        self.assertTrue((shared_root / "package-manifest.schema.json").is_file())
+    def test_inactive_contract_roots_are_retired(self) -> None:
+        self.assertFalse((REPO_ROOT / "contracts" / "shared" / "v0").exists())
+        self.assertFalse((REPO_ROOT / "contracts" / "docs" / "v0").exists())
 
     def test_manifest_shard_directory_exists(self) -> None:
         shard_dir = REPO_ROOT / "build" / "toolchains" / "run" / "manifests" / "run"
