@@ -13,6 +13,7 @@ set(CHAOS_FUZZ_GC_SRC
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_api.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_region.cpp"
 )
 
 set(CHAOS_FUZZ_LIBS

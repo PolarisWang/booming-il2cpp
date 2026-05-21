@@ -138,4 +138,26 @@ void GcNumaVirtualFree(void* ptr, CHAOS_IL2CPP_SIZE size) noexcept {
     ::munmap(ptr, size);
 }
 
+void GcNumaBindThread(int node) noexcept {
+    int count = g_numa_node_count.load(std::memory_order_acquire);
+    if (count <= 1 || node < 0 || node >= count) return;
+
+    cpu_set_t cpus;
+    CPU_ZERO(&cpus);
+
+    // Approximate: bind to CPUs on the target node.
+    // A precise implementation would enumerate CPUs per node via
+    // get_mempolicy or /sys/devices/system/node/nodeN/cpumap.
+    int cpu = node * 2;
+    int ncpus = sysconf(_SC_NPROCESSORS_CONF);
+    if (cpu < ncpus) {
+        CPU_SET(cpu, &cpus);
+        if (cpu + 1 < ncpus) {
+            CPU_SET(cpu + 1, &cpus);
+        }
+    }
+
+    pthread_setaffinity_np(pthread_self(), sizeof(cpus), &cpus);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
