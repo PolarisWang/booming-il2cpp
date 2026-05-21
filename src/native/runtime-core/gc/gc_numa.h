@@ -33,7 +33,7 @@ int GcNumaNodeCount() noexcept;
 int GcNumaCurrentNode() noexcept;
 
 /// Get the NUMA node for a given virtual address.
-/// Returns -1 when the node cannot be determined.
+/// Returns 0 on single-node systems or when the node cannot be determined.
 int GcNumaNodeOfAddress(const void* addr) noexcept;
 
 /// Allocate virtual memory on a specific NUMA node.

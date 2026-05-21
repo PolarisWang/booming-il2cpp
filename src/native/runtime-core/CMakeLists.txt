@@ -117,7 +117,6 @@ add_library(chaos_runtime_core STATIC
     gc/gc_loh.h
     gc/gc_loh.cpp
     gc/gc_numa.h
-    gc/gc_numa.cpp
     gc/gc_parallel_mark.h
     gc/gc_parallel_mark.cpp
     gc/gc_events.h
@@ -165,6 +164,17 @@ target_include_directories(
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 if(WIN32)
     target_link_libraries(chaos_runtime_core PRIVATE bcrypt)
+elseif(UNIX AND NOT APPLE)
+    target_link_libraries(chaos_runtime_core PRIVATE numa)
+endif()
+
+# NUMA platform sources: only compile the appropriate file for each platform.
+if(WIN32)
+    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_win.cpp)
+elseif(UNIX AND NOT APPLE)
+    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_linux.cpp)
+else()
+    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_other.cpp)
 endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"
