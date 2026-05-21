@@ -73,6 +73,24 @@ int GcNumaCurrentNode() noexcept {
     return 0;
 }
 
+void GcNumaBindThread(int node) noexcept {
+    int count = g_numa_node_count.load(std::memory_order_acquire);
+    if (count <= 1 || node < 0 || node >= count) return;
+
+    using GetNumaNodeProcessorMaskEx_t = decltype(&GetNumaNodeProcessorMaskEx);
+    static auto* get_mask_fn = reinterpret_cast<GetNumaNodeProcessorMaskEx_t>(
+        ::GetProcAddress(::GetModuleHandleW(L"kernel32.dll"),
+                         "GetNumaNodeProcessorMaskEx"));
+    if (get_mask_fn == nullptr) return;
+
+    GROUP_AFFINITY affinity;
+    if (!get_mask_fn(static_cast<USHORT>(node), &affinity)) return;
+
+    HANDLE thread = ::GetCurrentThread();
+    GROUP_AFFINITY previous;
+    ::SetThreadGroupAffinity(thread, &affinity, &previous);
+}
+
 int GcNumaNodeOfAddress(const void* addr) noexcept {
     if (addr == nullptr) return -1;
 

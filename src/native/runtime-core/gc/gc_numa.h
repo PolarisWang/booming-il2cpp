@@ -47,6 +47,13 @@ void* GcNumaVirtualAlloc(CHAOS_IL2CPP_SIZE size, int node) noexcept;
 /// @param size  Size passed to GcNumaVirtualAlloc (for region tracking).
 void GcNumaVirtualFree(void* ptr, CHAOS_IL2CPP_SIZE size) noexcept;
 
+/// Bind the calling thread to a specific NUMA node.
+/// On Windows: uses SetThreadGroupAffinity.
+/// On Linux: uses pthread_setaffinity_np.
+/// On single-node systems or unsupported platforms: no-op.
+/// @param node  Target NUMA node (0 to GcNumaNodeCount()-1).
+void GcNumaBindThread(int node) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_NUMA_H_

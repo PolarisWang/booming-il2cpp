@@ -2879,8 +2879,6 @@ static bool Test_UnwindInfoLayout() {
     std::printf("    [DEBUG] after Seal, code=%p\n", code); std::fflush(stdout);
     if (code == nullptr) { std::printf("    FAIL: Seal returned null\n"); return false; }
     const uint8_t* d = static_cast<const uint8_t*>(code);
-    std::printf("    [DEBUG] d[0]=0x%02X
-
     // Header: Version=1, Flags=0 → 1 | (0<<3) = 1
     uint8_t vf = d[unwind_off];
     if (vf != 1) {

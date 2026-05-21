@@ -107,6 +107,16 @@ public:
     /// Current write position (bytes emitted so far).
     uint32_t pos() const noexcept { return pos_; }
 
+    /// Read a byte from the buffer at a given offset (for testing).
+    /// Returns 0 if offset is past the current write position.
+    uint8_t Peek(uint32_t offset) const noexcept {
+        if (offset >= pos_) return 0;
+        return data_[offset];
+    }
+
+    /// Get read-only pointer to the buffer contents (for testing).
+    const uint8_t* Data() const noexcept { return data_; }
+
     /// Capacity of the underlying buffer.
     uint32_t capacity() const noexcept { return capacity_; }
 

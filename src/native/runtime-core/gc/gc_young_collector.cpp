@@ -641,35 +641,30 @@ phase3:
             return true;
         });
 
-    // Reset this thread's TLAB.
-    tls_tlab = TLAB();
-
     // ── Adaptive TLAB resizing ────────────────────────────────────
-    // Before reset, compute utilization of the PREVIOUS TLAB and
-    // adjust the size for the next allocation cycle.
+    // Snapshot TLAB utilization BEFORE the reset at the end of this block.
     // Utilization > 75% → double (up to 256 KB)
     // Utilization < 25% → halve (down to 16 KB)
     // Otherwise → keep
-    {
-        CHAOS_IL2CPP_SIZE cur_size = tls_tlab_size;
-        if (tlab_start_before != nullptr && tlab_end_before > tlab_start_before) {
-            CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
-                (tlab_current_before ? tlab_current_before : tlab_start_before) - tlab_start_before);
-            CHAOS_IL2CPP_SIZE total = static_cast<CHAOS_IL2CPP_SIZE>(tlab_end_before - tlab_start_before);
-            if (total > 0) {
-                double utilization = static_cast<double>(used) / static_cast<double>(total);
-                if (utilization > 0.75 && cur_size < 256 * 1024) {
-                    tls_tlab_size = cur_size * 2;
-                } else if (utilization < 0.25 && cur_size > 16 * 1024) {
-                    tls_tlab_size = cur_size / 2;
-                }
-                // else: keep current size
+    if (tls_tlab.start != nullptr && tls_tlab.end > tls_tlab.start) {
+        CHAOS_IL2CPP_SIZE used = static_cast<CHAOS_IL2CPP_SIZE>(
+            (tls_tlab.current ? tls_tlab.current : tls_tlab.start) - tls_tlab.start);
+        CHAOS_IL2CPP_SIZE total = static_cast<CHAOS_IL2CPP_SIZE>(tls_tlab.end - tls_tlab.start);
+        if (total > 0) {
+            double utilization = static_cast<double>(used) / static_cast<double>(total);
+            if (utilization > 0.75 && tls_tlab_size < 256 * 1024) {
+                tls_tlab_size = tls_tlab_size * 2;
+            } else if (utilization < 0.25 && tls_tlab_size > 16 * 1024) {
+                tls_tlab_size = tls_tlab_size / 2;
             }
         }
-        // If no TLAB info available, reset to default.
-        if (tls_tlab_size < 16 * 1024) tls_tlab_size = 16 * 1024;
-        if (tls_tlab_size > 256 * 1024) tls_tlab_size = 256 * 1024;
     }
+    // Clamp to valid range.
+    if (tls_tlab_size < 16 * 1024) tls_tlab_size = 16 * 1024;
+    if (tls_tlab_size > 256 * 1024) tls_tlab_size = 256 * 1024;
+
+    // Reset this thread's TLAB.
+    tls_tlab = TLAB();
 
     // Clear card table entries covering the young range.
     ClearAllCards();
