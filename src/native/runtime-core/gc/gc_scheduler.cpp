@@ -228,23 +228,92 @@ void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
 
 // ── Collection decision ──────────────────────────────────────────
 
+BgcScope GcScheduler::DecideBgcScope() noexcept {
+    BgcScope scope = BgcScope::GEN2_ONLY;
+
+    if (g_young_gen.survivor_begin != nullptr) {
+        auto* s_bump = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
+            (s_bump ? s_bump : g_young_gen.survivor_begin) -
+            g_young_gen.survivor_begin);
+        CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+            g_young_gen.survivor_end - g_young_gen.survivor_begin);
+
+        if (s_capacity > 0) {
+            float occupancy = static_cast<float>(s_used) /
+                static_cast<float>(s_capacity);
+            double gen1_survival = BitsToDouble(
+                gen1_survival_rate_bits_.load(std::memory_order_relaxed));
+
+            // Rule 1: Gen1 occupancy > 80% AND survival < 50% → collect Gen1+Gen2.
+            if (occupancy > 0.80f && gen1_survival < 0.50) {
+                scope = BgcScope::GEN1_GEN2;
+            }
+            // Rule 2: Gen2 fragmentation > 30% AND Gen1 survival > 60% → Gen2 only.
+            float frag = OldGenFragmentation();
+            if (frag > 0.30f && gen1_survival > 0.60) {
+                scope = BgcScope::GEN2_ONLY;
+            }
+
+            CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                "bgc_scope={0} gen1_occ={1:.2f} gen1_surv={2:.2f} gen2_frag={3:.2f}",
+                static_cast<int>(scope), occupancy, gen1_survival,
+                static_cast<double>(frag));
+        }
+    }
+
+    bgc_scope_.store(static_cast<uint8_t>(scope), std::memory_order_release);
+    RecordBgcScopeDecision(scope);
+    return scope;
+}
+
+void GcScheduler::RecordBgcScopeDecision(BgcScope scope) noexcept {
+    if (scope == BgcScope::GEN1_GEN2) {
+        bgc_gen1_gen2_count_.fetch_add(1, std::memory_order_relaxed);
+    } else {
+        bgc_gen2_only_count_.fetch_add(1, std::memory_order_relaxed);
+    }
+}
+
+void GcScheduler::RecordBgcGen1Promote(CHAOS_IL2CPP_SIZE bytes) noexcept {
+    bgc_gen1_promote_bytes_.fetch_add(bytes, std::memory_order_relaxed);
+}
+
+void GcScheduler::RecordBgcGen1Keep(CHAOS_IL2CPP_SIZE bytes) noexcept {
+    bgc_gen1_keep_bytes_.fetch_add(bytes, std::memory_order_relaxed);
+}
+
 GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     // 0. NO_GC_REGION: no collection allowed.
     if (GcIsInNoGcRegion()) {
         return GcCollectionKind::NONE;
     }
 
+    // 0b. Snapshot latency mode for consistent decisions.
+    auto mode = latency_mode_.load(std::memory_order_acquire);
+
+    // In low-latency modes, prefer FULL_BGC over STW FULL whenever BGC is
+    // available.  If BGC is busy, return NONE rather than blocking mutators.
+    bool prefer_bgc = (mode == GcLatencyMode::LOW_LATENCY ||
+                       mode == GcLatencyMode::SUSTAINED_LOW_LATENCY);
+    auto& bgc = BgcController::Instance();
+
     // 1. Full GC requested by another thread?
     if (full_gc_requested_.load(std::memory_order_acquire)) {
+        if (prefer_bgc && !bgc.IsBusy()) {
+            return GcCollectionKind::FULL_BGC;
+        }
         return GcCollectionKind::FULL;
     }
 
     // 2. Page count growth threshold exceeded?
     // Catches rapid page allocation bursts before the byte-based trigger reacts.
     if (page_count_growth_.load(std::memory_order_relaxed) >= kMaxPageGrowthThreshold) {
-        auto& bgc = BgcController::Instance();
         if (!bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
+        }
+        if (prefer_bgc) {
+            return GcCollectionKind::NONE;  // wait for BGC rather than STW
         }
         return GcCollectionKind::FULL;
     }
@@ -269,7 +338,10 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
         if (!bgc.IsBusy()) {
             return GcCollectionKind::FULL_BGC;
         }
-        // BGC is busy — fall back to STW full (emergency).
+        // BGC is busy — in low-latency mode, wait for BGC rather than STW.
+        if (prefer_bgc) {
+            return GcCollectionKind::NONE;
+        }
         return GcCollectionKind::FULL;
     }
 

@@ -2,6 +2,7 @@
 
 #include <chaos/log.h>
 #include <chaos/native_types.h>
+#include <chaos/asan_interface.h>
 
 #include "gc_events.h"
 #include "gc_gen1.h"
@@ -15,8 +16,6 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdio>
-#include <future>
-#include <thread>
 #include <thread>
 
 namespace chaos::il2cpp::runtime_core {
@@ -126,6 +125,18 @@ void BgcController::StartBgcCycle() {
     threading::ReleaseGlobalSafepoint(bgc_gen);
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "root_set_populated");
 
+    // Allocate Gen1 mark bitmap if BGC scope includes Gen1.
+    // Must happen after PopulateRootSet because the scheduler scope must
+    // be set by DecideBgcScope before entering StartBgcCycle.
+    if (g_gc_scheduler.GetBgcScope() == BgcScope::GEN1_GEN2) {
+        if (!AllocateGen1MarkBitmap()) {
+            CHAOS_IL2CPP_LOG_WARN("BGC",
+                "gen1_bitmap allocation failed — falling back to GEN2_ONLY");
+        }
+    } else {
+        FreeGen1MarkBitmap();  // Clean up any leftover from prior cycle.
+    }
+
     // Transition to concurrent mark phase.
     phase_.store(BgcPhase::CONCURRENT_MARK, std::memory_order_release);
     g_bgc_is_marking.store(true, std::memory_order_release);
@@ -233,6 +244,146 @@ void BgcController::StwCompact() {
     // BgcCompact handles DecideCompactMode + compaction + bitmap clear.
     g_old_gen.BgcCompact();
 
+    // ── Gen1 promote/keep decision (GEN1_GEN2 scope) ─────────────
+    // After BGC concurrent mark + sweep, walk Gen1 using the BGC Gen1
+    // mark bitmap.  If Gen1 survival is low (< 30%), promote live objects
+    // to Gen2 and reset survivor_bump (Gen1 filtering was effective).  If
+    // survival is high, leave Gen1 for the young GC to collect later.
+    if (gen1_mark_bitmap_ != nullptr) {
+        char* sv_begin = g_young_gen.survivor_begin;
+        char* sv_bump  = g_young_gen.survivor_bump.load(std::memory_order_acquire);
+        if (sv_begin != nullptr && sv_bump > sv_begin) {
+            GcFireEvent(GcEvent::GC_GEN1_COLLECT);
+
+            uintptr_t gen1_base = gen1_bitmap_base_;
+            char* cur = sv_begin;
+            CHAOS_IL2CPP_SIZE live_count = 0;
+            CHAOS_IL2CPP_SIZE dead_count = 0;
+            CHAOS_IL2CPP_SIZE total_bytes = static_cast<CHAOS_IL2CPP_SIZE>(sv_bump - sv_begin);
+            CHAOS_IL2CPP_SIZE live_bytes = 0;
+            CHAOS_IL2CPP_SIZE total_objects = 0;
+
+            while (cur < sv_bump) {
+                CHAOS_IL2CPP_SIZE obj_size = kGen1MaxEstObjectSize;
+                const void* pti = *reinterpret_cast<const void* const*>(cur);
+                if (pti != nullptr) {
+                    auto& layout = GcLayoutRegistry::Instance();
+                    if (layout.IsValidTypeInfoPointer(pti)) {
+                        uint64_t sid = layout.ReadStableId(pti);
+                        const auto* playout = layout.Lookup(sid);
+                        if (playout != nullptr && playout->instance_size > 0) {
+                            obj_size = static_cast<CHAOS_IL2CPP_SIZE>(playout->instance_size);
+                        }
+                    }
+                }
+
+                uintptr_t obj_addr = reinterpret_cast<uintptr_t>(cur);
+                CHAOS_IL2CPP_SIZE slot_idx = (obj_addr - gen1_base) / sizeof(void*);
+                CHAOS_IL2CPP_SIZE byte_idx = slot_idx / 8;
+                int bit_off = static_cast<int>(slot_idx % 8);
+                bool is_live = (byte_idx < gen1_bitmap_bytes_) &&
+                    ((gen1_mark_bitmap_[byte_idx] >> bit_off) & 1u);
+
+                total_objects++;
+                if (is_live) {
+                    live_count++;
+                    live_bytes += obj_size;
+                } else {
+                    dead_count++;
+                }
+                cur += obj_size;
+            }
+
+            double survival = (total_objects > 0)
+                ? static_cast<double>(live_count) / static_cast<double>(total_objects)
+                : 0.0;
+
+            CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
+                "gen1_sweep: objects={0} live={1} dead={2} live_bytes={3} "
+                "total_bytes={4} survival={5:.3f}",
+                static_cast<unsigned long long>(total_objects),
+                static_cast<unsigned long long>(live_count),
+                static_cast<unsigned long long>(dead_count),
+                static_cast<unsigned long long>(live_bytes),
+                static_cast<unsigned long long>(total_bytes),
+                survival);
+
+            // Decision: promote if survival < 30%.
+            constexpr double kGen1PromoteThreshold = 0.30;
+            if (survival < kGen1PromoteThreshold && live_bytes > 0) {
+                auto pause_start = std::chrono::steady_clock::now();
+                char* promote_cur = sv_begin;
+                CHAOS_IL2CPP_SIZE promoted_bytes = 0;
+                CHAOS_IL2CPP_SIZE promoted_objects = 0;
+                bool oom = false;
+
+                while (promote_cur < sv_bump) {
+                    CHAOS_IL2CPP_SIZE psize = kGen1MaxEstObjectSize;
+                    const void* pti = *reinterpret_cast<const void* const*>(promote_cur);
+                    if (pti != nullptr) {
+                        auto& playout = GcLayoutRegistry::Instance();
+                        if (playout.IsValidTypeInfoPointer(pti)) {
+                            uint64_t psid = playout.ReadStableId(pti);
+                            const auto* pl = playout.Lookup(psid);
+                            if (pl != nullptr && pl->instance_size > 0) {
+                                psize = static_cast<CHAOS_IL2CPP_SIZE>(pl->instance_size);
+                            }
+                        }
+                    }
+
+                    uintptr_t paddr = reinterpret_cast<uintptr_t>(promote_cur);
+                    CHAOS_IL2CPP_SIZE pslot = (paddr - gen1_base) / sizeof(void*);
+                    CHAOS_IL2CPP_SIZE pbyte = pslot / 8;
+                    int pbit = static_cast<int>(pslot % 8);
+                    bool plive = (pbyte < gen1_bitmap_bytes_) &&
+                        ((gen1_mark_bitmap_[pbyte] >> pbit) & 1u);
+
+                    if (plive) {
+                        void* gen2_addr = g_old_gen.Allocate(psize, true);
+                        if (gen2_addr != nullptr) {
+                            std::memcpy(gen2_addr, promote_cur, psize);
+                            promoted_objects++;
+                            promoted_bytes += psize;
+                        } else {
+                            oom = true;
+                            CHAOS_IL2CPP_LOG_ERROR("BGC",
+                                "gen1_promote OOM at offset={0}",
+                                static_cast<unsigned long long>(
+                                    promote_cur - sv_begin));
+                            break;
+                        }
+                    }
+                    promote_cur += psize;
+                }
+
+                if (!oom) {
+                    g_young_gen.survivor_bump.store(
+                        g_young_gen.survivor_begin, std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
+                        "gen1_promote_done: promoted={0} objs, {1} bytes",
+                        static_cast<unsigned long long>(promoted_objects),
+                        static_cast<unsigned long long>(promoted_bytes));
+
+                    g_gc_scheduler.RecordGen1Collection(
+                        promoted_bytes, total_objects,
+                        static_cast<uint64_t>(std::chrono::duration_cast<
+                            std::chrono::nanoseconds>(
+                                std::chrono::steady_clock::now() - pause_start).count()));
+                    g_gc_scheduler.RecordBgcGen1Promote(promoted_bytes);
+                } else {
+                    CHAOS_IL2CPP_LOG_WARN("BGC",
+                        "gen1_promote OOM — leaving Gen1 intact");
+                }
+            } else {
+                CHAOS_IL2CPP_LOG_DEBUG("BGC",
+                    "gen1_keep: survival={0:.2f} above threshold",
+                    survival);
+                g_gc_scheduler.RecordBgcGen1Keep(
+                    static_cast<CHAOS_IL2CPP_SIZE>(sv_bump - sv_begin));
+            }
+        }
+    }
+
     // Transition to FINISHED, signaling BGC thread to reset to IDLE.
     phase_.store(BgcPhase::FINISHED, std::memory_order_release);
     NotifyBgc();
@@ -321,6 +472,10 @@ void BgcController::ForceComplete() {
     cycle_complete_.store(true, std::memory_order_release);
     NotifyBgc();
 
+    // Free Gen1 bitmap — StopConcurrentMark means a full GC is handling
+    // all sweeping, so the bitmap is no longer valid.
+    FreeGen1MarkBitmap();
+
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "force_complete");
 }
 
@@ -343,6 +498,9 @@ void BgcController::StopConcurrentMark() {
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
     cycle_complete_.store(true, std::memory_order_release);
     NotifyBgc();
+
+    // Free Gen1 bitmap — the full GC handles all sweeping.
+    FreeGen1MarkBitmap();
 
     CHAOS_IL2CPP_LOG_DEBUG("BGC", "stop_concurrent_mark");
 }
@@ -381,6 +539,9 @@ void BgcController::PopulateRootSet() {
                             ctrl.bgc_workers_[0].deque.push_back(ref);
                         }
                     }
+                    // GEN1_GEN2 scope: mark live Gen1 references in the BGC
+                    // Gen1 bitmap.  No-op when Gen1 bitmap is not allocated.
+                    ctrl.BgcTryMarkGen1(ref);
                 }
             }
         }
@@ -453,6 +614,9 @@ void BgcController::PopulateRootSet() {
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
                     }
                 }
+                // GEN1_GEN2 scope: mark live Gen1 refs from stack roots.
+                // No-op when Gen1 bitmap is not allocated.
+                BgcController::Instance().BgcTryMarkGen1(ref);
             },
             nullptr);
         CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "root_scan heap={0} oldgen={1} valid={2} marked={3}",
@@ -476,6 +640,9 @@ void BgcController::PopulateRootSet() {
                         BgcController::Instance().bgc_workers_[0].deque.push_back(object);
                     }
                 }
+                // GEN1_GEN2 scope: mark Gen1-referenced handles in the
+                // BGC Gen1 bitmap.  No-op when bitmap is not allocated.
+                BgcController::Instance().BgcTryMarkGen1(object);
             },
             nullptr);
     }
@@ -813,21 +980,9 @@ void BgcController::BgcThreadMain() {
             phase_.store(BgcPhase::FINISHED, std::memory_order_release);
         }
 
-        // Reset for next cycle.
-        if (phase_.load(std::memory_order_acquire) == BgcPhase::FINISHED) {
-            g_bgc_is_marking.store(false, std::memory_order_release);
-            bgc_start_requested_.store(false, std::memory_order_release);
-            phase_.store(BgcPhase::IDLE, std::memory_order_release);
-            cycle_complete_.store(true, std::memory_order_release);
-            NotifyBgc();
-            CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
-        }
-
         // ── Publish finalization work to finalizer thread ────────────
-        // Instead of running finalizers on the BGC thread, publish them
-        // (and their corresponding weak handles) to the dedicated finalizer
-        // thread.  The finalizer thread processes finalizers first, then
-        // nulls weak handles — preserving WeakTrackResurrection ordering.
+        // Run BEFORE cycle_complete_ so that chaos_gc_wait_for_pending_finalizers
+        // can observe the pending batch and wait for it to drain.
         if (!bgc_dead_finalizables_.empty() || !bgc_dead_weak_handles_.empty()) {
             CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "publish_finalization finalizers={0} weak={1}",
                 static_cast<unsigned long long>(bgc_dead_finalizables_.size()),
@@ -835,6 +990,19 @@ void BgcController::BgcThreadMain() {
             PublishFinalizationWork(bgc_dead_finalizables_, bgc_dead_weak_handles_);
             bgc_dead_finalizables_.clear();
             bgc_dead_weak_handles_.clear();
+        }
+
+        // Reset for next cycle.
+        if (phase_.load(std::memory_order_acquire) == BgcPhase::FINISHED) {
+            // Free Gen1 bitmap before signaling completion so that
+            // WaitForCycleComplete() observes a clean state.
+            FreeGen1MarkBitmap();
+            g_bgc_is_marking.store(false, std::memory_order_release);
+            bgc_start_requested_.store(false, std::memory_order_release);
+            phase_.store(BgcPhase::IDLE, std::memory_order_release);
+            cycle_complete_.store(true, std::memory_order_release);
+            NotifyBgc();
+            CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
         }
 
         // ── BGC dependent handle processing ─────────────────────────
@@ -868,6 +1036,7 @@ void BgcController::PublishFinalizationWork(
             weak_handles.begin(), weak_handles.end());
         finalizer_work_pending_.store(true, std::memory_order_release);
     }
+    bgc_finalizer_batches_pending_.fetch_add(1, std::memory_order_release);
     finalizer_cv_.notify_one();
 }
 
@@ -882,8 +1051,7 @@ void BgcController::FinalizerThreadMain() noexcept {
         std::vector<DeadWeakHandle> weak_handles;
         {
             std::unique_lock<std::mutex> lock(finalizer_mutex_);
-            finalizer_cv_.wait_for(lock,
-                std::chrono::milliseconds(kFinalizerHeartbeatMs), [this]() {
+            finalizer_cv_.wait(lock, [this]() {
                 return finalizer_work_pending_.load(std::memory_order_acquire) ||
                        !finalizer_running_.load(std::memory_order_acquire);
             });
@@ -898,38 +1066,20 @@ void BgcController::FinalizerThreadMain() noexcept {
         CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "running {0} finalizers",
             static_cast<unsigned long long>(queue.size()));
 
-        std::vector<TimedFinalizerEntry> retry_queue;
-
         for (auto& entry : queue) {
             if (entry.finalizer == nullptr) continue;
-            if (entry.is_dead) continue;  // permanently skipped
+            if (entry.is_dead) continue;
 
-            // Launch finalizer via std::async with timeout.
-            auto future = std::async(std::launch::async, [&entry]() {
-#if !defined(__APPLE__)
-                int tid = threading::AllocateThreadId();
-                threading::RegisterThread(tid, nullptr);
-                threading::EnterCooperativeMode();
-#endif
+            // Run finalizer inline on the finalizer thread (matching CoreCLR).
+            // A hung finalizer blocks the finalizer thread — this is an
+            // intentional design choice favoring simplicity and thread-safety
+            // over per-finalizer timeout isolation.
+            try {
                 entry.finalizer(entry.obj);
-#if !defined(__APPLE__)
-                threading::EnterPreemptiveMode();
-                threading::UnregisterThread();
-#endif
-            });
-
-            auto status = future.wait_for(
-                std::chrono::milliseconds(kFinalizerTimeoutMs));
-
-            if (status == std::future_status::ready) {
-                try { future.get(); } catch (...) {
-                    CHAOS_IL2CPP_LOG_WARN("Finalizer",
-                        "finalizer exception obj={0}", entry.obj);
-                }
-            } else {
+            } catch (...) {
                 entry.retry_count++;
                 CHAOS_IL2CPP_LOG_WARN("Finalizer",
-                    "finalizer timeout obj={0} retry={1}/{2}",
+                    "finalizer exception obj={0} retry={1}/{2}",
                     entry.obj, entry.retry_count, kFinalizerMaxRetries);
 
                 if (entry.retry_count >= kFinalizerMaxRetries) {
@@ -937,18 +1087,11 @@ void BgcController::FinalizerThreadMain() noexcept {
                     CHAOS_IL2CPP_LOG_ERROR("Finalizer",
                         "finalizer permanently skipped obj={0}", entry.obj);
                 } else {
-                    retry_queue.push_back(entry);
+                    // Re-queue for retry.
+                    std::lock_guard<std::mutex> lock(finalizer_mutex_);
+                    pending_timed_finalizers_.push_back(entry);
+                    finalizer_work_pending_.store(true, std::memory_order_release);
                 }
-            }
-        }
-
-        // Re-queue timed-out finalizers for retry in the next batch.
-        if (!retry_queue.empty()) {
-            std::lock_guard<std::mutex> lock(finalizer_mutex_);
-            pending_timed_finalizers_.insert(pending_timed_finalizers_.end(),
-                retry_queue.begin(), retry_queue.end());
-            if (!pending_timed_finalizers_.empty()) {
-                finalizer_work_pending_.store(true, std::memory_order_release);
             }
         }
 
@@ -963,10 +1106,24 @@ void BgcController::FinalizerThreadMain() noexcept {
             CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "weak_handles_processed count={0}",
                 static_cast<unsigned long long>(flat.size()));
         }
+
+        // Signal drain completion.
+        int prev = bgc_finalizer_batches_pending_.fetch_sub(1, std::memory_order_acq_rel);
+        if (prev == 1) {
+            std::lock_guard<std::mutex> lock(bgc_finalizer_drain_mutex_);
+            bgc_finalizer_drain_cv_.notify_all();
+        }
     }
 
     threading::UnregisterThread();
     CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_stopped");
+}
+
+void BgcController::WaitForFinalizerDrain() noexcept {
+    std::unique_lock<std::mutex> lock(bgc_finalizer_drain_mutex_);
+    bgc_finalizer_drain_cv_.wait(lock, [this]() {
+        return bgc_finalizer_batches_pending_.load(std::memory_order_acquire) == 0;
+    });
 }
 
 // ── Parallel mark workers ──────────────────────────────────────────
@@ -1045,6 +1202,9 @@ namespace {
                         out_children.push_back(ref);
                     }
                 }
+                // GEN1_GEN2 scope: mark live Gen1 refs during transitive
+                // tracing.  No-op when Gen1 bitmap is not allocated.
+                BgcController::Instance().BgcTryMarkGen1(ref);
             }
             return;
         }
@@ -1066,6 +1226,9 @@ namespace {
                     out_children.push_back(ref);
                 }
             }
+            // GEN1_GEN2 scope: mark live Gen1 refs during transitive
+            // tracing.  No-op when Gen1 bitmap is not allocated.
+            BgcController::Instance().BgcTryMarkGen1(ref);
         }
     }
 }
@@ -1213,6 +1376,9 @@ CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
                     w0.deque.push_back(entry);
                 }
             }
+            // GEN1_GEN2 scope: mark live Gen1 SATB entries in the BGC
+            // Gen1 bitmap.  No-op when Gen1 bitmap is not allocated.
+            BgcTryMarkGen1(entry);
         }
         ++count;
     }
@@ -1237,6 +1403,86 @@ CHAOS_IL2CPP_SIZE BgcController::DrainAllTlsSatbBuffers() {
     return total;
 }
 
+// ── Gen1 concurrent mark bitmap ───────────────────────────────────
+
+bool BgcController::AllocateGen1MarkBitmap() noexcept {
+    if (gen1_mark_bitmap_ != nullptr) return true;
+
+    char* s_begin = g_young_gen.survivor_begin;
+    char* s_end   = g_young_gen.survivor_end;
+    if (s_begin == nullptr || s_end == nullptr || s_begin >= s_end) {
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "gen1_bitmap: no Gen1 range");
+        return false;
+    }
+
+    uintptr_t base = reinterpret_cast<uintptr_t>(s_begin);
+    CHAOS_IL2CPP_SIZE span = static_cast<CHAOS_IL2CPP_SIZE>(s_end - s_begin);
+    // 1 bit per pointer-sized slot: span / sizeof(void*) bits → bytes
+    CHAOS_IL2CPP_SIZE total_slots = span / sizeof(void*);
+    CHAOS_IL2CPP_SIZE bitmap_bytes = (total_slots / 8) + 1;
+
+    auto* bitmap = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(bitmap_bytes));
+    if (bitmap == nullptr) {
+        CHAOS_IL2CPP_LOG_ERROR("BGC", "gen1_bitmap OOM span=%llu",
+            static_cast<unsigned long long>(span));
+        return false;
+    }
+    std::memset(bitmap, 0, bitmap_bytes);
+
+    gen1_mark_bitmap_ = bitmap;
+    gen1_bitmap_bytes_ = bitmap_bytes;
+    gen1_bitmap_base_ = base;
+    gen1_bitmap_span_ = span;
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "gen1_bitmap allocated base=0x{0:x} span={1} bytes={2}",
+        static_cast<unsigned long long>(base),
+        static_cast<unsigned long long>(span),
+        static_cast<unsigned long long>(bitmap_bytes));
+    return true;
+}
+
+void BgcController::FreeGen1MarkBitmap() noexcept {
+    if (gen1_mark_bitmap_ != nullptr) {
+        CHAOS_IL2CPP_FREE(gen1_mark_bitmap_);
+        gen1_mark_bitmap_ = nullptr;
+    }
+    gen1_bitmap_bytes_ = 0;
+    gen1_bitmap_base_ = 0;
+    gen1_bitmap_span_ = 0;
+}
+
+bool BgcController::BgcTryMarkGen1(void* obj) noexcept {
+    if (gen1_mark_bitmap_ == nullptr) return false;
+    uintptr_t addr = reinterpret_cast<uintptr_t>(obj);
+    if (addr < gen1_bitmap_base_) return false;
+    uintptr_t offset = addr - gen1_bitmap_base_;
+    if (offset >= gen1_bitmap_span_) return false;
+
+    CHAOS_IL2CPP_SIZE slot_idx = offset / sizeof(void*);
+    CHAOS_IL2CPP_SIZE byte_idx = slot_idx / 8;
+    uint8_t mask = static_cast<uint8_t>(1u << (slot_idx % 8));
+    if (byte_idx >= gen1_bitmap_bytes_) return false;
+
+#if defined(_MSC_VER)
+    auto prev = _InterlockedOr8(reinterpret_cast<volatile char*>(&gen1_mark_bitmap_[byte_idx]), mask);
+    return (prev & mask) == 0;
+#else
+    auto prev = __atomic_fetch_or(&gen1_mark_bitmap_[byte_idx], mask, __ATOMIC_RELAXED);
+    return (prev & mask) == 0;
+#endif
+}
+
+void BgcController::ResetGen1MarkBitmap() noexcept {
+    if (gen1_mark_bitmap_ != nullptr) {
+        std::memset(gen1_mark_bitmap_, 0, gen1_bitmap_bytes_);
+        // Rebase to current survivor range in case it changed.
+        char* s_begin = g_young_gen.survivor_begin;
+        if (s_begin != nullptr) {
+            gen1_bitmap_base_ = reinterpret_cast<uintptr_t>(s_begin);
+        }
+        CHAOS_IL2CPP_LOG_DEBUG("BGC", "gen1_bitmap reset");
+    }
+}
 
 void GcAdvanceBgcCycle() noexcept {
     auto& bgc = BgcController::Instance();
@@ -1244,6 +1490,10 @@ void GcAdvanceBgcCycle() noexcept {
     if (phase == BgcPhase::IDLE) {
         auto decision = g_gc_scheduler.DecideCollection();
         if (decision != GcCollectionKind::FULL_BGC) return;
+        // Decide BGC scope (GEN2_ONLY or GEN1_GEN2) before starting the cycle.
+        // StartBgcCycle reads the scope from the scheduler to allocate the
+        // Gen1 mark bitmap if needed.
+        g_gc_scheduler.DecideBgcScope();
         bgc.StartBgcCycle();
     } else if (phase == BgcPhase::REMARK_NEEDED) {
         auto remark_start = std::chrono::steady_clock::now();

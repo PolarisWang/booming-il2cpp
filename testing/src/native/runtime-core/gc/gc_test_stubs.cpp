@@ -76,12 +76,13 @@ NativeMethod* GenerateNativeCode(
 #endif
 
 // ── gc_card_table globals ──────────────────────────────────────────────────
-// Defined in gc_card_table.cpp inside chaos_runtime_core.  May not be
-// resolved from the .lib when GPU/SSE card-table codepaths are excluded.
-namespace chaos { namespace il2cpp { namespace runtime_core {
-uintptr_t g_nursery_range_begin = 0;
-uintptr_t g_nursery_range_end = 0;
-}}}
+// These are now defined in gc_card_table.cpp inside chaos_runtime_core.lib.
+// The stubs below are no longer needed — uncomment if card-table globals are
+// excluded from the lib in a future build configuration.
+// namespace chaos { namespace il2cpp { namespace runtime_core {
+// uintptr_t g_nursery_range_begin = 0;
+// uintptr_t g_nursery_range_end = 0;
+// }}}
 // Note: GcYoungCollection is NOT stubbed here — the real implementation from
 // chaos_runtime_core.lib (gc_young_collector.cpp) must be resolved for the
 // young_collector_test and finalizer_test to work correctly.

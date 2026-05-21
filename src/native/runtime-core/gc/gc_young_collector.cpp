@@ -6,6 +6,7 @@
 
 #include "gc_card_table.h"
 #include "gc_events.h"
+#include "gc_bgc.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
@@ -541,6 +542,13 @@ phase3:
             bool near_full = (s_used + kGen1NearFullThreshold >= s_capacity);
 
             if (s_used > 0 && (should_collect_gen1 || near_full)) {
+                // Skip Gen1 collection if BGC has an active Gen1 mark bitmap
+                // (GEN1_GEN2 scope).  The BGC is concurrently marking Gen1
+                // objects and will handle promotion/keep in StwCompact.
+                if (BgcController::Instance().IsGen1MarkingActive()) {
+                    CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                        "gen1_bgc_marking_active — skip young Gen1 collection");
+                } else {
                 auto gen1_result = GcGen1Collection();
                 // GcGen1Collection resets survivor_bump after collection.
                 result.objects_promoted += gen1_result.objects_promoted;
@@ -580,6 +588,7 @@ phase3:
                         "promotion_age_threshold: {0} (scheduler, "
                         "occ={1:.2f})",
                         scheduler_threshold, occupancy);
+                }
                 }
             }
             // else: skip Gen1 collection — let objects age in Gen1.

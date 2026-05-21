@@ -13,7 +13,11 @@ FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.tar.gz
 )
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+if(USE_ASAN)
+    set(gtest_force_shared_crt OFF CACHE BOOL "" FORCE)
+else()
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
 FetchContent_MakeAvailable(googletest)
 
 # Project root for referencing source headers
@@ -80,7 +84,10 @@ endif()
 add_compile_options(/utf-8 /GS- /W1)
 if(USE_ASAN)
     add_compile_options(/fsanitize=address)
-    add_link_options(/fsanitize=address)
+    add_link_options(/fsanitize=address /FORCE:MULTIPLE)
+    add_compile_definitions(_DISABLE_VECTOR_ANNOTATION _DISABLE_STRING_ANNOTATION)
+else()
+    add_compile_options(/utf-8 /GS- /W1)
 endif()
 
 # Convenience: create gtest executable with chaos library support
