@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32PlatformCore">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonInteropKernel32PlatformCore</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonInteropKernel32PlatformCore.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>57</Uncoveredlines>
+    <Coverablelines>57</Coverablelines>
+    <Totallines>101</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>4</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="TryCreateFastPath">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>62</Blocksnotcovered>
+    </Element>
+    <Element name="TryCreateStaticFastPath">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="IsKnownValueType">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>74</Blocksnotcovered>
+    </Element>
+    <Element name="LoadScalar">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>24</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonInteropKernel32PlatformCore.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal sealed record RuntimeSkeletonInteropKernel32FastPathPlan(" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string ContractId," />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string CapabilityArea," />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    IReadOnlyList&lt;RuntimeSkeletonManagedInvokePointerArgShape&gt; ArgumentShapes," />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    RuntimeSkeletonManagedInvokeReturnContract ReturnShape," />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    string HelperStatements);" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal static class RuntimeSkeletonInteropKernel32PlatformCore" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public const string FastPathContractId = &quot;interop-kernel32-fast-v1&quot;;" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static bool TryCreateFastPath(" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        TypedIlMethodArtifact method," />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out RuntimeSkeletonInteropKernel32FastPathPlan plan)" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="20" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        plan = null!;" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (!method.SubjectId.Contains(&quot;/Interop+Kernel32::&quot;, StringComparison.Ordinal) ||" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            !string.Equals(method.BodyAvailability, &quot;has-canonical-body&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="27" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return method.SubjectId switch" />
+      <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="29" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::GetLastError:System.Int32()&quot; =&gt;" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;env-diagnostics-loader&quot;, &quot;System.Int32&quot;," />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetLastError();\n    *static_cast&lt;CHAOS_IL2CPP_INT32*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::GetCurrentProcessId:System.UInt32()&quot; =&gt;" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;process-thread-io&quot;, &quot;System.UInt32&quot;," />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;const auto result = static_cast&lt;CHAOS_IL2CPP_UINT32&gt;(chaos::il2cpp::runtime_core::InteropKernel32GetCurrentProcessId());\n    *static_cast&lt;CHAOS_IL2CPP_UINT32*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="35" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::GetCurrentThreadId:System.Int32()&quot; =&gt;" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;process-thread-io&quot;, &quot;System.Int32&quot;," />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentThreadId();\n    *static_cast&lt;CHAOS_IL2CPP_INT32*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::GetCurrentProcess:System.IntPtr()&quot; =&gt;" />
+      <LineAnalysis line="39" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;process-thread-io&quot;, &quot;System.IntPtr&quot;," />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentProcess();\n    *static_cast&lt;CHAOS_IL2CPP_INTPTR*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="41" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::GetCurrentThread:System.IntPtr()&quot; =&gt;" />
+      <LineAnalysis line="42" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;process-thread-io&quot;, &quot;System.IntPtr&quot;," />
+      <LineAnalysis line="43" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    &quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentThread();\n    *static_cast&lt;CHAOS_IL2CPP_INTPTR*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="44" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::CloseHandle:System.Boolean(System.IntPtr)&quot; =&gt;" />
+      <LineAnalysis line="45" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;process-thread-io&quot;, &quot;System.Boolean&quot;," />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    $&quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32CloseHandle({LoadScalar(&quot;System.IntPtr&quot;, &quot;request-&gt;arg0&quot;)});\n    *static_cast&lt;bool*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Private.CoreLib/Interop+Kernel32::FreeLibrary:System.Boolean(System.IntPtr)&quot; =&gt;" />
+      <LineAnalysis line="48" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                TryCreateStaticFastPath(method, &quot;env-diagnostics-loader&quot;, &quot;System.Boolean&quot;," />
+      <LineAnalysis line="49" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    $&quot;const auto result = chaos::il2cpp::runtime_core::InteropKernel32FreeLibrary({LoadScalar(&quot;System.IntPtr&quot;, &quot;request-&gt;arg0&quot;)});\n    *static_cast&lt;bool*&gt;(return_value_ptr) = result;&quot;, out plan)," />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _ =&gt; false," />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool TryCreateStaticFastPath(" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        TypedIlMethodArtifact method," />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string capabilityArea," />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string managedReturnType," />
+      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string helperStatements," />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out RuntimeSkeletonInteropKernel32FastPathPlan plan)" />
+      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        plan = null!;" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var argumentShapes = RuntimeSkeletonManagedInvokeAbiCore.CreatePointerBackedArgumentShapes(method);" />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (!RuntimeSkeletonManagedInvokeAbiCore.TryCreateStandardReturnContract(" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                managedReturnType," />
+      <LineAnalysis line="65" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                out var returnShape," />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                managedType =&gt; !IsKnownValueType(managedType)," />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                includeIndirectFlag: true))" />
+      <LineAnalysis line="68" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="69" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        plan = new RuntimeSkeletonInteropKernel32FastPathPlan(" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            FastPathContractId," />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            capabilityArea," />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            argumentShapes," />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnShape," />
+      <LineAnalysis line="77" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            helperStatements);" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return true;" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool IsKnownValueType(string managedType)" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return managedType is" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Void&quot; or &quot;System.Boolean&quot; or &quot;Interop+BOOL&quot; or &quot;System.Byte&quot; or &quot;System.SByte&quot; or" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Char&quot; or &quot;System.Int16&quot; or &quot;System.UInt16&quot; or &quot;System.Int32&quot; or &quot;System.UInt32&quot; or" />
+      <LineAnalysis line="86" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int64&quot; or &quot;System.UInt64&quot; or &quot;System.IntPtr&quot; or &quot;System.UIntPtr&quot;;" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="89" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static string LoadScalar(string managedType, string storageExpression)" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="91" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return managedType switch" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="93" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.IntPtr&quot; =&gt; $&quot;*static_cast&lt;const CHAOS_IL2CPP_INTPTR*&gt;({storageExpression})&quot;," />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UIntPtr&quot; =&gt; $&quot;*static_cast&lt;const CHAOS_IL2CPP_UINTPTR*&gt;({storageExpression})&quot;," />
+      <LineAnalysis line="95" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int32&quot; =&gt; $&quot;*static_cast&lt;const CHAOS_IL2CPP_INT32*&gt;({storageExpression})&quot;," />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt32&quot; =&gt; $&quot;*static_cast&lt;const CHAOS_IL2CPP_UINT32*&gt;({storageExpression})&quot;," />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Boolean&quot; =&gt; $&quot;*static_cast&lt;const bool*&gt;({storageExpression})&quot;," />
+      <LineAnalysis line="98" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _ =&gt; throw new InvalidOperationException($&quot;unsupported interop-kernel32 scalar type '{managedType}'&quot;)," />
+      <LineAnalysis line="99" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="100" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

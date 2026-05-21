@@ -15,36 +15,31 @@ public static partial class ErrorInfoBasicSubjects
     // [0] ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)
     public static void Subject_0()
     {
-        try { if (ErrorInfoBasicNativeEntry.Run(42) != ErrorInfoBasicNativeEntry.Run(42)) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        if (ErrorInfoBasicNativeEntry.Run(42) != -1) _exitCode = 1;
     }
 
     // [1] ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()
     public static void Subject_1()
     {
-        try { if (ErrorInfoBasicNativeEntry.TestGetExceptionForHR() != ErrorInfoBasicNativeEntry.TestGetExceptionForHR()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        if (ErrorInfoBasicNativeEntry.TestGetExceptionForHR() != 3) _exitCode = 1;
     }
 
     // [2] ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()
     public static void Subject_2()
     {
-        try { if (ErrorInfoBasicNativeEntry.TestGetHRForException() != ErrorInfoBasicNativeEntry.TestGetHRForException()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        if (ErrorInfoBasicNativeEntry.TestGetHRForException() != 0) _exitCode = 1;
     }
 
     // [3] ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()
     public static void Subject_3()
     {
-        try { if (ErrorInfoBasicNativeEntry.TestThrowExceptionForHR_S_OK() != ErrorInfoBasicNativeEntry.TestThrowExceptionForHR_S_OK()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        if (ErrorInfoBasicNativeEntry.TestThrowExceptionForHR_S_OK() != 0) _exitCode = 1;
     }
 
     // [4] ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()
     public static void Subject_4()
     {
-        try { if (ErrorInfoBasicNativeEntry.TestGetExceptionForHR_Zero() != ErrorInfoBasicNativeEntry.TestGetExceptionForHR_Zero()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        if (ErrorInfoBasicNativeEntry.TestGetExceptionForHR_Zero() != 0) _exitCode = 1;
     }
 
 }

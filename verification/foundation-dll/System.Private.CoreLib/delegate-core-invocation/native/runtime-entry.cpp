@@ -49,10 +49,13 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern "C" const int kAotMethodCount;
 
+// RunMicrobench is defined in microbench.cpp (auto-generated in native/ directory).
+extern "C" void RunMicrobench();
+
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
-enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark };
+enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark, Microbench };
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -206,10 +209,12 @@ int main(int argc, char** argv) {
         mode = RunMode::HotUpdateAndBenchmark;
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
-    } else if (argc >= 3 && std::strcmp(argv[1], "--patch-bench") == 0) {
+    } else if (argc >= 2 && std::strcmp(argv[1], "--patch-bench") == 0) {
         mode = RunMode::PatchAndBenchmark;
         entry_index = std::atoi(argv[2]);
         if (argc >= 4) iterations = std::atoi(argv[3]);
+    } else if (argc >= 2 && std::strcmp(argv[1], "--microbench") == 0) {
+        mode = RunMode::Microbench;
     } else if (argc >= 2) {
         entry_index = std::atoi(argv[1]);  // backward compat: numeric entry index
     }
@@ -226,11 +231,7 @@ int main(int argc, char** argv) {
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
-#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
-#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
-#endif
 #endif
             try {
                 RunNativeAot(i);
@@ -274,11 +275,7 @@ int main(int argc, char** argv) {
         auto* patch_ctx = ApplyHotpatchIfAvailable();
         int hotupdate_failed = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
-#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
-#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
-#endif
             try {
                 RunNativeAot(i);
             } catch (...) {
@@ -296,11 +293,7 @@ int main(int argc, char** argv) {
     case RunMode::HotUpdateAndBenchmark: {
         int hot_result = 0;
         for (int i = 0; i < kAotMethodCount; i++) {
-#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
-#else
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
-#endif
             try {
                 RunNativeAot(i);
             } catch (...) {
@@ -342,6 +335,12 @@ int main(int argc, char** argv) {
         double ns_per_op = (elapsed_ms * 1e6) / iterations;
         printf("{\"postPatchNsPerOp\":%.1f,\"elapsedMilliseconds\":%.3f,\"iterations\":%d,\"methodIndex\":%d}\n",
                ns_per_op, elapsed_ms, iterations, entry_index);
+        std::fflush(stdout);
+        _exit(0);
+        return 0;
+    }
+    case RunMode::Microbench: {
+        RunMicrobench();
         std::fflush(stdout);
         _exit(0);
         return 0;

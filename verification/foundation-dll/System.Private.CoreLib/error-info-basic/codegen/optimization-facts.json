@@ -111,31 +111,6 @@
   ],
   "exceptionFacts": [
     {
-      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_0:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_1:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_2:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_3:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_4:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
       "methodSubjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"

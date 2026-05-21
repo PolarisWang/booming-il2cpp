@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.PatchDataDumper">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.PatchDataDumper</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\PatchDataDumper.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>151</Uncoveredlines>
+    <Coverablelines>151</Coverablelines>
+    <Totallines>323</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>9</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="Dump">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>196</Blocksnotcovered>
+    </Element>
+    <Element name="DumpTable">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>22</Blocksnotcovered>
+    </Element>
+    <Element name="DumpAotCoreIrMethods">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>34</Blocksnotcovered>
+    </Element>
+    <Element name="ExtractMethodName">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>13</Blocksnotcovered>
+    </Element>
+    <Element name="DumpStringHeap">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>31</Blocksnotcovered>
+    </Element>
+    <Element name="DumpTypeDefs">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>37</Blocksnotcovered>
+    </Element>
+    <Element name="DumpMethodDefs">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>39</Blocksnotcovered>
+    </Element>
+    <Element name="ReadString">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="PatchData_TotalSize">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\PatchDataDumper.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Runtime.InteropServices;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Text;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Reads a .patchdata binary file and prints a human-readable dump for" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// debugging and audit purposes." />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;/summary&gt;" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public static class PatchDataDumper" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static void Dump(string patchdataPath, TextWriter writer)" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var fileSize = new FileInfo(patchdataPath).Length;" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var bytes = File.ReadAllBytes(patchdataPath);" />
+      <LineAnalysis line="16" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (bytes.Length &lt; Marshal.SizeOf&lt;FileHeader&gt;())" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="18" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;Error: file too small for header&quot;);" />
+      <LineAnalysis line="19" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return;" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var hdr = MemoryMarshal.Read&lt;FileHeader&gt;(bytes);" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.magic != 0x50415854)" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;Error: bad magic 0x{hdr.magic:X8} (expected 0x50415854 \&quot;PADT\&quot;)&quot;);" />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return;" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="29" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Magic:&quot;,-30} PADT (0x{hdr.magic:X8})&quot;);" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Version:&quot;,-30} {hdr.version}&quot;);" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Header size:&quot;,-30} {hdr.header_size} bytes&quot;);" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Total file size:&quot;,-30} {fileSize} bytes&quot;);" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Layout check" />
+      <LineAnalysis line="36" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.version &gt;= 1 &amp;&amp; hdr.header_size &lt; 112)" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;Warning: header_size smaller than v1 minimum (112)&quot;);" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.version &gt;= 2 &amp;&amp; hdr.header_size &lt; 124)" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="42" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;Warning: v2 header_size smaller than 124&quot;);" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="44" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (bytes.Length &lt; PatchData_TotalSize(in hdr))" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;Warning: file truncated — declared total exceeds file size&quot;);" />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Heaps" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── Heaps ──&quot;);" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;String heap:&quot;,-42} offset={hdr.string_heap_offset,8}  size={hdr.string_heap_size,8} bytes&quot;);" />
+      <LineAnalysis line="52" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Blob heap:&quot;,-42} offset={hdr.blob_heap_offset,8}  size={hdr.blob_heap_size,8} bytes&quot;);" />
+      <LineAnalysis line="53" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;User-string heap:&quot;,-42} offset={hdr.user_string_heap_offset,8}  size={hdr.user_string_heap_size,8} bytes&quot;);" />
+      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Tables" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── Metadata tables ──&quot;);" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;AssemblyRef&quot;, hdr.assembly_ref_offset, hdr.assembly_ref_count, 8);" />
+      <LineAnalysis line="59" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;TypeRef&quot;,     hdr.type_ref_offset,     hdr.type_ref_count,     16);" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;TypeDef&quot;,     hdr.type_def_offset,     hdr.type_def_count,     22);" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;FieldDef&quot;,    hdr.field_def_offset,    hdr.field_def_count,    18);" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;MethodDef&quot;,   hdr.method_def_offset,   hdr.method_def_count,   28);" />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;MemberRef&quot;,   hdr.member_ref_offset,   hdr.member_ref_count,   16);" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTable(writer, &quot;StandaloneSig&quot;, hdr.standalone_sig_offset, hdr.standalone_sig_count, 8);" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="66" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Method bodies" />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        int bodyCount = 0;" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.method_def_count &gt; 0)" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="70" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var methodDefs = MemoryMarshal.Cast&lt;byte, PatchMethodDefEntry&gt;(" />
+      <LineAnalysis line="71" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                bytes.AsSpan((int)hdr.method_def_offset, (int)hdr.method_def_count * 28));" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            foreach (ref readonly var m in methodDefs)" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                if (m.body_size &gt; 0) bodyCount++;" />
+      <LineAnalysis line="74" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;Method bodies:&quot;,-42} offset={hdr.body_data_offset,8}  size={hdr.body_data_size,8} bytes  ({bodyCount}/{hdr.method_def_count} methods have bodies)&quot;);" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;├── {&quot;offset&quot;,8} {&quot;count&quot;,6} {&quot;content&quot;,-20}&quot;);" />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine($&quot;{&quot;BodyData&quot;,-9} {hdr.body_data_offset,8} {hdr.method_def_count,6} methods  ({bodyCount} non-empty bodies, {hdr.body_data_size} bytes total)&quot;);" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="82" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // AotCoreIr section" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── AotCoreIr section ──&quot;);" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.aot_core_ir_count &gt; 0 &amp;&amp; hdr.aot_core_ir_size &gt; 0)" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="87" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Method count:&quot;,-30} {hdr.aot_core_ir_count}&quot;);" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Section size:&quot;,-30} {hdr.aot_core_ir_size} bytes&quot;);" />
+      <LineAnalysis line="89" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Offset:&quot;,-30} {hdr.aot_core_ir_offset}&quot;);" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="91" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Read the JSON index and print method names" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            DumpAotCoreIrMethods(bytes, in hdr, writer);" />
+      <LineAnalysis line="93" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="94" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        else" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;(empty — no IR embedded)&quot;);" />
+      <LineAnalysis line="97" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="98" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // RegIr section" />
+      <LineAnalysis line="100" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="101" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── Register IR section (v2+) ──&quot;);" />
+      <LineAnalysis line="102" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.reg_ir_count &gt; 0 &amp;&amp; hdr.reg_ir_size &gt; 0)" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="104" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Method count:&quot;,-30} {hdr.reg_ir_count}&quot;);" />
+      <LineAnalysis line="105" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Section size:&quot;,-30} {hdr.reg_ir_size} bytes&quot;);" />
+      <LineAnalysis line="106" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine($&quot;{&quot;Offset:&quot;,-30} {hdr.reg_ir_offset}&quot;);" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        else" />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            writer.WriteLine(&quot;(empty — runtime will fall back to AotCoreIr JSON)&quot;);" />
+      <LineAnalysis line="111" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="112" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // String heap sample" />
+      <LineAnalysis line="114" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── String heap sample (first 20) ──&quot;);" />
+      <LineAnalysis line="116" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpStringHeap(bytes, in hdr, writer);" />
+      <LineAnalysis line="117" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // TypeDef sample" />
+      <LineAnalysis line="119" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="120" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── TypeDef entries ──&quot;);" />
+      <LineAnalysis line="121" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpTypeDefs(bytes, in hdr, writer);" />
+      <LineAnalysis line="122" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="123" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // MethodDef sample" />
+      <LineAnalysis line="124" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine();" />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        writer.WriteLine(&quot;── MethodDef entries ──&quot;);" />
+      <LineAnalysis line="126" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        DumpMethodDefs(bytes, in hdr, writer);" />
+      <LineAnalysis line="127" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="128" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="129" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void DumpTable(TextWriter w, string name, uint offset, uint count, int entrySize)" />
+      <LineAnalysis line="130" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="131" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (count == 0)" />
+      <LineAnalysis line="132" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  {name,-15} (empty)&quot;);" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        else" />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  {name,-15} offset={offset,8}  count={count,6}  entry={entrySize}B  total={count * (uint)entrySize,8}B&quot;);" />
+      <LineAnalysis line="135" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="136" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="137" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void DumpAotCoreIrMethods(byte[] bytes, ref readonly FileHeader hdr, TextWriter w)" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="139" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var idxStart = (int)hdr.aot_core_ir_offset;" />
+      <LineAnalysis line="140" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var jsonStart = idxStart + (int)hdr.aot_core_ir_count * 4;" />
+      <LineAnalysis line="141" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var maxCount = Math.Min((int)hdr.aot_core_ir_count, 50); // cap output" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="143" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        for (int i = 0; i &lt; maxCount; i++)" />
+      <LineAnalysis line="144" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (idxStart + (i + 1) * 4 &gt; bytes.Length) break;" />
+      <LineAnalysis line="146" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var strOff = BitConverter.ToUInt32(bytes, idxStart + i * 4);" />
+      <LineAnalysis line="147" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var strPos = jsonStart + (int)strOff;" />
+      <LineAnalysis line="148" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (strPos &gt;= bytes.Length) continue;" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Read null-terminated JSON" />
+      <LineAnalysis line="151" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var end = strPos;" />
+      <LineAnalysis line="152" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            while (end &lt; bytes.Length &amp;&amp; bytes[end] != 0) end++;" />
+      <LineAnalysis line="153" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (end == strPos) continue;" />
+      <LineAnalysis line="154" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="155" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var snippet = Encoding.UTF8.GetString(bytes, strPos, Math.Min(end - strPos, 200));" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            // Extract method name from JSON snippet" />
+      <LineAnalysis line="157" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var name = ExtractMethodName(snippet);" />
+      <LineAnalysis line="158" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  [{i,2}] \&quot;{name}\&quot;  (JSON: {end - strPos} bytes)&quot;);" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="161" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.aot_core_ir_count &gt; 50)" />
+      <LineAnalysis line="162" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  ... and {hdr.aot_core_ir_count - 50} more&quot;);" />
+      <LineAnalysis line="163" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="164" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="165" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static string ExtractMethodName(string jsonSnippet)" />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Try to extract subjectId from the JSON" />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var search = &quot;\&quot;subjectId\&quot;:\&quot;&quot;;" />
+      <LineAnalysis line="169" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var idx = jsonSnippet.IndexOf(search, StringComparison.Ordinal);" />
+      <LineAnalysis line="170" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (idx &gt;= 0)" />
+      <LineAnalysis line="171" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="172" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            idx += search.Length;" />
+      <LineAnalysis line="173" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var close = jsonSnippet.IndexOf('&quot;', idx);" />
+      <LineAnalysis line="174" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (close &gt; idx)" />
+      <LineAnalysis line="175" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return jsonSnippet[idx..close];" />
+      <LineAnalysis line="176" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Fallback: truncate the raw snippet" />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return jsonSnippet.Length &gt; 80 ? jsonSnippet[..80] + &quot;...&quot; : jsonSnippet;" />
+      <LineAnalysis line="179" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void DumpStringHeap(byte[] bytes, ref readonly FileHeader hdr, TextWriter w)" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="183" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.string_heap_size == 0) { w.WriteLine(&quot;  (empty)&quot;); return; }" />
+      <LineAnalysis line="184" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var heapStart = (int)hdr.string_heap_offset;" />
+      <LineAnalysis line="185" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var heapEnd = heapStart + (int)hdr.string_heap_size;" />
+      <LineAnalysis line="186" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var pos = heapStart;" />
+      <LineAnalysis line="187" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var count = 0;" />
+      <LineAnalysis line="188" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="189" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        while (pos &lt; heapEnd &amp;&amp; count &lt; 20)" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="191" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var end = pos;" />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            while (end &lt; heapEnd &amp;&amp; bytes[end] != 0) end++;" />
+      <LineAnalysis line="193" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (end == pos) { pos++; continue; }" />
+      <LineAnalysis line="194" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var s = Encoding.UTF8.GetString(bytes, pos, end - pos);" />
+      <LineAnalysis line="195" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            if (s.Length &gt; 64) s = s[..61] + &quot;...&quot;;" />
+      <LineAnalysis line="196" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  [{count}] \&quot;{s}\&quot;&quot;);" />
+      <LineAnalysis line="197" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            count++;" />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            pos = end + 1;" />
+      <LineAnalysis line="199" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="200" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (pos &lt; heapEnd)" />
+      <LineAnalysis line="201" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  ... (more strings beyond first 20)&quot;);" />
+      <LineAnalysis line="202" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="203" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="204" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void DumpTypeDefs(byte[] bytes, ref readonly FileHeader hdr, TextWriter w)" />
+      <LineAnalysis line="205" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="206" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.type_def_count == 0) { w.WriteLine(&quot;  (none)&quot;); return; }" />
+      <LineAnalysis line="207" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="208" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var defs = MemoryMarshal.Cast&lt;byte, PatchTypeDefEntry&gt;(" />
+      <LineAnalysis line="209" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            bytes.AsSpan((int)hdr.type_def_offset, (int)hdr.type_def_count * 22));" />
+      <LineAnalysis line="210" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="211" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var max = Math.Min(defs.Length, 15);" />
+      <LineAnalysis line="212" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        for (int i = 0; i &lt; max; i++)" />
+      <LineAnalysis line="213" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="214" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ref readonly var d = ref defs[i];" />
+      <LineAnalysis line="215" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var name = ReadString(bytes, hdr.string_heap_offset, d.type_name_offset);" />
+      <LineAnalysis line="216" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var ns = ReadString(bytes, hdr.string_heap_offset, d.namespace_offset);" />
+      <LineAnalysis line="217" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var fullName = string.IsNullOrEmpty(ns) ? name : $&quot;{ns}.{name}&quot;;" />
+      <LineAnalysis line="218" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  [{i,2}] token=0x{d.token:X8}  {fullName}&quot;);" />
+      <LineAnalysis line="219" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="220" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (defs.Length &gt; 15)" />
+      <LineAnalysis line="221" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  ... and {defs.Length - 15} more&quot;);" />
+      <LineAnalysis line="222" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="223" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="224" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static void DumpMethodDefs(byte[] bytes, ref readonly FileHeader hdr, TextWriter w)" />
+      <LineAnalysis line="225" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="226" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (hdr.method_def_count == 0) { w.WriteLine(&quot;  (none)&quot;); return; }" />
+      <LineAnalysis line="227" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="228" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var defs = MemoryMarshal.Cast&lt;byte, PatchMethodDefEntry&gt;(" />
+      <LineAnalysis line="229" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            bytes.AsSpan((int)hdr.method_def_offset, (int)hdr.method_def_count * 28));" />
+      <LineAnalysis line="230" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="231" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var max = Math.Min(defs.Length, 20);" />
+      <LineAnalysis line="232" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        for (int i = 0; i &lt; max; i++)" />
+      <LineAnalysis line="233" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="234" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ref readonly var d = ref defs[i];" />
+      <LineAnalysis line="235" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var name = ReadString(bytes, hdr.string_heap_offset, d.name_offset);" />
+      <LineAnalysis line="236" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var hasBody = d.body_size &gt; 0 ? &quot;body&quot; : &quot;no-body&quot;;" />
+      <LineAnalysis line="237" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  [{i,2}] token=0x{d.token:X8}  \&quot;{name}\&quot;  body={d.body_size,5}B  ({hasBody})&quot;);" />
+      <LineAnalysis line="238" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="239" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (defs.Length &gt; 20)" />
+      <LineAnalysis line="240" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            w.WriteLine($&quot;  ... and {defs.Length - 20} more&quot;);" />
+      <LineAnalysis line="241" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="242" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="243" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static string ReadString(byte[] bytes, uint heapOffset, uint strOffset)" />
+      <LineAnalysis line="244" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="245" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (strOffset == 0) return &quot;&quot;;" />
+      <LineAnalysis line="246" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var pos = (int)(heapOffset + strOffset);" />
+      <LineAnalysis line="247" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        if (pos &gt;= bytes.Length) return &quot;&quot;;" />
+      <LineAnalysis line="248" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var end = pos;" />
+      <LineAnalysis line="249" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        while (end &lt; bytes.Length &amp;&amp; bytes[end] != 0) end++;" />
+      <LineAnalysis line="250" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return Encoding.UTF8.GetString(bytes, pos, end - pos);" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="252" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="253" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static uint PatchData_TotalSize(ref readonly FileHeader hdr)" />
+      <LineAnalysis line="254" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="255" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        uint sectionEnd = hdr.body_data_offset + hdr.body_data_size;" />
+      <LineAnalysis line="256" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        uint irEnd = hdr.aot_core_ir_offset + hdr.aot_core_ir_size;" />
+      <LineAnalysis line="257" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        uint regIrEnd = hdr.reg_ir_offset + hdr.reg_ir_size;" />
+      <LineAnalysis line="258" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        uint maxEnd = irEnd &gt; sectionEnd ? irEnd : sectionEnd;" />
+      <LineAnalysis line="259" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return regIrEnd &gt; maxEnd ? regIrEnd : maxEnd;" />
+      <LineAnalysis line="260" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="261" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="262" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Matching layout in patch_data.h ──────────────────────────────" />
+      <LineAnalysis line="263" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="264" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [StructLayout(LayoutKind.Sequential, Pack = 1)]" />
+      <LineAnalysis line="265" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private readonly struct FileHeader" />
+      <LineAnalysis line="266" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="267" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint magic;" />
+      <LineAnalysis line="268" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint version;" />
+      <LineAnalysis line="269" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint header_size;" />
+      <LineAnalysis line="270" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint string_heap_offset;" />
+      <LineAnalysis line="271" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint string_heap_size;" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint blob_heap_offset;" />
+      <LineAnalysis line="273" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint blob_heap_size;" />
+      <LineAnalysis line="274" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint user_string_heap_offset;" />
+      <LineAnalysis line="275" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint user_string_heap_size;" />
+      <LineAnalysis line="276" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint assembly_ref_offset;" />
+      <LineAnalysis line="277" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint assembly_ref_count;" />
+      <LineAnalysis line="278" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint type_ref_offset;" />
+      <LineAnalysis line="279" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint type_ref_count;" />
+      <LineAnalysis line="280" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint type_def_offset;" />
+      <LineAnalysis line="281" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint type_def_count;" />
+      <LineAnalysis line="282" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint field_def_offset;" />
+      <LineAnalysis line="283" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint field_def_count;" />
+      <LineAnalysis line="284" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint method_def_offset;" />
+      <LineAnalysis line="285" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint method_def_count;" />
+      <LineAnalysis line="286" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint member_ref_offset;" />
+      <LineAnalysis line="287" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint member_ref_count;" />
+      <LineAnalysis line="288" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint standalone_sig_offset;" />
+      <LineAnalysis line="289" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint standalone_sig_count;" />
+      <LineAnalysis line="290" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint body_data_offset;" />
+      <LineAnalysis line="291" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint body_data_size;" />
+      <LineAnalysis line="292" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint aot_core_ir_offset;" />
+      <LineAnalysis line="293" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint aot_core_ir_size;" />
+      <LineAnalysis line="294" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint aot_core_ir_count;" />
+      <LineAnalysis line="295" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint reg_ir_offset;" />
+      <LineAnalysis line="296" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint reg_ir_size;" />
+      <LineAnalysis line="297" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint reg_ir_count;" />
+      <LineAnalysis line="298" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="299" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="300" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [StructLayout(LayoutKind.Sequential, Pack = 1)]" />
+      <LineAnalysis line="301" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private readonly struct PatchMethodDefEntry" />
+      <LineAnalysis line="302" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="303" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint name_offset;" />
+      <LineAnalysis line="304" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint signature_offset;" />
+      <LineAnalysis line="305" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint body_offset;" />
+      <LineAnalysis line="306" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint body_size;" />
+      <LineAnalysis line="307" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint declaring_type_token;" />
+      <LineAnalysis line="308" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint token;" />
+      <LineAnalysis line="309" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly ushort impl_flags;" />
+      <LineAnalysis line="310" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly ushort flags;" />
+      <LineAnalysis line="311" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="312" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="313" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [StructLayout(LayoutKind.Sequential, Pack = 1)]" />
+      <LineAnalysis line="314" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private readonly struct PatchTypeDefEntry" />
+      <LineAnalysis line="315" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="316" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint type_name_offset;" />
+      <LineAnalysis line="317" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint namespace_offset;" />
+      <LineAnalysis line="318" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint enclosing_type_token;" />
+      <LineAnalysis line="319" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint extends_token;" />
+      <LineAnalysis line="320" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly uint token;" />
+      <LineAnalysis line="321" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public readonly ushort flags;" />
+      <LineAnalysis line="322" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="323" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

@@ -1,0 +1,228 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionFieldPropertySubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33",
+          "subjectId": "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "ReflectionFieldPropertySubjects_AutoGeneratedProgram_Main_System_String",
+          "subjectId": "ReflectionFieldPropertySubjects/AutoGeneratedProgram::Main:System.Void(System.String[])"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "ReflectionFieldPropertySubjects_AutoGeneratedProgram__ctor",
+          "subjectId": "ReflectionFieldPropertySubjects/AutoGeneratedProgram::.ctor:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.InliningPlanner">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.InliningPlanner</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Planning\InliningPlanner.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>76</Uncoveredlines>
+    <Coverablelines>76</Coverablelines>
+    <Totallines>211</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>108</Totalbranches>
+    <Branchcoverage>0</Branchcoverage>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>9</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ctor">
+      <Cyclomaticcomplexity>1</Cyclomaticcomplexity>
+      <NPathcomplexity>1</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>100</Branchcoverage>
+    </Element>
+    <Element name="EstimateInstructionWeight">
+      <Cyclomaticcomplexity>86</Cyclomaticcomplexity>
+      <NPathcomplexity>86</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="EvaluateInline">
+      <Cyclomaticcomplexity>6</Cyclomaticcomplexity>
+      <NPathcomplexity>6</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="ClassifySection">
+      <Cyclomaticcomplexity>4</Cyclomaticcomplexity>
+      <NPathcomplexity>4</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="ClassifySectionByStaticHeuristic">
+      <Cyclomaticcomplexity>4</Cyclomaticcomplexity>
+      <NPathcomplexity>4</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="GetSectionPragma">
+      <Cyclomaticcomplexity>4</Cyclomaticcomplexity>
+      <NPathcomplexity>4</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="GetSectionAttribute">
+      <Cyclomaticcomplexity>4</Cyclomaticcomplexity>
+      <NPathcomplexity>4</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\Planning\InliningPlanner.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Collections.Generic;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Inlining budget model and hot/cold classification for generated C++ methods." />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Provides two services:" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///   1. Inline budget analysis — determines whether a callee is cheap enough" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///      to inline at the call site based on IR instruction count and complexity." />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///   2. Hot/cold classification — classifies methods as hot (frequently called)," />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///      warm (moderate), or cold (rare) so the emitter can group them into" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///      separate linker sections (.text$hot / .text$cold) for better i-cache" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///      locality." />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Design principles:" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///   - Budget is conservative: under-estimating inlining is safer than over-" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///     estimating (avoids code bloat and compile-time explosions)." />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///   - Classification is based on call-count thresholds from tiering data," />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///     or static heuristics when profiling data is unavailable." />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="///   - Recursive calls are always excluded from inlining." />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;/summary&gt;" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal sealed class InliningPlanner" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Budget thresholds ──────────────────────────────────────────────" />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // Inline a callee only when:" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    //   - Its IR instruction count ≤ kMaxInlineInstructionCount AND" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    //   - Its IR count ≤ kMaxInlineCallerFraction * caller_instruction_count" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    //" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // These are conservative defaults tuned for the interpreter IR size." />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // Typical managed methods compile to 5-20 IR instructions; raising" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // beyond 16 without profiling risks code-bloat regressions." />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;Max callee IR instructions for inlining (hard cap).&lt;/summary&gt;" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const int kMaxInlineInstructionCount = 16;" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Max callee size as a fraction of caller size (e.g., 0.30f means" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// callee must be ≤ 30% of caller's IR instruction count)." />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const float kMaxInlineCallerFraction = 0.30f;" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Hot/cold thresholds ────────────────────────────────────────────" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // Methods with estimated call count exceeding these thresholds are" />
+      <LineAnalysis line="46" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // classified into temperature bands for code-section assignment." />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Minimum estimated call count to classify a method as hot." />
+      <LineAnalysis line="50" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Methods above this threshold get .text$hot section placement." />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const int kHotCallThreshold = 100;" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Maximum estimated call count for a method to be classified as cold." />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Methods at or below this threshold get .text$cold section placement" />
+      <LineAnalysis line="57" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// or no special placement (default .text)." />
+      <LineAnalysis line="58" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const int kColdCallThreshold = 10;" />
+      <LineAnalysis line="60" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="61" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Section names ──────────────────────────────────────────────────" />
+      <LineAnalysis line="62" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const string SectionHot  = &quot;.text$hot&quot;;" />
+      <LineAnalysis line="63" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const string SectionWarm = &quot;.text$warm&quot;;" />
+      <LineAnalysis line="64" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal const string SectionCold = &quot;.text$cold&quot;;" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="66" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Inline candidate result ────────────────────────────────────────" />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    internal sealed record InlineCandidate" />
+      <LineAnalysis line="68" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;true when the callee qualifies for inlining.&lt;/summary&gt;" />
+      <LineAnalysis line="70" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public bool CanInline { get; init; }" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="72" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        /// &lt;summary&gt;Reason for the decision (diagnostic only).&lt;/summary&gt;" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public string Reason { get; init; } = &quot;&quot;;" />
+      <LineAnalysis line="74" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="75" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="76" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Complexity analysis ────────────────────────────────────────────" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // Rough estimate of per-instruction &quot;weight&quot; for different opcode" />
+      <LineAnalysis line="78" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // families. A method with many call/throw/complex instructions is" />
+      <LineAnalysis line="79" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // less profitable to inline even if the raw count is low." />
+      <LineAnalysis line="80" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="81" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static int EstimateInstructionWeight(string opCode)" />
+      <LineAnalysis line="82" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="86" content="        return opCode switch" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;call&quot;       or &quot;callvirt&quot;   =&gt; 3,  // call site — indirect cost" />
+      <LineAnalysis line="86" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;calli&quot;      or &quot;cpblk&quot;" />
+      <LineAnalysis line="87" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                or &quot;initblk&quot;             =&gt; 4,  // expensive runtime helpers" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;throw&quot;      or &quot;rethrow&quot;    =&gt; 5,  // exceptional path" />
+      <LineAnalysis line="89" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;switch&quot;                     =&gt; 3,  // multi-branch" />
+      <LineAnalysis line="90" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;newobj&quot;     or &quot;box&quot;" />
+      <LineAnalysis line="91" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                or &quot;unbox&quot;               =&gt; 2,  // allocation path" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;ldelem&quot;     or &quot;stelem&quot;" />
+      <LineAnalysis line="93" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                or &quot;ldelema&quot;             =&gt; 2,  // bounds-checked access" />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;ldfld&quot;      or &quot;stfld&quot;" />
+      <LineAnalysis line="95" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                or &quot;ldsfld&quot; or &quot;stsfld&quot;  =&gt; 1,  // simple field access" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _                            =&gt; 1,  // default weight" />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="98" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="99" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="100" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Evaluate whether &lt;paramref name=&quot;calleeInstructionCount&quot;/&gt; IR" />
+      <LineAnalysis line="102" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// instructions should be inlined into a caller with" />
+      <LineAnalysis line="103" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;paramref name=&quot;callerInstructionCount&quot;/&gt; instructions." />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static InlineCandidate EvaluateInline(" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int calleeInstructionCount," />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int callerInstructionCount," />
+      <LineAnalysis line="108" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        bool isRecursive," />
+      <LineAnalysis line="109" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int calleeEstimatedComplexity = -1)" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="111" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (isRecursive)" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="113" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new InlineCandidate" />
+      <LineAnalysis line="114" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                CanInline = false," />
+      <LineAnalysis line="116" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Reason = &quot;recursive call — excluded from inlining&quot;" />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            };" />
+      <LineAnalysis line="118" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="120" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (calleeInstructionCount &gt; kMaxInlineInstructionCount)" />
+      <LineAnalysis line="121" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="122" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new InlineCandidate" />
+      <LineAnalysis line="123" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="124" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                CanInline = false," />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Reason = $&quot;callee size ({calleeInstructionCount}) exceeds max inline count ({kMaxInlineInstructionCount})&quot;" />
+      <LineAnalysis line="126" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            };" />
+      <LineAnalysis line="127" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="128" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="129" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        float fraction = (float)calleeInstructionCount / Math.Max(callerInstructionCount, 1);" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (fraction &gt; kMaxInlineCallerFraction)" />
+      <LineAnalysis line="131" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="132" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return new InlineCandidate" />
+      <LineAnalysis line="133" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                CanInline = false," />
+      <LineAnalysis line="135" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                Reason = $&quot;callee/caller ratio ({fraction:F2}) exceeds max ({kMaxInlineCallerFraction})&quot;" />
+      <LineAnalysis line="136" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            };" />
+      <LineAnalysis line="137" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="139" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return new InlineCandidate" />
+      <LineAnalysis line="140" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="141" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            CanInline = true," />
+      <LineAnalysis line="142" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            Reason = &quot;within budget&quot;" />
+      <LineAnalysis line="143" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="144" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="145" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="146" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── Hot/cold classification ────────────────────────────────────────" />
+      <LineAnalysis line="147" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="148" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="149" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Section name for a method given its estimated call count." />
+      <LineAnalysis line="150" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="151" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static string ClassifySection(int estimatedCallCount)" />
+      <LineAnalysis line="152" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="153" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (estimatedCallCount &gt;= kHotCallThreshold)" />
+      <LineAnalysis line="154" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return SectionHot;" />
+      <LineAnalysis line="155" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (estimatedCallCount &lt;= kColdCallThreshold)" />
+      <LineAnalysis line="156" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return SectionCold;" />
+      <LineAnalysis line="157" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return SectionWarm;" />
+      <LineAnalysis line="158" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="161" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Classify a method as hot based on static heuristics (e.g., it's" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// an entry point, a frequently-used accessor, or explicitly marked)." />
+      <LineAnalysis line="163" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="164" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static string ClassifySectionByStaticHeuristic(" />
+      <LineAnalysis line="165" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string subjectId," />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        bool isEntryPoint," />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        int instructionCount)" />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="169" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Entry points are always hot." />
+      <LineAnalysis line="170" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (isEntryPoint)" />
+      <LineAnalysis line="171" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return SectionHot;" />
+      <LineAnalysis line="172" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="173" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Very small methods (getters, simple calcs) are warm+." />
+      <LineAnalysis line="174" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (instructionCount &lt;= 5)" />
+      <LineAnalysis line="175" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return SectionWarm;" />
+      <LineAnalysis line="176" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Default: cold." />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return SectionCold;" />
+      <LineAnalysis line="179" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="180" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="181" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="182" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Get the MSVC `#pragma code_seg` directive for a section name." />
+      <LineAnalysis line="183" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Returns empty string for the default .text section." />
+      <LineAnalysis line="184" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static string GetSectionPragma(string sectionName)" />
+      <LineAnalysis line="186" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="187" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="        if (string.IsNullOrEmpty(sectionName) || sectionName == &quot;.text&quot;)" />
+      <LineAnalysis line="188" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return &quot;&quot;;" />
+      <LineAnalysis line="189" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // MSVC: #pragma code_seg(&quot;.text$hot&quot;)" />
+      <LineAnalysis line="191" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // GCC/Clang: __attribute__((hot)) — we emit both for compatibility." />
+      <LineAnalysis line="192" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // The MSVC pragma is linker-section-scoped; __attribute__ is hint-only." />
+      <LineAnalysis line="193" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return $&quot;#pragma code_seg(\&quot;{sectionName}\&quot;)&quot;;" />
+      <LineAnalysis line="194" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="195" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="196" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;summary&gt;" />
+      <LineAnalysis line="197" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// Get a C++ `__declspec` or `__attribute__` for the section." />
+      <LineAnalysis line="198" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// MSVC uses `__declspec(allocate(&quot;.text$hot&quot;))` for data;" />
+      <LineAnalysis line="199" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// for code, `#pragma code_seg` is the standard approach." />
+      <LineAnalysis line="200" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// This returns the attribute form for GCC/Clang compatibility." />
+      <LineAnalysis line="201" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    /// &lt;/summary&gt;" />
+      <LineAnalysis line="202" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    internal static string GetSectionAttribute(string sectionName)" />
+      <LineAnalysis line="203" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="204" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="        return sectionName switch" />
+      <LineAnalysis line="205" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="206" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            SectionHot  =&gt; &quot; __attribute__((hot))&quot;," />
+      <LineAnalysis line="207" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            SectionCold =&gt; &quot; __attribute__((cold))&quot;," />
+      <LineAnalysis line="208" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _           =&gt; &quot;&quot;," />
+      <LineAnalysis line="209" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="210" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="211" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

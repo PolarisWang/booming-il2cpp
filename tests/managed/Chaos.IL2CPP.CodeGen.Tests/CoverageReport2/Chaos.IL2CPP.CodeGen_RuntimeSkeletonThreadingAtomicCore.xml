@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingAtomicCore">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.RuntimeSkeletonThreadingAtomicCore</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonThreadingAtomicCore.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>208</Uncoveredlines>
+    <Coverablelines>208</Coverablelines>
+    <Totallines>298</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>141</Totalbranches>
+    <Branchcoverage>0</Branchcoverage>
+    <Coveredmethods>0</Coveredmethods>
+    <Fullcoveredmethods>0</Fullcoveredmethods>
+    <Totalmethods>5</Totalmethods>
+    <Methodcoverage>0</Methodcoverage>
+    <Fullmethodcoverage>0</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="TryBuild">
+      <Cyclomaticcomplexity>6</Cyclomaticcomplexity>
+      <NPathcomplexity>6</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="TryClassifyAtomicMethod">
+      <Cyclomaticcomplexity>54</Cyclomaticcomplexity>
+      <NPathcomplexity>54</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="ExtractReturnType">
+      <Cyclomaticcomplexity>4</Cyclomaticcomplexity>
+      <NPathcomplexity>4</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="ToCppType">
+      <Cyclomaticcomplexity>54</Cyclomaticcomplexity>
+      <NPathcomplexity>54</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="TryBuildAtomicStatements">
+      <Cyclomaticcomplexity>23</Cyclomaticcomplexity>
+      <NPathcomplexity>23</NPathcomplexity>
+      <Sequencecoverage>0</Sequencecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\src\managed\Chaos.IL2CPP.CodeGen\ReferenceProof\RuntimeSkeletonThreadingAtomicCore.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Scriban.Runtime;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="internal static class RuntimeSkeletonThreadingAtomicCore" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private const string AtomicContractId = &quot;threading-atomic-v1&quot;;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static bool TryBuild(" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        TypedIlMethodArtifact method," />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string stubName," />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out string stub)" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        stub = string.Empty;" />
+      <LineAnalysis line="16" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="        if (!TryClassifyAtomicMethod(method.SubjectId, out var operation, out var managedType) ||" />
+      <LineAnalysis line="17" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            !TryBuildAtomicStatements(operation, managedType, out var statements))" />
+      <LineAnalysis line="18" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="19" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return false;" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        var model = new ScriptObject" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            [&quot;stub_name&quot;] = stubName," />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            [&quot;contract_id&quot;] = AtomicContractId," />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            [&quot;atomic_statements&quot;] = statements," />
+      <LineAnalysis line="27" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            [&quot;return_managed_type&quot;] = managedType ?? &quot;System.Void&quot;," />
+      <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="29" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        stub = ScribanTemplateRenderer.RenderTemplate(" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            ScribanTemplateRenderer.LoadTemplate(NativeReferenceProofCatalog.RuntimeSkeletonThreadingAtomicStubTemplateRelativePath)," />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            model);" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return true;" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private enum AtomicOperation" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Increment," />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Decrement," />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Add," />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Exchange," />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        CompareExchange," />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        And," />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Or," />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Read," />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        Write," />
+      <LineAnalysis line="46" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        MemoryBarrier," />
+      <LineAnalysis line="47" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="48" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="49" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool TryClassifyAtomicMethod(string subjectId, out AtomicOperation operation, out string? managedType)" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        operation = default;" />
+      <LineAnalysis line="52" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        managedType = null;" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="54" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Increment&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="55" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Increment;" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="            return managedType is &quot;System.Int32&quot; or &quot;System.Int64&quot;;" />
+      <LineAnalysis line="59" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Decrement&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Decrement;" />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="            return managedType is &quot;System.Int32&quot; or &quot;System.Int64&quot;;" />
+      <LineAnalysis line="65" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Add&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Add;" />
+      <LineAnalysis line="69" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="70" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="8" content="            return managedType is &quot;System.Int32&quot; or &quot;System.Int64&quot; or &quot;System.UInt32&quot; or &quot;System.UInt64&quot;;" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="72" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Exchange&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Exchange;" />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="77" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::CompareExchange&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.CompareExchange;" />
+      <LineAnalysis line="81" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="82" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="83" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::And&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="85" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="86" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.And;" />
+      <LineAnalysis line="87" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="88" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="8" content="            return managedType is &quot;System.Int32&quot; or &quot;System.Int64&quot; or &quot;System.UInt32&quot; or &quot;System.UInt64&quot;;" />
+      <LineAnalysis line="89" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="90" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Or&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="91" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Or;" />
+      <LineAnalysis line="93" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="8" content="            return managedType is &quot;System.Int32&quot; or &quot;System.Int64&quot; or &quot;System.UInt32&quot; or &quot;System.UInt64&quot;;" />
+      <LineAnalysis line="95" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::Read&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="98" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Read;" />
+      <LineAnalysis line="99" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = &quot;System.Int64&quot;;" />
+      <LineAnalysis line="100" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="101" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="102" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Interlocked::MemoryBarrier&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="103" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="104" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.MemoryBarrier;" />
+      <LineAnalysis line="105" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = &quot;System.Void&quot;;" />
+      <LineAnalysis line="106" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="108" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Volatile::Read&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="109" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Read;" />
+      <LineAnalysis line="111" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return true;" />
+      <LineAnalysis line="113" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="114" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (subjectId.Contains(&quot;/System.Threading.Volatile::Write&quot;, StringComparison.Ordinal))" />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="116" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            operation = AtomicOperation.Write;" />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            managedType = ExtractReturnType(subjectId);" />
+      <LineAnalysis line="118" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return managedType is not null;" />
+      <LineAnalysis line="119" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="120" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="121" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return false;" />
+      <LineAnalysis line="122" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="123" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static string? ExtractReturnType(string subjectId)" />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="126" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var paramStart = subjectId.IndexOf('(', StringComparison.Ordinal);" />
+      <LineAnalysis line="127" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (paramStart &lt; 0) return null;" />
+      <LineAnalysis line="128" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var returnStart = subjectId.LastIndexOf(':', paramStart - 1);" />
+      <LineAnalysis line="129" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="        if (returnStart &lt; 0) return null;" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        return subjectId[(returnStart + 1)..paramStart];" />
+      <LineAnalysis line="131" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="132" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="133" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static string ToCppType(string managedType)" />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="135" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="50" content="        return managedType switch" />
+      <LineAnalysis line="136" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="137" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int32&quot; =&gt; &quot;CHAOS_IL2CPP_INT32&quot;," />
+      <LineAnalysis line="138" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt32&quot; =&gt; &quot;CHAOS_IL2CPP_UINT32&quot;," />
+      <LineAnalysis line="139" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Int64&quot; =&gt; &quot;CHAOS_IL2CPP_INT64&quot;," />
+      <LineAnalysis line="140" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UInt64&quot; =&gt; &quot;CHAOS_IL2CPP_UINT64&quot;," />
+      <LineAnalysis line="141" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.IntPtr&quot; =&gt; &quot;CHAOS_IL2CPP_INTPTR&quot;," />
+      <LineAnalysis line="142" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.UIntPtr&quot; =&gt; &quot;CHAOS_IL2CPP_UINTPTR&quot;," />
+      <LineAnalysis line="143" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Single&quot; =&gt; &quot;CHAOS_IL2CPP_FLOAT32&quot;," />
+      <LineAnalysis line="144" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Double&quot; =&gt; &quot;CHAOS_IL2CPP_FLOAT64&quot;," />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Void&quot; =&gt; &quot;void&quot;," />
+      <LineAnalysis line="146" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Boolean&quot; =&gt; &quot;bool&quot;," />
+      <LineAnalysis line="147" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;System.Object&quot; =&gt; &quot;void*&quot;," />
+      <LineAnalysis line="148" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            _ when managedType.EndsWith(&quot;&amp;&quot;, StringComparison.Ordinal) =&gt; ToCppType(managedType[..^1])," />
+      <LineAnalysis line="149" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            _ when managedType.EndsWith(&quot;*&quot;, StringComparison.Ordinal) =&gt; ToCppType(managedType[..^1])," />
+      <LineAnalysis line="150" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            _ =&gt; &quot;void*&quot;," />
+      <LineAnalysis line="151" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="152" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="153" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="154" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    private static bool TryBuildAtomicStatements(" />
+      <LineAnalysis line="155" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        AtomicOperation operation," />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        string? managedType," />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        out string statements)" />
+      <LineAnalysis line="158" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="159" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        statements = string.Empty;" />
+      <LineAnalysis line="160" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="161" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="11" content="        switch (operation)" />
+      <LineAnalysis line="162" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="163" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.MemoryBarrier:" />
+      <LineAnalysis line="164" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = &quot;std::atomic_thread_fence(std::memory_order_seq_cst);&quot;;" />
+      <LineAnalysis line="165" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="166" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="167" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Increment:" />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="169" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="170" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="                if (managedType == &quot;System.Int64&quot; || managedType == &quot;System.UInt64&quot;)" />
+      <LineAnalysis line="171" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="172" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="173" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_add(1, std::memory_order_seq_cst) + 1;\n&quot; +" />
+      <LineAnalysis line="174" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="175" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="176" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="177" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="179" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="180" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_add(1, std::memory_order_seq_cst) + 1;\n&quot; +" />
+      <LineAnalysis line="181" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="182" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="183" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="184" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="186" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="187" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Decrement:" />
+      <LineAnalysis line="188" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="189" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="190" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="                if (managedType == &quot;System.Int64&quot; || managedType == &quot;System.UInt64&quot;)" />
+      <LineAnalysis line="191" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="192" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="193" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_sub(1, std::memory_order_seq_cst) - 1;\n&quot; +" />
+      <LineAnalysis line="194" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="195" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="196" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="197" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="199" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="200" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_sub(1, std::memory_order_seq_cst) - 1;\n&quot; +" />
+      <LineAnalysis line="201" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="202" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="203" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="204" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="205" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="206" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="207" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Add:" />
+      <LineAnalysis line="208" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="209" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="210" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="                if (managedType == &quot;System.Int64&quot; || managedType == &quot;System.UInt64&quot;)" />
+      <LineAnalysis line="211" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="212" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="213" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto value = *static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="214" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_add(value, std::memory_order_seq_cst) + value;\n&quot; +" />
+      <LineAnalysis line="215" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="216" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="217" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="218" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="                else" />
+      <LineAnalysis line="219" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                {" />
+      <LineAnalysis line="220" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                    statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="221" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto value = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="222" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    auto result = ptr-&gt;fetch_add(value, std::memory_order_seq_cst) + value;\n&quot; +" />
+      <LineAnalysis line="223" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="224" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                                $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="225" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                }" />
+      <LineAnalysis line="226" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="227" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="228" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="229" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Exchange:" />
+      <LineAnalysis line="230" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="231" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="232" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="233" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto value = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="234" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto result = ptr-&gt;exchange(value, std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="235" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="236" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="237" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="238" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="239" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="240" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.CompareExchange:" />
+      <LineAnalysis line="241" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="242" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="243" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="244" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto expected = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="245" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto desired = *static_cast&lt;{cppType}*&gt;(request-&gt;arg2);\n&quot; +" />
+      <LineAnalysis line="246" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto result = ptr-&gt;compare_exchange_strong(expected, desired, std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="247" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result ? expected : ptr-&gt;load();\n&quot; +" />
+      <LineAnalysis line="248" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="249" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="250" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="252" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.And:" />
+      <LineAnalysis line="253" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="254" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="255" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="256" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto value = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="257" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto result = ptr-&gt;fetch_and(value, std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="258" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result &amp; value;\n&quot; +" />
+      <LineAnalysis line="259" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="260" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="261" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="262" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="263" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Or:" />
+      <LineAnalysis line="264" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="265" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="266" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="267" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto value = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="268" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto result = ptr-&gt;fetch_or(value, std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="269" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result | value;\n&quot; +" />
+      <LineAnalysis line="270" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="271" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="273" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="274" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Read:" />
+      <LineAnalysis line="275" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="276" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="277" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="278" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto result = ptr-&gt;load(std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="279" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    *static_cast&lt;{cppType}*&gt;(request-&gt;return_value) = result;\n&quot; +" />
+      <LineAnalysis line="280" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="281" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="282" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="283" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="284" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            case AtomicOperation.Write:" />
+      <LineAnalysis line="285" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="286" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var cppType = ToCppType(managedType!);" />
+      <LineAnalysis line="287" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                statements = $&quot;auto* ptr = static_cast&lt;CHAOS_IL2CPP_ATOMIC({cppType})*&gt;(request-&gt;arg0);\n&quot; +" />
+      <LineAnalysis line="288" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    auto value = *static_cast&lt;{cppType}*&gt;(request-&gt;arg1);\n&quot; +" />
+      <LineAnalysis line="289" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    ptr-&gt;store(value, std::memory_order_seq_cst);\n&quot; +" />
+      <LineAnalysis line="290" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                            $&quot;    return CHAOS_BRIDGE_STATUS_OK;&quot;;" />
+      <LineAnalysis line="291" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return true;" />
+      <LineAnalysis line="292" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="293" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="294" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            default:" />
+      <LineAnalysis line="295" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                return false;" />
+      <LineAnalysis line="296" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="297" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="298" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

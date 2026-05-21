@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -550,22 +551,22 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[16] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[16] = {
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_1
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_2
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_3
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_4
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects::Subject_5
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects::Subject_6
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects::Subject_7
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_0
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects::Subject_8
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects::Subject_9
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // DelegateCoreInvocationSubjects+<>c::.cctor
-	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DelegateCoreInvocationSubjects+<>c::.ctor
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_0
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_1
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_2
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_0
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_3
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_0
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_4
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_0
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_5
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_6
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_7
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_0
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_8
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects::Subject_9
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::.cctor
+	{ reinterpret_cast<void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DelegateCoreInvocationSubjects+<>c::.ctor
 };
 
 // Module hotpatch bundle
@@ -648,7 +649,52 @@ static void (*kAotMethods[16])() = {
 	reinterpret_cast<void(*)()>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor),
 };
 
+// ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
+// Each wrapper supplies default argument values based on parameter types.
+// String params receive a valid StringId; all others receive 0.
+// Instance methods receive a sentinel this-pointer so they don't crash on null.
+static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
+extern "C" void (*kBenchmarkWrappers[16])() = {
+	[]() {kAotMethods[0]();},
+	[]() {kAotMethods[1]();},
+	[]() {kAotMethods[2]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[3])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[4]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[5])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[6]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[7])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[8]();},
+	[]() {kAotMethods[9]();},
+	[]() {kAotMethods[10]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[12]();},
+	[]() {kAotMethods[13]();},
+	[]() {kAotMethods[14]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[15])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 10;
+extern "C" const int kSubjectEntryIndices[10] = {
+	0,
+	1,
+	2,
+	4,
+	6,
+	8,
+	9,
+	10,
+	12,
+	13,
+};
+
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -662,10 +708,276 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
 			entry.method_key, __chaos_args, __chaos_ret);
 	} else {
-		kAotMethods[chaos_entry_index]();
+		kBenchmarkWrappers[chaos_entry_index]();
 	}
 	return 0;
 }
+
+// All-methods loop: run every method and return a bitmask of failures.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
+{
+	CHAOS_IL2CPP_INT32 result = 0;
+	for (int i = 0; i < kAotMethodCount; i++) {
+		auto& entry = s_hotpatch_entries[i];
+		if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+			&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+		{
+			uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
+			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				entry.method_key, __chaos_args, __chaos_ret);
+		} else {
+			// Use kBenchmarkWrappers which supply correct default argument values
+			kBenchmarkWrappers[i]();
+		}
+	}
+	return result;
+}
+
+// Fast benchmark dispatch: no setjmp, inline slot access.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
+	CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+		return -1;
+	auto& entry = s_hotpatch_entries[chaos_entry_index];
+	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
+		&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
+	{
+		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
+			entry.method_key);
+	} else {
+		kBenchmarkWrappers[chaos_entry_index]();
+	}
+	return 0;
+}
+
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
+extern "C" double BenchmarkMethod(
+	int chaos_entry_index, int iterations) {
+	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+		return -1.0;
+	auto start = std::chrono::steady_clock::now();
+	for (int i = 0; i < iterations; i++) {
+		kBenchmarkWrappers[chaos_entry_index]();
+	}
+	auto end = std::chrono::steady_clock::now();
+	return std::chrono::duration<double, std::milli>(
+		end - start).count();
+}
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry0;
+	/* ── Entry 1: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry1;
+	/* ── Entry 2: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry2;
+	/* ── Entry 3: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry3;
+	/* ── Entry 4: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry4;
+	/* ── Entry 5: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry5;
+	/* ── Entry 6: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry6;
+	/* ── Entry 7: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry7;
+	/* ── Entry 8: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry8;
+	/* ── Entry 9: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry9;
+	/* ── Entry 10: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry10;
+	/* ── Entry 11: DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry11;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0 */
+	.entry0 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry1 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1 */
+	.entry1 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry2 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2 */
+	.entry2 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry3 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0 */
+	.entry3 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry4 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3 */
+	.entry4 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry5 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0 */
+	.entry5 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry6 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4 */
+	.entry6 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry7 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0 */
+	.entry7 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry8 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7 */
+	.entry8 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry9 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0 */
+	.entry9 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry10 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor */
+	.entry10 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry11 = DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor */
+	.entry11 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 348u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[16] = {
@@ -719,6 +1031,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
 	.vtable_descriptor_count = 1u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -842,15 +1157,13 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 	CHAOS_IL2CPP_INTPTR _s4{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Combine_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_delegate_combine(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -858,111 +1171,16 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				auto chaos_value = _s0;
 				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = 0;
-			_s1 = 0;
-			{
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Combine_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = 0;
-			_s1 = 0;
-			{
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Combine_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+	CHAOS_EH_END
 	return;
 }
 
@@ -978,15 +1196,13 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 	CHAOS_IL2CPP_INTPTR _s4{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Remove_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_delegate_remove(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -994,111 +1210,16 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				auto chaos_value = _s0;
 				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s0 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			_s0 = 0;
-			_s1 = 0;
-			{
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Remove_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			_s0 = 0;
-			_s1 = 0;
-			{
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Delegate__Remove_System_Delegate_System_Delegate_System_Delegate_(chaos_arg_0, chaos_arg_1);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+	CHAOS_EH_END
 	return;
 }
 
@@ -1119,9 +1240,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 	CHAOS_IL2CPP_INTPTR _s9{};
 
 
-#if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	try
-	{
+	CHAOS_EH_TRY
 			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
 			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0;
 			_s1 = _s0;
@@ -1179,199 +1298,16 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 					chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
 				}
 			}
-	}
-	catch (const chaos_managed_exception& chaos_exception)
-	{
-		if (chaos_exception.object_value < 0) { throw; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_exception.object_value);
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				throw;
-			}
+			{ CHAOS_EH_RETHROW; }
 		}
-		_s1 = chaos_exception.object_value;
-	}
-#elif defined(CHAOS_IL2CPP_EH_WIN32_SEH)
-	__try
-	{
-			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0;
-			_s1 = _s0;
-			{
-				if (_s1 == 0)
-				{
-					chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-					_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
-					{
-						// Hotpatch-aware ldftn wrapper (slot 3)
-						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-							auto& _d_entry = s_hotpatch_entries[3];
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-							{
-								alignas(16) uint8_t _d_ab[8];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d_entry.method_key, _d_ab, nullptr);
-								return;
-							}
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-						};
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-					}
-					{
-						const auto chaos_method_ptr = _s1;
-						const auto chaos_target = _s0;
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-						chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
-						chaos_object->chaos_delegate_target = chaos_target;
-						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					_s1 = _s0;
-					{
-						auto chaos_value = _s1;
-					chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-						chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0 = chaos_value;
-					}
-				}
-				{
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				{
-					const auto chaos_arg_0 = _s1;
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s1;
-					chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-				}
-			}
-	}
-		__except(CHAOS_SEH_FILTER_ALL())
-	{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-	}
-#else
-	{
-		auto* _chaos_jmp =
-			chaos::il2cpp::runtime_core::push_exception_jmp_buf();
-		if (setjmp(*_chaos_jmp) == 0)
-		{
-			chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-			_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0;
-			_s1 = _s0;
-			{
-				if (_s1 == 0)
-				{
-					chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-					_s0 = chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9;
-					{
-						// Hotpatch-aware ldftn wrapper (slot 3)
-						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-							auto& _d_entry = s_hotpatch_entries[3];
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-							{
-								alignas(16) uint8_t _d_ab[8];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d_entry.method_key, _d_ab, nullptr);
-								return;
-							}
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-						};
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-					}
-					{
-						const auto chaos_method_ptr = _s1;
-						const auto chaos_target = _s0;
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-						chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
-						chaos_object->chaos_delegate_target = chaos_target;
-						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					_s1 = _s0;
-					{
-						auto chaos_value = _s1;
-					chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c();
-						chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0 = chaos_value;
-					}
-				}
-				{
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				{
-					const auto chaos_arg_0 = _s1;
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s1;
-					chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___exitCode = chaos_value;
-				}
-			}
-		}
-		else
-		{
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		if (reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj) < 0)
-		{
-			chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-			chaos::il2cpp::runtime_core::chaos_raise_exception(
-				reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-					chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-		}
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(
-			chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{
-				chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-				chaos::il2cpp::runtime_core::chaos_raise_exception(
-					reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-						chaos::il2cpp::runtime_core::g_chaos_exception_obj));
-			}
-		}
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::runtime_core::g_chaos_exception_obj);
-		}
-		chaos::il2cpp::runtime_core::pop_exception_jmp_buf();
-	}
-#endif
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+	CHAOS_EH_END
 	return;
 }
 
@@ -1454,14 +1390,10 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		}
 		{
 			const auto chaos_arg_0 = _s1;
-			if (chaos_arg_0 == 0)
-			{
-				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-			}
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+			const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-892022381);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1176259652);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
@@ -1558,11 +1490,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		}
 		{
 			const auto chaos_arg_0 = _s1;
-			if (chaos_arg_0 == 0)
-			{
-				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-			}
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(chaos_arg_0);
+			const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(35342034);
@@ -1767,7 +1695,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -1780,4 +1708,50 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 16;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-0\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-0\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_0()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":18,\"handlerOffset\":19,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.NullReferenceException\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":4,\"resultType\":\"System.Delegate\",\"callee\":\"System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-1\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-1\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_1()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":18,\"handlerOffset\":19,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.NullReferenceException\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":4,\"resultType\":\"System.Delegate\",\"callee\":\"System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":11,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-2\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-2\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_2()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":52,\"handlerOffset\":53,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.NullReferenceException\"}],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\",\"ilOffset\":2,\"resultType\":\"System.Action\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":33,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"ilOffset\":11,\"resultType\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"ilOffset\":16,\"resultType\":\"System.IntPtr\",\"callee\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":22,\"resultType\":\"System.Private.CoreLib/System.Action\",\"callee\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\",\"ilOffset\":28,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__3_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":33,\"resultType\":\"System.Object[]\",\"callee\":\"System.Private.CoreLib/System.Array::Empty\\u003CSystem.Object\\u003E:System.Object[]()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Array::Empty\\u003CSystem.Object\\u003E:System.Object[]()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Array::Empty\\u003CSystem.Object\\u003E:System.Object[]()\",\"openDefinitionSubjectId\":\"System.Private.CoreLib/System.Array::Empty:!!0[]()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":2,\"definitionSubjectId\":\"System.Private.CoreLib/System.Array::Empty:!!0[]()\",\"typeArguments\":[],\"methodArguments\":[\"System.Object\"]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:methodSpec\"},\"genericDiagnostic\":{\"subjectId\":\"System.Private.CoreLib/System.Array::Empty\\u003CSystem.Object\\u003E:System.Object[]()\",\"definitionSubjectId\":\"System.Private.CoreLib/System.Array::Empty:!!0[]()\",\"displaySubjectId\":\"System.Private.CoreLib/System.Array::Empty\\u003CSystem.Object\\u003E()\",\"instantiationKey\":{\"contextKind\":2,\"definitionSubjectId\":\"System.Private.CoreLib/System.Array::Empty:!!0[]()\",\"typeArguments\":[],\"methodArguments\":[\"System.Object\"]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":38,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":58,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":53,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":58,\"ilOffset\":56,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":58,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-0\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-0\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_2\\u003Eb__3_0()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-3\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-3\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_3()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\",\"ilOffset\":1,\"resultType\":\"System.Action\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":32,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"ilOffset\":10,\"resultType\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"ilOffset\":15,\"resultType\":\"System.IntPtr\",\"callee\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":21,\"resultType\":\"System.Private.CoreLib/System.Action\",\"callee\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\",\"ilOffset\":27,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__4_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":32,\"resultType\":\"System.Reflection.MethodInfo\",\"callee\":\"System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1176259652,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":53,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":62,\"ilOffset\":54,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":57,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":62,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-0\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-0\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_3\\u003Eb__4_0()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-4\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-4\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_4()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\",\"ilOffset\":1,\"resultType\":\"System.Action\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":32,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"ilOffset\":10,\"resultType\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"ilOffset\":15,\"resultType\":\"System.IntPtr\",\"callee\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":21,\"resultType\":\"System.Private.CoreLib/System.Action\",\"callee\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\",\"ilOffset\":27,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__5_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":32,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Delegate::get_Target:System.Object()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::get_Target:System.Object()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::get_Target:System.Object()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":35342034,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":53,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":62,\"ilOffset\":54,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":57,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":62,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-0\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-0\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_4\\u003Eb__5_0()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-5\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-5\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_5()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-6\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-6\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_6()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-7\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-7\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_7()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\",\"ilOffset\":1,\"resultType\":\"System.Action\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":32,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"ilOffset\":10,\"resultType\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ldftn\",\"opCode\":73,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"ilOffset\":15,\"resultType\":\"System.IntPtr\",\"callee\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":21,\"resultType\":\"System.Private.CoreLib/System.Action\",\"callee\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\",\"ilOffset\":27,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9__8_0\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Action\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":32,\"resultType\":\"System.Delegate[]\",\"callee\":\"System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":37,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":45,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":46,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":55,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"ilOffset\":50,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-0\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-0\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003CSubject_7\\u003Eb__8_0()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-8\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-8\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_8()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_13[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-9\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-9\",\"signature\":\"System.Void DelegateCoreInvocationSubjects::Subject_9()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_14[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.cctor\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.cctor:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.cctor()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.cctor:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.cctor:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.cctor\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.cctor()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":0,\"resultType\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"callee\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"method\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":true,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Object\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"ilOffset\":5,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::\\u003C\\u003E9\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":10,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+static const char kMethodJson_15[] = "{\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.ctor\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor:System.Void()\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor()\",\"identity\":{\"assemblyName\":\"DelegateCoreInvocationSubjects\",\"declaringTypeSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"definitionSubjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor:System.Void()\",\"subjectId\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor:System.Void()\",\"methodId\":\"delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.ctor\",\"signature\":\"System.Void DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec::.ctor()\"},\"nativeSymbol\":\"DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\\u002B\\u003C\\u003Ec\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DelegateCoreInvocationSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[16] =
+{
+    { kMethodJson_0, 3684u, 0x00000009u, 0u },
+    { kMethodJson_1, 3681u, 0x0000000Au, 0u },
+    { kMethodJson_2, 10091u, 0x0000000Bu, 0u },
+    { kMethodJson_3, 1641u, 0x00000015u, 0u },
+    { kMethodJson_4, 8867u, 0x0000000Cu, 0u },
+    { kMethodJson_5, 1641u, 0x00000016u, 0u },
+    { kMethodJson_6, 8805u, 0x0000000Du, 0u },
+    { kMethodJson_7, 1641u, 0x00000017u, 0u },
+    { kMethodJson_8, 1409u, 0x0000000Eu, 0u },
+    { kMethodJson_9, 1409u, 0x0000000Fu, 0u },
+    { kMethodJson_10, 8400u, 0x00000010u, 0u },
+    { kMethodJson_11, 1641u, 0x00000018u, 0u },
+    { kMethodJson_12, 1409u, 0x00000011u, 0u },
+    { kMethodJson_13, 1409u, 0x00000012u, 0u },
+    { kMethodJson_14, 3300u, 0x00000013u, 0u },
+    { kMethodJson_15, 2260u, 0x00000014u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 16u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

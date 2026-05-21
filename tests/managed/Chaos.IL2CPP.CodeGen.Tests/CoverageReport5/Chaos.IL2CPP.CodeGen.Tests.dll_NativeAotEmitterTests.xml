@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.Tests.NativeAotEmitterTests">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.Tests.NativeAotEmitterTests</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\NativeAotEmitterTests.cs</File>
+    </Files>
+    <Coveredlines>25</Coveredlines>
+    <Uncoveredlines>0</Uncoveredlines>
+    <Coverablelines>25</Coverablelines>
+    <Totallines>66</Totallines>
+    <Linecoverage>100</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>5</Coveredmethods>
+    <Fullcoveredmethods>5</Fullcoveredmethods>
+    <Totalmethods>5</Totalmethods>
+    <Methodcoverage>100</Methodcoverage>
+    <Fullmethodcoverage>100</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="NativeAotEmitterTests">
+      <Blockscovered>2</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="ToCppStringLiteral_ReturnsExpected">
+      <Blockscovered>5</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="RequireStringField_NonNullNonEmpty_DoesNotThrow">
+      <Blockscovered>7</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="RequireStringField_NullOrEmpty_Throws">
+      <Blockscovered>9</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="BuildMethodSection_ReturnsRenderedTemplate">
+      <Blockscovered>9</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\NativeAotEmitterTests.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.CodeGen;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Xunit;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Tests;" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public sealed class NativeAotEmitterTests" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="9" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly Type s_t = typeof(NativeAotEmitter);" />
+      <LineAnalysis line="10" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private static readonly BindingFlags s_flags = BindingFlags.NonPublic | BindingFlags.Static;" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── ToCppStringLiteral ──────────────────────────────────────────────" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Theory]" />
+      <LineAnalysis line="15" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;hello&quot;, &quot;\&quot;hello\&quot;&quot;)]" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;&quot;, &quot;\&quot;\&quot;&quot;)]" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;with\&quot;quote&quot;, &quot;\&quot;with\\\&quot;quote\&quot;&quot;)]" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;with\\backslash&quot;, &quot;\&quot;with\\\\backslash\&quot;&quot;)]" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;with\nnewline&quot;, &quot;\&quot;with\\nnewline\&quot;&quot;)]" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;with\ttab&quot;, &quot;\&quot;with\\ttab\&quot;&quot;)]" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;with\rreturn&quot;, &quot;\&quot;with\\rreturn\&quot;&quot;)]" />
+      <LineAnalysis line="22" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void ToCppStringLiteral_ReturnsExpected(string input, string expected)" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="24" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = s_t.GetMethod(&quot;ToCppStringLiteral&quot;, s_flags, new[] { typeof(string) })!;" />
+      <LineAnalysis line="25" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var result = (string)method.Invoke(null, new object[] { input })!;" />
+      <LineAnalysis line="26" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        Assert.Equal(expected, result);" />
+      <LineAnalysis line="27" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── RequireStringField ──────────────────────────────────────────────" />
+      <LineAnalysis line="30" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="31" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void RequireStringField_NonNullNonEmpty_DoesNotThrow()" />
+      <LineAnalysis line="33" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="34" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = s_t.GetMethod(&quot;RequireStringField&quot;, s_flags, new[] { typeof(string), typeof(string) })!;" />
+      <LineAnalysis line="35" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var ex = Record.Exception(() =&gt;" />
+      <LineAnalysis line="36" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            method.Invoke(null, new object[] { &quot;valid&quot;, &quot;fieldName&quot; }));" />
+      <LineAnalysis line="37" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        Assert.Null(ex);" />
+      <LineAnalysis line="38" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="39" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Theory]" />
+      <LineAnalysis line="41" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(null)]" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;&quot;)]" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;   &quot;)]" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void RequireStringField_NullOrEmpty_Throws(string? value)" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="46" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = s_t.GetMethod(&quot;RequireStringField&quot;, s_flags, new[] { typeof(string), typeof(string) })!;" />
+      <LineAnalysis line="47" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var ex = Assert.Throws&lt;TargetInvocationException&gt;(() =&gt;" />
+      <LineAnalysis line="48" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            method.Invoke(null, new object[] { value!, &quot;fieldName&quot; }));" />
+      <LineAnalysis line="49" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        Assert.Contains(&quot;requires non-empty field&quot;, ex.InnerException!.Message);" />
+      <LineAnalysis line="50" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="51" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ── BuildMethodSection ──────────────────────────────────────────────" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void BuildMethodSection_ReturnsRenderedTemplate()" />
+      <LineAnalysis line="56" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="57" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = s_t.GetMethod(&quot;BuildMethodSection&quot;, s_flags, new[] { typeof(NativeAotMethodTemplateModel) })!;" />
+      <LineAnalysis line="58" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var model = new NativeAotMethodTemplateModel" />
+      <LineAnalysis line="59" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="60" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            SubjectId = &quot;TestMethod&quot;," />
+      <LineAnalysis line="61" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            MethodSource = &quot;// test body&quot;," />
+      <LineAnalysis line="62" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        };" />
+      <LineAnalysis line="63" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var result = (string)method.Invoke(null, new object[] { model })!;" />
+      <LineAnalysis line="64" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        Assert.False(string.IsNullOrEmpty(result));" />
+      <LineAnalysis line="65" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="66" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

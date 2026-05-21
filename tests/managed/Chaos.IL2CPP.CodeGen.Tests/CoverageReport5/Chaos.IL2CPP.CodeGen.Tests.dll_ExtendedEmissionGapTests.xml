@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Chaos.IL2CPP.CodeGen.Tests.Emission.ExtendedEmissionGapTests">
+  <Summary>
+    <Class>Chaos.IL2CPP.CodeGen.Tests.Emission.ExtendedEmissionGapTests</Class>
+    <Assembly>Chaos.IL2CPP.CodeGen.Tests.dll</Assembly>
+    <Files>
+      <File>D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\ExtendedEmissionGapTests.cs</File>
+    </Files>
+    <Coveredlines>26</Coveredlines>
+    <Uncoveredlines>436</Uncoveredlines>
+    <Coverablelines>462</Coverablelines>
+    <Totallines>682</Totallines>
+    <Linecoverage>5.6</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>4</Coveredmethods>
+    <Fullcoveredmethods>4</Fullcoveredmethods>
+    <Totalmethods>38</Totalmethods>
+    <Methodcoverage>10.5</Methodcoverage>
+    <Fullmethodcoverage>10.5</Fullmethodcoverage>
+  </Summary>
+  <Metrics>
+    <Element name="ExtendedEmissionGapTests">
+      <Blockscovered>3</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="UnsignedDivide_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="UnsignedRemainder_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="UnsignedShiftRight_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="Ckfinite_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="OverflowAddUnsigned_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="OverflowSubUnsigned_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="OverflowMulUnsigned_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="LdcI8_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+    <Element name="LdcR8_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="LdcR4_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>9</Blocksnotcovered>
+    </Element>
+    <Element name="CompareGreaterThan_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="CompareLessThanUnsigned_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="CompareLessThan_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="ConvVariants_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>14</Blocksnotcovered>
+    </Element>
+    <Element name="OverflowConvUnsignedInput_EmitsValidCode">
+      <Blockscovered>8</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="Localloc_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="Ldarga_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="Ldobj_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="Initblk_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="Ldelema_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="LdtokenType_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="LdtokenField_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="LdnullBranch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="BrtrueBranch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>10</Blocksnotcovered>
+    </Element>
+    <Element name="BneUnBranch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="BgeBranch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="BleBranch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>11</Blocksnotcovered>
+    </Element>
+    <Element name="Throw_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+    <Element name="Rethrow_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>5</Blocksnotcovered>
+    </Element>
+    <Element name="Endfilter_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>6</Blocksnotcovered>
+    </Element>
+    <Element name="Switch_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>13</Blocksnotcovered>
+    </Element>
+    <Element name="Arglist_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="Refanyval_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="Refanytype_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>7</Blocksnotcovered>
+    </Element>
+    <Element name="Ldstr_EmitsValidCode">
+      <Blockscovered>6</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+    <Element name="Ldlen_EmitsValidCode">
+      <Blockscovered>0</Blockscovered>
+      <Blocksnotcovered>8</Blocksnotcovered>
+    </Element>
+    <Element name="Dispose">
+      <Blockscovered>1</Blockscovered>
+      <Blocksnotcovered>0</Blocksnotcovered>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="D:\agent\booming-il2cpp\tests\managed\Chaos.IL2CPP.CodeGen.Tests\Emission\ExtendedEmissionGapTests.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.CodeGen.Tests.Infra;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Chaos.IL2CPP.Contracts;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using Xunit;" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace Chaos.IL2CPP.CodeGen.Tests.Emission;" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;summary&gt;" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Extended emission tests that exercise edge-case codegen paths" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// within NativeAotLoweringPlanner emission partials." />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// Each test drives the full planner pipeline via PlannerFixture and" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// verifies the generated C++ source contains expected emission patterns." />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="/// &lt;/summary&gt;" />
+      <LineAnalysis line="13" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="public sealed class ExtendedEmissionGapTests : IDisposable" />
+      <LineAnalysis line="14" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="15" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    private readonly PlannerFixture _fixture = new();" />
+      <LineAnalysis line="16" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Extended Arithmetic (div.un, rem.un, shr.un, ckfinite) ────────" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="20" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void UnsignedDivide_EmitsValidCode()" />
+      <LineAnalysis line="21" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="23" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::UnsignedDiv:System.Int32()&quot;," />
+      <LineAnalysis line="24" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="25" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="26" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="27" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="28" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 3)," />
+      <LineAnalysis line="29" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;div.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="32" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="34" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="37" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void UnsignedRemainder_EmitsValidCode()" />
+      <LineAnalysis line="38" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="39" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="40" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::UnsignedRem:System.Int32()&quot;," />
+      <LineAnalysis line="41" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="42" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="43" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="44" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="45" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 3)," />
+      <LineAnalysis line="46" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;rem.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="47" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="48" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="49" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="50" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="51" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="52" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="53" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="54" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void UnsignedShiftRight_EmitsValidCode()" />
+      <LineAnalysis line="55" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="56" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="57" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::UnsignedShr:System.Int32()&quot;," />
+      <LineAnalysis line="58" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="59" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="60" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="61" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 16)," />
+      <LineAnalysis line="62" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 2)," />
+      <LineAnalysis line="63" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;shr.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="64" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="65" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="66" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="67" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="68" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="69" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="70" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="71" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ckfinite_EmitsValidCode()" />
+      <LineAnalysis line="72" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="73" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="74" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ckfinite:TestType()&quot;," />
+      <LineAnalysis line="75" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="76" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="77" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="78" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.r8&quot;, ilOffset: 0, doubleOperand: 42.0, resultType: &quot;System.Double&quot;)," />
+      <LineAnalysis line="79" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ckfinite&quot;, ilOffset: 1, resultType: &quot;System.Double&quot;)," />
+      <LineAnalysis line="80" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="81" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="82" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="83" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="84" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="85" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="86" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Overflow Arithmetic Unsigned Variants ─────────────────────────" />
+      <LineAnalysis line="87" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="88" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="89" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void OverflowAddUnsigned_EmitsValidCode()" />
+      <LineAnalysis line="90" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="91" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="92" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::AddOvfUn:System.Int32()&quot;," />
+      <LineAnalysis line="93" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="94" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="95" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="96" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="97" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 20)," />
+      <LineAnalysis line="98" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;add.ovf.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="99" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="100" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="101" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="102" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="103" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="104" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="105" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="106" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void OverflowSubUnsigned_EmitsValidCode()" />
+      <LineAnalysis line="107" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="108" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="109" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::SubOvfUn:System.Int32()&quot;," />
+      <LineAnalysis line="110" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="111" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="112" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="113" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 20)," />
+      <LineAnalysis line="114" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 10)," />
+      <LineAnalysis line="115" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;sub.ovf.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="116" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="117" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="118" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="119" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="120" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="121" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="122" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="123" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void OverflowMulUnsigned_EmitsValidCode()" />
+      <LineAnalysis line="124" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="125" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="126" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::MulOvfUn:System.Int32()&quot;," />
+      <LineAnalysis line="127" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="128" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="129" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="130" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="131" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 20)," />
+      <LineAnalysis line="132" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;mul.ovf.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="133" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="134" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="135" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="136" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="137" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="138" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="139" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Int64/IntPtr Constants ─────────────────────────────────────────" />
+      <LineAnalysis line="140" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="141" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="142" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdcI8_EmitsValidCode()" />
+      <LineAnalysis line="143" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="144" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="145" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::LdcI8:System.Int64()&quot;," />
+      <LineAnalysis line="146" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnType: &quot;System.Int64&quot;," />
+      <LineAnalysis line="147" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int64Abi," />
+      <LineAnalysis line="148" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="149" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="150" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i8&quot;, ilOffset: 0, longOperand: 0x7FFFFFFFFFFFFFFF, resultType: &quot;System.Int64&quot;)," />
+      <LineAnalysis line="151" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 1)," />
+      <LineAnalysis line="152" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="153" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="154" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="155" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="156" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="157" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="158" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdcR8_EmitsValidCode()" />
+      <LineAnalysis line="159" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="160" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="161" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::LdcR8:System.Double()&quot;," />
+      <LineAnalysis line="162" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnType: &quot;System.Double&quot;," />
+      <LineAnalysis line="163" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeSubjectId = &quot;System.Double&quot; }," />
+      <LineAnalysis line="164" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="165" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="166" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.r8&quot;, ilOffset: 0, doubleOperand: 3.14159265358979, resultType: &quot;System.Double&quot;)," />
+      <LineAnalysis line="167" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 1)," />
+      <LineAnalysis line="168" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="169" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="170" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="171" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="172" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="173" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="174" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdcR4_EmitsValidCode()" />
+      <LineAnalysis line="175" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="176" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="177" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::LdcR4:System.Single()&quot;," />
+      <LineAnalysis line="178" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnType: &quot;System.Single&quot;," />
+      <LineAnalysis line="179" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float32, TypeSubjectId = &quot;System.Single&quot; }," />
+      <LineAnalysis line="180" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="181" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="182" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.r4&quot;, ilOffset: 0, doubleOperand: 3.14, resultType: &quot;System.Single&quot;)," />
+      <LineAnalysis line="183" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 1)," />
+      <LineAnalysis line="184" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="185" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        // Production code accepts a double operand for ldc.r4 via implicit conversion." />
+      <LineAnalysis line="186" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="187" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="188" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="189" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="190" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Comparison Variants ────────────────────────────────────────────" />
+      <LineAnalysis line="191" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="192" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="193" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void CompareGreaterThan_EmitsValidCode()" />
+      <LineAnalysis line="194" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="195" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="196" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Cgt:System.Int32()&quot;," />
+      <LineAnalysis line="197" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="198" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="199" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="200" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="201" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 5)," />
+      <LineAnalysis line="202" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;cgt&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="203" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="204" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="205" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="206" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="207" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="208" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="209" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="210" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void CompareLessThanUnsigned_EmitsValidCode()" />
+      <LineAnalysis line="211" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="212" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="213" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::CltUn:System.Int32()&quot;," />
+      <LineAnalysis line="214" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="215" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="216" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="217" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 5)," />
+      <LineAnalysis line="218" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 10)," />
+      <LineAnalysis line="219" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;clt.un&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="220" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="221" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="222" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="223" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="224" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="225" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="226" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="227" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void CompareLessThan_EmitsValidCode()" />
+      <LineAnalysis line="228" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="229" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="230" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Clt:System.Int32()&quot;," />
+      <LineAnalysis line="231" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="232" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="233" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="234" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 5)," />
+      <LineAnalysis line="235" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 10)," />
+      <LineAnalysis line="236" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;clt&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="237" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="238" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="239" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="240" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="241" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="242" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="243" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Conv Variants (non-overflow) ───────────────────────────────────" />
+      <LineAnalysis line="244" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="245" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Theory]" />
+      <LineAnalysis line="246" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.i1&quot;, &quot;System.SByte&quot;)]" />
+      <LineAnalysis line="247" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.u1&quot;, &quot;System.Byte&quot;)]" />
+      <LineAnalysis line="248" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.i2&quot;, &quot;System.Int16&quot;)]" />
+      <LineAnalysis line="249" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.u2&quot;, &quot;System.UInt16&quot;)]" />
+      <LineAnalysis line="250" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.u8&quot;, &quot;System.UInt64&quot;)]" />
+      <LineAnalysis line="251" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.u&quot;, &quot;System.UIntPtr&quot;)]" />
+      <LineAnalysis line="252" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.i&quot;, &quot;System.IntPtr&quot;)]" />
+      <LineAnalysis line="253" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void ConvVariants_EmitsValidCode(string op, string resultType)" />
+      <LineAnalysis line="254" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="255" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="256" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            $&quot;TestModule.TestClass::{op}:{resultType}()&quot;," />
+      <LineAnalysis line="257" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="258" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="259" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="260" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 42)," />
+      <LineAnalysis line="261" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(op, ilOffset: 1, resultType: resultType)," />
+      <LineAnalysis line="262" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="263" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="264" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="265" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="266" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="267" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="268" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Overflow Conv Unsigned Input Variants ──────────────────────────" />
+      <LineAnalysis line="269" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="270" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Theory]" />
+      <LineAnalysis line="271" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.i.un&quot;)]" />
+      <LineAnalysis line="272" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.u.un&quot;)]" />
+      <LineAnalysis line="273" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.i8.un&quot;)]" />
+      <LineAnalysis line="274" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.u8.un&quot;)]" />
+      <LineAnalysis line="275" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.i1.un&quot;)]" />
+      <LineAnalysis line="276" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.i2.un&quot;)]" />
+      <LineAnalysis line="277" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.i4.un&quot;)]" />
+      <LineAnalysis line="278" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.u1.un&quot;)]" />
+      <LineAnalysis line="279" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.u2.un&quot;)]" />
+      <LineAnalysis line="280" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [InlineData(&quot;conv.ovf.u4.un&quot;)]" />
+      <LineAnalysis line="281" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void OverflowConvUnsignedInput_EmitsValidCode(string op)" />
+      <LineAnalysis line="282" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="283" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="284" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            $&quot;TestModule.TestClass::{op}:System.Int32()&quot;," />
+      <LineAnalysis line="285" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="286" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="287" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="288" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 42)," />
+      <LineAnalysis line="289" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(op, ilOffset: 1, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="290" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="291" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="292" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="293" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="294" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="295" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="296" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Localloc (stack-alloc buffer) ──────────────────────────────────" />
+      <LineAnalysis line="297" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="298" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="299" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Localloc_EmitsValidCode()" />
+      <LineAnalysis line="300" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="301" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="302" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Localloc:System.Void()&quot;," />
+      <LineAnalysis line="303" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="304" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="305" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 64)," />
+      <LineAnalysis line="306" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;localloc&quot;, ilOffset: 1, resultType: &quot;System.IntPtr&quot;)," />
+      <LineAnalysis line="307" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 2)," />
+      <LineAnalysis line="308" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="309" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="310" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="311" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="312" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="313" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="314" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Ldarga (load argument address) ─────────────────────────────────" />
+      <LineAnalysis line="315" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="316" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="317" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ldarga_EmitsValidCode()" />
+      <LineAnalysis line="318" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="319" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="320" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldarga:TestType(System.Int32)&quot;," />
+      <LineAnalysis line="321" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="322" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            parameterAbis: new[] { ModelFactory.Int32Abi }," />
+      <LineAnalysis line="323" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="324" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="325" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldarga&quot;, ilOffset: 0, intOperand: 0, resultType: &quot;System.Int32&amp;&quot;)," />
+      <LineAnalysis line="326" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldind.i4&quot;, ilOffset: 1, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="327" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="328" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="329" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="330" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="331" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="332" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="333" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Ldobj / Stobj (load/store object from pointer) ────────────────" />
+      <LineAnalysis line="334" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="335" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="336" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ldobj_EmitsValidCode()" />
+      <LineAnalysis line="337" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="338" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="339" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldobj:TestType(System.Int32)&quot;," />
+      <LineAnalysis line="340" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="341" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            parameterAbis: new[] { ModelFactory.Int32Abi }," />
+      <LineAnalysis line="342" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="343" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="344" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldarga&quot;, ilOffset: 0, intOperand: 0, resultType: &quot;System.Int32&amp;&quot;)," />
+      <LineAnalysis line="345" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldobj&quot;, ilOffset: 1, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="346" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="347" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="348" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="349" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="350" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="351" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="352" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Initblk / Cpblk (memory block operations) ─────────────────────" />
+      <LineAnalysis line="353" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="354" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="355" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Initblk_EmitsValidCode()" />
+      <LineAnalysis line="356" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="357" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="358" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Initblk:System.Void()&quot;," />
+      <LineAnalysis line="359" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="360" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="361" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 0)," />
+      <LineAnalysis line="362" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;conv.i&quot;, ilOffset: 1, resultType: &quot;System.IntPtr&quot;)," />
+      <LineAnalysis line="363" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 2, intOperand: 0)," />
+      <LineAnalysis line="364" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 3, intOperand: 16)," />
+      <LineAnalysis line="365" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;initblk&quot;, ilOffset: 4)," />
+      <LineAnalysis line="366" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 5)," />
+      <LineAnalysis line="367" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="368" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="369" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="370" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="371" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="372" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Ldelema (load element address) ─────────────────────────────────" />
+      <LineAnalysis line="373" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="374" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="375" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ldelema_EmitsValidCode()" />
+      <LineAnalysis line="376" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="377" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="378" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldelema:System.Void()&quot;," />
+      <LineAnalysis line="379" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="380" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="381" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 0)," />
+      <LineAnalysis line="382" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;newarr&quot;, ilOffset: 1, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="383" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 2, intOperand: 0)," />
+      <LineAnalysis line="384" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldelema&quot;, ilOffset: 3, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="385" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 4)," />
+      <LineAnalysis line="386" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 5)," />
+      <LineAnalysis line="387" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="388" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="389" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="390" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="391" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="392" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Ldtoken (load runtime handle) ──────────────────────────────────" />
+      <LineAnalysis line="393" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="394" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="395" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdtokenType_EmitsValidCode()" />
+      <LineAnalysis line="396" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="397" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="398" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldtoken:System.Void()&quot;," />
+      <LineAnalysis line="399" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="400" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="401" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldtoken&quot;, ilOffset: 0, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="402" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 1)," />
+      <LineAnalysis line="403" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="404" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="405" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="406" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="407" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="408" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="409" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="410" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdtokenField_EmitsValidCode()" />
+      <LineAnalysis line="411" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="412" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="413" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::LdtokenField:System.Void()&quot;," />
+      <LineAnalysis line="414" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="415" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="416" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldtoken&quot;, ilOffset: 0, &quot;TestModule.TestClass::_field&quot;, AotCoreIrReferenceKind.Field)," />
+      <LineAnalysis line="417" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 1)," />
+      <LineAnalysis line="418" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="419" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="420" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="421" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="422" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="423" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="424" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Ldnull + Brtrue/Brfalse (null branch patterns) ────────────────" />
+      <LineAnalysis line="425" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="426" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="427" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void LdnullBranch_EmitsValidCode()" />
+      <LineAnalysis line="428" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="429" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="430" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::LdnullBranch:System.Int32()&quot;," />
+      <LineAnalysis line="431" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="432" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="433" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="434" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldnull&quot;, ilOffset: 0)," />
+      <LineAnalysis line="435" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;brfalse&quot;, ilOffset: 1, intOperand: 4)," />
+      <LineAnalysis line="436" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 2, intOperand: 1)," />
+      <LineAnalysis line="437" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="438" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 4, intOperand: 0)," />
+      <LineAnalysis line="439" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 5)," />
+      <LineAnalysis line="440" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="441" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="442" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="443" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="444" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="445" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="446" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void BrtrueBranch_EmitsValidCode()" />
+      <LineAnalysis line="447" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="448" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="449" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::BrtrueBranch:System.Int32()&quot;," />
+      <LineAnalysis line="450" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="451" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="452" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="453" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 1)," />
+      <LineAnalysis line="454" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;brtrue&quot;, ilOffset: 1, intOperand: 4)," />
+      <LineAnalysis line="455" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 2, intOperand: 0)," />
+      <LineAnalysis line="456" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="457" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 4, intOperand: 42)," />
+      <LineAnalysis line="458" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 5)," />
+      <LineAnalysis line="459" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="460" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="461" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="462" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="463" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="464" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Bne_Un / Bge / Ble branch variants ────────────────────────────" />
+      <LineAnalysis line="465" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="466" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="467" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void BneUnBranch_EmitsValidCode()" />
+      <LineAnalysis line="468" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="469" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="470" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::BneUn:System.Int32()&quot;," />
+      <LineAnalysis line="471" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="472" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="473" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="474" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="475" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 20)," />
+      <LineAnalysis line="476" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;bne.un&quot;, ilOffset: 2, intOperand: 5)," />
+      <LineAnalysis line="477" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 3, intOperand: 0)," />
+      <LineAnalysis line="478" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 4)," />
+      <LineAnalysis line="479" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 5, intOperand: 1)," />
+      <LineAnalysis line="480" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 6)," />
+      <LineAnalysis line="481" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="482" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="483" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="484" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="485" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="486" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="487" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void BgeBranch_EmitsValidCode()" />
+      <LineAnalysis line="488" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="489" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="490" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Bge:System.Int32()&quot;," />
+      <LineAnalysis line="491" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="492" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="493" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="494" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 20)," />
+      <LineAnalysis line="495" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 10)," />
+      <LineAnalysis line="496" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;bge&quot;, ilOffset: 2, intOperand: 5)," />
+      <LineAnalysis line="497" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 3, intOperand: 0)," />
+      <LineAnalysis line="498" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 4)," />
+      <LineAnalysis line="499" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 5, intOperand: 1)," />
+      <LineAnalysis line="500" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 6)," />
+      <LineAnalysis line="501" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="502" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="503" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="504" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="505" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="506" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="507" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void BleBranch_EmitsValidCode()" />
+      <LineAnalysis line="508" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="509" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="510" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ble:System.Int32()&quot;," />
+      <LineAnalysis line="511" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="512" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="513" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="514" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="515" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 1, intOperand: 20)," />
+      <LineAnalysis line="516" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ble&quot;, ilOffset: 2, intOperand: 5)," />
+      <LineAnalysis line="517" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 3, intOperand: 0)," />
+      <LineAnalysis line="518" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 4)," />
+      <LineAnalysis line="519" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 5, intOperand: 1)," />
+      <LineAnalysis line="520" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 6)," />
+      <LineAnalysis line="521" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="522" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="523" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="524" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="525" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="526" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Throw / Rethrow / Endfilter ────────────────────────────────────" />
+      <LineAnalysis line="527" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="528" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="529" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Throw_EmitsValidCode()" />
+      <LineAnalysis line="530" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="531" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="532" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Throw:System.Void()&quot;," />
+      <LineAnalysis line="533" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="534" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="535" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldnull&quot;, ilOffset: 0)," />
+      <LineAnalysis line="536" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;throw&quot;, ilOffset: 1)," />
+      <LineAnalysis line="537" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="538" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="539" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="540" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="541" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="542" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="543" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Rethrow_EmitsValidCode()" />
+      <LineAnalysis line="544" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="545" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="546" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Rethrow:System.Void()&quot;," />
+      <LineAnalysis line="547" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="548" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="549" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;rethrow&quot;, ilOffset: 0)," />
+      <LineAnalysis line="550" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="551" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="552" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="553" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="554" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="555" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="556" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Endfilter_EmitsValidCode()" />
+      <LineAnalysis line="557" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="558" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="559" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Endfilter:System.Int32()&quot;," />
+      <LineAnalysis line="560" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="561" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="562" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="563" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 0)," />
+      <LineAnalysis line="564" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;endfilter&quot;, ilOffset: 1, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="565" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="566" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="567" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="568" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="569" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="570" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Switch ─────────────────────────────────────────────────────────" />
+      <LineAnalysis line="571" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="572" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="573" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Switch_EmitsValidCode()" />
+      <LineAnalysis line="574" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="575" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="576" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Switch:System.Int32()&quot;," />
+      <LineAnalysis line="577" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="578" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="579" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="580" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 2)," />
+      <LineAnalysis line="581" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;switch&quot;, ilOffset: 1, arrayOperand: new[] { 4, 5, 6 })," />
+      <LineAnalysis line="582" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 2, intOperand: -1)," />
+      <LineAnalysis line="583" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="584" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 4, intOperand: 0)," />
+      <LineAnalysis line="585" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 5)," />
+      <LineAnalysis line="586" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 6, intOperand: 1)," />
+      <LineAnalysis line="587" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 7)," />
+      <LineAnalysis line="588" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="589" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="590" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="591" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="592" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="593" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Arglist ────────────────────────────────────────────────────────" />
+      <LineAnalysis line="594" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="595" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="596" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Arglist_EmitsValidCode()" />
+      <LineAnalysis line="597" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="598" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="599" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Arglist:System.Void()&quot;," />
+      <LineAnalysis line="600" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="601" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="602" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;arglist&quot;, ilOffset: 0)," />
+      <LineAnalysis line="603" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 1)," />
+      <LineAnalysis line="604" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="605" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="606" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="607" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="608" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="609" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="610" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Refanyval / Refanytype / Mkrefany ──────────────────────────────" />
+      <LineAnalysis line="611" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="612" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="613" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Refanyval_EmitsValidCode()" />
+      <LineAnalysis line="614" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="615" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="616" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Refanyval:System.Void()&quot;," />
+      <LineAnalysis line="617" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="618" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="619" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;refanyval&quot;, ilOffset: 0, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="620" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 1)," />
+      <LineAnalysis line="621" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="622" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="623" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="624" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="625" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="626" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="627" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="628" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Refanytype_EmitsValidCode()" />
+      <LineAnalysis line="629" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="630" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="631" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Refanytype:System.Void()&quot;," />
+      <LineAnalysis line="632" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="633" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="634" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;refanytype&quot;, ilOffset: 0)," />
+      <LineAnalysis line="635" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;pop&quot;, ilOffset: 1)," />
+      <LineAnalysis line="636" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 2)," />
+      <LineAnalysis line="637" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="638" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="639" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="640" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="641" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="642" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Load string literal ────────────────────────────────────────────" />
+      <LineAnalysis line="643" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="644" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="645" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ldstr_EmitsValidCode()" />
+      <LineAnalysis line="646" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="647" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="648" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldstr:System.String()&quot;," />
+      <LineAnalysis line="649" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            returnType: &quot;System.String&quot;," />
+      <LineAnalysis line="650" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.RefAbi," />
+      <LineAnalysis line="651" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="652" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="653" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldstr&quot;, ilOffset: 0, stringOperand: &quot;Hello, World!&quot;, resultType: &quot;System.String&quot;)," />
+      <LineAnalysis line="654" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 1)," />
+      <LineAnalysis line="655" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="656" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="657" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="658" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="659" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="660" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    // ──── Load length of array ───────────────────────────────────────────" />
+      <LineAnalysis line="661" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="662" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    [Fact]" />
+      <LineAnalysis line="663" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Ldlen_EmitsValidCode()" />
+      <LineAnalysis line="664" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="665" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var method = ModelFactory.CreateMethod(" />
+      <LineAnalysis line="666" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            &quot;TestModule.TestClass::Ldlen:System.Int32()&quot;," />
+      <LineAnalysis line="667" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            returnAbi: ModelFactory.Int32Abi," />
+      <LineAnalysis line="668" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            instructions: new[]" />
+      <LineAnalysis line="669" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="670" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldc.i4&quot;, ilOffset: 0, intOperand: 10)," />
+      <LineAnalysis line="671" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;newarr&quot;, ilOffset: 1, &quot;System.Int32&quot;, AotCoreIrReferenceKind.Type)," />
+      <LineAnalysis line="672" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ldlen&quot;, ilOffset: 2, resultType: &quot;System.Int32&quot;)," />
+      <LineAnalysis line="673" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                ModelFactory.Instruction(&quot;ret&quot;, ilOffset: 3)," />
+      <LineAnalysis line="674" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            });" />
+      <LineAnalysis line="675" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        var source = _fixture.RunPlannerSingleMethod(method);" />
+      <LineAnalysis line="676" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        AssertExtensions.ContainsCode(&quot;extern \&quot;C\&quot;&quot;, source);" />
+      <LineAnalysis line="677" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="678" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="679" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public void Dispose()" />
+      <LineAnalysis line="680" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="681" visits="1" coverage="Covered" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="682" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>
