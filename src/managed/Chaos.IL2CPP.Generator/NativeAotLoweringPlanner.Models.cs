@@ -145,6 +145,13 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
         IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
 
+    private sealed record MultipleCatchExceptionMethodShape(
+        IReadOnlyList<AotCoreIrExceptionRegionArtifact> CatchRegions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<IReadOnlyList<AotCoreIrInstructionArtifact>> HandlerInstructionsList,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
     private sealed record CustomAttributeSupportModel(
         IReadOnlyDictionary<string, string> QueryAttributeTypeByCallee,
         IReadOnlyDictionary<string, string> SyntheticGetterFieldByMethodSubjectId,

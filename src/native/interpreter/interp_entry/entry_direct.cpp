@@ -20,6 +20,11 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── Debugger frame chain ──────────────────────────────────────────────
+// Thread-local pointer to the current interpreter frame.
+// Used by the debugger to walk the call stack.
+thread_local void* tls_current_frame = nullptr;
+
 // ── Tier hit counters (profile instrumentation) ─────────────────────────
 struct TierCounters {
     std::atomic<uint64_t> step_1c       = 0;
@@ -493,6 +498,9 @@ void InterpreterEntryDirect(
         rf.dispatch_ctx = &reg_dispatch_ctx;
         rf.call_cache = patch_method->call_cache;
         rf.call_count = static_cast<uint32_t>(instr_count);
+        rf.patch_method = patch_method;
+        rf.prev_frame = tls_current_frame;
+        tls_current_frame = &rf;
 
         auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
         auto tier = patch_method->tier_state.load(std::memory_order_acquire);
@@ -538,6 +546,7 @@ void InterpreterEntryDirect(
                         if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
                             codegen::CodeGenConfig cfg;
                             cfg.enable_safepoint_polls = true;
+                            cfg.enable_liveness = true;
                             cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
                             cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                             cfg.dispatch_ctx = &reg_dispatch_ctx;
@@ -601,13 +610,14 @@ void InterpreterEntryDirect(
                 auto ret_tag = static_cast<interpreter::ValueTag>(rf.ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val)); return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val)); return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &rf.ret_val, sizeof(float)); ret_writer.WriteF32(v); return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &rf.ret_val, sizeof(double)); ret_writer.WriteF64(v); return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val)); return;
+                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
+                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
+                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &rf.ret_val, sizeof(float)); ret_writer.WriteF32(v); tls_current_frame = rf.prev_frame; return; }
+                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &rf.ret_val, sizeof(double)); ret_writer.WriteF64(v); tls_current_frame = rf.prev_frame; return; }
+                default: ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
                 }
             }
+            tls_current_frame = rf.prev_frame;
             return;
         }
     }
@@ -659,6 +669,7 @@ void InterpreterEntryDirect(
                               reg_dispatch_ctx.thread_state = thread_state;
                               codegen::CodeGenConfig cfg;
                               cfg.enable_safepoint_polls = true;
+                              cfg.enable_liveness = true;
                               cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
                               cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                               cfg.dispatch_ctx = &reg_dispatch_ctx;
@@ -704,6 +715,11 @@ void InterpreterEntryDirect(
         FastFrame ff_fallback;
         bool using_pool = true;
         if (ff == nullptr) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); using_pool = false; }
+        ff->prev_frame = tls_current_frame;
+        ff->ir_instrs = ir->instructions.data();
+        ff->instr_count = static_cast<uint32_t>(ir->instructions.size());
+        tls_current_frame = ff;
+        void* step_c_prev_frame = ff->prev_frame;
 
         { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.SetupFrame");
           auto* runtime_state = GetCurrentRuntimeState(); auto* thread_state = GetCurrentThreadState();
@@ -720,17 +736,19 @@ void InterpreterEntryDirect(
                 auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &ff->ret_val, sizeof(float)); ret_writer.WriteF32(v); if (using_pool) tls_frame_pool.Release(ff); return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &ff->ret_val, sizeof(double)); ret_writer.WriteF64(v); if (using_pool) tls_frame_pool.Release(ff); return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); return;
+                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
+                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
+                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &ff->ret_val, sizeof(float)); ret_writer.WriteF32(v); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return; }
+                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &ff->ret_val, sizeof(double)); ret_writer.WriteF64(v); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return; }
+                default: ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
                 }
             }
             if (using_pool) tls_frame_pool.Release(ff);
+            tls_current_frame = step_c_prev_frame;
             return;
         }
         if (using_pool) tls_frame_pool.Release(ff);
+        tls_current_frame = step_c_prev_frame;
     }
 
     CHAOS_IL2CPP_LOG_DEBUG("diag", "Step D (InterpreterVM) entering");

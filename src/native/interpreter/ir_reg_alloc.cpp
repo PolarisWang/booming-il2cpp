@@ -652,6 +652,12 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
         result.instructions.push_back(ri);
     }
 
+    // Propagate il_offsets from IRMethod to RegisterMethod (1:1 instruction mapping).
+    result.il_offsets.reserve(ir_method.il_offsets.size());
+    for (auto off : ir_method.il_offsets) {
+        result.il_offsets.push_back(off);
+    }
+
     result.max_regs = next_vreg;
     return result;
 }
@@ -1533,15 +1539,16 @@ static void Reg_MulOvf(RegisterFrame& frame, const RegisterInstruction& instr) n
 // ── Overflow-checked conversions ────────────────────────────────────────
 static void Reg_ConvOvfI(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI");
-    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
-                       static_cast<uint8_t>(ValueTag::Int32));
+    // conv.ovf.i: int32 → native int (int64 on x64). Sign-extend through int32.
+    int32_t v = static_cast<int32_t>(static_cast<uint32_t>(frame.regs.reg(instr.src1_reg())));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int64_t>(v)),
+                       static_cast<uint8_t>(ValueTag::Int64));
     ++frame.pc;
 }
 
 static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI4");
-    int32_t v = static_cast<int32_t>(frame.regs.reg(instr.src1_reg()));
+    int32_t v = static_cast<int32_t>(static_cast<uint32_t>(frame.regs.reg(instr.src1_reg())));
     frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<uint32_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int32));
     ++frame.pc;
@@ -1549,8 +1556,9 @@ static void Reg_ConvOvfI4(RegisterFrame& frame, const RegisterInstruction& instr
 
 static void Reg_ConvOvfI8(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvOvfI8");
-    int64_t v = static_cast<int64_t>(frame.regs.reg(instr.src1_reg()));
-    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(v),
+    // conv.ovf.i8: int32 → int64. Sign-extend through int32.
+    int32_t v = static_cast<int32_t>(static_cast<uint32_t>(frame.regs.reg(instr.src1_reg())));
+    frame.regs.set_reg(instr.dst_reg(), static_cast<uint64_t>(static_cast<int64_t>(v)),
                        static_cast<uint8_t>(ValueTag::Int64));
     ++frame.pc;
 }
@@ -2265,6 +2273,7 @@ static void TryOsrPromotion(RegisterFrame& frame,
     // Generate native code with full deopt support.
     chaos::il2cpp::codegen::CodeGenConfig cfg;
     cfg.enable_deopt = true;
+    cfg.enable_liveness = true;
     cfg.safepoint_fn = nullptr;
 
     auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);

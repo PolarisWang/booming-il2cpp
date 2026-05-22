@@ -978,3 +978,113 @@ public static class InterfaceDevirtHelper
     // Used by fixture 80-interface-devirtualized
     public static int RunInterfaceTest() => ((IMyInterface)new ImplHelper(42)).GetValue();
 }
+
+// --- Fixture 81: try-finally (FinallyOnly pattern) ---
+public static class EhFinallyHelper
+{
+    // Used by fixture 81-eh-try-finally
+    public static int TryFinally_Only(int x)
+    {
+        int result = 0;
+        try { result = 100 / x; } finally { result = -1; }
+        return result;
+    }
+}
+
+// --- Fixture 82: try-fault (Fault pattern, flat fallback) ---
+public static class EhFaultHelper
+{
+    // Used by fixture 82-eh-try-fault
+    public static int TryFault(int x)
+    {
+        int result = 0;
+        try { result = 100 / x; } finally { result = -1; }
+        return result;
+    }
+}
+
+// --- Fixture 83: try-filter (FilterOnly pattern) ---
+public static class EhFilterHelper
+{
+    // Used by fixture 83-eh-try-filter
+    public static int TryFilter(int x)
+    {
+        try { return 100 / x; }
+        catch (Exception e) when (e != null) { return -1; }
+    }
+}
+
+// --- Fixture 84: multiple catch blocks (MultipleCatch pattern) ---
+public static class EhMultipleCatchHelper
+{
+    // Used by fixture 84-eh-multiple-catch
+    public static int MultipleCatch(int x)
+    {
+        try { return 100 / x; }
+        catch (DivideByZeroException) { return -1; }
+        catch (Exception) { return -2; }
+    }
+}
+
+// --- Fixture 85: catch inside finally (CatchAndFinally pattern) ---
+public static class EhCatchFinallyNestedHelper
+{
+    // Used by fixture 85-eh-catch-finally-nested
+    public static int CatchFinallyNested(int x)
+    {
+        int result = 0;
+        try
+        {
+            try { result = 100 / x; }
+            catch (DivideByZeroException) { result = -1; }
+        }
+        finally { result = -2; }
+        return result;
+    }
+}
+
+// --- Fixture 86: filter inside finally (FilterAndFinally pattern) ---
+public static class EhFilterFinallyHelper
+{
+    // Used by fixture 86-eh-filter-finally
+    public static int FilterFinally(int x)
+    {
+        int result = 0;
+        try
+        {
+            try { return 100 / x; }
+            catch (Exception e) when (e != null) { result = -1; }
+        }
+        finally { result = -2; }
+        return result;
+    }
+}
+
+// --- Fixture 87: typed catch (CatchOnly pattern with specific exception type) ---
+public static class EhNestedTryCatchHelper
+{
+    // Used by fixture 87-eh-nested-try-catch
+    public static int NestedTryCatch(int x)
+    {
+        try { return 100 / x; }
+        catch (DivideByZeroException) { return -1; }
+        return -2;
+    }
+}
+
+// --- Fixture 88: nested finally blocks (FinallyOnly pattern) ---
+public static class EhFaultFinallyHelper
+{
+    // Used by fixture 88-eh-fault-finally
+    public static int FaultFinally(int x)
+    {
+        int result = 0;
+        try
+        {
+            try { result = 100 / x; }
+            finally { result = -2; }
+        }
+        finally { result = -3; }
+        return result;
+    }
+}

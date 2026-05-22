@@ -1739,6 +1739,11 @@ public sealed partial class NativeAotLoweringPlanner
             body = BuildFilterAndFinallyExceptionIRBody(filterAndFinally, offsets);
             extraHandlerPushes = 2;
         }
+        else if (TryCreateMultipleCatchExceptionMethodShape(method, out var multiCatch) && multiCatch is not null)
+        {
+            body = BuildMultipleCatchExceptionIRBody(multiCatch, offsets);
+            extraHandlerPushes = 1;
+        }
 
         if (body is null)
         {
@@ -1897,6 +1902,50 @@ public sealed partial class NativeAotLoweringPlanner
         nodes.Add(wrapped);
         if (filterAndFinally.TailInstructions.Count > 0)
             nodes.Add(BuildExceptionPartitionTree(filterAndFinally.TailInstructions, offsets));
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
+    private StructuredIRNode BuildMultipleCatchExceptionIRBody(
+        MultipleCatchExceptionMethodShape multiCatch,
+        IReadOnlySet<int> offsets)
+    {
+        LogMultipleCatchShape();
+
+        var nodes = new List<StructuredIRNode>();
+
+        // Build IR tree for prefix (instructions before the try block)
+        if (multiCatch.PrefixInstructions.Count > 0)
+        {
+            var prefixOffsets = new HashSet<int>(multiCatch.PrefixInstructions.Select(GetRequiredIlOffset));
+            var prefixCfg = BuildControlFlowGraph(multiCatch.PrefixInstructions, prefixOffsets);
+            if (prefixCfg.IsReducible)
+                nodes.Add(RecoverStructure(prefixCfg, 0, prefixCfg.Blocks.Count - 1));
+            else
+                nodes.Add(new IRSequence(Array.Empty<StructuredIRNode>()));
+        }
+
+        // Build the shared try body tree
+        var tryTree = BuildExceptionPartitionTree(multiCatch.TryInstructions, offsets);
+
+        // For each catch region, create a sequential IRExceptionRegion with the shared try body.
+        // The catch regions are siblings (sequential), not nested.
+        for (int i = 0; i < multiCatch.CatchRegions.Count; i++)
+        {
+            var handlerTree = BuildExceptionPartitionTree(multiCatch.HandlerInstructionsList[i], offsets);
+            nodes.Add(new IRExceptionRegion(
+                IRExceptionKind.TryCatch,
+                tryTree,
+                handlerTree,
+                CatchTypeSubjectId: multiCatch.CatchRegions[i].CatchTypeSubjectId));
+        }
+
+        // Build IR tree for tail (instructions after all handlers)
+        if (multiCatch.TailInstructions.Count > 0)
+        {
+            var tailTree = BuildExceptionPartitionTree(multiCatch.TailInstructions, offsets);
+            nodes.Add(tailTree);
+        }
+
         return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
     }
 
@@ -2117,6 +2166,9 @@ public sealed partial class NativeAotLoweringPlanner
         if (total == 0) return " 0.0%";
         return (part * 100.0 / total).ToString("F1") + "%";
     }
+
+    internal static void LogMultipleCatchShape() =>
+        System.Console.Error.WriteLine("[MultipleCatch] Detected multi-catch EH shape");
 }
 
 

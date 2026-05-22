@@ -131,6 +131,21 @@ private:
     // GC slot map entries (for GcSlotMapV0 serialization)
     std::vector<uint32_t> slot_map_entries_;
 
+    // ── Precise GC: liveness analysis for slot map filtering ─────────────
+    // Per-instruction live-in bitmask (1 << vreg).  Set by Generate() when
+    // config_.enable_liveness is true.  Used by RecordGcPoint() to report
+    // only ObjectRef vregs that are actually live at each GC point.
+    std::vector<uint64_t> live_in_;
+
+    // When true, RecordGcPoint() filters by live_in_ at current_instr_index_.
+    // Default false so existing call sites (EmitSafepointPoll, EmitCallWithSpill)
+    // continue to report all ObjectRef vregs conservatively.
+    bool use_liveness_ = false;
+
+    // Tracks whether liveness was computed in Generate().  Used by
+    // RecordGcPoint() to decide whether live_in_ contains valid data.
+    bool liveness_computed_ = false;
+
     // ── Conservative forward type inference ────────────────────────────
     // Per-vreg type state used to determine which vregs hold ObjectRefs
     // at GC safepoints.  Initialized to kTypeVoid in Generate().
@@ -384,16 +399,31 @@ void NativeCodeGenerator::RecordGcPoint(uint32_t native_offset) noexcept {
     GcPoint gp;
     gp.native_offset = native_offset;
 
+    // Determine which vregs are live at this instruction point.
+    // Default: report all ObjectRef vregs (conservative, backward compatible).
+    // When liveness is active: only report vregs that are BOTH ObjectRef-typed
+    // AND live at current_instr_index_.
+    uint64_t live_mask = ~0ULL;
+    if (use_liveness_ && liveness_computed_ &&
+        current_instr_index_ < live_in_.size()) {
+        live_mask = live_in_[current_instr_index_];
+    }
+
     // Count live ObjectRef vregs at this point
     uint32_t count = 0;
     for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-        if (vr < vreg_types_.size() && vreg_types_[vr] == kTypeObjectRef) ++count;
+        if (vr < vreg_types_.size() &&
+            vreg_types_[vr] == kTypeObjectRef &&
+            (live_mask & (1ULL << vr)))
+            ++count;
     }
     gp.slot_count = count;
     gp.slots = (count > 0) ? static_cast<GcSlot*>(CHAOS_IL2CPP_MALLOC(count * sizeof(GcSlot))) : nullptr;
     uint32_t idx = 0;
     for (uint32_t vr = 0; vr < kGprCount; ++vr) {
-        if (vr < vreg_types_.size() && vreg_types_[vr] == kTypeObjectRef) {
+        if (vr < vreg_types_.size() &&
+            vreg_types_[vr] == kTypeObjectRef &&
+            (live_mask & (1ULL << vr))) {
             gp.slots[idx].kind = GcSlotKind::Stack;
             gp.slots[idx].index = GprOff(vr) / 8;
             // Also record in slot_map_entries_ for GcSlotMapV0
@@ -444,9 +474,23 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::LdFtn:
         SetVregType(dst, kTypeObjectRef); break;
 
-    // LdFld/LdSFld: V1 conservatively marks as ObjectRef
-    // TODO(B3): precise field type metadata (requires per-field type map from module)
-    case IROpCode::LdFld:  case IROpCode::LdSFld:
+    // LdFld: use field type tags for precision when available
+    // LdSFld: conservative ObjectRef (no field_index carried in RegisterInstruction)
+    case IROpCode::LdFld:
+    {
+        if (config_.field_type_tags != nullptr &&
+            instr.imm.field_offset < config_.field_type_count) {
+            uint8_t field_tag = config_.field_type_tags[instr.imm.field_offset];
+            if (field_tag <= kTypeObjectRef) {
+                SetVregType(dst, field_tag);
+                break;
+            }
+        }
+        // Conservative fallback
+        SetVregType(dst, kTypeObjectRef);
+        break;
+    }
+    case IROpCode::LdSFld:
         SetVregType(dst, kTypeObjectRef); break;
 
     // Call: use ret_tag from call_cache for precise return type
@@ -457,6 +501,11 @@ void NativeCodeGenerator::PropagateTypes(
             auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
             if (cached.ret_tag != 0xFF && cached.ret_tag <= kTypeObjectRef)
                 tag = cached.ret_tag;
+        } else if (config_.method_ret_tags != nullptr &&
+                   current_instr_index_ < config_.method_ret_tag_count) {
+            uint8_t rtag = config_.method_ret_tags[current_instr_index_];
+            if (rtag <= kTypeObjectRef)
+                tag = rtag;
         }
         SetVregType(dst, tag);
         break;
@@ -2984,6 +3033,109 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     std::vector<uint8_t> removed_mask;
     if (config_.enable_optimizer)
         OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
+
+    // ── Liveness analysis for precise GC slot maps ─────────────────────────
+    // Computes per-instruction live-in bitmasks used by RecordGcPoint() to
+    // report only ObjectRef vregs that are both typed-as-ref AND live at the
+    // current instruction point.  Uses the optimized instruction stream so
+    // liveness reflects the actual emitted code.
+    if (config_.enable_liveness && n_instrs > 0)
+    {
+        live_in_.assign(n_instrs, 0);
+        std::vector<uint64_t> live_out(n_instrs, 0);
+        std::vector<uint64_t> def(n_instrs, 0);
+        std::vector<uint64_t> use(n_instrs, 0);
+
+        // Pass 1: Compute def and use for each instruction
+        for (uint32_t i = 0; i < n_instrs; ++i) {
+            const auto& inst = opt_instrs[i];
+            if (inst.has_dst() && inst.dst_reg() < kGprCount)
+                def[i] |= (1ULL << inst.dst_reg());
+            if (inst.has_src1() && inst.src1_reg() < kGprCount)
+                use[i] |= (1ULL << inst.src1_reg());
+            if (inst.has_src2() && inst.src2_reg() < kGprCount)
+                use[i] |= (1ULL << inst.src2_reg());
+            if (inst.flags() & interpreter::kRegHasSrc3) {
+                uint8_t src3 = inst.src3_reg();
+                if (src3 < kGprCount)
+                    use[i] |= (1ULL << src3);
+            }
+            // Calli: func_ptr vreg in imm.operand_index is an implicit source
+            if (inst.op_code() == interpreter::IROpCode::Calli &&
+                inst.imm.operand_index < kGprCount) {
+                use[i] |= (1ULL << inst.imm.operand_index);
+            }
+        }
+
+        // Pass 2: Iterative backward dataflow to fixed point
+        bool changed = true;
+        while (changed) {
+            changed = false;
+            for (int32_t i = static_cast<int32_t>(n_instrs) - 1; i >= 0; --i) {
+                const auto& inst = opt_instrs[i];
+                uint64_t new_live_out = 0;
+                auto opc = inst.op_code();
+
+                if (opc == interpreter::IROpCode::Switch) {
+                    uint32_t n_targets = inst.imm.i4;
+                    if (n_targets > 0 && inst.imm.ptr) {
+                        const uint32_t* targets = static_cast<const uint32_t*>(inst.imm.ptr);
+                        uint32_t limit = n_targets < 256 ? n_targets : 256;
+                        for (uint32_t ti = 0; ti < limit; ++ti) {
+                            if (targets[ti] < n_instrs)
+                                new_live_out |= live_in_[targets[ti]];
+                        }
+                    }
+                } else if (opc == interpreter::IROpCode::Br ||
+                           opc == interpreter::IROpCode::Leave) {
+                    uint32_t target = inst.imm.branch_target;
+                    if (target < n_instrs)
+                        new_live_out |= live_in_[target];
+                } else if (opc == interpreter::IROpCode::BrTrue ||
+                           opc == interpreter::IROpCode::BrFalse ||
+                           opc == interpreter::IROpCode::Beq ||
+                           opc == interpreter::IROpCode::BneUn ||
+                           opc == interpreter::IROpCode::Blt ||
+                           opc == interpreter::IROpCode::Bgt ||
+                           opc == interpreter::IROpCode::Ble ||
+                           opc == interpreter::IROpCode::Bge ||
+                           opc == interpreter::IROpCode::BltUn ||
+                           opc == interpreter::IROpCode::BgtUn ||
+                           opc == interpreter::IROpCode::BleUn ||
+                           opc == interpreter::IROpCode::BgeUn) {
+                    uint32_t target = inst.imm.branch_target;
+                    if (target < n_instrs)
+                        new_live_out |= live_in_[target];
+                    if (static_cast<uint32_t>(i) + 1 < n_instrs)
+                        new_live_out |= live_in_[i + 1];
+                } else if (opc == interpreter::IROpCode::Ret ||
+                           opc == interpreter::IROpCode::Throw ||
+                           opc == interpreter::IROpCode::Rethrow ||
+                           opc == interpreter::IROpCode::EndFinally ||
+                           opc == interpreter::IROpCode::EndFilter) {
+                    // Terminator: no successors
+                } else {
+                    if (static_cast<uint32_t>(i) + 1 < n_instrs)
+                        new_live_out |= live_in_[i + 1];
+                }
+
+                uint64_t new_live_in = use[i] | (new_live_out & ~def[i]);
+
+                if (new_live_in != live_in_[i] || new_live_out != live_out[i]) {
+                    live_in_[i] = new_live_in;
+                    live_out[i] = new_live_out;
+                    changed = true;
+                }
+            }
+        }
+
+        // Activate liveness filtering in RecordGcPoint
+        use_liveness_ = true;
+        liveness_computed_ = true;
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+            "Liveness computed for %u instructions, use_liveness=%d",
+            n_instrs, (int)use_liveness_);
+    }
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
