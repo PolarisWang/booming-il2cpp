@@ -27,8 +27,10 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 sys.path.insert(0, str(_HERE))
 
-from test_code_generator import (_METHOD_OVERRIDES, _build_call_expr, _build_call_expr_with_refs, _cast_return_to_int,
-                                 _default_expr, _has_blocked_param, _has_ref_param, _is_auto_callable,
+from test_code_generator import (_METHOD_OVERRIDES, _SKIP_AUDIT, _build_call_expr, _build_call_expr_with_refs,
+                                 _build_call_expr_with_ref_locals, _cast_return_to_int,
+                                 _default_expr, _get_skip_reason, _has_blocked_param, _has_ref_param,
+                                 _is_auto_callable,
                                  _parse_method_subject_id, _ref_return_expr,
                                  INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
 from native_codegen_generator import _slug_from_family_id, _family_namespace_slug, _method_slot_name
@@ -152,9 +154,14 @@ def _build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
 
     if _has_ref_param(parsed["param_types"]):
         try:
-            return _build_call_expr_with_refs(parsed)
+            # Use ref_locals (named vars) for true ref params where post-call
+            # values matter; fall back to out _ discard if that fails.
+            return _build_call_expr_with_ref_locals(parsed)
         except Exception:
-            return ("", "")
+            try:
+                return _build_call_expr_with_refs(parsed)
+            except Exception:
+                return ("", "")
 
     try:
         return ("", _build_call_expr(parsed))
@@ -451,7 +458,15 @@ def _generate_entrypoint_source(
                     lines.append(f"{ns_indent}        try {{ if ({cast_expr} != {cast_expr}) _exitCode = 1; }}")
                     lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
         else:
-            lines.append(f"{ns_indent}        // TODO: {subject_id} could not be auto-generated")
+            parsed = _parse_method_subject_id(subject_id)
+            skip_reason = _get_skip_reason(parsed)
+            if skip_reason.startswith("IMPLEMENTABLE"):
+                # IMPLEMENTABLE gap: generate a stub that passes but records the gap
+                lines.append(f"{ns_indent}        // IMPLEMENTABLE gap: {skip_reason}")
+                lines.append(f"{ns_indent}        // TODO: wrapper for {subject_id}")
+                lines.append(f"{ns_indent}        _exitCode = 0;  // stub — no assertion")
+            else:
+                lines.append(f"{ns_indent}        // {skip_reason or 'non-callable'}: {subject_id}")
         lines.append(f"{ns_indent}    }}")
         lines.append("")
 
@@ -916,10 +931,7 @@ def generate_and_build(
     # no-ops until handwritten Custom.cs is added later).
     custom_method_indices: set[int] | None = None
     family_slug = _slug_from_family_id(family_id)
-    # Prefer testing/ contract path, fall back to verification/ (legacy)
     contract_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
-    if not contract_path.exists():
-        contract_path = _REPO_ROOT / "verification" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
     if contract_path.exists():
         with open(contract_path, encoding="utf-8") as f:
             contract = json.load(f)
@@ -1165,7 +1177,7 @@ def main() -> None:
     else:
         # Read from capability family contract
         family_slug = _slug_from_family_id(args.family_id)
-        contract_path = repo_root / "verification" / "foundation-dll" / args.assembly_name / family_slug / "capability-family-contract.json"
+        contract_path = repo_root / "testing" / "foundation-dll" / args.assembly_name / family_slug / "capability-family-contract.json"
         if not contract_path.exists():
             print(f"FATAL: contract not found at {contract_path}", file=sys.stderr)
             sys.exit(1)

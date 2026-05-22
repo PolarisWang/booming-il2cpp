@@ -37,7 +37,7 @@ def _read_json(path: Path) -> dict[str, Any] | None:
 
 
 def _family_truth_root(repo_root: Path, assembly_name: str, family_id: str) -> Path:
-    return repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
+    return repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id)
 
 
 def _default_method_contracts(family: dict[str, Any], method_subject_ids: list[str]) -> list[dict[str, Any]]:

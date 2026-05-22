@@ -352,7 +352,7 @@ def _benchmark_hint_empty(key: str) -> str:
 
 def _hint_source(key: str) -> list[str]:
     if key.startswith("stage") or key == "statusReason":
-        return ["inventory_generator.py", "verification-v1/spec.md", "subject-test-framework-v1/INDEX.md", "AOT新Feature接入自测规范.md"]
+        return ["inventory_generator.py", "subject-test-framework-v1/INDEX.md", "AOT新Feature接入自测规范.md"]
     if key in {"platformId", "deviceId", "deviceName", "managedStatus", "nativeStatus", "interpreterStatus", "lastRecordedAt", "gitCommit", "isStale"} or key.endswith("MeanDurationMs") or key.endswith("OpsPerSecond") or key.endswith("RelativeToManaged"):
         return [
             "artifact/verification-catalog/archive/master/evidence-claims-master.json",
@@ -1177,7 +1177,7 @@ def _write_verification_navigation(
                 "benchmark": _relative(repo_root, benchmark_root),
             },
             "commands": {
-                "verify": "python build/toolchains/run/run.py verify verification-v1 --json",
+                "verify": "python build/toolchains/run/run.py test inventory --json",
                 "workspace": "python build/toolchains/run/run.py generate project all --json",
             },
         },
@@ -1215,7 +1215,7 @@ def _write_verification_navigation(
             f"- Total workspace: `{_relative(repo_root, verification_all_solution)}`",
             "",
             "## Commands",
-            "- `python build/toolchains/run/run.py verify verification-v1 --json`",
+            "- `python build/toolchains/run/run.py test inventory --json`",
             "- `python build/toolchains/run/run.py generate project all --json`",
             "",
         ]

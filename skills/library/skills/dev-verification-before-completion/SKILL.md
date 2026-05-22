@@ -1,4 +1,4 @@
----
+﻿---
 name: dev-verification-before-completion
 description: 在即将声称工作完成、已修复或已通过时使用；在提交或创建 PR 之前使用，需要运行验证命令并先确认输出，再做任何成功声明
 ---
@@ -44,9 +44,9 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 - 项目级测试知识以 [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-测试验证/INDEX.md) 为正式入口
 - selector / registry 信息优先读 `artifacts/tests/registry/current/index.json` 或执行 `run test registry list --json`
 - 如果 registry 给出 `canonicalCommand`，优先直接执行
-- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev-project-test-governance` / `verification-v1` 主线，则 regression 通过后还必须刷新 formal source；默认执行 `run verify verification-v1 --json`
+- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev-project-test-governance` verification 主线，则 regression 通过后还必须刷新 formal source；默认执行 `run test inventory --json`
 - `run test inventory` 不是 public verification entry
-- `benchmark --record` 不等于 formal refresh；需要新的 benchmark archive / projection / merged data 时，仍要执行 `run verify verification-v1 --json`
+- `benchmark --record` 不等于 formal refresh；需要新的 benchmark archive / projection / merged data 时，仍要执行 `run test inventory --json`
 - 只有 `summaryPath` / `eventsPath` / `consolePath`，但没有 `verification/archive/{latest,master,reports}` 或 `verification/evidence/owners/*/codegen-stubs/*` 更新时，不足以声称“新测试流程已打通”
 - `docs/dev/**` 只是任务过程记录，不是长期 authority
 
@@ -60,7 +60,7 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
   - `build/toolchains/run/testing/foundation_dll/verification_kernel.py`
   - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
   - `Native Proof Detail`、family progress、tooltip detail
-- 命中时，默认需要执行 `run verify verification-v1 --json`，而不是只改 HTML 或局部 JSON
+- 命中时，默认需要执行 `run test inventory --json`，而不是只改 HTML 或局部 JSON
 - 完成前至少核对：
   - `verification/projections/foundation-dll-audit/family-verification-claims.json`
   - `verification/projections/foundation-dll-audit/family-verification.json`

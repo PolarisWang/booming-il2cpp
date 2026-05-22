@@ -1044,28 +1044,6 @@
       ]
     },
     {
-      "id": "verify-verification-v1",
-      "title": "Refresh and validate verification-v1 formal outputs",
-      "group": "Test And Verify",
-      "handler": "verify.dispatch",
-      "platforms": [
-        "windows",
-        "macos",
-        "linux"
-      ],
-      "tokens": [
-        "verify",
-        "verification-v1"
-      ],
-      "target": "verification-v1",
-      "syntax": "verify verification-v1 [--output <dir>]",
-      "show_in_menu": true,
-      "examples": [
-        "run verify verification-v1",
-        "run verify verification-v1 --output verification/projections/testing-inventory"
-      ]
-    },
-    {
       "id": "foundation-dll-derive",
       "title": "Derive a candidate foundation DLL denominator ledger",
       "group": "Test And Verify",

@@ -1,4 +1,4 @@
----
+﻿---
 name: dev-executing-plans
 description: 当你有一个已写好的实现计划，需要在当前会话中按批次执行、维护任务状态，并在必要时处理活动任务冲突时使用
 ---
@@ -231,17 +231,17 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 2. 运行 formal verification gate 与项目级测试
    - obligation-driven 任务先按 `dev-verification-before-completion` 选择并执行正式对象
    - 再运行受影响项目级测试套件或项目约定的完整命令
-   - 如果任务命中 `dev-project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs：在 formal object 与项目测试通过后，必须执行 `run verify verification-v1 --json` 刷新正式产物
+   - 如果任务命中 `dev-project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs（即旧 verification-v1 框架的消费链路）：在 formal object 与项目测试通过后，必须执行 `run test inventory --json` 刷新正式产物
    - 不要把 `run test inventory` 当成 public verification entry；它只是内部生成命令。
-   - 如果本批次只跑了 `benchmark --record`，则只有 raw benchmark records 被更新，还不算刷新 formal archive / projection，仍需要继续执行 `run verify verification-v1 --json`。
-   - 只有当 `run verify verification-v1 --json` 返回的 `artifacts` 中出现最新 `verification/archive/latest/*`、`master/*`、`reports/*`，且命中 codegen 主线时出现 `verification/evidence/owners/*/codegen-stubs/*`，本轮才算真正打通新测试流程
+   - 如果本批次只跑了 `benchmark --record`，则只有 raw benchmark records 被更新，还不算刷新 formal archive / projection，仍需要继续执行 `run test inventory --json`。
+   - 只有当 `run test inventory --json` 返回的 `artifacts` 中出现最新 `verification/archive/latest/*`、`master/*`、`reports/*`，且命中 codegen 主线时出现 `verification/evidence/owners/*/codegen-stubs/*`，本轮才算真正打通新测试流程
    - 如果测试阶段出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃：
      - 本次验证立即视为失败
      - 收集 `stderr`、`binlog`、崩溃堆栈或 dump 信息（如果可用）
      - 使用 `dev-systematic-debugging` 定位并修复根因
      - 根因未修复前，不得继续归档或收尾
 3. 将结构告警、架构审视结论与验证结果写入 `STATUS.md`
-   - 如果本轮执行了 `run verify verification-v1 --json`，同时写入新的 formal verification 数据路径，而不只是运行日志路径
+   - 如果本轮执行了 `run test inventory --json`，同时写入新的 formal verification 数据路径，而不只是运行日志路径
    - 如果 `docs/dev/ACTIVE.md` 仍指向当前任务，再同步其中的摘要指针
    - 只有在重要决策或验证失败时才需要额外写入 `notes/progress-*.md`
    - 默认使用结构化证据卡，不写长篇完成总结
@@ -251,7 +251,7 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 5. 只有在以下条件都满足后，才允许归档为 `completed`：
    - 计划任务全部完成
    - formal verification gate 通过
-   - 如本轮要求新的 verification 数据：`verification-v1` formal source 已刷新完成
+   - 如本轮要求新的 verification 数据：verification formal source 已刷新完成
    - 最新结构告警不存在未解决的 `blocker`
    - `critical` 任务的最新 `权责图审核` 已完成
    - 受影响项目测试通过

@@ -138,7 +138,7 @@ class TuiTests(unittest.TestCase):
         self.assertIn("test-registry-list", command_ids)
         self.assertIn("test-registry-refresh", command_ids)
         self.assertIn("test-registry-check-consistency", command_ids)
-        self.assertIn("verify-verification-v1", command_ids)
+        self.assertNotIn("verify-verification-v1", command_ids)
         self.assertNotIn("test-family-suite", command_ids)
         self.assertNotIn("test-list", command_ids)
 
@@ -165,7 +165,7 @@ class TuiTests(unittest.TestCase):
 
         self.assertEqual(["test", "registry", "list"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "registry-list"))
         self.assertEqual(["test", "all"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "all"))
-        self.assertEqual(["verify", "verification-v1"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "verify"))
+        self.assertIsNone(tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "verify"))
 
 
 if __name__ == "__main__":

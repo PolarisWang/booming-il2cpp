@@ -7,7 +7,7 @@ Unified pipeline calling the canonical 9-stage verify_family() for each family:
   2. Phase 2 generation  — run_phase2.py
   3. Per-family verify   — verify_family(slug) for each active family
   4. Results table       — aggregate preflight/codegen/fact/audit/overall
-  5. Dashboard refresh   — verification-v1 projection refresh
+  5. Inventory refresh   — test inventory projection refresh
 
 Returns exit code 0 on success, 1 on any family with failed required stages.
 """
@@ -24,7 +24,7 @@ REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
 REFRESH_CMD = [sys.executable, str(REPO / "build" / "toolchains" / "run" / "run.py"),
-               "verify", "verification-v1", "--json"]
+               "test", "inventory", "--json"]
 
 # Path to the orchestrator module (for importing verify_family)
 _ORCHESTRATOR_DIR = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll"

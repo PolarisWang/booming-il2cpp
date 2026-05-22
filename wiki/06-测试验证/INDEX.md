@@ -4,10 +4,10 @@
 
 ## Authority 分工
 
-- [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)
-  - 拥有新的长期 canonical 测试流程入口、formal source 口径、全覆盖模型与旧流程退役规则
-- [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md)
-  - 拥有统一测试主线、collection / manifest / codegen 分层与宿主边界
+- [`统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
+  - 拥有统一测试主线、collection / manifest / codegen 分层与宿主边界的 authority
+- [`../../docs/archive/architecture/subject-test-framework-v1/INDEX.md`](../../docs/archive/architecture/subject-test-framework-v1/INDEX.md)
+  - 保留为历史架构参考（已归档）
 - [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)
   - 拥有 capability intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序
 - 本 `INDEX.md`
@@ -15,15 +15,15 @@
 
 ## 正式主线
 
-- 正式长期流程入口：[`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)
-- 默认 formal refresh 入口：`run verify verification-v1 --json`
+- 统一测试框架入口：[`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
+- 正式 inventory 刷新入口：`run test inventory --json`
 - 审核者稳定报告入口：[`../../docs/verification/INDEX.md`](../../docs/verification/INDEX.md)
 - foundation DLL 当前总览页：[`../../docs/verification/foundation-dll-audit/dashboard.html`](../../docs/verification/foundation-dll-audit/dashboard.html)
 - foundation DLL 详情页入口：`../../docs/verification/foundation-dll-audit/dlls/<assembly>.html`
 - artifact 索引入口：[`../../docs/verification/foundation-dll-audit/artifact-index.html`](../../docs/verification/foundation-dll-audit/artifact-index.html)
-- `run test inventory` 只保留为内部实现命令，不是 public entry。
-- `benchmark --record` 只写原始 benchmark records，不会直接刷新 formal archive / projection。需要新的正式报告、dashboard 和合并数据时，仍然走 `run verify verification-v1 --json`。
-- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、页面矩阵列或证据链接规则，也必须通过 `run verify verification-v1 --json` 刷新正式数据；不允许只改 schema、模板或页面读取逻辑而不刷新 archive / reports / projections。
+- `run test inventory` 用于刷新 formal archive 和 projections。
+- `benchmark --record` 只写原始 benchmark records，不会直接刷新 formal archive / projection。需要新的 benchmark archive / projection 时，通过 `run test inventory` 刷新。
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、页面矩阵列或证据链接规则，也必须通过 `run test inventory --json` 刷新正式数据；不允许只改 schema、模板或页面读取逻辑而不刷新 archive / reports / projections。
 - 对于 DLL-first reporting 这类 evidence-driven projection，`artifacts/**` 下的真实产物才算 primary evidence；`docs/**`、`subjects/**`、`artifact/verification-catalog/**` 只允许作为 support refs 展示，不能直接驱动项目变绿或混入 artifact index。
 - 主线定义：`managed solution -> dotnet 8 collection analysis -> collection files -> managed test project -> native project -> native test project -> hotupdate patch project + hotupdate test host project`
 - 测试声明：由 `Chaos.TestFramework.Sdk` 中的 attribute 在 managed solution 中声明。
@@ -39,12 +39,11 @@
 | --- | --- | --- |
 | [`CodeGen快照测试规范.md`](./CodeGen快照测试规范.md) | CodeGen 增量回归测试 | 定义 NativeAotEmitter 输出的快照测试体系：夹具结构、基线管理、开发工作流集成 |
 | [`测试方法清单.md`](./测试方法清单.md) | 全链路测试方法索引 | **推荐入口** — 系统梳理 Python、C# Foundation-DLL、Native 编译三条测试链的所有测试方法和管线阶段，按文件/类/方法粒度索引 |
-| [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md) | Verification V1 测试流程 | 说明新的 canonical 测试流程、formal source、覆盖模型、投影视图与旧流程清理规则 |
+| [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层，为正式 canonical 入口 |
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
 | [`Foundation-DLL新增验证接入流程.md`](./Foundation-DLL新增验证接入流程.md) | foundation DLL 新增验证接入 | 说明 `derive -> promote -> onboard` 的标准流程 |
 | [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增测试接入 | 说明如何在 subject source 中声明测试，并接入 collection-driven 主线 |
 | [`ASan-内存错误检测指南.md`](./ASan-%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B%E6%8C%87%E5%8D%97.md) | ASan 内存检测 | 说明 ASan 的构建配置、运行方式、假阳性处理策略与常见问题 |
-| [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层 |
 | [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) | Scriban 使用与 codegen 规范 | 说明 IL2CPP / Python codegen 默认优先 Scriban，以及能力不足时的扩展顺序 |
 | [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject 统一入口 | 说明 subject 入口、public command 和结果落点 |
 | [`subject-perf-and-smoke-baselines.md`](./subject-perf-and-smoke-baselines.md) | perf / smoke baseline | 说明 subject 的 perf baseline、smoke 验证与报告路径 |

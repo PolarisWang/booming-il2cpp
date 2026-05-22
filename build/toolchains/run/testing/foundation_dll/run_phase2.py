@@ -288,7 +288,7 @@ def main():
             if int(fam.get("methodCount", 0)) <= 0:
                 continue
             slug = _family_slug(fid)
-            contract_path = REPO / "verification" / "foundation-dll" / aname / slug / "capability-family-contract.json"
+            contract_path = REPO / "testing" / "foundation-dll" / aname / slug / "capability-family-contract.json"
             if not contract_path.exists():
                 print(f"  SKIP {aname}/{slug} — no contract")
                 continue

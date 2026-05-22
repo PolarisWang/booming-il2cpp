@@ -1,4 +1,4 @@
-# executing-plans
+﻿# executing-plans
 
 > 项目中的顺序执行主线，负责执行计划、维�?`STATUS.md`、`ACTIVE.md`、索引和目录终态，并触发项目知识沉淀�?
 
@@ -17,7 +17,7 @@
 - 每任务后更新 `STATUS.md`、`ACTIVE.md`、`notes/progress-*.md` 与索�?
 - 有长期知识时调用 `project-wiki-maintenance`
 - obligation-driven 任务�?`completed` 前必须先消费 [`verification-before-completion`](../04-%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C/verification-before-completion.md)
-- 需要新的验证通过记录 / 新的数据时，�?formal object 与项目测试通过后继续执�?`run verify verification-v1 --json`，刷�?`verification-v1` 正式产物
+- 需要新的验证通过记录 / 新的数据时，�?formal object 与项目测试通过后继续执�?`run test inventory --json`，刷�?`verification-v1` 正式产物
 
 ## 项目规则
 

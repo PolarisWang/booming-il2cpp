@@ -16,7 +16,6 @@ if __package__ in (None, ""):
     from commands import project as project_commands
     from commands import foundation_dll as foundation_dll_commands
     from commands import test as test_commands
-    from commands import verify as verify_commands
     from commands import benchmark as benchmark_commands
     from commands import stress as stress_commands
     from core import manifest as manifest_module
@@ -35,7 +34,6 @@ else:
     from .commands import project as project_commands
     from .commands import foundation_dll as foundation_dll_commands
     from .commands import test as test_commands
-    from .commands import verify as verify_commands
     from .commands import benchmark as benchmark_commands
     from .commands import stress as stress_commands
     from .core import manifest as manifest_module
@@ -57,7 +55,7 @@ except ImportError:
     from .commands.trace_analyze import handle as handle_trace_analyze
 
 
-OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch", "verify.dispatch", "foundation_dll.dispatch"}
+OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch", "foundation_dll.dispatch"}
 
 
 def resolve_repo_root() -> Path:
@@ -289,15 +287,6 @@ def execute_command(
             host_platform,
             command_text,
             manifest,
-            options or {},
-            progress_callback=progress_callback,
-        )
-    if command["handler"] == "verify.dispatch":
-        return verify_commands.handle(
-            command,
-            repo_root,
-            host_platform,
-            command_text,
             options or {},
             progress_callback=progress_callback,
         )

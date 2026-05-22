@@ -7,7 +7,7 @@ Commands:
     run benchmark status [--subject <id>] [--all]
 
 `--record` only appends raw benchmark records. Refresh formal benchmark projections
-with `run verify verification-v1 --json`.
+with `run test inventory --json`.
 """
 from __future__ import annotations
 
@@ -1081,12 +1081,12 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
         if regression_found:
             print(
                 "Benchmark records generated; regression verdict found. "
-                "Run `run verify verification-v1 --json` to merge records and refresh verification/projections/benchmark/."
+                "Run `run test inventory --json` to merge records and refresh verification/projections/benchmark/."
             )
             return 0
         print(
             "Benchmark records generated without execution errors. "
-            "Run `run verify verification-v1 --json` to refresh formal benchmark projections."
+            "Run `run test inventory --json` to refresh formal benchmark projections."
         )
         return 0
 

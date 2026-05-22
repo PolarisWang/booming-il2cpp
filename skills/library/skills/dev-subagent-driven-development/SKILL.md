@@ -1,4 +1,4 @@
----
+﻿---
 name: dev-subagent-driven-development
 description: 当在当前会话中执行具有独立任务的实现计划时使用
 ---
@@ -59,7 +59,7 @@ description: 当在当前会话中执行具有独立任务的实现计划时使�
 - 在规格合规性通过前开始代码质量审查
 - 让子 Agent 自己去读计划文件
 - 用"任务都做完了"替代 formal verification gate
-- 只拿运行日志就声称"新测试流程已打通"，却没有刷新 `verification-v1` formal source
+- 只拿运行日志就声称"新测试流程已打通"，却没有刷新 verification formal source
 - 用固定文件行数直接判定失败
 - 把 `warn` 升级成独立人工复核流程
 - 让 `STATUS.md`、`ACTIVE.md` 或索引落后于当前进度

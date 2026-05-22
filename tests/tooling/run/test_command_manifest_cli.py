@@ -94,15 +94,13 @@ class CommandManifestCliTests(CommandManifestTestSupport):
         self.assertEqual("testing-inventory", inventory_case["target"])
         self.assertEqual("verification/projections/testing-inventory", inventory_case["options"]["output"])
 
-        verification_case = manifest_module.parse_cli(
+        removed_verification = manifest_module.parse_cli(
             ["verify", "verification-v1", "--output", "verification/projections/testing-inventory"],
             False,
             manifest,
             "windows",
         )
-        self.assertEqual("verify-verification-v1", verification_case["command"]["id"])
-        self.assertEqual("verification-v1", verification_case["target"])
-        self.assertEqual("verification/projections/testing-inventory", verification_case["options"]["output"])
+        self.assertIsNone(removed_verification["command"])
 
         registry_refresh = manifest_module.parse_cli(["test", "registry", "refresh"], False, manifest, "macos")
         self.assertEqual("test-registry-refresh", registry_refresh["command"]["id"])

@@ -85,7 +85,6 @@ class CommandManifestTests(unittest.TestCase):
                 "test-family-all",
                 "test-all",
                 "test-list",
-                "verify-verification-v1",
             }.issubset(visible_command_ids)
         )
         self.assertNotIn("test-pipeline", visible_command_ids)
@@ -249,15 +248,13 @@ class CommandManifestTests(unittest.TestCase):
         )
         self.assertEqual("test-registry-check-consistency", registry_check["command"]["id"])
 
-        verification_case = manifest_module.parse_cli(
+        removed_verification = manifest_module.parse_cli(
             ["verify", "verification-v1", "--output", "verification/projections/testing-inventory"],
             False,
             manifest,
             "windows",
         )
-        self.assertEqual("verify-verification-v1", verification_case["command"]["id"])
-        self.assertEqual("verification-v1", verification_case["target"])
-        self.assertEqual("verification/projections/testing-inventory", verification_case["options"]["output"])
+        self.assertIsNone(removed_verification["command"])
 
         list_family = manifest_module.parse_cli(["test", "list", "smoke"], False, manifest, "macos")
         self.assertEqual("test-list", list_family["command"]["id"])
