@@ -96,6 +96,7 @@ add_library(chaos_runtime_core STATIC
     assembly_manager.cpp
     gc/gc_bump_cache.h
     gc/gc_bit_utils.h
+    gc/gc_features.h
     gc/gc_helpers.h
     gc/gc_transition.h
     gc/gc_scheduler.h
@@ -150,6 +151,36 @@ add_library(chaos_runtime_core STATIC
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
+
+# ── GC feature selection (G-29: compile-time feature toggles) ──────
+#
+# Each option maps to a CHAOS_IL2CPP_GC_* compile definition.
+# Disable features to reduce binary size and complexity on constrained
+# platforms.  CoreCLR equivalent: FEATURE_* macros in gcpriv.h.
+#
+# See gc/gc_features.h for the full feature flag reference.
+
+option(CHAOS_IL2CPP_GC_BGC          "Enable Background GC (BGC) concurrent mark-sweep"     ON)
+option(CHAOS_IL2CPP_GC_PARALLEL_MARK "Enable parallel marking in GC"                        ON)
+option(CHAOS_IL2CPP_GC_EVENTS       "Enable GC event tracing and callbacks"                 ON)
+option(CHAOS_IL2CPP_GC_STRESS       "Enable GC stress testing mode (debug/validation only)" OFF)
+option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" OFF)
+
+if(CHAOS_IL2CPP_GC_BGC)
+    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_BGC=1)
+endif()
+if(CHAOS_IL2CPP_GC_PARALLEL_MARK)
+    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_PARALLEL_MARK=1)
+endif()
+if(CHAOS_IL2CPP_GC_EVENTS)
+    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_EVENTS=1)
+endif()
+if(CHAOS_IL2CPP_GC_STRESS)
+    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_STRESS=1)
+endif()
+if(CHAOS_IL2CPP_GC_LARGE_PAGES)
+    target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_LARGE_PAGES=1)
+endif()
 target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS>)
 target_include_directories(
     chaos_runtime_core
@@ -164,14 +195,14 @@ target_include_directories(
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 if(WIN32)
     target_link_libraries(chaos_runtime_core PRIVATE bcrypt)
-elseif(UNIX AND NOT APPLE)
+elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_link_libraries(chaos_runtime_core PRIVATE numa)
 endif()
 
 # NUMA platform sources: only compile the appropriate file for each platform.
 if(WIN32)
     target_sources(chaos_runtime_core PRIVATE gc/gc_numa_win.cpp)
-elseif(UNIX AND NOT APPLE)
+elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_sources(chaos_runtime_core PRIVATE gc/gc_numa_linux.cpp)
 else()
     target_sources(chaos_runtime_core PRIVATE gc/gc_numa_other.cpp)
