@@ -7,6 +7,7 @@
 #include <cstdio>
 
 #include "generated_code_compat.h"
+#include "string_table.h"
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
 #include "reflection_query_model.h"
@@ -63,9 +64,19 @@ static void write_string_data(CHAOS_IL2CPP_INTPTR str_handle, const char* data, 
 static const char* get_string_data(CHAOS_IL2CPP_INTPTR str_handle, CHAOS_IL2CPP_UINTPTR& out_len) noexcept
 {
     if (str_handle == 0) { out_len = 0; return ""; }
-    // length at offset 16
+    // Handle compile-time tagged string IDs (from CHAOS_IL2CPP_STRING_ID)
+    if (chaos_is_string_id(str_handle)) {
+        auto id = chaos_extract_string_id(str_handle);
+        auto sv = chaos::il2cpp::string_table::Resolve(id);
+        if (sv.utf8_data != nullptr) {
+            out_len = sv.byte_count;
+            return sv.utf8_data;
+        }
+        out_len = 0;
+        return "";
+    }
+    // Raw managed object pointer path
     out_len = static_cast<CHAOS_IL2CPP_UINTPTR>(*reinterpret_cast<const CHAOS_IL2CPP_INT32*>(str_handle + 16));
-    // utf8_data at offset 24
     return *reinterpret_cast<const char* const*>(str_handle + 24);
 }
 

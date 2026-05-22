@@ -32,7 +32,7 @@
 | 文件 | 职责 |
 |------|------|
 | `Emission/NativeAotLoweringPlanner.MethodEmission.cs` | 方法体发射入口、指令派发、结构化控制流发射、虚方法/接口方法 dispatch |
-| `Emission/NativeAotLoweringPlanner.ExceptionEmission.cs` | EH C++ 生成（5种 shape） |
+| `Emission/NativeAotLoweringPlanner.ExceptionEmission.cs` | EH C++ 生成（5种 shape），InlineShapeDescriptor 调用折叠、enum.ToString 常量折叠 |
 | `Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs` | CFG 构建、基本块分析、结构化恢复算法 |
 | `Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` | 对象模型发射（TypeInfo、VTable 数组、iface_map、对象创建） |
 | `Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs` | SubjectId 工具函数、stable_id 计算、类型名解析 |

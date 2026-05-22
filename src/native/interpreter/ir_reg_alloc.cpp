@@ -35,6 +35,19 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     RegisterMethod result;
     result.seh_clauses = ir_method.seh_clauses;
 
+    // ── Phase 0: Build catch handler entry map ──────────────────────────
+    // Pre-scan SEH clauses to find catch handler start indices where the
+    // allocator must push a synthetic exception vreg onto the virtual stack.
+    uint32_t catch_entry_pc[16];
+    uint32_t catch_entry_count = 0;
+    for (size_t ci = 0; ci < ir_method.seh_clauses.size() && catch_entry_count < 16; ++ci) {
+        auto flags = static_cast<uint32_t>(ir_method.seh_clauses[ci].flags);
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
+            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+            catch_entry_pc[catch_entry_count++] = static_cast<uint32_t>(ir_method.seh_clauses[ci].handler_start_idx);
+        }
+    }
+
     // Virtual register stack — tracks which virtual reg holds each stack slot.
     // Fixed-size array avoids heap allocation from std::vector.
     uint32_t virt_stack[256];
@@ -45,6 +58,27 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     result.instructions.reserve(instrs.size());
 
     for (size_t i = 0; i < instrs.size(); ++i) {
+        // Check if this instruction is a catch handler entry point.
+        // If so, push a synthetic exception vreg onto the virtual stack
+        // so that the handler's first pop instruction maps correctly.
+        for (uint32_t ei = 0; ei < catch_entry_count; ++ei) {
+            if (catch_entry_pc[ei] == i) {
+                uint8_t exc_reg = static_cast<uint8_t>(next_vreg++);
+                virt_stack[virt_sp++] = exc_reg;
+                // Look up class_token from the corresponding SEH clause.
+                uint32_t ct = 0;
+                for (size_t ci = 0; ci < ir_method.seh_clauses.size(); ++ci) {
+                    if (static_cast<uint32_t>(ir_method.seh_clauses[ci].handler_start_idx) == i) {
+                        ct = ir_method.seh_clauses[ci].class_token;
+                        break;
+                    }
+                }
+                result.catch_handler_entries.push_back(
+                    {static_cast<uint32_t>(i), exc_reg, ct});
+                break;
+            }
+        }
+
         const auto& ir = instrs[i];
         RegisterInstruction ri = {};
         uint32_t op_val = static_cast<uint32_t>(ir.op_code);
@@ -1881,14 +1915,161 @@ static void Reg_InitBlk(RegisterFrame& frame, const RegisterInstruction& instr) 
     Reg_Unsupported(frame, instr);
 }
 
-// ── Throw / Rethrow / EndFinally / EndFilter / Break ────────────────────
+// ── Throw: SEH-aware catch dispatch with finally unwind + typed matching ──
 static void Reg_Throw(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    // Throw requires SEH handling — fall through to VM.
-    Reg_Unsupported(frame, instr);
+    void* exc_obj = frame.regs.reg_ptr(instr.src1_reg());
+    frame.exception_obj = exc_obj;
+
+    // Scan backward for innermost catch/filter handler.
+    // For typed clauses, check type match via callback.
+    int32_t catch_idx = -1;
+    for (int32_t i = static_cast<int32_t>(frame.seh_clause_count) - 1; i >= 0; --i) {
+        const auto& clause = frame.seh_clauses[i];
+        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx) continue;
+        auto flags = static_cast<uint32_t>(clause.flags);
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
+            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+            // Check typed catch matching.
+            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 &&
+                frame.typed_catch_check != nullptr &&
+                !frame.typed_catch_check(exc_obj, clause.class_token)) {
+                continue;  // Type doesn't match — keep scanning outward.
+            }
+            catch_idx = i;
+            break;
+        }
+    }
+
+    if (catch_idx < 0) {
+        // No catch handler — propagate to caller.
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+
+    // Collect finally/fault clauses nested inside the catch's try range
+    // that also cover the throw pc.  These must unwind before entering catch.
+    const auto& catch_clause = frame.seh_clauses[catch_idx];
+    frame.unwind_finally_count = 0;
+    for (int32_t i = 0; i < static_cast<int32_t>(frame.seh_clause_count); ++i) {
+        if (i == catch_idx) continue;
+        const auto& clause = frame.seh_clauses[i];
+        auto flags = static_cast<uint32_t>(clause.flags);
+        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) ||
+             flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
+            frame.pc >= clause.try_start_idx && frame.pc < clause.try_end_idx &&
+            clause.try_start_idx >= catch_clause.try_start_idx &&
+            clause.try_end_idx <= catch_clause.try_end_idx &&
+            frame.unwind_finally_count < RegisterFrame::kMaxUnwindDepth) {
+            frame.unwind_finally_list[frame.unwind_finally_count++] = i;
+        }
+    }
+
+    if (frame.unwind_finally_count > 0) {
+        // Unwind innermost finally first (list is innermost-first from i=0 scan).
+        frame.unwinding_throw = true;
+        frame.unwind_exception_obj = exc_obj;
+        frame.unwind_catch_clause = catch_idx;
+        frame.unwind_finally_current = 0;
+        int32_t finally_idx = frame.unwind_finally_list[0];
+        frame.in_handler = true;
+        frame.active_handler_clause = finally_idx;
+        frame.pc = static_cast<uint32_t>(frame.seh_clauses[finally_idx].handler_start_idx);
+        return;
+    }
+
+    // No finally to unwind — enter catch directly.
+    uint32_t handler_start = static_cast<uint32_t>(catch_clause.handler_start_idx);
+    for (uint32_t ei = 0; ei < frame.catch_handler_count; ++ei) {
+        if (frame.catch_handler_entries[ei].handler_start_idx == handler_start) {
+            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg,
+                               reinterpret_cast<uint64_t>(exc_obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef));
+            break;
+        }
+    }
+    frame.in_handler = true;
+    frame.active_handler_clause = catch_idx;
+    frame.pc = handler_start;
 }
 
 static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Unsupported(frame, instr);
+    // Use exception_obj from frame (set by a previous Call that threw).
+    void* exc_obj = frame.exception_obj;
+    if (exc_obj == nullptr) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+
+    // Skip the active handler clause to avoid re-catching in the same handler.
+    // Scan backward for innermost catch/filter handler outside the current one.
+    int32_t catch_idx = -1;
+    for (int32_t i = static_cast<int32_t>(frame.seh_clause_count) - 1; i >= 0; --i) {
+        if (i == frame.active_handler_clause) continue;
+        const auto& clause = frame.seh_clauses[i];
+        if (frame.pc < clause.try_start_idx || frame.pc >= clause.try_end_idx) continue;
+        auto flags = static_cast<uint32_t>(clause.flags);
+        if (flags == static_cast<uint32_t>(SEHFlags::Exception) ||
+            flags == static_cast<uint32_t>(SEHFlags::Filter)) {
+            if ((flags & static_cast<uint32_t>(SEHFlags::Typed)) != 0 &&
+                frame.typed_catch_check != nullptr &&
+                !frame.typed_catch_check(exc_obj, clause.class_token)) {
+                continue;
+            }
+            catch_idx = i;
+            break;
+        }
+    }
+
+    if (catch_idx < 0) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+
+    // Collect finally/fault clauses between rethrow pc and catch.
+    const auto& catch_clause = frame.seh_clauses[catch_idx];
+    frame.unwind_finally_count = 0;
+    for (int32_t i = 0; i < static_cast<int32_t>(frame.seh_clause_count); ++i) {
+        if (i == catch_idx || i == frame.active_handler_clause) continue;
+        const auto& clause = frame.seh_clauses[i];
+        auto flags = static_cast<uint32_t>(clause.flags);
+        if ((flags == static_cast<uint32_t>(SEHFlags::Finally) ||
+             flags == static_cast<uint32_t>(SEHFlags::Fault)) &&
+            frame.pc >= clause.try_start_idx && frame.pc < clause.try_end_idx &&
+            clause.try_start_idx >= catch_clause.try_start_idx &&
+            clause.try_end_idx <= catch_clause.try_end_idx &&
+            frame.unwind_finally_count < RegisterFrame::kMaxUnwindDepth) {
+            frame.unwind_finally_list[frame.unwind_finally_count++] = i;
+        }
+    }
+
+    if (frame.unwind_finally_count > 0) {
+        frame.unwinding_throw = true;
+        frame.unwind_exception_obj = exc_obj;
+        frame.unwind_catch_clause = catch_idx;
+        frame.unwind_finally_current = 0;
+        int32_t finally_idx = frame.unwind_finally_list[0];
+        frame.in_handler = true;
+        frame.active_handler_clause = finally_idx;
+        frame.pc = static_cast<uint32_t>(frame.seh_clauses[finally_idx].handler_start_idx);
+        return;
+    }
+
+    // No finally — enter catch directly.
+    uint32_t handler_start = static_cast<uint32_t>(catch_clause.handler_start_idx);
+    for (uint32_t ei = 0; ei < frame.catch_handler_count; ++ei) {
+        if (frame.catch_handler_entries[ei].handler_start_idx == handler_start) {
+            frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg,
+                               reinterpret_cast<uint64_t>(exc_obj),
+                               static_cast<uint8_t>(ValueTag::ObjectRef));
+            break;
+        }
+    }
+    frame.in_handler = true;
+    frame.active_handler_clause = catch_idx;
+    frame.pc = handler_start;
 }
 
 static void Reg_EndFinally(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
@@ -1900,6 +2081,38 @@ static void Reg_EndFinally(RegisterFrame& frame, const RegisterInstruction& inst
         frame.active_handler_clause = -1;
         return;
     }
+
+    // Check for throw unwind — continue to next finally or enter catch.
+    if (frame.unwinding_throw) {
+        frame.unwind_finally_current++;
+        if (frame.unwind_finally_current < frame.unwind_finally_count) {
+            // More finally blocks to unwind.
+            int32_t finally_idx = frame.unwind_finally_list[frame.unwind_finally_current];
+            frame.in_handler = true;
+            frame.active_handler_clause = finally_idx;
+            frame.pc = static_cast<uint32_t>(frame.seh_clauses[finally_idx].handler_start_idx);
+            return;
+        }
+
+        // All finally blocks done — enter catch.
+        frame.unwinding_throw = false;
+        int32_t catch_idx = frame.unwind_catch_clause;
+        const auto& catch_clause = frame.seh_clauses[catch_idx];
+        uint32_t handler_start = static_cast<uint32_t>(catch_clause.handler_start_idx);
+        for (uint32_t ei = 0; ei < frame.catch_handler_count; ++ei) {
+            if (frame.catch_handler_entries[ei].handler_start_idx == handler_start) {
+                frame.regs.set_reg(frame.catch_handler_entries[ei].exception_reg,
+                                   reinterpret_cast<uint64_t>(frame.unwind_exception_obj),
+                                   static_cast<uint8_t>(ValueTag::ObjectRef));
+                break;
+            }
+        }
+        frame.in_handler = true;
+        frame.active_handler_clause = catch_idx;
+        frame.pc = handler_start;
+        return;
+    }
+
     // Normal EndFinally — continue sequentially.
     frame.in_handler = false;
     frame.active_handler_clause = -1;
@@ -1907,7 +2120,16 @@ static void Reg_EndFinally(RegisterFrame& frame, const RegisterInstruction& inst
 }
 
 static void Reg_EndFilter(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Unsupported(frame, instr);
+    // Pop filter result from src1_reg.
+    // 0 = filter didn't match, non-zero = matched.
+    int32_t result = frame.regs.reg_i32(instr.src1_reg());
+    if (result == 0) {
+        // Filter didn't match — continue SEH search via Step D fallthrough.
+        Reg_Unsupported(frame, instr);
+    } else {
+        // Filter matched — advance to catch handler code.
+        ++frame.pc;
+    }
 }
 
 static void Reg_Break(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {

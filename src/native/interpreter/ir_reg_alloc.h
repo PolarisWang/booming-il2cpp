@@ -124,6 +124,12 @@ struct RegisterFile {
 };
 
 // ── Register frame (replaces FastFrame for register-based execution) ────
+struct CatchHandlerEntry;  // forward decl (defined below, used in RegisterFrame)
+
+// Type check callback for typed catch matching.
+// Returns true if exc_obj is an instance of the type identified by class_token.
+using TypedCatchCheckFn = bool (*)(void* exc_obj, uint32_t class_token);
+
 struct RegisterFrame {
     RegisterFile  regs;           // unified register file
 
@@ -161,10 +167,26 @@ struct RegisterFrame {
     // ── SEH state (for Reg_Leave / Reg_EndFinally support) ──────────────
     const SEHClause* seh_clauses            = nullptr;
     uint32_t         seh_clause_count       = 0;
+    const CatchHandlerEntry* catch_handler_entries = nullptr;
+    uint32_t                catch_handler_count    = 0;
     bool             in_handler             = false;
     bool             pending_leave          = false;
     uint32_t         pending_leave_target   = 0;
     int32_t          active_handler_clause  = -1;
+
+    // ── Throw unwind state (finally unwind before catch) ─────────────────
+    static constexpr uint32_t kMaxUnwindDepth = 8;
+    bool             unwinding_throw        = false;
+    void*            unwind_exception_obj   = nullptr;
+    int32_t          unwind_finally_list[kMaxUnwindDepth]{};
+    uint32_t         unwind_finally_count   = 0;
+    uint32_t         unwind_finally_current = 0;
+    int32_t          unwind_catch_clause    = -1;
+
+    // ── Typed catch check callback ──────────────────────────────────────
+    // Called for each typed catch clause to check if exception matches.
+    // If null, typed catches match conservatively (catch-all fallback).
+    TypedCatchCheckFn typed_catch_check      = nullptr;
 
     // ── Tracked object cleanup ─────────────────────────────────────────
     static constexpr uint32_t kMaxTracked = 8;
@@ -192,11 +214,22 @@ struct RegisterFrame {
     }
 };
 
+// ── CatchHandlerEntry ───────────────────────────────────────────────────
+// Maps a catch handler entry point to the virtual register holding the
+// exception object at that instruction, plus the class_token for typed
+// catch matching.  Filled during AllocateRegisters.
+struct CatchHandlerEntry {
+    uint32_t handler_start_idx;  // IR instruction index (matches SEH clause)
+    uint8_t  exception_reg;      // virtual register with exception object
+    uint32_t class_token;        // metadata token for typed catch (0 = untyped)
+};
+
 // ── Register method ─────────────────────────────────────────────────────
 // A method lowered to register-based IR.  Produced by the register allocator.
 struct RegisterMethod {
     CHAOS_IL2CPP_VECTOR(RegisterInstruction) instructions = {};
     CHAOS_IL2CPP_VECTOR(SEHClause)           seh_clauses  = {};
+    CHAOS_IL2CPP_VECTOR(CatchHandlerEntry)   catch_handler_entries = {};
     uint32_t                                  max_regs     = 0;  // highest register used
 };
 
