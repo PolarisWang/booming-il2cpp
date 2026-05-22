@@ -260,6 +260,91 @@ void TestSuppressSuppressed() {
     g_old_gen.Collect(nullptr, nullptr);
     CHECK(true, "GC after suppressed finalizers completed without crash");
 }
+
+// ── Test 9: Emergency reserve basic allocation ────────────────────────
+void TestEmergencyReserveBasic() {
+    printf("\n── Test 9: Emergency reserve basic allocation ──\n");
+
+    constexpr CHAOS_IL2CPP_SIZE kReserveSize = 64 * 1024;
+    char reserve_buf[kReserveSize];
+    std::memset(reserve_buf, 0xFF, kReserveSize);
+
+    g_old_gen.InitEmergencyReserveForTest(reserve_buf, kReserveSize);
+    CHECK(g_old_gen.HasEmergencyReserveSpace(), "HasEmergencyReserveSpace() OK");
+
+    void* p1 = g_old_gen.AllocateFromEmergencyReserve(64);
+    CHECK(p1 != nullptr, "AllocateFromEmergencyReserve(64) OK");
+
+    auto* bytes = static_cast<uint8_t*>(p1);
+    bool all_zeroed = true;
+    for (size_t i = 0; i < 64; i++) {
+        if (bytes[i] != 0) { all_zeroed = false; break; }
+    }
+    CHECK(all_zeroed, "Allocated memory is zeroed");
+
+    void* p2 = g_old_gen.AllocateFromEmergencyReserve(1024);
+    CHECK(p2 != nullptr, "AllocateFromEmergencyReserve(1024) OK");
+
+    auto p1_end = static_cast<char*>(p1) + 64;
+    CHECK(static_cast<char*>(p2) >= p1_end, "Allocations do not overlap");
+
+    // Replenish to restore state.
+    g_old_gen.ReplenishEmergencyReserve();
+    CHECK(true, "Emergency reserve basic tests passed");
+}
+
+// ── Test 10: Emergency reserve exhaustion ─────────────────────────────
+void TestEmergencyReserveExhaustion() {
+    printf("\n── Test 10: Emergency reserve exhaustion ──\n");
+
+    constexpr CHAOS_IL2CPP_SIZE kSmallReserve = 128;
+    char reserve_buf[kSmallReserve];
+    g_old_gen.InitEmergencyReserveForTest(reserve_buf, kSmallReserve);
+
+    // 100 bytes aligns to 104.
+    void* p = g_old_gen.AllocateFromEmergencyReserve(100);
+    CHECK(p != nullptr, "First allocation (100 bytes) OK");
+
+    // Remaining: 24 bytes. Next 100 should fail.
+    void* p2 = g_old_gen.AllocateFromEmergencyReserve(100);
+    CHECK(p2 == nullptr, "Large allocation correctly returns nullptr (beyond remaining)");
+
+    // 16 bytes fits in remaining 24 — should succeed.
+    void* p3 = g_old_gen.AllocateFromEmergencyReserve(16);
+    CHECK(p3 != nullptr, "Small allocation fits in remaining space");
+}
+
+// ── Test 11: Emergency reserve replenish ──────────────────────────────
+void TestEmergencyReserveReplenish() {
+    printf("\n── Test 11: Emergency reserve replenish ──\n");
+
+    constexpr CHAOS_IL2CPP_SIZE kReserveSize = 1024;
+    char reserve_buf[kReserveSize];
+    g_old_gen.InitEmergencyReserveForTest(reserve_buf, kReserveSize);
+
+    void* p1 = g_old_gen.AllocateFromEmergencyReserve(512);
+    CHECK(p1 != nullptr, "Allocate 512 bytes OK");
+
+    g_old_gen.ReplenishEmergencyReserve();
+
+    void* p2 = g_old_gen.AllocateFromEmergencyReserve(512);
+    CHECK(p2 != nullptr, "Allocate 512 bytes after replenish OK");
+    CHECK(true, "Emergency reserve replenish test passed");
+}
+
+// ── Test 12: Emergency reserve no-op replenish ────────────────────────
+void TestEmergencyReserveNoOpReplenish() {
+    printf("\n── Test 12: Emergency reserve no-op replenish ──\n");
+
+    constexpr CHAOS_IL2CPP_SIZE kReserveSize = 1024;
+    char reserve_buf[kReserveSize];
+    g_old_gen.InitEmergencyReserveForTest(reserve_buf, kReserveSize);
+
+    // Replenish with no activations should be a no-op.
+    g_old_gen.ReplenishEmergencyReserve();
+    CHECK(true, "No-op replenish did not crash");
+}
+
 int main() {
     puts("CRAG Finalizer unit test");
     puts("═══════════════════════\n");
@@ -273,8 +358,12 @@ int main() {
     TestLargeFinalizerQueue();
     TestSuppressSuppressed();
 
-    printf("\n══ Results: %d tests, %d failures ══\n",
-           8 - (g_failures > 0 ? 1 : 0), g_failures);
+    TestEmergencyReserveBasic();
+    TestEmergencyReserveExhaustion();
+    TestEmergencyReserveReplenish();
+    TestEmergencyReserveNoOpReplenish();
+
+    printf("\n══ Results: 12 tests, %d failures ══\n", g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

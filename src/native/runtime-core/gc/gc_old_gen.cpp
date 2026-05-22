@@ -119,6 +119,13 @@ MarkSweepOldGen::~MarkSweepOldGen() {
         }
     }
     retired_arrays_.clear();
+
+    // Free emergency reserve.
+    if (emergency_reserve_base_ != nullptr) {
+        GcNumaVirtualFree(emergency_reserve_base_, emergency_reserve_size_);
+        emergency_reserve_base_ = nullptr;
+        emergency_reserve_size_ = 0;
+    }
 }
 
 // ── OldGenPage helpers ─────────────────────────────────────────────
@@ -187,6 +194,11 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
     // Without this reset, a large Init (e.g. 64 pages) immediately triggers
     // a Full GC when DecideCollection() checks page_count_growth >= 16.
     g_gc_scheduler.ResetPageCountGrowth();
+
+    // Allocate the emergency reserve for finalizer OOM protection.
+    if (!InitEmergencyReserve()) {
+        CHAOS_IL2CPP_LOG_WARN_M("OldGen", "emergency reserve allocation failed (non-fatal)");
+    }
 
     initialized_.store(true, std::memory_order_release);
 
@@ -571,10 +583,17 @@ int MarkSweepOldGen::DiagProtectPayloads() {
     while (page != nullptr) {
         if (page->in_use.load(std::memory_order_acquire) && !page->is_oversized) {
             void* payload = page->Payload();
+#if defined(_WIN32) || defined(_WIN64)
             DWORD old;
             if (VirtualProtect(payload, page->payload_size, PAGE_READONLY, &old)) {
                 count++;
             }
+#else
+            // On POSIX, use mprotect for read-only protection.
+            if (::mprotect(payload, page->payload_size, PROT_READ) == 0) {
+                count++;
+            }
+#endif
         }
         page = page->next;
     }
@@ -586,8 +605,12 @@ void MarkSweepOldGen::DiagUnprotectPayloads() {
     while (page != nullptr) {
         if (page->in_use.load(std::memory_order_acquire) && !page->is_oversized) {
             void* payload = page->Payload();
+#if defined(_WIN32) || defined(_WIN64)
             DWORD old;
             VirtualProtect(payload, page->payload_size, PAGE_READWRITE, &old);
+#else
+            ::mprotect(payload, page->payload_size, PROT_READ | PROT_WRITE);
+#endif
         }
         page = page->next;
     }
@@ -2122,11 +2145,27 @@ void MarkSweepOldGen::RelocateRoots(const std::vector<CompactPlanEntry>& entries
     // would NOT be relocated, leaving dangling pointers to evacuated pages
     // that BgcSweep subsequently decommissions.
     //
-    // Scan the current thread's own stack conservatively using the Windows
-    // TEB to cover this case.
+    // Scan the current thread's own stack conservatively.
+    uintptr_t self_stack_limit;
+    uintptr_t self_stack_base;
+#if defined(_WIN32) || defined(_WIN64)
     auto* teb = reinterpret_cast<NT_TIB*>(__readgsqword(0x30));
-    uintptr_t self_stack_limit = reinterpret_cast<uintptr_t>(teb->StackLimit);
-    uintptr_t self_stack_base  = reinterpret_cast<uintptr_t>(teb->StackBase);
+    self_stack_limit = reinterpret_cast<uintptr_t>(teb->StackLimit);
+    self_stack_base  = reinterpret_cast<uintptr_t>(teb->StackBase);
+#elif defined(__APPLE__)
+    self_stack_base   = reinterpret_cast<uintptr_t>(pthread_get_stackaddr_np(pthread_self()));
+    self_stack_limit  = self_stack_base - pthread_get_stacksize_np(pthread_self());
+#else
+    // Linux/Android: use pthread_getattr_np.
+    pthread_attr_t attr;
+    void* stack_addr;
+    size_t stack_size;
+    pthread_getattr_np(pthread_self(), &attr);
+    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
+    pthread_attr_destroy(&attr);
+    self_stack_base   = reinterpret_cast<uintptr_t>(stack_addr) + stack_size;
+    self_stack_limit  = reinterpret_cast<uintptr_t>(stack_addr);
+#endif
     uintptr_t self_aligned_start = (self_stack_limit + sizeof(void*) - 1)
         & ~static_cast<uintptr_t>(sizeof(void*) - 1);
     uintptr_t self_aligned_end   = self_stack_base
@@ -2736,6 +2775,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Signal full GC complete for registered notification waiters.
     g_gc_scheduler.SignalFullGcComplete();
+
+    // Replenish the emergency reserve after a full GC frees memory.
+    ReplenishEmergencyReserve();
 }
 
 bool MarkSweepOldGen::CollectFull() {
@@ -3167,6 +3209,85 @@ void MarkSweepOldGen::BgcCompact() {
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).
     pinned_compact_skip_.clear();
 
+}
+
+// ======================================================================
+// Emergency reserve (Finalizer OOM guarantee)
+// ======================================================================
+
+bool MarkSweepOldGen::InitEmergencyReserve() noexcept {
+    if (emergency_reserve_base_ != nullptr) return true;  // Already initialized.
+
+    auto* mem = static_cast<char*>(GcNumaVirtualAlloc(kEmergencyReserveSize, 0));
+    if (mem == nullptr) {
+        // Non-fatal: finalizer OOM protection is best-effort.
+        return false;
+    }
+
+    // Zero the reserved memory.
+    std::memset(mem, 0, kEmergencyReserveSize);
+
+    emergency_reserve_base_ = mem;
+    emergency_reserve_size_ = kEmergencyReserveSize;
+    emergency_reserve_current_.store(mem, std::memory_order_release);
+    emergency_reserve_activated_.store(false, std::memory_order_release);
+
+    CHAOS_IL2CPP_LOG_INFO_M("OldGen", "emergency_reserve_allocated base=0x{0} size={1}",
+        reinterpret_cast<uintptr_t>(mem),
+        static_cast<unsigned long long>(kEmergencyReserveSize));
+    return true;
+}
+
+void MarkSweepOldGen::InitEmergencyReserveForTest(void* base, CHAOS_IL2CPP_SIZE size) noexcept {
+    emergency_reserve_base_ = static_cast<char*>(base);
+    emergency_reserve_size_ = size;
+    emergency_reserve_current_.store(static_cast<char*>(base), std::memory_order_release);
+    emergency_reserve_activated_.store(false, std::memory_order_release);
+}
+
+void* MarkSweepOldGen::AllocateFromEmergencyReserve(CHAOS_IL2CPP_SIZE size) noexcept {
+    if (emergency_reserve_base_ == nullptr) return nullptr;
+
+    // Align to pointer size.
+    size = (size + sizeof(void*) - 1) & ~static_cast<CHAOS_IL2CPP_SIZE>(sizeof(void*) - 1);
+    if (size == 0) size = sizeof(void*);
+
+    // Bump-allocate from the reserve.
+    char* current = emergency_reserve_current_.load(std::memory_order_acquire);
+    while (true) {
+        char* next = current + size;
+        char* end = emergency_reserve_base_ + emergency_reserve_size_;
+        if (next > end) return nullptr;  // Reserve exhausted.
+        if (emergency_reserve_current_.compare_exchange_weak(current, next,
+                std::memory_order_acq_rel, std::memory_order_acquire)) {
+            // Zero the allocated region.
+            std::memset(current, 0, size);
+            emergency_reserve_activated_.store(true, std::memory_order_release);
+            CHAOS_IL2CPP_LOG_WARN_M("OldGen",
+                "emergency_reserve_used size={0} remaining={1}",
+                static_cast<unsigned long long>(size),
+                static_cast<long long>(end - next));
+            return current;
+        }
+        // CAS failed, retry with updated current value.
+    }
+}
+
+void MarkSweepOldGen::ReplenishEmergencyReserve() noexcept {
+    if (!emergency_reserve_activated_.load(std::memory_order_acquire)) {
+        return;  // Reserve was not used — nothing to replenish.
+    }
+
+    // Reset the bump pointer to the base.
+    char* base = emergency_reserve_base_;
+    emergency_reserve_current_.store(base, std::memory_order_release);
+    emergency_reserve_activated_.store(false, std::memory_order_release);
+
+    // Re-zero the entire reserve.
+    std::memset(base, 0, emergency_reserve_size_);
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "emergency_reserve_replenished size={0}",
+        static_cast<unsigned long long>(emergency_reserve_size_));
 }
 
 }  // namespace chaos::il2cpp::runtime_core

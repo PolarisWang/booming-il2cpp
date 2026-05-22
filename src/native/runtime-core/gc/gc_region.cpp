@@ -8,6 +8,7 @@
 #include "gc_events.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
+#include "gc_numa.h"
 #include "gc_old_gen.h"
 #include "gc_loh.h"
 #include "gc_scheduler.h"
@@ -188,6 +189,17 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     threading::EnterCooperativeMode();  // SafepointPoll re-sync if pending
     if (old_result) {
         tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+    } else if (BgcController::IsFinalizerThread()) {
+        // Finalizer OOM guarantee: if the finalizer thread is trying to
+        // allocate during heap exhaustion, use the emergency reserve to
+        // prevent finalizer deadlock.  The reserve is replenished after
+        // the next GC cycle completes.
+        threading::EnterPreemptiveMode();
+        old_result = g_old_gen.AllocateFromEmergencyReserve(size);
+        threading::EnterCooperativeMode();
+        if (old_result) {
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+        }
     }
     return old_result;
 }
@@ -529,12 +541,23 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     void* mem = nullptr;
     {
         CHAOS_IL2CPP_SIZE alloc_size = sizeof(Region) + region_size;
-#if defined(_WIN32) || defined(_WIN64)
-        mem = VirtualAlloc(nullptr, alloc_size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-#else
-        mem = mmap(nullptr, alloc_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-        if (mem == MAP_FAILED) mem = nullptr;
+#if defined(CHAOS_IL2CPP_GC_LARGE_PAGES) && CHAOS_IL2CPP_GC_LARGE_PAGES == 1
+        // Try large pages for regions >= large page minimum (typically 2MB).
+        // Most regions (512KB nursery, 64KB POH/domain) are below this
+        // threshold; only large tenured or custom-size regions benefit.
+        if (alloc_size >= GcGetLargePageMinimum()) {
+            mem = GcTryAllocLargePages(alloc_size);
+        }
+        if (mem == nullptr)  // fallback to normal pages
 #endif
+        {
+#if defined(_WIN32) || defined(_WIN64)
+            mem = VirtualAlloc(nullptr, alloc_size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+#else
+            mem = mmap(nullptr, alloc_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+            if (mem == MAP_FAILED) mem = nullptr;
+#endif
+        }
     }
     if (mem == nullptr) return nullptr;
 
