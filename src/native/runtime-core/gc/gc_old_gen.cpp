@@ -8,6 +8,7 @@
 #include "gc_bgc.h"
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
+#include "gc_demotion.h"
 #include "gc_events.h"
 #include "gc_etw.h"
 #include "gc_helpers.h"
@@ -746,6 +747,16 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
             GcAdvanceBgcCycle();
             s_old_gen_gc_active = false;
         }
+    }
+
+    // ── Hard memory limit check ───────────────────────────────────
+    // Before allocating a new page, check whether the hard limit would
+    // be exceeded.  If so, return nullptr — the caller will go through
+    // HandleOomCondition which may trigger a full GC to free memory.
+    if (G_Scheduler().ExceedsHardLimit(size)) {
+        CHAOS_IL2CPP_LOG_WARN_M("OldGen", "hard_limit_reached size={0}",
+            static_cast<unsigned long long>(size));
+        return nullptr;
     }
 
     // Oversized: route to Large Object Heap or direct page allocation.
@@ -2646,6 +2657,16 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         }
     }
 
+    // Phase 3d: Collect demotion candidates (Gen2 → Gen1).
+    // Before sweeping, identify live objects on highly fragmented pages
+    // and relocate them to Gen1 via TryAllocateInGen1.  The mark bitmap
+    // bits are cleared for demoted objects so the subsequent sweep
+    // reclaims their old Gen2 space.
+    std::vector<DemotionEntry> demotion_entries;
+    {
+        demotion_entries = CollectDemotionCandidates(*this);
+    }
+
     // Phase 4: Sweep and coalesce all pages (sequential).
     // Parallel sweep via GcWorkerPool is disabled in the full-GC path
     // because ASan reports use-after-free in CoalescePage when worker
@@ -2763,6 +2784,13 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             // Fix up GCHandles.
             GcRelocateHandles(loh_relocs);
         }
+    }
+
+    // Phase 4a: Relocate references for demoted objects (Gen2 → Gen1).
+    // Must happen after sweep (old pages are still valid for slot scanning)
+    // but before compaction (which would invalidate page layout).
+    if (!demotion_entries.empty()) {
+        DemotionRelocate(demotion_entries, *this);
     }
 
     // Phase 4b: Compaction (when fragmentation exceeds threshold).

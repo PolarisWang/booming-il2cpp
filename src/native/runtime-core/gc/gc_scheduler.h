@@ -304,6 +304,41 @@ public:
         return external_memory_pressure_.load(std::memory_order_relaxed);
     }
 
+    // ── Hard / soft memory limits ─────────────────────────────────
+
+    /// Set the hard memory limit in bytes (0 = no limit).
+    void SetHardLimit(CHAOS_IL2CPP_SIZE bytes) noexcept {
+        hard_limit_.store(bytes, std::memory_order_release);
+    }
+
+    /// Set the soft memory limit in bytes (0 = no limit).
+    void SetSoftLimit(CHAOS_IL2CPP_SIZE bytes) noexcept {
+        soft_limit_.store(bytes, std::memory_order_release);
+    }
+
+    /// Check whether allocating @a additional_bytes would exceed the hard limit.
+    /// Returns true if the hard limit is set and would be exceeded.
+    bool ExceedsHardLimit(CHAOS_IL2CPP_SIZE additional_bytes = 0) const noexcept {
+        auto limit = hard_limit_.load(std::memory_order_acquire);
+        if (limit == 0) return false;
+        auto current = estimated_heap_size_.load(std::memory_order_relaxed)
+                     + static_cast<CHAOS_IL2CPP_SIZE>(
+                           external_memory_pressure_.load(std::memory_order_relaxed));
+        return (current + additional_bytes) > limit;
+    }
+
+    /// Check whether the current heap usage exceeds the soft memory limit.
+    /// Does not check @a additional_bytes — soft limit is a threshold check
+    /// that triggers GC proactively, not a hard cap.
+    bool ExceedsSoftLimit() const noexcept {
+        auto limit = soft_limit_.load(std::memory_order_acquire);
+        if (limit == 0) return false;
+        auto current = estimated_heap_size_.load(std::memory_order_relaxed)
+                     + static_cast<CHAOS_IL2CPP_SIZE>(
+                           external_memory_pressure_.load(std::memory_order_relaxed));
+        return current > limit;
+    }
+
     // ── Full GC notification (GC.RegisterForFullGCNotification / WaitForFullGC*) ──
 
     /// Enable full GC notifications for the calling thread.
@@ -499,6 +534,16 @@ private:
     /// Process-wide external memory pressure counter.
     /// Accumulated by AddMemoryPressure, decremented by RemoveMemoryPressure.
     std::atomic<CHAOS_IL2CPP_INT64> external_memory_pressure_{0};
+
+    // ── Hard / soft memory limit state ─────────────────────────
+
+    /// Hard memory limit in bytes (0 = disabled).
+    /// Set from CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB at startup.
+    std::atomic<CHAOS_IL2CPP_SIZE> hard_limit_{0};
+
+    /// Soft memory limit in bytes (0 = disabled).
+    /// Set from CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB at startup.
+    std::atomic<CHAOS_IL2CPP_SIZE> soft_limit_{0};
 
     /// Minimum absolute threshold for external memory pressure triggering.
     /// Below this, external pressure alone won't trigger a full GC.

@@ -24,6 +24,41 @@ enum class ManagedThreadState : int32_t {
     AbortRequested  = 512,
 };
 
+/// Validate a thread state transition in debug builds.
+/// Calls CHAOS_IL2CPP_ASSERT if the transition is illegal.
+/// No-op in PROFILE and SHIP builds.
+inline void ValidateThreadStateTransition(ManagedThreadState from, ManagedThreadState to) noexcept {
+    // Strip flag bits (Background) that can coexist with other states.
+    auto strip_flags = [](ManagedThreadState s) -> int32_t {
+        return static_cast<int32_t>(s) & ~static_cast<int32_t>(ManagedThreadState::Background);
+    };
+
+    int32_t f = strip_flags(from);
+    int32_t t = strip_flags(to);
+
+    // Legal transitions (from → to):
+    //   Unstarted → Running          (thread starts)
+    //   Running → WaitSleepJoin      (Monitor.Wait, Thread.Sleep, WaitHandle)
+    //   WaitSleepJoin → Running      (woken up)
+    //   Running → Stopped            (thread exits)
+    //   Unstarted → Stopped          (thread never started, directly stopped)
+    //   (same state)                 (always legal — setting Running→Running etc.)
+
+    bool legal = (f == t)
+        || (f == static_cast<int32_t>(ManagedThreadState::Unstarted)
+            && t == static_cast<int32_t>(ManagedThreadState::Running))
+        || (f == static_cast<int32_t>(ManagedThreadState::Unstarted)
+            && t == static_cast<int32_t>(ManagedThreadState::Stopped))
+        || (f == static_cast<int32_t>(ManagedThreadState::Running)
+            && t == static_cast<int32_t>(ManagedThreadState::WaitSleepJoin))
+        || (f == static_cast<int32_t>(ManagedThreadState::WaitSleepJoin)
+            && t == static_cast<int32_t>(ManagedThreadState::Running))
+        || (f == static_cast<int32_t>(ManagedThreadState::Running)
+            && t == static_cast<int32_t>(ManagedThreadState::Stopped));
+
+    CHAOS_IL2CPP_ASSERT(legal && "illegal thread state transition");
+}
+
 // ── Thread priority (matches System.Threading.ThreadPriority) ───────────
 
 enum class ManagedThreadPriority : int32_t {
@@ -150,6 +185,13 @@ struct ManagedThread {
 
 extern thread_local ManagedThread* tls_this_thread;
 extern thread_local int32_t        tls_this_thread_id;
+
+/// Set thread state with debug validation.
+/// In PROFILE/SHIP, compiles to a plain assignment.
+inline void SetThreadState(ManagedThread& thread, ManagedThreadState new_state) noexcept {
+    ValidateThreadStateTransition(thread.managed_state, new_state);
+    thread.managed_state = new_state;
+}
 
 /// Current thread's managed ID (1 for the main thread).
 inline int32_t GetCurrentThreadId() noexcept {

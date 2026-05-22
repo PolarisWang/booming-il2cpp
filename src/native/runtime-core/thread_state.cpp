@@ -104,7 +104,7 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
     thread->managed_id     = managed_id;
     thread->managed_object = managed_obj;
     thread->is_running     = true;
-    thread->managed_state  = ManagedThreadState::Running;
+    SetThreadState(*thread, ManagedThreadState::Running);
 
 #if defined(_WIN32) || defined(_WIN64)
     // Set default OS thread priority to THREAD_PRIORITY_NORMAL.
@@ -173,7 +173,7 @@ void UnregisterThread() noexcept {
     if (thread == nullptr) return;
 
     thread->is_running = false;
-    thread->managed_state = ManagedThreadState::Stopped;
+    SetThreadState(*thread, ManagedThreadState::Stopped);
 
     // Return the TLS nursery to the region manager before clearing TLS.
     // Otherwise the nursery region leaks until process exit.

@@ -275,6 +275,20 @@ add_chaos_test(test_gc_domain_unload
     LABELS "unit;gc"
 )
 
+# gc_demotion_test — Gen2→Gen1 demotion (ShouldDemote, CollectDemotionCandidates, DemotionRelocate)
+add_chaos_test(test_gc_demotion
+    gc_demotion_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+
+# gc_heap_limit_test — Hard/soft memory limit tests (scheduler API + old-gen integration)
+add_chaos_test(test_gc_heap_limit
+    gc_heap_limit_test.cpp ${CHAOS_GC_STUBS}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch E — Stress tests (labelled "stress", excluded from default run)
 # ═══════════════════════════════════════════════════════════════════════════

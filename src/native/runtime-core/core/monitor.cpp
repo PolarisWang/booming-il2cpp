@@ -226,7 +226,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     }
 
     // Set WaitSleepJoin after confirming sb is valid and no abort/interrupt pending.
-    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
+    if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::WaitSleepJoin);
 
     // Release the monitor before wait (Monitor.Wait semantics).
     if ((sync & kSyncInflatedBit) != 0) {
@@ -266,7 +266,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     sb->mutex.lock();
 
     // Restore Running state after wait completes.
-    if (thread) thread->managed_state = threading::ManagedThreadState::Running;
+    if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::Running);
     return result;
 }
 
@@ -321,7 +321,7 @@ bool ThreadSleep(int32_t timeout_ms) {
             throw chaos_managed_exception{kManagedExceptionThreadInterrupt};
         }
     }
-    if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
+    if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::WaitSleepJoin);
     GC_TRANSITION_TO_PREEMPTIVE();
     if (timeout_ms == 0) {
         std::this_thread::yield();
@@ -329,7 +329,7 @@ bool ThreadSleep(int32_t timeout_ms) {
         std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
     }
     GC_TRANSITION_TO_COOPERATIVE();
-    if (thread) thread->managed_state = threading::ManagedThreadState::Running;
+    if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::Running);
     return true;
 }
 
