@@ -60,7 +60,7 @@
 | gc-p2-02 | phase-1 | **completed** | **大页支持 THP/LargePages（G-21）** | 无 | gc_region.cpp, gc_old_gen.cpp | 2 周 |
 | gc-p2-03 | phase-1 | **completed** | **iOS/Android 平台验证 + 平台适配测试（G-27）** | 无 | gc_numa_*.cpp, gc_region.cpp | 2 周 |
 | gc-p2-04 | phase-1 | **completed** | **Finalizer OOM 保证：预留内存/专用堆（G-12）** | 无 | gc_finalizer.*, engine_lifecycle.cpp | 1 周 |
-| gc-p2-05 | phase-1 | planned | **内存压力主动调度反馈闭环（G-28）** | 无 | gc_scheduler.cpp | 1 周 |
+| gc-p2-05 | phase-1 | **completed** | **内存压力主动调度反馈闭环（G-28）** | 无 | gc_scheduler.cpp | 1 周 |
 | gc-p2-06 | phase-1 | planned | **GC 编译时选择（G-29）** | 无 | CMakeLists.txt, gc/*.h | 1 周 |
 | gc-p2-07 | phase-1 | planned | **测试覆盖增强：修复预存问题 + 补充用例（G-30）** | 无 | 测试文件 | 1-2 周 |
 | gc-p1-vfy | phase-1 | planned | **Phase 1 集成验证** | 全部 P1 | 验证目录 | 3 天 |
@@ -119,7 +119,7 @@ Phase 3:          ▼
 
 ## 当前建议推进顺序
 
-串行推进，当前进度：**gc-p2-04（Finalizer OOM 保证）→ 已完成。下一步：gc-p2-05（内存压力主动调度反馈）**。
+串行推进，当前进度：**gc-p2-04→05 已完成。下一步：gc-p2-06（GC 编译时选择）**。
 
 ---
 
