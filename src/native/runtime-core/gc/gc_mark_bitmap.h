@@ -94,6 +94,24 @@ public:
         }
     }
 
+    /// Clear @a num_slots bits starting at @a start_slot.
+    /// Non-atomic — safe only at safepoint (no concurrent marker threads).
+    /// Used by demotion to unmark objects relocated to Gen1 before sweep.
+    void ClearRange(CHAOS_IL2CPP_SIZE start_slot, CHAOS_IL2CPP_SIZE num_slots) noexcept {
+        if (num_slots == 0 || data_ == nullptr) return;
+        CHAOS_IL2CPP_SIZE max_slots = byte_count_ * 8;
+        CHAOS_IL2CPP_SIZE end_slot = start_slot + num_slots;
+        if (end_slot > max_slots) end_slot = max_slots;
+        for (CHAOS_IL2CPP_SIZE s = start_slot; s < end_slot; ) {
+            CHAOS_IL2CPP_SIZE byte_idx = s / 8;
+            int bit_off = static_cast<int>(s % 8);
+            int bits_here = std::min(8 - bit_off, static_cast<int>(end_slot - s));
+            unsigned char mask = static_cast<unsigned char>(((1u << bits_here) - 1) << bit_off);
+            data_[byte_idx] &= ~mask;
+            s += bits_here;
+        }
+    }
+
     /// Return true if any bit is set.
     bool AnySet() const noexcept {
         for (CHAOS_IL2CPP_SIZE i = 0; i < byte_count_; i++) {

@@ -115,6 +115,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_young_collector.cpp
     gc/gc_old_gen.h
     gc/gc_old_gen.cpp
+    gc/gc_demotion.h
+    gc/gc_demotion.cpp
     gc/gc_layout.h
     gc/gc_layout.cpp
     gc/gc_loh.h
@@ -176,6 +178,13 @@ option(CHAOS_IL2CPP_GC_STRESS       "Enable GC stress testing mode (debug/valida
 option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" ON)
 option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              OFF)
 
+option(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB
+    "Hard memory limit in MB (0=disabled). Allocation exceeding this fails."
+    0)
+option(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB
+    "Soft memory limit in MB (0=disabled). Triggers GC when exceeded, does not fail."
+    0)
+
 if(CHAOS_IL2CPP_GC_BGC)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_BGC=1)
 endif()
@@ -193,6 +202,14 @@ if(CHAOS_IL2CPP_GC_LARGE_PAGES)
 endif()
 if(CHAOS_IL2CPP_GC_SERVER)
     target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_IL2CPP_GC_SERVER=1)
+endif()
+if(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB)
+    target_compile_definitions(chaos_runtime_core PRIVATE
+        CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB=${CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB})
+endif()
+if(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB)
+    target_compile_definitions(chaos_runtime_core PRIVATE
+        CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB=${CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB})
 endif()
 target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS>)
 target_include_directories(

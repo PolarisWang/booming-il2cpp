@@ -108,6 +108,13 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     // Flush TLS allocation counter to scheduler before making any GC decision.
     FlushTlsAllocCounter();
 
+    // Phase 0: Check soft memory limit (non-blocking).
+    // When estimated heap usage exceeds the soft limit, request a full GC
+    // at the next safepoint.  Does not block or fail the allocation.
+    if (G_Scheduler().ExceedsSoftLimit()) [[unlikely]] {
+        G_Scheduler().RequestFullGc();
+    }
+
     // Phase 1: Try to claim a new TLAB from the shared young generation.
     TLAB tlab = TlabClaimFromYoungGen();
     if (tlab.current != nullptr) {
@@ -271,6 +278,11 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     }
 
     FlushTlsAllocCounter();
+
+    // Phase 0: Check soft memory limit (non-blocking).
+    if (G_Scheduler().ExceedsSoftLimit()) [[unlikely]] {
+        G_Scheduler().RequestFullGc();
+    }
 
     // Phase 1: Try to claim a new TLAB.
     TLAB tlab = TlabClaimFromYoungGen();
@@ -448,6 +460,16 @@ void TeardownTlsPoh() noexcept {
 // ======================================================================
 
 void InitYoungGeneration() noexcept {
+    // Initialize scheduler memory limits from compile-time configuration.
+#if defined(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB > 0
+    G_Scheduler().SetHardLimit(
+        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB) * 1024 * 1024);
+#endif
+#if defined(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) && CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB > 0
+    G_Scheduler().SetSoftLimit(
+        static_cast<CHAOS_IL2CPP_SIZE>(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB) * 1024 * 1024);
+#endif
+
     // Allocate an independent nursery region (no longer split 50/50 with survivor).
     auto* nursery = RegionManager::Instance().AllocateRegion(
         RegionKind::REGION_NURSERY, kDefaultYoungRegionSize);

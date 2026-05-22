@@ -60,9 +60,17 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     }
     tls_in_oom_handler = true;
 
-    // Step 1: Try a blocking full STW GC (unless already in a GC or NoGcRegion).
+    // Step 0: Hard limit guard — if the hard limit is already exceeded,
+    // skip the full GC retry.  Even after GC, the estimated heap size
+    // would still exceed the limit (old-gen free lists reuse space but
+    // don't reduce the heap size estimate).  Fall through to emergency
+    // reserve and OOM event.
+    bool hard_limit_exceeded = G_Scheduler().ExceedsHardLimit(size);
+
+    // Step 1: Try a blocking full STW GC (skip if hard limit exceeded).
     bool gc_ran = false;
-    if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
+    if (!hard_limit_exceeded &&
+        !GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
         CHAOS_IL2CPP_LOG_WARN("GC_API", "OOM: triggering blocking full GC for size={0}",
             static_cast<unsigned long long>(size));
         uint32_t gen = threading::RequestGlobalSafepoint();

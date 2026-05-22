@@ -47,5 +47,20 @@
 ///   parallel via GcCoordinator.
 ///   When disabled (default): single-heap WKS mode with global state.
 ///   Default: OFF (disabled) — WKS workstation GC compatible with Unity.
+///
+/// CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB (=0)
+///   Hard memory limit in MB.  When the estimated heap size (old-gen page
+///   usage + external memory pressure) exceeds this limit, allocation
+///   fails and returns nullptr, triggering the OOM recovery chain.
+///   After a full GC frees memory, allocation may succeed if the freed
+///   space brings the heap back below the limit.
+///   0 = no hard limit (default).
+///
+/// CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB (=0)
+///   Soft memory limit in MB.  When the estimated heap size exceeds this
+///   limit, a full GC is requested at the next safepoint (via
+///   RequestFullGc).  Allocation is not blocked — the limit is advisory.
+///   Useful for proactive GC before the hard limit is reached.
+///   0 = no soft limit (default).
 
 #endif  // CHAOS_IL2CPP_GC_FEATURES_H_

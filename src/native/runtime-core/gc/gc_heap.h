@@ -68,10 +68,19 @@ inline Gen1State& G_Gen1State() noexcept { return g_gen1_state; }
 
 // Young generation and Gen1 survivor space are shared across all heaps.
 // Only OldGen, LOH, and Scheduler are per-NUMA-node.
+// When tls_current_heap is null (unregistered thread), fall back to
+// the process-wide global — this simplifies testing and provides a
+// safety net for threads that don't go through RegisterThread().
 inline YoungGeneration& G_YoungGen() noexcept { return g_young_gen; }
-inline MarkSweepOldGen& G_OldGen() noexcept { return tls_current_heap->old_gen; }
-inline LargeObjectHeap& G_Loh() noexcept { return tls_current_heap->loh; }
-inline GcScheduler& G_Scheduler() noexcept { return tls_current_heap->scheduler; }
+inline MarkSweepOldGen& G_OldGen() noexcept {
+    return tls_current_heap ? tls_current_heap->old_gen : g_old_gen;
+}
+inline LargeObjectHeap& G_Loh() noexcept {
+    return tls_current_heap ? tls_current_heap->loh : g_loh;
+}
+inline GcScheduler& G_Scheduler() noexcept {
+    return tls_current_heap ? tls_current_heap->scheduler : g_gc_scheduler;
+}
 inline Gen1State& G_Gen1State() noexcept { return g_gen1_state; }
 
 #endif  // CHAOS_IL2CPP_GC_SERVER

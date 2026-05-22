@@ -369,6 +369,18 @@ private:
     /// Caller MUST hold mutex_.
     void RebuildPageArray();
 
+public:
+    // ── Demotion support accessors ────────────────────────────────
+    // Exposed for gc_demotion.cpp (STW full-GC only — single threaded).
+
+    /// Return the head of the page list.  Safe only when mutex_ is held.
+    OldGenPage* PageList() const { return page_list_; }
+
+    /// Return the page list mutex for STW scanning.
+    std::mutex& PageMutex() { return mutex_; }
+
+private:
+
     // ── Allocation helpers ──────────────────────────────────────
 
     /// Round up to the nearest size class. Returns size class index or -1.
