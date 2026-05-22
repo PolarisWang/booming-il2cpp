@@ -34,6 +34,12 @@ add_chaos_test(method_aot_map_test method_aot_map_test.cpp gc/gc_test_stubs.cpp
     LABELS "unit;core"
 )
 
+# T0-1: type_registry API unit tests (Type System / VTable Industrialization)
+add_chaos_test(type_registry_test type_registry_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
 # B1 — Blittable benchmark (labelled "benchmark", excluded from default run)
 add_chaos_test(blittable_benchmark blittable_benchmark_test.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
