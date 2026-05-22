@@ -63,14 +63,16 @@ inline LargeObjectHeap& G_Loh() noexcept { return g_loh; }
 inline GcScheduler& G_Scheduler() noexcept { return g_gc_scheduler; }
 inline Gen1State& G_Gen1State() noexcept { return g_gen1_state; }
 
-// ── Server GC mode — route through tls_current_heap ───────────────────
+// ── Server GC mode — young gen + Gen1 are SHARED, rest per-heap ────────
 #else
 
-inline YoungGeneration& G_YoungGen() noexcept { return tls_current_heap->young_gen; }
+// Young generation and Gen1 survivor space are shared across all heaps.
+// Only OldGen, LOH, and Scheduler are per-NUMA-node.
+inline YoungGeneration& G_YoungGen() noexcept { return g_young_gen; }
 inline MarkSweepOldGen& G_OldGen() noexcept { return tls_current_heap->old_gen; }
 inline LargeObjectHeap& G_Loh() noexcept { return tls_current_heap->loh; }
 inline GcScheduler& G_Scheduler() noexcept { return tls_current_heap->scheduler; }
-inline Gen1State& G_Gen1State() noexcept { return tls_current_heap->gen1_state; }
+inline Gen1State& G_Gen1State() noexcept { return g_gen1_state; }
 
 #endif  // CHAOS_IL2CPP_GC_SERVER
 

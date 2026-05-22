@@ -11,6 +11,7 @@
 | `03-文档体系` | `docs` / `wiki` 边界和文档结构知识 | [`03-文档体系/INDEX.md`](./03-%E6%96%87%E6%A1%A3%E4%BD%93%E7%B3%BB/INDEX.md) |
 | `04-测试与验证` | skill 行为测试和验证策略 | [`04-测试与验证/INDEX.md`](./04-%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%AA%8C%E8%AF%81/INDEX.md) |
 | `05-工具能力` | 项目内工具能力、生成链约束与长期技术方案 | [`05-工具能力/INDEX.md`](./05-%E5%B7%A5%E5%85%B7%E8%83%BD%E5%8A%9B/INDEX.md) |
+| `08-GC子系统` | CRAG GC 分配器、收集器、诊断知识 | [`08-GC子系统/INDEX.md`](./08-GC%E5%AD%90%E7%B3%BB%E7%BB%9F/INDEX.md) |
 
 ## 重要文档
 
@@ -19,6 +20,7 @@
 | [`01-执行系统/CURRENT执行上下文机制.md`](./01-%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F/CURRENT%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9C%BA%E5%88%B6.md) | CURRENT 机制 | 说明恢复执行的结构化上下文。 |
 | [`03-文档体系/docs与wiki边界.md`](./03-%E6%96%87%E6%A1%A3%E4%BD%93%E7%B3%BB/docs%E4%B8%8Ewiki%E8%BE%B9%E7%95%8C.md) | 文档边界 | 说明过程文档与长期知识的分流。 |
 | [`05-工具能力/SIMD语义降级与多后端IR方案C3.md`](./05-%E5%B7%A5%E5%85%B7%E8%83%BD%E5%8A%9B/SIMD%E8%AF%AD%E4%B9%89%E9%99%8D%E7%BA%A7%E4%B8%8E%E5%A4%9A%E5%90%8E%E7%AB%AFIR%E6%96%B9%E6%A1%88C3.md) | SIMD 语义抽象 | 沉淀 fixed-vector / SIMD 通用抽象、Shape IR、Semantic IR 与多 backend lowering 方案。 |
+| [`08-GC子系统/CRAG-GC-Phase3-并发能力.md`](./08-GC%E5%AD%90%E7%B3%BB%E7%BB%9F/CRAG-GC-Phase3-%E5%B9%B6%E5%8F%91%E8%83%BD%E5%8A%9B.md) | Phase 3 并发能力 | Server GC 模式、并发根扫描、NUMA 感知空闲页回收。 |
 
 ## 本层规则
 

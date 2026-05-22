@@ -554,6 +554,7 @@ public:
         CHAOS_IL2CPP_SIZE page_size;      // saved before decommit for recommit
         CHAOS_IL2CPP_SIZE payload_size;   // preserved across decommit (zeroed by OS)
         CHAOS_IL2CPP_SIZE bitmap_bytes;   // preserved across decommit
+        int8_t        numa_node;          // NUMA node this page was allocated on (-1 = unknown)
     };
     static constexpr int kMaxPoolSize = 16;
     std::vector<PoolEntry> page_pool_;

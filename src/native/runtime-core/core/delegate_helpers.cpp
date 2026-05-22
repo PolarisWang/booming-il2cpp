@@ -2,6 +2,7 @@
 
 #include "gc/gc_old_gen.h"
 
+#include "gc_heap.h"
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
@@ -83,7 +84,7 @@ CHAOS_IL2CPP_INTPTR DelegateCreateMulticast(
 
     // Allocate DelegateObject via old-gen (conservative scan covers all pointer fields).
     auto* delegate = static_cast<DelegateObject*>(
-        g_old_gen.Allocate(sizeof(DelegateObject), true));
+        G_OldGen().Allocate(sizeof(DelegateObject), true));
     delegate->type_info = template_delegate->type_info;
     delegate->sync_state = 0;
     delegate->chaos_delegate_target = 0;
@@ -92,7 +93,7 @@ CHAOS_IL2CPP_INTPTR DelegateCreateMulticast(
     // Allocate invocation list in GC heap, placement-new vector copy.
     using InvocationList = std::vector<CHAOS_IL2CPP_INTPTR>;
     auto* vec = static_cast<InvocationList*>(
-        g_old_gen.Allocate(sizeof(InvocationList), true));
+        G_OldGen().Allocate(sizeof(InvocationList), true));
     vec = new (vec) InvocationList(entries);
 
     delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(vec);

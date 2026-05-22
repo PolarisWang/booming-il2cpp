@@ -15,6 +15,7 @@
 #include "gc_young_gen.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
+#include "gc_heap.h"
 
 #include <chrono>
 #include <cstdint>
@@ -110,13 +111,13 @@ static CHAOS_IL2CPP_SIZE PreciseObjectSize(const void* obj) {
 /// Returns nullptr if the Gen1 area is exhausted — caller should fall
 /// back to old gen.  Thread-safe via CAS on gen1_bump.
 static void* TryAllocateInSurvivor(CHAOS_IL2CPP_SIZE size) noexcept {
-    char* current = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    char* current = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
     char* next;
     do {
         if (current == nullptr) return nullptr;
         next = current + size;
-        if (next > g_young_gen.gen1_end) return nullptr;
-    } while (!g_young_gen.gen1_bump.compare_exchange_weak(
+        if (next > G_YoungGen().gen1_end) return nullptr;
+    } while (!G_YoungGen().gen1_bump.compare_exchange_weak(
         current, next, std::memory_order_release, std::memory_order_acquire));
     std::memset(current, 0, size);
     return current;
@@ -126,9 +127,9 @@ static void* TryAllocateInSurvivor(CHAOS_IL2CPP_SIZE size) noexcept {
 /// File-local helper (the non-static IsInGen1 in gc_gen1.cpp does the same
 /// thing for external callers).
 static bool IsInGen1Local(const void* ptr) noexcept {
-    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
     if (gen1 == nullptr) return false;
-    auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    auto* bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
     if (bump == nullptr) return false;
     auto* cptr = static_cast<const char*>(ptr);
     return cptr >= gen1->begin && cptr < bump;
@@ -161,7 +162,7 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         // This can happen for unregistered types or objects whose TypeInfo
         // has been overwritten by a forwarding pointer from a concurrent
         // scavenge (rare, but possible in cross-thread scenarios).
-        Region* nursery_local = g_young_gen.region.load(std::memory_order_acquire);
+        Region* nursery_local = G_YoungGen().region.load(std::memory_order_acquire);
         if (nursery_local != nullptr &&
             reinterpret_cast<uintptr_t>(obj) >= reinterpret_cast<uintptr_t>(nursery_local->begin) &&
             reinterpret_cast<uintptr_t>(obj) < reinterpret_cast<uintptr_t>(nursery_local->current)) {
@@ -174,7 +175,7 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         }
     }
 
-    void* tenured = g_old_gen.Allocate(obj_size, true);
+    void* tenured = G_OldGen().Allocate(obj_size, true);
     if (tenured == nullptr) return nullptr;
 
     // Copy the object contents.
@@ -189,7 +190,7 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
             auto& reg = GcLayoutRegistry::Instance();
             if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
-                g_old_gen.RegisterFinalizer(tenured, cb);
+                G_OldGen().RegisterFinalizer(tenured, cb);
             }
         }
     }
@@ -243,7 +244,7 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
 
     CHAOS_IL2CPP_SIZE obj_size = PreciseObjectSize(obj);
     if (obj_size == 0) {
-        Region* nursery_local = g_young_gen.region.load(std::memory_order_acquire);
+        Region* nursery_local = G_YoungGen().region.load(std::memory_order_acquire);
         if (nursery_local != nullptr &&
             reinterpret_cast<uintptr_t>(obj) >= reinterpret_cast<uintptr_t>(nursery_local->begin) &&
             reinterpret_cast<uintptr_t>(obj) < reinterpret_cast<uintptr_t>(nursery_local->current)) {
@@ -260,20 +261,20 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     // Objects in Gen0 (young half) always copy to Gen1 (first survival).
     void* target;
     if (IsInGen1(obj)) {
-        int threshold = g_young_gen.promotion_age_threshold_.load(
+        int threshold = G_YoungGen().promotion_age_threshold_.load(
             std::memory_order_acquire);
         if (threshold > 1) {
             target = TryAllocateInGen1(obj_size);
             if (target == nullptr) {
-                target = g_old_gen.Allocate(obj_size, true);
+                target = G_OldGen().Allocate(obj_size, true);
             }
         } else {
-            target = g_old_gen.Allocate(obj_size, true);
+            target = G_OldGen().Allocate(obj_size, true);
         }
     } else {
         target = TryAllocateInGen1(obj_size);
         if (target == nullptr) {
-            target = g_old_gen.Allocate(obj_size, true);
+            target = G_OldGen().Allocate(obj_size, true);
         }
     }
 
@@ -287,7 +288,7 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
         if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
             auto& reg = GcLayoutRegistry::Instance();
             if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
-                g_old_gen.RegisterFinalizer(target, cb);
+                G_OldGen().RegisterFinalizer(target, cb);
             }
         }
     }
@@ -348,7 +349,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         uint64_t phase3_ns = 0, phase3b_ns = 0, phase4_ns = 0;
     } pt;
 
-    Region* nursery = g_young_gen.region.load(std::memory_order_acquire);
+    Region* nursery = G_YoungGen().region.load(std::memory_order_acquire);
     if (nursery == nullptr) {
         CHAOS_IL2CPP_LOG_WARN("CRAG", "young_collection_no_region");
         return result;
@@ -358,11 +359,11 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
 
     uintptr_t nursery_begin = reinterpret_cast<uintptr_t>(nursery->begin);
     // With shared young gen + TLABs, TlabClaimFromYoungGen() updates
-    // g_young_gen.bump, NOT nursery->current.  Read the actual allocation
+    // G_YoungGen().bump, NOT nursery->current.  Read the actual allocation
     // frontier from the shared bump pointer so the nursery scan covers
     // all objects in all TLABs.
     uintptr_t nursery_used  = reinterpret_cast<uintptr_t>(
-        g_young_gen.bump.load(std::memory_order_acquire));
+        G_YoungGen().bump.load(std::memory_order_acquire));
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG", "young_collection nursery=[{0}, {1}) usage={2}",
         static_cast<void*>(nursery->begin),
@@ -398,7 +399,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         // reducing per-card callback overhead (common when large object
         // arrays span multiple cards).
         // Scan old-gen pages for Gen2→nursery references.
-        g_old_gen.ScanDirtyCardsInPagesBatched(
+        G_OldGen().ScanDirtyCardsInPagesBatched(
             &result.dirty_cards_scanned,
             [&](uintptr_t range_start, uintptr_t range_end) {
                 for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
@@ -415,7 +416,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         // Scan LOH segments for LOH→nursery references.
         // LOH segments are registered with the card table, so DirtyCard()
         // tracks all pointer writes into LOH objects during the mutator phase.
-        g_loh.ScanDirtyCardsInSegmentsBatched(
+        G_Loh().ScanDirtyCardsInSegmentsBatched(
             &result.dirty_cards_scanned,
             [&](uintptr_t range_start, uintptr_t range_end) {
                 for (uintptr_t slot = range_start; slot < range_end; slot += sizeof(void*)) {
@@ -530,9 +531,9 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
     // established AFTER ClearAllCards(), which means the write barrier
     // set the corresponding card dirty.
     {
-        auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {
-            char* g1_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+            char* g1_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
             if (g1_bump > gen1->begin) {
                 ScanDirtyCardsBatched(
                     reinterpret_cast<uintptr_t>(gen1->begin),
@@ -613,31 +614,31 @@ phase3:
         - pt.phase1_ns - pt.phase2_ns - pt.phase2b_ns - pt.phase3_ns;
 
     // ── Phase 4: Sweep young generation ──
-    // Reset g_young_gen.bump to the beginning of the region.
+    // Reset G_YoungGen().bump to the beginning of the region.
     // Clear all threads' TLAB ranges so they re-claim on next allocation.
     CHAOS_IL2CPP_SIZE nursery_used_bytes = static_cast<CHAOS_IL2CPP_SIZE>(
         nursery_used - nursery_begin);
     result.bytes_reclaimed = nursery_used_bytes;
 
     // Increment young GC counter for dynamic promotion threshold.
-    int gc_count = g_young_gen.young_gc_count_.fetch_add(1, std::memory_order_relaxed) + 1;
+    int gc_count = G_YoungGen().young_gc_count_.fetch_add(1, std::memory_order_relaxed) + 1;
 
     // ── Phase 4: Gen1 collection ──
     // Trigger Gen1 (survivor) collection based on promotion_age_threshold.
     // When force_skip_gen1 is true, skip Gen1 entirely (gen=0 young-only path).
     if (!force_skip_gen1) {
-        int threshold = g_young_gen.promotion_age_threshold_.load(
+        int threshold = G_YoungGen().promotion_age_threshold_.load(
             std::memory_order_acquire);
         bool should_collect_gen1 = (threshold <= 1) || (gc_count % threshold == 0);
 
-        auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {
-            char* g1_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+            char* g1_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
             CHAOS_IL2CPP_SIZE g1_used = static_cast<CHAOS_IL2CPP_SIZE>(
                 (g1_bump ? g1_bump : gen1->begin) - gen1->begin);
             constexpr CHAOS_IL2CPP_SIZE kGen1NearFullThreshold = 4096;
             CHAOS_IL2CPP_SIZE g1_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
-                g_young_gen.gen1_end - gen1->begin);
+                G_YoungGen().gen1_end - gen1->begin);
             bool near_full = (g1_used + kGen1NearFullThreshold >= g1_capacity);
 
             if (g1_used > 0 && (should_collect_gen1 || near_full)) {
@@ -657,7 +658,7 @@ phase3:
                     gen1_result.bytes_promoted,
                     gen1_result.bytes_reclaimed,
                     gen1_result.pause_ns);
-                g_gc_scheduler.RecordGen1Collection(
+                G_Scheduler().RecordGen1Collection(
                     gen1_result.bytes_promoted,
                     gen1_result.objects_in_gen1,
                     gen1_result.pause_ns);
@@ -665,9 +666,9 @@ phase3:
                 // ── Dynamic Gen1 resize after collection ──
                 // Gen1 is now empty (bump was reset).  If the scheduler
                 // recommends a significantly different size, reallocate.
-                CHAOS_IL2CPP_SIZE recommended = g_gc_scheduler.RecommendedGen1Size();
+                CHAOS_IL2CPP_SIZE recommended = G_Scheduler().RecommendedGen1Size();
                 CHAOS_IL2CPP_SIZE current_size = static_cast<CHAOS_IL2CPP_SIZE>(
-                    g_young_gen.gen1_end - gen1->begin);
+                    G_YoungGen().gen1_end - gen1->begin);
                 CHAOS_IL2CPP_SIZE diff = (recommended > current_size)
                     ? (recommended - current_size)
                     : (current_size - recommended);
@@ -684,7 +685,7 @@ phase3:
                 // Gen1 EMA survival rate (smoothing out per-collection noise)
                 // and pause-time cost awareness.  This replaces the previous
                 // ad-hoc tuning using raw per-collection survival rate.
-                int scheduler_threshold = g_gc_scheduler.GetRecommendedPromotionAge();
+                int scheduler_threshold = G_Scheduler().GetRecommendedPromotionAge();
 
                 // Gen1-occupancy override: if the Gen1 area is nearly
                 // full after this collection, force threshold to 1 regardless
@@ -696,9 +697,9 @@ phase3:
                 }
 
                 if (scheduler_threshold !=
-                    g_young_gen.promotion_age_threshold_.load(
+                    G_YoungGen().promotion_age_threshold_.load(
                         std::memory_order_relaxed)) {
-                    g_young_gen.promotion_age_threshold_.store(
+                    G_YoungGen().promotion_age_threshold_.store(
                         scheduler_threshold, std::memory_order_release);
                     CHAOS_IL2CPP_LOG_DEBUG("CRAG",
                         "promotion_age_threshold: {0} (scheduler, "
@@ -714,8 +715,8 @@ phase3:
 
     // Reset the shared young region bump pointer.
     nursery->current = nursery->begin;
-    g_young_gen.bump.store(nursery->begin, std::memory_order_release);
-    g_young_gen.region_end.store(nursery->end, std::memory_order_release);
+    G_YoungGen().bump.store(nursery->begin, std::memory_order_release);
+    G_YoungGen().region_end.store(nursery->end, std::memory_order_release);
 
     // ── Note: dynamic Gen1 resizing is deferred to Phase C. ──
     // The scheduler's RecommendedSurvivorSize() value will be used in a future
@@ -782,12 +783,12 @@ phase3:
         result.dirty_cards_scanned,
         pause_ns);
 
-    g_gc_scheduler.RecordYoungCollection(
+    G_Scheduler().RecordYoungCollection(
         nursery_used_bytes, result.bytes_promoted, pause_ns);
 
     // Report old-gen fragmentation for adaptive nursery sizing.
     // High fragmentation → shrink nursery to reduce promotion rate.
-    g_gc_scheduler.SetOldGenFragmentation(g_old_gen.OverallFragmentation());
+    G_Scheduler().SetOldGenFragmentation(G_OldGen().OverallFragmentation());
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG",
         "young trace promoted={0} prom_bytes={1} reclaimed={2} cards={3} "

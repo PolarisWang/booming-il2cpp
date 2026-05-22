@@ -4,6 +4,7 @@
 
 #include "gc_helpers.h"
 #include "gc_gen1.h"
+#include "gc_heap.h"
 #include "gc_loh.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
@@ -57,9 +58,9 @@ CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_memory(
     // a full GC they closely approximate live data size since freed
     // memory stays in the internal free lists.
     auto old_gen_bytes = static_cast<CHAOS_IL2CPP_INT64>(
-        g_old_gen.TotalAllocated());
+        G_OldGen().TotalAllocated());
     auto loh_bytes = static_cast<CHAOS_IL2CPP_INT64>(
-        g_loh.TotalAllocated());
+        G_Loh().TotalAllocated());
     return old_gen_bytes + loh_bytes;
 }
 
@@ -75,7 +76,7 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_add_memory_pressure(
         return;
     }
 
-    g_gc_scheduler.AddExternalMemoryPressure(bytes);
+    G_Scheduler().AddExternalMemoryPressure(bytes);
 }
 
 // ======================================================================
@@ -90,7 +91,7 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
         return;
     }
 
-    g_gc_scheduler.RemoveExternalMemoryPressure(bytes);
+    G_Scheduler().RemoveExternalMemoryPressure(bytes);
 }
 
 // ======================================================================
@@ -105,7 +106,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
 
     // Map mode to scheduler state.
     auto gc_mode = static_cast<GcCollectionMode>(mode);
-    g_gc_scheduler.SetCollectionMode(gc_mode);
+    G_Scheduler().SetCollectionMode(gc_mode);
 
     // Map .NET semantics:
     //   Forced (1) / Aggressive (3) → immediate blocking collect
@@ -113,7 +114,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
     //   Default (0) → same as Forced for GC.Collect(int)
     if (gc_mode == GcCollectionMode::OPTIMIZED) {
         // Optimized: trigger via scheduler (may defer to BGC).
-        g_gc_scheduler.RequestFullGc();
+        G_Scheduler().RequestFullGc();
         CHAOS_IL2CPP_LOG_DEBUG("GC_API", "collect_with_mode optimized (request deferred)");
     } else {
         // Forced / Aggressive / Default: immediate blocking collect.
@@ -149,13 +150,13 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
                         gen1_result.bytes_promoted,
                         gen1_result.bytes_reclaimed,
                         gen1_result.pause_ns);
-                    g_gc_scheduler.RecordGen1Collection(
+                    G_Scheduler().RecordGen1Collection(
                         gen1_result.bytes_promoted,
                         gen1_result.objects_in_gen1,
                         gen1_result.pause_ns);
                 }
             }
-            g_old_gen.RunFinalizers();
+            G_OldGen().RunFinalizers();
         } else {
             // Young only: gen == 0.  Skip Gen1 entirely.
             Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
@@ -165,7 +166,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
                 GcYoungCollection(true);
                 threading::ReleaseGlobalSafepoint(gen);
             }
-            g_old_gen.RunFinalizers();
+            G_OldGen().RunFinalizers();
         }
     }
 }
@@ -176,7 +177,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
 
 extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_latency_mode() noexcept
 {
-    return static_cast<CHAOS_IL2CPP_INT32>(g_gc_scheduler.GetLatencyMode());
+    return static_cast<CHAOS_IL2CPP_INT32>(G_Scheduler().GetLatencyMode());
 }
 
 // ======================================================================
@@ -195,13 +196,13 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
         return;
     }
 
-    g_gc_scheduler.SetLatencyMode(lm);
+    G_Scheduler().SetLatencyMode(lm);
 
     // If switching away from NO_GC_REGION, trigger any deferred GC.
     if (lm != GcLatencyMode::NO_GC_REGION) {
-        auto kind = g_gc_scheduler.DecideCollection();
+        auto kind = G_Scheduler().DecideCollection();
         if (kind != GcCollectionKind::NONE) {
-            g_gc_scheduler.RequestFullGc();
+            G_Scheduler().RequestFullGc();
         }
     }
 }
@@ -214,9 +215,9 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_heap_size() no
 {
     // Return total allocated bytes in old gen + LOH.
     auto old_gen_bytes = static_cast<CHAOS_IL2CPP_INT64>(
-        g_old_gen.TotalAllocated());
+        G_OldGen().TotalAllocated());
     auto loh_bytes = static_cast<CHAOS_IL2CPP_INT64>(
-        g_loh.TotalAllocated());
+        G_Loh().TotalAllocated());
     return old_gen_bytes + loh_bytes;
 }
 
@@ -248,7 +249,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
         reinterpret_cast<char*>(static_cast<std::intptr_t>(obj)) + sizeof(void*));
     auto snap = GcGetSnapshot();
     auto heap_size = static_cast<CHAOS_IL2CPP_INT64>(
-        g_old_gen.TotalAllocated() + g_loh.TotalAllocated());
+        G_OldGen().TotalAllocated() + G_Loh().TotalAllocated());
     auto promoted = static_cast<CHAOS_IL2CPP_INT64>(snap.young_bytes_promoted);
     auto fragmented = static_cast<CHAOS_IL2CPP_INT64>(
         snap.young_bytes_reclaimed + snap.full_bytes_reclaimed);
@@ -322,7 +323,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     info->gen1_frag_after = 0;
 
     // Gen2 (old gen)
-    int64_t old_alloc = static_cast<int64_t>(g_old_gen.TotalAllocated());
+    int64_t old_alloc = static_cast<int64_t>(G_OldGen().TotalAllocated());
     int64_t old_reclaimed = static_cast<int64_t>(snap.full_bytes_reclaimed);
     info->gen2_size_before = old_alloc;
     info->gen2_size_after = (old_alloc > old_reclaimed) ? old_alloc - old_reclaimed : old_alloc;
@@ -336,7 +337,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     info->gen3_frag_after = 0;
 
     // LOH
-    int64_t loh_alloc = static_cast<int64_t>(g_loh.TotalAllocated());
+    int64_t loh_alloc = static_cast<int64_t>(G_Loh().TotalAllocated());
     info->loh_size_before = loh_alloc;
     info->loh_size_after = loh_alloc;
     info->loh_frag_before = 0;
@@ -366,9 +367,9 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept {
 
     // When counter reaches zero, trigger any deferred GC.
     if (tls_no_gc_region_depth == 0) {
-        auto kind = g_gc_scheduler.DecideCollection();
+        auto kind = G_Scheduler().DecideCollection();
         if (kind != GcCollectionKind::NONE) {
-            g_gc_scheduler.RequestFullGc();
+            G_Scheduler().RequestFullGc();
         }
     }
 }
@@ -409,7 +410,7 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_try_start_no_gc_re
     // Add old gen free page capacity (estimate: use half of total allocated
     // as a conservative approximation of free-list capacity).
     CHAOS_IL2CPP_INT64 old_alloc = static_cast<CHAOS_IL2CPP_INT64>(
-        g_old_gen.TotalAllocated());
+        G_OldGen().TotalAllocated());
     available += old_alloc / 2;
 
     // Apply 2x safety margin: require twice the requested budget.
@@ -438,9 +439,9 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_end_no_gc_region()
     CHAOS_IL2CPP_LOG_DEBUG("GC_API", "end_no_gc_region depth=%d", tls_no_gc_region_depth);
 
     if (tls_no_gc_region_depth == 0) {
-        auto kind = g_gc_scheduler.DecideCollection();
+        auto kind = G_Scheduler().DecideCollection();
         if (kind != GcCollectionKind::NONE) {
-            g_gc_scheduler.RequestFullGc();
+            G_Scheduler().RequestFullGc();
             return 1;  // GCTriggered
         }
     }
@@ -465,7 +466,7 @@ void chaos_gc_register_finalizable(void* obj) noexcept {
 
     // Register with old gen so RunFinalizers() can invoke the callback
     // when the object becomes unreachable.
-    g_old_gen.RegisterFinalizer(obj, callback);
+    G_OldGen().RegisterFinalizer(obj, callback);
 }
 
 // ======================================================================
@@ -503,27 +504,27 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enable_full_gc_notification(
     CHAOS_IL2CPP_INT32 /*max_generation_threshold*/,
     CHAOS_IL2CPP_INT32 /*large_object_heap_threshold*/) noexcept
 {
-    g_gc_scheduler.EnableFullGcNotification();
+    G_Scheduler().EnableFullGcNotification();
 }
 
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_disable_full_gc_notification() noexcept
 {
-    g_gc_scheduler.DisableFullGcNotification();
+    G_Scheduler().DisableFullGcNotification();
 }
 
 extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_approach(
     CHAOS_IL2CPP_INT32 timeout_ms) noexcept
 {
-    bool signaled = g_gc_scheduler.WaitForFullGcApproach(timeout_ms);
-    if (!g_gc_scheduler.IsNotificationEnabled()) return -1;  // not registered
+    bool signaled = G_Scheduler().WaitForFullGcApproach(timeout_ms);
+    if (!G_Scheduler().IsNotificationEnabled()) return -1;  // not registered
     return signaled ? 0 : 1;  // 0=success, 1=timeout
 }
 
 extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_complete(
     CHAOS_IL2CPP_INT32 timeout_ms) noexcept
 {
-    bool signaled = g_gc_scheduler.WaitForFullGcComplete(timeout_ms);
-    if (!g_gc_scheduler.IsNotificationEnabled()) return -1;  // not registered
+    bool signaled = G_Scheduler().WaitForFullGcComplete(timeout_ms);
+    if (!G_Scheduler().IsNotificationEnabled()) return -1;  // not registered
     return signaled ? 0 : 1;  // 0=success, 1=timeout
 }
 

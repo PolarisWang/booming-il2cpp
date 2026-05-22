@@ -10,6 +10,7 @@
 #include "gc_api.h"
 #include "gc_gen1.h"
 #include "gc_young_gen.h"
+#include "gc_heap.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -130,7 +131,7 @@ void GcScheduler::RecordYoungCollection(CHAOS_IL2CPP_SIZE nursery_used,
     } else {
         new_threshold = 1;
     }
-    g_young_gen.promotion_age_threshold_.store(new_threshold, std::memory_order_release);
+    G_YoungGen().promotion_age_threshold_.store(new_threshold, std::memory_order_release);
 
 }
 
@@ -228,14 +229,14 @@ void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE /*bytes*/) noexcept {
 BgcScope GcScheduler::DecideBgcScope() noexcept {
     BgcScope scope = BgcScope::GEN2_ONLY;
 
-    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
     if (gen1 != nullptr) {
-        auto* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        auto* s_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
         CHAOS_IL2CPP_SIZE s_used = static_cast<CHAOS_IL2CPP_SIZE>(
             (s_bump ? s_bump : gen1->begin) -
             gen1->begin);
         CHAOS_IL2CPP_SIZE s_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
-            g_young_gen.gen1_end - gen1->begin);
+            G_YoungGen().gen1_end - gen1->begin);
 
         if (s_capacity > 0) {
             float occupancy = static_cast<float>(s_used) /

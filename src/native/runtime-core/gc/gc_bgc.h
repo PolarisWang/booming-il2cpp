@@ -251,6 +251,13 @@ public:
     /// Drain up to @a batch_limit entries from worker @a idx's deque.
     CHAOS_IL2CPP_SIZE DrainWorkerDeque(int idx, CHAOS_IL2CPP_SIZE batch_limit = 0);
 
+    /// Push an object to worker 0's mark deque for transitive closure.
+    /// Used by root change buffer drain during STW re-mark.
+    void PushToBgcMarkDeque(void* obj) noexcept {
+        std::lock_guard<std::mutex> lock(bgc_workers_[0].steal_mutex);
+        bgc_workers_[0].deque.push_back(obj);
+    }
+
     // ── Gen1 concurrent marking (GEN1_GEN2 scope) ──────────────────
 
     /// Try to mark a Gen1 object in the BGC Gen1 mark bitmap.
@@ -285,11 +292,18 @@ private:
     /// Pushes newly-marked children to worker 0's deque.
     void ProcessGreyObject(void* obj);
 
+    // ── Test-accessible members ─────────────────────────────────
+    // DrainGlobalSatbQueue and kMaxSatbPool are accessed by SATB
+    // stress tests.  Normal GC calls DrainGlobalSatbQueue from
+    // StwRemark / DrainAllTlsSatbBuffers internally.
+public:
     /// Drain the global SATB queue: for each entry, if the object is in
     /// old-gen and not yet marked, push to worker 0's deque.
     CHAOS_IL2CPP_SIZE DrainGlobalSatbQueue();
 
-    /// Drain all thread-local SATB buffers into the global queue.
+    static constexpr int kMaxSatbPool = 256;
+
+private:
     /// SAFE ONLY UNDER SAFEPOINT (threads are stopped).
     CHAOS_IL2CPP_SIZE DrainAllTlsSatbBuffers();
 
@@ -339,7 +353,6 @@ private:
     // Global SATB buffer pool (heap-allocated, indexed by tls_satb_buffer_index).
     // Replaces the thread_local SatbThreadBuffer (~4KB) with a TLS int index
     // (~4 bytes) for iOS TLS-constrained platforms.
-    static constexpr int kMaxSatbPool = 256;
     SatbThreadBuffer satb_pool_[kMaxSatbPool]{};
     std::atomic<int> satb_pool_alloc_{0};
 
@@ -381,7 +394,7 @@ public:
 private:
     // ── Gen1 concurrent mark bitmap ────────────────────────────────
 
-    /// Allocate a Gen1 mark bitmap covering [gen1->begin, g_young_gen.gen1_end).
+    /// Allocate a Gen1 mark bitmap covering [gen1->begin, G_YoungGen().gen1_end).
     /// Returns true on success, false on OOM (GEN1_GEN2 falls back to GEN2_ONLY).
     bool AllocateGen1MarkBitmap() noexcept;
 
@@ -398,7 +411,7 @@ private:
     /// Base address of the Gen1 range covered by the bitmap.
     uintptr_t gen1_bitmap_base_{0};
 
-    /// Total span covered by the bitmap (bytes, max = g_young_gen.gen1_end - gen1->begin).
+    /// Total span covered by the bitmap (bytes, max = G_YoungGen().gen1_end - gen1->begin).
     CHAOS_IL2CPP_SIZE gen1_bitmap_span_{0};
 
     // ── BGC finalization support ──────────────────────────────────

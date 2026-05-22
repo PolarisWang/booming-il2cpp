@@ -12,7 +12,9 @@
 #include "gc_numa.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
+#include "gc_root_change.h"
 #include "gc_young_gen.h"
+#include "gc_heap.h"
 #include "thread_state.h"
 
 #include <algorithm>
@@ -98,7 +100,7 @@ int BgcController::AllocateSatbBuffer() {
         // Pool exhausted — reset alloc and trigger emergency full GC fallback.
         satb_pool_alloc_.fetch_sub(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_LOG_ERROR("BGC", "satb_pool_exhausted — requesting emergency full GC");
-        g_gc_scheduler.RequestFullGc();
+        G_Scheduler().RequestFullGc();
         return -1;
     }
     return idx;
@@ -125,8 +127,8 @@ void BgcController::StartBgcCycle() {
     // we fall back to GEN2_ONLY before doing any real work (root scanning),
     // avoiding wasted effort and the need for OOM handling during the mark
     // phase.  The BGC scope was already set by DecideBgcScope() in the
-    // caller (GcAdvanceBgcCycle), so g_gc_scheduler.GetBgcScope() is current.
-    if (g_gc_scheduler.GetBgcScope() == BgcScope::GEN1_GEN2) {
+    // caller (GcAdvanceBgcCycle), so G_Scheduler().GetBgcScope() is current.
+    if (G_Scheduler().GetBgcScope() == BgcScope::GEN1_GEN2) {
         if (!AllocateGen1MarkBitmap()) {
             CHAOS_IL2CPP_LOG_WARN("BGC",
                 "gen1_bitmap OOM — falling back to GEN2_ONLY");
@@ -170,12 +172,27 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // Drain mark stack to completion.
     CHAOS_IL2CPP_SIZE marked = DrainWorkerDeque(0, 0);
 
+    // Drain all threads' root change buffers (G-25).
+    // During concurrent mark, mutators may have overwritten root slots
+    // (statics, GCHandles).  Re-mark any old-gen objects that were the
+    // old value in those slots — they may have lost their last reference.
+    threading::EnumerateThreads([](threading::ManagedThread* mt) {
+        BgcDrainRootChangeBuffer(mt, [](void* obj) -> bool {
+            if (G_OldGen().BgcTryMark(obj)) {
+                BgcController::Instance().PushToBgcMarkDeque(obj);
+                return true;
+            }
+            return false;
+        });
+        return true;  // continue enumeration
+    });
+
     // Scan dirty cards: any old-gen pages may have new cross-gen references
     // from concurrent mark phase that aren't captured by SATB alone
     // (e.g., a nursery object allocated during concurrent mark that points
     // to an unmarked old-gen object via a new field write).
     CHAOS_IL2CPP_SIZE cards_dirty = 0;
-    g_old_gen.ScanDirtyCardsInPages(
+    G_OldGen().ScanDirtyCardsInPages(
         [&](uintptr_t /*card_idx*/, uintptr_t card_start, uintptr_t card_end) {
             cards_dirty++;
             // Scan every pointer slot in the dirty card range for old-gen refs.
@@ -185,8 +202,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                  slot < reinterpret_cast<void**>(card_end);
                  slot++) {
                 void* ref = *slot;
-                if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
-                    if (g_old_gen.BgcTryMark(ref)) {
+                if (ref != nullptr && G_OldGen().IsInOldGen(ref)) {
+                    if (G_OldGen().BgcTryMark(ref)) {
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
@@ -205,10 +222,10 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
     // Scan only dirty cards in the Gen1 region for efficiency,
     // replacing the prior full-walk re-scan.
     {
-        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {
             char* sv_begin = gen1->begin;
-            auto* sv_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+            auto* sv_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
             if (sv_bump > sv_begin) {
                 auto& ctrl = BgcController::Instance();
                 ScanDirtyCards(
@@ -219,8 +236,8 @@ CHAOS_IL2CPP_SIZE BgcController::StwRemark() {
                              slot < reinterpret_cast<void**>(card_end);
                              slot++) {
                             void* ref = *slot;
-                            if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
-                                if (g_old_gen.BgcTryMark(ref)) {
+                            if (ref != nullptr && G_OldGen().IsInOldGen(ref)) {
+                                if (G_OldGen().BgcTryMark(ref)) {
                                     std::lock_guard<std::mutex> lock(
                                         ctrl.bgc_workers_[0].steal_mutex);
                                     ctrl.bgc_workers_[0].deque.push_back(ref);
@@ -255,7 +272,7 @@ void BgcController::StwCompact() {
 
     // Run compaction using the mark bitmap left intact by BgcSweep().
     // BgcCompact handles DecideCompactMode + compaction + bitmap clear.
-    g_old_gen.BgcCompact();
+    G_OldGen().BgcCompact();
 
     // ── Gen1 promote/keep decision (GEN1_GEN2 scope) ─────────────
     // After BGC concurrent mark + sweep, walk Gen1 using the BGC Gen1
@@ -263,9 +280,9 @@ void BgcController::StwCompact() {
     // to Gen2 and reset gen1_bump (Gen1 filtering was effective).  If
     // survival is high, leave Gen1 for the young GC to collect later.
     if (gen1_mark_bitmap_ != nullptr) {
-        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         char* sv_begin = (gen1 != nullptr) ? gen1->begin : nullptr;
-        char* sv_bump  = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        char* sv_bump  = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
         if (sv_begin != nullptr && sv_bump > sv_begin) {
             GcEtwFireGcGen1Collect(0, 0, 0);  // placeholder — actual stats recorded in GcGen1Collection
             GcFireEvent(GcEvent::GC_GEN1_COLLECT);
@@ -354,7 +371,7 @@ void BgcController::StwCompact() {
                         ((gen1_mark_bitmap_[pbyte] >> pbit) & 1u);
 
                     if (plive) {
-                        void* gen2_addr = g_old_gen.Allocate(psize, true);
+                        void* gen2_addr = G_OldGen().Allocate(psize, true);
                         if (gen2_addr != nullptr) {
                             std::memcpy(gen2_addr, promote_cur, psize);
                             promoted_objects++;
@@ -372,19 +389,19 @@ void BgcController::StwCompact() {
                 }
 
                 if (!oom) {
-                    g_young_gen.gen1_bump.store(
+                    G_YoungGen().gen1_bump.store(
                         gen1->begin, std::memory_order_release);
                     CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
                         "gen1_promote_done: promoted={0} objs, {1} bytes",
                         static_cast<unsigned long long>(promoted_objects),
                         static_cast<unsigned long long>(promoted_bytes));
 
-                    g_gc_scheduler.RecordGen1Collection(
+                    G_Scheduler().RecordGen1Collection(
                         promoted_bytes, total_objects,
                         static_cast<uint64_t>(std::chrono::duration_cast<
                             std::chrono::nanoseconds>(
                                 std::chrono::steady_clock::now() - pause_start).count()));
-                    g_gc_scheduler.RecordBgcGen1Promote(promoted_bytes);
+                    G_Scheduler().RecordBgcGen1Promote(promoted_bytes);
                 } else {
                     CHAOS_IL2CPP_LOG_WARN("BGC",
                         "gen1_promote OOM — leaving Gen1 intact");
@@ -393,7 +410,7 @@ void BgcController::StwCompact() {
                 CHAOS_IL2CPP_LOG_DEBUG("BGC",
                     "gen1_keep: survival={0:.2f} above threshold",
                     survival);
-                g_gc_scheduler.RecordBgcGen1Keep(
+                G_Scheduler().RecordBgcGen1Keep(
                     static_cast<CHAOS_IL2CPP_SIZE>(sv_bump - sv_begin));
             }
         }
@@ -495,8 +512,8 @@ void BgcController::ForceComplete() {
     // finalizers skipped (the BGC main loop skips CONCURRENT_SWEEP phase when
     // ForceComplete jumps straight to FINISHED).
     if (p == BgcPhase::CONCURRENT_MARK || p == BgcPhase::REMARK_NEEDED) {
-        g_old_gen.BgcSweep();
-        bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
+        G_OldGen().BgcSweep();
+        bgc_dead_finalizables_ = G_OldGen().CollectDeadFinalizables();
         bgc_dead_weak_handles_.clear();
         CollectDeadWeakHandlesForBgc();
     }
@@ -505,7 +522,7 @@ void BgcController::ForceComplete() {
     // freeing (pages unlinked by BgcSweep Phase 4b but deferred for
     // safe VirtualFree) and mark bitmap clearing.
     // BgcCompact runs under safepoint — no concurrent readers exist.
-    g_old_gen.BgcCompact();
+    G_OldGen().BgcCompact();
 
     // Phase 3+4: Publish dead finalizables + weak handles to the finalizer
     // thread instead of running them inline.  The finalizer thread processes
@@ -529,7 +546,7 @@ void BgcController::ForceComplete() {
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
 
     // Replenish the emergency reserve after a forced BGC completion.
-    g_old_gen.ReplenishEmergencyReserve();
+    G_OldGen().ReplenishEmergencyReserve();
 
     cycle_complete_.store(true, std::memory_order_release);
     NotifyBgc();
@@ -571,7 +588,7 @@ void BgcController::StopConcurrentMark() {
 
 void BgcController::PopulateRootSet() {
     // Phase 1a: Mark pinned roots from MarkSweepOldGen.
-    // Pinned roots are registered via g_old_gen.AddPinnedRoot().
+    // Pinned roots are registered via G_OldGen().AddPinnedRoot().
     // They are stored in MarkSweepOldGen::pinned_roots_ (private),
     // so we rely on the scheduler/gc_old_gen to expose them.
     // For now, pinned roots are handled via TryMarkRoot in the stack
@@ -580,22 +597,22 @@ void BgcController::PopulateRootSet() {
         // Phase 1b: Scan the shared young generation for old-gen pointers.
     // The young region is scanned [begin, bump) for any reference
     // to old-gen objects; those objects are marked and enqueued for
-    // concurrent marking.  Uses g_young_gen.bump (the true allocation
+    // concurrent marking.  Uses G_YoungGen().bump (the true allocation
     // frontier advanced by TLAB claims) rather than region->current
     // (which is frozen at begin after each young GC reset).
     {
-        Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+        Region* young_region = G_YoungGen().region.load(std::memory_order_acquire);
         if (young_region != nullptr) {
             auto& ctrl = BgcController::Instance();
             void* begin = young_region->begin;
-            void* cur   = g_young_gen.bump.load(std::memory_order_acquire);
+            void* cur   = G_YoungGen().bump.load(std::memory_order_acquire);
             if (cur > begin) {
                 for (auto* slot = static_cast<void**>(begin);
                      slot < static_cast<void**>(cur);
                      slot++) {
                     void* ref = *slot;
-                    if (ref != nullptr && g_old_gen.IsInOldGen(ref)) {
-                        if (g_old_gen.BgcTryMark(ref)) {
+                    if (ref != nullptr && G_OldGen().IsInOldGen(ref)) {
+                        if (G_OldGen().BgcTryMark(ref)) {
                             std::lock_guard<std::mutex> lock(
                                 ctrl.bgc_workers_[0].steal_mutex);
                             ctrl.bgc_workers_[0].deque.push_back(ref);
@@ -613,10 +630,10 @@ void BgcController::PopulateRootSet() {
     // Gen1 objects may reference Gen2 objects.  These Gen2 references
     // must be marked by BGC to prevent premature reclamation.
     {
-        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {
             char* sv_begin = gen1->begin;
-            auto* sv_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+            auto* sv_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
             if (sv_bump > sv_begin) {
                 auto& ctrl = BgcController::Instance();
                 auto& layout_registry = GcLayoutRegistry::Instance();
@@ -632,8 +649,8 @@ void BgcController::PopulateRootSet() {
                             for (uint16_t i = 0; i < layout->pointer_count; i++) {
                                 uint16_t off = layout->pointer_offsets[i].offset;
                                 void* child = *reinterpret_cast<void**>(s_cur + off);
-                                if (child != nullptr && g_old_gen.IsInOldGen(child)) {
-                                    if (g_old_gen.BgcTryMark(child)) {
+                                if (child != nullptr && G_OldGen().IsInOldGen(child)) {
+                                    if (G_OldGen().BgcTryMark(child)) {
                                         std::lock_guard<std::mutex> lock(
                                             ctrl.bgc_workers_[0].steal_mutex);
                                         ctrl.bgc_workers_[0].deque.push_back(child);
@@ -660,18 +677,18 @@ void BgcController::PopulateRootSet() {
                 void* ref = *slot;
                 s_gte_heap++;
                 if (ref == nullptr) return;
-                if (g_old_gen.IsInOldGen(ref)) {
+                if (G_OldGen().IsInOldGen(ref)) {
                     s_in_oldgen++;
                     if (!IsValidManagedObject(ref)) return;
                     s_valid++;
-                    if (g_old_gen.BgcTryMark(ref)) {
+                    if (G_OldGen().BgcTryMark(ref)) {
                         s_marked++;
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
                     }
-                } else if (g_loh.IsInLOH(ref)) {
-                    if (g_loh.MarkObject(ref)) {
+                } else if (G_Loh().IsInLOH(ref)) {
+                    if (G_Loh().MarkObject(ref)) {
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(ref);
@@ -692,12 +709,12 @@ void BgcController::PopulateRootSet() {
         GcIterateTenuredHandles(
             [](void* object, void* /*user_data*/) {
                 if (object == nullptr) return;
-                if (g_old_gen.BgcTryMark(object)) {
+                if (G_OldGen().BgcTryMark(object)) {
                     std::lock_guard<std::mutex> lock(
                         BgcController::Instance().bgc_workers_[0].steal_mutex);
                     BgcController::Instance().bgc_workers_[0].deque.push_back(object);
-                } else if (g_loh.IsInLOH(object)) {
-                    if (g_loh.MarkObject(object)) {
+                } else if (G_Loh().IsInLOH(object)) {
+                    if (G_Loh().MarkObject(object)) {
                         std::lock_guard<std::mutex> lock(
                             BgcController::Instance().bgc_workers_[0].steal_mutex);
                         BgcController::Instance().bgc_workers_[0].deque.push_back(object);
@@ -736,8 +753,8 @@ void BgcController::PopulateRootSet() {
                             for (uint16_t i = 0; i < layout->pointer_count; i++) {
                                 uint16_t off = layout->pointer_offsets[i].offset;
                                 void* child = *reinterpret_cast<void**>(poh_cur + off);
-                                if (child != nullptr && g_old_gen.IsInOldGen(child)) {
-                                    if (g_old_gen.BgcTryMark(child)) {
+                                if (child != nullptr && G_OldGen().IsInOldGen(child)) {
+                                    if (G_OldGen().BgcTryMark(child)) {
                                         std::lock_guard<std::mutex> lock(
                                             ctrl.bgc_workers_[0].steal_mutex);
                                         ctrl.bgc_workers_[0].deque.push_back(child);
@@ -753,8 +770,8 @@ void BgcController::PopulateRootSet() {
                          static_cast<uintptr_t>(r->end - poh_cur);
                          off += sizeof(void*)) {
                         void* child = *reinterpret_cast<void**>(poh_cur + off);
-                        if (child != nullptr && g_old_gen.IsInOldGen(child)) {
-                            if (g_old_gen.BgcTryMark(child)) {
+                        if (child != nullptr && G_OldGen().IsInOldGen(child)) {
+                            if (G_OldGen().BgcTryMark(child)) {
                                 std::lock_guard<std::mutex> lock(
                                     ctrl.bgc_workers_[0].steal_mutex);
                                 ctrl.bgc_workers_[0].deque.push_back(child);
@@ -1003,13 +1020,13 @@ void BgcController::BgcThreadMain() {
             // Sweep pages uncovered by the mark bitmap.
             // Each page is swept under the old-gen mutex, with yields between
             // pages so that mutator allocations are not starved.
-            g_old_gen.BgcSweep();
+            G_OldGen().BgcSweep();
 
             // Collect dead finalizable objects using the mark bitmap
             // (still valid because BgcSweep preserves it via clear_bitmap=false).
             // The bitmap will be cleared by StwCompact() later, so we must
             // capture the list now.
-            bgc_dead_finalizables_ = g_old_gen.CollectDeadFinalizables();
+            bgc_dead_finalizables_ = G_OldGen().CollectDeadFinalizables();
             if (!bgc_dead_finalizables_.empty()) {
                 CHAOS_IL2CPP_LOG_DEBUG_M("BGC", "dead_finalizables count={0}",
                     static_cast<unsigned long long>(bgc_dead_finalizables_.size()));
@@ -1066,7 +1083,7 @@ void BgcController::BgcThreadMain() {
 
             // Replenish the emergency reserve before signaling completion,
             // so the reserve is ready for the next cycle's allocations.
-            g_old_gen.ReplenishEmergencyReserve();
+            G_OldGen().ReplenishEmergencyReserve();
 
             cycle_complete_.store(true, std::memory_order_release);
             NotifyBgc();
@@ -1258,7 +1275,7 @@ namespace {
             // but no GcLayout is registered for this stable_id.  Scan all
             // pointer-aligned slots in the object and mark any old-gen refs.
             // This matches the same conservative path in DrainMarkStack.
-            auto* page = g_old_gen.FindPage(obj);
+            auto* page = G_OldGen().FindPage(obj);
             if (page == nullptr) return;
             auto obj_addr = reinterpret_cast<uintptr_t>(obj);
             auto payload_start = reinterpret_cast<uintptr_t>(page->Payload());
@@ -1273,12 +1290,12 @@ namespace {
                 auto* slot = reinterpret_cast<void**>(static_cast<char*>(obj) + slot_off);
                 void* ref = *slot;
                 if (ref == nullptr) continue;
-                if (g_old_gen.IsInOldGen(ref)) {
-                    if (g_old_gen.BgcTryMark(ref)) {
+                if (G_OldGen().IsInOldGen(ref)) {
+                    if (G_OldGen().BgcTryMark(ref)) {
                         out_children.push_back(ref);
                     }
-                } else if (g_loh.IsInLOH(ref)) {
-                    if (g_loh.MarkObject(ref)) {
+                } else if (G_Loh().IsInLOH(ref)) {
+                    if (G_Loh().MarkObject(ref)) {
                         out_children.push_back(ref);
                     }
                 }
@@ -1297,12 +1314,12 @@ namespace {
             auto* slot = reinterpret_cast<void**>(obj_base + offset);
             void* ref = *slot;
             if (ref == nullptr) continue;
-            if (g_old_gen.IsInOldGen(ref)) {
-                if (g_old_gen.BgcTryMark(ref)) {
+            if (G_OldGen().IsInOldGen(ref)) {
+                if (G_OldGen().BgcTryMark(ref)) {
                     out_children.push_back(ref);
                 }
-            } else if (g_loh.IsInLOH(ref)) {
-                if (g_loh.MarkObject(ref)) {
+            } else if (G_Loh().IsInLOH(ref)) {
+                if (G_Loh().MarkObject(ref)) {
                     out_children.push_back(ref);
                 }
             }
@@ -1451,13 +1468,13 @@ CHAOS_IL2CPP_SIZE BgcController::DrainGlobalSatbQueue() {
             global_satb_.pop_back();
         }
         if (entry != nullptr) {
-            if (g_old_gen.IsInOldGen(entry)) {
-                if (g_old_gen.BgcTryMark(entry)) {
+            if (G_OldGen().IsInOldGen(entry)) {
+                if (G_OldGen().BgcTryMark(entry)) {
                     std::lock_guard<std::mutex> lock(w0.steal_mutex);
                     w0.deque.push_back(entry);
                 }
-            } else if (g_loh.IsInLOH(entry)) {
-                if (g_loh.MarkObject(entry)) {
+            } else if (G_Loh().IsInLOH(entry)) {
+                if (G_Loh().MarkObject(entry)) {
                     std::lock_guard<std::mutex> lock(w0.steal_mutex);
                     w0.deque.push_back(entry);
                 }
@@ -1494,9 +1511,9 @@ CHAOS_IL2CPP_SIZE BgcController::DrainAllTlsSatbBuffers() {
 bool BgcController::AllocateGen1MarkBitmap() noexcept {
     if (gen1_mark_bitmap_ != nullptr) return true;
 
-    Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
     char* s_begin = (gen1 != nullptr) ? gen1->begin : nullptr;
-    char* s_end   = g_young_gen.gen1_end;
+    char* s_end   = G_YoungGen().gen1_end;
     if (s_begin == nullptr || s_end == nullptr || s_begin >= s_end) {
         CHAOS_IL2CPP_LOG_DEBUG("BGC", "gen1_bitmap: no Gen1 range");
         return false;
@@ -1563,7 +1580,7 @@ void BgcController::ResetGen1MarkBitmap() noexcept {
     if (gen1_mark_bitmap_ != nullptr) {
         std::memset(gen1_mark_bitmap_, 0, gen1_bitmap_bytes_);
         // Rebase to current Gen1 range in case it changed.
-        Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+        Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {
             gen1_bitmap_base_ = reinterpret_cast<uintptr_t>(gen1->begin);
         }
@@ -1575,12 +1592,12 @@ void GcAdvanceBgcCycle() noexcept {
     auto& bgc = BgcController::Instance();
     auto phase = bgc.Phase();
     if (phase == BgcPhase::IDLE) {
-        auto decision = g_gc_scheduler.DecideCollection();
+        auto decision = G_Scheduler().DecideCollection();
         if (decision != GcCollectionKind::FULL_BGC) return;
         // Decide BGC scope (GEN2_ONLY or GEN1_GEN2) before starting the cycle.
         // StartBgcCycle reads the scope from the scheduler to allocate the
         // Gen1 mark bitmap if needed.
-        g_gc_scheduler.DecideBgcScope();
+        G_Scheduler().DecideBgcScope();
         bgc.StartBgcCycle();
     } else if (phase == BgcPhase::REMARK_NEEDED) {
         auto remark_start = std::chrono::steady_clock::now();

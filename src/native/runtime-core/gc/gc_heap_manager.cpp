@@ -33,10 +33,11 @@ void GcHeapManager::Initialize(int num_heaps) noexcept {
         heap.heap_id = i;
         heap.numa_node = i;
 
-        // Initialize per-heap subsystems.
-        // YoungGen, OldGen, LOH lazy-init on first allocation, so we
-        // only need to construct them (already done by default init).
-        // Explicit Init() calls happen on first allocation (same as WKS).
+        // Initialize per-heap old-gen with a unique address hint to avoid
+        // virtual address conflicts between heaps.
+        uintptr_t heap_hint = static_cast<uintptr_t>(0x200000000ULL +
+            static_cast<uintptr_t>(i) * 0x40000000ULL);
+        heap.old_gen.Init(heap_hint);
     }
 
     std::printf("[GC] GcHeapManager initialized: %d heaps\n", heap_count_);

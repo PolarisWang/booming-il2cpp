@@ -5,6 +5,8 @@
 #include <cstdio>
 
 #include "gc_bgc.h"
+#include "gc_coordinator.h"
+#include "gc_etw.h"
 #include "gc_events.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
@@ -26,6 +28,36 @@
 #endif
 
 #include <cstdlib>
+
+// ── Large page allocation helpers ──────────────────────────────────
+// These are only compiled when CHAOS_IL2CPP_GC_LARGE_PAGES == 1.
+// On Windows: uses VirtualAlloc with MEM_LARGE_PAGES (requires
+// SeLockMemoryPrivilege).  On Linux: uses mmap with MAP_HUGETLB.
+// Both fall back gracefully — the callers in AllocateRegion check
+// for nullptr and fall through to normal VirtualAlloc/mmap.
+#if defined(CHAOS_IL2CPP_GC_LARGE_PAGES) && CHAOS_IL2CPP_GC_LARGE_PAGES == 1
+
+static CHAOS_IL2CPP_SIZE GcGetLargePageMinimum() noexcept {
+#if defined(_WIN32) || defined(_WIN64)
+    return ::GetLargePageMinimum();
+#else
+    return 2 * 1024 * 1024;  // 2 MB — typical huge page size on Linux
+#endif
+}
+
+static void* GcTryAllocLargePages(CHAOS_IL2CPP_SIZE alloc_size) noexcept {
+#if defined(_WIN32) || defined(_WIN64)
+    return ::VirtualAlloc(nullptr, alloc_size,
+                          MEM_RESERVE | MEM_COMMIT | MEM_LARGE_PAGES,
+                          PAGE_READWRITE);
+#else
+    void* mem = ::mmap(nullptr, alloc_size, PROT_READ | PROT_WRITE,
+                       MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB, -1, 0);
+    return (mem == MAP_FAILED) ? nullptr : mem;
+#endif
+}
+
+#endif  // CHAOS_IL2CPP_GC_LARGE_PAGES == 1
 #include <cstring>
 
 namespace chaos::il2cpp::runtime_core {
@@ -89,12 +121,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
     // Phase 2: Young region is exhausted — consult the GC scheduler.
     // When in NO_GC_REGION, skip collection and go straight to old-gen fallback.
-    if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
+    if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
 
         // Check if scheduler wants a full STW GC before doing a young GC.
         // DecideCollection() returns FULL when full_gc_requested_ is set or
         // page growth exceeds the trigger threshold.
-        auto collection_kind = g_gc_scheduler.DecideCollection();
+        auto collection_kind = G_Scheduler().DecideCollection();
         if (collection_kind == GcCollectionKind::FULL) {
             uint32_t gen = threading::RequestGlobalSafepoint();
             auto* mt = threading::GetCurrentThread();
@@ -207,6 +239,9 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
         }
     }
+    if (old_result == nullptr) {
+        GcEtwFireGcOom();
+    }
     return old_result;
 }
 
@@ -233,12 +268,12 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
 
     // Phase 2: Young region is exhausted — consult the GC scheduler.
     // When in NO_GC_REGION, skip collection and go straight to old-gen fallback.
-    if (!GcIsInNoGcRegion() && g_gc_scheduler.TryClaimGcSlot()) {
+    if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
 
         // Check if scheduler wants a full STW GC before doing a young GC.
         // DecideCollection() returns FULL when full_gc_requested_ is set or
         // page growth exceeds the trigger threshold.
-        auto collection_kind = g_gc_scheduler.DecideCollection();
+        auto collection_kind = G_Scheduler().DecideCollection();
         if (collection_kind == GcCollectionKind::FULL) {
             uint32_t gen = threading::RequestGlobalSafepoint();
             auto* mt = threading::GetCurrentThread();
@@ -289,6 +324,9 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     threading::EnterCooperativeMode();
     if (old_result) {
         tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+    }
+    if (old_result == nullptr) {
+        GcEtwFireGcOom();
     }
     return old_result;
 }
@@ -342,7 +380,7 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         if (next <= s_poh_current->end) {
             s_poh_current->current = next;
             std::memset(ptr, 0, size);
-            g_gc_scheduler.RecordAllocation(size);
+            G_Scheduler().RecordAllocation(size);
             tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
             return ptr;
         }
@@ -364,7 +402,7 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     char* ptr = new_poh->current;
     new_poh->current = ptr + size;
     std::memset(ptr, 0, size);
-    g_gc_scheduler.RecordAllocation(size);
+    G_Scheduler().RecordAllocation(size);
     return ptr;
 }
 
@@ -1109,6 +1147,9 @@ Region* RegionManager::GetNextPohRegion(const Region* current) const {
 /// 2. Runs full old-gen mark-sweep (STW safepoint).
 /// 3. Runs pending finalizers.
 extern "C" void chaos_gc_collect() noexcept {
+#if CHAOS_IL2CPP_GC_SERVER
+    GcCoordinator::Instance().RequestGlobalGc();
+#else
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect requested");
 
     // Step 1: Young collection on the shared young generation (if any).
@@ -1136,7 +1177,7 @@ extern "C" void chaos_gc_collect() noexcept {
                 gen1_result.bytes_promoted,
                 gen1_result.bytes_reclaimed,
                 gen1_result.pause_ns);
-            g_gc_scheduler.RecordGen1Collection(
+            G_Scheduler().RecordGen1Collection(
                 gen1_result.bytes_promoted,
                 gen1_result.objects_in_gen1,
                 gen1_result.pause_ns);
@@ -1154,6 +1195,7 @@ extern "C" void chaos_gc_collect() noexcept {
     g_old_gen.RunFinalizers();
 
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect completed");
+#endif  // CHAOS_IL2CPP_GC_SERVER
 }
 
 /// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).

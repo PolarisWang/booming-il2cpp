@@ -7,6 +7,7 @@
 #include <mutex>
 #include <shared_mutex>
 
+#include "gc_heap.h"
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
@@ -171,7 +172,7 @@ void* MarshalGetDelegateForFunctionPointerImpl(
     // target_instance stores the native_fn_ptr; DfnDispatch<true> passes it as
     // the third argument to the dispatch thunk.
     auto* node = static_cast<NativeFunctionDelegate*>(
-        g_old_gen.Allocate(sizeof(NativeFunctionDelegate), true));
+        G_OldGen().Allocate(sizeof(NativeFunctionDelegate), true));
     node->method_token = 0;
     node->method_pointer = dispatch_thunk;
     node->target_instance = reinterpret_cast<void*>(native_fn_ptr);

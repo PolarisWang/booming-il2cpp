@@ -1,3 +1,4 @@
+#include "gc_heap.h"
 namespace chaos::il2cpp::runtime_core {
 
 // MSVC 14.44 cannot see anonymous-namespace symbols from other unity files.
@@ -390,23 +391,23 @@ int GcProcessDependentHandlesAfterFullGC() noexcept {
             if (primary == nullptr || secondary == nullptr) continue;
 
             // Check if primary is in old-gen and marked alive.
-            bool primary_alive = g_old_gen.IsInOldGen(primary) &&
-                                 g_old_gen.IsMarked(primary);
+            bool primary_alive = G_OldGen().IsInOldGen(primary) &&
+                                 G_OldGen().IsMarked(primary);
 
             // Also check LOH.
-            if (!primary_alive && g_loh.IsInLOH(primary)) {
-                primary_alive = g_loh.IsMarked(primary);
+            if (!primary_alive && G_Loh().IsInLOH(primary)) {
+                primary_alive = G_Loh().IsMarked(primary);
             }
 
             if (primary_alive) {
                 // Mark secondary as a GC root to keep it alive.
-                if (g_old_gen.IsInOldGen(secondary)) {
-                    if (g_old_gen.MarkObject(secondary)) {
-                        g_old_gen.AddToMarkStack(secondary);
+                if (G_OldGen().IsInOldGen(secondary)) {
+                    if (G_OldGen().MarkObject(secondary)) {
+                        G_OldGen().AddToMarkStack(secondary);
                         kept_this_round++;
                     }
-                } else if (g_loh.IsInLOH(secondary)) {
-                    if (g_loh.MarkObject(secondary)) {
+                } else if (G_Loh().IsInLOH(secondary)) {
+                    if (G_Loh().MarkObject(secondary)) {
                         kept_this_round++;
                     }
                 }
@@ -440,13 +441,13 @@ void GcCollectDeadWeakHandles(
         void* obj = kv.second.object_instance;
         if (obj == nullptr) continue;
 
-        if (!g_old_gen.IsInOldGen(obj) && !g_loh.IsInLOH(obj)) continue;
+        if (!G_OldGen().IsInOldGen(obj) && !G_Loh().IsInLOH(obj)) continue;
 
         bool is_marked = false;
-        if (g_old_gen.IsInOldGen(obj)) {
-            is_marked = g_old_gen.IsMarked(obj);
-        } else if (g_loh.IsInLOH(obj)) {
-            is_marked = g_loh.IsMarked(obj);
+        if (G_OldGen().IsInOldGen(obj)) {
+            is_marked = G_OldGen().IsMarked(obj);
+        } else if (G_Loh().IsInLOH(obj)) {
+            is_marked = G_Loh().IsMarked(obj);
         }
 
         if (!is_marked) {
@@ -494,20 +495,20 @@ int GcProcessDependentHandlesAfterBgc() noexcept {
             if (primary == nullptr || secondary == nullptr) continue;
 
             bool primary_alive = false;
-            if (g_old_gen.IsInOldGen(primary) && g_old_gen.IsMarked(primary)) {
+            if (G_OldGen().IsInOldGen(primary) && G_OldGen().IsMarked(primary)) {
                 primary_alive = true;
-            } else if (g_loh.IsInLOH(primary) && g_loh.IsMarked(primary)) {
+            } else if (G_Loh().IsInLOH(primary) && G_Loh().IsMarked(primary)) {
                 primary_alive = true;
             }
 
             if (primary_alive) {
-                if (g_old_gen.IsInOldGen(secondary)) {
-                    if (g_old_gen.MarkObject(secondary)) {
-                        g_old_gen.AddToMarkStack(secondary);
+                if (G_OldGen().IsInOldGen(secondary)) {
+                    if (G_OldGen().MarkObject(secondary)) {
+                        G_OldGen().AddToMarkStack(secondary);
                         kept_this_round++;
                     }
-                } else if (g_loh.IsInLOH(secondary)) {
-                    if (g_loh.MarkObject(secondary)) {
+                } else if (G_Loh().IsInLOH(secondary)) {
+                    if (G_Loh().MarkObject(secondary)) {
                         kept_this_round++;
                     }
                 }

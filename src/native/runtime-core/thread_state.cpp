@@ -8,6 +8,7 @@
 #include "gc_root_scanner.h"
 #include "gc_static_roots.h"
 #include "gc_card_table.h"
+#include "gc_heap_manager.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
 #include "forbid_suspend.h"
@@ -162,6 +163,9 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
         thread->next.store(expected, std::memory_order_relaxed);
     } while (!s_thread_list.compare_exchange_weak(expected, thread,
         std::memory_order_release, std::memory_order_acquire));
+
+    // Server GC: bind this thread to its NUMA-aware heap.
+    SetThreadHeap();
 }
 
 void UnregisterThread() noexcept {
@@ -203,6 +207,9 @@ void UnregisterThread() noexcept {
         thread->suspend_mutex = nullptr;
     }
 #endif
+
+    // Server GC: clear heap binding before TLS clear.
+    ClearThreadHeap();
 
     tls_this_thread    = nullptr;
     tls_this_thread_id = 0;

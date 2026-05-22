@@ -56,6 +56,7 @@ const EVENT_DESCRIPTOR kEtwGcFullStart   = { 0x05, 0x00, 0x00, 0x04, 0x00, 0x05,
 const EVENT_DESCRIPTOR kEtwGcFullEnd     = { 0x06, 0x00, 0x00, 0x04, 0x00, 0x06, 0x0000000000000001ull };
 const EVENT_DESCRIPTOR kEtwGcOom         = { 0x07, 0x00, 0x00, 0x04, 0x00, 0x07, 0x0000000000000001ull };
 const EVENT_DESCRIPTOR kEtwGcGen1Collect = { 0x08, 0x00, 0x00, 0x04, 0x00, 0x08, 0x0000000000000001ull };
+const EVENT_DESCRIPTOR kEtwGcAllocationTick = { 0x09, 0x00, 0x00, 0x04, 0x00, 0x09, 0x0000000000000002ull };
 
 REGHANDLE g_gc_etw_provider = 0;
 std::atomic<int32_t> g_gc_etw_registered{0};
@@ -102,7 +103,18 @@ struct GcEtwPayloadGen1Collect {
     uint64_t objects_promoted;
     uint64_t bytes_reclaimed;
 };
+struct GcEtwPayloadAllocationTick {
+    uint32_t allocation_amount;   // bytes allocated since last tick
+    uint32_t allocation_kind;     // 0=small object, 1=large object (LOH)
+};
 #pragma pack(pop)
+
+// ── Per-thread allocation tick tracking ──────────────────────────────
+// Fires GCAllocationTick every ~kAllocationTickThreshold bytes of managed
+// allocation.  Using a per-thread counter so multi-threaded workloads each
+// get independent tick coverage.  Matches CoreCLR behavior.
+static constexpr uint32_t kAllocationTickThreshold = 1024 * 100;  // 100 KB
+thread_local uint32_t tls_alloc_tick_counter = 0;
 
 }  // anonymous namespace
 #endif  // _WIN32 && CHAOS_IL2CPP_GC_EVENTS
@@ -223,6 +235,38 @@ void GcEtwFireGcGen1Collect(
     GcEtwInitialize();
     GcEtwPayloadGen1Collect payload{ pause_ns, objects_promoted, bytes_reclaimed };
     WriteEtwEvent(kEtwGcGen1Collect, payload);
+#endif
+}
+
+void GcEtwFireAllocationTick(uint32_t bytes, uint32_t is_large_object) noexcept {
+#if (defined(_WIN32) || defined(_WIN64)) && \
+    defined(CHAOS_IL2CPP_GC_EVENTS) && CHAOS_IL2CPP_GC_EVENTS == 1
+    if (g_gc_etw_registered.load(std::memory_order_acquire) == 0) return;
+    GcEtwPayloadAllocationTick payload{ bytes, is_large_object };
+    WriteEtwEvent(kEtwGcAllocationTick, payload);
+#endif
+}
+
+/// Record an allocation for tick tracking.  Called from GcRecordAlloc on every
+/// managed allocation.  Accumulates a per-thread counter and fires the ETW
+/// GCAllocationTick event when the threshold (100 KB) is crossed.
+void GcEtwRecordAlloc(CHAOS_IL2CPP_SIZE bytes) noexcept {
+#if (defined(_WIN32) || defined(_WIN64)) && \
+    defined(CHAOS_IL2CPP_GC_EVENTS) && CHAOS_IL2CPP_GC_EVENTS == 1
+    if (g_gc_etw_registered.load(std::memory_order_acquire) == 0) return;
+
+    // Accumulate.  Use saturation-at-max to avoid overflow on pathological
+    // single-call sizes (e.g. a 4GB array allocation).
+    uint32_t prev = tls_alloc_tick_counter;
+    uint32_t add = bytes > UINT32_MAX ? UINT32_MAX : static_cast<uint32_t>(bytes);
+    uint32_t sum = prev + add;
+    if (sum < prev) sum = UINT32_MAX;  // saturation on overflow
+    tls_alloc_tick_counter = sum;
+
+    if (sum >= kAllocationTickThreshold) {
+        GcEtwFireAllocationTick(sum, bytes > 85000 ? 1 : 0);
+        tls_alloc_tick_counter = 0;
+    }
 #endif
 }
 
